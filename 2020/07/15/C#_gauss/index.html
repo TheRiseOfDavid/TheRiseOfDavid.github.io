@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-c-math" class="article article-type-post" itemscope
+  <article id="post-C#_gauss" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -60,8 +60,8 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/06/08/c-math/" class="article-date">
-  <time datetime="2020-06-08T07:58:42.000Z" itemprop="datePublished">2020-06-08</time>
+      <a href="/2020/07/15/C#_gauss/" class="article-date">
+  <time datetime="2020-07-14T16:23:42.000Z" itemprop="datePublished">2020-07-15</time>
 </a>
       
   <div class="article-category">
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">617</span>
+            <span class="post-count">862</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">2分鐘</span>
+            <span class="post-count">3分鐘</span>
         </span>
     </span>
 </div>
@@ -118,7 +118,7 @@ ga('send', 'pageview');
 
 
 <h2 id="C-套件"><a href="#C-套件" class="headerlink" title="C# 套件"></a>C# 套件</h2><p>此套可解決於多元一次方程式組解，快速且有效率解法<br>P.S. 技術僅限到更新日期</p>
-<p><a href="https://drive.google.com/file/d/1GB_UtHQ0Ja1pWHgObjNUCXonvex5NknS/view?usp=sharing" target="_blank" rel="noopener">gauss 套件下載</a></p>
+<p><img src="/images/C#_gaussgauss.dll" alt="gauss 套件下載"></p>
 <p><strong>必須加入 using guass;</strong></p>
 <h3 id="高斯消去法"><a href="#高斯消去法" class="headerlink" title="高斯消去法"></a>高斯消去法</h3><h4 id="宣告物件"><a href="#宣告物件" class="headerlink" title="宣告物件"></a>宣告物件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss test &#x3D; new gauss(int n ,doublue[,]  douGauss , double[] ans )</span><br></pre></td></tr></table></figure>
 
@@ -129,14 +129,16 @@ ga('send', 'pageview');
 <h4 id="elimindation-高斯消元法"><a href="#elimindation-高斯消元法" class="headerlink" title="elimindation() 高斯消元法"></a>elimindation() 高斯消元法</h4><p><a href="https://drive.google.com/file/d/1GB_UtHQ0Ja1pWHgObjNUCXonvex5NknS/view?usp=sharing" target="_blank" rel="noopener">高斯消元法</a>說明</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss.elimindation() ;</span><br></pre></td></tr></table></figure>
 
-<h4 id="seidel-method-賽德爾疊代"><a href="#seidel-method-賽德爾疊代" class="headerlink" title="seidel_method() 賽德爾疊代"></a>seidel_method() 賽德爾疊代</h4><p><a href="https://www.maa.org/press/periodicals/loci/joma/iterative-methods-for-solving-iaxi-ibi-gauss-seidel-method" target="_blank" rel="noopener">賽德爾疊代</a>說明</p>
-<p>在 2020/06/08 時將 seidel_method() 優化，現在已經在任何情況下比消元速度還快</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss.Seidel_method();</span><br></pre></td></tr></table></figure>
+<h4 id="seidel-method-賽德爾疊代-and-SOR-超鬆弛迭代法"><a href="#seidel-method-賽德爾疊代-and-SOR-超鬆弛迭代法" class="headerlink" title="seidel_method() 賽德爾疊代 and SOR 超鬆弛迭代法"></a>seidel_method() 賽德爾疊代 and SOR 超鬆弛迭代法</h4><p><a href="https://www.maa.org/press/periodicals/loci/joma/iterative-methods-for-solving-iaxi-ibi-gauss-seidel-method" target="_blank" rel="noopener">賽德爾疊代</a>說明<br>在 2020/06/08 時將 seidel_method() 優化，現在已經在任何情況下比消元速度還快</p>
+<p><a href="http://marta.certik.cz/NM/Asor.pdf" target="_blank" rel="noopener">超鬆弛迭代法</a><br>在 2020/07/15 時由於 SOR 是找 omega 來進行鬆弛(P.S. seidel_method() 為 1)，由於 omega 在每個多元一次方成組解時 omega 量為不固定，並我目前還沒將 omega 的公式完全讀熟(P.S. 如有人會可以教我嗎 拜託QQ)，於是我目前先將 omega 定為 1.1。</p>
+<p>Q: 為甚麼 omega 是 1.1?<br>A: 我曾訂過 0.658 , 1.658 發現都不如預期，在大多數情況下多元一次方成組 omega 大多分布在 1.1 ~ 1.3 之間，於是我選擇 1.1，如果大家不喜歡的話可以在裡面帶自訂數值。</p>
+<p>Q: it 是甚麼? <del>可以吃嗎</del><br>A: 不行啦， it 是自訂迭代次數，你可以自己設定想迭代幾層，預設 -1 為完美迭代，即答案必求到絕對正確。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss.Seidel_method(double omega &#x3D; 1.1 , int it &#x3D; -1);</span><br></pre></td></tr></table></figure>
 
 <h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><p>在開發　gauss 套件時，其實花了很多時間在 Debug 與 效率優化，由於分手的關係，這真的是非常痛苦的過程阿…。工程師需要讓自己不被情緒給影響真的有些許的困難，我們也要能夠在 coding 過程中注意到女朋友，不可以讓女生感覺到自己已經不在意他，消耗愛的能量，導致愛情與悲劇收場。</p>
 <p>然後再鑽寫程式的過程中，我發現出了一個極大的問題。使我的「賽德爾疊代」應該要能夠比「高斯消元法」速度還要快，但因為原先我的「賽德爾疊代」在陣列方式處理不佳，過程中浪費大量效率使我矩陣在 &gt; 500 時速度會比「高斯消元法」過慢。</p>
 <p>因為在 seidel_method 中每次都需要 k+1 的迭代，於是原先我的程式寫法是準備一個巨大的迭代陣列，但我發現 二維陣列 當索引值太大時，查找速度會過慢，在大量迭代之下就會將此問題放大。於是後來將迭代陣列弄成 二維，類似於 array[2][n] (因為每次迭代只需要 k+1 , k )，相對來說查找速度就快很多。在 500*500的陣列中，原先使用 seidel_method 未優化需使用 578s，優化後只需要 2s，二維陣列查找速度。</p>
-<h4 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h4><p>2020-05-18 14:30:21 - 完成 gauss 套件、 高斯消元法<br>2020-05-30 20:34:28 - 完成 seidel_method<br>2020-06-08 15:58:42 - 完成 seidel_method 優化</p>
+<h4 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h4><p>2020-05-18 14:30:21 - 完成 gauss 套件、 高斯消元法<br>2020-05-30 20:34:28 - 完成 seidel_method<br>2020-06-08 15:58:42 - 完成 seidel_method 優化<br>2020-07-15 00:23:42 - 將 Successive Over Relaxation 的 omega 鎖定為 1.1</p>
 
       
       <!-- reward -->
@@ -171,19 +173,10 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/06/09/UVa12918/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            UVa12918 - Lucky Thief
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/05/26/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pi/" class="article-nav-link">
+      <a href="/2020/07/11/git-branch-problem/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">ProblemI Ideal Pyramid</div>
+        <div class="article-nav-title">git 在使用其他電腦 remote 同網址時問題</div>
       </a>
     
   </nav>

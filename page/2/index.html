@@ -77,6 +77,92 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-C-sharp-big-array" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/16/C-sharp-big-array/"
+    >C# 開超大陣列解決方法</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/16/C-sharp-big-array/" class="article-date">
+  <time datetime="2020-06-16T15:32:37.000Z" itemprop="datePublished">2020-06-16</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="C-在一個陣列裡最多可以有多少元素阿！"><a href="#C-在一個陣列裡最多可以有多少元素阿！" class="headerlink" title="C# 在一個陣列裡最多可以有多少元素阿！"></a>C# 在一個陣列裡最多可以有多少元素阿！</h2><p>根據 MSDN 預設，陣列的最大大小只能夠有 2GB， 假設此陣列為 int 時，最大元素最多只能有 \( 2^{31} /4 \)</p>
+<h3 id="那我一定要開到比這更大的陣列呢！"><a href="#那我一定要開到比這更大的陣列呢！" class="headerlink" title="那我一定要開到比這更大的陣列呢！"></a>那我一定要開到比這更大的陣列呢！</h3><p>別擔心，還是會有些解決之道的，如果你在 64 位元的電腦就可以解決了！只需要下方兩步驟即可完成。<br>但還是有些限制，假設 RAM 夠大，將可以使陣列擁有 40 億 elements。如果 RAM 沒辦法負荷 40 億 elements，則只能到負荷最大值。</p>
+<ol>
+<li><p>將電腦預設 32bits 建置環境改成 64 bits<br> 建置 &gt; 組態管理員 &gt; 平台 &gt; 新增 &gt; 新平台 &gt; x64，剩下按確認就可以了。</p>
+<img src="/images/C_sharp_math_2.jpg" alt="C_sharp_math_2.jpg">
+</li>
+<li><p>在 config 新增 gcAllowVeryLargeObjects 來新增<br> 在 packages.config 新增 gcAllowVeryLargeObjects 即可</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;<span class="name">runtime</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">gcAllowVeryLargeObjects</span> <span class="attr">enabled</span>=<span class="string">"true"</span> /&gt;</span>  </span><br><span class="line">  <span class="tag">&lt;/<span class="name">runtime</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/images/C_sharp_math_1.PNG" alt="C_sharp_math_1.PNG">
+
+</li>
+</ol>
+<h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><p>即使，未來科技再進步，還是必須要有好的資料結構與演算法，若豪不在意的不斷增加記憶體與處理器只是對之前那些努力設計電腦的人不敬，也會對自家的電腦造成很大的負擔QQ<br>這是必殺技，請小心慎用，不要上癮。</p>
+<h4 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h4><p>2020-06-22 14:45:24 - 錯誤資訊修改</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8B%80%E6%B3%81%E6%8E%92%E9%99%A4/" rel="tag">狀況排除</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pb" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -382,83 +468,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B0%B4%E9%A1%8C/" rel="tag">水題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-c-math" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/06/08/c-math/"
-    >C#_大衛製作套件</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/06/08/c-math/" class="article-date">
-  <time datetime="2020-06-08T07:58:42.000Z" itemprop="datePublished">2020-06-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <blockquote>
-<p>此套件為大衞製作，方便未來的我可以直接套用套件。<br>若要使用，在 VS 上加入參考加入 gauss.dll 即可使用</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/06/08/c-math/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A5%97%E4%BB%B6%E8%AA%AA%E6%98%8E/" rel="tag">套件說明</a></li></ul>
 
 
     </footer>
