@@ -113,12 +113,12 @@ ga('send', 'pageview');
       
       <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<h3 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h3><blockquote>
+<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>排序一個數組，但只能左右交換，試問數組最少要交換幾次。</p>
 </blockquote>
 <a id="more"></a> 
 
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h3><p><font color = "#dd0000"> <del><strong>這題真的好賤，上面寫著 QuickSort 結果是 MergeSort， 這代表經驗真的還是只能相信，不能先入為主阿</strong></del> </font></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h2><p><font color = "#dd0000"> <del><strong>這題真的好賤，上面寫著 QuickSort 結果是 MergeSort， 這代表經驗真的還是只能相信，不能先入為主阿</strong></del> </font></p>
 <p>QuickSort 是在每一次分治 (divide) 的時候，就已經分好大小邊，<br>但 MergeSort 是不斷分治，直到不能再做分治後，才開始進行排序，透過此優點，所以很容易推算出左右交換的次數，加上 MergeSort 的複雜度也跟 QuickSort 一樣，所以一樣可以完成此問題！</p>
 <p>需要注意的點是: 由於他最大的是 500050 ， 最複雜的排序可能來到 O ( \({n^2}\) )， 所以要使用 long long 以防溢位(overflow) 。</p>
 <p><a href="https://www.youtube.com/watch?v=mB5HXBb_HY8&t" target="_blank" rel="noopener">MergeSort - Abdul Bari</a></p>
@@ -148,7 +148,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Merge-sort/" rel="tag">Merge-sort</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Merge-sort/" rel="tag">Merge-sort</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>

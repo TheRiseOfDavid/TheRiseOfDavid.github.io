@@ -113,16 +113,16 @@ ga('send', 'pageview');
       
       <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<h3 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h3><blockquote>
+<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你一個正方形矩陣 M ， 你必須判斷矩陣是否對稱 (symmetric)</p>
 <p>矩陣定義: 矩陣內部元素不會有負數，且是對中間點對稱</p>
 </blockquote>
 <a id="more"></a>
 
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h3><p>這題的包裝手法，個人覺得非常之妙阿，小弟我的能力太差了!</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h2><p>這題的包裝手法，個人覺得非常之妙阿，小弟我的能力太差了!</p>
 <p>由於此題的定義是僅限對 「中心點」 對稱，你可以發現，但你將它變成一維陣列表示時，會發現它其實是一個迴文！ 太神奇了，高手中的高手阿</p>
 <p>解開的方式就中間切一半，然後開始判斷是否迴文就可以了。</p>
-<h4 id="陷阱"><a href="#陷阱" class="headerlink" title=" 陷阱 : "></a><font color="#dd0000"> 陷阱 : </font ></h4><p>有兩點需要特別注意，這題有骯髒的手法wwww</p>
+<h3 id="陷阱"><a href="#陷阱" class="headerlink" title=" 陷阱 : "></a><font color="#dd0000"> 陷阱 : </font ></h3><p>有兩點需要特別注意，這題有骯髒的手法wwww</p>
 <ol>
 <li>cin 的值會有負數，但矩陣內禁止有負號需特別注意</li>
 <li>元素的值為 \({-2^{32} }\) &lt;= \(M_{ij} \) &lt;= \({2^{32}}\)，超出int的範圍(\({-2^{31}}\) &lt;= int &lt;= <font color = "dd0000"> \({2^{31}-1}\) </font >)，所以必須使用 long long 處理。</li>
@@ -150,7 +150,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B5%E6%96%B0%E9%A1%8C/" rel="tag">創新題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B5%E6%96%B0%E9%A1%8C/" rel="tag">創新題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
