@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    C#_大衛製作套件 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-C_sharp/Csharp_gauss" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  C#_大衛製作套件
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/15/C_sharp/Csharp_gauss/" class="article-date">
+  <time datetime="2020-07-14T16:23:42.000Z" itemprop="datePublished">2020-07-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">871</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">3分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>此套件為大衞製作，方便未來的我可以直接套用套件。<br>若要使用，在 VS 上加入參考加入 gauss.dll 即可使用</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="C-套件"><a href="#C-套件" class="headerlink" title="C# 套件"></a>C# 套件</h2><p>此套可解決於多元一次方程式組解，快速且有效率解法<br>P.S. 技術僅限到更新日期</p>
+<p><a href="https://drive.google.com/file/d/1GB_UtHQ0Ja1pWHgObjNUCXonvex5NknS/view?usp=sharing" target="_blank" rel="noopener">gauss 套件下載</a></p>
+<p><strong>必須加入 using guass;</strong></p>
+<h3 id="高斯消去法"><a href="#高斯消去法" class="headerlink" title="高斯消去法"></a>高斯消去法</h3><h4 id="宣告物件"><a href="#宣告物件" class="headerlink" title="宣告物件"></a>宣告物件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss test &#x3D; new gauss(int n ,doublue[,]  douGauss , double[] ans )</span><br></pre></td></tr></table></figure>
+
+<p>n = 有多少階數<br>douGauss = 所有行係數的陣列<br>ans = 每元的係數</p>
+<h4 id="prepare-測試用方法"><a href="#prepare-測試用方法" class="headerlink" title="prepare()  測試用方法"></a>prepare()  測試用方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss.prepare() ;</span><br></pre></td></tr></table></figure>
+
+<p>透過 console.wrire 來輸入 n , douGauss , ans<br>方便使用者加入 gauss 中的變數</p>
+<h4 id="elimindation-高斯消元法"><a href="#elimindation-高斯消元法" class="headerlink" title="elimindation() 高斯消元法"></a>elimindation() 高斯消元法</h4><p><a href="https://drive.google.com/file/d/1GB_UtHQ0Ja1pWHgObjNUCXonvex5NknS/view?usp=sharing" target="_blank" rel="noopener">高斯消元法</a>說明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss.elimindation() ;</span><br></pre></td></tr></table></figure>
+
+<h4 id="seidel-method-賽德爾疊代-and-SOR-超鬆弛迭代法"><a href="#seidel-method-賽德爾疊代-and-SOR-超鬆弛迭代法" class="headerlink" title="seidel_method() 賽德爾疊代 and SOR 超鬆弛迭代法"></a>seidel_method() 賽德爾疊代 and SOR 超鬆弛迭代法</h4><p><a href="https://www.maa.org/press/periodicals/loci/joma/iterative-methods-for-solving-iaxi-ibi-gauss-seidel-method" target="_blank" rel="noopener">賽德爾疊代</a>說明<br>在 2020/06/08 時將 seidel_method() 優化，現在已經在任何情況下比消元速度還快</p>
+<p><a href="http://marta.certik.cz/NM/Asor.pdf" target="_blank" rel="noopener">超鬆弛迭代法</a>說明<br>在 2020/07/15 時由於 SOR 是找 omega 來進行鬆弛(P.S. seidel_method() 為 1)，由於 omega 在每個多元一次方成組解時 omega 量為不固定，要找出對應的 omega 計算十分複雜(且我尚未讀熟，如果有大佬懂可以教我嗎 QQ) ，於是我目前先將 omega 定為 1.1。</p>
+<p>Q: 為甚麼 omega 是 1.1?<br>A: 我曾訂過 0.658 , 1.658 發現都不如預期，在大多數情況下多元一次方成組 omega 大多分布在 1.1 ~ 1.3 之間，於是我選擇 1.1，如果大家不喜歡的話可以在裡面帶自訂數值。</p>
+<p>Q: it 是甚麼? <del>可以吃嗎</del><br>A: 不行啦， it 是自訂迭代次數，你可以自己設定想迭代幾層，預設 -1 為完美迭代，即答案必求到絕對正確。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gauss.Seidel_method(double omega &#x3D; 1.1 , int it &#x3D; -1);</span><br></pre></td></tr></table></figure>
+
+<h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><p>在開發　gauss 套件時，其實花了很多時間在 Debug 與 效率優化，由於分手的關係，這真的是非常痛苦的過程阿…。工程師需要讓自己不被情緒給影響真的有些許的困難，我們也要能夠在 coding 過程中注意到女朋友，不可以讓女生感覺到自己已經不在意他，消耗愛的能量，導致愛情與悲劇收場。</p>
+<p>然後再鑽寫程式的過程中，我發現出了一個極大的問題。使我的「賽德爾疊代」應該要能夠比「高斯消元法」速度還要快，但因為原先我的「賽德爾疊代」在陣列方式處理不佳，過程中浪費大量效率使我矩陣在 &gt; 500 時速度會比「高斯消元法」過慢。</p>
+<p>因為在 seidel_method 中每次都需要 k+1 的迭代，於是原先我的程式寫法是準備一個巨大的迭代陣列，但我發現 二維陣列 當索引值太大時，查找速度會過慢，在大量迭代之下就會將此問題放大。於是後來將迭代陣列弄成 二維，類似於 array[2][n] (因為每次迭代只需要 k+1 , k )，相對來說查找速度就快很多。在 500*500的陣列中，原先使用 seidel_method 未優化需使用 578s，優化後只需要 2s，二維陣列查找速度。</p>
+<h2 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h2><p>2020-05-18 14:30:21 - 完成 gauss 套件、 高斯消元法<br>2020-05-30 20:34:28 - 完成 seidel_method<br>2020-06-08 15:58:42 - 完成 seidel_method 優化<br>2020-07-15 00:23:42 - 將 Successive Over Relaxation 的 omega 鎖定為 1.1</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A5%97%E4%BB%B6%E8%AA%AA%E6%98%8E/" rel="tag">套件說明</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/07/15/R/install-R3.2.0-centOS6/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            在 centOS 上安裝 R 3.2.0
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/11/git/git-branch-problem/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">git 在使用其他電腦 remote 同網址時問題</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>請我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    ProblemG Game Design |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-ICPC/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pg" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ProblemG Game Design
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/26/ICPC/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pg/" class="article-date">
+  <time datetime="2020-07-25T16:35:16.000Z" itemprop="datePublished">2020-07-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ICPC/">ICPC</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">5分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>請設計塔防遊戲的地圖，這個地圖為一棵樹但可以超過 2 個 leaf。怪物只會從 leaf 往 root 走(即走到樹的根節點就再也不會走動)，我們將他簡單設計化，我們假設每個塔都可以完美殺死怪物，但建造塔則需要花費，請設計一張地圖 (那張地圖需要有節點與節點上的成本)，給你一數值 k，請生成一張地圖總共有 k 種最少成本的建造塔的解法 (任意一種即可)。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><blockquote>
+<p>這題的想法非常有趣，我原本快要想對，但最後還是想錯方向了…<br>P.S. 如果我的分析不好，可以看此 <a href="https://www.cnblogs.com/st1vdy/p/12444426.html#1865251979" target="_blank" rel="noopener">st1vdy的 BLOG</a>，我是從他那邊得到靈感的。<br>下方說明文的 root，為整棵樹的 root。<br>x 為任意變數<br>left node 為 x 的右邊節點<br>right node 為 x 的左邊節點</p>
+</blockquote>
+<p>由於我們要設計一張地圖(樹)，為了方便我們簡單設計地圖，我們就定義為他是一顆二元樹。那我們接下來就是要來找一個規律來設計 k！</p>
+<h3 id="初步思考"><a href="#初步思考" class="headerlink" title="初步思考"></a>初步思考</h3><p>我們先來思考哪種方式設計是最棒的，由於我們簡單設計成二元樹，於是我們先設定一算法，只有 root 為 x，其餘 node 值都為 1，且 \(x \geq  2 \)，這樣子最好算法就會有 \(k = a \cdot b \)。</p>
+<p>那如果是質數呢？質數沒辦法符合那方程式阿，那只要把 \( x = 2 \)，就會再多一種算法，即\(k + 1\)，因為最小成本都是 2，如果從 root 放塔，那最小成本也還會是 2(\(因為 x = 2\))，因而多一種算法。</p>
+<p><img src="/images/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pg/1.jpg" alt=""></p>
+<h3 id="找出問題"><a href="#找出問題" class="headerlink" title="找出問題"></a>找出問題</h3><p>我們的初步思考有一個很致命的缺點，因為他是給予我們 k，但如果要從 k 還原 a , b，如果遇到質數還需要 +1，程式碼太複雜不好維護。於是我們想出新的方法，既然可以 \(a \cdot b \)，那一定也有道理 \( a \cdot a \cdot b \)，可以推導成 \(a^{c} * b \)，但由於我們將算法簡化成程式碼好解決，就是將 \(a = 2\)，由於二元樹的特性，可以省下很多程式碼的功夫。</p>
+<h3 id="新的想法"><a href="#新的想法" class="headerlink" title="新的想法"></a>新的想法</h3><p>所以我們把它從原本只有樹的 root 分兩邊然後 \(a * b \)，那我們就把每一個只要是「有連接到 leaf 的 node 的右子樹」(引號內在之後簡稱為 LN )都加入兩顆為 1 的 node，就可以達到 \( \cdot a \)的功用，剩下我們就是考慮到底要有幾個 LN，就可以湊出 k 種解法，然後如果說數字為一質數時，我們就把那 LN 的成本變成 \(LN = \text{left node} + \text{right node} \)，那如果不是質數就是 \(LN \geq \text{left node} + \text{right node} \)。</p>
+<p>然後則必須思考，當 \(k = 1 \) 時我們實際上不需要 \(*2\)，於是我們只需要將那兩個 node 其中 1 節點改為 1，另一點則 \( &gt; 1 \)。但當 \( k = 2 \)時，則兩節點必要為 1。</p>
+<p>下方圖片為當 k = x 時所產生的地圖與有多少解方法及選擇的點<br><img src="/images/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pg/2.jpg" alt=""></p>
+<h3 id="設計想法"><a href="#設計想法" class="headerlink" title="設計想法"></a>設計想法</h3><p>因為這題是不斷的進行除以 2，來生成地圖，但我們並不確定他需要幾次才能將 \( k / 2 &lt; 1\)，所以用遞迴解決，當用遞迴解決時，這遞迴需要的條件如下:</p>
+<p>也就是遞迴可以解決，方程式想法如下:</p>
+<ul>
+<li>\(f(K) = if k &gt; 2 , 呼叫 f(k/2) + f(2) \)</li>
+<li>\(if(k \leq 2) , 在右子樹加入 2 個 node\)</li>
+<li>\(LN = \text{left node} + \text{right node} \)</li>
+<li>\(if (k \% 2 == 0), LN +1 \)</li>
+</ul>
+<p>下方則是說明，對應每個方程式的說明</p>
+<ul>
+<li>當 \(k &gt; 2 \) 時，我們需要做 \( /2\) 這動作，但因為我們是在尋找 \( /2\) 的最好長度，於是需要再後面加入 \(f(2)\)，才能滿足 k 的要求</li>
+<li>由於 k 的值小於等於 2，我們要加入 2 個 node 以滿足 \( * 2\)的動作</li>
+<li>LN 會等於左節點 + 右節點，這為 K = 質數時的情況</li>
+<li>如果 k 是偶數，那我們將 LN + 1，才不會多出一種解</li>
+</ul>
+<h3 id="觀念小釐清"><a href="#觀念小釐清" class="headerlink" title="觀念小釐清"></a>觀念小釐清</h3><p>在新的想法中，圖片最後在最後的 LN 時，左子樹也是右子樹的一種，減少程式碼撰寫麻煩。</p>
+<p>Q: 為甚麼在下方的程式碼 function dfs 中是 <code>return temp</code> 而不是 <code>return value[root]</code>?<br>A: 很簡單的一個邏輯， 5 / 2 = 2 ，但 (2+1) * (2) = 6 ，回推不符合。應該還是要 2 * 2 + 1 = 5。</p>
+<p>Q: 這篇講得很爛，文章主人是不是國文不好?<br>A: 這種想法的東西真的很難用文字表述，我的表達能力不好抱歉…<br>P.S. 但你可以稍微嘗試將這些用文字表達，真的不太好表達。這需要你去嘗試才知道困難處。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>要感謝 Bill and Entroy 先思考這題，等他們想通後，我才根據他們說給予我的指導和想法，幫助我寫出此題，不然要是自己寫應該要花比有他人指導更多的時間吧！希望我跟他們能夠一輩子都是好朋友。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 100010</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> pa[SIZE] , value[SIZE] , cnt=<span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> root )</span></span>&#123;</span><br><span class="line">    cnt++ ;</span><br><span class="line">    <span class="keyword">int</span> temp ;</span><br><span class="line">    pa[cnt] = root++ ;</span><br><span class="line">    <span class="keyword">if</span>(k &lt;= <span class="number">2</span>)&#123;</span><br><span class="line">        value[cnt] = <span class="number">3</span> - k ;</span><br><span class="line">        pa[cnt+<span class="number">1</span>] = cnt ;</span><br><span class="line">        value[++cnt] = <span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    temp = dfs(k/<span class="number">2</span>,root) + dfs(<span class="number">2</span>,root)  ;</span><br><span class="line">    value[root] = temp + (k % <span class="number">2</span> == <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> temp ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k ;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; k ;</span><br><span class="line">    dfs(k , <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; cnt &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= cnt ; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; pa[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= cnt ; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; value[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICPC/" rel="tag">ICPC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICPC-2019-2020-North-Western-Russia-Regional-Contest/" rel="tag">ICPC_2019-2020_North-Western_Russia_Regional_Contest</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/07/28/R/R-shinyapps-experence/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            使用 shinyapps 建立網站
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/25/centOS-command/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">centOS 基礎指令教學</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>請我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    ProblemK Assigning Frequencies |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-ICPC/2017-ICPC-Asia-Taipei-Hualien-Regional-Pk" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ProblemK Assigning Frequencies
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/18/ICPC/2017-ICPC-Asia-Taipei-Hualien-Regional-Pk/" class="article-date">
+  <time datetime="2020-08-17T16:32:24.000Z" itemprop="datePublished">2020-08-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ICPC/">ICPC</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">6分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一張圖，這圖不會超過 25 個 Node，試問能不能用 3 個顏色塗滿所有點但相鄰的點不能有相同顏色。<br>題目提示: 測資不會超過 85 筆。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>如果對暴力搜尋法有一定了解的人，應該看到題目就會馬上想到暴力搜尋法了吧！<br>可惜我不是，我用了一個奇怪的想法然後還沒解開…。(有興趣的可以往下滑)</p>
+<h3 id="甚麼時機該用暴力搜尋法？"><a href="#甚麼時機該用暴力搜尋法？" class="headerlink" title="甚麼時機該用暴力搜尋法？"></a>甚麼時機該用暴力搜尋法？</h3><ol>
+<li>題目有告訴你測資不超過幾筆，但那數字卻不大</li>
+<li>圖也不大，相較於其他圖論的題目</li>
+<li>明顯看到他的測資基本上不大於 100 or 1000，應題目而定</li>
+</ol>
+<p>由於是暴力搜尋法，也沒有甚麼好講，但他有一地方神奇就在於遞迴。讓我來稍微解說下:</p>
+<h3 id="依序新增一點，然後塗色"><a href="#依序新增一點，然後塗色" class="headerlink" title="依序新增一點，然後塗色"></a>依序新增一點，然後塗色</h3><p>這是我認為最為有趣的地方，也是最困擾我的地方。一開始我認為這遞迴非常好寫，輕輕鬆鬆，開始寫以後才證明我錯了，在這邊呼籲各位不要精神 AC 阿，真的，魔鬼藏在細節裡。</p>
+<p>由於他依序新增一點，所以她其實在過程中，並不是完整的圖而是分裂的，但沒關係。不影響我們作答，因為之後連起來時就會發現顏色一樣而再將點更改顏色。如果都不行就可以直接 FALSE。</p>
+<p>塗色，你是要幫下一個點選色。這是遞迴裡面最有魅力的地方，明明是 a 的遞迴 time，但卻幫 b 做好顏色選擇。你可能會覺得很奇怪？<br>但你仔細想想，如果不這樣做的話，那你在 a 的遞迴才幫 a 做塗色，那複雜度雖然一樣，但程式碼就非常亂了，因為要考慮你是因為 3 個顏色都不行呢？還是這顏色可以通過。這兩種情況下，你可能還需要一個 flag 之類的東西來判斷，不好看。太醜了。<br>但這點我也是觀看別人程式碼，我才懂得。寫這份文件的人果真大神。</p>
+<h3 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h3><p>我在解這題時，是閱讀觀看這位<a href="https://www.twblogs.net/a/5b8ee83f2b7177188348a611" target="_blank" rel="noopener">大神</a>才得以解出的，謝謝他。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 30</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> path[MAXN][MAXN] = &#123;&#125; ;</span><br><span class="line"><span class="keyword">int</span> node[MAXN] = &#123;&#125; ;</span><br><span class="line"><span class="keyword">int</span> n , p , N ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; v ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(path[v][i] &amp;&amp; node[v] == node[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(n == v<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">3</span> ; j++)&#123;</span><br><span class="line">        node[v+<span class="number">1</span>] = j ;</span><br><span class="line">        <span class="keyword">if</span>(DFS(v+<span class="number">1</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> _i , _j ;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N ;</span><br><span class="line">    <span class="keyword">while</span>(N--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; p ;</span><br><span class="line">        <span class="comment">//clear</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; n ; j++)</span><br><span class="line">                path[i][j] = <span class="number">0</span> ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; p ; i++ )&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; _i &gt;&gt; _j ;</span><br><span class="line">            path[_i][_j] = <span class="number">1</span> ;</span><br><span class="line">            path[_j][_i] = <span class="number">1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(DFS(<span class="number">0</span>))</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Y"</span> ;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"N"</span> ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="我再看到此題的想法"><a href="#我再看到此題的想法" class="headerlink" title="我再看到此題的想法:"></a>我再看到此題的想法:</h2><p>這裡是廢文。如果不想要了解我的想法可以直接略過，因為我的想法是錯誤的。但如果想看看我的思考邏輯就建議看看。</p>
+<p>我一開始看到這題目時，就想到簡單 2 顏色塗色問題，想說直接用 BFS，搞定！但絕對沒有那麼簡單啊 XD，於是我就想出一方法關於我要怎麼解出這題目。<br>怎麼做呢，用有點類似於 DP 的方式，開一 struct，裡面放入一陣列代表有 3 顏色，只要他相鄰的點有被用過的顏色，那此點就不能用這顏色，只要附近的點都將 3 種顏色都用過就輸出 N，是不是覺得我的想法還不賴！當初的我也覺得我的想法很不錯，所以就用了這方式。</p>
+<p>寫出來後，丟去 judge，卻發現是錯的！可是錯在哪裡我不知道…，非常討厭。於是我就去問了我的朋友們，但我的朋友們似乎也不太清楚，於是就問了奧林匹亞銅牌國手，他說出了一句令我震驚的話。<br><img src="./images/1.jpg" alt=""></p>
+<p>原來剛剛的我試圖在嘗試不可能的任務阿，怕。差點我就能把 3 塗色問題的演算法名稱掛上大衛了www，沒，開玩笑的。於是我就也放棄了此題，使用暴力搜尋法 ಥ⌣ಥ。</p>
+<p>下面是我寫的程式碼(我的想法)，有興趣的可以拿去研究看看www。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path[<span class="number">30</span>] ;</span><br><span class="line"><span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; nodes ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N , n , p  ;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> color[<span class="number">3</span>] = &#123;&#125; ;</span><br><span class="line">    <span class="keyword">int</span> use = <span class="number">0</span> ;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>&#123;</span><br><span class="line">        color[<span class="number">0</span>] = <span class="number">0</span> ;</span><br><span class="line">        color[<span class="number">1</span>] = <span class="number">0</span> ;</span><br><span class="line">        color[<span class="number">2</span>] = <span class="number">0</span> ;</span><br><span class="line">        use = <span class="number">0</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;node[<span class="number">30</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">choose</span><span class="params">(<span class="keyword">int</span> i , <span class="keyword">int</span> k )</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; path[i].<span class="built_in">size</span>() ; j++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!node[path[i][j]].use)&#123;</span><br><span class="line">            nodes.push_back(path[i][j]);</span><br><span class="line">            node[path[i][j]].use = <span class="number">1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node[path[i][j]].color[k])</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> i )</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span> ; k &lt; <span class="number">3</span> ; k++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(node[i].color[k])</span><br><span class="line">            <span class="keyword">continue</span> ;</span><br><span class="line">        <span class="keyword">if</span>(choose(i,k))&#123;</span><br><span class="line">            node[i].color[k] = <span class="number">1</span> ;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BFS</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//node[0].color[0] = 1 ;</span></span><br><span class="line">    nodes.push_back(<span class="number">0</span>) ;</span><br><span class="line">    node[<span class="number">0</span>].use = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">while</span>(nodes.<span class="built_in">size</span>())&#123;</span><br><span class="line">        <span class="keyword">if</span>(!check(nodes.front()))</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">        nodes.pop_front();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> i , j ;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N ;</span><br><span class="line">    <span class="keyword">while</span>(N--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; p ;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//clear</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            path[i].<span class="built_in">clear</span>() ;</span><br><span class="line">            node[i].<span class="built_in">clear</span>() ;</span><br><span class="line">        &#125;</span><br><span class="line">        nodes.<span class="built_in">clear</span>() ;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//bulid</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span> ; k &lt; p ; k++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; i &gt;&gt; j ;</span><br><span class="line">            path[i].push_back(j) ;</span><br><span class="line">            path[j].push_back(i) ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(BFS())</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Y"</span> ;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"N"</span> ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*//debug</span></span><br><span class="line"><span class="comment">        for(int i = 0 ; i &lt; n ; i++)&#123;</span></span><br><span class="line"><span class="comment">            cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; node[i].color[0] &lt;&lt; ' ' &lt;&lt; node[i].color[1] &lt;&lt; ' ' &lt;&lt; node[i].color[2] &lt;&lt; '\n' ;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2017-ICPC-Asia-Taipei-Hualien-Regional/" rel="tag">2017-ICPC-Asia-Taipei-Hualien-Regional</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICPC/" rel="tag">ICPC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E6%90%9C%E5%B0%8B%E6%B3%95/" rel="tag">暴力搜尋法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/13/R/R-httr/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">透過 httr 來使用 API 完成在 R 上的應用</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>請我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
