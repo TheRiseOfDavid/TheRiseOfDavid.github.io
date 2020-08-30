@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">475</span>
+            <span class="post-count">530</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">1分鐘</span>
+            <span class="post-count">2分鐘</span>
         </span>
     </span>
 </div>
@@ -147,6 +147,8 @@ ga('send', 'pageview');
 <h4 id="參考連結-3"><a href="#參考連結-3" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="http://linux.vbird.org/linux_basic/0440processcontrol.php" target="_blank" rel="noopener">第十六章、程序管理與 SELinux 初探</a><br><a href="https://blog.csdn.net/YuZhiHui_No1/article/details/44564963" target="_blank" rel="noopener">Linux任务/进程前后台切换</a></p>
 <h2 id="排成-使電腦在特定時段啟動此程式"><a href="#排成-使電腦在特定時段啟動此程式" class="headerlink" title="排成(使電腦在特定時段啟動此程式)"></a>排成(使電腦在特定時段啟動此程式)</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crontab -e 編輯排成</span><br><span class="line"><span class="number">00</span> <span class="number">03</span> * * * Rscript /home/archcopilot/public_html/david53133/v2.0/main.R</span><br><span class="line">crontab -l 檢查</span><br></pre></td></tr></table></figure>
 <h4 id="參考連結-4"><a href="#參考連結-4" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://stackoverflow.max-everyday.com/2017/08/centos-crontab/" target="_blank" rel="noopener">CentOS 的cron自動排程</a></p>
+<h2 id="如何更改時間"><a href="#如何更改時間" class="headerlink" title="如何更改時間"></a>如何更改時間</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo date -s &quot;2020&#x2F;08&#x2F;20 17:37:32&quot;</span><br><span class="line">sudo date -s &quot;Thu, 20 Aug 2020 17:40:32 CST&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="參考連結-5"><a href="#參考連結-5" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://blog.gtwang.org/linux/howto-set-date-time-from-linux-command-prompt/" target="_blank" rel="noopener">Linux 手動更改系統時間：date、hwclock 與 timedatectl 指令用法教學</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>centOS我也是第一次摸過並不太認識他阿，現在慢慢熟悉希望可以把它變成自己的技能之一。</p>
 <h2 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h2><p>2020-07-25 20:48:32 - 完成</p>
 <ol>
