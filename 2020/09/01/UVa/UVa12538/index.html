@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    關於我 |  大衞的筆記
+    UVa12538 - Version Controlled IDE |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="page-" class="article article-type-page" itemscope
+  <article id="post-UVa/UVa12538" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  關於我
+  UVa12538 - Version Controlled IDE
 </h1>
   
 
@@ -59,6 +59,47 @@ ga('send', 'pageview');
     
 
     
+    <div class="article-meta">
+      <a href="/2020/09/01/UVa/UVa12538/" class="article-date">
+  <time datetime="2020-09-01T10:07:27.000Z" itemprop="datePublished">2020-09-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">634</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">2分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
 
     
 
@@ -70,23 +111,20 @@ ga('send', 'pageview');
       
 
       
-      <blockquote>
-<p>A Coder, Live in Taipei</p>
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>我們需要版本控制一份文件，類型如下：<br>type 1 ，插入字串在 p 位置<br>type 2 ，移除字串從 p 位置開始移除 c 個字元<br>type 3 ，查詢 v 版本從 p 位置開始輸出 c 個字元<br>每進行一次 type 1 or 2 的動作，就增加一版本。<br>我們順便進行加密混淆的動作，每一次只要 type 3 輸出的字元中擁有 ‘c’，則接下來 除了 type 一外的數字都會因為前面 type 3 輸出字元中有多少的 c，則會增加多少數字。</p>
 </blockquote>
-<p>姓名： 江大衞<br>目前就讀： 國立台北科技大學 資訊與財金管理系<br>telegram : David53133<br>Line : 0979595505<br>​        </p>
-<blockquote>
-<p>曾經很努力，從高三上開始日以繼日的認真coding，但起步還是太晚。<br>由於知道自己以無法向大神們一樣耀眼，因而選擇資訊+財金的廢材</p>
-</blockquote>
-<h2 id="經歷-awards"><a href="#經歷-awards" class="headerlink" title="經歷 (awards):"></a>經歷 (awards):</h2><ul>
-<li>第五屆<strong>全國科技大專校院程式競賽</strong> NCTU 2020 <font color="#dd0000">［金獎、第五名］</font></li>
-<li>2018（107）學年度全國高級中等學校商業類學生<strong>技藝競賽程式設計</strong>職種  <font color="#dd0000">［金手獎、第六名］</font></li>
-<li>2019國際資訊奧林匹亞競賽選訓營 ［第七十二名］</li>
-<li>全國高級中等學校商業與管理群2018（107）年<strong>專題及創意製作競賽決賽</strong>創意組  <font color="#dd0000">［第三名］</font></li>
-<li>2018（107）年新北市<strong>中小學科學展覽會</strong>高級中等學校組電腦與資訊學科 <font color="#dd0000">［特優］</font></li>
-<li>未完待續的努力 ［進行式］</li>
-</ul>
-<!-- L:24~25 and L:27~30 &#8203 -->
-<p>​<br>​<br><img src="/images/me.jpg" alt="me.jpg" width="300" style="border-radius:50%"><br>​<br>​<br>​<br>​      </p>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>通常大家看到這題直覺都會是用 string 來寫這題吧！但這題不是 QAQ。<br>這題要用 string 的另外一個好朋友 rope 來解決，rope 的結構為「可持久化平衡樹」，他在加入資料時不破壞舊有狀態，這樣使得每次在插入新增時效率來比 string 更優秀。</p>
+<p>下圖為 <a href="https://en.wikipedia.org/wiki/Rope_(data_structure)" target="_blank" rel="noopener">wiki string 與 rope 的複雜度比較圖</a><br><img src="/images/UVa12538/1.PNG" alt=""></p>
+<p>在這需要大量插入移除的題目中，rope 是再好不過的了！且他語法也跟 string 大同小異，上手起來也不至於太久。</p>
+<h3 id="小提醒"><a href="#小提醒" class="headerlink" title="小提醒:"></a>小提醒:</h3><p>type 2 and type 3 的 p 都是從 1 開始，所以必須要 -1，因為電腦從 0 開始呀！</p>
+<p>rope.insert()，裡面放的是字元陣列！所以如果是 string，需要變成 string.c_str()，才有辦法讀進去喔！</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>查了下 string 中文是細繩，rope 是粗繩，嗯? 怎麼感覺好像特斯拉與愛迪生的感覺呢wwww，主流都是 string 沒有 rope 阿 ಥ⌣ಥ。不過被我學了一課，嗯! 我又多學了一些知識，開心。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="stl之rope大法好及可持久化并查集用法">rope大法好</a><br><a href="http://sunmoon-template.blogspot.com/2015/01/c-rope.html" target="_blank" rel="noopener">c++ rope 基本應用</a><br><a href="https://en.wikipedia.org/wiki/Rope_(data_structure)" target="_blank" rel="noopener">Rope (data structure)</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ext/rope&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 50020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> __gnu_cxx ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> n , t , a , b , c , d=<span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">int</span> v = <span class="number">0</span> ;</span><br><span class="line">    <span class="built_in">string</span> strA ;</span><br><span class="line">    rope&lt;<span class="keyword">char</span>&gt; r[MAXN] , rtmp ;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(t==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a ;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; strA ;</span><br><span class="line">            a -= d ;</span><br><span class="line">            r[++v] = r[v] ;</span><br><span class="line">            r[v].insert(a,strA.c_str());</span><br><span class="line">            <span class="comment">//debug</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; r[v] &lt;&lt; '\n' ;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t==<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b ;</span><br><span class="line">            a -= d ; b -= d ;</span><br><span class="line">            r[++v] = r[v] ;</span><br><span class="line">            r[v].erase(a<span class="number">-1</span>,b);</span><br><span class="line">            <span class="comment">//debug</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; r[v] &lt;&lt; ' ' &lt;&lt; r[v-1] &lt;&lt; '\n' ;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t==<span class="number">3</span>)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c ;</span><br><span class="line">            a -= d ; b -= d ; c -= d ;</span><br><span class="line">            rtmp = r[a].substr(b<span class="number">-1</span>,c) ;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; rtmp &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            d += count(rtmp.begin() , rtmp.end() , <span class="string">'c'</span> );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
       <!-- reward -->
@@ -110,6 +148,8 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rope/" rel="tag">rope</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
 
     </footer>
 
@@ -117,6 +157,16 @@ ga('send', 'pageview');
 
   
   
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/31/Codeforces/Codeforces-Round-666-Div-2-pA/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">ProblemA Juggling Letters</div>
+      </a>
+    
+  </nav>
+
 
   
 
@@ -174,6 +224,8 @@ ga('send', 'pageview');
 
   
 
+  
+  
   
 
 </article>
@@ -320,6 +372,30 @@ ga('send', 'pageview');
 </script>
 
 
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
 
 
 

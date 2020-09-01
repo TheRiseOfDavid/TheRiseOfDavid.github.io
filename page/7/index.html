@@ -47,7 +47,7 @@ ga('send', 'pageview');
     
   <div class="cover-frame">
     <div class="bg-box">
-      <img src="/images/cover3.jpg" alt="image frame" />
+      <img src="/images/cover4.jpg" alt="image frame" />
     </div>
     <div class="cover-inner text-center text-white">
       <h1><a href="/">大衞的筆記</a></h1>
@@ -76,6 +76,84 @@ ga('send', 'pageview');
     
     
     
+    
+    <article id="post-UVa/UVa11636" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/03/30/UVa/UVa11636/"
+    >UVa11636 - Hello World!</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/30/UVa/UVa11636/" class="article-date">
+  <time datetime="2020-03-30T08:16:21.000Z" itemprop="datePublished">2020-03-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
+<p>一開始給你一段句子，你只能透過 「複製 (copy)」 方式，複製出 x 段句子</p>
+<p>給你一數字 x ，試問在幾次後可以複製可達到 x 個句子？</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/03/30/UVa/UVa11636/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B0%B4%E9%A1%8C/" rel="tag">水題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
     
     <article id="post-life_experence/enrollment_to_university" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
@@ -294,11 +372,9 @@ ga('send', 'pageview');
 <li>shift x1 , x2 , x3 : 原本的值都往前循環一個位置</li>
 </ol>
 </blockquote>
-<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>透過線段樹來維護最小值查詢，加上 shift 的數字最多只有 30 位，透過單點修改的方式即可完成。</p>
-<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><p>shift 給的是位置，並不是數值，也不一定給你的位置會是照順序，所以必須要進行 sort</p>
-<h2 id="備註："><a href="#備註：" class="headerlink" title="備註："></a>備註：</h2><p>要是不知道 RMQ (Range Minimum/Maximum Query)) 就看 <a href="https://www.youtube.com/watch?v=c5O7E_PDO4U" target="_blank" rel="noopener">Tushar Roy - Coding Made Simple</a></p>
-<p><del>印度人教程式真的強，不知道為甚麼感覺看中文的教學影片都比較沒辦法聽得懂阿，難道真的是語言的關係嗎QQ</del></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) ((x &lt;&lt; 1) +1)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) ((x &lt;&lt; 1) +2)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 99999999</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100005</span> ;</span><br><span class="line"><span class="keyword">int</span> shift[<span class="number">35</span>] , num[N] , len_shift ;</span><br><span class="line"><span class="built_in">string</span> strLine ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> left , right , Min_Value  ;</span><br><span class="line">&#125;node[<span class="number">4</span> * N ];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">0</span> )</span></span>&#123;</span><br><span class="line">    node[x].left = left ;</span><br><span class="line">    node[x].right = right ;</span><br><span class="line">    <span class="keyword">if</span>(left == right)&#123;</span><br><span class="line">        node[x].Min_Value = num[left] ;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right ) / <span class="number">2</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; mid &lt;&lt; '\n' ;</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; node[x].left &lt;&lt; ' ' &lt;&lt; node[x].right &lt;&lt; ' ' &lt;&lt; '\n' ;</span></span><br><span class="line"></span><br><span class="line">    build(left , mid , Lson(x)) ;</span><br><span class="line">    build(mid + <span class="number">1</span> , right , Rson(x)) ;</span><br><span class="line">    node[x].Min_Value = min(node[Lson(x)].Min_Value  , node[Rson(x)].Min_Value ) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span></span>&#123;</span><br><span class="line">    len_shift = <span class="number">0</span> ;</span><br><span class="line">    shift[len_shift] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">6</span> ; i &lt; strLine.length() ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(strLine[i] &gt;= <span class="string">'0'</span> &amp;&amp; strLine[i] &lt;= <span class="string">'9'</span> )&#123;</span><br><span class="line">            shift[len_shift] = shift[len_shift] * <span class="number">10</span> + (<span class="keyword">int</span>) (strLine[i] - <span class="string">'0'</span> ) ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            shift[++len_shift ] = <span class="number">0</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//finaly char is ')' , so len_shift is right</span></span><br><span class="line">    sort(shift , shift + len_shift ) ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">/**&lt;</span></span><br><span class="line"><span class="comment">    for(int i = 0 ; i &lt; len_shift ; i++)</span></span><br><span class="line"><span class="comment">        cout &lt;&lt; shift[i] &lt;&lt; ' ' ;</span></span><br><span class="line"><span class="comment">    cout &lt;&lt; '\n' ;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">0</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left &gt;= left &amp;&amp; node[x].right &lt;= right)</span><br><span class="line">        <span class="keyword">return</span> node[x].Min_Value ;</span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ;</span><br><span class="line">    <span class="keyword">int</span> ans = INF ;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; node[x].left &lt;&lt; ' ' &lt;&lt; node[x].right &lt;&lt; ' ' &lt;&lt; node[x].Min_Value &lt;&lt; '\n' ;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( left &lt;= mid )</span><br><span class="line">        ans = min(ans , query(left , right , Lson(x))) ;</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; right )</span><br><span class="line">        ans = min(ans , query(left , right , Rson(x))) ;</span><br><span class="line">    <span class="keyword">return</span> ans ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set_num</span><span class="params">(<span class="keyword">int</span> position , <span class="keyword">int</span> value , <span class="keyword">int</span> x = <span class="number">0</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left == position &amp;&amp; node[x].right == position )&#123;</span><br><span class="line">       node[x].Min_Value = value ;</span><br><span class="line">       <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ;</span><br><span class="line">    <span class="keyword">if</span>(position &lt;= mid )</span><br><span class="line">        set_num(position , value , Lson(x) );</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; position )</span><br><span class="line">        set_num(position , value , Rson(x)) ;</span><br><span class="line">    node[x].Min_Value = min(node[Lson(x)].Min_Value , node[Rson(x)].Min_Value );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n , q , intTemp ;</span><br><span class="line">    ios::sync_with_stdio(<span class="number">0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span> ) ;</span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> ) ;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; q ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num[i] ;</span><br><span class="line">    build(<span class="number">1</span>,n);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">/**&lt;</span></span><br><span class="line"><span class="comment">    for(int i = 0 ; i &lt; 13 ; i++)&#123;</span></span><br><span class="line"><span class="comment">        cout &lt;&lt; node[i].left &lt;&lt; ' ' &lt;&lt; node[i].right &lt;&lt; ' ' &lt;&lt; node[i].Min_Value &lt;&lt; '\n' ;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    return 0 ;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; strLine ;</span><br><span class="line">        <span class="keyword">if</span>(strLine[<span class="number">0</span>] == <span class="string">'q'</span>)&#123;</span><br><span class="line">            handle();</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; query(shift[<span class="number">0</span>] , shift[<span class="number">1</span>] ) &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (strLine[<span class="number">0</span>] == <span class="string">'s'</span>)&#123;</span><br><span class="line">            handle();</span><br><span class="line">            intTemp = num[shift[<span class="number">0</span>]] ;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; len_shift ; i++)&#123;</span><br><span class="line">                set_num(shift[i<span class="number">-1</span>] , num[shift[i]]) ;</span><br><span class="line">                num[shift[i<span class="number">-1</span>]] = num[shift[i]] ;</span><br><span class="line">            &#125;</span><br><span class="line">            num[shift[len_shift<span class="number">-1</span>]] = intTemp ;</span><br><span class="line">            set_num(shift[len_shift<span class="number">-1</span>] , intTemp );</span><br><span class="line"></span><br><span class="line">            <span class="comment">//debug</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; intTemp &lt;&lt; ' ' &lt;&lt; shift[len_shift-1] &lt;&lt; '\n' ;</span></span><br><span class="line">            <span class="comment">//for(int i = 1 ; i &lt;= n ; i++)</span></span><br><span class="line">             <span class="comment">//   cout &lt;&lt; num[i] &lt;&lt; ' ' ;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <a class="article-more-link" href="/2020/03/23/UVa/UVa12299/">閱讀更多...</a>
+      
       
       <!-- reward -->
       
@@ -789,86 +865,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LIS-%E6%9C%80%E9%95%B7%E9%81%9E%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">LIS 最長遞增子序列</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa11349" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/03/19/UVa/UVa11349/"
-    >UVa11349 - Symmetric Matrix</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/03/19/UVa/UVa11349/" class="article-date">
-  <time datetime="2020-03-19T08:12:26.000Z" itemprop="datePublished">2020-03-19</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
-<p>給你一個正方形矩陣 M ， 你必須判斷矩陣是否對稱 (symmetric)</p>
-<p>矩陣定義: 矩陣內部元素不會有負數，且是對中間點對稱</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/03/19/UVa/UVa11349/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%B5%E6%96%B0%E9%A1%8C/" rel="tag">創新題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>

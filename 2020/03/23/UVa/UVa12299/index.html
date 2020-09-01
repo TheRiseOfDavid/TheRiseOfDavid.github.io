@@ -118,6 +118,8 @@ ga('send', 'pageview');
 <li>shift x1 , x2 , x3 : 原本的值都往前循環一個位置</li>
 </ol>
 </blockquote>
+<a id="more"></a>
+
 <h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>透過線段樹來維護最小值查詢，加上 shift 的數字最多只有 30 位，透過單點修改的方式即可完成。</p>
 <h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><p>shift 給的是位置，並不是數值，也不一定給你的位置會是照順序，所以必須要進行 sort</p>
 <h2 id="備註："><a href="#備註：" class="headerlink" title="備註："></a>備註：</h2><p>要是不知道 RMQ (Range Minimum/Maximum Query)) 就看 <a href="https://www.youtube.com/watch?v=c5O7E_PDO4U" target="_blank" rel="noopener">Tushar Roy - Coding Made Simple</a></p>
