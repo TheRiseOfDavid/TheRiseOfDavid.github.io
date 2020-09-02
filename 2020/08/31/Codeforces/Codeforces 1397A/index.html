@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    ProblemD Stoned Game |  大衞的筆記
+    Codeforces 1397A - Juggling Letters |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-Codeforces/Codeforces-Round-666-Div-2-pD" class="article article-type-post" itemscope
+  <article id="post-Codeforces/Codeforces 1397A" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  ProblemD Stoned Game
+  Codeforces 1397A - Juggling Letters
 </h1>
   
 
@@ -60,7 +60,7 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/08/31/Codeforces/Codeforces-Round-666-Div-2-pD/" class="article-date">
+      <a href="/2020/08/31/Codeforces/Codeforces%201397A/" class="article-date">
   <time datetime="2020-08-30T17:07:27.000Z" itemprop="datePublished">2020-08-31</time>
 </a>
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">356</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">3分鐘</span>
+            <span class="post-count">1分鐘</span>
         </span>
     </span>
 </div>
@@ -112,24 +112,16 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>T、HL 在玩遊戲。遊戲規則如下，有 x 堆石頭，每堆石頭數量不定，每次都是 T 先從其中一堆拿石頭，H 再拿一顆石頭，每位玩家則不可以拿上位玩家拿石頭的石頭堆。<br><del>這到底是甚麼原始人遊戲 XD，好像舊石器時代的人會玩的遊戲</del></p>
+<p>給你 x 組字串，試問能不能把這些字串進行重組後，能夠再重新分成 x 組字串，但字串內容則是全部一樣，可以輸出 YES，不行輸出 NO。</p>
 </blockquote>
 <a id="more"></a>
 
 <h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><blockquote>
-<p>這題真的很難啊…，這題目與我之前碰過的經驗不同，讓我搞錯方向去思考，好題好題。<br>幸好有解開啦…，不然我就會很生氣了 XD。</p>
+<p>水題，這題真的水題，還是有點巧思的水題。喜歡這種水題</p>
 </blockquote>
-<p>每次都選擇最大的兩堆石頭出來，然後兩堆石頭各減一。之後再放回去 priority_queue 內，假如 priority_queue size 只有一堆代表 T win，若剛好 0 堆則代表 HL win。</p>
-<p>至於我為甚麼會這樣想呢？我建議讀者都先從我的初步想法慢慢讀起，我認為會比直接看我的正確想法來的更好理解些。</p>
-<h3 id="初步想法"><a href="#初步想法" class="headerlink" title="初步想法"></a>初步想法</h3><h4 id="錯誤想法-奇偶數堆"><a href="#錯誤想法-奇偶數堆" class="headerlink" title="錯誤想法 - 奇偶數堆"></a>錯誤想法 - 奇偶數堆</h4><p>一開始，稍微推斷一下。<br>他可能是甚麼透過偶奇數來判斷的，個人在猜應該是用偶數堆與奇數堆來進行判斷。<br>後來自己在紙筆推導時，發現 2 2 2 這測資是 HL win。但 2 2 4 則是 T 贏。</p>
-<h4 id="錯誤想法-T-從最小堆石頭拿取，HL-從最大堆石頭拿取"><a href="#錯誤想法-T-從最小堆石頭拿取，HL-從最大堆石頭拿取" class="headerlink" title="錯誤想法 - T 從最小堆石頭拿取，HL 從最大堆石頭拿取"></a>錯誤想法 - T 從最小堆石頭拿取，HL 從最大堆石頭拿取</h4><p>這是根據題目給的測資進行判斷，比較有點根據了XD<br>只要只剩一堆石頭必定會是 T 贏，HL 則是要盡量讓石頭堆數達到兩堆且兩堆數量一樣。(從題目測資進行判斷)，於是我寫了一程式關於 T 從小石頭開始拿，當 T 從小石頭堆的提取數量已經大於 HL 的最大堆時，則 HL 在往次大堆進行提取，看最後是 T 還是 HL 的石頭比較多，我在進行判斷。(此想法透過遞迴撰寫)。</p>
-<p>由於是錯誤想法因此我用圖片來給大家看我的錯誤遞迴，以免誤導大家以為這也是正確的一部份。</p>
-<p><img src="/images/Codeforces-Round-666-Div-2-pD/1.PNG" alt=""></p>
-<p>但後來證明我是錯誤的，測資怎麼樣都沒過，卡在第二筆。我後來仔細想想，每次都只拿一顆，經驗告訴我，消去法不一定適用。在使用 2 2 2 測資時得到啟發。</p>
-<h4 id="正確想法-T-只提取最大堆石頭，HL-則提取次大堆石頭"><a href="#正確想法-T-只提取最大堆石頭，HL-則提取次大堆石頭" class="headerlink" title="正確想法 - T 只提取最大堆石頭，HL 則提取次大堆石頭"></a>正確想法 - T 只提取最大堆石頭，HL 則提取次大堆石頭</h4><p>為甚麼會這樣想呢？ 是 1 5 1 這測資啟發我的，我只要 T 直接拿取最大堆，那 HL 要拿甚麼石頭我都不需要在意阿 XD，反正我只要拿我的最大堆，剩下的石頭隨 HL 拿就行。那如果最大堆沒有呢？那就拿次大堆吧，把問題丟給 HL 就可以了 XD。</p>
-<p>那有人會好奇說，為甚麼 HL 怎麼會每次都拿最大堆石頭？這樣 HL 真的是聰明的嗎？其實阿，這場遊戲 HL 完全沒有優勢，她為了要把自己的優勢找回來，所以她要拿次大堆的石頭，來希望當最大堆的石頭用完時，次大堆的石頭還在，這樣他就會是贏家 XD。</p>
-<h2 id="心得："><a href="#心得：" class="headerlink" title="心得："></a>心得：</h2><p>暴力解法，這題讓我很意外啊！我以為會是很優秀的解法，沒想到被我這個程式笨蛋給用暴力解法解出來，如果這並不是作者想的方法，作者會被我給氣死吧! XD</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t , n ;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; num;</span><br><span class="line"><span class="keyword">int</span> a , b ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">judge</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a , b ;</span><br><span class="line">    <span class="keyword">while</span>(num.size())&#123;</span><br><span class="line">        a = num.top() ;</span><br><span class="line">        a-- ;</span><br><span class="line">        num.pop();</span><br><span class="line">        <span class="keyword">if</span>(!num.size())&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"T"</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        b = num.top() ;</span><br><span class="line">        b-- ;</span><br><span class="line">        num.pop();</span><br><span class="line">        <span class="keyword">if</span>(a &gt; <span class="number">0</span>)</span><br><span class="line">            num.push(a);</span><br><span class="line">        <span class="keyword">if</span>(b &gt; <span class="number">0</span>)</span><br><span class="line">            num.push(b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"HL"</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//#ifdef LOCAL</span></span><br><span class="line"><span class="comment">//    freopen("in1.txt" , "r" , stdin );</span></span><br><span class="line"><span class="comment">//#endif // LOCAL</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        <span class="keyword">int</span> intTemp ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; intTemp ;</span><br><span class="line">            num.push(intTemp) ;</span><br><span class="line">        &#125;</span><br><span class="line">        judge();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由於他會給你一些字串，但這些字串的字母可以全部移動，而他詢問說要讓重組後的字串全部一樣，於是只要確認<strong>每個字母</strong>除以 x 剛好是整除時就可以輸出 YES，如果不行就輸出 NO。</p>
+<h2 id="心得："><a href="#心得：" class="headerlink" title="心得："></a>心得：</h2><p>這題其實不難，但我在閱讀時也花了許多時間。以及我在思考題目時其實也不太能夠馬上很直觀了解，但進行假設與觀察後即可發現規律，我認為這題放在第一題是很不賴的設計。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span> , <span class="keyword">int</span>&gt; dict ;</span><br><span class="line"><span class="built_in">string</span> strTemp ;</span><br><span class="line"><span class="keyword">int</span> t , n  ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ans</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it : dict)&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; it.second &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="keyword">if</span>(it.second % n)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"NO"</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"YES"</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//#ifdef LOCAL</span></span><br><span class="line"><span class="comment">//    freopen("in1.txt" , "r" , stdin );</span></span><br><span class="line"><span class="comment">//#endif // LOCAL</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        dict.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; strTemp ;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; strTemp.length() ; j++)&#123;</span><br><span class="line">                dict[strTemp[j]] +=<span class="number">1</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ans();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
       <!-- reward -->
@@ -153,7 +145,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codeforces-Round-666-Div-2/" rel="tag">Codeforces Round .#666 (Div. 2)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E6%90%9C%E5%B0%8B%E6%B3%95/" rel="tag">暴力搜尋法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codeforces-Round-666-Div-2/" rel="tag">Codeforces Round .#666 (Div. 2)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B0%B4%E9%A1%8C/" rel="tag">水題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -164,19 +156,19 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/08/31/Codeforces/Codeforces-Round-666-Div-2-pA/" class="article-nav-link">
+      <a href="/2020/09/01/UVa/UVa12538/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            ProblemA Juggling Letters
+            UVa12538 - Version Controlled IDE
           
         </div>
       </a>
     
     
-      <a href="/2020/08/28/centOS-install-python3/" class="article-nav-link">
+      <a href="/2020/08/31/Codeforces/Codeforces%201397D/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">在 centOS6 安裝 Python 3.8</div>
+        <div class="article-nav-title">Codeforces 1397D - Stoned Game</div>
       </a>
     
   </nav>
