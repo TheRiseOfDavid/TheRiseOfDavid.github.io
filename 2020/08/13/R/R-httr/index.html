@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">301</span>
+            <span class="post-count">313</span>
         </span>
     </span>
 
@@ -133,6 +133,7 @@ ga('send', 'pageview');
 <h3 id="將傳進來的資料轉換成-json"><a href="#將傳進來的資料轉換成-json" class="headerlink" title="將傳進來的資料轉換成 json"></a>將傳進來的資料轉換成 json</h3><p>則需要些比較麻煩的方式，然後注意 <strong>encoding</strong> 必須正確。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(jsonlite)</span><br><span class="line">data_json &lt;- jsonlite::fromJSON(content(data , type=<span class="string">"text"</span> , encoding=<span class="string">"UTF8"</span>))</span><br></pre></td></tr></table></figure>
 
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://community.rstudio.com/t/get-timeout-error-httr-package-error-in-curl/21349" target="_blank" rel="noopener">GET Timeout Error - httr package - Error in Curl</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>httr 真的很好用，他是我在學 R 過程中最容易上手的 ಥ⌣ಥ。能夠將難的東西變成簡單，我真的敬佩那些人的能力。比起 igraph 真的好用太多..，不過應該是我不會用拉，我沒慧根。</p>
 
       
