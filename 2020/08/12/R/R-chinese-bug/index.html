@@ -124,7 +124,7 @@ ga('send', 'pageview');
 <h3 id="solution-2"><a href="#solution-2" class="headerlink" title="solution 2:"></a>solution 2:</h3><p>須將 source 改寫，透過 <code>R eval()</code>進行改寫，eval() 可將字串變成表達式(即 R 的程式碼)使用。<br>R 是可以進行覆寫的語言，可用這招來解決問題。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span> &lt;- <span class="keyword">function</span>(path, encoding = <span class="string">'UTF-8'</span>) &#123;</span><br><span class="line">    l &lt;- readLines(path, encoding=encoding)</span><br><span class="line">    eval(parse(text=l),envir=.GlobalEnv)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">source</span>(path)</span><br></pre></td></tr></table></figure>
 <p>envir = 環境<br>.GlobalEnv = 全域環境</p>
-<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://stackoverflow.com/questions/5031630/how-to-source-r-file-saved-using-utf-8-encoding" target="_blank" rel="noopener">How to source() .R file saved using UTF-8 encoding?</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/5031630/how-to-source-r-file-saved-using-utf-8-encoding" target="_blank" rel="noopener">How to source() .R file saved using UTF-8 encoding?</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>程式語言的世界博大精神，要是沒有他們的付出我能走上現在的路嗎?<br>肯定是沒辦法的，於是我也需要更努力地去為社會付出。</p>
 
       
