@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">288</span>
+            <span class="post-count">301</span>
         </span>
     </span>
 
@@ -120,8 +120,8 @@ ga('send', 'pageview');
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages(<span class="string">"httr"</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="教學範例"><a href="#教學範例" class="headerlink" title="教學範例"></a>教學範例</h2><p>我會記錄關於我所有用到的相關語法，會不斷進行補充</p>
-<h3 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object &lt;- POST(url , body=list(data) , encode = c(<span class="string">"multipart"</span>,<span class="string">"text"</span> , <span class="string">"json"</span>),  accept_json())</span><br></pre></td></tr></table></figure>
-<p><strong>url</strong> = 網址<br><strong>body</strong> 則放入你需要傳送給他的資料，EX: 密碼…<br>程式範例如下 <code>body = list(a=1 , b=2 , c=3)</code><br><strong>encode</strong> 編碼有分</p>
+<h3 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object &lt;- POST(url , body=list(data) , timeout(seconds) , encode = c(<span class="string">"multipart"</span>,<span class="string">"text"</span> , <span class="string">"json"</span>),  accept_json())</span><br></pre></td></tr></table></figure>
+<p><strong>url</strong> = 網址<br><strong>body</strong> 則放入你需要傳送給他的資料，EX: 密碼…<br><strong>timeout()</strong> 最多等待幾秒後就退出<br>程式範例如下 <code>body = list(a=1 , b=2 , c=3)</code><br><strong>encode</strong> 編碼有分</p>
 <ol>
 <li>multipart 多重</li>
 <li>text 文字</li>
