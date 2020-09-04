@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">417</span>
+            <span class="post-count">458</span>
         </span>
     </span>
 
@@ -118,12 +118,12 @@ ga('send', 'pageview');
 
 <h2 id="list-是甚麼"><a href="#list-是甚麼" class="headerlink" title="list 是甚麼?"></a>list 是甚麼?</h2><p>一個讓我非常訝異的 object，他可以變形成 array、dict…等，讓你驚奇的狀態</p>
 <h2 id="用-list-實作-dict"><a href="#用-list-實作-dict" class="headerlink" title="用 list 實作 dict"></a>用 list 實作 dict</h2><p>很簡單，R 的 list 不只可以用數字當作索引，<strong>文字</strong>也可以！所以就像下方範例即可。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list[<span class="string">'test'</span>] &lt;- a</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#簡單物件，其中 a 只能是簡單物件，如 cha , num ,logic , list一層 </span></span><br><span class="line">list[<span class="string">'test'</span>] &lt;- a</span><br></pre></td></tr></table></figure>
 
 <p>但需要注意的是，這時候的 list 裡面只能放入簡單物件，不能有複雜型態。如: list 裡面又有 list…。</p>
 <h3 id="教練，可是我想要讓-list-更好用呀！他應該沒有像-C-Map-一樣那麼不方便吧！"><a href="#教練，可是我想要讓-list-更好用呀！他應該沒有像-C-Map-一樣那麼不方便吧！" class="headerlink" title="教練，可是我想要讓 list 更好用呀！他應該沒有像 C++ Map 一樣那麼不方便吧！"></a>教練，可是我想要讓 list 更好用呀！他應該沒有像 C++ Map 一樣那麼不方便吧！</h3><p>當然沒有。他是 R，你痛苦的時候會想要，RRRRRRR 的叫呀~</p>
 <p>如果想要這時候的 list 可以放入複雜型態時，可看下方舉例：</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list[<span class="string">'test'</span>] &lt;- list(a=<span class="number">4</span> , b=list())</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#複雜物件，其中裡面想要多複雜都可以完成</span></span><br><span class="line">list[[<span class="string">'test'</span>]] &lt;- list(a=<span class="number">4</span> , b=list())</span><br></pre></td></tr></table></figure>
 <p>這樣子後 list 裡面就可以在放入 list，達到許多完美的操作！</p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>程式語言的世界博大精神，要是沒有他們的付出我能走上現在的路嗎?<br>肯定是沒辦法的，於是我也需要更努力地去為社會付出。</p>
 <p>這裡也要感謝牛哥(牛維方) 給我看了許多神奇又酷的 R 操作，讓我在學習 R 的路上突飛猛進，非常謝謝他。省去了我在網路上翻找文章解決問題的時間。</p>
