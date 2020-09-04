@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">684</span>
+            <span class="post-count">707</span>
         </span>
     </span>
 
@@ -117,7 +117,7 @@ ga('send', 'pageview');
 <a id="more"></a>
 <h2 id="ERROR-Can’t-connect-to-HTTPS-URL-because-the-SSL-module-is-not-available"><a href="#ERROR-Can’t-connect-to-HTTPS-URL-because-the-SSL-module-is-not-available" class="headerlink" title="ERROR: Can’t connect to HTTPS URL because the SSL module is not available"></a>ERROR: Can’t connect to HTTPS URL because the SSL module is not available</h2><p>我是在進行 <code>pip install requests</code>時發生，內容大意是指說 pip 不能夠用 SSL，所以找不到套件可以安裝。<del>其實是說沒有相對應的版本，但我覺得這樣講很爛</del></p>
 <h2 id="SOLUTION-update-openssl-and-vim-file"><a href="#SOLUTION-update-openssl-and-vim-file" class="headerlink" title="SOLUTION: update openssl and vim file"></a>SOLUTION: update openssl and vim file</h2><p>由於此問題是 SSL，在我花了約 1 小時查找文件後找出是因為 openssl 版本需要大於 1.0.2，但 centOS6 可更新的最高版本只能到 1.0.1，所以需要進行更新。</p>
-<p>如果是 os 為 centOS6 可參考此篇<br><a href=""></a></p>
+<p>如果是 os 為 centOS6 可參考此篇<br><a href="https://theriseofdavid.github.io/2020/09/05/linux/linux-openssl1.1.0-update/" target="_blank" rel="noopener">CentOS6 安裝與更新 openssl 1.1.0 教學</a></p>
 <h3 id="更新完-openssl-後，怎麼做"><a href="#更新完-openssl-後，怎麼做" class="headerlink" title="更新完 openssl 後，怎麼做?"></a>更新完 openssl 後，怎麼做?</h3><p>重新編譯一次 python ，cd 回 python</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Python-a.b.c</span><br><span class="line">.&#x2F;configure --with-ssl</span><br></pre></td></tr></table></figure>
 
@@ -132,8 +132,9 @@ ga('send', 'pageview');
 <h3 id="驗證"><a href="#驗證" class="headerlink" title="驗證"></a>驗證</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install requests</span><br></pre></td></tr></table></figure>
 
 <p>以上全部都沒問題驗證也成功話，那在 centOS6 上就沒有問題了！太強了你，我花了兩小時才解決此問題..</p>
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>環境的問題時常把新手搞得喘不過氣，幸好這次我能克服此困難。希望以後 python 的版本控制能夠更好，centOS6 提供的相容性也可以更棒！雖然他 2020/11 就要停止更新了…<br>不過還是謝謝能在網路上提供資源的大神們，沒有他們，我連解決都不能解決！<br>尤其是國人，技術資源國人比起台灣資源多很多。</p>
-<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.cnblogs.com/reblue520/p/11103311.html" target="_blank" rel="noopener">centos6.8安装python3.7.3报错Can’t connect to HTTPS URL because the SSL module is not available问题解决</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.cnblogs.com/reblue520/p/11103311.html" target="_blank" rel="noopener">centos6.8安装python3.7.3报错Can’t connect to HTTPS URL because the SSL module is not available问题解决</a><br><a href="https://blog.csdn.net/rongDang/article/details/102871874" target="_blank" rel="noopener">Centos7安装uwsgi出现关于SSL错误的问题</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>環境的問題時常把新手搞得喘不過氣，幸好這次我能克服此困難。希望以後 python 的版本控制能夠更好，centOS6 提供的相容性也可以更棒！雖然他 2020/11 就要停止更新了…<br>不過還是謝謝能在網路上提供資源的大神們，沒有他們，我連解決都不能解決！</p>
+<p>尤其是國人，技術資源國人比起台灣資源多很多。</p>
 
       
       <!-- reward -->
@@ -169,9 +170,9 @@ ga('send', 'pageview');
   <nav class="article-nav">
     
     
-      <a href="/2020/09/05/linux/centOS-install-python36/" class="article-nav-link">
+      <a href="/2020/09/05/linux/centOS-ERROR-bad_interpreter/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">在 centOS6 安裝 Python 3.6</div>
+        <div class="article-nav-title">ERROR! bad interpreter No such file or directory</div>
       </a>
     
   </nav>
