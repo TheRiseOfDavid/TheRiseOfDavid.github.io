@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    centOS 基礎指令教學 |  大衞的筆記
+    Linux 刪除已被監聽的 port |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-centOS-command" class="article article-type-post" itemscope
+  <article id="post-linux/linux-kill-port" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  centOS 基礎指令教學
+  Linux 刪除已被監聽的 port
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/07/25/centOS-command/" class="article-date">
-  <time datetime="2020-07-25T12:48:32.000Z" itemprop="datePublished">2020-07-25</time>
+      <a href="/2020/08/20/linux/linux-kill-port/" class="article-date">
+  <time datetime="2020-08-20T06:55:44.000Z" itemprop="datePublished">2020-08-20</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">530</span>
+            <span class="post-count">193</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">2分鐘</span>
+            <span class="post-count">1分鐘</span>
         </span>
     </span>
 </div>
@@ -112,50 +112,18 @@ ga('send', 'pageview');
 
       
       <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
-<p>記錄我在 centOS 上遇到的指令困難，讓我以後不忘記XD<br>此版本為: centOS 6</p>
+<p>記錄我在 LINUX 上遇到的問題</p>
+<p>會寫這篇的原因是因為我在寫 R 的 api 並且架在 godaddy 的 server 時，常常遇到自己想使用的 port 被監聽，但那 port 有沒有用。</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="成為-root-的使用者"><a href="#成為-root-的使用者" class="headerlink" title="成為 root 的使用者"></a>成為 root 的使用者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su</span><br></pre></td></tr></table></figure>
-<p>接下來會輸入密碼，密碼在 ternimal 上不會顯示，但他還是有運作的，用力地按下 ENTER 吧!之後應該會看到自己的 ternimal 中會出現 <code>[user @ path] #</code> 就代表你成功了!</p>
-<h2 id="查看底下資料夾"><a href="#查看底下資料夾" class="headerlink" title="查看底下資料夾"></a>查看底下資料夾</h2><p>因為是在 ternimal 所以沒有 gui 介面告訴你裡面有哪些資料夾，這時候輸入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p>之後會出現許多子目錄接下來如果文字顯現是，<strong><font color="#0000FF">藍色，代表是資料夾</font></strong>、<strong><font color="#ff0000">紅色，代表是檔案</font></strong>。</p>
-<h2 id="新增資料夾"><a href="#新增資料夾" class="headerlink" title="新增資料夾"></a>新增資料夾</h2><p>如果要在 centOS 底下新增資料夾輸入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir folder_name</span><br></pre></td></tr></table></figure>
-<p>就會產生了</p>
-<h2 id="查看電腦的-RAM"><a href="#查看電腦的-RAM" class="headerlink" title="查看電腦的 RAM"></a>查看電腦的 RAM</h2><p>以 MB 顯示記憶體</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
-<p>以 GB 顯示記憶體</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -g</span><br></pre></td></tr></table></figure>
-<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://www.opencli.com/linux/linux-check-ram-usage-spec" target="_blank" rel="noopener">Linux 查看記憶體 (RAM) 使用狀況及規格</a></p>
-<h2 id="查看安裝歷史"><a href="#查看安裝歷史" class="headerlink" title="查看安裝歷史"></a>查看安裝歷史</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history</span><br></pre></td></tr></table></figure>
-
-<h2 id="移除套件"><a href="#移除套件" class="headerlink" title="移除套件"></a>移除套件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove vlc</span><br></pre></td></tr></table></figure>
-<h4 id="參考連結-1"><a href="#參考連結-1" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://darkranger.no-ip.org/archives/v5/document/linux/yum.htm" target="_blank" rel="noopener">How-To：用 yum 進行軟體安裝移除與更新</a></p>
-<h2 id="查看更新"><a href="#查看更新" class="headerlink" title="查看更新"></a>查看更新</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看電腦-ip"><a href="#查看電腦-ip" class="headerlink" title="查看電腦 ip"></a>查看電腦 ip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
-<h4 id="參考連結-2"><a href="#參考連結-2" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://www.opencli.com/linux/ip-command" target="_blank" rel="noopener">ip 指令 — 取代 ifconfig 的工具</a></p>
-<h2 id="將程式放後台執行"><a href="#將程式放後台執行" class="headerlink" title="將程式放後台執行"></a>將程式放後台執行</h2><p>命令後 + &amp;<br>EX:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R &amp;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看現在有那些後台"><a href="#查看現在有那些後台" class="headerlink" title="查看現在有那些後台"></a>查看現在有那些後台</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jobs</span><br></pre></td></tr></table></figure>
-
-<h2 id="將後台指令刪除"><a href="#將後台指令刪除" class="headerlink" title="將後台指令刪除"></a>將後台指令刪除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 %i</span><br></pre></td></tr></table></figure>
-<p>i = jobs上的數字</p>
-<h4 id="參考連結-3"><a href="#參考連結-3" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="http://linux.vbird.org/linux_basic/0440processcontrol.php" target="_blank" rel="noopener">第十六章、程序管理與 SELinux 初探</a><br><a href="https://blog.csdn.net/YuZhiHui_No1/article/details/44564963" target="_blank" rel="noopener">Linux任务/进程前后台切换</a></p>
-<h2 id="排成-使電腦在特定時段啟動此程式"><a href="#排成-使電腦在特定時段啟動此程式" class="headerlink" title="排成(使電腦在特定時段啟動此程式)"></a>排成(使電腦在特定時段啟動此程式)</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crontab -e 編輯排成</span><br><span class="line"><span class="number">00</span> <span class="number">03</span> * * * Rscript /home/archcopilot/public_html/david53133/v2.0/main.R</span><br><span class="line">crontab -l 檢查</span><br></pre></td></tr></table></figure>
-<h4 id="參考連結-4"><a href="#參考連結-4" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://stackoverflow.max-everyday.com/2017/08/centos-crontab/" target="_blank" rel="noopener">CentOS 的cron自動排程</a></p>
-<h2 id="如何更改時間"><a href="#如何更改時間" class="headerlink" title="如何更改時間"></a>如何更改時間</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo date -s &quot;2020&#x2F;08&#x2F;20 17:37:32&quot;</span><br><span class="line">sudo date -s &quot;Thu, 20 Aug 2020 17:40:32 CST&quot;</span><br></pre></td></tr></table></figure>
-<h4 id="參考連結-5"><a href="#參考連結-5" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://blog.gtwang.org/linux/howto-set-date-time-from-linux-command-prompt/" target="_blank" rel="noopener">Linux 手動更改系統時間：date、hwclock 與 timedatectl 指令用法教學</a></p>
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>centOS我也是第一次摸過並不太認識他阿，現在慢慢熟悉希望可以把它變成自己的技能之一。</p>
-<h2 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h2><p>2020-07-25 20:48:32 - 完成</p>
-<ol>
-<li>成為 root 的使用者</li>
-<li>查看底下資料夾</li>
-<li>新增資料夾</li>
-</ol>
+<h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><h3 id="查詢自己的-port"><a href="#查詢自己的-port" class="headerlink" title="查詢自己的 port"></a>查詢自己的 port</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo netstat -lpn |grep 3000</span><br></pre></td></tr></table></figure>
+<p>3000 為數字，可以自行更改，之後看他跳出的資訊最後面應該會有 5 數字，記住那五數字。</p>
+<h3 id="把監聽-port-刪除"><a href="#把監聽-port-刪除" class="headerlink" title="把監聽 port 刪除"></a>把監聽 port 刪除</h3><p>知道自己的 port 後，就將那 5 數字記起來</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill 12345</span><br></pre></td></tr></table></figure>
+<p>這樣就完成了！</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://andy6804tw.github.io/2018/02/09/kill-port/" target="_blank" rel="noopener">如何清除系統上被佔用的Port?</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>LINUX 好多事情真的需要我學，跟 WINDOWS 又是完全不一樣的東西，學起來我就又多一把刷子了 XD</p>
 
       
       <!-- reward -->
@@ -179,7 +147,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centOS/" rel="tag">centOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
 
 
     </footer>
@@ -190,19 +158,19 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/07/26/ICPC/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pg/" class="article-nav-link">
+      <a href="/2020/08/28/linux/centOS-install-python3/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            ProblemG Game Design
+            在 centOS6 安裝 Python 3.8
           
         </div>
       </a>
     
     
-      <a href="/2020/07/24/ngrok-experience/" class="article-nav-link">
+      <a href="/2020/08/18/life_experence/kaohsiung-playing20200804/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">透過 ngrok 來讓自己的電腦成為 server</div>
+        <div class="article-nav-title">與國小好朋友高雄屏東四天行</div>
       </a>
     
   </nav>
