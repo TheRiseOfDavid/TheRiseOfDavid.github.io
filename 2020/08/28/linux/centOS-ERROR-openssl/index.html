@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Codeforces 1397D - Stoned Game |  大衞的筆記
+    ERROR! Can&#39;t connect to HTTPS URL because the SSL module is not available |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-Codeforces/Codeforces 1397D" class="article article-type-post" itemscope
+  <article id="post-linux/centOS-ERROR-openssl" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Codeforces 1397D - Stoned Game
+  ERROR! Can&#39;t connect to HTTPS URL because the SSL module is not available
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/08/31/Codeforces/Codeforces%201397D/" class="article-date">
-  <time datetime="2020-08-30T17:07:27.000Z" itemprop="datePublished">2020-08-31</time>
+      <a href="/2020/08/28/linux/centOS-ERROR-openssl/" class="article-date">
+  <time datetime="2020-08-28T05:51:54.000Z" itemprop="datePublished">2020-08-28</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">684</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">3分鐘</span>
+            <span class="post-count">2分鐘</span>
         </span>
     </span>
 </div>
@@ -111,25 +111,29 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>T、HL 在玩遊戲。遊戲規則如下，有 x 堆石頭，每堆石頭數量不定，每次都是 T 先從其中一堆拿石頭，H 再拿一顆石頭，每位玩家則不可以拿上位玩家拿石頭的石頭堆。<br><del>這到底是甚麼原始人遊戲 XD，好像舊石器時代的人會玩的遊戲</del></p>
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>由於 python 3.6 中的 pip 套件要求 openssl 版本需要大於 1.0.2，但 centOS6 可更新的最高版本只能到 1.0.1，於是必須重新安裝。<br><del>centOS6，跟 python 都好麻煩…</del></p>
 </blockquote>
 <a id="more"></a>
+<h2 id="ERROR-Can’t-connect-to-HTTPS-URL-because-the-SSL-module-is-not-available"><a href="#ERROR-Can’t-connect-to-HTTPS-URL-because-the-SSL-module-is-not-available" class="headerlink" title="ERROR: Can’t connect to HTTPS URL because the SSL module is not available"></a>ERROR: Can’t connect to HTTPS URL because the SSL module is not available</h2><p>我是在進行 <code>pip install requests</code>時發生，內容大意是指說 pip 不能夠用 SSL，所以找不到套件可以安裝。<del>其實是說沒有相對應的版本，但我覺得這樣講很爛</del></p>
+<h2 id="SOLUTION-update-openssl-and-vim-file"><a href="#SOLUTION-update-openssl-and-vim-file" class="headerlink" title="SOLUTION: update openssl and vim file"></a>SOLUTION: update openssl and vim file</h2><p>由於此問題是 SSL，在我花了約 1 小時查找文件後找出是因為 openssl 版本需要大於 1.0.2，但 centOS6 可更新的最高版本只能到 1.0.1，所以需要進行更新。</p>
+<p>如果是 os 為 centOS6 可參考此篇<br><a href=""></a></p>
+<h3 id="更新完-openssl-後，怎麼做"><a href="#更新完-openssl-後，怎麼做" class="headerlink" title="更新完 openssl 後，怎麼做?"></a>更新完 openssl 後，怎麼做?</h3><p>重新編譯一次 python ，cd 回 python</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Python-a.b.c</span><br><span class="line">.&#x2F;configure --with-ssl</span><br></pre></td></tr></table></figure>
 
-<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><blockquote>
-<p>這題真的很難啊…，這題目與我之前碰過的經驗不同，讓我搞錯方向去思考，好題好題。<br>幸好有解開啦…，不然我就會很生氣了 XD。</p>
-</blockquote>
-<p>每次都選擇最大的兩堆石頭出來，然後兩堆石頭各減一。之後再放回去 priority_queue 內，假如 priority_queue size 只有一堆代表 T win，若剛好 0 堆則代表 HL win。</p>
-<p>至於我為甚麼會這樣想呢？我建議讀者都先從我的初步想法慢慢讀起，我認為會比直接看我的正確想法來的更好理解些。</p>
-<h3 id="初步想法"><a href="#初步想法" class="headerlink" title="初步想法"></a>初步想法</h3><h4 id="錯誤想法-奇偶數堆"><a href="#錯誤想法-奇偶數堆" class="headerlink" title="錯誤想法 - 奇偶數堆"></a>錯誤想法 - 奇偶數堆</h4><p>一開始，稍微推斷一下。<br>他可能是甚麼透過偶奇數來判斷的，個人在猜應該是用偶數堆與奇數堆來進行判斷。<br>後來自己在紙筆推導時，發現 2 2 2 這測資是 HL win。但 2 2 4 則是 T 贏。</p>
-<h4 id="錯誤想法-T-從最小堆石頭拿取，HL-從最大堆石頭拿取"><a href="#錯誤想法-T-從最小堆石頭拿取，HL-從最大堆石頭拿取" class="headerlink" title="錯誤想法 - T 從最小堆石頭拿取，HL 從最大堆石頭拿取"></a>錯誤想法 - T 從最小堆石頭拿取，HL 從最大堆石頭拿取</h4><p>這是根據題目給的測資進行判斷，比較有點根據了XD<br>只要只剩一堆石頭必定會是 T 贏，HL 則是要盡量讓石頭堆數達到兩堆且兩堆數量一樣。(從題目測資進行判斷)，於是我寫了一程式關於 T 從小石頭開始拿，當 T 從小石頭堆的提取數量已經大於 HL 的最大堆時，則 HL 在往次大堆進行提取，看最後是 T 還是 HL 的石頭比較多，我在進行判斷。(此想法透過遞迴撰寫)。</p>
-<p>由於是錯誤想法因此我用圖片來給大家看我的錯誤遞迴，以免誤導大家以為這也是正確的一部份。</p>
-<p><img src="/images/Codeforces-Round-666-Div-2-pD/1.PNG" alt=""></p>
-<p>但後來證明我是錯誤的，測資怎麼樣都沒過，卡在第二筆。我後來仔細想想，每次都只拿一顆，經驗告訴我，消去法不一定適用。在使用 2 2 2 測資時得到啟發。</p>
-<h4 id="正確想法-T-只提取最大堆石頭，HL-則提取次大堆石頭"><a href="#正確想法-T-只提取最大堆石頭，HL-則提取次大堆石頭" class="headerlink" title="正確想法 - T 只提取最大堆石頭，HL 則提取次大堆石頭"></a>正確想法 - T 只提取最大堆石頭，HL 則提取次大堆石頭</h4><p>為甚麼會這樣想呢？ 是 1 5 1 這測資啟發我的，我只要 T 直接拿取最大堆，那 HL 要拿甚麼石頭我都不需要在意阿 XD，反正我只要拿我的最大堆，剩下的石頭隨 HL 拿就行。那如果最大堆沒有呢？那就拿次大堆吧，把問題丟給 HL 就可以了 XD。</p>
-<p>那有人會好奇說，為甚麼 HL 怎麼會每次都拿最大堆石頭？這樣 HL 真的是聰明的嗎？其實阿，這場遊戲 HL 完全沒有優勢，她為了要把自己的優勢找回來，所以她要拿次大堆的石頭，來希望當最大堆的石頭用完時，次大堆的石頭還在，這樣他就會是贏家 XD。</p>
-<h2 id="心得："><a href="#心得：" class="headerlink" title="心得："></a>心得：</h2><p>暴力解法，這題讓我很意外啊！我以為會是很優秀的解法，沒想到被我這個程式笨蛋給用暴力解法解出來，如果這並不是作者想的方法，作者會被我給氣死吧! XD</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t , n ;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; num;</span><br><span class="line"><span class="keyword">int</span> a , b ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">judge</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a , b ;</span><br><span class="line">    <span class="keyword">while</span>(num.size())&#123;</span><br><span class="line">        a = num.top() ;</span><br><span class="line">        a-- ;</span><br><span class="line">        num.pop();</span><br><span class="line">        <span class="keyword">if</span>(!num.size())&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"T"</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        b = num.top() ;</span><br><span class="line">        b-- ;</span><br><span class="line">        num.pop();</span><br><span class="line">        <span class="keyword">if</span>(a &gt; <span class="number">0</span>)</span><br><span class="line">            num.push(a);</span><br><span class="line">        <span class="keyword">if</span>(b &gt; <span class="number">0</span>)</span><br><span class="line">            num.push(b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"HL"</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//#ifdef LOCAL</span></span><br><span class="line"><span class="comment">//    freopen("in1.txt" , "r" , stdin );</span></span><br><span class="line"><span class="comment">//#endif // LOCAL</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        <span class="keyword">int</span> intTemp ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; intTemp ;</span><br><span class="line">            num.push(intTemp) ;</span><br><span class="line">        &#125;</span><br><span class="line">        judge();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改文件，讓-pip-可以抓到-openssl-路徑"><a href="#修改文件，讓-pip-可以抓到-openssl-路徑" class="headerlink" title="修改文件，讓 pip 可以抓到 openssl 路徑"></a>修改文件，讓 pip 可以抓到 openssl 路徑</h3><p><strong>需要先找到自己的 openssl 資料夾，驗證可以看 openssl 資料夾內有沒有 include..等資料夾，記住此路徑，接下來會用到。</strong></p>
+<p>先不要急著輸入 make 指令，先修改文件 Python-a.b.c/Modules/Setup</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim .&#x2F;Modules&#x2F;Setup</span><br></pre></td></tr></table></figure>
+<p>應該會出現一堆開頭井字的程式碼，之後搜尋 SSL=，方法為 <code>/SSL=</code><br>如果正確的話視窗應顯示在這裡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Socket module helper for SSL support; you must comment out the other</span><br><span class="line"># socket line above, and possibly edit the SSL variable:</span><br><span class="line">SSL&#x3D;&#x2F;usr&#x2F;local&#x2F;lab&#x2F;openssl-1.0.2j&#x2F;    #將這行註解取消，並把 openssl 的路徑放入 SSL&#x3D; 之後</span><br><span class="line">_ssl _ssl.c \     #將這行註解取消</span><br><span class="line">-DUSE_SSL -I$(SSL)&#x2F;include -I$(SSL)&#x2F;include&#x2F;openssl \      #將這行註解取消</span><br><span class="line">-L$(SSL)&#x2F;lib -lssl -lcrypto      #將這行註解取消</span><br><span class="line"></span><br><span class="line"># The crypt module is now disabled by default because it breaks builds</span><br><span class="line"># on many systems (where -lcrypt is needed), e.g. Linux (I believe).</span><br><span class="line"></span><br><span class="line">#_crypt _cryptmodule.c # -lcrypt    # crypt(3); needs -lcrypt on some systems</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改完成後，編譯與安裝"><a href="#修改完成後，編譯與安裝" class="headerlink" title="修改完成後，編譯與安裝"></a>修改完成後，編譯與安裝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make </span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="驗證"><a href="#驗證" class="headerlink" title="驗證"></a>驗證</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install requests</span><br></pre></td></tr></table></figure>
+
+<p>以上全部都沒問題驗證也成功話，那在 centOS6 上就沒有問題了！太強了你，我花了兩小時才解決此問題..</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>環境的問題時常把新手搞得喘不過氣，幸好這次我能克服此困難。希望以後 python 的版本控制能夠更好，centOS6 提供的相容性也可以更棒！雖然他 2020/11 就要停止更新了…<br>不過還是謝謝能在網路上提供資源的大神們，沒有他們，我連解決都不能解決！<br>尤其是國人，技術資源國人比起台灣資源多很多。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.cnblogs.com/reblue520/p/11103311.html" target="_blank" rel="noopener">centos6.8安装python3.7.3报错Can’t connect to HTTPS URL because the SSL module is not available问题解决</a></p>
 
       
       <!-- reward -->
@@ -153,7 +157,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codeforces-Round-666-Div-2/" rel="tag">Codeforces Round .#666 (Div. 2)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E6%90%9C%E5%B0%8B%E6%B3%95/" rel="tag">暴力搜尋法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centOS/" rel="tag">centOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
 
 
     </footer>
@@ -164,19 +168,19 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/08/31/Codeforces/Codeforces%201397A/" class="article-nav-link">
+      <a href="/2020/08/28/linux/centOS-install-python36/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Codeforces 1397A - Juggling Letters
+            在 centOS6 安裝 Python 3.6
           
         </div>
       </a>
     
     
-      <a href="/2020/08/28/linux/centOS-install-python36/" class="article-nav-link">
+      <a href="/2020/08/28/linux/centOS-install-python38/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">在 centOS6 安裝 Python 3.6</div>
+        <div class="article-nav-title">在 centOS6 安裝 Python 3.8</div>
       </a>
     
   </nav>
