@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    BLOG 經驗分享 |  大衞的筆記
+    centOS 排成教學 |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-life_experence/blog-experience" class="article article-type-post" itemscope
+  <article id="post-linux/centOS-crontab" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  BLOG 經驗分享
+  centOS 排成教學
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/07/20/life_experence/blog-experience/" class="article-date">
-  <time datetime="2020-07-19T16:27:17.000Z" itemprop="datePublished">2020-07-20</time>
+      <a href="/2020/09/09/linux/centOS-crontab/" class="article-date">
+  <time datetime="2020-09-09T09:55:32.000Z" itemprop="datePublished">2020-09-09</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/">人生旅途</a>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">3分鐘</span>
+            <span class="post-count">5分鐘</span>
         </span>
     </span>
 </div>
@@ -111,26 +111,113 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="我為甚麼會寫-BLOG"><a href="#我為甚麼會寫-BLOG" class="headerlink" title="我為甚麼會寫 BLOG"></a>我為甚麼會寫 BLOG</h2><blockquote>
-<p>因為我在高中的時候，練習科展、專題、演算法，大都是看網路上大神的 BLOG，學習他們的程式、邏輯概念、思考模式，這讓我在 2020/03/07 時有了動機，我應該幫助我自己建立一個 BLOG，來整理自己的思緒、也將自己遇到的一些狀況記錄下來，未來如果有用到也不會忘記，用俗話一點說就是不想要把知識再還給老師，知識還要是我的!</p>
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>記錄我在 linux 上學習排成時遇到的困難，排成自學真的好麻煩呀 QQ<br>教學示範作業系統 centOS6</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="BLOG-一開始遇到的狀況"><a href="#BLOG-一開始遇到的狀況" class="headerlink" title="BLOG 一開始遇到的狀況"></a>BLOG 一開始遇到的狀況</h2><p>老實說，一開始在撰寫 BLOG 時，我的文字表達能力並不是很好，時常打出來的文字都不滿意，詞不達意，可能現在也是一樣XD。於是這讓我在一開始寫 BLOG 時遇到了些許障礙，有點沒有動力寫，因為我寫一個題目的時間比我打出一份我的解題心得還要久時我就有點卻步了。</p>
-<h2 id="那為甚麼還有動力繼續寫"><a href="#那為甚麼還有動力繼續寫" class="headerlink" title="那為甚麼還有動力繼續寫?"></a>那為甚麼還有動力繼續寫?</h2><p>這就真的是件很神奇的事情了，通常大家都說人在做一件事情時 3個月就會把他的熱情降低至百分之 50%，可能就不再願意繼續做。但為甚麼我會繼續做呢?因為我用到了！在科大程式競賽時，我需要做一些快速複習演算法的時候，這 BLOG 就派上用場了！很神奇，因為我會對我打過的心得有印象，於是我只需要大概看一下就可以恢復很大的記憶，這在我之前沒有寫 BLOG 時是不一樣的，我常常忘記就要再上網翻資料，但上網的資料有時候營養成分又不高會很浪費時間，所以現在我就一樣繼續寫 BLOG 寫到現在~</p>
-<h2 id="BLOG-伴隨著我成長的鏡子"><a href="#BLOG-伴隨著我成長的鏡子" class="headerlink" title="BLOG 伴隨著我成長的鏡子"></a>BLOG 伴隨著我成長的鏡子</h2><p>因為我會把我所學到的知識放入 BLOG 內，於是當我想跟別人說我會甚麼東西時，我可以直接快速的從 BLOG 翻閱給他看，讓他知道我是有這個實力，但要是這項事情是我沒有學過，而我將它學起來時，我則可以幫我的 BLOG 增加內容，也幫我記錄下許多資料，讓我又成長了些。或是朋友們想要跟我學些東西時，我就可以將我的 BLOG 給他看，減少溝通上的失誤，也避免掉浪費時間。畢竟時間一長很多事情是會忘記的，但記錄下來後可以快速瀏覽紀錄來喚起回憶。</p>
-<h2 id="甚麼，大衛！你竟然還把你的-BLOG-丟掉-google-上！"><a href="#甚麼，大衛！你竟然還把你的-BLOG-丟掉-google-上！" class="headerlink" title="甚麼，大衛！你竟然還把你的 BLOG 丟掉 google 上！"></a>甚麼，大衛！你竟然還把你的 BLOG 丟掉 google 上！</h2><p>這…其實只是我想要拉XD，因為我在學習的過程中我都是看著大家的 BLOG 才使我成長、前進。於是我也希望我可以抱持著這種精神，充足這個世界的知識量，也許我的知識可能淺薄，沒有營養。但我相信有些文章還是具有一定的影響程度，希望大家在觀看我的 BLOG、瀏覽我的知識時不要罵我怎麼那麼爛 QQ。</p>
-<h2 id="整理-BLOG-真的很難"><a href="#整理-BLOG-真的很難" class="headerlink" title="整理 BLOG 真的很難"></a>整理 BLOG 真的很難</h2><p>整理 BLOG 真的是一件難事情，我到現在都還沒有抓到整理的重點，常常都要把我的文章全部打開(大約有 70 篇，在編寫此文章這時間點)，將分類與標籤重新改過，重新分類。打造出好讓我也好讓使用者可以快速查閱到他想要的資料，到現在我還不太確定我的分類到底能不能友善的讓使用者快速抓到他想要的文章，但是我正努力朝著邁進。</p>
-<h2 id="提供-BLOG-主題的大神，非常感謝"><a href="#提供-BLOG-主題的大神，非常感謝" class="headerlink" title="提供 BLOG 主題的大神，非常感謝"></a>提供 BLOG 主題的大神，非常感謝</h2><p>有了這些提供 BLOG 主題的大神，我才可以致力於編寫文章，而不用受限於其他技術之苦。 hexo 幫助了我可以快速將文章發布在 github，ayer 主題則幫助我打造出漂亮的網站，我都十分感謝。要是未來我有機會，我也想要回饋你們，謝謝。</p>
-<h2 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h2><p>2020/07/20 00:50:23 - 完成 6 段落</p>
-<ul>
-<li>BLOG 一開始遇到的狀況</li>
-<li>那為甚麼還有動力繼續寫?</li>
-<li>BLOG 伴隨著我成長的鏡子</li>
-<li>甚麼，大衛！你竟然還把你的 BLOG 丟掉 google 上！</li>
-<li>整理 BLOG 真的很難</li>
-<li>提供 BLOG 主題的大神，非常感謝</li>
-</ul>
+<h2 id="排成主要功能"><a href="#排成主要功能" class="headerlink" title="排成主要功能"></a>排成主要功能</h2><p>簡單來說就是有一個機器人幫你服務，在你設定的時間執行你想要的指令，通常限定一行。</p>
+<h3 id="如何進入排成"><a href="#如何進入排成" class="headerlink" title="如何進入排成"></a>如何進入排成</h3><p>在  ternimal 輸入 <code>crontab -e</code> 即可。</p>
+<h2 id="排成的語法規則"><a href="#排成的語法規則" class="headerlink" title="排成的語法規則"></a>排成的語法規則</h2><table>
+<thead>
+<tr>
+<th>指令語法</th>
+<th>分鐘</th>
+<th>小時</th>
+<th>日期</th>
+<th>月份</th>
+<th>周</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可接受數字範圍</td>
+<td>0~59</td>
+<td>0~23</td>
+<td>1~31</td>
+<td>1~12</td>
+<td>0~7</td>
+<td>執行命令</td>
+</tr>
+</tbody></table>
+<p><strong><font color="#dd0000">在周這欄時不管打 0 or 7 都是代表星期日的意思</font></strong></p>
+<h3 id="排成特殊字元"><a href="#排成特殊字元" class="headerlink" title="排成特殊字元"></a>排成特殊字元</h3><p>有些字元有著特殊意義，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>字元</th>
+<th>中文解釋</th>
+<th>意義</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>星號</td>
+<td>代表任何時段，舉例: 排成如果 月、日、周都是 * ，則代表每月每日每周都會執行此命令，但<strong>注意:如果有大單位已經有數字時，則建議小單位不要用 * ，假設日期是 4，則小時、分鐘就建議不要用 * 號</strong></td>
+</tr>
+<tr>
+<td>,</td>
+<td>逗號</td>
+<td>分隔時段，舉例:如果想要在 13:00 and 16:00 都執行命令，就輸入指令 0 13,16 * * * command，醬子(◍•ᴗ•◍)❤️</td>
+</tr>
+<tr>
+<td>-</td>
+<td>減號</td>
+<td>在 A-B 段單位時間內，都會執行指令，舉例: 想要在 8 點到 12 點的 10 分之間都執行指令，則輸入指令 10 8-12 * * * command，比起逗號在跟方便一些的指令</td>
+</tr>
+<tr>
+<td>/n</td>
+<td>斜線</td>
+<td>n = 數字，代表每隔 n 單位時間的意思，例如每 3 分鐘執行指令，則輸入指令 */3 * * * * command，也可以寫成 0-59/5，意思相同，但 0-30/5 意義就不相同XD，變成 0~30 分的每 5 分鐘執行指令</td>
+</tr>
+</tbody></table>
+<h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例:"></a>舉例:</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解釋</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5 * * * *</td>
+<td>每小時的第五分鐘執行命令</td>
+</tr>
+<tr>
+<td>30 8 * * *</td>
+<td>每天 8:30 執行命令</td>
+</tr>
+<tr>
+<td>15 8-10 * * *</td>
+<td>每天的 8 到 11 點的 15 分執行命令</td>
+</tr>
+<tr>
+<td>*/5 * * * *</td>
+<td>每 5 分鐘執行命令</td>
+</tr>
+<tr>
+<td>30 6 /10 * *</td>
+<td>每個月中，每 10 天的 6:30 執行命令，也就是每月的 1, 11, 21, 31 日的 6:30 執行命令</td>
+</tr>
+</tbody></table>
+<h2 id="QUESTION-排成需要多行指令那要怎麼辦呢？"><a href="#QUESTION-排成需要多行指令那要怎麼辦呢？" class="headerlink" title="QUESTION: 排成需要多行指令那要怎麼辦呢？"></a>QUESTION: 排成需要多行指令那要怎麼辦呢？</h2><p>用括號 + 分號來解決這問題，括號來放入全部指令，分號則用來分隔命令。<br>舉例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;5 * * * *  (cd &#x2F;home&#x2F;archcopilot&#x2F;public_html&#x2F;david53133&#x2F;v1.0&#x2F; ; &#x2F;usr&#x2F;local&#x2F;bin&#x2F;python3.6 climb.py)</span><br></pre></td></tr></table></figure>
+
+<h2 id="QUESTION-如果我想要透過執行檔執行文件該怎麼辦呢"><a href="#QUESTION-如果我想要透過執行檔執行文件該怎麼辦呢" class="headerlink" title="QUESTION: 如果我想要透過執行檔執行文件該怎麼辦呢?"></a>QUESTION: 如果我想要透過執行檔執行文件該怎麼辦呢?</h2><p>舉例，例如我想要執行 python 程式，那我是不是應該要 <code>python3 test.py</code>，在某些情況下是可以的。但如果你的 <code>python3</code> 並沒有放在系統預設的位置 <code>/usr/bin</code>就不行！<br>因此我建議的操作如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">which python3 # 先尋找執行檔的路徑</span><br><span class="line">&#x2F;home&#x2F;path&#x2F;... # 輸出的路徑</span><br><span class="line">&#x2F;home&#x2F;path&#x2F;..&#x2F;python3 test.py #執行命令</span><br></pre></td></tr></table></figure>
+
+<h2 id="QUESTION-我想要看我的排成有沒有被執行？"><a href="#QUESTION-我想要看我的排成有沒有被執行？" class="headerlink" title="QUESTION: 我想要看我的排成有沒有被執行？"></a>QUESTION: 我想要看我的排成有沒有被執行？</h2><p>排成執行的紀錄在 <code>/var/log/cron</code>，再透過 <code>cat</code> 找出來即可。舉例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;var&#x2F;log&#x2F;cron</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="QUESTION-為甚麼我排成的指令有被執行，但我看卻沒有？"><a href="#QUESTION-為甚麼我排成的指令有被執行，但我看卻沒有？" class="headerlink" title="QUESTION: 為甚麼我排成的指令有被執行，但我看卻沒有？"></a>QUESTION: 為甚麼我排成的指令有被執行，但我看卻沒有？</h2><h3 id="SITUATION-1-你沒有-cd-路徑"><a href="#SITUATION-1-你沒有-cd-路徑" class="headerlink" title="SITUATION 1: 你沒有 cd 路徑"></a>SITUATION 1: 你沒有 cd 路徑</h3><p>為甚麼會這樣說呢？因為其實你在執行路徑時，基本上都是從 <code>/user_name</code>出發，因此如果你的指令文件內有提到關於路徑，且路徑又是相對路徑是則極高機率遇到此問題。<br>建議使用 cd 到路徑後，在執行命令。舉例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;5 * * * *  (cd &#x2F;home&#x2F;archcopilot&#x2F;public_html&#x2F;david53133&#x2F;v1.0&#x2F; ; &#x2F;usr&#x2F;local&#x2F;bin&#x2F;python3.6 climb.py)</span><br></pre></td></tr></table></figure>
+<h3 id="SITUATION-2-指令本身有誤"><a href="#SITUATION-2-指令本身有誤" class="headerlink" title="SITUATION 2: 指令本身有誤"></a>SITUATION 2: 指令本身有誤</h3><p>這也是一種可能，但我幫不了忙，對不起QQ。</p>
+<h2 id="QUESTION-因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？"><a href="#QUESTION-因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？" class="headerlink" title="QUESTION: 因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？"></a>QUESTION: 因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？</h2><p>當然可以。我一開始研究還花很多時間XD，因為我一開始看不太懂，後面資料查久了才懂得wwww<br>透過 <code>&gt;&gt; test.log 2&amp;&gt;1</code>即可。舉例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 0 *&#x2F;1 * *  (cd &#x2F;home&#x2F;archcopilot&#x2F;public_html&#x2F;david53133&#x2F;v1.0&#x2F; ; &#x2F;usr&#x2F;local&#x2F;bin&#x2F;python3.6 climb.py)  &gt;&gt; &#x2F;home&#x2F;archcopilot&#x2F;public_html&#x2F;david53133&#x2F;v1.0&#x2F;crontab.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h2 id="QUESITON-我要想排成好麻煩，有沒有比較簡單的排成方法"><a href="#QUESITON-我要想排成好麻煩，有沒有比較簡單的排成方法" class="headerlink" title="QUESITON: 我要想排成好麻煩，有沒有比較簡單的排成方法"></a>QUESITON: 我要想排成好麻煩，有沒有比較簡單的排成方法</h2><p>其實是有，但我個人覺得要記那些語法對我言太麻煩了。<br>這裡有一推薦的排成計算機，可以幫助你對你想要的時間點進行排成的指令計算出來。<br>連結就<a href="https://crontab.guru/" target="_blank" rel="noopener">請點這裡</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/liaoyanyunde/article/details/86572370" target="_blank" rel="noopener">查看crontab任务是否执行以及执行日志</a><br><a href="https://blog.gtwang.org/linux/linux-crontab-cron-job-tutorial-and-examples/" target="_blank" rel="noopener">Linux 設定 crontab 例行性工作排程教學與範例</a><br><a href="https://freesilo.com/?p=1083" target="_blank" rel="noopener">crontab的语法规则格式（每分钟、每小时、每天、每周、每月、每年定时执行 规则）</a><br><a href="https://crontab.guru/" target="_blank" rel="noopener">crontab calculator</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>排成真的有點難呀，不過我認為是我閱讀文章的能力不夠，還沒辦法閱讀一次就能看懂網路上大神的文章，於是我在這邊做些筆記紀錄，也希望幫助現在跟我一樣還不夠看懂大神的文章人可以透過我這篇文章而了解排成的用法。<br>希望能夠幫助到別人，這是我最大的心願。</p>
 
       
       <!-- reward -->
@@ -154,7 +241,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/" rel="tag">Blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centOS/" rel="tag">centOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
 
 
     </footer>
@@ -165,19 +252,10 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/07/20/life_experence/japan-experience-for-skill-contest/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            2019 新北市薦送高中職學生赴日本技職研習參訪活動
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/07/20/blog/about-mathjax/" class="article-nav-link">
+      <a href="/2020/09/05/linux/centOS-ERROR-bad_interpreter/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">mathjax 用法紀錄</div>
+        <div class="article-nav-title">ERROR! bad interpreter No such file or directory</div>
       </a>
     
   </nav>
