@@ -116,7 +116,7 @@ ga('send', 'pageview');
 </blockquote>
 <a id="more"></a>
 <h2 id="ERROR-Can’t-connect-to-HTTPS-URL-because-the-SSL-module-is-not-available"><a href="#ERROR-Can’t-connect-to-HTTPS-URL-because-the-SSL-module-is-not-available" class="headerlink" title="ERROR: Can’t connect to HTTPS URL because the SSL module is not available"></a>ERROR: Can’t connect to HTTPS URL because the SSL module is not available</h2><p>我是在進行 <code>pip install requests</code>時發生，內容大意是指說 pip 不能夠用 SSL，所以找不到套件可以安裝。<del>其實是說沒有相對應的版本，但我覺得這樣講很爛</del></p>
-<h2 id="SOLUTION-update-openssl-and-vim-file"><a href="#SOLUTION-update-openssl-and-vim-file" class="headerlink" title="SOLUTION: update openssl and vim file"></a>SOLUTION: update openssl and vim file</h2><p>由於此問題是 SSL，在我花了約 1 小時查找文件後找出是因為 openssl 版本需要大於 1.0.2，但 centOS6 可更新的最高版本只能到 1.0.1，所以需要進行更新。</p>
+<h2 id="solution-update-openssl-and-vim-file"><a href="#solution-update-openssl-and-vim-file" class="headerlink" title="solution: update openssl and vim file"></a>solution: update openssl and vim file</h2><p>由於此問題是 SSL，在我花了約 1 小時查找文件後找出是因為 openssl 版本需要大於 1.0.2，但 centOS6 可更新的最高版本只能到 1.0.1，所以需要進行更新。</p>
 <p>如果是 os 為 centOS6 可參考此篇<br><a href="https://theriseofdavid.github.io/2020/09/05/linux/linux-openssl1.1.0-update/" target="_blank" rel="noopener">CentOS6 安裝與更新 openssl 1.1.0 教學</a></p>
 <h3 id="更新完-openssl-後，怎麼做"><a href="#更新完-openssl-後，怎麼做" class="headerlink" title="更新完 openssl 後，怎麼做?"></a>更新完 openssl 後，怎麼做?</h3><p>重新編譯一次 python ，cd 回 python</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Python-a.b.c</span><br><span class="line">.&#x2F;configure --with-ssl</span><br></pre></td></tr></table></figure>
@@ -317,10 +317,6 @@ ga('send', 'pageview');
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
-    </li>
-    
-    <li class="nav-item">
       <a class="nav-item-link" href="/about">關於我</a>
     </li>
     
@@ -354,13 +350,8 @@ ga('send', 'pageview');
 <!-- #reward -->
 <div id="reward">
   <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>請我喝杯咖啡吧~</p>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
   <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
     
     
   </div>

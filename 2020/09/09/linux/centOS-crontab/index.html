@@ -209,9 +209,9 @@ ga('send', 'pageview');
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;var&#x2F;log&#x2F;cron</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="QUESTION-為甚麼我排成的指令有被執行，但我看卻沒有？"><a href="#QUESTION-為甚麼我排成的指令有被執行，但我看卻沒有？" class="headerlink" title="QUESTION: 為甚麼我排成的指令有被執行，但我看卻沒有？"></a>QUESTION: 為甚麼我排成的指令有被執行，但我看卻沒有？</h2><h3 id="SITUATION-1-你沒有-cd-路徑"><a href="#SITUATION-1-你沒有-cd-路徑" class="headerlink" title="SITUATION 1: 你沒有 cd 路徑"></a>SITUATION 1: 你沒有 cd 路徑</h3><p>為甚麼會這樣說呢？因為其實你在執行路徑時，基本上都是從 <code>/user_name</code>出發，因此如果你的指令文件內有提到關於路徑，且路徑又是相對路徑是則極高機率遇到此問題。<br>建議使用 cd 到路徑後，在執行命令。舉例:</p>
+<h2 id="QUESTION-為甚麼我排成的指令有被執行，但我看卻沒有？"><a href="#QUESTION-為甚麼我排成的指令有被執行，但我看卻沒有？" class="headerlink" title="QUESTION: 為甚麼我排成的指令有被執行，但我看卻沒有？"></a>QUESTION: 為甚麼我排成的指令有被執行，但我看卻沒有？</h2><h3 id="situation-1-你沒有-cd-路徑"><a href="#situation-1-你沒有-cd-路徑" class="headerlink" title="situation 1: 你沒有 cd 路徑"></a>situation 1: 你沒有 cd 路徑</h3><p>為甚麼會這樣說呢？因為其實你在執行路徑時，基本上都是從 <code>/user_name</code>出發，因此如果你的指令文件內有提到關於路徑，且路徑又是相對路徑是則極高機率遇到此問題。<br>建議使用 cd 到路徑後，在執行命令。舉例:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;5 * * * *  (cd &#x2F;home&#x2F;archcopilot&#x2F;public_html&#x2F;david53133&#x2F;v1.0&#x2F; ; &#x2F;usr&#x2F;local&#x2F;bin&#x2F;python3.6 climb.py)</span><br></pre></td></tr></table></figure>
-<h3 id="SITUATION-2-指令本身有誤"><a href="#SITUATION-2-指令本身有誤" class="headerlink" title="SITUATION 2: 指令本身有誤"></a>SITUATION 2: 指令本身有誤</h3><p>這也是一種可能，但我幫不了忙，對不起QQ。</p>
+<h3 id="situation-2-指令本身有誤"><a href="#situation-2-指令本身有誤" class="headerlink" title="situation 2: 指令本身有誤"></a>situation 2: 指令本身有誤</h3><p>這也是一種可能，但我幫不了忙，對不起QQ。</p>
 <h2 id="QUESTION-因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？"><a href="#QUESTION-因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？" class="headerlink" title="QUESTION: 因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？"></a>QUESTION: 因為排成執行如果有問題是不會顯示，但我想要知道問題出在哪裡。排成可以提供日誌嗎？</h2><p>當然可以。我一開始研究還花很多時間XD，因為我一開始看不太懂，後面資料查久了才懂得wwww<br>透過 <code>&gt;&gt; test.log 2&amp;&gt;1</code>即可。舉例:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 0 *&#x2F;1 * *  (cd &#x2F;home&#x2F;archcopilot&#x2F;public_html&#x2F;david53133&#x2F;v1.0&#x2F; ; &#x2F;usr&#x2F;local&#x2F;bin&#x2F;python3.6 climb.py)  &gt;&gt; &#x2F;home&#x2F;archcopilot&#x2F;public_html&#x2F;david53133&#x2F;v1.0&#x2F;crontab.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
 
@@ -251,6 +251,15 @@ ga('send', 'pageview');
   
   
   <nav class="article-nav">
+    
+      <a href="/2020/09/10/linux/linux-locan_bin_vs_bin/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            linux /usr/bin 與 /usr/local/bin 有甚麼差別?
+          
+        </div>
+      </a>
     
     
       <a href="/2020/09/05/linux/centOS-ERROR-bad_interpreter/" class="article-nav-link">
@@ -391,10 +400,6 @@ ga('send', 'pageview');
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
-    </li>
-    
-    <li class="nav-item">
       <a class="nav-item-link" href="/about">關於我</a>
     </li>
     
@@ -428,13 +433,8 @@ ga('send', 'pageview');
 <!-- #reward -->
 <div id="reward">
   <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>請我喝杯咖啡吧~</p>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
   <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
     
     
   </div>
