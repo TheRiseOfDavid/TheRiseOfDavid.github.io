@@ -4072,4 +4072,35 @@
         <tag>centOS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>QUESTION! HEXO 可以多個 categories 嗎?</title>
+    <url>/2020/07/20/blog/blog-categories/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明:"></a>內容說明:</h2><blockquote>
+<p>關於我在撰寫 blog 時遇到的問題經驗，並留下紀錄來解決。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-HEXO-可以多個-categories-嗎"><a href="#QUESTION-HEXO-可以多個-categories-嗎" class="headerlink" title="QUESTION: HEXO 可以多個 categories 嗎?"></a>QUESTION: HEXO 可以多個 categories 嗎?</h2><p>當然可以。<del>雖然我應該一開始還覺得不行，因為看到了其他文章說不行 QQ</del></p>
+<h3 id="situation-1-子分類"><a href="#situation-1-子分類" class="headerlink" title="situation 1: 子分類"></a>situation 1: 子分類</h3><p>如果你想要有一種分類是在 a 分類底下還有 b 分類，那就要使用此寫法。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">categories: [Language,Chinese]</span><br></pre></td></tr></table></figure>
+
+<h3 id="situation-2-一篇文章放在多分類中"><a href="#situation-2-一篇文章放在多分類中" class="headerlink" title="situation 2: 一篇文章放在多分類中"></a>situation 2: 一篇文章放在多分類中</h3><p>如果你想要一篇文章可以再多種分類下，但並不是 situation 1 那種情況，而是要那些分類的 level 等級都是一樣時，可以使用這種寫法。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">  - [English]</span><br><span class="line">  - [Chinese]</span><br></pre></td></tr></table></figure>
+
+<h3 id="situation-3-我想要上述兩種方法我同時都要使用怎麼辦？"><a href="#situation-3-我想要上述兩種方法我同時都要使用怎麼辦？" class="headerlink" title="situation 3: 我想要上述兩種方法我同時都要使用怎麼辦？"></a>situation 3: 我想要上述兩種方法我同時都要使用怎麼辦？</h3><p>那就將他們綜合起來運用就可以了！</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">categories:</span><br><span class="line">  - [Language]</span><br><span class="line">  - [Sport]</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://aiellochan.com/2018/02/13/hexo/Hexo-%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%A4%9A%E4%B8%AA-categories/" target="_blank" rel="noopener">Hexo 一篇文章多个 categories</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講，因為我的英文能力不好，所以我大部分的學習都是仰賴國人的文章，我很感謝他們，如果沒有他們我或許學習的速度並沒有那麼快八，雖然可能少了學習英文的機會，但我本來主意就是要學習好程式技術，所以我對願意撰寫技術的每個人，只要是這個世界的人我都保持著謝意與尊敬。</p>
+<p>我自己也希望可以變成這種人，但我技術還不強，目前邊寫邊紀錄，希望能讓自己成長蛻變。</p>
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>人生旅途</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
 </search>
