@@ -4164,4 +4164,33 @@
         <tag>點分治</tag>
       </tags>
   </entry>
+  <entry>
+    <title>QUESTION! HEXO 可以使用錨點嗎？</title>
+    <url>/2020/09/11/blog/markdown-anchor/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明:"></a>內容說明:</h2><blockquote>
+<p>關於我在撰寫 blog 時遇到的問題經驗，並留下紀錄來解決。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-HEXO-可以使用錨點嗎？"><a href="#QUESTION-HEXO-可以使用錨點嗎？" class="headerlink" title="QUESTION: HEXO 可以使用錨點嗎？"></a>QUESTION: HEXO 可以使用錨點嗎？</h2><p>我會寫的文章還會不行嗎 XD。</p>
+<p>markdown 中常用 # 來建立段落標題，於是就利用段落標題來添加錨點</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">標題1</span>](<span class="link">#標題1</span>)</span><br><span class="line">[<span class="string">標題2</span>](<span class="link">#標題2</span>)</span><br><span class="line">[<span class="string">標題3</span>](<span class="link">#標題3</span>)</span><br><span class="line"></span><br><span class="line"><span class="section"># 標題一</span></span><br><span class="line"><span class="section">## 標題二</span></span><br><span class="line"><span class="section">### 標題三</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="需要注意的小細節"><a href="#需要注意的小細節" class="headerlink" title="需要注意的小細節:"></a>需要注意的小細節:</h3><p>如果我們的標題有空白時則使用 - 號代替</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">標題2 Test</span>](<span class="link">#標題2-test</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### 標題2 Test</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快速找到錨點的小步驟"><a href="#快速找到錨點的小步驟" class="headerlink" title="快速找到錨點的小步驟"></a>快速找到錨點的小步驟</h3><p>如果你是用來寫 blog 文章，建議可以 localhost 後直接點標題(圖片中的 1)，就可以看到 url 上有錨點(圖片中的二)，就可以直接貼在 markdown 中，是不是很方便呢！<br><img src="/images/markdown-anchor/1.PNG" alt=""></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.jishuwen.com/d/2uT8/zh-tw" target="_blank" rel="noopener">Github markdown 錨點</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>畢竟 markdown 要是沒有錨點，那 markdown 在寫那種比較長的文章就相對吃力拉，幸好有錨點，也謝謝 markdown 的發明團隊們可以讓我在寫文章時減少撰寫網頁的麻煩。</p>
+<p>也謝謝 Clloz 大大在網路上分享此技術，讓英文不好的我也可以快速學習，非常謝謝他。</p>
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>人生旅途</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
 </search>
