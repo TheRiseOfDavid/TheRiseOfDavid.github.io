@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    mathjax 用法紀錄 |  大衞的筆記
+    Codeforces 1406A - Subset Mex |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-blog/about-mathjax" class="article article-type-post" itemscope
+  <article id="post-Codeforces/Codeforces 1406A" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  mathjax 用法紀錄
+  Codeforces 1406A - Subset Mex
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/07/20/blog/about-mathjax/" class="article-date">
-  <time datetime="2020-07-19T16:10:56.000Z" itemprop="datePublished">2020-07-20</time>
+      <a href="/2020/09/14/Codeforces/Codeforces%201406A/" class="article-date">
+  <time datetime="2020-09-13T17:23:27.000Z" itemprop="datePublished">2020-09-14</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">275</span>
+            <span class="post-count">721</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">1分鐘</span>
+            <span class="post-count">2分鐘</span>
         </span>
     </span>
 </div>
@@ -111,87 +111,35 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="主要內容"><a href="#主要內容" class="headerlink" title="主要內容"></a>主要內容</h2><blockquote>
-<p>幫助大衛在 blog 中使用 mathjax 時忘記用法的時候直接快速使用，省去找文章的麻煩<br>雙斜線代表 mathjax 的用法，因為這裡我若完整照打會直接變成 mathjax 格式，於是我都只打內容<br>如下 &amp;&amp;(內容 &amp;&amp;) ，將 &amp;消除後放入內容即可使用</p>
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>定義 mex: 這集合裡面缺少的最小負整數。<br>如 \(mex(  \{ 1,4,0,2,2,1 \}  ) = 3\)，缺少 \(3\)<br>如 \(mex(\{3,2,3,1,3,0,0\}) = 4\)，缺少 \(4\)</p>
+<p>給你一組數列，要把它拆成 A , B 兩個子集，如果此數列裡面有重複的數字時需要平均分配給 A , B。試問如何讓 \(mex(a) + mex(b) \) 最大？</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="數學用法"><a href="#數學用法" class="headerlink" title="數學用法"></a>數學用法</h2><p><strong>普通英文字母若前面未加入反斜線則代表可隨意帶入數值</strong></p>
-<table>
-<thead>
-<tr>
-<th>數學用法</th>
-<th>mathjax 打法</th>
-<th>備註</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>次方</td>
-<td>a^{b}</td>
-<td></td>
-</tr>
-<tr>
-<td>x項</td>
-<td>a_{b}</td>
-<td></td>
-</tr>
-<tr>
-<td>字與字的空格</td>
-<td>a \ b</td>
-<td></td>
-</tr>
-<tr>
-<td>大括號</td>
-<td>\&amp;{ , \&amp;}</td>
-<td>&amp;需消除</td>
-</tr>
-<tr>
-<td>分式寫法</td>
-<td>\frac{分子}{分母}</td>
-<td></td>
-</tr>
-<tr>
-<td>套入文字</td>
-<td>\text{文字}</td>
-<td></td>
-</tr>
-<tr>
-<td>總和</td>
-<td>\sum_{i=1}^n a_n</td>
-<td></td>
-</tr>
-<tr>
-<td>大於等於</td>
-<td>\geq</td>
-<td></td>
-</tr>
-<tr>
-<td>小於等於</td>
-<td>\leq</td>
-<td></td>
-</tr>
-<tr>
-<td>乘法</td>
-<td>\cdot</td>
-<td></td>
-</tr>
-<tr>
-<td>百分比</td>
-<td>\ \ %</td>
-<td>須將斜線 與 % 中間的空白消去</td>
-</tr>
-<tr>
-<td>註解</td>
-<td>\ %</td>
-<td>須將斜線 與 % 中間的空白消去</td>
-</tr>
-<tr>
-<td>對數</td>
-<td>\log_2 x</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a></p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>依序把數列讀入，之後排序，再透過 a , b 兩個變數紀錄這數列裡面缺少的最小與次小的負整數就是答案。</p>
+<h3 id="為甚麼可以這樣做？"><a href="#為甚麼可以這樣做？" class="headerlink" title="為甚麼可以這樣做？"></a>為甚麼可以這樣做？</h3><p>由於 mex 的定義，是集合裡面缺少的最小負整數，而再根據題目拆子集的要求只要有重複的就要分配給 a,b 兩個集合。</p>
+<p>然後我們來舉個例:</p>
+<ul>
+<li><p>\( \{ 0,1,2,3 \} \)</p>
+<blockquote>
+<p> \(A = \{1,2,3 \}  , mex(A)=4 \)<br> \(B = \{\} , mex(B)=0 \)</p>
+</blockquote>
+</li>
+<li><p>\(\{0,0,1,1,2,4\}\)</p>
+<blockquote>
+<p>\(A = \{0,1,2,4\} , mex(A) = 3 \)<br>\(B = \{0,1\} , mex(B) = 2 \)<br>這裡的 4 放在 A 或 B 都沒關係，不影響</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="得出結論"><a href="#得出結論" class="headerlink" title="得出結論"></a>得出結論</h3><p>數列中，如果此數列中沒有重複的最小整數，那最小整數就會是 \(mex(B)\)，A 則是排序中第一個缺失的最小整數。</p>
+<p>於是我們排序好，直接用一個 for，只要根據數字順序判斷這數列哪裡數字缺失就是 A 的位置，而 B 就是沒有重複的最小整數。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.cnblogs.com/RioTian/p/13659464.html" target="_blank" rel="noopener">Codeforces Round #670 (Div. 2) 深夜掉分（A - C题补题）</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實這場比賽我一題都沒有解出來www，實力不好啊！也不太會分配時間，這點我還需要再學習。然後這題有個很大的重點讓當時的我沒有解出來，就是<font color="#dd0000"><strong>我看不懂他的英文</strong></font> ，導致我在讀懂題目就花了 30 分鐘卻還沒有讀懂題目，浪費掉了許多時間。英文能力真的很重要，一定要學好。</p>
+<p>等我 ICPC 2020 taipei 比完後我一定要來好好惡補我的英文能力，<del>演算法也要好嗎= = ~</del>。我還有好多事情要努力要學習，好希望自己的學習能力能夠好點。</p>
+<p>感謝 <strong>RioTian</strong> 大神分享程式碼讓我可以看到這種程式解法，我知道中文題目後我沒有想到這種解法，而且這種解法更有效率更好懂！讓我學習了一課，謝謝大神讓我能夠往前成長一步。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 110</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t , n , num[MAXN] =&#123;&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//#ifdef LOCAL</span></span><br><span class="line"><span class="comment">//    freopen("in1.txt" ,"r" , stdin ) ;</span></span><br><span class="line"><span class="comment">//#endif // LOCAL</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; num[i] ;</span><br><span class="line">        sort(num,num+n);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">0</span> , b = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[i] == a ) a++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (num[i] == b ) b++ ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a + b &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
       <!-- reward -->
@@ -215,7 +163,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mathjax/" rel="tag">mathjax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codeforces-Round-670-Div-2/" rel="tag">Codeforces Round .#670 (Div. 2)</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B0%B4%E9%A1%8C/" rel="tag">水題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -226,19 +174,19 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/07/20/life_experence/blog-experience/" class="article-nav-link">
+      <a href="/2020/09/14/Codeforces/Codeforces%201406B/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            BLOG 經驗分享
+            Codeforces 1406B - Maximum Product
           
         </div>
       </a>
     
     
-      <a href="/2020/07/20/blog/blog-format/" class="article-nav-link">
+      <a href="/2020/09/11/blog/markdown-anchor/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">部落格編排格式</div>
+        <div class="article-nav-title">QUESTION! HEXO 可以使用錨點嗎？</div>
       </a>
     
   </nav>

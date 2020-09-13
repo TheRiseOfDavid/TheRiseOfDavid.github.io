@@ -231,7 +231,7 @@
         <tag>ICPC</tag>
         <tag>程式解題</tag>
         <tag>2017-ICPC-Asia-Taipei-Hualien-Regional</tag>
-        <tag>暴力搜尋法</tag>
+        <tag>Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -2230,8 +2230,8 @@
       <tags>
         <tag>水題</tag>
         <tag>UVa</tag>
-        <tag>暴力</tag>
         <tag>程式解題</tag>
+        <tag>Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -2259,8 +2259,8 @@
       <tags>
         <tag>水題</tag>
         <tag>UVa</tag>
-        <tag>暴力</tag>
         <tag>程式解題</tag>
+        <tag>Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -3210,8 +3210,8 @@
       </categories>
       <tags>
         <tag>程式解題</tag>
-        <tag>暴力搜尋法</tag>
         <tag>Codeforces Round .#666 (Div. 2)</tag>
+        <tag>Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -3915,7 +3915,7 @@
 </tr>
 <tr>
 <td>大括號</td>
-<td>&amp;{ , &amp;}</td>
+<td>\&amp;{ , \&amp;}</td>
 <td>&amp;需消除</td>
 </tr>
 <tr>
@@ -4191,6 +4191,80 @@
         <tag>學習筆記</tag>
         <tag>人生旅途</tag>
         <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1406A - Subset Mex</title>
+    <url>/2020/09/14/Codeforces/Codeforces%201406A/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>定義 mex: 這集合裡面缺少的最小負整數。<br>如 \(mex(  \{ 1,4,0,2,2,1 \}  ) = 3\)，缺少 \(3\)<br>如 \(mex(\{3,2,3,1,3,0,0\}) = 4\)，缺少 \(4\)</p>
+<p>給你一組數列，要把它拆成 A , B 兩個子集，如果此數列裡面有重複的數字時需要平均分配給 A , B。試問如何讓 \(mex(a) + mex(b) \) 最大？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>依序把數列讀入，之後排序，再透過 a , b 兩個變數紀錄這數列裡面缺少的最小與次小的負整數就是答案。</p>
+<h3 id="為甚麼可以這樣做？"><a href="#為甚麼可以這樣做？" class="headerlink" title="為甚麼可以這樣做？"></a>為甚麼可以這樣做？</h3><p>由於 mex 的定義，是集合裡面缺少的最小負整數，而再根據題目拆子集的要求只要有重複的就要分配給 a,b 兩個集合。</p>
+<p>然後我們來舉個例:</p>
+<ul>
+<li><p>\( \{ 0,1,2,3 \} \)</p>
+<blockquote>
+<p> \(A = \{1,2,3 \}  , mex(A)=4 \)<br> \(B = \{\} , mex(B)=0 \)</p>
+</blockquote>
+</li>
+<li><p>\(\{0,0,1,1,2,4\}\)</p>
+<blockquote>
+<p>\(A = \{0,1,2,4\} , mex(A) = 3 \)<br>\(B = \{0,1\} , mex(B) = 2 \)<br>這裡的 4 放在 A 或 B 都沒關係，不影響</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="得出結論"><a href="#得出結論" class="headerlink" title="得出結論"></a>得出結論</h3><p>數列中，如果此數列中沒有重複的最小整數，那最小整數就會是 \(mex(B)\)，A 則是排序中第一個缺失的最小整數。</p>
+<p>於是我們排序好，直接用一個 for，只要根據數字順序判斷這數列哪裡數字缺失就是 A 的位置，而 B 就是沒有重複的最小整數。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.cnblogs.com/RioTian/p/13659464.html" target="_blank" rel="noopener">Codeforces Round #670 (Div. 2) 深夜掉分（A - C题补题）</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實這場比賽我一題都沒有解出來www，實力不好啊！也不太會分配時間，這點我還需要再學習。然後這題有個很大的重點讓當時的我沒有解出來，就是<font color="#dd0000"><strong>我看不懂他的英文</strong></font> ，導致我在讀懂題目就花了 30 分鐘卻還沒有讀懂題目，浪費掉了許多時間。英文能力真的很重要，一定要學好。</p>
+<p>等我 ICPC 2020 taipei 比完後我一定要來好好惡補我的英文能力，<del>演算法也要好嗎= = ~</del>。我還有好多事情要努力要學習，好希望自己的學習能力能夠好點。</p>
+<p>感謝 <strong>RioTian</strong> 大神分享程式碼讓我可以看到這種程式解法，我知道中文題目後我沒有想到這種解法，而且這種解法更有效率更好懂！讓我學習了一課，謝謝大神讓我能夠往前成長一步。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 110</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t , n , num[MAXN] =&#123;&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//#ifdef LOCAL</span></span><br><span class="line"><span class="comment">//    freopen("in1.txt" ,"r" , stdin ) ;</span></span><br><span class="line"><span class="comment">//#endif // LOCAL</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; num[i] ;</span><br><span class="line">        sort(num,num+n);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">0</span> , b = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[i] == a ) a++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (num[i] == b ) b++ ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a + b &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>程式解題</tag>
+        <tag>Codeforces Round .#670 (Div. 2)</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1406B - Maximum Product</title>
+    <url>/2020/09/14/Codeforces/Codeforces%201406B/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一組數列裡面含有正、負整數，試問從中找出 5 個數字乘起來數字最大</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>先排序讀進來的全部數列，之後進行窮舉。</p>
+<h3 id="窮舉共有三種方法："><a href="#窮舉共有三種方法：" class="headerlink" title="窮舉共有三種方法："></a>窮舉共有三種方法：</h3><blockquote>
+<p>全部 5 個數字選最大的正整數<br>選 3 個最大正整數 + 2 個最小負整數<br>選 1 個最大正整數 + 4 個最小負整數</p>
+</blockquote>
+<h3 id="Why-怎麼是這樣做呢"><a href="#Why-怎麼是這樣做呢" class="headerlink" title="Why? 怎麼是這樣做呢?"></a>Why? 怎麼是這樣做呢?</h3><p>由於我們負負得正，我們沒辦法確定說到底選誰比較好，但我們可以用窮舉的方式來找出最好的解法。<br>只要進行排序，最小的兩個負數相乘肯定會比其他的負數相乘來的更大，以此類推，最大的兩個正整數相乘肯定會比其他的正整數相乘更大。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.cnblogs.com/RioTian/p/13659464.html" target="_blank" rel="noopener">Codeforces Round #670 (Div. 2) 深夜掉分（A - C题补题）</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題其實很簡單的，但是我把它想得太複雜了。<del>這…這就是社會的歷練嗎</del>，明明小學生都可以解開的簡單題目，我花了一小時半都沒有解出來。這題出的好呀，直接打中的思考盲點，好過癮，讓我學起來了！</p>
+<p>我原本是想要用遞迴解開但我一直錯呀，真的比賽思考很久都還是沒有解開，好討厭。結果我把她想得太困難了，用簡單的小技巧就能解開了。</p>
+<p>遞迴解法是選出 9 個數字，其中 5 個為正整數最大，4 個為負整數最小，然後進行遞迴判斷，之後進行優化，但只能過題目的測資，之後就不行了XD，我的技術還是不夠承受呀XD</p>
+<p>感謝 <strong>RioTian</strong> 大神分享程式碼讓我可以看到這種程式解法，讓我可以了解到這種窮舉解法，讓我學習了一課，謝謝大神讓我能夠往前成長一步。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 200010</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll t , n , a[MAXN] = &#123;&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//#ifdef LOCAL</span></span><br><span class="line"><span class="comment">//    freopen("in1.txt" , "r" , stdin );</span></span><br><span class="line"><span class="comment">//#endif // LOCAL</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a[i] ;</span><br><span class="line">        sort(a , a + n);</span><br><span class="line"></span><br><span class="line">        ll ans[<span class="number">5</span>] = &#123;&#125; ;</span><br><span class="line">        ans[<span class="number">0</span>] = a[n<span class="number">-1</span>] * a[n<span class="number">-2</span>] * a[n<span class="number">-3</span>] * a[n<span class="number">-4</span>] * a[n<span class="number">-5</span>] ;</span><br><span class="line">        ans[<span class="number">1</span>] = a[n<span class="number">-1</span>] * a[n<span class="number">-2</span>] * a[n<span class="number">-3</span>] * a[<span class="number">0</span>] * a[<span class="number">1</span>] ;</span><br><span class="line">        ans[<span class="number">2</span>] = a[n<span class="number">-1</span>] * a[<span class="number">0</span>] * a[<span class="number">1</span>] * a[<span class="number">2</span>] * a[<span class="number">3</span>] ;</span><br><span class="line">        sort(ans,ans+<span class="number">3</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans[<span class="number">2</span>] &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="題外話"><a href="#題外話" class="headerlink" title="題外話"></a>題外話</h2><p>這裡是我的遞迴解法，有人要幫我修改這程式幫助我通過嗎？如果通過私訊我告訴我好嗎XD，謝謝你啦</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lln</span>&#123;</span></span><br><span class="line">    ll num , neg ;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">deque</span>&lt;lln&gt; dnum;</span><br><span class="line"><span class="keyword">int</span> t , n ;</span><br><span class="line">ll maxn = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(lln a , lln b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span>  a.num &lt; b.num ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">p</span><span class="params">(<span class="keyword">int</span> index , ll sum , <span class="keyword">int</span> i , ll intNeg )</span></span>&#123;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; index &lt;&lt; ' ' &lt;&lt; sum &lt;&lt; ' ' &lt;&lt; i &lt;&lt; ' ' &lt;&lt; intNeg &lt;&lt; '\n' ;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(index &gt;= <span class="number">5</span>)&#123;</span><br><span class="line">        maxn = max(sum,maxn) ;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; sum &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; <span class="number">0</span> )</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    p(index +<span class="number">1</span> , sum * dnum[i].num * (dnum[i].neg? <span class="number">-1</span> : <span class="number">1</span>) , i<span class="number">-1</span> , intNeg+dnum[i].neg);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>((intNeg+dnum[i].neg) % <span class="number">2</span> == <span class="number">1</span>)&#123;</span><br><span class="line">        p(index, sum , i<span class="number">-1</span> , intNeg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    lln temp ;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        dnum.clear();</span><br><span class="line">        maxn = <span class="number">-1e15</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp.num ;</span><br><span class="line">            <span class="keyword">if</span>(temp.num &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                temp.neg = <span class="number">1</span> ;</span><br><span class="line">                temp.num *= <span class="number">-1</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                temp.neg = <span class="number">0</span> ;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; temp.num &lt;&lt; ' ' &lt;&lt; temp.neg &lt;&lt; '\n';</span></span><br><span class="line">            dnum.push_back(temp) ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; '\n' ;</span></span><br><span class="line">        sort(dnum.begin() , dnum.end(), compare ) ;</span><br><span class="line">        p(<span class="number">0</span>,<span class="number">1</span>,n<span class="number">-1</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; maxn &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>程式解題</tag>
+        <tag>Codeforces Round .#670 (Div. 2)</tag>
+        <tag>Brute force</tag>
       </tags>
   </entry>
 </search>
