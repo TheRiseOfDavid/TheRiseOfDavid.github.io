@@ -4000,7 +4000,7 @@
       </tags>
   </entry>
   <entry>
-    <title>character 與 factor 比較</title>
+    <title>R character 與 factor 比較</title>
     <url>/2020/09/10/R/R-factor_vs_character/</url>
     <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
 <p>說明 R 語言中 factor 跟 character 他們彼此有甚麼好處又有甚麼不一樣。</p>
@@ -4265,6 +4265,62 @@
         <tag>程式解題</tag>
         <tag>Codeforces Round .#670 (Div. 2)</tag>
         <tag>Brute force</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R string 取代文字語法與教學</title>
+    <url>/2020/09/14/R/R-string-replace/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>說明 R 語言中 string 怎麼做到取代 (replace) 功能。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-R-有沒有一種語法關於字串中取代文字呢？"><a href="#QUESTION-R-有沒有一種語法關於字串中取代文字呢？" class="headerlink" title="QUESTION! R 有沒有一種語法關於字串中取代文字呢？"></a>QUESTION! R 有沒有一種語法關於字串中取代文字呢？</h2><blockquote>
+<p>有，但他有兩種方法，好麻煩wwww。<br>但我們這邊只介紹最簡單的方法，其中另外一方法必須要安裝額外套件因而略過。</p>
+</blockquote>
+<h3 id="soultion"><a href="#soultion" class="headerlink" title="soultion:"></a>soultion:</h3><p>使用 <code>gsub</code> 方法。</p>
+<p>gsub 基本上與其他語言中的 replace 相同，只是換了一個名字..。<del>這些程式語言就不能再互相好好整理一下嗎..</del></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">strA &lt;- <span class="string">"I can to sleep"</span></span><br><span class="line">gsub(<span class="string">"cab"</span> , <span class="string">"want"</span> , strA)</span><br><span class="line"><span class="comment">#"I want to sleep"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="tip"><a href="#tip" class="headerlink" title="tip:"></a>tip:</h3><p>基本上任何符號與空格、tab、換行都是可以被識別的，但還是有些例外。<br>這邊只附上一些常用的例外，還有些例外可以點此<a href="https://blog.csdn.net/lztttao/article/details/82086346" target="_blank" rel="noopener">連結</a></p>
+<table>
+<thead>
+<tr>
+<th>取代寫法</th>
+<th>實際取代</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>//.</td>
+<td>.</td>
+<td>取代 , 必須先加//</td>
+</tr>
+<tr>
+<td>//+</td>
+<td>+</td>
+<td>取代 + 必須先加//</td>
+</tr>
+<tr>
+<td>[:blank:]</td>
+<td>取代空白字元，如 space or tab</td>
+<td>這真的很好用欸，超讚</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>所有阿拉伯數字 1~9</td>
+<td>這也是非常好用欸。<del>C 有沒有考慮跟進一下</del></td>
+</tr>
+</tbody></table>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/lztttao/article/details/82086346" target="_blank" rel="noopener">R语言-gsub替换字符工具</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>原本都很喜歡寫 C，現在越來越喜歡寫 R，R 真的好好用一堆方便的寫法，<del>還有一堆堪稱是神奇的操作，給喜歡 C 的人看是玩壞www</del>，不過我也要好好努力學會更多的語言，造就自己的優勢！</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
       </tags>
   </entry>
 </search>
