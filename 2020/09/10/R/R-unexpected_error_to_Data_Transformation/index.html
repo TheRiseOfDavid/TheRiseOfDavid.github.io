@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">338</span>
+            <span class="post-count">393</span>
         </span>
     </span>
 
@@ -117,7 +117,8 @@ ga('send', 'pageview');
 <a id="more"></a>
 
 <h2 id="BUG-Data-Transformation-to-OS"><a href="#BUG-Data-Transformation-to-OS" class="headerlink" title="BUG! Data_Transformation_to_OS"></a>BUG! Data_Transformation_to_OS</h2><p>當我再 windows10 上把寫好的 R 程式放到 centOS6 上時卻執行出 ERROR，但在 windows 不會出錯呀！為甚麼會這樣呢？</p>
-<h2 id="solution-1-可能是型態不同"><a href="#solution-1-可能是型態不同" class="headerlink" title="solution 1: 可能是型態不同"></a>solution 1: 可能是型態不同</h2><p>在我的經驗中，R 的 tribble 的字串可能會在 windows 是 character 型態，但在 linux 上則是 factor，因此如果要讓程式可以繼續跑，就在 linux 上的程式特意再將 factor 再轉成 character 即可。</p>
+<h3 id="solution-1-可能是型態不同"><a href="#solution-1-可能是型態不同" class="headerlink" title="solution 1: 可能是型態不同"></a>solution 1: 可能是型態不同</h3><p>在我的經驗中，R 的 tribble 的字串可能會在 windows 是 character 型態，但在 linux 上則是 factor，因此如果要讓程式可以繼續跑，就在 linux 上的程式特意再將 factor 再轉成 character 即可。</p>
+<h4 id="補述"><a href="#補述" class="headerlink" title="補述:"></a>補述:</h4><p>在 2020/09/14 的 Debug 經驗中發現，只要是字串陣列在 linux 極高機率是 factor，如果不想要 factor，個人建議可以在每一個宣告字元陣列時加上 <code>as.character()</code>。</p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講，這種問題我第一次遇到，這也讓我很頭疼。因為其實只有一份程式碼讓我遇到，於是我都沒有往這方向去思考，直到我不斷尋找問題時，腦袋靈光一閃才讓我找出此錯誤。</p>
 <p>在這邊推薦一種除錯方式，雖然應該很多人都知道，但這除錯方式是我自己想的，可以將你每份程式碼都先複製 4、5 行進入 R console，這樣會相對好除錯很多。因為我在公司沒有人教我怎麼除錯，我當時也過有自信的說我會寫 R，導致變成讓我少從主管們學到一些經驗，讓我多踩一些坑，有時候這確實也不太好QQ。</p>
 

@@ -1431,6 +1431,8 @@
 <h3 id="我遇到了一個問題，我不懂要怎麼把-json-post-給-api"><a href="#我遇到了一個問題，我不懂要怎麼把-json-post-給-api" class="headerlink" title="我遇到了一個問題，我不懂要怎麼把 json post 給 api"></a>我遇到了一個問題，我不懂要怎麼把 json post 給 api</h3><p>小問題，我已經試過了，早就狀況排除了~ <del>血與淚的過程</del></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl &quot;localhost:8551&#x2F;url&quot; --header &quot;Content-type:application&#x2F;json&quot; -X POST -d @path&#x2F;file</span><br></pre></td></tr></table></figure>
 
+<h2 id="QUESTIONS-and-ERRORS-集合地"><a href="#QUESTIONS-and-ERRORS-集合地" class="headerlink" title="QUESTIONS and ERRORS 集合地"></a>QUESTIONS and ERRORS 集合地</h2><p>這裡有些作者已經經歷過的問題就放在這裡供大家參考怎麼解決或<del>放棄</del>。</p>
+<h3 id="QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？"><a href="#QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？" class="headerlink" title="QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？"></a>QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？</h3><p>改用 LINUX 平台是目前作者最好的解法。由於 Window 似乎在傳遞進來時編碼會遇到問題例如 <code>‘</code> 透過字串傳輸在 windows 上是亂碼，但在 Linux 不會，於是建議遇到此問題一律都使用 linux server 來解決。</p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實不得不說，要不是因為有上班的地方願意讓我磨練，不然我可能連 api 是甚麼都還需要等到未來 2,3 年後我才能夠熟悉並且知道這些事物，也很謝謝<strong>高鈺成學長</strong>在我有些遇到狀況時會給我些許提示，然後專案報告真的好趕阿QwQ，希望我能夠如期做完，那就是最完美的了！謝謝 <strong>Luft 學長</strong> 幫我很多忙，也謝謝 steam 基礎教育聯盟給我機會學習。</p>
 <h2 id="連結"><a href="#連結" class="headerlink" title="連結"></a>連結</h2><p>我在翻找資料的過程中，閱讀到一些對我非常有意義的資料。如下:</p>
 <p><a href="https://rviews.rstudio.com/2018/07/23/rest-apis-and-plumber/" target="_blank" rel="noopener">REST APIs and Plumber</a><br><a href="https://www.rplumber.io/articles/routing-and-input.html" target="_blank" rel="noopener">Routing &amp; Input</a><br><a href="https://stackoverflow.com/questions/51944328/sending-json-file-in-curl-and-receiving-it-in-r-using-plumber/51945300#51945300" target="_blank" rel="noopener">Sending json file in curl and receiving it in R using plumber</a><br><a href="https://stackoverflow.com/questions/7172784/how-do-i-post-json-data-with-curl" target="_blank" rel="noopener">How do I POST JSON data with cURL?</a></p>
@@ -4040,7 +4042,8 @@
 <a id="more"></a>
 
 <h2 id="BUG-Data-Transformation-to-OS"><a href="#BUG-Data-Transformation-to-OS" class="headerlink" title="BUG! Data_Transformation_to_OS"></a>BUG! Data_Transformation_to_OS</h2><p>當我再 windows10 上把寫好的 R 程式放到 centOS6 上時卻執行出 ERROR，但在 windows 不會出錯呀！為甚麼會這樣呢？</p>
-<h2 id="solution-1-可能是型態不同"><a href="#solution-1-可能是型態不同" class="headerlink" title="solution 1: 可能是型態不同"></a>solution 1: 可能是型態不同</h2><p>在我的經驗中，R 的 tribble 的字串可能會在 windows 是 character 型態，但在 linux 上則是 factor，因此如果要讓程式可以繼續跑，就在 linux 上的程式特意再將 factor 再轉成 character 即可。</p>
+<h3 id="solution-1-可能是型態不同"><a href="#solution-1-可能是型態不同" class="headerlink" title="solution 1: 可能是型態不同"></a>solution 1: 可能是型態不同</h3><p>在我的經驗中，R 的 tribble 的字串可能會在 windows 是 character 型態，但在 linux 上則是 factor，因此如果要讓程式可以繼續跑，就在 linux 上的程式特意再將 factor 再轉成 character 即可。</p>
+<h4 id="補述"><a href="#補述" class="headerlink" title="補述:"></a>補述:</h4><p>在 2020/09/14 的 Debug 經驗中發現，只要是字串陣列在 linux 極高機率是 factor，如果不想要 factor，個人建議可以在每一個宣告字元陣列時加上 <code>as.character()</code>。</p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講，這種問題我第一次遇到，這也讓我很頭疼。因為其實只有一份程式碼讓我遇到，於是我都沒有往這方向去思考，直到我不斷尋找問題時，腦袋靈光一閃才讓我找出此錯誤。</p>
 <p>在這邊推薦一種除錯方式，雖然應該很多人都知道，但這除錯方式是我自己想的，可以將你每份程式碼都先複製 4、5 行進入 R console，這樣會相對好除錯很多。因為我在公司沒有人教我怎麼除錯，我當時也過有自信的說我會寫 R，導致變成讓我少從主管們學到一些經驗，讓我多踩一些坑，有時候這確實也不太好QQ。</p>
 ]]></content>

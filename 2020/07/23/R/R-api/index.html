@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">598</span>
+            <span class="post-count">723</span>
         </span>
     </span>
 
@@ -134,6 +134,8 @@ ga('send', 'pageview');
 <h3 id="我遇到了一個問題，我不懂要怎麼把-json-post-給-api"><a href="#我遇到了一個問題，我不懂要怎麼把-json-post-給-api" class="headerlink" title="我遇到了一個問題，我不懂要怎麼把 json post 給 api"></a>我遇到了一個問題，我不懂要怎麼把 json post 給 api</h3><p>小問題，我已經試過了，早就狀況排除了~ <del>血與淚的過程</del></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &quot;localhost:8551&#x2F;url&quot; --header &quot;Content-type:application&#x2F;json&quot; -X POST -d @path&#x2F;file</span><br></pre></td></tr></table></figure>
 
+<h2 id="QUESTIONS-and-ERRORS-集合地"><a href="#QUESTIONS-and-ERRORS-集合地" class="headerlink" title="QUESTIONS and ERRORS 集合地"></a>QUESTIONS and ERRORS 集合地</h2><p>這裡有些作者已經經歷過的問題就放在這裡供大家參考怎麼解決或<del>放棄</del>。</p>
+<h3 id="QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？"><a href="#QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？" class="headerlink" title="QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？"></a>QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？</h3><p>改用 LINUX 平台是目前作者最好的解法。由於 Window 似乎在傳遞進來時編碼會遇到問題例如 <code>‘</code> 透過字串傳輸在 windows 上是亂碼，但在 Linux 不會，於是建議遇到此問題一律都使用 linux server 來解決。</p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實不得不說，要不是因為有上班的地方願意讓我磨練，不然我可能連 api 是甚麼都還需要等到未來 2,3 年後我才能夠熟悉並且知道這些事物，也很謝謝<strong>高鈺成學長</strong>在我有些遇到狀況時會給我些許提示，然後專案報告真的好趕阿QwQ，希望我能夠如期做完，那就是最完美的了！謝謝 <strong>Luft 學長</strong> 幫我很多忙，也謝謝 steam 基礎教育聯盟給我機會學習。</p>
 <h2 id="連結"><a href="#連結" class="headerlink" title="連結"></a>連結</h2><p>我在翻找資料的過程中，閱讀到一些對我非常有意義的資料。如下:</p>
 <p><a href="https://rviews.rstudio.com/2018/07/23/rest-apis-and-plumber/" target="_blank" rel="noopener">REST APIs and Plumber</a><br><a href="https://www.rplumber.io/articles/routing-and-input.html" target="_blank" rel="noopener">Routing &amp; Input</a><br><a href="https://stackoverflow.com/questions/51944328/sending-json-file-in-curl-and-receiving-it-in-r-using-plumber/51945300#51945300" target="_blank" rel="noopener">Sending json file in curl and receiving it in R using plumber</a><br><a href="https://stackoverflow.com/questions/7172784/how-do-i-post-json-data-with-curl" target="_blank" rel="noopener">How do I POST JSON data with cURL?</a></p>
