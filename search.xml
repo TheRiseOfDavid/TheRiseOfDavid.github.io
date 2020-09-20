@@ -4326,4 +4326,206 @@
         <tag>學習筆記</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Codeforces 126B - Password (Z-algorithm 講解)</title>
+    <url>/2020/09/18/Codeforces/Codeforces%20126B/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一字串 X，試問有沒有一個子字串 S，在 X 的頭、尾巴、中間都出現。<br>                                ，在 X 的 prefix , suffix and Beside prefix and suffix appear。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題是 Z algorithm 的模板題，先介紹 Z-algorithm。<br><strong>此題有多種解，這裡使用 Z-algorithm 解</strong></p>
+<blockquote>
+<p>專門解決在線性時間中在一段文字 (text) 中找到我們所需要的段落 (pattern)<br>與此類似的演算法: KMP algorithm<br>由於此題是 Z-algorithm 的模板題，只要能夠了解 Z-algorithm 就能解決此問題。<br>這題為教學題，但此問題還有一點點的小設計，需要稍加解釋才能完全理解。</p>
+</blockquote>
+<h2 id="Z-algorithm-介紹"><a href="#Z-algorithm-介紹" class="headerlink" title="Z-algorithm 介紹"></a>Z-algorithm 介紹</h2><blockquote>
+<p><strong>Z-algorithm 精隨: 透過 x,y 兩變數與 「Z 陣列」找出此字串中「最長共同前綴總和 (Longest Common Prefix)」</strong></p>
+</blockquote>
+<h3 id="QUESTION-1-x-y-and-「Z-陣列」是甚麼"><a href="#QUESTION-1-x-y-and-「Z-陣列」是甚麼" class="headerlink" title="QUESTION 1: x,y and 「Z 陣列」是甚麼?"></a>QUESTION 1: x,y and 「Z 陣列」是甚麼?</h3><p>等下會解釋XD，很快，看不到 1 分鐘就能知道了。</p>
+<h3 id="QUESTION-2-此演算法的複雜度呢"><a href="#QUESTION-2-此演算法的複雜度呢" class="headerlink" title="QUESTION 2: 此演算法的複雜度呢?"></a>QUESTION 2: 此演算法的複雜度呢?</h3><p>複雜度 \(O(text + pattern)\)</p>
+<h2 id="Z-algorithm-原理"><a href="#Z-algorithm-原理" class="headerlink" title="Z-algorithm 原理"></a>Z-algorithm 原理</h2><h3 id="Z-Array"><a href="#Z-Array" class="headerlink" title="Z Array"></a>Z Array</h3><p>在實現 Z-algorithm 需要用到一陣列，「Z Array」。</p>
+<p>我們查看字串的長度，並建立一陣列與字串長度相當，其就是 Z Array，Z 陣列中的 i 表示當前「最長共同前綴總和 (Longest Common Prefix)」</p>
+<p>\(Z[0]\) 毫無幫助XD，由於 Z[0] 只有自己他沒辦法達到共同，<del>他們都是自己</del>，即為都是「同一個字串」，因而無意義。</p>
+<h3 id="x-and-y"><a href="#x-and-y" class="headerlink" title="x and y"></a>x and y</h3><p>在實現 Z-algorithm <strong>還</strong>需要用到兩變數 \( x , y\)。</p>
+<blockquote>
+<p>x = 目前<strong>共同前綴</strong>的第一個字元<br>y = 目前<strong>共同前綴</strong>的最後一字元在字串中的 index</p>
+</blockquote>
+<h3 id="Z-algorithm-再除了此題目以外的應用"><a href="#Z-algorithm-再除了此題目以外的應用" class="headerlink" title="Z-algorithm 再除了此題目以外的應用"></a>Z-algorithm 再除了此題目以外的應用</h3><p>通常是應用在尋找段落 (pattern)，將文本字串 (text) 與段落連接起來，視段落為「P」、文字為「T」，並加上一個沒有在 P and T 出現過的字元，假設為「\$」，產生出「P\$T」，最後產生 Z array，如果 Z array 中的某個值等於 P 的長度，則段落出現在此處。</p>
+<p>因為從未出現過的字元使得「最長共同前綴總和 (Longest Common Prefix)」最大只能到 P，從未出現的字元阻斷了增加的可能性，才能應用在此。</p>
+<h3 id="Z-algorithm-實現與說明"><a href="#Z-algorithm-實現與說明" class="headerlink" title="Z-algorithm 實現與說明"></a>Z-algorithm 實現與說明</h3><p>由於我認為在程式碼中加上好懂得註解十分好懂，所以我就根據每一行程式碼進行說明，相信會讓讀者更好學會此演算法。<br>如果對下方說明還是不了解，可以點擊此<a href="https://personal.utdallas.edu/~besp/demo/John2010/z-algorithm.htm" target="_blank" rel="noopener">連結</a>觀看動畫，也許能夠讓你更了解 Z-algorithm 運作。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s ;</span><br><span class="line"><span class="keyword">int</span> z[s.length()] = &#123;&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; s.length() ; i++ )&#123; </span><br><span class="line">    z[i] = max(<span class="number">0</span>,min(z[i-x] , y - i + <span class="number">1</span>));</span><br><span class="line">    <span class="comment">// z[i-x] 直接詢問 z[i-x] 共同前綴嘗是多少，</span></span><br><span class="line">    <span class="comment">// 如果當前是在目前的共同前綴中，那理所當然現在的 i 必會等於最初的共同前綴 i-x 值，</span></span><br><span class="line">    <span class="comment">// 如果不是，那必定會是 0。</span></span><br><span class="line">    <span class="comment">// y-i+1  此共同前綴理應只會有 y-i+1 個</span></span><br><span class="line">    <span class="comment">//如果 z[i-x] 比較小，代表沒有從 i 位置開始的前綴字串，否則 z[i-x] 應該要更大，所以</span></span><br><span class="line">    <span class="comment">//也就表示 z[i] == z[k]。</span></span><br><span class="line">    <span class="comment">// 如果 y-i+1 比較小，代表這次的共同前綴比較小，因為 z[i-x] 更大，也就代表應該有從這</span></span><br><span class="line">    <span class="comment">//裡開始的共同前綴</span></span><br><span class="line">    <span class="keyword">while</span>(i + z[i] &lt; s.length() &amp;&amp; s[z[i]] == s[i+z[i]] )&#123;</span><br><span class="line">        x = i ;</span><br><span class="line">        y = i + z[i] ;</span><br><span class="line">        z[i]++ ;</span><br><span class="line">        <span class="comment">//進行比對，查看 s[z[i]] 的位置是否等於 s[i+z[i]] 的位置是的話就比對下一個</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣 Z-algorithm 就完成了！</p>
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>我們可以透過 Z-algorithm 找到「最長共同前綴總和 (Longest Common Prefix)」，但題目的要求字串後面也需要前綴呀，有可能共同最長前綴是 abcabcabc，但是這樣會是 6 呀，應該要是 abc、長度 3，才行的！</p>
+<p>於是我們需要加一個 if 來找出 3，來防止我們的程式出現瑕疵，這裡用程式碼來解釋會更好解釋，逆向思考有時候會比普通的思考方式來的更好。我們一樣根據每一行程式碼進行說明。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; s.length() ; i++)</span><br><span class="line">    <span class="keyword">if</span>(z[i] == s.length() - i &amp;&amp; maxn &gt;= s.length()-i )&#123;</span><br><span class="line">    <span class="comment">// z[i] == s.length() - i -&gt; 如果 z[i] 等於字串剩下的長度那保證會有</span></span><br><span class="line">    <span class="comment">//後綴，通常 i 都會接近 s.length() 時才會符合</span></span><br><span class="line">    <span class="comment">// maxn &gt;= s.length()-i -&gt; 再從 0 to s.length() 時勢必會找到並經過</span></span><br><span class="line">    <span class="comment">//「最長共同前綴總和 (Longest Common Prefix)」，只要他比後綴還要長或相等 </span></span><br><span class="line">    <span class="comment">//(還需要先滿足第一個條件，才能判斷到此條件)，就肯定代表中間已經也有經</span></span><br><span class="line">    <span class="comment">//過「最長共同前綴總和 (Longest Common Prefix)」，尾巴這個並不會是第一次經過，</span></span><br><span class="line">    <span class="comment">//如果尾巴是那就代表他只有兩次的共同前綴。</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; s.substr(<span class="number">0</span>,z[i]); <span class="comment">// 輸出答案</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    maxn = max(maxn , z[i]);</span><br><span class="line">    <span class="comment">//經過時更新 「最長共同前綴總和 (Longest Common Prefix)」</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://wangwilly.github.io/willywangkaa/2018/03/19/Algorithm-Z-%E6%BC%94%E7%AE%97%E6%B3%95/" target="_blank" rel="noopener">Algorithm - Z 演算法</a><br><a href="https://personal.utdallas.edu/~besp/demo/John2010/z-algorithm.htm" target="_blank" rel="noopener">Z Algorithm</a><br><a href="https://codeforces.com/blog/entry/3107" target="_blank" rel="noopener">Z Algorithm_codeforces</a><br><a href="https://blog.csdn.net/weixin_30362801/article/details/101855543" target="_blank" rel="noopener">Codeforces 126B Password（Z算法）</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講，這題學習很快www，<del>廢話，程式碼很少呀</del>，但撰寫文章倒是花了很多時間，補了許多學習時沒有注意到的漏洞。此演算法寫起來十分簡單，但它裡面蘊藏著許多小細節，我花了很多時間去整理。沒想到快要跟學「點分治」的時間快要一樣久了，看來我的學習能力還挺不好，還需要多加強了 QAQ</p>
+<p>不過也要感謝網路上已經有許多優秀的人放了教學文章在上面可以讓我學習與思考，要是沒有他們我應該也沒辦法順利推出來這些想法，還是習慣用紙筆去理解一次演算法，雖然很花時間，但印象深刻。<del>RAM 太少常常忘記自己迴圈是做到第幾次，然後就一直鬼打牆</del></p>
+<p>不過也對自己表示一點小失望，學習能力有點偏差呀！好希望自己的頭腦可以再清楚一點，能夠可以讀懂優秀大神寫的演算法，而不是每次都要花上 5,6 個小時來理解，在撞牆期中常常會覺得自己很沒用呀。</p>
+<p><strong>那怕是一點點的進步也好，都可以給在學習路上的我很大的自信。</strong></p>
+<p>雖然每次在學習演算法總是會讓我覺得難過，因為是自學很容易遇到學習障礙，但我認為這是我應該要學會的基礎。我並不是幸運的孩子，我勢必要先做出一些成果，讓資源跟大神可以關注到我，在提拔我或幫助我成長。在還沒有大神們關注到我之前，我會默默耕耘，繼續努力的！</p>
+<p>為了讓讀者與未來的我看到之前的我學習是怎麼學習的，我就在這邊放入我為了學習這份演算法而在紙上實作的紀錄吧！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，我也花了三個小時撰寫文章，看得懂跟說得出來真的是兩回事，<del>也許還有人覺得我說的很差</del>，不過我已經盡力解釋拉。希望可以幫助到各位。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> z[MAXN] = &#123;&#125; ;</span><br><span class="line"><span class="keyword">int</span> x=<span class="number">0</span> , y=<span class="number">0</span> , maxn = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">string</span> s ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; s ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; s.length() ; i++ )&#123;</span><br><span class="line">        z[i] = max(<span class="number">0</span>,min(z[i-x] , y - i + <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">while</span>(i + z[i] &lt; s.length() &amp;&amp; s[z[i]] == s[i+z[i]] )&#123;</span><br><span class="line">            x = i ;</span><br><span class="line">            y = i + z[i] ;</span><br><span class="line">            z[i]++ ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; s.length() ; i++)</span><br><span class="line">        <span class="keyword">if</span>(z[i] == s.length() - i &amp;&amp; maxn &gt;= s.length()-i )&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; s.substr(<span class="number">0</span>,z[i]);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        maxn = max(maxn , z[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Just a legend"</span> ;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>Codeforces Round .#666 (Div. 2)</tag>
+        <tag>Z-algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 初次介紹</title>
+    <url>/2020/09/16/NTUT_note/statistics-begin/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Bloomberg"><a href="#Bloomberg" class="headerlink" title="Bloomberg"></a>Bloomberg</h2><h3 id="QUESTION-and-SOLUTION"><a href="#QUESTION-and-SOLUTION" class="headerlink" title="QUESTION and SOLUTION"></a>QUESTION and SOLUTION</h3><blockquote>
+<p>Bloomberg 如何利用資料</p>
+</blockquote>
+<ul>
+<li>分析股市</li>
+<li>觀察使用者消費習慣</li>
+<li>程式設計</li>
+<li>行業系類資訊<blockquote>
+<p>這些資料可以帶來甚麼價值</p>
+</blockquote>
+</li>
+<li>平台隨時更新資訊</li>
+<li>透明的資訊來源</li>
+<li>幫客戶降低風險</li>
+<li>投資決策<blockquote>
+<p>除了影片所述，Bloomberg 還可以如何進一步使用資料</p>
+</blockquote>
+</li>
+<li>預測未來經濟走勢</li>
+<li>賣資料給其他需要客戶</li>
+<li>預測股市趨勢</li>
+</ul>
+<h2 id="QUESTION-SET"><a href="#QUESTION-SET" class="headerlink" title="QUESTION SET"></a>QUESTION SET</h2><h3 id="甚麼是統計？"><a href="#甚麼是統計？" class="headerlink" title="甚麼是統計？"></a>甚麼是統計？</h3><p>透過數值表達，蒐集、分析、表現並解釋結果。</p>
+<h3 id="找一份統計分析資料"><a href="#找一份統計分析資料" class="headerlink" title="找一份統計分析資料"></a>找一份統計分析資料</h3><p>手機電量，長條圖</p>
+<h3 id="統計在商業與經濟的應用"><a href="#統計在商業與經濟的應用" class="headerlink" title="統計在商業與經濟的應用"></a>統計在商業與經濟的應用</h3><ul>
+<li>會計<ul>
+<li>本益比</li>
+</ul>
+</li>
+<li>經濟<ul>
+<li>就業</li>
+<li>GDP</li>
+</ul>
+</li>
+<li>金融<ul>
+<li>股票</li>
+<li>投資分析</li>
+</ul>
+</li>
+<li>行銷<ul>
+<li>同業資訊</li>
+<li>通路</li>
+<li>廣告</li>
+<li>消費者喜愛</li>
+</ul>
+</li>
+<li>產品<ul>
+<li>產能</li>
+<li>良率 </li>
+</ul>
+</li>
+<li>資訊系統<ul>
+<li>資料庫</li>
+</ul>
+</li>
+<li><a href="https://tradingvalley.com" target="_blank" rel="noopener"><strong>機器人理財</strong></a><br>詢問妳問題，之後給你最好的組合。</li>
+</ul>
+<h3 id="DataSet-名詞介紹"><a href="#DataSet-名詞介紹" class="headerlink" title="DataSet 名詞介紹"></a>DataSet 名詞介紹</h3><ul>
+<li>Elements 單位名稱，如:公司名稱</li>
+<li>Variables  想查看的變數，如:公司盈餘<ul>
+<li>變數歸類，如：「種類」、「數字」、「有無」</li>
+</ul>
+</li>
+<li>Observations 單筆元素的變數資料</li>
+<li>DataSet 全部元素的變數資料，不包含 Elements and Variables</li>
+</ul>
+<h3 id="Scales-of-Measurement-衡量此度-必考"><a href="#Scales-of-Measurement-衡量此度-必考" class="headerlink" title="Scales of Measurement 衡量此度 *必考 "></a><strong><font color="#dd0000">Scales of Measurement 衡量此度 *必考 </font></strong></h3><ul>
+<li>Nominal 名目尺度，歸類用</li>
+<li>Ordinal 順序尺度，歸類用</li>
+<li>Interval 等距尺度，可進行分析</li>
+<li>Ratio 等比尺度，可進行分析</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>第一周的統計課就讓我覺得好難的感覺呀！我希望我能夠不被當，開學新希望XD。人生好難，讀書、比賽、工作都要兼顧，希望我能兼顧好 QwQ，統計的報告與測驗都能順利。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第二章</title>
+    <url>/2020/09/20/NTUT_note/statistics-ch2/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Chaper-2-A"><a href="#Chaper-2-A" class="headerlink" title="Chaper 2-A"></a>Chaper 2-A</h2><blockquote>
+<p><img src="/images/statistics-ch2/1.PNG" alt=""><br>圖片當中</p>
+</blockquote>
+<ul>
+<li>\( \text{Relative Frequency} = \frac{\text{Frequency}}{\text{total Frequency}} \)</li>
+<li><strong>Relative Frequency 總和一定會是1。</strong></li>
+<li>\( \text{Percent Frequency} = \text{Rekative Frequency} * 100 \)</li>
+</ul>
+<h3 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h3><p>aggregated crosstabulation 已彙整的表<br>simpsons’s Paradox 辛普森悖論<br>aggregated 收集<br>Scatter Diagram and Trendline 散佈圖</p>
+<h3 id="simpsons’s-Paradox-辛普森悖論"><a href="#simpsons’s-Paradox-辛普森悖論" class="headerlink" title="simpsons’s Paradox 辛普森悖論"></a>simpsons’s Paradox 辛普森悖論</h3><p>在分組比較中都佔優勢的一方，在總評(全部一起考量)有時會是劣勢的一方。<br>為了避免此勃論則需要斟酌各分組權重，並乘以一定係數消除分組數據差造成的影響</p>
+<h3 id="Scatter-Diagram-and-Trendline-散佈圖"><a href="#Scatter-Diagram-and-Trendline-散佈圖" class="headerlink" title="Scatter Diagram and Trendline 散佈圖"></a>Scatter Diagram and Trendline 散佈圖</h3><blockquote>
+<p><strong>散佈圖的 x,y 都必須是數值變數</strong><br>假如 x 變動很大但趨勢線卻沒有變動表示 x 與 y 沒有甚麼關係。如下圖：<br><img src="/images/statistics-ch2/2.PNG" alt=""></p>
+</blockquote>
+<h3 id="Side-by-Side-Bar-Chart-長條圖"><a href="#Side-by-Side-Bar-Chart-長條圖" class="headerlink" title="Side-by-Side Bar Chart 長條圖"></a>Side-by-Side Bar Chart 長條圖</h3><p>可同時比較很多 Elements </p>
+<h4 id="Stacked-Bar-Chart-堆疊長條圖"><a href="#Stacked-Bar-Chart-堆疊長條圖" class="headerlink" title="Stacked Bar Chart 堆疊長條圖"></a>Stacked Bar Chart 堆疊長條圖</h4><blockquote>
+<p>將要比較的變數全部堆疊在一起，所以長度都會達到 100%，如下圖：<br>通常是要查看同個 elements 的 variables 誰比較高<br><img src="/images/statistics-ch2/3.PNG" alt=""></p>
+</blockquote>
+<h3 id="Data-Visualization-資料視覺化"><a href="#Data-Visualization-資料視覺化" class="headerlink" title="Data Visualization 資料視覺化"></a>Data Visualization 資料視覺化</h3><ul>
+<li>明確標題</li>
+<li>簡潔表單</li>
+<li>清楚標示 x,y 軸</li>
+<li>顏色要明確，不可過度模糊。假如是黑白報表的話，建議使用符號來表示</li>
+</ul>
+<h3 id="建議圖表"><a href="#建議圖表" class="headerlink" title="建議圖表"></a>建議圖表</h3><h4 id="QEUSTION-想要兩個變數之間比較"><a href="#QEUSTION-想要兩個變數之間比較" class="headerlink" title="QEUSTION: 想要兩個變數之間比較"></a>QEUSTION: 想要兩個變數之間比較</h4><p>Side-by-Side Bar Chart or Stacked Bar Chart </p>
+<h4 id="QEUSTION-想要看兩個變數之間的關係"><a href="#QEUSTION-想要看兩個變數之間的關係" class="headerlink" title="QEUSTION: 想要看兩個變數之間的關係"></a>QEUSTION: 想要看兩個變數之間的關係</h4><h5 id="solution-A-Scatter-Diagram-散佈圖"><a href="#solution-A-Scatter-Diagram-散佈圖" class="headerlink" title="solution A: Scatter Diagram 散佈圖"></a>solution A: Scatter Diagram 散佈圖</h5><p>但請記住，變數只能是數值變數</p>
+<h5 id="solution-B-Trendline-趨勢線"><a href="#solution-B-Trendline-趨勢線" class="headerlink" title="solution B: Trendline 趨勢線"></a>solution B: Trendline 趨勢線</h5><p>來看在散佈圖上面的關聯行如何</p>
+<h3 id="Data-Dashboards-資料儀表板"><a href="#Data-Dashboards-資料儀表板" class="headerlink" title="Data Dashboards 資料儀表板"></a>Data Dashboards 資料儀表板</h3><p>通常查看 KPI(關鍵績效指標)，能讓使用者方便閱讀了解。</p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><ul>
+<li>盡量讓圖不要下拉或上移，可以完整呈現</li>
+<li>減少不必要的視覺效果</li>
+<li>圖要有明顯邊界<blockquote>
+<p>如下圖：<br><img src="/images/statistics-ch2/4.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
+      </tags>
+  </entry>
 </search>
