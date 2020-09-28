@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    UVa245 - Uncompress |  大衞的筆記
+    統計學(一) 筆記 - 第二章A |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-UVa/Uva245" class="article article-type-post" itemscope
+  <article id="post-NTUT_note/statistics-ch2A" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  UVa245 - Uncompress
+  統計學(一) 筆記 - 第二章A
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/09/25/UVa/Uva245/" class="article-date">
-  <time datetime="2020-09-24T16:07:35.000Z" itemprop="datePublished">2020-09-25</time>
+      <a href="/2020/09/28/NTUT_note/statistics-ch2A/" class="article-date">
+  <time datetime="2020-09-28T15:10:50.000Z" itemprop="datePublished">2020-09-28</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">878</span>
+            <span class="post-count">652</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">3分鐘</span>
+            <span class="post-count">2分鐘</span>
         </span>
     </span>
 </div>
@@ -111,19 +111,110 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>給你一個經過壓縮的文本，文本中的數字則是代表是前面第幾個單字並輸出，但如果前面那些單字有重複到則只算一次並且是由後往前看的第一次遇到為準，請解壓縮此文本。</p>
-<p>註:單字中間只要遇到非英文字母就全部都視為不一樣的單字。</p>
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題要用 Linked-List 由於每個單字的上一個單字與下一個單字都會隨著壓縮而變不同，剛好符合 Linked-List 的特色。再加上一些優秀的讀取字串技術，就可以輕鬆解決掉這題了XD。</p>
-<p>如果不懂的話，下方程式碼有做解說。相信你會很快理解 Linked-List 的，我很努力想讓讀者都能懂啦。但是我個人不太喜歡在解題時使用指標，所以下面並不是指標實作。<del>對不起我就爛，debug 指標的技術很爛</del></p>
-<h2 id="參考連結："><a href="#參考連結：" class="headerlink" title="參考連結："></a>參考連結：</h2><p><a href="https://www.codeleading.com/article/5927815599/" target="_blank" rel="noopener">UVA245 WF5184 POJ1885 Uncompress【文本】</a></p>
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題應該看的出來他是用 Linked-List 拉XD，我一開始是想要用 vector 但是我卻卡關QQ，可惡腦袋不給力呀！之後就用 Linked-List 解決掉這題，不過太久沒有寫字串題目，讀取字串的能力特別差啊讀取字串的能力特別差啊，腦袋整個完全沒想法。後來看到參考連結中的那篇優秀程式碼文章，才讓我對於讀取字串又有了更新的領悟，好讚。非常感謝作者願意將他的程式碼技術公布出來！</p>
-<p>也希望我自己也能成為獨當一面的演算法程式設計師，不要甚麼都不太會，未來只能領低薪，我要努力，直到看到夢想為止之前！也希望大家可以幫助我。</p>
-<p>不過指標的 Linked-List 我還是覺得寫起來很麻煩阿，常常 Debug 都找不出錯誤，好討厭。我可能之後會變成愛用 C++，但不喜歡指標的怪人吧www。<del>C++ 的優勢根本沒有發揮出來</del></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> ch ;</span><br><span class="line"><span class="built_in">string</span> strTemp = <span class="string">""</span> ;</span><br><span class="line"><span class="keyword">int</span> wcnt = <span class="number">0</span> , head = <span class="number">0</span> , num =<span class="number">0</span>   ;</span><br><span class="line"><span class="comment">//wcnt linklist 的總量</span></span><br><span class="line"><span class="comment">//head 上一個單字的 index</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu_words</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> next ;</span><br><span class="line">    <span class="built_in">string</span> word ;</span><br><span class="line">&#125;word[MAXN] ;</span><br><span class="line"><span class="comment">// next 上一個單字的 index</span></span><br><span class="line"><span class="comment">// word 此單字</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    <span class="comment">//freopen("out.txt" , "w" , stdout );</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        ch = getchar() ;</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'0'</span>)</span><br><span class="line">            <span class="keyword">break</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">isalpha</span>(ch))&#123;</span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">isalpha</span>(ch))&#123; <span class="comment">//不斷讀取單字，直到遇到其他</span></span><br><span class="line">                strTemp += ch ;</span><br><span class="line">                ch = getchar() ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; strTemp ;</span><br><span class="line">            word[wcnt].word = strTemp ; <span class="comment">//添加新單字</span></span><br><span class="line">            word[wcnt].next = head ; <span class="comment">//上一個單字 index</span></span><br><span class="line">            head = wcnt++ ; <span class="comment">//長度增加</span></span><br><span class="line">            strTemp = <span class="string">""</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">isdigit</span>(ch))&#123; </span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))&#123; <span class="comment">//不斷讀取數字，直到遇到其他</span></span><br><span class="line">                num = num * <span class="number">10</span> + (ch - <span class="string">'0'</span>) ;</span><br><span class="line">                ch = getchar() ;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> cur = head , prev  ; </span><br><span class="line">            <span class="comment">//cur = 數字的那個單字</span></span><br><span class="line">            <span class="comment">//prev = 數字的下一個單字</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; num ; i++)&#123; <span class="comment">// 向上追蹤單字</span></span><br><span class="line">                prev = cur ;</span><br><span class="line">                cur = word[cur].next ;</span><br><span class="line">            &#125;</span><br><span class="line">            num = <span class="number">0</span> ;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; word[cur].word ;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(head != cur )&#123; <span class="comment">// 要將當前的單字搬到後面，所以單字的上一個 index 也需要更新</span></span><br><span class="line">                word[prev].next = word[cur].next ; </span><br><span class="line">                <span class="comment">// 因為要移動當前單字所以必須要將當前單字的下一個單字的 next，往前到現在這單字的 next</span></span><br><span class="line">                word[cur].next = head ;</span><br><span class="line">                <span class="comment">// 當前的單字 next 改為現在讀取中的上一個單字</span></span><br><span class="line">                head = cur ; <span class="comment">// 現在這個單字變成結尾</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(ch) ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2A-介紹"><a href="#2A-介紹" class="headerlink" title="2A 介紹"></a>2A 介紹</h2><h3 id="類別型變數-Categorical-Data"><a href="#類別型變數-Categorical-Data" class="headerlink" title="類別型變數 Categorical Data"></a>類別型變數 Categorical Data</h3><p>類別型變數可以用符號、名稱來界定不同類別</p>
+<h4 id="可呈現的表"><a href="#可呈現的表" class="headerlink" title="可呈現的表"></a>可呈現的表</h4><ul>
+<li>次數分配</li>
+<li>相對次數分配</li>
+<li>百分比次數分配</li>
+<li>長條圖</li>
+<li>圓餅圖</li>
+</ul>
+<blockquote>
+<p><img src="/images/statistics-ch2B/1.PNG" alt=""></p>
+</blockquote>
+<p>圖片當中</p>
+<ul>
+<li>\( \text{Relative Frequency} = \frac{\text{Frequency}}{\text{total Frequency}} \)</li>
+<li><strong>Relative Frequency 總和一定會是1。</strong></li>
+<li>\( \text{Percent Frequency} = \text{Rekative Frequency} * 100 \)</li>
+</ul>
+<h4 id="Bar-Chart-長條圖"><a href="#Bar-Chart-長條圖" class="headerlink" title="Bar Chart 長條圖"></a>Bar Chart 長條圖</h4><p>他長這個樣子</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/1.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>適合呈現 qualitative data(定值型資料)</li>
+<li>通常 bar(長條) 都會是固定長度</li>
+<li>每條 bar 必須要分開</li>
+</ul>
+<h4 id="Pareto-Chart-柏拉圖"><a href="#Pareto-Chart-柏拉圖" class="headerlink" title="Pareto Chart 柏拉圖"></a>Pareto Chart 柏拉圖</h4><p>一個長條圖配上百分比線，通常用在顯示產品品質管理。</p>
+<h4 id="Pie-Chart-圓餅圖"><a href="#Pie-Chart-圓餅圖" class="headerlink" title="Pie Chart 圓餅圖"></a>Pie Chart 圓餅圖</h4><p>通常元素不可以太多，<strong>絕對</strong>不可以超過 10 個。</p>
+<h3 id="數值型變數-Quantitative-Data"><a href="#數值型變數-Quantitative-Data" class="headerlink" title="數值型變數 Quantitative Data"></a>數值型變數 Quantitative Data</h3><h4 id="可呈現的表-1"><a href="#可呈現的表-1" class="headerlink" title="可呈現的表"></a>可呈現的表</h4><ul>
+<li>次數分配</li>
+<li>相對次數分配</li>
+<li>百分比次數分配</li>
+<li>點圖</li>
+<li>直方圖</li>
+<li>枝葉圖</li>
+</ul>
+<h4 id="Dot-Plot-點圖"><a href="#Dot-Plot-點圖" class="headerlink" title="Dot Plot 點圖"></a>Dot Plot 點圖</h4><p>一個點代表一筆資料，越多點代表越多資料。</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/2.PNG" alt=""></p>
+</blockquote>
+<h3 id="Frequency-Distribution-次數分配"><a href="#Frequency-Distribution-次數分配" class="headerlink" title="Frequency Distribution 次數分配"></a>Frequency Distribution 次數分配</h3><ul>
+<li>決定類別、分類，分類不可以重疊還要包跨全部資料<ul>
+<li>介於 5 到 20 組</li>
+<li>每一組基本上都要有資料，並要看出分布，可能需要進行嘗試沒辦法一次到位。</li>
+</ul>
+</li>
+<li>組距<ul>
+<li>採用同樣寬度</li>
+<li>寬度決定 = \( \frac{\text{最大值} - \text{最小值}}{組數}\)</li>
+</ul>
+</li>
+<li>上下限<ul>
+<li><strong>每一筆資料只能屬於某一組之間</strong></li>
+<li>下限必須要涵蓋資料最小值，上限反之</li>
+<li>通常最小或是最大可以是 *<em>open end *</em><br>open end 舉例：小於 x 值 or 大於 x 值</li>
+</ul>
+</li>
+</ul>
+<h3 id="資料頗析"><a href="#資料頗析" class="headerlink" title="資料頗析"></a>資料頗析</h3><p>我懶得打，直接看圖</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/3.PNG" alt=""></p>
+</blockquote>
+<h3 id="Histogram-直方圖"><a href="#Histogram-直方圖" class="headerlink" title="Histogram 直方圖"></a>Histogram 直方圖</h3><p>由於資料是數值並針對類別型資料，所以他們的 <strong>bar 必須黏在一起</strong></p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/4.PNG" alt=""></p>
+</blockquote>
+<h4 id="Showing-Skewness-偏態"><a href="#Showing-Skewness-偏態" class="headerlink" title="Showing Skewness 偏態"></a>Showing Skewness 偏態</h4><p>通常只資料分布著重在某處。</p>
+<ul>
+<li>對稱 Symmetric<ul>
+<li>資料對稱，舉例:身高分布</li>
+</ul>
+</li>
+<li>左偏 Moderately Skewed Left<ul>
+<li>資料左偏，舉例:分數</li>
+</ul>
+</li>
+<li>右偏 Moderately Right Skewed <ul>
+<li>資料右偏，舉例:房價</li>
+</ul>
+</li>
+<li>Highly Skewed Right 右邊幾乎只有一點點<ul>
+<li>資料極端左偏，舉例:管理階層薪水</li>
+</ul>
+</li>
+</ul>
+<h3 id="Stem-and-Leaf-Display"><a href="#Stem-and-Leaf-Display" class="headerlink" title="Stem-and-Leaf Display"></a>Stem-and-Leaf Display</h3><p>就長這樣</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/5.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>會有排序與資料分布的型態</li>
+<li>跟直方圖相似，但會呈現資料真正數值</li>
+<li>葉子<ul>
+<li>單位可調整</li>
+<li>通常單位是 1，但可調整</li>
+</ul>
+</li>
+</ul>
+
       
       <!-- reward -->
       
@@ -146,7 +237,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linked-List/" rel="tag">Linked-List</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
 
 
     </footer>
@@ -157,19 +248,10 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/09/25/git/git-error-local-changes-to-the-following-files-would-be-overwritten/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            ERROR! Your local changes to the following files would be overwritten by merge
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/09/20/NTUT_note/statistics-ch2B/" class="article-nav-link">
+      <a href="/2020/09/28/life_experence/Yilan_in_2020summer/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">統計學(一) 筆記 - 第二章B</div>
+        <div class="article-nav-title">與大學好朋友宜蘭三星三天行</div>
       </a>
     
   </nav>

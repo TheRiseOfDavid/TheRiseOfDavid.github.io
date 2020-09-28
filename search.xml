@@ -4476,57 +4476,6 @@
       </tags>
   </entry>
   <entry>
-    <title>統計學(一) 筆記 - 第二章</title>
-    <url>/2020/09/20/NTUT_note/statistics-ch2/</url>
-    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="Chaper-2-A"><a href="#Chaper-2-A" class="headerlink" title="Chaper 2-A"></a>Chaper 2-A</h2><blockquote>
-<p><img src="/images/statistics-ch2/1.PNG" alt=""><br>圖片當中</p>
-</blockquote>
-<ul>
-<li>\( \text{Relative Frequency} = \frac{\text{Frequency}}{\text{total Frequency}} \)</li>
-<li><strong>Relative Frequency 總和一定會是1。</strong></li>
-<li>\( \text{Percent Frequency} = \text{Rekative Frequency} * 100 \)</li>
-</ul>
-<h3 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h3><p>aggregated crosstabulation 已彙整的表<br>simpsons’s Paradox 辛普森悖論<br>aggregated 收集<br>Scatter Diagram and Trendline 散佈圖</p>
-<h3 id="simpsons’s-Paradox-辛普森悖論"><a href="#simpsons’s-Paradox-辛普森悖論" class="headerlink" title="simpsons’s Paradox 辛普森悖論"></a>simpsons’s Paradox 辛普森悖論</h3><p>在分組比較中都佔優勢的一方，在總評(全部一起考量)有時會是劣勢的一方。<br>為了避免此勃論則需要斟酌各分組權重，並乘以一定係數消除分組數據差造成的影響</p>
-<h3 id="Scatter-Diagram-and-Trendline-散佈圖"><a href="#Scatter-Diagram-and-Trendline-散佈圖" class="headerlink" title="Scatter Diagram and Trendline 散佈圖"></a>Scatter Diagram and Trendline 散佈圖</h3><blockquote>
-<p><strong>散佈圖的 x,y 都必須是數值變數</strong><br>假如 x 變動很大但趨勢線卻沒有變動表示 x 與 y 沒有甚麼關係。如下圖：<br><img src="/images/statistics-ch2/2.PNG" alt=""></p>
-</blockquote>
-<h3 id="Side-by-Side-Bar-Chart-長條圖"><a href="#Side-by-Side-Bar-Chart-長條圖" class="headerlink" title="Side-by-Side Bar Chart 長條圖"></a>Side-by-Side Bar Chart 長條圖</h3><p>可同時比較很多 Elements </p>
-<h4 id="Stacked-Bar-Chart-堆疊長條圖"><a href="#Stacked-Bar-Chart-堆疊長條圖" class="headerlink" title="Stacked Bar Chart 堆疊長條圖"></a>Stacked Bar Chart 堆疊長條圖</h4><blockquote>
-<p>將要比較的變數全部堆疊在一起，所以長度都會達到 100%，如下圖：<br>通常是要查看同個 elements 的 variables 誰比較高<br><img src="/images/statistics-ch2/3.PNG" alt=""></p>
-</blockquote>
-<h3 id="Data-Visualization-資料視覺化"><a href="#Data-Visualization-資料視覺化" class="headerlink" title="Data Visualization 資料視覺化"></a>Data Visualization 資料視覺化</h3><ul>
-<li>明確標題</li>
-<li>簡潔表單</li>
-<li>清楚標示 x,y 軸</li>
-<li>顏色要明確，不可過度模糊。假如是黑白報表的話，建議使用符號來表示</li>
-</ul>
-<h3 id="建議圖表"><a href="#建議圖表" class="headerlink" title="建議圖表"></a>建議圖表</h3><h4 id="QEUSTION-想要兩個變數之間比較"><a href="#QEUSTION-想要兩個變數之間比較" class="headerlink" title="QEUSTION: 想要兩個變數之間比較"></a>QEUSTION: 想要兩個變數之間比較</h4><p>Side-by-Side Bar Chart or Stacked Bar Chart </p>
-<h4 id="QEUSTION-想要看兩個變數之間的關係"><a href="#QEUSTION-想要看兩個變數之間的關係" class="headerlink" title="QEUSTION: 想要看兩個變數之間的關係"></a>QEUSTION: 想要看兩個變數之間的關係</h4><h5 id="solution-A-Scatter-Diagram-散佈圖"><a href="#solution-A-Scatter-Diagram-散佈圖" class="headerlink" title="solution A: Scatter Diagram 散佈圖"></a>solution A: Scatter Diagram 散佈圖</h5><p>但請記住，變數只能是數值變數</p>
-<h5 id="solution-B-Trendline-趨勢線"><a href="#solution-B-Trendline-趨勢線" class="headerlink" title="solution B: Trendline 趨勢線"></a>solution B: Trendline 趨勢線</h5><p>來看在散佈圖上面的關聯行如何</p>
-<h3 id="Data-Dashboards-資料儀表板"><a href="#Data-Dashboards-資料儀表板" class="headerlink" title="Data Dashboards 資料儀表板"></a>Data Dashboards 資料儀表板</h3><p>通常查看 KPI(關鍵績效指標)，能讓使用者方便閱讀了解。</p>
-<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><ul>
-<li>盡量讓圖不要下拉或上移，可以完整呈現</li>
-<li>減少不必要的視覺效果</li>
-<li>圖要有明顯邊界<br>如下圖：<br><img src="/images/statistics-ch2/4.PNG" alt=""></li>
-</ul>
-]]></content>
-      <categories>
-        <category>北科上課筆記</category>
-      </categories>
-      <tags>
-        <tag>學習筆記</tag>
-        <tag>北科上課筆記</tag>
-        <tag>統計學筆記</tag>
-        <tag>北科大二上統計學筆記</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UVa245 - Uncompress</title>
     <url>/2020/09/25/UVa/Uva245/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
@@ -4747,6 +4696,170 @@
       <tags>
         <tag>大學Life</tag>
         <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第二章A</title>
+    <url>/2020/09/28/NTUT_note/statistics-ch2A/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="2A-介紹"><a href="#2A-介紹" class="headerlink" title="2A 介紹"></a>2A 介紹</h2><h3 id="類別型變數-Categorical-Data"><a href="#類別型變數-Categorical-Data" class="headerlink" title="類別型變數 Categorical Data"></a>類別型變數 Categorical Data</h3><p>類別型變數可以用符號、名稱來界定不同類別</p>
+<h4 id="可呈現的表"><a href="#可呈現的表" class="headerlink" title="可呈現的表"></a>可呈現的表</h4><ul>
+<li>次數分配</li>
+<li>相對次數分配</li>
+<li>百分比次數分配</li>
+<li>長條圖</li>
+<li>圓餅圖</li>
+</ul>
+<blockquote>
+<p><img src="/images/statistics-ch2B/1.PNG" alt=""></p>
+</blockquote>
+<p>圖片當中</p>
+<ul>
+<li>\( \text{Relative Frequency} = \frac{\text{Frequency}}{\text{total Frequency}} \)</li>
+<li><strong>Relative Frequency 總和一定會是1。</strong></li>
+<li>\( \text{Percent Frequency} = \text{Rekative Frequency} * 100 \)</li>
+</ul>
+<h4 id="Bar-Chart-長條圖"><a href="#Bar-Chart-長條圖" class="headerlink" title="Bar Chart 長條圖"></a>Bar Chart 長條圖</h4><p>他長這個樣子</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/1.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>適合呈現 qualitative data(定值型資料)</li>
+<li>通常 bar(長條) 都會是固定長度</li>
+<li>每條 bar 必須要分開</li>
+</ul>
+<h4 id="Pareto-Chart-柏拉圖"><a href="#Pareto-Chart-柏拉圖" class="headerlink" title="Pareto Chart 柏拉圖"></a>Pareto Chart 柏拉圖</h4><p>一個長條圖配上百分比線，通常用在顯示產品品質管理。</p>
+<h4 id="Pie-Chart-圓餅圖"><a href="#Pie-Chart-圓餅圖" class="headerlink" title="Pie Chart 圓餅圖"></a>Pie Chart 圓餅圖</h4><p>通常元素不可以太多，<strong>絕對</strong>不可以超過 10 個。</p>
+<h3 id="數值型變數-Quantitative-Data"><a href="#數值型變數-Quantitative-Data" class="headerlink" title="數值型變數 Quantitative Data"></a>數值型變數 Quantitative Data</h3><h4 id="可呈現的表-1"><a href="#可呈現的表-1" class="headerlink" title="可呈現的表"></a>可呈現的表</h4><ul>
+<li>次數分配</li>
+<li>相對次數分配</li>
+<li>百分比次數分配</li>
+<li>點圖</li>
+<li>直方圖</li>
+<li>枝葉圖</li>
+</ul>
+<h4 id="Dot-Plot-點圖"><a href="#Dot-Plot-點圖" class="headerlink" title="Dot Plot 點圖"></a>Dot Plot 點圖</h4><p>一個點代表一筆資料，越多點代表越多資料。</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/2.PNG" alt=""></p>
+</blockquote>
+<h3 id="Frequency-Distribution-次數分配"><a href="#Frequency-Distribution-次數分配" class="headerlink" title="Frequency Distribution 次數分配"></a>Frequency Distribution 次數分配</h3><ul>
+<li>決定類別、分類，分類不可以重疊還要包跨全部資料<ul>
+<li>介於 5 到 20 組</li>
+<li>每一組基本上都要有資料，並要看出分布，可能需要進行嘗試沒辦法一次到位。</li>
+</ul>
+</li>
+<li>組距<ul>
+<li>採用同樣寬度</li>
+<li>寬度決定 = \( \frac{\text{最大值} - \text{最小值}}{組數}\)</li>
+</ul>
+</li>
+<li>上下限<ul>
+<li><strong>每一筆資料只能屬於某一組之間</strong></li>
+<li>下限必須要涵蓋資料最小值，上限反之</li>
+<li>通常最小或是最大可以是 *<em>open end *</em><br>open end 舉例：小於 x 值 or 大於 x 值</li>
+</ul>
+</li>
+</ul>
+<h3 id="資料頗析"><a href="#資料頗析" class="headerlink" title="資料頗析"></a>資料頗析</h3><p>我懶得打，直接看圖</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/3.PNG" alt=""></p>
+</blockquote>
+<h3 id="Histogram-直方圖"><a href="#Histogram-直方圖" class="headerlink" title="Histogram 直方圖"></a>Histogram 直方圖</h3><p>由於資料是數值並針對類別型資料，所以他們的 <strong>bar 必須黏在一起</strong></p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/4.PNG" alt=""></p>
+</blockquote>
+<h4 id="Showing-Skewness-偏態"><a href="#Showing-Skewness-偏態" class="headerlink" title="Showing Skewness 偏態"></a>Showing Skewness 偏態</h4><p>通常只資料分布著重在某處。</p>
+<ul>
+<li>對稱 Symmetric<ul>
+<li>資料對稱，舉例:身高分布</li>
+</ul>
+</li>
+<li>左偏 Moderately Skewed Left<ul>
+<li>資料左偏，舉例:分數</li>
+</ul>
+</li>
+<li>右偏 Moderately Right Skewed <ul>
+<li>資料右偏，舉例:房價</li>
+</ul>
+</li>
+<li>Highly Skewed Right 右邊幾乎只有一點點<ul>
+<li>資料極端左偏，舉例:管理階層薪水</li>
+</ul>
+</li>
+</ul>
+<h3 id="Stem-and-Leaf-Display"><a href="#Stem-and-Leaf-Display" class="headerlink" title="Stem-and-Leaf Display"></a>Stem-and-Leaf Display</h3><p>就長這樣</p>
+<blockquote>
+<p><img src="/images/statistics-ch2A/5.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>會有排序與資料分布的型態</li>
+<li>跟直方圖相似，但會呈現資料真正數值</li>
+<li>葉子<ul>
+<li>單位可調整</li>
+<li>通常單位是 1，但可調整</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第二章B</title>
+    <url>/2020/09/20/NTUT_note/statistics-ch2B/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="2B-介紹"><a href="#2B-介紹" class="headerlink" title="2B 介紹"></a>2B 介紹</h2><p>著重在兩個變數關係。</p>
+<h3 id="Crosstabulation-交叉表"><a href="#Crosstabulation-交叉表" class="headerlink" title="Crosstabulation 交叉表"></a>Crosstabulation 交叉表</h3><p>可以用交叉表來看兩個變數的關係。<br>不管是數值型資料或是類別型資料都可以用交叉表來表示。</p>
+<h3 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h3><p>aggregated crosstabulation 已彙整的表<br>simpsons’s Paradox 辛普森悖論<br>aggregated 收集<br>Scatter Diagram and Trendline 散佈圖</p>
+<h3 id="simpsons’s-Paradox-辛普森悖論"><a href="#simpsons’s-Paradox-辛普森悖論" class="headerlink" title="simpsons’s Paradox 辛普森悖論"></a>simpsons’s Paradox 辛普森悖論</h3><p>在分組比較中都佔優勢的一方，在總評(全部一起考量)有時會是劣勢的一方。<br>為了避免此勃論則需要斟酌各分組權重，並乘以一定係數消除分組數據差造成的影響</p>
+<h3 id="Scatter-Diagram-and-Trendline-散佈圖"><a href="#Scatter-Diagram-and-Trendline-散佈圖" class="headerlink" title="Scatter Diagram and Trendline 散佈圖"></a>Scatter Diagram and Trendline 散佈圖</h3><blockquote>
+<p><strong>散佈圖的 x,y 都必須是數值變數</strong><br>假如 x 變動很大但趨勢線卻沒有變動表示 x 與 y 沒有甚麼關係。如下圖：<br><img src="/images/statistics-ch2B/2.PNG" alt=""></p>
+</blockquote>
+<h3 id="Side-by-Side-Bar-Chart-長條圖"><a href="#Side-by-Side-Bar-Chart-長條圖" class="headerlink" title="Side-by-Side Bar Chart 長條圖"></a>Side-by-Side Bar Chart 長條圖</h3><p>可同時比較很多 Elements </p>
+<h4 id="Stacked-Bar-Chart-堆疊長條圖"><a href="#Stacked-Bar-Chart-堆疊長條圖" class="headerlink" title="Stacked Bar Chart 堆疊長條圖"></a>Stacked Bar Chart 堆疊長條圖</h4><blockquote>
+<p>將要比較的變數全部堆疊在一起，所以長度都會達到 100%，如下圖：<br>通常是要查看同個 elements 的 variables 誰比較高</p>
+</blockquote>
+<p><img src="/images/statistics-ch2B/3.PNG" alt=""></p>
+<h3 id="Data-Visualization-資料視覺化"><a href="#Data-Visualization-資料視覺化" class="headerlink" title="Data Visualization 資料視覺化"></a>Data Visualization 資料視覺化</h3><ul>
+<li>明確標題</li>
+<li>簡潔表單</li>
+<li>清楚標示 x,y 軸</li>
+<li>顏色要明確，不可過度模糊。假如是黑白報表的話，建議使用符號來表示</li>
+</ul>
+<h3 id="建議圖表"><a href="#建議圖表" class="headerlink" title="建議圖表"></a>建議圖表</h3><h4 id="QEUSTION-想要兩個變數之間比較"><a href="#QEUSTION-想要兩個變數之間比較" class="headerlink" title="QEUSTION: 想要兩個變數之間比較"></a>QEUSTION: 想要兩個變數之間比較</h4><p>Side-by-Side Bar Chart or Stacked Bar Chart </p>
+<h4 id="QEUSTION-想要看兩個變數之間的關係"><a href="#QEUSTION-想要看兩個變數之間的關係" class="headerlink" title="QEUSTION: 想要看兩個變數之間的關係"></a>QEUSTION: 想要看兩個變數之間的關係</h4><h5 id="solution-A-Scatter-Diagram-散佈圖"><a href="#solution-A-Scatter-Diagram-散佈圖" class="headerlink" title="solution A: Scatter Diagram 散佈圖"></a>solution A: Scatter Diagram 散佈圖</h5><p>但請記住，變數只能是數值變數</p>
+<h5 id="solution-B-Trendline-趨勢線"><a href="#solution-B-Trendline-趨勢線" class="headerlink" title="solution B: Trendline 趨勢線"></a>solution B: Trendline 趨勢線</h5><p>來看在散佈圖上面的關聯行如何</p>
+<h3 id="Data-Dashboards-資料儀表板"><a href="#Data-Dashboards-資料儀表板" class="headerlink" title="Data Dashboards 資料儀表板"></a>Data Dashboards 資料儀表板</h3><p>通常查看 KPI(關鍵績效指標)，能讓使用者方便閱讀了解。</p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><ul>
+<li>盡量讓圖不要下拉或上移，可以完整呈現</li>
+<li>減少不必要的視覺效果</li>
+<li>圖要有明顯邊界<br>如下圖：<br><img src="/images/statistics-ch2B/4.PNG" alt=""></li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
       </tags>
   </entry>
 </search>
