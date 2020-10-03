@@ -4891,6 +4891,7 @@
 <blockquote>
 <p>EXERCISE 2 Run kmp_preprocess() on P = ‘ABABA’ and show the b array !<br>EXERCISE 2 Run kmp_search() with P = ‘ABABA’ and T = ‘ACABAABABDABABA’. Explain how the KMP search looks like?</p>
 </blockquote>
+<p>大衛我自己解這兩題練習的紀錄，不過後來因為有為了要讓自己在更釐清觀念而稍微改一下練習，所以不要認為我的是標準答案，可能只有近似於答案<br><img src="/images/UVa11475/1.jpg" alt=""></p>
 <h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>題目是詢問迴文，那跟 KMP algorithm 有甚麼關係呢？這就是為甚麼題目有給一個善意題型的關係了，由於大部分讀者都會誤判這題為水題，所以才給這個提示以免花太多時間把程式碼寫的雜亂又不會 AC。如果將題目給的字串顛倒做為 pattern 則 KMP 最後的 j 就會是原本的字串已經有的迴文長度，我們只需要補足就好了！</p>
 <p>是不是沒有一個舉例，會讓人很不好懂呢？那我們就來舉例吧！</p>
 <h3 id="SITUATION-題目字串-xyz"><a href="#SITUATION-題目字串-xyz" class="headerlink" title="SITUATION : 題目字串 xyz :"></a>SITUATION : 題目字串 xyz :</h3><blockquote>
@@ -4915,6 +4916,29 @@
         <tag>UVa</tag>
         <tag>程式解題</tag>
         <tag>KMP Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QUESTION! C++11 有沒有語法可以讓字串直接顛倒呢？</title>
+    <url>/2020/10/03/C++/C++11_reverse/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>說明我在寫 <a href="https://theriseofdavid.github.io/2020/10/03/UVa/UVa11475/" target="_blank" rel="noopener">UVa11475</a> 時想要透過語法怎麼讓字串顛倒</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-C-11-有沒有語法可以讓字串直接顛倒呢？"><a href="#QUESTION-C-11-有沒有語法可以讓字串直接顛倒呢？" class="headerlink" title="QUESTION! C++11 有沒有語法可以讓字串直接顛倒呢？"></a>QUESTION! C++11 有沒有語法可以讓字串直接顛倒呢？</h2><p>使用 <code>reverse</code> 即可。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::reverse(<span class="built_in">string</span>.begin() , <span class="built_in">string</span>.end());</span><br><span class="line"><span class="comment">// 不能這樣寫 string = std::reverse(string.begin() , string.end());</span></span><br><span class="line"><span class="comment">// 他本身就會改變了，不需要在前面放 string 多此一舉</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣就不需要自己手寫一個 for 輸出，太感動了 C++11，有這麼方便的函式，嗚嗚。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://shengyu7697.github.io/blog/2020/08/05/Cpp-string-reverse/" target="_blank" rel="noopener">C/C++ 字串反轉 reverse</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有時候語言寫多常常會讓自己搞混很多語法，透過自己的 blog 紀錄這樣真的會讓自己學比較快阿！</p>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
 </search>

@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">2k</span>
+            <span class="post-count">2.1k</span>
         </span>
     </span>
 
@@ -137,6 +137,7 @@ ga('send', 'pageview');
 <blockquote>
 <p>EXERCISE 2 Run kmp_preprocess() on P = ‘ABABA’ and show the b array !<br>EXERCISE 2 Run kmp_search() with P = ‘ABABA’ and T = ‘ACABAABABDABABA’. Explain how the KMP search looks like?</p>
 </blockquote>
+<p>大衛我自己解這兩題練習的紀錄，不過後來因為有為了要讓自己在更釐清觀念而稍微改一下練習，所以不要認為我的是標準答案，可能只有近似於答案<br><img src="/images/UVa11475/1.jpg" alt=""></p>
 <h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>題目是詢問迴文，那跟 KMP algorithm 有甚麼關係呢？這就是為甚麼題目有給一個善意題型的關係了，由於大部分讀者都會誤判這題為水題，所以才給這個提示以免花太多時間把程式碼寫的雜亂又不會 AC。如果將題目給的字串顛倒做為 pattern 則 KMP 最後的 j 就會是原本的字串已經有的迴文長度，我們只需要補足就好了！</p>
 <p>是不是沒有一個舉例，會讓人很不好懂呢？那我們就來舉例吧！</p>
 <h3 id="SITUATION-題目字串-xyz"><a href="#SITUATION-題目字串-xyz" class="headerlink" title="SITUATION : 題目字串 xyz :"></a>SITUATION : 題目字串 xyz :</h3><blockquote>
@@ -186,6 +187,15 @@ ga('send', 'pageview');
   
   
   <nav class="article-nav">
+    
+      <a href="/2020/10/03/C++/C++11_reverse/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            QUESTION! C++11 有沒有語法可以讓字串直接顛倒呢？
+          
+        </div>
+      </a>
     
     
       <a href="/2020/09/28/NTUT_note/statistics-ch2A/" class="article-nav-link">
