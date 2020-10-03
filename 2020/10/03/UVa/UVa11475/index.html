@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa11475 - Extend to Palindrome (KMP algorithm 詳解) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa11475" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa11475 - Extend to Palindrome (KMP algorithm 詳解)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/03/UVa/UVa11475/" class="article-date">
+  <time datetime="2020-10-03T06:06:07.000Z" itemprop="datePublished">2020-10-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">8分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p><strong>給你一字串，請新增字元讓這字串變成迴文，但新增字元數量要最少。</strong><br>迴文：從左邊讀與從右邊讀意思都一樣<br>題目善意提示：這題不要給經驗不足的新手做 ^^</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題是 KMP (Knuth-Morris-Pratt’s) Algorithm 的小變化題，先介紹 KMP algorithm。</p>
+<blockquote>
+<p>專門解決在線性時間中在一段文字 (text) 中找到我們所需要的段落 (pattern)<br>與此類似的演算法: <a href="https://theriseofdavid.github.io/2020/09/18/Codeforces/Codeforces%20126B/" target="_blank" rel="noopener">Z-algorithm</a><br>由於此題是 KMP algorithm 的模板題，只要能夠了解 KMP algorithm 就能解決此問題。<br>這題為教學題，但此問題還有一點點的小設計，需要稍加解釋才能完全理解。</p>
+</blockquote>
+<h2 id="KMP-algorithm-介紹"><a href="#KMP-algorithm-介紹" class="headerlink" title="KMP algorithm 介紹"></a>KMP algorithm 介紹</h2><blockquote>
+<p>在線性時間內找出段落(Pattern) 在文字(text) 中哪裡出現過。<br>對 Pattern 找出<strong>次長相同前綴後綴</strong>，在使用 DP 將時間複雜度壓縮</p>
+</blockquote>
+<h3 id="QUESTION-1-Pattern-and-text-是甚麼意思"><a href="#QUESTION-1-Pattern-and-text-是甚麼意思" class="headerlink" title="QUESTION 1: Pattern and text 是甚麼意思"></a>QUESTION 1: Pattern and text 是甚麼意思</h3><p>如果用平常使用者較為了解的方式說明，就像是你在網頁搜尋(使用 <strong>ctrl + F</strong>) 某個特定文字時，某個特地文字就是 Pattern 而被搜尋的文字則是 text。</p>
+<h3 id="QUESTION-2-此演算法的時間複雜度"><a href="#QUESTION-2-此演算法的時間複雜度" class="headerlink" title="QUESTION 2: 此演算法的時間複雜度"></a>QUESTION 2: 此演算法的時間複雜度</h3><p>複雜度 \(O(\text{text} + \text{pattern})\)</p>
+<h2 id="KMP-algorithm-原理"><a href="#KMP-algorithm-原理" class="headerlink" title="KMP algorithm 原理"></a>KMP algorithm 原理</h2><p>在實現 KMP algorithm 前，必須要先對 Pattern 找出<strong>次長相同前綴</strong>，通常被稱為 KMP_process()，並透過一陣列紀錄，再根據文字去比對，如果在迴圈當下字元比對不正確時則回到 DP 當下 index 的 Value 去比對，確認現在的值是否為也是 Pattern 中的某部分。</p>
+<h2 id="KMP-algorithm-實現與說明"><a href="#KMP-algorithm-實現與說明" class="headerlink" title="KMP algorithm 實現與說明"></a>KMP algorithm 實現與說明</h2><p>由於我認為在程式碼中加上好懂得註解十分好懂，所以我就根據每一行程式碼進行說明，相信會讓讀者更好學會此演算法。<br>如果對下方說明還是不了解，可以點擊此<a href="https://www.youtube.com/watch?v=V5-7GzOfADQ&ab_channel=AbdulBari" target="_blank" rel="noopener">Abdul Bari 所教導的 KMP algorithm </a>觀看影片，他會跟你說嗨喔！也許能夠讓你更了解 KMP algorithm 運作，<del>或許是我解釋不好</del>。</p>
+<p>KMP 演算法主要由 kmp_process 與 kmp_search 這兩個 function 而成，讀者只要能看懂此兩 function 應該就能夠學會 KMP 的 80%。</p>
+<h3 id="kmp-process"><a href="#kmp-process" class="headerlink" title="kmp_process"></a>kmp_process</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span>  strB ;</span><br><span class="line"><span class="keyword">int</span> b[MAXN] ;</span><br><span class="line"><span class="comment">// b[] value 表示 strB當下此字元上次前綴的 index，如果已經沒有前綴則設定 -1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kmp_process</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = strB.length() ,i = <span class="number">0</span> ,  j = <span class="number">-1</span> ;</span><br><span class="line">    <span class="comment">// j = 前綴的長度</span></span><br><span class="line">    <span class="comment">//strB 是 pattern , j = -1 時代表沒有辦法再回推到前一個次長相同前綴</span></span><br><span class="line">    b[<span class="number">0</span>] = <span class="number">-1</span> ;</span><br><span class="line">    <span class="comment">// 由於 strB[0] 絕對沒有前綴所以設定 -1 </span></span><br><span class="line">    <span class="keyword">while</span>(i &lt; n )&#123; <span class="comment">//對從 Pattern 的第 0 個字元到第 i 字元找出次長相同前綴</span></span><br><span class="line">        <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; strB[i] != strB[j]) j = b[j] ;</span><br><span class="line">        <span class="comment">// j &gt;= 0 代表還可以有機會找出 次長相同前綴</span></span><br><span class="line">        <span class="comment">// strB[i] != strB[j] 則代表他們字元不同，於是在這裡把 j 值設為 b[j]</span></span><br><span class="line">        <span class="comment">// 當 j 只要被設定成 -1 就代表完全沒有次長相同前綴</span></span><br><span class="line">        i++ ; j++ ;</span><br><span class="line">        b[i] = j ;</span><br><span class="line">        <span class="comment">// strB[i] 上次前綴的 index 值或是將 j 設定成 0 而不設定成 -1 是因為</span></span><br><span class="line">        <span class="comment">// 他有可能會是 strB[0] 長度只有 1 的前綴</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug 供應測試用</span></span><br><span class="line">    <span class="comment">//    for(int k = 0 ; k &lt;= n ; k++)</span></span><br><span class="line">    <span class="comment">//        cout &lt;&lt; b[k] &lt;&lt; ' ' ;</span></span><br><span class="line">    <span class="comment">//    cout &lt;&lt; '\n' ;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣 kmp_process 就完成了！</p>
+<h3 id="kmp"><a href="#kmp" class="headerlink" title="kmp"></a>kmp</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strA ;</span><br><span class="line"><span class="comment">//strA 是 text</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kmp_search</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = strA.length() , m=strB.length() , i=<span class="number">0</span> , j=<span class="number">0</span>  ;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; n )&#123; <span class="comment">//對從 text 找出搜尋哪裡符合 Pattern </span></span><br><span class="line">        <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; strA[i] != strB[j]) j = b[j] ;</span><br><span class="line">        <span class="comment">// j &gt;= 0  代表還可以有機會是 pattern 的前綴</span></span><br><span class="line">        <span class="comment">// strA[i] != strB[j]  則代表他們字元不同，於是在這裡把 j 改為 b[j]</span></span><br><span class="line">        <span class="comment">// b[j] 說明請看 kmp_process 宣告 b[j] 時的解釋</span></span><br><span class="line">        i++ ; j++ ;</span><br><span class="line">        <span class="keyword">if</span> (j == m) &#123; <span class="comment">// j 已經跟 pattern 的長度相同了</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"P is found at index %d in T\n"</span>, i - j); </span><br><span class="line">            <span class="comment">// 告訴使用者在哪裡找出</span></span><br><span class="line">            j = b[j];</span><br><span class="line">            <span class="comment">// 將 j 設定成此字元上次前綴的 index</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用紙筆去模擬-KMP"><a href="#用紙筆去模擬-KMP" class="headerlink" title="用紙筆去模擬 KMP"></a>用紙筆去模擬 KMP</h3><p>有時候用想或用看的可能不太能夠懂這演算法，那就用寫的吧！這裡有兩題，可以幫助你更好搞懂 KMP，如果你願意用紙筆去模擬。 </p>
+<blockquote>
+<p>EXERCISE 2 Run kmp_preprocess() on P = ‘ABABA’ and show the b array !<br>EXERCISE 2 Run kmp_search() with P = ‘ABABA’ and T = ‘ACABAABABDABABA’. Explain how the KMP search looks like?</p>
+</blockquote>
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>題目是詢問迴文，那跟 KMP algorithm 有甚麼關係呢？這就是為甚麼題目有給一個善意題型的關係了，由於大部分讀者都會誤判這題為水題，所以才給這個提示以免花太多時間把程式碼寫的雜亂又不會 AC。如果將題目給的字串顛倒做為 pattern 則 KMP 最後的 j 就會是原本的字串已經有的迴文長度，我們只需要補足就好了！</p>
+<p>是不是沒有一個舉例，會讓人很不好懂呢？那我們就來舉例吧！</p>
+<h3 id="SITUATION-題目字串-xyz"><a href="#SITUATION-題目字串-xyz" class="headerlink" title="SITUATION : 題目字串 xyz :"></a>SITUATION : 題目字串 xyz :</h3><blockquote>
+<p>正常字串 : xyz<br>顛倒字串 : zyx</p>
+</blockquote>
+<p>他們經過 KMP algorithm 後最後的 j 會是多少？答案是 1，所以我們只要將顛倒字元從 1 開始輸出顛倒字元就會是迴文了！(這裡字串的 index 一開始設定為 0，配合 C++)</p>
+<blockquote>
+<p>正確答案: xyzyx</p>
+</blockquote>
+<h2 id="參考連結："><a href="#參考連結：" class="headerlink" title="參考連結："></a>參考連結：</h2><p>Competitive Programming 3　(book)<br><a href="https://medium.com/nlp-tsupei/kmp%E7%AE%97%E6%B3%95%E8%A9%B3%E8%A7%A3-1b1050a45850" target="_blank" rel="noopener">KMP算法詳解</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實我在學習 KMP 的時候覺得我已經學會 Z-algorithm 拉，幹嘛還要在學其他的？但是我發現到如果只有學會其中一種演算法會使自己的思維能力受限，就像是井底之蛙一樣。那樣不好，所以我再花時間學習 KMP，KMP 我學習的時間也沒有很長大約花了 3 小時的時間，我想應該是<strong>風平</strong>學長介紹的書很好用的關係吧！讓我在學習此演算法時不需要自學，有一本書引導我可以讓我學習的更快！</p>
+<p><strong>謝謝風平學長</strong></p>
+<p>學習演算法的過程中通常都是無聊的，令人想睡的。大部分的人都認為學習演算法不如去學習網頁，因為學習網頁可以很快地得到回饋，不想演算法只能夠得到題目的「AC」罷了。但我不這麼認為，學習演算法可以讓自己獲得很多思維的想法，他們都可以應用在生活上，我不後悔學習演算法，不如說，我很高興可以學到演算法，可以讓自己在面對很多問題時之前過去的自己在學習演算法而擴展的思維可以幫助到自己，擁有比別人更傑出的想法。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，我也花了兩個小時撰寫文章，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> b[MAXN] , p[MAXN] ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kmp_process</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = strB.length() ,i = <span class="number">0</span> ,  j = <span class="number">-1</span> ;</span><br><span class="line">    b[<span class="number">0</span>] = <span class="number">-1</span> ;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; n )&#123;</span><br><span class="line">        <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; strB[i] != strB[j]) j = b[j] ;</span><br><span class="line">        i++ ; j++ ;</span><br><span class="line">        b[i] = j ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line"><span class="comment">//    for(int k = 0 ; k &lt;= n ; k++)</span></span><br><span class="line"><span class="comment">//        cout &lt;&lt; b[k] &lt;&lt; ' ' ;</span></span><br><span class="line"><span class="comment">//    cout &lt;&lt; '\n' ;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kmp</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = strA.length() , m=strB.length() , i=<span class="number">0</span> , j=<span class="number">0</span>  ;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; n )&#123;</span><br><span class="line">        <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; strA[i] != strB[j]) j = b[j] ;</span><br><span class="line">        i++ ; j++ ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; strA)&#123;</span><br><span class="line">        strB = strA;</span><br><span class="line">        reverse(strB.begin() , strB.end());</span><br><span class="line">        kmp_process();</span><br><span class="line">        <span class="keyword">int</span> n = kmp() ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; strA &lt;&lt; strB.substr(n) &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KMP-Algorithm/" rel="tag">KMP Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/09/28/NTUT_note/statistics-ch2A/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">統計學(一) 筆記 - 第二章A</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
