@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa526 - String Distance and Transform Process (Minimum Edit Distance 詳解) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa526" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa526 - String Distance and Transform Process (Minimum Edit Distance 詳解)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/04/UVa/UVa526/" class="article-date">
+  <time datetime="2020-10-04T15:19:12.000Z" itemprop="datePublished">2020-10-04</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">9分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你兩個字串分別是 A,B 你可以用插入、刪除、替換，來將 A 字串轉換成為 B 字串，輸出需要幾次的轉換，也要將步驟輸出。</p>
+<p>這題很毒瘤，A,B 都必須用 <code>getline</code> 實作，字串可以包括空白</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><blockquote>
+<p>這題為教學題，但此問題還有一點點的小設計，需要稍加解釋才能完全理解。<br>這題要用到<strong>最短修改距離 Minimum Edit Distance</strong>，這是一個動態規劃，遞迴式如下。</p>
+</blockquote>
+<p><img src="/images/UVa526/1.svg" alt=""></p>
+<h2 id="Minimum-Edit-Distance-介紹"><a href="#Minimum-Edit-Distance-介紹" class="headerlink" title="Minimum Edit Distance 介紹"></a>Minimum Edit Distance 介紹</h2><blockquote>
+<p>可以透過刪除、插入、替換字元來達到將 A 字串轉換到 B 字串，並且是最少編輯次數。<br>此演算法的時間複雜度 \(O(n^2)\)</p>
+</blockquote>
+<h2 id="最短修改距離-Minimum-Edit-Distance-應用"><a href="#最短修改距離-Minimum-Edit-Distance-應用" class="headerlink" title="最短修改距離 Minimum Edit Distance 應用"></a>最短修改距離 Minimum Edit Distance 應用</h2><ul>
+<li>DNA 分析</li>
+<li>拼寫檢查</li>
+<li>語音辨識</li>
+<li>抄襲偵測</li>
+</ul>
+<h2 id="MED-實現與說明"><a href="#MED-實現與說明" class="headerlink" title="MED 實現與說明"></a>MED 實現與說明</h2><p>由於 MED 此演算法是動態規劃原理的部分我個人認為沒有很難，因此沒有說明原理。<del>其實是作者很早以前就會了所以不想花時間寫XD</del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dis[MAXN][MAXN]; </span><br><span class="line"><span class="comment">//dis[A][B] 指在 strA 長度 0 to A 與 strB 長度 0 to B 的最短修改距離為多少</span></span><br><span class="line"><span class="comment">//這裡假設由 A 轉換 B</span></span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> n , m ;</span><br><span class="line">n=strA.length() ;</span><br><span class="line">m=strB.length() ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">med</span><span class="params">()</span></span>&#123; <span class="comment">//Minimum Edit Distance</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++) dis[i][<span class="number">0</span>] = i ;</span><br><span class="line">    <span class="comment">// 由於 B 是 0 ，所以 A 轉換成 B 時每個字元都要被進行刪除的動作</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;= m ; j++) dis[<span class="number">0</span>][j] = j ;</span><br><span class="line">    <span class="comment">// 由於 A 是 0 ，所以 A 轉換成 B 時每個字元都需要進行插入的動作</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123; <span class="comment">// 對 strA 每個字元掃描</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= m ; j++)&#123; <span class="comment">// 對 strB 每個字元進行掃描</span></span><br><span class="line">            <span class="keyword">if</span>(strA[i<span class="number">-1</span>] == strB[j<span class="number">-1</span>]) dis[i][j] = dis[i<span class="number">-1</span>][j<span class="number">-1</span>] ;</span><br><span class="line">            <span class="comment">// 如果他們字元相同則代表不需要修改，因此修改距離直接延續先前</span></span><br><span class="line">            <span class="keyword">else</span> dis[i][j] = min(dis[i<span class="number">-1</span>][j<span class="number">-1</span>], min(dis[i<span class="number">-1</span>][j] , dis[i][j<span class="number">-1</span>]))+<span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 因為她們字元不相同，所以要詢問 replace , delete , insert 哪一個編輯距離</span></span><br><span class="line">            <span class="comment">// 最小，就選擇他 +1 來成為目前的最少編輯距離</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> dis[n][m] ; <span class="comment">// 這就是最少編輯距離的答案</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="QUESTION-現在的我們知道最少編輯距離的答案，那我們可以回推有哪些字元被編輯嗎？"><a href="#QUESTION-現在的我們知道最少編輯距離的答案，那我們可以回推有哪些字元被編輯嗎？" class="headerlink" title="QUESTION: 現在的我們知道最少編輯距離的答案，那我們可以回推有哪些字元被編輯嗎？"></a>QUESTION: 現在的我們知道最少編輯距離的答案，那我們可以回推有哪些字元被編輯嗎？</h2><p>那當然是可以的阿XD，只是寫起來比較麻煩。通常這種答案會有很多種，依照題目的要求通常只需要你輸出一種方式即可。<del>除非是毒瘤</del></p>
+<h3 id="實現方式如下："><a href="#實現方式如下：" class="headerlink" title="實現方式如下："></a>實現方式如下：</h3><p>由於這回推其實也就只是一個簡單的遞迴你能夠推得出 DP 就可以知道要怎麼回推哪些字元被編輯，於是我就在程式碼上旁寫下說明來幫助讀者閱讀。<del>希望能夠幫助到</del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span> ;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span> i , <span class="keyword">int</span> j )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==<span class="number">0</span> || j==<span class="number">0</span>)&#123;  <span class="comment">//表示 A or B 完全沒有字串</span></span><br><span class="line">        <span class="keyword">while</span>( i &gt; <span class="number">0</span> )&#123; </span><br><span class="line">            <span class="comment">// 由於 B 完全沒有字串，所以需要刪除 A 的所有字串</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Delete "</span> &lt;&lt; i &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>( j &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">// 由於 A 完全沒有字串，所以需要增加 B 的所有字串</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Insert "</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">","</span> &lt;&lt; strB[j<span class="number">-1</span>] &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            j-- ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果字元相等代表這裡沒有增加修改距離</span></span><br><span class="line">    <span class="comment">// 特別注意：不可以使用　dis[i][j] == dis[i-1][j-1]</span></span><br><span class="line">    <span class="comment">// 有可能 dis[i-1][j]+1 = dis[i-1][j-1] 這樣就會導致 strB 的第 j 字元遺失</span></span><br><span class="line">    <span class="comment">// 而讓回推出錯</span></span><br><span class="line">    <span class="keyword">if</span>(strA[i<span class="number">-1</span>] == strB[j<span class="number">-1</span>])</span><br><span class="line">        backtracking(i<span class="number">-1</span>,j<span class="number">-1</span>); <span class="comment">// 往前推</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(dis[i][j] == dis[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>)&#123; <span class="comment">// 這次是使用替換指令</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Replace "</span> &lt;&lt; i &lt;&lt; <span class="string">","</span> &lt;&lt; strB[j<span class="number">-1</span>] &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            backtracking(i<span class="number">-1</span>,j<span class="number">-1</span>); <span class="comment">// 回推替換</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 特別注意這裡要使用 else if ，不可以只有 if，這樣會讓回推變成 BFS 而不是 DFS</span></span><br><span class="line">        <span class="comment">// 答案就會變成輸出所有的替換可能而不是輸出一種「完整」的其中一種回推</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(dis[i][j] == dis[i<span class="number">-1</span>][j]+<span class="number">1</span>)&#123;  <span class="comment">// 這次是使用刪除指令</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Delete "</span> &lt;&lt; i &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            backtracking(i<span class="number">-1</span>,j) ; <span class="comment">// 回推刪除</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(dis[i][j] == dis[i][j<span class="number">-1</span>]+<span class="number">1</span>)&#123; <span class="comment">// 這次是使用插入指令</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Insert "</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">","</span> &lt;&lt; strB[j<span class="number">-1</span>] &lt;&lt;<span class="string">'\n'</span>  ;</span><br><span class="line">            backtracking(i,j<span class="number">-1</span>); <span class="comment">// 回推插入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>甚麼，這題好像沒有甚麼焦點！</p>
+<p>還是有的，這題的輸入不一定要用字串，只要是那一行都可以，所以請記住要用<code>getline</code>，<del>不要像我這個大笨蛋一直用<code>cin &gt;&gt; strA &gt;&gt; strB</code>，然後一直找不出答案，還在想是不是自己 DP 寫不好</del></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.roy4801.tw/2019/06/14/uva/uva526/" target="_blank" rel="noopener">Uva 526 - String Distance and Transform Process</a><br><a href="https://zh.wikipedia.org/wiki/%E8%90%8A%E6%96%87%E6%96%AF%E5%9D%A6%E8%B7%9D%E9%9B%A2" target="_blank" rel="noopener">萊文斯坦距離</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實這演算法在我高中時就有學習過了，但是我高中的時候不懂得整理資料的重要性。讓我在高中學會的很多演算法一經過時間的摧殘就忘記這些演算法是甚麼了，可惡，應該高中就要學會整理資料的能力，這太重要了。</p>
+<p>然後在此奉戒各位女朋友可以教，但是不要讓她影響到你的正業，我常常會因為女朋友而影響正業導致高三下的時候荒廢了我的程式，因為已經知道自己能保送上某間大學而每天跟女朋友打打鬧鬧，到最後跟女朋友分手還不是甚麼都沒有獲得。</p>
+<p>不過如果你能跟她在一起到結婚的話，就當我沒說吧！這也是令我羨慕的結局，我也好想要。</p>
+<p>謝謝新北市教育局能讓我在高三寒假時去板橋高中訓練程式設計，讓我可以增強我的演算法能力，也謝謝板橋高中的蝸牛老師，你的指導能力讓我在學習演算法的路上突飛猛進。老師您真的教得很好，高中沒有你真的沒辦法像現在這樣。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，我也花了兩個小時撰寫文章，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> dis[MAXN][MAXN] , back_table[MAXN][MAXN] ;</span><br><span class="line"><span class="keyword">int</span> cnt , m , n  ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtracking</span><span class="params">(<span class="keyword">int</span> i , <span class="keyword">int</span> j )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==<span class="number">0</span> || j==<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>( i &gt; <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Delete "</span> &lt;&lt; i &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>( j &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Insert "</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">","</span> &lt;&lt; strB[j<span class="number">-1</span>] &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            j-- ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(strA[i<span class="number">-1</span>] == strB[j<span class="number">-1</span>])</span><br><span class="line">        backtracking(i<span class="number">-1</span>,j<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(dis[i][j] == dis[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Replace "</span> &lt;&lt; i &lt;&lt; <span class="string">","</span> &lt;&lt; strB[j<span class="number">-1</span>] &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            backtracking(i<span class="number">-1</span>,j<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(dis[i][j] == dis[i<span class="number">-1</span>][j]+<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Delete "</span> &lt;&lt; i &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            backtracking(i<span class="number">-1</span>,j) ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(dis[i][j] == dis[i][j<span class="number">-1</span>]+<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt++ &lt;&lt; <span class="string">" Insert "</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">","</span> &lt;&lt; strB[j<span class="number">-1</span>] &lt;&lt;<span class="string">'\n'</span>  ;</span><br><span class="line">            backtracking(i,j<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">med</span><span class="params">()</span></span>&#123; <span class="comment">//Minimum Edit Distance</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++) dis[i][<span class="number">0</span>] = i ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;= m ; j++) dis[<span class="number">0</span>][j] = j ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= m ; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(strA[i<span class="number">-1</span>] == strB[j<span class="number">-1</span>]) dis[i][j] = dis[i<span class="number">-1</span>][j<span class="number">-1</span>] ;</span><br><span class="line">            <span class="keyword">else</span> dis[i][j] = min(dis[i<span class="number">-1</span>][j<span class="number">-1</span>], min(dis[i<span class="number">-1</span>][j] , dis[i][j<span class="number">-1</span>]))+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">while</span>(getline(<span class="built_in">cin</span> ,strA) &amp;&amp; getline(<span class="built_in">cin</span> , strB))&#123;</span><br><span class="line">        n=strA.length() ;</span><br><span class="line">        m=strB.length() ;</span><br><span class="line">        cnt = <span class="number">1</span> ;</span><br><span class="line">        med();</span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        flag = <span class="number">1</span> ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; dis[n][m] &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        backtracking(n,m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83/" rel="tag">動態規劃</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E4%BF%AE%E6%94%B9%E8%B7%9D%E9%9B%A2-Minimum-Edit-Distance/" rel="tag">最短修改距離 Minimum Edit Distance</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/10/03/C++/C++11_reverse/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">QUESTION! C++11 有沒有語法可以讓字串直接顛倒呢？</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
