@@ -2061,8 +2061,8 @@
       <tags>
         <tag>UVa</tag>
         <tag>動態規劃</tag>
-        <tag>LCS</tag>
         <tag>程式解題</tag>
+        <tag>最長共同子序列 Longest Common Subsequence</tag>
       </tags>
   </entry>
   <entry>
@@ -3965,8 +3965,13 @@
 <td>\log_2 x</td>
 <td></td>
 </tr>
+<tr>
+<td>在文字上面加一橫線</td>
+<td>\bar{x}</td>
+<td></td>
+</tr>
 </tbody></table>
-<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a></p>
+<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a></p>
 ]]></content>
       <categories>
         <category>blog</category>
@@ -4989,6 +4994,143 @@
         <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>最短修改距離 Minimum Edit Distance</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11151 - Longest Palindrome</title>
+    <url>/2020/10/05/UVa/UVa11151/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一個字串，詢問在這字串中能夠找到的最長迴文長度為多少。<br>迴文：從左邊讀與右邊讀相同</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題可以使用兩種方式解，但我這裡只用其中一種方式解題，原因是解決速度較快，但缺點時間複雜度較高。</p>
+<h3 id="QUESTION-1-哪兩種方式呢"><a href="#QUESTION-1-哪兩種方式呢" class="headerlink" title="QUESTION 1: 哪兩種方式呢"></a>QUESTION 1: 哪兩種方式呢</h3><ul>
+<li><strong>最長共同子序列 Longest Common Subsequence</strong> (LCS)<br>時間複雜度為 \(O(n^2)\)</li>
+<li><strong>馬拉車演算法 Manacher’s Algorithm</strong><br>時間複雜度為 \(O(n)\)</li>
+</ul>
+<blockquote>
+<p>這裡我們使用時間複雜度比較高的演算法，最長共同子序列</p>
+</blockquote>
+<h3 id="QUESTION-2-那為甚麼我們會使用最長共同子序列，時間複雜度比較高呀！"><a href="#QUESTION-2-那為甚麼我們會使用最長共同子序列，時間複雜度比較高呀！" class="headerlink" title="QUESTION 2: 那為甚麼我們會使用最長共同子序列，時間複雜度比較高呀！"></a>QUESTION 2: 那為甚麼我們會使用最長共同子序列，時間複雜度比較高呀！</h3><p>因為這題的字串長度不超過 1000，且題目有說明 \(90 \% \) 的測試資料長度都小於 255。通常時間複雜度 \(O(n^2)\) 只要測試資料大小不大於 \(10^3\) 基本上都可以通過。加上如果只有 LCS 去寫這題目可以讓這題目簡單非常多。</p>
+<p><del>也可以透過題目給的測試資料範圍大小來猜這題的時間複雜度</del></p>
+<h3 id="QUESTION-3-通常-LCS-應該要有兩個字串來找出共同子序列但這題是迴文，哪裡有關係呢？"><a href="#QUESTION-3-通常-LCS-應該要有兩個字串來找出共同子序列但這題是迴文，哪裡有關係呢？" class="headerlink" title="QUESTION 3: 通常 LCS 應該要有兩個字串來找出共同子序列但這題是迴文，哪裡有關係呢？"></a>QUESTION 3: 通常 LCS 應該要有兩個字串來找出共同子序列但這題是迴文，哪裡有關係呢？</h3><p>嘿嘿，這個我其實一開始也想不到但後來我在 google 翻找文章時看到了一個超級優秀的想法！顛覆了我的想像。</p>
+<p>必須要有兩個子串，第一個為題目給的字串，第二為題目反轉字串，並將他們進行 LCS 就可以把找到他們的共同子序列，那也就是迴文啦!</p>
+<blockquote>
+<p>Why?</p>
+</blockquote>
+<p>由於迴文的特性，你如果顛倒反著念也會一樣，剛好符合共同子序列，因為迴文就算顛倒還是一樣呀www。</p>
+<h3 id="EXERCISE-A"><a href="#EXERCISE-A" class="headerlink" title="EXERCISE A:"></a>EXERCISE A:</h3><blockquote>
+<p>求 ADAM 與 MADA 的 LCS</p>
+</blockquote>
+<p>答案是不是會是 3 呢！很神奇吧，國人的演算法思維真的大於大於我，我好爛嗚嗚ಥ⌣ಥ。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/llx523113241/article/details/45536793" target="_blank" rel="noopener">uva 11151 Longest Palindrome （最长公共子序列）</a><br><a href="https://hackmd.io/@sa072686/SJCdfKC0M/https%3A%2F%2Fhackmd.io%2Fs%2FS1jJaysvQ" target="_blank" rel="noopener">APCS - 2018台南一中選修</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實我還沒有學好 Manacher’s Algorithm，有點怠惰阿我！還需要更努力，明明有一個中秋廉價我的努力卻沒有變多有點討厭啊！我需要讓我自己變得能夠專心，有時候我在打 blog 文章時，我都會有種腦袋已經想好要打甚麼，但手指卻沒有跟上QAQ，難道是老了嗎…，不會吧！</p>
+<p>不過打心得的時候是快樂的，因為可以把自己想講的話抒發出來，認識的人不太會看到不會尷尬，也不會被他們覺得虛偽XD，我好希望我能夠把生活中的每件事情都記錄在 blog 上，但感覺還是有點難，有時候遇到一些討厭的事情通常都是會選擇跟朋友分享，有點少打在 Blog 上，我也希望我可以打打我的愛情故事在 Blog 上，但我又很怕之後被朋友們 judge。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1010</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN] = &#123;&#125; ;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> n , m ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    n = strA.length();</span><br><span class="line">    m = strB.length();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++) dp[i][<span class="number">0</span>] = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt;= m ; j++) dp[j][<span class="number">0</span>] = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= m ; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(strA[i<span class="number">-1</span>] == strB[j<span class="number">-1</span>]) dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span> ;</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = max(dp[i<span class="number">-1</span>][j] , dp[i][j<span class="number">-1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n][m] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> t ;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="built_in">cin</span>.ignore();</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        getline(<span class="built_in">cin</span>,strA);</span><br><span class="line">        strB = strA ;</span><br><span class="line">        reverse(strB.begin() , strB.end());</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; lcs() &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>動態規劃</tag>
+        <tag>程式解題</tag>
+        <tag>最長共同子序列 Longest Common Subsequence</tag>
+        <tag>最長迴文子字串 Longest Palindromic Substrings</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第二章A</title>
+    <url>/2020/10/05/NTUT_note/statistics-ch3A/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="3A-介紹"><a href="#3A-介紹" class="headerlink" title="3A 介紹"></a>3A 介紹</h2><p>敘述統計。</p>
+<h3 id="Descriptive-Statistics-Numerical-Measures-數值方式"><a href="#Descriptive-Statistics-Numerical-Measures-數值方式" class="headerlink" title="Descriptive Statistics: Numerical Measures(數值方式)"></a>Descriptive Statistics: Numerical Measures(數值方式)</h3><h4 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h4><p>sample statistics 從資料中找出的某些資料<br>population parameters 母體參數，從母體的資料取得<br>point estimator 點估計量</p>
+<h4 id="Measures-of-Location-位置量數如何"><a href="#Measures-of-Location-位置量數如何" class="headerlink" title="Measures of Location 位置量數如何"></a>Measures of Location 位置量數如何</h4><ul>
+<li><p>mean 平均數<br>  平均數為資料中央量數，如果是樣本平均數則符號為 \(\bar{x}\)，母體平均數用 \(μ\)</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/1.PNG" alt=""></p>
+</blockquote>
+<p>  但如果有極端值時，平均數不適用。</p>
+<ul>
+<li>trimmed mean<br>刪掉極端值的平均數，常用方法，將最小 \(5\% \) 與最大 \(5\% \)去掉後算平均數。</li>
+</ul>
+</li>
+<li><p>median 中位數<br>  如果資料裡有極端值時試用 median，<del>例如白鳥麗次、中川圭一</del>。<br>  如果資料量是偶數就將最中間兩個數字加起來除以二</p>
+</li>
+<li><p>mode 眾數<br>  眾數不一定只有一個，可以有很多的</p>
+</li>
+<li><p>Weighted Mean 加權平均數<br>  根據重要性來加權重，例如根據學分數來判斷權重<br>  加權平均公式</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/2.PNG" alt=""><br><img src="/images/statistics-ch3A/3.PNG" alt=""></p>
+</blockquote>
+</li>
+<li><p>Geometric Mean 幾何平均數<br>算法</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/4.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>通常用在算財務報表成長率</p>
+<p>舉例:</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/5.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li><p>Percentiles 百分位數<br>通常用第 p 的百分位數表示，至少有 p percent 比你差，其他比你好。<br>公式:\(L_{p} = (p/100)(n+1)\)<br>如果出來的數值是有小數點則將左右兩邊數字相減乘以小數位數即可</p>
+</li>
+<li><p>Quartiles 四分位數<br>用百分位數表示就是分成 25% , 50% , 75% 來區分公式一樣用百分位數公式，如果出來的數值有小數點也是如此。</p>
+</li>
+</ul>
+<h3 id="Measures-of-Variability-變異程度"><a href="#Measures-of-Variability-變異程度" class="headerlink" title="Measures of Variability 變異程度"></a>Measures of Variability 變異程度</h3><ul>
+<li><p>Range<br>\( \text{Range} = \text{Largest Value} - \text{Smallest Value} \)<br><strong>對極端值敏感</strong></p>
+</li>
+<li><p>Interquartile Range (四分位距)<br>用 75% 的值與 25% 的值設為範圍</p>
+</li>
+<li><p><em>對極端值不敏感*</em></p>
+</li>
+<li><p>Variance (變異數)<br>數字大代表變異大，數字小代表變異小。公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/6.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>Degrees of Freedom 自由度 縮寫 df<br>如果是等比數列或是等差數列自由度為零。<br>樣本變數  \(n-1\)<br>母體變數  \(n\)<blockquote>
+<p><img src="/images/statistics-ch3A/7.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Standard Deviation 標準差<br>標準差越小離散程度越小，標準差越大離散程度越大<br>把變異數開根號，所以值一定為正</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/8.PNG" alt=""></p>
+</blockquote>
+</li>
+<li><p>Coefficient of Variation (變異系數)<br>標準差相較於平均數差距多大</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/9.PNG" alt=""></p>
+</blockquote>
+</li>
+<li><p>Mean Absolute error 平均絕對誤差 MAE<br>數字越大代表離平均數遠，如果不是就離平均數近。公式如下</p>
+<blockquote>
+<p><img src="/images/statistics-ch3A/11.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="統整練習"><a href="#統整練習" class="headerlink" title="統整練習"></a>統整練習</h4><blockquote>
+<p><img src="/images/statistics-ch3A/10.PNG" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
       </tags>
   </entry>
 </search>
