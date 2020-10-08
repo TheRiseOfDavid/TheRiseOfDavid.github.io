@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa11362 - Phone List (字典樹 詳解) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa11362" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa11362 - Phone List (字典樹 詳解)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/09/UVa/UVa11362/" class="article-date">
+  <time datetime="2020-10-08T16:30:26.000Z" itemprop="datePublished">2020-10-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">6分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一組電話號碼，不超過 10 位數，如果這一組的電話號碼內只要有一個電話號碼是另外一個電話號碼的前綴就輸出 “NO”，否則就輸出 “YES”</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題用　<strong>字典樹 trie</strong> 解決是再好不過的了，我們先來介紹 trie！</p>
+<blockquote>
+<p>是一種有序樹，常用於搜尋提示，最好的比喻就是 google 的搜尋提示。<del>就是你打幾個 key word 上去下面就跑出一堆你不想要的那個</del><br>這題為教學題，但此問題並沒有把 trie 的全部能力都展現出來，若以後我有其他題目可以將 trie 展現，我會再寫一篇做為說明，但此問題還有一點點的小設計，需要稍加解釋才能完全理解。<br>由於是寫給初學者看於是這題不使用任何<strong>指標</strong>來幫助這份程式碼，希望可以讓其他沒學過 C++ 的使用者都能學會。</p>
+</blockquote>
+<h2 id="TRIE-字典樹-原理"><a href="#TRIE-字典樹-原理" class="headerlink" title="TRIE 字典樹 原理"></a>TRIE 字典樹 原理</h2><p>先看看圖片吧！這樣應該會比較有點概念</p>
+<blockquote>
+<p><img src="/images/UVa11362/1.jpg" alt=""></p>
+</blockquote>
+<p>TRIE 本身也是一種樹，可以試著把它當作有規則的樹理解。<del>畢竟他的發音跟 tree 根本沒有不一樣吧！</del><br>字串根據 TRIE 判斷，如果字串中的字元已經在 TRIE 擁有，則就在往 TRIE 的下一層判斷，假如沒有那我們就新增一個節點給予這個字元。</p>
+<p>達到最後一層時則必須要有一個判斷表示這是某個單字的結尾。</p>
+<h3 id="QUESTION-TRIE-的時間複雜度呢？"><a href="#QUESTION-TRIE-的時間複雜度呢？" class="headerlink" title="QUESTION: TRIE 的時間複雜度呢？"></a>QUESTION: TRIE 的時間複雜度呢？</h3><blockquote>
+<p>新增字串的時間複雜度為 \(O(n)\)<br>搜尋的時間複雜度為 \(O(n)\)<br>搜尋關鍵字首的時間複雜度為 \(O(n)\)<br><del>算是還不錯用的資料結構之一，感覺學起來可以在很多地方用到，小弟我菜鳥還沒有實際用過</del></p>
+</blockquote>
+<h2 id="TRIE-字典樹的實現與說明"><a href="#TRIE-字典樹的實現與說明" class="headerlink" title="TRIE 字典樹的實現與說明"></a>TRIE 字典樹的實現與說明</h2><h3 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">bool</span> isWord = <span class="literal">false</span> ; <span class="comment">// 判斷是否為單字結尾</span></span><br><span class="line">    <span class="keyword">int</span> next[alp_MAXN]; <span class="comment">// 到下個單字的索引，假如有 26 英文字母就設定 26</span></span><br><span class="line">    <span class="comment">// alp_MAXN = alphabet MAXN</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span></span>&#123; <span class="comment">//重新設定</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; alp_MAXN ; i++)</span><br><span class="line">            next[i] = <span class="number">-1</span> ; </span><br><span class="line">        isWord = <span class="literal">false</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;trie[arr_MAXN];</span><br></pre></td></tr></table></figure>
+<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insrt</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c , cur = <span class="number">0</span>; <span class="comment">// c=字元的索引 cur = trie 現在這層，可以想像成樹的 root</span></span><br><span class="line">    <span class="comment">// cur =0，表示現在在 trie 的最一開始處</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; strA.length() ; i++)&#123; <span class="comment">//將字串加入 trie</span></span><br><span class="line">        c = strA[i] - <span class="string">'0'</span> ;</span><br><span class="line">        <span class="keyword">if</span>(trie[cur].next[c] == <span class="number">-1</span> )&#123; <span class="comment">//代表節點沒有被新增</span></span><br><span class="line">            trie[cnt].reset(); <span class="comment">//先重新設定節點，以免舊資料也加入</span></span><br><span class="line">            trie[cur].next[c] = cnt ; <span class="comment">//連接到下一層的 node</span></span><br><span class="line">            cur = cnt++ ; <span class="comment">//增加陣列長度</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = trie[cur].next[c]; <span class="comment">//因為已經有節點，可以直接往下層走就好</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    trie[cur].isWord = <span class="literal">true</span> ; <span class="comment">//由於已讀到字尾於是給他是字尾的標記</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="搜尋"><a href="#搜尋" class="headerlink" title="搜尋"></a>搜尋</h3><p>跟插入的算法差不多，只是不需要新增節點的 if，只需要 else 跟最後判斷當已經讀到字尾時有沒有被標記成是字尾。</p>
+<h3 id="關鍵字查詢"><a href="#關鍵字查詢" class="headerlink" title="關鍵字查詢"></a>關鍵字查詢</h3><p>跟搜尋一樣，但只要搜到此字串最底層後就可以 return 了，不需要檢查是否到字尾，如果是在寫題目通常是用 return true or false。</p>
+<h3 id="刪除"><a href="#刪除" class="headerlink" title="刪除"></a>刪除</h3><p>目前還沒有學到，隨後補上。打算要用遞迴嘗試創作看看，畢竟沒有用指標的 trie，在網路上的自學資源還很少見呢！XD</p>
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>由於這題是問「前綴」，且只要一個就好，於是我們就用一個 flag 與一個 if 來進行判斷，只要當現在的電話號碼再依序插入 trie 中如果剛好字尾有被標記就表示已經有一個電話號碼已經是這個電話的前綴了就 <code>return</code>；另一個則是假如這個電話號碼字元已經全部被插入 trie 中表示，這組電話號碼是先前某個電話的前綴，所以也需要 <code>return</code>。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> flag = <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">if</span>(trie[cur].isWord || i == strA.length()<span class="number">-1</span> ) &#123;flag = <span class="number">1</span> ;<span class="keyword">return</span> ;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://epmahfuz.blogspot.com/2016/10/solution-of-uva-11362-phonebook.html" target="_blank" rel="noopener">Solution of UVa 11362-Phone List</a><br><a href="https://www.mdeditor.tw/pl/2iwz/zh-tw" target="_blank" rel="noopener">[翻譯]資料結構——trie樹介紹</a><br><a href="https://zh.wikipedia.org/wiki/Trie" target="_blank" rel="noopener">Trie</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>應該是我這題選得不好，我原本是想要完整地把 trie 都學起來的，結果這題只需要用到 trie 的插入就好，刪除、搜尋都不需要用到，害我的心情很差：(，有種覺得沒有把全部資料都學起來的感覺，以後在挑選題目時需要謹慎挑選，要是挑到這種題目會覺得一個演算法沒有完整學習，有點小難過。</p>
+<p>不過 trie 算是簡單易學的演算法，以自學來說。我就讀的大學演算法資源基本上是零，我都覺得我在這種環境下自學演算法可能也算是個抖 M 了吧XD，希望我在學習的路上能夠填補些自學的資源讓接下來想學習的人不要想我一樣這麼辛苦，我到現在才學有點太慢了呢，等我最近忙完後我再補上刪除的程式碼，補足自己的知識與空白之處。等學習完後看自己有沒有更多心得再補上。<del>希望是有</del></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，我也花了兩個小時撰寫文章，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> alp_MAXN 15</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> arr_MAXN 1000009</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span> , flag = <span class="number">0</span> ;</span><br><span class="line"><span class="built_in">string</span> strA ;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">bool</span> isWord = <span class="literal">false</span> ;</span><br><span class="line">    <span class="keyword">int</span> next[alp_MAXN];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; alp_MAXN ; i++)</span><br><span class="line">            next[i] = <span class="number">-1</span> ;</span><br><span class="line">        isWord = <span class="literal">false</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;trie[arr_MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insrt</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c , cur = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; strA.length() ; i++)&#123;</span><br><span class="line">        c = strA[i] - <span class="string">'0'</span> ;</span><br><span class="line">        <span class="keyword">if</span>(trie[cur].next[c] == <span class="number">-1</span> )&#123;</span><br><span class="line">            trie[cnt].reset();</span><br><span class="line">            trie[cur].next[c] = cnt ;</span><br><span class="line">            cur = cnt++ ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = trie[cur].next[c];</span><br><span class="line">            <span class="keyword">if</span>(trie[cur].isWord || i == strA.length()<span class="number">-1</span> ) &#123;flag = <span class="number">1</span> ;<span class="keyword">return</span> ;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="keyword">break</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    trie[cur].isWord = <span class="literal">true</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    <span class="comment">//freopen("out.txt" , "w" , stdout );</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> t , n ;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        cnt = <span class="number">1</span> ;</span><br><span class="line">        flag = <span class="number">0</span> ;</span><br><span class="line">        trie[<span class="number">0</span>].reset();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; strA ;</span><br><span class="line">            insrt();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (flag? <span class="string">"NO"</span> : <span class="string">"YES"</span>) &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//debug</span></span><br><span class="line"><span class="comment">//        for(int i = 0 ; i &lt; 20 ; i++)&#123;</span></span><br><span class="line"><span class="comment">//            for(int j = 0 ; j &lt; 10 ; j++)</span></span><br><span class="line"><span class="comment">//                cout &lt;&lt; trie[i].next[j] &lt;&lt; ' ' ;</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; trie[i].isWord ;</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; '\n' ;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E5%85%B8%E6%A8%B9-trie/" rel="tag">字典樹 trie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/10/05/NTUT_note/statistics-ch3A/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">統計學(一) 筆記 - 第三章A</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
