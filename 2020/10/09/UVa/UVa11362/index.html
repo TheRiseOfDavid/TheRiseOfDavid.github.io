@@ -116,9 +116,9 @@ ga('send', 'pageview');
 </blockquote>
 <a id="more"></a>
 
-<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題用　<strong>字典樹 trie</strong> 解決是再好不過的了，我們先來介紹 trie！</p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題用 <strong>字典樹 trie</strong> 解決是再好不過的了，我們先來介紹 trie！</p>
 <blockquote>
-<p>是一種有序樹，常用於搜尋提示，最好的比喻就是 google 的搜尋提示。<del>就是你打幾個 key word 上去下面就跑出一堆你不想要的那個</del><br>這題為教學題，但此問題並沒有把 trie 的全部能力都展現出來，若以後我有其他題目可以將 trie 展現，我會再寫一篇做為說明，但此問題還有一點點的小設計，需要稍加解釋才能完全理解。<br>由於是寫給初學者看於是這題不使用任何<strong>指標</strong>來幫助這份程式碼，希望可以讓其他沒學過 C++ 的使用者都能學會。</p>
+<p>trie 是一種有序樹，常用於搜尋提示，最好的比喻就是 google 的搜尋提示。<del>就是你打幾個 key word 上去下面就跑出一堆你不想要的那個</del><br>這題為教學題，但此問題並沒有把 trie 的全部能力都展現出來，若以後我有其他題目可以將 trie 展現，我會再寫一篇做為說明，但此問題還有一點點的小設計，需要稍加解釋才能完全理解。<br>由於是寫給初學者看於是這題不使用任何 <strong>指標 pointer</strong> 來幫助這份程式碼，希望可以讓其他沒學過 C++ 的使用者都能學會。</p>
 </blockquote>
 <h2 id="TRIE-字典樹-原理"><a href="#TRIE-字典樹-原理" class="headerlink" title="TRIE 字典樹 原理"></a>TRIE 字典樹 原理</h2><p>先看看圖片吧！這樣應該會比較有點概念</p>
 <blockquote>
