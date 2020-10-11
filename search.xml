@@ -198,7 +198,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemK Assigning Frequencies</title>
+    <title>ProblemK Assigning Frequencies (Brute force)</title>
     <url>/2020/08/18/ICPC/2017-ICPC-Asia-Taipei-Hualien-Regional-Pk/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一張圖，這圖不會超過 25 個 Node，試問能不能用 3 個顏色塗滿所有點但相鄰的點不能有相同顏色。<br>題目提示: 測資不會超過 85 筆。</p>
@@ -275,7 +275,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemB Binary Tree</title>
+    <title>ProblemB Binary Tree (水題)</title>
     <url>/2020/06/15/ICPC/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pb/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給 ALICE and BOB 一個遊戲，這個遊戲是他們要不斷刪除樹的節點，但有規定，刪除的節點必定是完整二元樹。試問，誰一定必勝？</p>
@@ -334,7 +334,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemD Defining Labels</title>
+    <title>ProblemD Defining Labels (Math)</title>
     <url>/2020/07/03/ICPC/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pd/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你 x 進制 y 值且他是試算表模式，如:A,B,..,Z,AA,AB..，請嘗試將他轉回 10 進制</p>
@@ -365,7 +365,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemD Tapioka</title>
+    <title>ProblemD Tapioka (水題)</title>
     <url>/2020/05/14/ICPC/2019-ICPC-Asia-Taipei-Hsinchu-Regional-Pd/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一行話，請不要輸出 “bubble” 、 “tapioka”<br>格式有特別要求，請注意。</p>
@@ -436,7 +436,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemC Are They All Integers?</title>
+    <title>ProblemC Are They All Integers? (水題)</title>
     <url>/2020/05/14/ICPC/2019-ICPC-Asia-Taipei-Hsinchu-Regional-Pc/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一微陣列數字(a[])，試問此陣列中是否都符合此公式 (a[i]+a[j]) / a[k] % 1 == 0 </p>
@@ -530,7 +530,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemB Bad Treap</title>
+    <title>ProblemB Bad Treap (Math)</title>
     <url>/2020/06/16/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pb/</url>
     <content><![CDATA[<head>
   <script type="text/javascript"
@@ -561,13 +561,14 @@
       </categories>
       <tags>
         <tag>ICPC_2019-2020_North-Western_Russia_Regional_Contest</tag>
+        <tag>math theorm</tag>
         <tag>ICPC</tag>
         <tag>設計解題</tag>
         <tag>程式解題</tag>
       </tags>
   </entry>
   <entry>
-    <title>ProblemA Accurate Movement</title>
+    <title>ProblemA Accurate Movement (Math)</title>
     <url>/2020/05/18/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pa/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有兩個 Box ，這兩個 Box 不可以互相拋棄對方，必須要相互連在一起</p>
@@ -597,7 +598,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemE Equidistant</title>
+    <title>ProblemE Equidistant (DFS)</title>
     <url>/2020/05/20/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pe/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一張地圖，有幾個需要參加 ICPC 的城市，我們需要設計一個程式，尋找一個城市可以讓每個要參加 ICPC 的城市都是花相同的距離到達?</p>
@@ -621,7 +622,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemH High Load Database</title>
+    <title>ProblemH High Load Database (Complex Optimization)</title>
     <url>/2020/05/26/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Ph/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你兩組陣列 (定義為 A , B)，詢問 B 的每一個數字，能將 A 分割最大。<br>補述說明：　可將 A 想像成包裹 B 想像為箱子<br>要將 A 塞到 B 裡面並最佳化利用但必須按照順序，試問需要幾個箱子。</p>
@@ -655,7 +656,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemI Ideal Pyramid</title>
+    <title>ProblemI Ideal Pyramid (Complex Optimization)</title>
     <url>/2020/05/26/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pi/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>我需要一個蓋一個金字塔，中間要有許多柱子。請寫出一個程式告訴此金字塔的中心點與高。</p>
@@ -685,7 +686,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemJ Just the Last Digit</title>
+    <title>ProblemJ Just the Last Digit (Floyd)</title>
     <url>/2020/05/25/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pj/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一張有向圖，有一人遍地此路徑，於是她得出每個點有幾種不一樣的路徑，並繪製地圖<br>你的任務就是將此圖還原成原始地圖，如 a -&gt; b , c -&gt; b </p>
@@ -714,7 +715,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemM Managing Difficulties</title>
+    <title>ProblemM Managing Difficulties (Complex Optimization)</title>
     <url>/2020/05/18/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pm/</url>
     <content><![CDATA[<script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -1663,7 +1664,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10050 - Combination Lock</title>
+    <title>UVa10050 - Combination Lock (水題)</title>
     <url>/2020/03/30/UVa/UVa10050/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>解保險箱鎖盤，透過他獨家的開鎖方式，試問你需要轉幾度，</p>
@@ -1694,7 +1695,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10036 - Divisibility</title>
+    <title>UVa10036 - Divisibility (動態規劃)</title>
     <url>/2020/03/17/UVa/UVa10036/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你 n 個數字 與 x ，在 n 個數字中加上 - or + ， 判斷組合後的總合是否可以被 x 整除?</p>
@@ -1718,7 +1719,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10101 - Bangla Numbers</title>
+    <title>UVa10101 - Bangla Numbers (水題)</title>
     <url>/2020/04/09/UVa/UVa10101/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給一數字，用題目獨家的單位詞做輸出</p>
@@ -1738,7 +1739,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10010 - Where&#39;s Waldorf?</title>
+    <title>UVa10010 - Where&#39;s Waldorf? (動態規劃)</title>
     <url>/2020/03/16/UVa/UVa10010/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你一張圖，再給你x個單字，這些單字必定會在圖中出現，請輸入單字的第一個字母再圖中的哪個位置? ( 如果有重複的，輸出最左上的 )</p>
@@ -1756,11 +1757,14 @@
       <tags>
         <tag>圖論</tag>
         <tag>UVa</tag>
+        <tag>動態規劃</tag>
         <tag>程式解題</tag>
+        <tag>String Processing Problems</tag>
+        <tag>Competitive Programming3</tag>
       </tags>
   </entry>
   <entry>
-    <title>UVa10221 - Satellites</title>
+    <title>UVa10221 - Satellites (math)</title>
     <url>/2020/03/17/UVa/UVa10221/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>如圖，給你圓上兩點夾角，和點圓心的距離<br>求出兩點的弧長與弦長。</p>
@@ -1785,7 +1789,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10530 - Guessing Game</title>
+    <title>UVa10530 - Guessing Game (水題)</title>
     <url>/2020/03/17/UVa/UVa10530/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p><strong>玩猜數字</strong></p>
@@ -1809,7 +1813,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa1056 - Degrees of Separation</title>
+    <title>UVa1056 - Degrees of Separation (Floyd)</title>
     <url>/2020/03/12/UVa/UVa1056/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>有一個大型的人類組織社會，詢問人與人的最大距離為何? 如果沒有的話，輸出 “DISCONNECTED”。</p>
@@ -1830,7 +1834,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10603 - Fill</title>
+    <title>UVa10603 - Fill (Dijkstra)</title>
     <url>/2020/03/17/UVa/UVa10603/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>有 3 個杯子， a , b , c ，以及目標水量 d ， 一開始只有 c 裝滿了水，其他為空，透過倒入杯子&gt;的方式，來讓其他的杯子加滿水，試問能否達到 d ，要是不行，給出最接近數。</p>
@@ -1888,7 +1892,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa11220 - Decoding the message</title>
+    <title>UVa11220 - Decoding the message (水題)</title>
     <url>/2020/03/19/UVa/UVa11220/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>會給很多英文單字，第 x 個的英文單字中找出第 x 的字元，之後再將它印出。</p>
@@ -1937,7 +1941,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa11541 - Decoding</title>
+    <title>UVa11541 - Decoding (水題)</title>
     <url>/2020/03/20/UVa/UVa11541/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>輸入是一串 (英文，數字) * n 的組合</p>
@@ -1958,7 +1962,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa11636 - Hello World!</title>
+    <title>UVa11636 - Hello World! (水題)</title>
     <url>/2020/03/30/UVa/UVa11636/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>一開始給你一段句子，你只能透過 「複製 (copy)」 方式，複製出 x 段句子</p>
@@ -1979,7 +1983,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa11678 - Cards&#39; Exchange</title>
+    <title>UVa11678 - Cards&#39; Exchange (水題)</title>
     <url>/2020/03/20/UVa/UVa11678/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>兩個非常可愛的小女孩，想要玩交換卡片的遊戲 (ﾉ&gt;ω&lt;)ﾉ</p>
@@ -2006,7 +2010,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa11747 - Heavy Cycle Edges</title>
+    <title>UVa11747 - Heavy Cycle Edges (Kruskal)</title>
     <url>/2020/03/20/UVa/UVa11747/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>無向圖，之後生成 Minimum Spanning Tree (最小生成樹)</p>
@@ -2027,7 +2031,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa1207 - AGTC</title>
+    <title>UVa1207 - AGTC (LCS)</title>
     <url>/2020/03/13/UVa/UVa1207/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>有 a , b 兩個字串求他們的 LCS(最長公共子序列) 最短修改數?</p>
@@ -2095,7 +2099,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa12299 - RMQ with Shifts</title>
+    <title>UVa12299 - RMQ with Shifts (Segment Tree)</title>
     <url>/2020/03/23/UVa/UVa12299/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給予一個數組，有兩種操作</p>
@@ -2121,7 +2125,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa12385 - Interesting Sequences</title>
+    <title>UVa12385 - Interesting Sequences (水題)</title>
     <url>/2020/04/28/UVa/UVa12385/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一個數列，請找出 「Interesting Sequences」共有幾組。</p>
@@ -2164,7 +2168,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa1262 - Password</title>
+    <title>UVa1262 - Password (水題)</title>
     <url>/2020/04/13/UVa/UVa1262/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你兩個 5*6 的表格，尋找這兩個表格的第 n 個 column 一樣的字母。<br>輸出第 x 個組合(透過字典序順序排列)</p>
@@ -2189,7 +2193,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa12918 - Lucky Thief</title>
+    <title>UVa12918 - Lucky Thief (水題)</title>
     <url>/2020/06/09/UVa/UVa12918/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>小偷有 a 把 key 與 b 的房子，小偷想要找出 key 於房間的配對，每個 key 只能跟一個房間配對。</p>
@@ -2213,7 +2217,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa1583 - Digit Generator</title>
+    <title>UVa1583 - Digit Generator(Brute force )</title>
     <url>/2020/03/13/UVa/UVa1583/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你一個數字，求出此數的原本 + 每個位數的 sum(總和)，假如有同時兩個數字符合需求時輸出最小值。<br>example: 216<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = (198 + 1 + 9 + 8 )<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = (207 + 2 + 0 + 7 )</p>
@@ -2237,7 +2241,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa1594 - Ducci Sequence</title>
+    <title>UVa1594 - Ducci Sequence (Brute force)</title>
     <url>/2020/03/16/UVa/UVa1594/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你一個隊列，每一次計算後生成新的隊列，隊列規則如下:</p>
@@ -2266,7 +2270,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa255 - Correct Move</title>
+    <title>UVa255 - Correct Move (水題)</title>
     <url>/2020/03/07/UVa/UVa255/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給定 queen 與 king 的位置， queen 下一步移動，判斷狀態和移動的合法性。</p>
@@ -2288,7 +2292,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa294 - Divisors</title>
+    <title>UVa294 - Divisors (math)</title>
     <url>/2020/04/09/UVa/UVa294/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一段數字，求出範圍數字內可以被最多數字整除於 0。(如果有一樣，輸出最小)<br><strong>並透過格式輸出</strong></p>
@@ -2311,7 +2315,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa544 - Heavy Cargo</title>
+    <title>UVa544 - Heavy Cargo (Kruskal)</title>
     <url>/2020/03/08/UVa/UVa544/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一個載重無限的卡車從 a 地到 b 地路徑可乘載的最大重量為何?</p>
@@ -2334,7 +2338,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa846 - Steps</title>
+    <title>UVa846 - Steps (math)</title>
     <url>/2020/03/11/UVa/UVa846/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你兩個數字，每次走的步伐必須為上一步的 +1 , -1 , 0 步伐，試問最短的步伐為?</p>
@@ -2370,7 +2374,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa679 - Dropping Balls</title>
+    <title>UVa679 - Dropping Balls (tree)</title>
     <url>/2020/03/08/UVa/UVa679/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一顆二元樹，每次走訪會經過走訪次數最小的 node直到leaf node<br>試問在經過 x 次走訪後將會走到哪個 leaf node ?</p>
@@ -2454,7 +2458,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Uva10420 - List of Conquests</title>
+    <title>Uva10420 - List of Conquests (水題)</title>
     <url>/2020/03/17/UVa/Uva10420/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你 n 行話，第一個空白前是國家名，之後則全是人名。</p>
@@ -2474,7 +2478,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa929 - Number Maze</title>
+    <title>UVa929 - Number Maze (Dijkstra)</title>
     <url>/2020/03/11/UVa/UVa929/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>從左上角開始走，走至右下角，最短路徑為多少?</p>
@@ -2504,7 +2508,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Uva11456 - Trainsorting</title>
+    <title>Uva11456 - Trainsorting (LIS)</title>
     <url>/2020/03/19/UVa/Uva11456/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>有一台火車， x 輛汽車，目的是要讓火車上載滿最多汽車 (可以選擇不要加入這台汽車)，且要排序。</p>
@@ -2533,7 +2537,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Uva11987 - Almost Union-Find</title>
+    <title>Uva11987 - Almost Union-Find (Disjoint Set)</title>
     <url>/2020/03/23/UVa/Uva11987/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>並查集，有三種操作</p>
@@ -3136,7 +3140,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa12538 - Version Controlled IDE</title>
+    <title>UVa12538 - Version Controlled IDE (Rope)</title>
     <url>/2020/09/01/UVa/UVa12538/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>我們需要版本控制一份文件，類型如下：<br>type 1 ，插入字串在 p 位置<br>type 2 ，移除字串從 p 位置開始移除 c 個字元<br>type 3 ，查詢 v 版本從 p 位置開始輸出 c 個字元<br>每進行一次 type 1 or 2 的動作，就增加一版本。<br>我們順便進行加密混淆的動作，每一次只要 type 3 輸出的字元中擁有 ‘c’，則接下來 除了 type 以外的數字都會因為前面 type 3 輸出字元中有多少的 c，則會增加多少數字。</p>
@@ -3160,10 +3164,11 @@
         <tag>UVa</tag>
         <tag>程式解題</tag>
         <tag>rope</tag>
+        <tag>String Processing Problems</tag>
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1397A - Juggling Letters</title>
+    <title>Codeforces 1397A - Juggling Letters(水題)</title>
     <url>/2020/08/31/Codeforces/Codeforces%201397A/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你 x 組字串，試問能不能把這些字串進行重組後，能夠再重新分成 x 組字串，但字串內容則是全部一樣，可以輸出 YES，不行輸出 NO。</p>
@@ -3187,7 +3192,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1397D - Stoned Game</title>
+    <title>Codeforces 1397D - Stoned Game(Brute force)</title>
     <url>/2020/08/31/Codeforces/Codeforces%201397D/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>T、HL 在玩遊戲。遊戲規則如下，有 x 堆石頭，每堆石頭數量不定，每次都是 T 先從其中一堆拿石頭，H 再拿一顆石頭，每位玩家則不可以拿上位玩家拿石頭的石頭堆。<br><del>這到底是甚麼原始人遊戲 XD，好像舊石器時代的人會玩的遊戲</del></p>
@@ -4204,7 +4209,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1406A - Subset Mex</title>
+    <title>Codeforces 1406A - Subset Mex (水題)</title>
     <url>/2020/09/14/Codeforces/Codeforces%201406A/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>定義 mex: 這集合裡面缺少的最小負整數。<br>如 \(mex(  \{ 1,4,0,2,2,1 \}  ) = 3\)，缺少 \(3\)<br>如 \(mex(\{3,2,3,1,3,0,0\}) = 4\)，缺少 \(4\)</p>
@@ -4246,7 +4251,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1406B - Maximum Product</title>
+    <title>Codeforces 1406B - Maximum Product (Brute force)</title>
     <url>/2020/09/14/Codeforces/Codeforces%201406B/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一組數列裡面含有正、負整數，試問從中找出 5 個數字乘起來數字最大</p>
@@ -4484,7 +4489,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa245 - Uncompress</title>
+    <title>UVa245 - Uncompress (String Process)</title>
     <url>/2020/09/25/UVa/Uva245/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一個經過壓縮的文本，文本中的數字則是代表是前面第幾個單字並輸出，但如果前面那些單字有重複到則只算一次並且是由後往前看的第一次遇到為準，請解壓縮此文本。</p>
@@ -4505,8 +4510,8 @@
       <tags>
         <tag>UVa</tag>
         <tag>程式解題</tag>
-        <tag>字串處理</tag>
-        <tag>Linked-List</tag>
+        <tag>String Processing Problems</tag>
+        <tag>Competitive Programming3</tag>
       </tags>
   </entry>
   <entry>
@@ -5001,7 +5006,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa11151 - Longest Palindrome</title>
+    <title>UVa11151 - Longest Palindrome (LCS)</title>
     <url>/2020/10/05/UVa/UVa11151/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一個字串，詢問在這字串中能夠找到的最長迴文長度為多少。<br>迴文：從左邊讀與右邊讀相同</p>
@@ -5402,6 +5407,48 @@
       <tags>
         <tag>大學Life</tag>
         <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10163 - Storage Keepers (Knapsack Problem)</title>
+    <url>/2020/10/12/UVa/UVa10163/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>有 X 的倉庫需要有人看守，每個人可以看守多個倉庫，但一個倉庫只能被一人看守，看守的規定如下：<br>每位看守人員的能力值與報酬相同<br>如果要讓一看守人員看多個倉庫則其能力值會依照此公式下降 <strong>\( \text{倉庫安全值} = \text{看守人員能力值} / \text{倉庫數量} \)</strong>，有小數點時取整數。<br>目標是要讓我們花費在看守人員的<strong>報酬最低</strong>並讓倉庫的<strong>安全值最高</strong>。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題是變化背包問題，不懂背包問題的觀眾可以看一下此<a href="https://www.csie.ntu.edu.tw/~sprout/algo2019/ppt_pdf/week09/DP-2-inclass.pdf" target="_blank" rel="noopener">連結</a>，不愧是台大的教學材料，質量好到一個極致阿。要是我高中有找點翻到這個資料我一定可以學得更快！，可惜現在的我已經學會了QAQ，想到過去學動態規劃就覺得好辛苦呀..orz。</p>
+<p>不過這題必須要用兩個 DP 來解決…，太棒了！這還是我第一次遇到要用兩個 DP 問題去解決題目，我原本一開始以為用一個背包問題去記錄現在的最大安全就好，但沒有考慮到有可能相同的最大安全可能會有不同種的成本，老了，真的老人。已經不是那個刷題大師了。ಥ⌣ಥ</p>
+<p>這題要用到兩個 DP，分別是尋找<strong>報酬最低</strong>與<strong>安全值最高</strong>。</p>
+<h2 id="背包問題：安全值最高"><a href="#背包問題：安全值最高" class="headerlink" title="背包問題：安全值最高"></a>背包問題：安全值最高</h2><p>這裡其實應該是一個普通的背包問題，但有一個重點要考慮的是公式 \( \text{倉庫安全值} = \text{看守人員能力值} \ \text{倉庫數量} \)，所以這裡需要用到 <code>min(dp[j-k] , val[i] / k )</code>來確保有符合公式的條件。</p>
+<p>而這段 min 程式碼是怎麼意思呢？分析一下吧！</p>
+<ul>
+<li><code>dp[j-k]</code><br>如果前面沒有的倉庫還沒有還沒有被人看守(沒有被看守設值為 0)，於是用這個去判定倉庫有沒有被人看守，如果沒有會因為 min 的關係把現在這個倉庫也先設定成無人看守。</li>
+<li><code>val[i] / k</code><br>配合公式讓一個看守人員去管理多個倉庫</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max_safe</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++) <span class="comment">//init</span></span><br><span class="line">        dp[i] = <span class="number">0</span> ;</span><br><span class="line">    dp[<span class="number">0</span>] = INF ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123; <span class="comment">//worker</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123; <span class="comment">//storage</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= j &amp;&amp; val[i] &gt;= k ; k++)&#123; <span class="comment">//看守幾個倉庫</span></span><br><span class="line">            <span class="comment">// val[i] &gt;= k 不讓公式的值小於 1</span></span><br><span class="line">                dp[j] = max(dp[j] , min(dp[j-k] , val[i] / k ));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="背包問題：01-PROBLEM、報酬最低"><a href="#背包問題：01-PROBLEM、報酬最低" class="headerlink" title="背包問題：01 PROBLEM、報酬最低"></a>背包問題：01 PROBLEM、報酬最低</h2><p>當我們已經有了安全值最高後接下來就要找出報酬最低的數值是多少了，這就是標準的 01 背包問題，我們要怎麼樣選擇工人才能達到報酬率最低。配合上一維陣列壓縮即可。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">min_cost</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cost==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ; <span class="comment">//由於安全性為 0、題目說明工人成本等於安全性，於是安全性為 0 成本也為 0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++) <span class="comment">//init</span></span><br><span class="line">        dp[i] = INF ;</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = min(j , val[i] / cost ) ; k &gt; <span class="number">0</span> ; k--)&#123;</span><br><span class="line">                dp[j] = min(dp[j] , dp[j-k] + val[i]);</span><br><span class="line">                <span class="comment">//debug</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; j &lt;&lt; ' ' &lt;&lt; dp[j] &lt;&lt; ' ' &lt;&lt; dp[j-k] + val[i] &lt;&lt; '\n' ;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/keshuai19940722/article/details/11861717" target="_blank" rel="noopener">uva 10163 - Storage Keepers(01背包）</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題背包問題其實難倒了我了qqq，我一開始寫真的沒有把它想得太深，誤把它當作背包問題的水題帶過(害自己花了 20 min 在思考我怎麼沒有寫對)，下次要能夠多想一點啊！剛好今天也刷了一個經驗值可以讓我在變更優秀些，知道更多知識。也謝謝網路上的大神們分享程式碼讓我可以學習，今天也從<strong>JeraKrs</strong>學習到了一些比我更棒的命名規則，讓我的腦袋瓜有了更多知識，也謝謝學弟(承恩)給我這題讓我磨練，讓我可以把我的動態規劃知識複習一下，已經好久沒有練習動態規劃，都在寫字串演算法，嗚嗚。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，我也花了兩個小時撰寫文章，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 110</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 40</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1 &lt;&lt; 30</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n , m , dp[N] , val[N] , cost ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max_safe</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)</span><br><span class="line">        dp[i] = <span class="number">0</span> ;</span><br><span class="line">    dp[<span class="number">0</span>] = INF ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= j &amp;&amp; val[i] &gt;= k ; k++)&#123;</span><br><span class="line">                dp[j] = max(dp[j] , min(dp[j-k] , val[i] / k ));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">min_cost</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cost==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++)</span><br><span class="line">        dp[i] = INF ;</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = min(j , val[i] / cost ) ; k &gt; <span class="number">0</span> ; k--)&#123;</span><br><span class="line">                dp[j] = min(dp[j] , dp[j-k] + val[i]);</span><br><span class="line">                <span class="comment">//debug</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; j &lt;&lt; ' ' &lt;&lt; dp[j] &lt;&lt; ' ' &lt;&lt; dp[j-k] + val[i] &lt;&lt; '\n' ;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &amp;&amp; (n || m) )&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; val[i] ;</span><br><span class="line">        cost = max_safe() ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; cost &lt;&lt; <span class="string">' '</span> &lt;&lt; min_cost() &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用紙筆去模擬-Knapsack-Problem"><a href="#用紙筆去模擬-Knapsack-Problem" class="headerlink" title="用紙筆去模擬 Knapsack Problem"></a>用紙筆去模擬 Knapsack Problem</h2><p>因為只是自己在思考過程中隨手做的筆記，覺得不是對讀者這麼有幫助，因此放在文章最下面。</p>
+<p>有時候用想或用看的可能不太能夠懂這演算法，那就用寫的吧！這是大衛我自己解這題動態規劃的手稿，如果我文字沒有幫助的話可以考慮看看我的手稿來釐清觀念XD，希望可以幫助到你。</p>
+<p><img src="/images/UVa10163/2.jpg" alt=""><br><img src="/images/UVa10163/1.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>動態問題　</tag>
+        <tag>背包問題 Knapsack Problem</tag>
       </tags>
   </entry>
 </search>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa10163 - Storage Keepers (Knapsack Problem) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa10163" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa10163 - Storage Keepers (Knapsack Problem)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/12/UVa/UVa10163/" class="article-date">
+  <time datetime="2020-10-11T17:08:26.000Z" itemprop="datePublished">2020-10-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">6分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>有 X 的倉庫需要有人看守，每個人可以看守多個倉庫，但一個倉庫只能被一人看守，看守的規定如下：<br>每位看守人員的能力值與報酬相同<br>如果要讓一看守人員看多個倉庫則其能力值會依照此公式下降 <strong>\( \text{倉庫安全值} = \text{看守人員能力值} / \text{倉庫數量} \)</strong>，有小數點時取整數。<br>目標是要讓我們花費在看守人員的<strong>報酬最低</strong>並讓倉庫的<strong>安全值最高</strong>。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題是變化背包問題，不懂背包問題的觀眾可以看一下此<a href="https://www.csie.ntu.edu.tw/~sprout/algo2019/ppt_pdf/week09/DP-2-inclass.pdf" target="_blank" rel="noopener">連結</a>，不愧是台大的教學材料，質量好到一個極致阿。要是我高中有找點翻到這個資料我一定可以學得更快！，可惜現在的我已經學會了QAQ，想到過去學動態規劃就覺得好辛苦呀..orz。</p>
+<p>不過這題必須要用兩個 DP 來解決…，太棒了！這還是我第一次遇到要用兩個 DP 問題去解決題目，我原本一開始以為用一個背包問題去記錄現在的最大安全就好，但沒有考慮到有可能相同的最大安全可能會有不同種的成本，老了，真的老人。已經不是那個刷題大師了。ಥ⌣ಥ</p>
+<p>這題要用到兩個 DP，分別是尋找<strong>報酬最低</strong>與<strong>安全值最高</strong>。</p>
+<h2 id="背包問題：安全值最高"><a href="#背包問題：安全值最高" class="headerlink" title="背包問題：安全值最高"></a>背包問題：安全值最高</h2><p>這裡其實應該是一個普通的背包問題，但有一個重點要考慮的是公式 \( \text{倉庫安全值} = \text{看守人員能力值} \ \text{倉庫數量} \)，所以這裡需要用到 <code>min(dp[j-k] , val[i] / k )</code>來確保有符合公式的條件。</p>
+<p>而這段 min 程式碼是怎麼意思呢？分析一下吧！</p>
+<ul>
+<li><code>dp[j-k]</code><br>如果前面沒有的倉庫還沒有還沒有被人看守(沒有被看守設值為 0)，於是用這個去判定倉庫有沒有被人看守，如果沒有會因為 min 的關係把現在這個倉庫也先設定成無人看守。</li>
+<li><code>val[i] / k</code><br>配合公式讓一個看守人員去管理多個倉庫</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max_safe</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++) <span class="comment">//init</span></span><br><span class="line">        dp[i] = <span class="number">0</span> ;</span><br><span class="line">    dp[<span class="number">0</span>] = INF ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123; <span class="comment">//worker</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123; <span class="comment">//storage</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= j &amp;&amp; val[i] &gt;= k ; k++)&#123; <span class="comment">//看守幾個倉庫</span></span><br><span class="line">            <span class="comment">// val[i] &gt;= k 不讓公式的值小於 1</span></span><br><span class="line">                dp[j] = max(dp[j] , min(dp[j-k] , val[i] / k ));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="背包問題：01-PROBLEM、報酬最低"><a href="#背包問題：01-PROBLEM、報酬最低" class="headerlink" title="背包問題：01 PROBLEM、報酬最低"></a>背包問題：01 PROBLEM、報酬最低</h2><p>當我們已經有了安全值最高後接下來就要找出報酬最低的數值是多少了，這就是標準的 01 背包問題，我們要怎麼樣選擇工人才能達到報酬率最低。配合上一維陣列壓縮即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">min_cost</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cost==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ; <span class="comment">//由於安全性為 0、題目說明工人成本等於安全性，於是安全性為 0 成本也為 0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++) <span class="comment">//init</span></span><br><span class="line">        dp[i] = INF ;</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = min(j , val[i] / cost ) ; k &gt; <span class="number">0</span> ; k--)&#123;</span><br><span class="line">                dp[j] = min(dp[j] , dp[j-k] + val[i]);</span><br><span class="line">                <span class="comment">//debug</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; j &lt;&lt; ' ' &lt;&lt; dp[j] &lt;&lt; ' ' &lt;&lt; dp[j-k] + val[i] &lt;&lt; '\n' ;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/keshuai19940722/article/details/11861717" target="_blank" rel="noopener">uva 10163 - Storage Keepers(01背包）</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題背包問題其實難倒了我了qqq，我一開始寫真的沒有把它想得太深，誤把它當作背包問題的水題帶過(害自己花了 20 min 在思考我怎麼沒有寫對)，下次要能夠多想一點啊！剛好今天也刷了一個經驗值可以讓我在變更優秀些，知道更多知識。也謝謝網路上的大神們分享程式碼讓我可以學習，今天也從<strong>JeraKrs</strong>學習到了一些比我更棒的命名規則，讓我的腦袋瓜有了更多知識，也謝謝學弟(承恩)給我這題讓我磨練，讓我可以把我的動態規劃知識複習一下，已經好久沒有練習動態規劃，都在寫字串演算法，嗚嗚。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，我也花了兩個小時撰寫文章，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 110</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 40</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1 &lt;&lt; 30</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n , m , dp[N] , val[N] , cost ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max_safe</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)</span><br><span class="line">        dp[i] = <span class="number">0</span> ;</span><br><span class="line">    dp[<span class="number">0</span>] = INF ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span> ; k &lt;= j &amp;&amp; val[i] &gt;= k ; k++)&#123;</span><br><span class="line">                dp[j] = max(dp[j] , min(dp[j-k] , val[i] / k ));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">min_cost</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cost==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; i++)</span><br><span class="line">        dp[i] = INF ;</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = n ; j &gt; <span class="number">0</span> ; j--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = min(j , val[i] / cost ) ; k &gt; <span class="number">0</span> ; k--)&#123;</span><br><span class="line">                dp[j] = min(dp[j] , dp[j-k] + val[i]);</span><br><span class="line">                <span class="comment">//debug</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; j &lt;&lt; ' ' &lt;&lt; dp[j] &lt;&lt; ' ' &lt;&lt; dp[j-k] + val[i] &lt;&lt; '\n' ;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &amp;&amp; (n || m) )&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; i++)</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; val[i] ;</span><br><span class="line">        cost = max_safe() ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; cost &lt;&lt; <span class="string">' '</span> &lt;&lt; min_cost() &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用紙筆去模擬-Knapsack-Problem"><a href="#用紙筆去模擬-Knapsack-Problem" class="headerlink" title="用紙筆去模擬 Knapsack Problem"></a>用紙筆去模擬 Knapsack Problem</h2><p>因為只是自己在思考過程中隨手做的筆記，覺得不是對讀者這麼有幫助，因此放在文章最下面。</p>
+<p>有時候用想或用看的可能不太能夠懂這演算法，那就用寫的吧！這是大衛我自己解這題動態規劃的手稿，如果我文字沒有幫助的話可以考慮看看我的手稿來釐清觀念XD，希望可以幫助到你。</p>
+<p><img src="/images/UVa10163/2.jpg" alt=""><br><img src="/images/UVa10163/1.jpg" alt=""></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E5%95%8F%E9%A1%8C/" rel="tag">動態問題　</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E5%95%8F%E9%A1%8C-Knapsack-Problem/" rel="tag">背包問題 Knapsack Problem</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/10/11/life_experence/Dimdimsum20200920/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">NTUT_Kn1ghts 點點心聚餐</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
