@@ -5056,8 +5056,8 @@
 </blockquote>
 <a id="more"></a>
 
-<h2 id="3A-介紹"><a href="#3A-介紹" class="headerlink" title="3A 介紹"></a>3A 介紹</h2><p>敘述統計。</p>
-<h3 id="Descriptive-Statistics-Numerical-Measures-數值方式"><a href="#Descriptive-Statistics-Numerical-Measures-數值方式" class="headerlink" title="Descriptive Statistics: Numerical Measures(數值方式)"></a>Descriptive Statistics: Numerical Measures(數值方式)</h3><h4 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h4><p>sample statistics 從資料中找出的某些資料<br>population parameters 母體參數，從母體的資料取得<br>point estimator 點估計量</p>
+<h2 id="3A-介紹-Descriptive-Statistics-Numerical-Measures-數值方式"><a href="#3A-介紹-Descriptive-Statistics-Numerical-Measures-數值方式" class="headerlink" title="3A 介紹 - Descriptive Statistics: Numerical Measures(數值方式)"></a>3A 介紹 - Descriptive Statistics: Numerical Measures(數值方式)</h2><p>敘述統計。</p>
+<h4 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h4><p>sample statistics 從資料中找出的某些資料<br>population parameters 母體參數，從母體的資料取得<br>point estimator 點估計量</p>
 <h4 id="Measures-of-Location-位置量數如何"><a href="#Measures-of-Location-位置量數如何" class="headerlink" title="Measures of Location 位置量數如何"></a>Measures of Location 位置量數如何</h4><ul>
 <li><p>mean 平均數<br>  平均數為資料中央量數，如果是樣本平均數則符號為 \(\bar{x}\)，母體平均數用 \(μ\)</p>
 <blockquote>
@@ -5449,6 +5449,97 @@
         <tag>UVa</tag>
         <tag>動態問題　</tag>
         <tag>背包問題 Knapsack Problem</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第三章B</title>
+    <url>/2020/10/30/NTUT_note/statistcs-ch3B/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="3B-介紹-Descriptive-Statistics-Numerical-Measures-數值方式"><a href="#3B-介紹-Descriptive-Statistics-Numerical-Measures-數值方式" class="headerlink" title="3B 介紹 - Descriptive Statistics: Numerical Measures(數值方式)"></a>3B 介紹 - Descriptive Statistics: Numerical Measures(數值方式)</h2><p>敘述統計,too。</p>
+<h3 id="Measures-of-Distribution-Shape-分配形狀度量"><a href="#Measures-of-Distribution-Shape-分配形狀度量" class="headerlink" title="Measures of Distribution Shape 分配形狀度量"></a>Measures of Distribution Shape 分配形狀度量</h3><h4 id="Skewness-偏態"><a href="#Skewness-偏態" class="headerlink" title="Skewness 偏態"></a>Skewness 偏態</h4><p>公式如下:</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/1.PNG" alt=""></p>
+</blockquote>
+<p>如果圖片剛好是具有左右對稱性則 \(Skewness = 0 \)，往右偏則 \(Skewness &gt; 0 \) ，往左偏則是 \(Skewness &lt; 0 \)，負數表如下圖：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/2.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>Highly Skewed Right<br>右偏 &gt; 1，通常平均數會比中位數來的更高。</li>
+<li>關於 Skewness 的平均數、中位數的比較如下：<blockquote>
+<p><img src="/images/statistics-ch3B/3.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h5 id="QUESTION-左偏的意思是甚麼？"><a href="#QUESTION-左偏的意思是甚麼？" class="headerlink" title="QUESTION: 左偏的意思是甚麼？"></a>QUESTION: 左偏的意思是甚麼？</h5><p>就是左邊的資料比較少，重心在右邊則叫左偏。</p>
+<h4 id="Z-Scores-Z-分數"><a href="#Z-Scores-Z-分數" class="headerlink" title="Z-Scores Z 分數"></a>Z-Scores Z 分數</h4><p>某一數值離母體平均值差幾個標準差，標準差公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/4.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>Z-Score &gt; 0 表示數值比平均數大，Z-Score 則代表離幾個標準差遠</li>
+<li>Z-Score &lt;&gt; 0 表示數值比平均數小，Z-Score 則代表離幾個標準差遠</li>
+</ul>
+<h4 id="Chebyshev’s-Theorem-柴比雪夫定理"><a href="#Chebyshev’s-Theorem-柴比雪夫定理" class="headerlink" title="Chebyshev’s Theorem 柴比雪夫定理"></a>Chebyshev’s Theorem 柴比雪夫定理</h4><p>用於知道資料分布位置，<strong>用心看圖片裡面文字XD</strong>。</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/5.PNG" alt=""></p>
+</blockquote>
+<h5 id="Chebyshev’s-Theorem-舉例"><a href="#Chebyshev’s-Theorem-舉例" class="headerlink" title="Chebyshev’s Theorem 舉例"></a>Chebyshev’s Theorem 舉例</h5><blockquote>
+<p><img src="/images/statistics-ch3B/6.PNG" alt=""></p>
+</blockquote>
+<p>可以得知 Chebyshev’s Theorem 預估有 509 ~ 673 裡面有百分之 56% 的資料，但事實上有 86% 的資料在 509 ~ 673 之間，Chebyshev’s Theorem 屬於比較保守的知道資料分布位置。</p>
+<h4 id="Empirical-Rule-經驗法則"><a href="#Empirical-Rule-經驗法則" class="headerlink" title="Empirical Rule 經驗法則"></a>Empirical Rule 經驗法則</h4><p>當資料大約是鐘型分布時可以用 Empirical Rule 來查看有有多少資料分布在某個特定的標準差裡面，此原理是用常態分配推算出。</p>
+<p>看圖說故事拉XD</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/7.PNG" alt=""></p>
+</blockquote>
+<h4 id="Detecting-Outliers-離群值"><a href="#Detecting-Outliers-離群值" class="headerlink" title="Detecting Outliers 離群值"></a>Detecting Outliers 離群值</h4><p>找出極端數值使用離群值，也可用於找出資料錯誤，看圖說明：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/8.PNG" alt=""></p>
+</blockquote>
+<h4 id="Five-Number-Summary-and-Box-Plox-五數彙整-和-箱型圖"><a href="#Five-Number-Summary-and-Box-Plox-五數彙整-和-箱型圖" class="headerlink" title="Five-Number Summary and Box Plox 五數彙整 和 箱型圖"></a>Five-Number Summary and Box Plox 五數彙整 和 箱型圖</h4><h5 id="QUESTION-Five-Number-Summary-哪五數"><a href="#QUESTION-Five-Number-Summary-哪五數" class="headerlink" title="QUESTION: Five-Number Summary 哪五數?"></a>QUESTION: Five-Number Summary 哪五數?</h5><ul>
+<li>Smallest Value 最小值</li>
+<li>First Quartile 第一分位(25%)</li>
+<li>Median 中位數</li>
+<li>Thrid Quartile 第三分位(75%)</li>
+<li>Larget Value 最大值</li>
+</ul>
+<h5 id="Box-Plox-箱型圖"><a href="#Box-Plox-箱型圖" class="headerlink" title="Box Plox 箱型圖"></a>Box Plox 箱型圖</h5><p>基礎是 Five-Number Summary，也可看出離群值的圖。<br>箱型圖怎麼畫，在這裡！</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/9.PNG" alt=""></p>
+</blockquote>
+<h3 id="Measures-of-Association-Between-Two-Variables-兩個變數的關係"><a href="#Measures-of-Association-Between-Two-Variables-兩個變數的關係" class="headerlink" title="Measures of Association Between Two Variables 兩個變數的關係"></a>Measures of Association Between Two Variables 兩個變數的關係</h3><p>把散佈圖切成4塊，如果散佈圖數值集中在一、三象限代表有線性關係，二、四象限也是，如果數值散步則代表沒有線性關系。</p>
+<h3 id="Covariance-共變異數"><a href="#Covariance-共變異數" class="headerlink" title="Covariance 共變異數"></a>Covariance 共變異數</h3><p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/10.PNG" alt=""></p>
+</blockquote>
+<p>舉例如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/11.PNG" alt=""></p>
+</blockquote>
+<h3 id="Correlation-Coefficient-相關係數"><a href="#Correlation-Coefficient-相關係數" class="headerlink" title="Correlation Coefficient 相關係數"></a>Correlation Coefficient 相關係數</h3><p>只能說兩變數有相關性，不可以說哪個變數影響誰。<br>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/12.PNG" alt=""></p>
+</blockquote>
+<p>Correlation Coefficient 介於 1 與 -1 之間，越接近 -1 代表有很強烈的負相關、接近 1 代表有強烈的正相關，如果是 0 代表沒關係，<del>與我無關</del>。</p>
+<p>舉例：</p>
+<blockquote>
+<p><img src="/images/statistics-ch3B/13.PNG" alt=""><br><img src="/images/statistics-ch3B/14.PNG" alt=""></p>
+</blockquote>
+<h2 id="Data-Dashboards-資料儀表板"><a href="#Data-Dashboards-資料儀表板" class="headerlink" title="Data Dashboards 資料儀表板"></a>Data Dashboards 資料儀表板</h2><p>把圖表或是數值分析放在同一塊螢幕上。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
       </tags>
   </entry>
 </search>
