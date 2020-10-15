@@ -5482,7 +5482,7 @@
 </blockquote>
 <ul>
 <li>Z-Score &gt; 0 表示數值比平均數大，Z-Score 則代表離幾個標準差遠</li>
-<li>Z-Score &lt;&gt; 0 表示數值比平均數小，Z-Score 則代表離幾個標準差遠</li>
+<li>Z-Score &lt; 0 表示數值比平均數小，Z-Score 則代表離幾個標準差遠</li>
 </ul>
 <h4 id="Chebyshev’s-Theorem-柴比雪夫定理"><a href="#Chebyshev’s-Theorem-柴比雪夫定理" class="headerlink" title="Chebyshev’s Theorem 柴比雪夫定理"></a>Chebyshev’s Theorem 柴比雪夫定理</h4><p>用於知道資料分布位置，<strong>用心看圖片裡面文字XD</strong>。</p>
 <blockquote>
