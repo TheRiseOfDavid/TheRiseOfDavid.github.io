@@ -267,11 +267,11 @@
 <h2 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h2><p>2020-05-18 14:30:21 - 完成 gauss 套件、 高斯消元法<br>2020-05-30 20:34:28 - 完成 seidel_method<br>2020-06-08 15:58:42 - 完成 seidel_method 優化<br>2020-07-15 00:23:42 - 將 Successive Over Relaxation 的 omega 鎖定為 1.1</p>
 ]]></content>
       <categories>
-        <category>C#</category>
+        <category>C_sharp</category>
       </categories>
       <tags>
-        <tag>C#</tag>
         <tag>套件說明</tag>
+        <tag>C_sharp</tag>
       </tags>
   </entry>
   <entry>
@@ -327,10 +327,11 @@
 <h3 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h3><p>2020-06-22 14:45:24 - 錯誤資訊修改</p>
 ]]></content>
       <categories>
-        <category>C#</category>
+        <category>C_sharp</category>
       </categories>
       <tags>
-        <tag>C#</tag>
+        <tag>套件說明</tag>
+        <tag>C_sharp</tag>
       </tags>
   </entry>
   <entry>
@@ -3977,8 +3978,18 @@
 <td>\bar{x}</td>
 <td></td>
 </tr>
+<tr>
+<td>Union(聯集)</td>
+<td>\cup</td>
+<td></td>
+</tr>
+<tr>
+<td>Intersection(交集)</td>
+<td>\cap</td>
+<td></td>
+</tr>
 </tbody></table>
-<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a></p>
+<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a></p>
 ]]></content>
       <categories>
         <category>blog</category>
@@ -4958,11 +4969,11 @@
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有時候語言寫多常常會讓自己搞混很多語法，透過自己的 blog 紀錄這樣真的會讓自己學比較快阿！</p>
 ]]></content>
       <categories>
-        <category>C++</category>
+        <category>Cpp</category>
       </categories>
       <tags>
         <tag>學習筆記</tag>
-        <tag>C++</tag>
+        <tag>Cpp</tag>
       </tags>
   </entry>
   <entry>
@@ -5806,6 +5817,61 @@
         <tag>math theorm</tag>
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第四章</title>
+    <url>/2020/10/27/NTUT_note/statistcs-ch4A/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="4A-介紹-Introduction-to-Probability-機率導論"><a href="#4A-介紹-Introduction-to-Probability-機率導論" class="headerlink" title="4A 介紹 - Introduction to Probability(機率導論)"></a>4A 介紹 - Introduction to Probability(機率導論)</h2><p>一共介紹</p>
+<ul>
+<li>Random Experiments(隨機時間)、Counting Rules(技術法則)、Assigning Probabilities(指派機率)</li>
+<li>Event and Their Probability(事件與事件機率)</li>
+<li>Bayes’ Theorem </li>
+<li>Conditional Probability(條件機率)</li>
+</ul>
+<h3 id="Probability-機率值"><a href="#Probability-機率值" class="headerlink" title="Probability 機率值"></a>Probability 機率值</h3><ul>
+<li>當機率越接近 \(1\) 表示發生越高，接近\(0\) 則代表發生機率越低</li>
+</ul>
+<h3 id="Statistcal-Experiments-統計實驗"><a href="#Statistcal-Experiments-統計實驗" class="headerlink" title="Statistcal Experiments(統計實驗)"></a>Statistcal Experiments(統計實驗)</h3><p>我們知道他的結果發生可能，但我們沒辦法知道下次的結果是甚麼。</p>
+<ul>
+<li>Random Experiment(隨機實驗)<br>可以清楚知道他的實驗結果可能</li>
+<li>Sample Space(樣本空間)<br>此實驗所有可能性結果的集合</li>
+<li>Sample Point(樣本點)</li>
+<li><em>這一次*</em>實驗發生的結果</li>
+</ul>
+<h3 id="Counting-Rule-for-Multiple-Step-Experiments-多重步驟實驗"><a href="#Counting-Rule-for-Multiple-Step-Experiments-多重步驟實驗" class="headerlink" title="Counting Rule for Multiple-Step Experiments(多重步驟實驗)"></a>Counting Rule for Multiple-Step Experiments(多重步驟實驗)</h3><p>簡單說就是用 \(C_{n}^{m}\) or \(P_{n}^{m} \) 的應用。</p>
+<h3 id="Assigning-Probabilities-指派結果"><a href="#Assigning-Probabilities-指派結果" class="headerlink" title="Assigning Probabilities(指派結果)"></a>Assigning Probabilities(指派結果)</h3><ul>
+<li>實驗結果機率必須介在\(0~1\)之間，\(E_{i}\)為第幾次的結果。</li>
+<li>假如有 n 種不同的實驗結果，加總起來必等於 \(1\)</li>
+</ul>
+<h4 id="Classical-Method-古典法"><a href="#Classical-Method-古典法" class="headerlink" title="Classical Method(古典法)"></a>Classical Method(古典法)</h4><p>每一個實驗結果發生可能性都相同時使用，每一個 sample point 機率都是 \(\frac{1}{n}\)。</p>
+<h4 id="Relative-Frequency-Method-相對次數法"><a href="#Relative-Frequency-Method-相對次數法" class="headerlink" title="Relative Frequency Method(相對次數法)"></a>Relative Frequency Method(相對次數法)</h4><p>根據實驗結果的歷史資料來決定機率多少，設實驗總次數為 n，x 實驗結果為 y，則機率是\(\frac{y}{n}\。</p>
+<h4 id="Subjective-Method-主觀法"><a href="#Subjective-Method-主觀法" class="headerlink" title="Subjective Method(主觀法)"></a>Subjective Method(主觀法)</h4><p>用主觀判斷、經驗來判斷機率。<br><strong>有資料一定要盡量引用資料</strong></p>
+<h3 id="Event-and-Their-Probability-事件與事件機率"><a href="#Event-and-Their-Probability-事件與事件機率" class="headerlink" title="Event and Their Probability(事件與事件機率)"></a>Event and Their Probability(事件與事件機率)</h3><p>在實驗裡面找出所有樣本點並對所有的樣本點指出機率，就可以找出此實驗的機率。</p>
+<h4 id="Some-Relationships-of-Probability"><a href="#Some-Relationships-of-Probability" class="headerlink" title="Some Relationships of Probability"></a>Some Relationships of Probability</h4><ul>
+<li>\(A^c\) Complement(餘集)</li>
+<li>\(A \cup B \) Union(聯集)</li>
+<li>Mutually Exclusive Event(互斥)，即 \(P(A \cup B) = 0 \)</li>
+</ul>
+<h3 id="Conditional-Probability-條件機率"><a href="#Conditional-Probability-條件機率" class="headerlink" title="Conditional Probability(條件機率)"></a>Conditional Probability(條件機率)</h3><p>在 B 已發生的情況中 A 發生的情況機率是多少，數學符號則是用 \(P(A|B) \)，公式則是 <br>(P(A|B) = \frac{P(A \cap B)}{P(B)}\)</p>
+<ul>
+<li>Multiplication Law(乘法律)<br>\(P(A \cup B) = P(B)P(A|B) \) or \(P(A \cup B) = P(A)P(B|A) \)</li>
+</ul>
+<p>目前看到 CH4-6</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
       </tags>
   </entry>
 </search>
