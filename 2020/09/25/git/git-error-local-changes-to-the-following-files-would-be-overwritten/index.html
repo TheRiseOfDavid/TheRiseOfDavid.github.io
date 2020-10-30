@@ -112,11 +112,11 @@ ga('send', 'pageview');
 
       
       <h2 id="文章大意："><a href="#文章大意：" class="headerlink" title="文章大意："></a>文章大意：</h2><blockquote>
-<p>如果本地已經有修改資料，但遠端也同時也有修改過這份資料，我這邊要 <code>git push</code> 則會遇到此問題的解決方式。</p>
+<p>如果本地已經有修改資料，但遠端也同時也有修改過這份資料，我這邊要 <code>git pull</code> 則會遇到此問題的解決方式。</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge"><a href="#ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge" class="headerlink" title="ERROR! Your local changes to the following files would be overwritten by merge"></a>ERROR! Your local changes to the following files would be overwritten by merge</h2><p>在 <code>git push</code> 時遇到一個 ERROR 關於上方標題所述，要怎麼解決？</p>
+<h2 id="ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge"><a href="#ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge" class="headerlink" title="ERROR! Your local changes to the following files would be overwritten by merge"></a>ERROR! Your local changes to the following files would be overwritten by merge</h2><p>在 <code>git pull</code> 時遇到一個 ERROR 關於上方標題所述，要怎麼解決？</p>
 <h3 id="situlation-A-放棄本地修改程式碼直接將伺服器程式碼抓下來"><a href="#situlation-A-放棄本地修改程式碼直接將伺服器程式碼抓下來" class="headerlink" title="situlation A - 放棄本地修改程式碼直接將伺服器程式碼抓下來:"></a>situlation A - 放棄本地修改程式碼直接將伺服器程式碼抓下來:</h3><p>那我們則是輸入指令直接退回到伺服器的版本，之後再重新 pull。我個人猜測當我們在修改的時候就已經脫離了伺服器的版本，git 會視為我們已經修改可能還會想要 <code>git push</code>，所以才不准我們 <code>git pull</code> 吧！</p>
 <p>以下是所需要用到的指令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard</span><br><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line"># 其中 origin master 是 git 的分支</span><br></pre></td></tr></table></figure>

@@ -4540,11 +4540,11 @@
     <title>ERROR! Your local changes to the following files would be overwritten by merge</title>
     <url>/2020/09/25/git/git-error-local-changes-to-the-following-files-would-be-overwritten/</url>
     <content><![CDATA[<h2 id="文章大意："><a href="#文章大意：" class="headerlink" title="文章大意："></a>文章大意：</h2><blockquote>
-<p>如果本地已經有修改資料，但遠端也同時也有修改過這份資料，我這邊要 <code>git push</code> 則會遇到此問題的解決方式。</p>
+<p>如果本地已經有修改資料，但遠端也同時也有修改過這份資料，我這邊要 <code>git pull</code> 則會遇到此問題的解決方式。</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge"><a href="#ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge" class="headerlink" title="ERROR! Your local changes to the following files would be overwritten by merge"></a>ERROR! Your local changes to the following files would be overwritten by merge</h2><p>在 <code>git push</code> 時遇到一個 ERROR 關於上方標題所述，要怎麼解決？</p>
+<h2 id="ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge"><a href="#ERROR-Your-local-changes-to-the-following-files-would-be-overwritten-by-merge" class="headerlink" title="ERROR! Your local changes to the following files would be overwritten by merge"></a>ERROR! Your local changes to the following files would be overwritten by merge</h2><p>在 <code>git pull</code> 時遇到一個 ERROR 關於上方標題所述，要怎麼解決？</p>
 <h3 id="situlation-A-放棄本地修改程式碼直接將伺服器程式碼抓下來"><a href="#situlation-A-放棄本地修改程式碼直接將伺服器程式碼抓下來" class="headerlink" title="situlation A - 放棄本地修改程式碼直接將伺服器程式碼抓下來:"></a>situlation A - 放棄本地修改程式碼直接將伺服器程式碼抓下來:</h3><p>那我們則是輸入指令直接退回到伺服器的版本，之後再重新 pull。我個人猜測當我們在修改的時候就已經脫離了伺服器的版本，git 會視為我們已經修改可能還會想要 <code>git push</code>，所以才不准我們 <code>git pull</code> 吧！</p>
 <p>以下是所需要用到的指令</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git reset --hard</span><br><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line"># 其中 origin master 是 git 的分支</span><br></pre></td></tr></table></figure>
@@ -5975,6 +5975,30 @@
         <tag>大學Life</tag>
         <tag>產學合作</tag>
         <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QUESTION! 如何回到之前的 commit 版本呢？</title>
+    <url>/2020/10/31/git/git-reset-to-commit/</url>
+    <content><![CDATA[<h2 id="文章大意："><a href="#文章大意：" class="headerlink" title="文章大意："></a>文章大意：</h2><blockquote>
+<p>如果發現最後一次的 commit 並不是最好的版本，想要回去之前的版本要如何做比較好？</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="QUESTION-如何回到之前的-commit-版本呢？"><a href="#QUESTION-如何回到之前的-commit-版本呢？" class="headerlink" title="QUESTION! 如何回到之前的 commit 版本呢？"></a>QUESTION! 如何回到之前的 commit 版本呢？</h2><p>先用 <code>git log --oneline</code> 在找出自己想要復原的版本輸入 <code>git reset --soft XXXXXX</code> 就可以成功復原了，其中<code>XXXXXX</code> 是 <code>git log --oneline</code> 所出來前面的數字則是我們想要復原哪個版本的要求之一。</p>
+<p>這裡是應該指令的集中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log --oneline</span><br><span class="line">git reset --soft XXXXXX</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.poychang.net/git-how-to-remove-file-and-commit-from-history/" target="_blank" rel="noopener">移除 Git 歷史紀錄</a><br><a href="https://gitbook.tw/chapters/branch/how-git-know-what-current-branch-is.html" target="_blank" rel="noopener">【冷知識】Git 怎麼知道現在是在哪一個分支？</a></p>
+<h2 id="心得："><a href="#心得：" class="headerlink" title="心得："></a>心得：</h2><p>git 真的好好用XD，但我是自學的基礎不穩，很多東西都是需要用到才會學，基礎不穩阿，要好好多讓自己嘗試找到缺失之處，然後補足。才可以讓自己獨當一面！</p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>git</tag>
       </tags>
   </entry>
 </search>
