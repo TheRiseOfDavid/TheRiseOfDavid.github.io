@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">2.7k</span>
+            <span class="post-count">2.8k</span>
         </span>
     </span>
 
@@ -141,12 +141,12 @@ ga('send', 'pageview');
 </blockquote>
 <img src="/images/suffix-automaton/1.png" style="border:2px black solid;">
 
-<h3 id="重大的兩個特性"><a href="#重大的兩個特性" class="headerlink" title="重大的兩個特性"></a>重大的兩個特性</h3><ul>
+<h3 id="重大的三個特性"><a href="#重大的三個特性" class="headerlink" title="重大的三個特性"></a>重大的三個特性</h3><ul>
 <li>跟著<font color="#0000FF">藍色線</font>走到終點時會是必定是 “aabbabd” 的後綴</li>
 <li>跟著<font color="#0000FF">藍色線</font>走到任意點必定會是此字串的子字串</li>
 <li>發明這個的演算法大師太強了，跟神一般的存在</li>
 </ul>
-<p>根據這張圖大概就能夠理解後綴自動機在說甚麼了<del>，</del>不懂別打我~~。</p>
+<p><del>好啦，其實是兩個，但是沒有第三個前面兩個都不會成立XD</del><br>根據這張圖大概就能夠理解後綴自動機在說甚麼了<del>，</del>不懂別打我~~。</p>
 <h2 id="程式碼實現與說明"><a href="#程式碼實現與說明" class="headerlink" title="程式碼實現與說明"></a>程式碼實現與說明</h2><p>程式碼實現與說明分成三大部分，建構、初始化、SAM 擴增長度。</p>
 <h3 id="建構"><a href="#建構" class="headerlink" title="建構"></a>建構</h3><p>一個 SAM 必須要有從出發點到此的最長長度，離起點最近的位置、與連結其他點的邊。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAMN N*10 </span></span><br><span class="line"><span class="comment">// N 為字串最長長度</span></span><br><span class="line"><span class="keyword">int</span> sz , last ; <span class="comment">// 到 SAM 初始化說明</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">state</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> len , link ; <span class="comment">// len = 最長長度 , link = 當前子字串中第一個最長後綴結束位置 </span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="keyword">int</span>&gt; next ;</span><br><span class="line">&#125;st[SAMN];</span><br></pre></td></tr></table></figure>
@@ -183,8 +183,9 @@ ga('send', 'pageview');
 </blockquote>
 <p><img src="/images/suffix-automaton/2.jpg" alt=""><br><img src="/images/suffix-automaton/3.jpg" alt=""></p>
 <blockquote>
-<p>最後一張則是我自己其他幫助我自己內心釐清的手稿，非常沒用，不要看，我純紀念用<br><img src="/images/suffix-automaton/4.jpg" alt=""></p>
+<p>最後一張則是我自己其他幫助我自己內心釐清的手稿，非常沒用，不要看，我純紀念用</p>
 </blockquote>
+<p><img src="/images/suffix-automaton/4.jpg" alt=""></p>
 
       
       <!-- reward -->
