@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    演算法知識 - Suffix Automaton 後綴自動機 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Explain_Algorithm/suffix-automaton" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  演算法知識 - Suffix Automaton 後綴自動機
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/31/Explain_Algorithm/suffix-automaton/" class="article-date">
+  <time datetime="2020-10-31T11:12:07.000Z" itemprop="datePublished">2020-10-31</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">10分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Suffix-Automation-介紹"><a href="#Suffix-Automation-介紹" class="headerlink" title="Suffix Automation 介紹"></a>Suffix Automation 介紹</h2><blockquote>
+<p>Suffix Automation，簡稱 SAM，(以下內文都簡稱 SAM)，是一個能解決許多字串特定問題的資料結構。</p>
+<p>只要關於這兩個字串問題都可以使用 \(O(n)\) 時間複雜度解決：</p>
+<ul>
+<li>在另一個字串中查詢另一個字串的所有出現位置</li>
+<li>計算此字串中裡面有多少不同的子字串</li>
+</ul>
+<p>簡單來說 SAM 可以理解成字串壓縮，一個 SAM 最多只會有 \(2n-1\) 個節點與 \(3n-4\) 個轉移邊。</p>
+<p>**建立 SAM 的時間複雜度為 \(O(n)\)</p>
+<p>此文章跳開蠻多理論與證明，如果想要知道可再從下方參考連結點選即可</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Suffix-Automation-原理"><a href="#Suffix-Automation-原理" class="headerlink" title="Suffix Automation 原理"></a>Suffix Automation 原理</h2><p>需要用到 struct，此 struct 需要 len , link , next，這些的意義為：</p>
+<ul>
+<li>len 目前的最長長度</li>
+<li>link 為當前子字串中第一個<strong>最長</strong>後綴結束位置 </li>
+<li>next 連結其他的點的邊，方向是 -&gt;</li>
+</ul>
+<h3 id="Suffix-Automation-圖示說明："><a href="#Suffix-Automation-圖示說明：" class="headerlink" title="Suffix Automation 圖示說明："></a>Suffix Automation 圖示說明：</h3><p>我們假設此字串為 “aabbabd”，下方圖片的線為：</p>
+<ul>
+<li>link 為綠色線</li>
+<li>next 為藍色線</li>
+<li>len 從起點到終點的最長長度</li>
+</ul>
+<blockquote>
+<p>我們感謝一下畫這張圖的大神，不得不說話的超棒</p>
+</blockquote>
+<img src="/images/suffix-automaton/1.png" style="border:2px black solid;">
+
+<h3 id="重大的兩個特性"><a href="#重大的兩個特性" class="headerlink" title="重大的兩個特性"></a>重大的兩個特性</h3><ul>
+<li>跟著<font color="#0000FF">藍色線</font>走到終點時會是必定是 “aabbabd” 的後綴</li>
+<li>跟著<font color="#0000FF">藍色線</font>走到任意點必定會是此字串的子字串</li>
+<li>發明這個的演算法大師太強了，跟神一般的存在</li>
+</ul>
+<p>根據這張圖大概就能夠理解後綴自動機在說甚麼了<del>，</del>不懂別打我~~。</p>
+<h2 id="程式碼實現與說明"><a href="#程式碼實現與說明" class="headerlink" title="程式碼實現與說明"></a>程式碼實現與說明</h2><p>程式碼實現與說明分成三大部分，建構、初始化、SAM 擴增長度。</p>
+<h3 id="建構"><a href="#建構" class="headerlink" title="建構"></a>建構</h3><p>一個 SAM 必須要有從出發點到此的最長長度，離起點最近的位置、與連結其他點的邊。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAMN N*10 </span></span><br><span class="line"><span class="comment">// N 為字串最長長度</span></span><br><span class="line"><span class="keyword">int</span> sz , last ; <span class="comment">// 到 SAM 初始化說明</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">state</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> len , link ; <span class="comment">// len = 最長長度 , link = 當前子字串中第一個最長後綴結束位置 </span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="keyword">int</span>&gt; next ;</span><br><span class="line">&#125;st[SAMN];</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>先給予一開始的起點，由於起點(當前狀態為空字串)並不會有後綴於是我們 link 直接設為 -1，且長度(len)為 0。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sam_init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    sz = <span class="number">0</span> ;</span><br><span class="line">    st[<span class="number">0</span>].len = <span class="number">0</span> ;</span><br><span class="line">    st[<span class="number">0</span>].link = <span class="number">-1</span> ;</span><br><span class="line">    st[<span class="number">0</span>].next.clear();</span><br><span class="line">    sz++ ;</span><br><span class="line">    last = <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SAM-增加長度"><a href="#SAM-增加長度" class="headerlink" title="SAM 增加長度"></a>SAM 增加長度</h3><p>這裡就比較複雜了，應該是說超級複雜，我在程式中一行一行註解相信會更容易許多。</p>
+<p><strong>請讀者特別注意，「子字串」跟「字串」要仔細分別，不要忽略會很嚴重</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sam_extend</span><span class="params">(<span class="keyword">char</span> c )</span></span>&#123; <span class="comment">//char c 要擴增的字元</span></span><br><span class="line">    <span class="keyword">int</span> cur = sz++ ; <span class="comment">//sz++ 增加 sam array 長度 , cur 為當前的 sam 節點</span></span><br><span class="line">    st[cur].next.clear() ; <span class="comment">//先把當前的 sam 連接點狀態移除</span></span><br><span class="line">    st[cur].len = st[last].len+<span class="number">1</span> ; <span class="comment">//為前一個 sam 節點 len +1 表示其長度</span></span><br><span class="line">    <span class="keyword">int</span> p = last ; <span class="comment">// p = 查詢當前字串的「所有子字串」與新增加 c 後的字串是否有共同後綴，</span></span><br><span class="line">    <span class="comment">//將跑到他們有共同後綴的「前一個位置」</span></span><br><span class="line">    <span class="comment">//注意：這裡的共同後綴只要有一個字元是就可以是共同後綴</span></span><br><span class="line">    <span class="comment">//舉例："abca" and "abcab" 中的 'b' 就是共同後綴</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p != <span class="number">-1</span> &amp;&amp; !st[p].next.count(c))&#123; <span class="comment">// p = -1 表示已經到起點，</span></span><br><span class="line">        <span class="comment">// !st[p].next.count(c) 則是詢問增加此字元後是否會有共同後綴的情形，</span></span><br><span class="line">        <span class="comment">// 如果有則需要額外處理</span></span><br><span class="line">        st[p].next[c] = cur ; <span class="comment">// 將前面的點與現在的 sam 節點做連結</span></span><br><span class="line">        p = st[p].link ; <span class="comment">// 由於現在的字元並沒有和前面的子字串有共同後綴，</span></span><br><span class="line">        <span class="comment">// 於是他們的 link 就向上追蹤</span></span><br><span class="line">        <span class="comment">// 如果有則 st[p].next.count(c) == TRUE 不符合迴圈要求</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="number">-1</span>)&#123; </span><br><span class="line">        <span class="comment">// p = -1 表示沒有共同後綴且此字元在當前字串中從沒出現過，</span></span><br><span class="line">        <span class="comment">//才回到了起始點，所以將 link 設置為 0 </span></span><br><span class="line">        st[cur].link = <span class="number">0</span> ; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> q = st[p].next[c] ; <span class="comment">// q 為他們共同後綴的位置</span></span><br><span class="line">        <span class="keyword">if</span>(st[p].len + <span class="number">1</span> == st[q].len)&#123; </span><br><span class="line">            <span class="comment">//如果 st[p].len + 1 == st[q].len 表示「不同位置但相同字元」的共同後綴長度大於一</span></span><br><span class="line">            <span class="comment">//只需要直接將當前的 sam[cur].link 設定成 q 也就是共同後綴的位置 </span></span><br><span class="line">            st[cur].link = q ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// 如果不同位置但相同字元的共同後綴如果等於一，則需要連創建新的 sam 節點，</span></span><br><span class="line">            <span class="comment">// 建立以 c + 字串前一個字元的後綴(前一個並不包括我們現在新增的 c)，</span></span><br><span class="line">            <span class="comment">// 並同時放棄另一個不同位置但也是 c 字元的後綴，但要持續存在以保護先前做好的 sam</span></span><br><span class="line">            <span class="keyword">int</span> clone = sz++ ; <span class="comment">// 創建新節點</span></span><br><span class="line">            st[clone].len = st[p].len + <span class="number">1</span> ; <span class="comment">// 表示從共同後綴的前一個位置 +1，</span></span><br><span class="line">            <span class="comment">//用來建立以 c + 字串前一個字元的後綴</span></span><br><span class="line">            st[clone].next = st[q].next ; <span class="comment">//複製 q 的 next，因為前面已經設定好連接的點，</span></span><br><span class="line">            <span class="comment">//但是因為共同後綴不同，後面還需要一個 while 迴圈進行調整</span></span><br><span class="line">            st[clone].link = st[q].link ; <span class="comment">//將他們 link 先設置相同，</span></span><br><span class="line">            <span class="comment">//之後用 while 迴圈再移動到正確的 link</span></span><br><span class="line">            <span class="keyword">while</span>(p != <span class="number">-1</span> &amp;&amp; st[p].next[c] == q)&#123; </span><br><span class="line">                <span class="comment">//p != -1 是不可以讓她更改起始點的位置</span></span><br><span class="line">                <span class="comment">//st[p].next[c] == q 接下來的點是從 clone 繼續擴展而不是原先的 q，</span></span><br><span class="line">                <span class="comment">//所以要將原先連接到 q 的點全部改連接至 clone</span></span><br><span class="line">                st[p].next[c] = clone ; <span class="comment">//更改連接點至 clone</span></span><br><span class="line">                p = st[p].link ; <span class="comment">// 繼續往上層追蹤</span></span><br><span class="line">            &#125;</span><br><span class="line">            st[q].link = st[cur].link = clone ;</span><br><span class="line">            <span class="comment">// 最後則是也要把 q and cur 的 link 改到 clone，</span></span><br><span class="line">            <span class="comment">// 原因則是因為接下來的點是從 clone 繼續擴展而不是原先的 q</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    last = cur ; <span class="comment">//準備下一次的擴展</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>想必蠻多讀者看完還是不知道這到底是甚麼鬼對不對？<del>沒關係，我自己在寫這個註解花了三小時，我自己都不太知道怎麼說明比較好，這有點太抽象了</del></p>
+<p>我在這邊<strong>強烈希望讀者</strong>可以根據我的 Exercise 練習，就可以知道不容易寫以及其抽象的原因。</p>
+<h4 id="EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”"><a href="#EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”" class="headerlink" title="EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”"></a>EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”</h4><h4 id="EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？"><a href="#EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？" class="headerlink" title="EXERCISE B: 根據 Exercise A 甚麼時後會用到 if(st[p].len + 1 == st[q].len) 的 else 情況？"></a>EXERCISE B: 根據 Exercise A 甚麼時後會用到 <code>if(st[p].len + 1 == st[q].len)</code> 的 <code>else</code> 情況？</h4><p>在現在新增字元與現在的 SAM 圖中字元一樣但後綴不大於一時，新增 clone 點，並放棄原本的 q 點，但必須保留以保證先前的 SAM 狀態正確。</p>
+<h2 id="SAM-應用"><a href="#SAM-應用" class="headerlink" title="SAM 應用"></a>SAM 應用</h2><p>這裡將提出大衛將 SAM 應用在哪些題目上</p>
+<h3 id="最小循環移位"><a href="#最小循環移位" class="headerlink" title="最小循環移位"></a>最小循環移位</h3><ul>
+<li><a href="https://theriseofdavid.github.io/2020/11/01/UVa/UVa719/" target="_blank" rel="noopener">UVa719 - Glass Beads (最小循環移位 Lexicographically minimum string rotation)</a></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://oi-wiki.org/string/sam/#_17" target="_blank" rel="noopener">后缀自动机 (SAM)</a><br><a href="https://blog.csdn.net/stevensonson/article/details/81748438?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">后缀自动机学习笔记</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>感覺 SAM 沒有學得很好啊 ಥ⌣ಥ，沒辦法把一個抽象的事物說明的很清楚是我的問題呀，嗚嗚嗚嗚，這次就算有手寫程式碼以後還是有很多的學習盲點沒有意識到，慢慢再看其他教導 SAM 的文章才搞懂了些，SAM 是一個很酷、很強大的資料結構，發明 SAM 的人是一個大神吧。</p>
+<p>這一次我不會說學習 SAM 會增加我的思維，因為我在寫完 blog 的感覺並沒有幫助我擴展我的思維，我想是我理解的不夠深或是依我當前的背景知識學習 SAM，會讓我自己不懂優秀的人們背後的學習理論，而導致我可能是用<strong>死背</strong>的方式得出結論。</p>
+<p>雖然我有可能是用死背的方式得出結論，但我也花了一個禮拜在嘗試與思考此問題，我的腦袋沒有辦法好好描述 SAM 的程式碼，但我的腦袋卻告訴我她已經熟悉這個算法，但我無法肯定是不是用背的還是理解的，希望我自己是有理解到但只是我的腦袋還沒辦法用口語述說。</p>
+<p>自學很好，但自學常常會遇到很多思考盲點；因為自學比較難有系統地去學習，學習方式是用跳躍的，常常是自己在學習其他觀念時才會想到，對欸！我之前學的哪個演算法就是用這個基礎去延伸的，這樣其實不太好，有點討厭，但我一路以來的學習方法也都是如此，可能也沒有辦法再去讓自己習慣另一種模式，就繼續堅持下去吧！我相信只要我堅持，美好的成果我一定也能品嘗到的！</p>
+<p>也謝謝 OI WIKI 與 stevensonson 一個用證明與理論來讓我學習 SAM、優質的 SAM 程式碼讓我對此演算法學習速度更快，另一個則是使用圖加速了我對 SAM 的理解，謝謝二位大神，也還希望 stevensonson 願意讓我用此圖來對未來可能會忘記這演算法的我、其他想學的人進行說明，謝謝！</p>
+<p>我也花了七個小時撰寫文章，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<h2 id="SAM-無註解程式碼"><a href="#SAM-無註解程式碼" class="headerlink" title="SAM 無註解程式碼"></a>SAM 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">state</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> len, link;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; next;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXLEN = <span class="number">100000</span>;</span><br><span class="line">state st[MAXLEN * <span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> sz, last;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sam_init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  st[<span class="number">0</span>].len = <span class="number">0</span>;</span><br><span class="line">  st[<span class="number">0</span>].link = <span class="number">-1</span>;</span><br><span class="line">  sz++;</span><br><span class="line">  last = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sam_extend</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> cur = sz++;</span><br><span class="line">  st[cur].len = st[last].len + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> p = last;</span><br><span class="line">  <span class="keyword">while</span> (p != <span class="number">-1</span> &amp;&amp; !st[p].next.count(c)) &#123;</span><br><span class="line">    st[p].next[c] = cur;</span><br><span class="line">    p = st[p].link;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (p == <span class="number">-1</span>) &#123;</span><br><span class="line">    st[cur].link = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> q = st[p].next[c];</span><br><span class="line">    <span class="keyword">if</span> (st[p].len + <span class="number">1</span> == st[q].len) &#123;</span><br><span class="line">      st[cur].link = q;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">int</span> clone = sz++;</span><br><span class="line">      st[clone].len = st[p].len + <span class="number">1</span>;</span><br><span class="line">      st[clone].next = st[q].next;</span><br><span class="line">      st[clone].link = st[q].link;</span><br><span class="line">      <span class="keyword">while</span> (p != <span class="number">-1</span> &amp;&amp; st[p].next[c] == q) &#123;</span><br><span class="line">        st[p].next[c] = clone;</span><br><span class="line">        p = st[p].link;</span><br><span class="line">      &#125;</span><br><span class="line">      st[q].link = st[cur].link = clone;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  last = cur;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用紙筆去模擬-SAM"><a href="#用紙筆去模擬-SAM" class="headerlink" title="用紙筆去模擬 SAM"></a>用紙筆去模擬 SAM</h2><p>因為只是自己在思考過程中隨手做的筆記，覺得不是對讀者這麼有幫助，因此放在文章最下面。</p>
+<p>有時候用想或用看的可能不太能夠懂這演算法，那就用寫的吧！這是大衛我自己學習的手稿，紀錄者我的學習過程。</p>
+<blockquote>
+<p>這裡的舉例是用 “daviddavid”</p>
+</blockquote>
+<p><img src="/images/suffix-automaton/2.jpg" alt=""><br><img src="/images/suffix-automaton/3.jpg" alt=""></p>
+<blockquote>
+<p>最後一張則是我自己其他幫助我自己內心釐清的手稿，非常沒用，不要看，我純紀念用<br><img src="/images/suffix-automaton/4.jpg" alt=""></p>
+</blockquote>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%8C%E7%B6%B4%E8%87%AA%E5%8B%95%E6%A9%9F/" rel="tag">後綴自動機</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E5%BE%AA%E7%92%B0%E7%A7%BB%E4%BD%8D-Lexicographically-minimum-string-rotation/" rel="tag">最小循環移位 Lexicographically minimum string rotation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/11/01/UVa/UVa719/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa719 - Glass Beads (最小循環移位 Lexicographically minimum string rotation)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/10/31/git/git-reset-to-commit/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">QUESTION! 如何回到之前的 commit 版本呢？</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
