@@ -119,7 +119,7 @@ ga('send', 'pageview');
 <li>計算此字串中裡面有多少不同的子字串</li>
 </ul>
 <p>簡單來說 SAM 可以理解成字串壓縮，一個 SAM 最多只會有 \(2n-1\) 個節點與 \(3n-4\) 個轉移邊。</p>
-<p>**建立 SAM 的時間複雜度為 \(O(n)\)</p>
+<p><strong>建立 SAM 的時間複雜度為 \(O(n)\)</strong></p>
 <p>此文章跳開蠻多理論與證明，如果想要知道可再從下方參考連結點選即可</p>
 </blockquote>
 <a id="more"></a>
@@ -161,9 +161,9 @@ ga('send', 'pageview');
 <p>想必蠻多讀者看完還是不知道這到底是甚麼鬼對不對？<del>沒關係，我自己在寫這個註解花了三小時，我自己都不太知道怎麼說明比較好，這有點太抽象了</del></p>
 <p>我在這邊<strong>強烈希望讀者</strong>可以根據我的 Exercise 練習，就可以知道不容易寫以及其抽象的原因。</p>
 <h4 id="EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”"><a href="#EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”" class="headerlink" title="EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”"></a>EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”</h4><h4 id="EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？"><a href="#EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？" class="headerlink" title="EXERCISE B: 根據 Exercise A 甚麼時後會用到 if(st[p].len + 1 == st[q].len) 的 else 情況？"></a>EXERCISE B: 根據 Exercise A 甚麼時後會用到 <code>if(st[p].len + 1 == st[q].len)</code> 的 <code>else</code> 情況？</h4><p>在現在新增字元與現在的 SAM 圖中字元一樣但後綴不大於一時，新增 clone 點，並放棄原本的 q 點，但必須保留以保證先前的 SAM 狀態正確。</p>
-<h2 id="SAM-應用"><a href="#SAM-應用" class="headerlink" title="SAM 應用"></a>SAM 應用</h2><p>這裡將提出大衛將 SAM 應用在哪些題目上</p>
+<h2 id="SAM-應用"><a href="#SAM-應用" class="headerlink" title="SAM 應用"></a>SAM 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
 <h3 id="最小循環移位"><a href="#最小循環移位" class="headerlink" title="最小循環移位"></a>最小循環移位</h3><ul>
-<li><a href="https://theriseofdavid.github.io/2020/11/01/UVa/UVa719/" target="_blank" rel="noopener">UVa719 - Glass Beads (最小循環移位 Lexicographically minimum string rotation)</a></li>
+<li><a href="https://theriseofdavid.github.io/2020/11/01/UVa/UVa719/" target="_blank" rel="noopener">UVa719 - Glass Beads (Suffix Automation 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)</a></li>
 </ul>
 <h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://oi-wiki.org/string/sam/#_17" target="_blank" rel="noopener">后缀自动机 (SAM)</a><br><a href="https://blog.csdn.net/stevensonson/article/details/81748438?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">后缀自动机学习笔记</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>感覺 SAM 沒有學得很好啊 ಥ⌣ಥ，沒辦法把一個抽象的事物說明的很清楚是我的問題呀，嗚嗚嗚嗚，這次就算有手寫程式碼以後還是有很多的學習盲點沒有意識到，慢慢再看其他教導 SAM 的文章才搞懂了些，SAM 是一個很酷、很強大的資料結構，發明 SAM 的人是一個大神吧。</p>
@@ -209,7 +209,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%8C%E7%B6%B4%E8%87%AA%E5%8B%95%E6%A9%9F/" rel="tag">後綴自動機</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E5%BE%AA%E7%92%B0%E7%A7%BB%E4%BD%8D-Lexicographically-minimum-string-rotation/" rel="tag">最小循環移位 Lexicographically minimum string rotation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%8C%E7%B6%B4%E8%87%AA%E5%8B%95%E6%A9%9F-Suffix-Automaton/" rel="tag">後綴自動機 Suffix Automaton</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E5%BE%AA%E7%92%B0%E7%A7%BB%E4%BD%8D-Lexicographically-minimum-string-rotation/" rel="tag">最小循環移位 Lexicographically minimum string rotation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -224,7 +224,7 @@ ga('send', 'pageview');
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            UVa719 - Glass Beads (最小循環移位 Lexicographically minimum string rotation)
+            UVa719 - Glass Beads (Suffix Automation 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)
           
         </div>
       </a>

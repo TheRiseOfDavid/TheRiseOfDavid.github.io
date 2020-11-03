@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    演算法知識 - Suffix Tree 後綴樹 (Using Ukkonen Algorithm) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Explain_Algorithm/suffix-tree" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  演算法知識 - Suffix Tree 後綴樹 (Using Ukkonen Algorithm)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/03/Explain_Algorithm/suffix-tree/" class="article-date">
+  <time datetime="2020-11-03T12:42:07.000Z" itemprop="datePublished">2020-11-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">5.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">20分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Suffix-Tree-介紹"><a href="#Suffix-Tree-介紹" class="headerlink" title="Suffix Tree 介紹"></a>Suffix Tree 介紹</h2><blockquote>
+<p>Suffix Tree 是字典樹(Trie) 的延伸，透過對一字串的所有後綴去建構樹，是一個能解決許多字串特定問題的資料結構。</p>
+<p>以下是 Suffix Tree 能解決的問題：</p>
+<ul>
+<li>尋找 A 字串是否在字串 B 中</li>
+<li>找出 B 在 A 字串重複的次數</li>
+<li>最長共同子字串</li>
+</ul>
+<p>簡單來說 Suffix Tree 是將字串的所有後綴建構成 Trie，再將其壓縮(沒有分支的節點都放在同個節點)。</p>
+<p><strong>建立 Suffix Tree 的時間複雜度為 \(O(n)\)，使用 Ukkonen Algorithm</strong><br>通常建構 Suffix Tree 有兩種方法，一種時間複雜度為 \(O(n)\)，另一種為 \(O(n^2)\)，這裡只介紹普遍比賽會經用的演算法(Ukkonen Algorithm)</p>
+<p>此文章跳開蠻多證明與理論，如果想要知道可再從下方參考連結點選即可</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Suffix-Tree-原理-正確來說應該是Ukkonen-Algorithm-原理"><a href="#Suffix-Tree-原理-正確來說應該是Ukkonen-Algorithm-原理" class="headerlink" title="Suffix Tree 原理 (正確來說應該是Ukkonen Algorithm 原理)"></a>Suffix Tree 原理 (正確來說應該是Ukkonen Algorithm 原理)</h2><p>這裡我們借助 Tushar Roy 的 Youtube 影片教學，此教學影片非常棒，連結將放在下方標題的參考連結<br><strong>這裡我們將透過一字串 “xyzxyaxyz$” 來進行解說，有些地方會跟影片不一樣，因為我個人認為這樣寫對學習更有幫助，請不要理會右邊的變數</strong>，EX: remaining , active_Node…。 </p>
+<h3 id="名詞介紹"><a href="#名詞介紹" class="headerlink" title="名詞介紹"></a>名詞介紹</h3><p>先來介紹一些我們會用到的名詞</p>
+<ul>
+<li>remaining 隱藏在 Suffix Tree 中的後綴節點</li>
+<li>root = Suffix Tree 的最主要根節點</li>
+<li>active_node 活動節點，主要是用來生長葉節點 (leaf)</li>
+<li>active_e 隱藏節點的第一個字元</li>
+<li>active_len 隱藏在 Suffix Tree 中節點的長度</li>
+<li>node 一個 struct 用來存入 Suffix Tree 節點<ul>
+<li>start 此節點開始的位置(index)</li>
+<li>end 此節點結束的位置(end)<br>舉例： node.start = 3 and node.end = 5，則 string 的長度是 <code>string.substr(3,2)</code>，用數學表示則是 \((start , end ]\)</li>
+<li>next 用來指出下一個節點的位置，個人習慣用 map</li>
+<li>slink 指出此節點的最長後綴節點，EX: XYZ 則指出 YZ。</li>
+<li>edge_length() 公式為 \(min(end,pos+1) - start \)<br>用來找出此節點的字串長度</li>
+</ul>
+</li>
+</ul>
+<h3 id="原理說明-初始建構"><a href="#原理說明-初始建構" class="headerlink" title="原理說明 - 初始建構"></a>原理說明 - 初始建構</h3><p>我們必須先建構 Suffix Tree Root，才可以讓 Suffix Tree 慢慢變長，Suffix Tree Root 的 start and end 都是 -1，Root 是起始點且並不包含任何資料。</p>
+<ul>
+<li>remaining = 0<br>一開始不會有隱藏在 Suffix Tree 中的後綴節點於是設定成 0</li>
+<li>root = 1<br>我們捨棄從 0 開始，從 1 開始會更好建構，於是起始點是 1 </li>
+<li>active_node = 1<br>由於一開始生長葉節點只能先從 root 開始，所以設定 active_node = root </li>
+<li>active_e = 0<br>一開始沒有隱藏節點於是設定成 0</li>
+<li>active_len = 0<br>一開始沒有隱藏在 Suffix Tree 中節點的長度，所以設定 0 </li>
+</ul>
+<h3 id="原理說明-“x”"><a href="#原理說明-“x”" class="headerlink" title="原理說明 - “x”"></a>原理說明 - “x”</h3><p>由於一開始樹中並沒有 x 此字元，直接產生新節點(葉節點)，由於有產生節點，沒有隱藏節點所以 remaining = 0</p>
+<ul>
+<li>葉節點(node) 建構設定<ul>
+<li>start 等於此<strong>字元</strong>位置</li>
+<li>end 等於<strong>字串</strong>長度</li>
+<li>slink 設定為 0</li>
+<li>next.clear()</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>原理說明 - “x”</p>
+</blockquote>
+<p><img src="/images/suffix-tree/1.PNG" alt=""></p>
+<h3 id="原理說明-“xy”"><a href="#原理說明-“xy”" class="headerlink" title="原理說明 - “xy”"></a>原理說明 - “xy”</h3><p>樹中沒有 y 字元，也直接產生新節點，跟上個步驟一樣。</p>
+<blockquote>
+<p>原理說明 - “xy”，這裡無法截圖到 remaining 為 0 的狀態，於是自己寫 </p>
+</blockquote>
+<p><img src="/images/suffix-tree/2.PNG" alt=""></p>
+<h3 id="原理說明-“xyz”"><a href="#原理說明-“xyz”" class="headerlink" title="原理說明 - “xyz”"></a>原理說明 - “xyz”</h3><p>樹中沒有 z 字元，也直接產生新節點，跟上個步驟一樣。</p>
+<blockquote>
+<p>原理說明 - “xyz”，這裡無法截圖到 remaining 為 0 的狀態，於是自己寫 </p>
+</blockquote>
+<p><img src="/images/suffix-tree/3.PNG" alt=""></p>
+<h3 id="原理說明-“xyzx”"><a href="#原理說明-“xyzx”" class="headerlink" title="原理說明 - “xyzx”"></a>原理說明 - “xyzx”</h3><p>樹中已經有 x 字元，且是在 active_node 底下，於是我們不新增節點，以符合壓縮原理，而我們多了一個隱藏節點並將隱藏節點長度則 +1，因為增加 x，且 remaining 也要 +1 表示增加一個隱藏節點。</p>
+<blockquote>
+<p>原理說明 - “xyzx”</p>
+</blockquote>
+<p><img src="/images/suffix-tree/4.PNG" alt=""></p>
+<h3 id="原理說明-“xyzxy”"><a href="#原理說明-“xyzxy”" class="headerlink" title="原理說明 - “xyzxy”"></a>原理說明 - “xyzxy”</h3><p>樹中已經有 y 字元，且是在 active_node 底下，於是我們不新增節點，以符合壓縮原理，而我們多了一個隱藏節點並將隱藏節點長度則 +1，因為增加 y，且 remaining 也要 +1 表示增加一個隱藏節點。</p>
+<p>這時隱藏節點長度(active_len)則變成 2<br>remainging = 2<br>隱藏字元有 “xy”</p>
+<blockquote>
+<p>原理說明 - “xyzxy”</p>
+</blockquote>
+<p><img src="/images/suffix-tree/5.PNG" alt=""></p>
+<h3 id="原理說明-“xyzxya”"><a href="#原理說明-“xyzxya”" class="headerlink" title="原理說明 - “xyzxya”"></a>原理說明 - “xyzxya”</h3><p>這裡需要比較長的說明，共三個步驟。</p>
+<h4 id="step-1"><a href="#step-1" class="headerlink" title="step 1:"></a>step 1:</h4><p>此時的隱藏長度為 2，我們無法因為字元 a 而增加隱藏長度，因為前面是 “xy<strong>z</strong>“(先從隱藏字元方向 “xy” )，而不是 “xy<strong>a</strong>“，所以我們這邊要做出一個切割節點，切割方式為 root 往 x 的邊且長度為 2；來保持 “xyzxya” 後綴與 “xya” 後綴，分裂完成後 remaining 必須 -1，因為 x 此隱藏節點已經產生，隱藏長度(active_len)也需 -1。</p>
+<p>這時隱藏節點長度(active_len)則變成 1<br>remainging = 1<br>隱藏字元有 “y”</p>
+<blockquote>
+<p>原理說明 - “xyzxya” 切割點為 xy </p>
+</blockquote>
+<p><img src="/images/suffix-tree/6.PNG" alt=""></p>
+<h4 id="step-2"><a href="#step-2" class="headerlink" title="step 2:"></a>step 2:</h4><p>此時的隱藏長度為 1，我們無法因為字元 a 而增加隱藏長度，因為前面是 “y<strong>z</strong>“，而不是 “y<strong>a</strong>“，所以我們這邊要做出一個切割節點，切割方式為 root 往 y 的邊且長度為 2；來保持 “yzxya” 後綴與 “ya” 後綴，分裂完成後 remaining 必須 -1，因為 y 此隱藏節點已經產生，隱藏長度(active_len)也需 -1。</p>
+<p>此時的 slink 則派上用場，需要指回在隱藏字元 “xy” 時所切割的節點，表示如果 xy 的葉節點們如果也需要更改時則表示隱藏字元 “y” 時所切割的葉節點也需要更改。</p>
+<p>這時隱藏節點長度(active_len)則變成 0<br>remainging = 0<br>隱藏字元無</p>
+<blockquote>
+<p>原理說明 - “xyzxya” 切割點為 y </p>
+</blockquote>
+<p><img src="/images/suffix-tree/7.PNG" alt=""></p>
+<h4 id="step-3"><a href="#step-3" class="headerlink" title="step 3:"></a>step 3:</h4><p>由於一開始樹中並沒有 a 此字元，直接產生新節點(葉節點)，由於有產生節點，沒有隱藏節點所以 remaining = 0</p>
+<blockquote>
+<p>原理說明 - 新增 a 節點</p>
+</blockquote>
+<p><img src="/images/suffix-tree/7.PNG" alt=""></p>
+<h3 id="原理說明-“xyzxyax”"><a href="#原理說明-“xyzxyax”" class="headerlink" title="原理說明 - “xyzxyax”"></a>原理說明 - “xyzxyax”</h3><p>樹中已經有 x 字元，且是在 active_node 底下，於是我們不新增節點，以符合壓縮原理，而我們多了一個隱藏節點並將隱藏節點長度則 +1，因為增加 x，且 remaining 也要 +1 表示增加一個隱藏節點。</p>
+<p>與第一個步驟相似</p>
+<p>這時隱藏節點長度(active_len)則變成 1<br>remainging = 1<br>隱藏字元有 “x”</p>
+<blockquote>
+<p>原理說明 - “xyzxyax”</p>
+</blockquote>
+<p><img src="/images/suffix-tree/8.PNG" alt=""></p>
+<h3 id="原理說明-“xyzxyaxy”"><a href="#原理說明-“xyzxyaxy”" class="headerlink" title="原理說明 - “xyzxyaxy”"></a>原理說明 - “xyzxyaxy”</h3><p>樹中已經有 y 字元，且是在 active_node 底下，於是我們不新增節點，以符合壓縮原理，而我們多了一個隱藏節點並將隱藏節點長度則 +1，因為增加 y，且 remaining 也要 +1 表示增加一個隱藏節點。</p>
+<p>這時隱藏節點長度(active_len)則變成 2<br>remainging = 2<br>隱藏字元有 “xy”</p>
+<blockquote>
+<p>原理說明 - “xyzxyaxy”</p>
+</blockquote>
+<p><img src="/images/suffix-tree/9.PNG" alt=""></p>
+<h3 id="原理說明-“xyzxyaxyz”"><a href="#原理說明-“xyzxyaxyz”" class="headerlink" title="原理說明 - “xyzxyaxyz”"></a>原理說明 - “xyzxyaxyz”</h3><p>樹中已經有 z 字元，且是在 active_node 底下，於是我們不新增節點，以符合壓縮原理，而我們多了一個隱藏節點並將隱藏節點長度則 +1，因為增加 z，且 remaining 也要 +1 表示增加一個隱藏節點。</p>
+<p>這時隱藏節點長度(active_len)則變成 3<br>remainging = 3<br>隱藏字元有 “xyz”</p>
+<blockquote>
+<p>原理說明 - “xyzxyaxyz”</p>
+</blockquote>
+<p><img src="/images/suffix-tree/10.PNG" alt=""></p>
+<h3 id="原理說明-“xyzxyaxyz-”"><a href="#原理說明-“xyzxyaxyz-”" class="headerlink" title="原理說明 - “xyzxyaxyz$”"></a>原理說明 - “xyzxyaxyz$”</h3><p>由於我們希望只要是後綴樹的後綴都可以有一個節點而不被隱藏，於是我們增加一個從未出現的符號，來把這些隱藏節點全部都拉出來新增節點，有點類似於新增 a 的步驟，但在複雜一些，共有四步 。</p>
+<h4 id="step-1-1"><a href="#step-1-1" class="headerlink" title="step 1"></a>step 1</h4><p>此時的隱藏長度為 3，我們無法因為字元 $ 而增加隱藏長度，因為前面是 “xyz<strong>x</strong>“，而不是 “xyz<strong>$</strong>“，所以我們這邊要做出一個切割節點，切割方式為 root 往 z 的邊且長度為 1，這是因為前面 xy 已經是一個節點，所以我們就必須先將 active_len 先減 2 的節點在往 z 的方向切割；來保持 “<font color="    #ADADAD" >xy</font>zxyaxyz$” 後綴與 “<font color="    #ADADAD" >xy</font>z$” 後綴，分裂完成後 remaining 必須 -1，因為 z 此隱藏節點已經產生，隱藏長度(active_len)也需 -1。</p>
+<p>這時隱藏節點長度(active_len)則變成 2<br>remainging = 2<br>隱藏字元有 “yz”</p>
+<blockquote>
+<p>原理說明 - “xyzxyaxyz$” 切割點為 <font color="#ADADAD" >xy</font>z，這裡 remainding 應該為 2</p>
+</blockquote>
+<p><img src="/images/suffix-tree/11.PNG" alt=""></p>
+<h4 id="step-2-1"><a href="#step-2-1" class="headerlink" title="step 2"></a>step 2</h4><p>此時的隱藏長度為 2，我們無法因為字元 $ 而增加隱藏長度，因為前面是 “yz<strong>x</strong>“，而不是 “yz<strong>$</strong>“，所以我們這邊要做出一個切割節點，切割方式為 root 往 z 的邊且長度為 1，這是因為前面 y 已經是一個節點，所以我們就必須先將 active_len 先減 1 的節點在往 z 的方向切割；來保持 “<font color="    #ADADAD" >yz</font>xyaxyz$” 後綴與 “<font color="#ADADAD" >yz</font>$” 後綴，分裂完成後 remaining 必須 -1，因為 z 此隱藏節點已經產生，隱藏長度(active_len)也需 -1。</p>
+<p>此時的 slink 則派上用場，需要指回在隱藏字元 “xyz” 時所切割的節點，表示如果 xyz 的葉節點們如果也需要更改時則表示隱藏字元 “yz” 時所切割的葉節點也需要更改。</p>
+<p>這時隱藏節點長度(active_len)則變成 1<br>remainging = 1<br>隱藏字元有 “z”</p>
+<blockquote>
+<p>原理說明 - “yzxyaxyz$” 切割點為 <font color="#ADADAD" >y</font>z，這裡 remainding 應該為 1，沒辦法擷取到完整畫面，只好犧牲</p>
+</blockquote>
+<p><img src="/images/suffix-tree/12.PNG" alt=""></p>
+<h4 id="step-3-1"><a href="#step-3-1" class="headerlink" title="step 3"></a>step 3</h4><p>此時的隱藏長度為 1，我們無法因為字元 $ 而增加隱藏長度，因為前面是 “z<strong>x</strong>“，而不是 “z<strong>$</strong>“，所以我們這邊要做出一個切割節點，切割方式為 root 往 z 的邊且長度為 1；來保持 “<font color="    #ADADAD" >z</font>xyaxyz$” 後綴與 “<font color="#ADADAD" >z</font>$” 後綴，分裂完成後 remaining 必須 -1，因為 z 此隱藏節點已經產生，隱藏長度(active_len)也需 -1。</p>
+<p>此時的 slink 則派上用場，需要指回在隱藏字元 “yz” 時所切割的節點，表示如果 yz 的葉節點們如果也需要更改時則表示隱藏字元 “z” 時所切割的葉節點也需要更改。</p>
+<p>這時隱藏節點長度(active_len)則變成 0<br>remainging = 0<br>隱藏字元無</p>
+<blockquote>
+<p>原理說明 - “zxyaxyz$” 切割點為 z，這裡 remainding 應該為 0，沒辦法擷取到完整畫面，只好犧牲</p>
+</blockquote>
+<p><img src="/images/suffix-tree/13.PNG" alt=""></p>
+<h4 id="step-4"><a href="#step-4" class="headerlink" title="step 4"></a>step 4</h4><p>由於一開始樹中並沒有 $ 此字元，直接產生新節點(葉節點)，由於有產生節點，沒有隱藏節點所以 remaining = 0</p>
+<blockquote>
+<p>原理說明 - “xyzxyaxyz$” 切割點為 $</p>
+</blockquote>
+<p><img src="/images/suffix-tree/14.PNG" alt=""></p>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p>以上，就是 Suffix Tree 原理，謝謝各位觀看，如果還是看不太懂可以看Tushar Roy - Coding Made Simple 大神的影片教學，一定比我講得更棒。</p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/aPRqocoBsFQ" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+
+<h2 id="程式碼實現與說明"><a href="#程式碼實現與說明" class="headerlink" title="程式碼實現與說明"></a>程式碼實現與說明</h2><p>程式碼實現與說明分成三大部分，建構、初始化、SAM 擴增長度。</p>
+<h3 id="建構"><a href="#建構" class="headerlink" title="建構"></a>建構</h3><p>這裡比較簡單，於是請直接看此就沒問題的XD。<br><a href="#原理說明-初始建構">原理說明 - 初始建構</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> start , end ,slink ; </span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="keyword">int</span>&gt; next ;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">edge_length</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> min(end , pos+<span class="number">1</span>) - start ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> st , <span class="keyword">int</span> ed = oo)</span></span>&#123;</span><br><span class="line">        start = st ;</span><br><span class="line">        end = ed ;</span><br><span class="line">        slink = <span class="number">0</span> ;</span><br><span class="line">        next.clear() ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;tree[<span class="number">2</span>*N];</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>建議搭配 <a href="#名詞介紹">名詞介紹</a> 會更好理解。<br>cnt 為我們 Suffix Tree 的總長度</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">st_init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//tree root is 1 not zero</span></span><br><span class="line">    needSL = remainder_ = <span class="number">0</span> ;</span><br><span class="line">    active_node = active_e = active_len = <span class="number">0</span> ;</span><br><span class="line">    pos = <span class="number">-1</span> ;</span><br><span class="line"></span><br><span class="line">    cnt = root = <span class="number">1</span> ;</span><br><span class="line">    active_node = <span class="number">1</span> ;</span><br><span class="line">    tree[cnt++].init(<span class="number">-1</span>,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Suffix-Tree-擴增長度"><a href="#Suffix-Tree-擴增長度" class="headerlink" title="Suffix Tree 擴增長度"></a>Suffix Tree 擴增長度</h3><p>建議搭配 <a href="#原理說明-“x”">原理說明-“x”</a> 以下全部的<strong>原理說明</strong>會更好理解。<br>這份程式碼與影片教學方式有些許差別，原因是因為這份程式碼我是用簡潔的方式寫，而影片則是用好理解的方式去教導。</p>
+<p><strong>請注意 remainder 進入迴圈後是從 1 開始，之後再到迴圈的最後做 -1 的動作，上述原理說明有省略此步</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">active_edge</span><span class="params">()</span></span>&#123; <span class="comment">//隱藏字元的第一個</span></span><br><span class="line">    <span class="keyword">return</span> text[active_e] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_SL</span><span class="params">(<span class="keyword">int</span> node)</span></span>&#123; <span class="comment">// slink 指回上一個隱藏節點的位置，如果上一個後綴節點的葉節點需要被更改時，</span></span><br><span class="line"><span class="comment">// 這裡的下方葉節點也能被迅速被更改，達到 O(1) 效果</span></span><br><span class="line">    <span class="keyword">if</span>(needSL &gt; <span class="number">0</span> ) tree[needSL].slink = node ;</span><br><span class="line">    needSL = node ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">walkdown</span><span class="params">(<span class="keyword">int</span> node)</span></span>&#123; <span class="comment">//即 原理說明 - "xyzxyaxyz$" 的 step 1， xyz 但 xy 是一個節點，</span></span><br><span class="line"><span class="comment">// 需要在往下一個子節點前進</span></span><br><span class="line">    <span class="keyword">if</span>(active_len &gt;= tree[node].edge_length())&#123;</span><br><span class="line">        active_e += tree[node].edge_length() ; <span class="comment">//找到此長度後的第一個隱藏字元 </span></span><br><span class="line">        active_len -= tree[node].edge_length() ; <span class="comment">//減少長度</span></span><br><span class="line">        active_node = node ; <span class="comment">//往後方前進</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">st_extend</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123; <span class="comment">//擴增 suffix tree </span></span><br><span class="line">    pos++; <span class="comment">// 往下個字串前進</span></span><br><span class="line">    needSL = <span class="number">0</span> ; <span class="comment">// 紀錄上一個切割點的位置，用來 slink 的前一個點</span></span><br><span class="line">    remainder_++ ; <span class="comment">// 先 +1，如果這個點有被增加之後做 -1 的動作</span></span><br><span class="line">    <span class="keyword">while</span>(remainder_ &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(active_len == <span class="number">0</span> ) active_e = pos ; </span><br><span class="line">        <span class="comment">// 如果 active len 等於 0，就表示沒有隱藏長度，所以我們要判斷的就是當前字元</span></span><br><span class="line">        <span class="comment">// 是否存在此 active_node 節點中</span></span><br><span class="line">        <span class="keyword">if</span>(tree[active_node].next[active_edge()] == <span class="number">0</span>)&#123; </span><br><span class="line">            <span class="comment">// active_node 沒有此字元的節點，新增節點</span></span><br><span class="line">            <span class="keyword">int</span> leaf = cnt ;</span><br><span class="line">            tree[cnt++].init(pos) ;</span><br><span class="line">            tree[active_node].next[active_edge()] = leaf ;</span><br><span class="line">            add_SL(active_node) ;　<span class="comment">// 紀錄 slink 的位置，以防下次用到</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// active_node 有此字元的節點</span></span><br><span class="line">            <span class="keyword">int</span> nxt = tree[active_node].next[active_edge()] ;</span><br><span class="line">            <span class="keyword">if</span>(walkdown(nxt)) <span class="keyword">continue</span> ; <span class="comment">// 如果還需要在往下一個節點走，就減少隱藏長度，</span></span><br><span class="line">            <span class="comment">//然後回去重新查詢</span></span><br><span class="line">            <span class="keyword">if</span>(text[tree[nxt].start + active_len] == c)&#123; </span><br><span class="line">                <span class="comment">// 如果此節點有包含到此字元，代表隱藏長度可以+1，因為後綴還是在節點長裡面</span></span><br><span class="line">                active_len++ ; <span class="comment">// 隱藏長度可以 +1</span></span><br><span class="line">                add_SL(active_node) ; <span class="comment">// 紀錄 slink 的位置，以防下次用到</span></span><br><span class="line">                <span class="keyword">break</span> ; <span class="comment">//由於隱藏節點是 +1，所以我們沒必要減</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 需要做切割點</span></span><br><span class="line">            <span class="keyword">int</span> split = cnt ; </span><br><span class="line">            tree[cnt++].init(tree[nxt].start , tree[nxt].start + active_len) ;</span><br><span class="line">            <span class="comment">//製作切割點中...，結束位置就是當前節點的 start + 隱藏長度</span></span><br><span class="line">            tree[active_node].next[active_edge()] = split ;</span><br><span class="line">            <span class="comment">// 需要將 active_node 指向我們的切割點，而不是原來的點</span></span><br><span class="line">            <span class="keyword">int</span> leaf = cnt ; <span class="comment">// 需要葉節點</span></span><br><span class="line">            tree[cnt++].init(pos) ;</span><br><span class="line">            <span class="comment">// 製作葉節點</span></span><br><span class="line">            tree[split].next[c] = leaf ; <span class="comment">// 把葉節點指向我們的切割點</span></span><br><span class="line">            tree[nxt].start += active_len ; <span class="comment">//原本的節點 start 往後到切割點的 end</span></span><br><span class="line">            tree[split].next[text[tree[nxt].start]] = nxt ; <span class="comment">//將原本節點指向我們的切割點</span></span><br><span class="line">            add_SL(split) ; <span class="comment">// 紀錄 slink 的位置，以防下次用到</span></span><br><span class="line">        &#125;</span><br><span class="line">        remainder_-- ; <span class="comment">// 由於有增加節點，所以 -1</span></span><br><span class="line">        <span class="keyword">if</span>(active_node == root &amp;&amp; active_len &gt; <span class="number">0</span> )&#123; </span><br><span class="line">            <span class="comment">//active_len &gt; 0 表示我們現在做的是把隱藏節點新增，所以要減掉</span></span><br><span class="line">            <span class="comment">//active_node == root 確保有回到根節點才做隱藏節點減掉，否則 </span></span><br><span class="line">            <span class="comment">//text[node.start + active_len ] 就會亂掉</span></span><br><span class="line">            active_len-- ;</span><br><span class="line">            <span class="comment">//由於我們減少了一個隱藏長度，所以 -1 </span></span><br><span class="line">            active_e = pos - remainder_ + <span class="number">1</span> ;</span><br><span class="line">            <span class="comment">//找到減少後隱藏長度的第一個隱藏字元，此時如果 active_len == 0，</span></span><br><span class="line">            <span class="comment">// 則下次迴圈則在 active_e 會被重新定義成 pos</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 跟著 slink 走去改動其他的後綴在 tree[active_node].slink &gt; 0 時，</span></span><br><span class="line">            <span class="comment">// 否則則回到 root，繼續建立後綴樹</span></span><br><span class="line">            active_node = tree[active_node].slink &gt; <span class="number">0</span> ? tree[active_node].slink : root ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Suffix-Array-應用"><a href="#Suffix-Array-應用" class="headerlink" title="Suffix Array 應用"></a>Suffix Array 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
+<h3 id="最長重複子字串-longest-repeated-substring"><a href="#最長重複子字串-longest-repeated-substring" class="headerlink" title="最長重複子字串 longest repeated substring"></a>最長重複子字串 longest repeated substring</h3><ul>
+<li><a href="https://theriseofdavid.github.io//2020/11/04/UVa/Uva11512/" target="_blank" rel="noopener">UVa11512 - GATTACA (Suffix Tree 後綴樹 - 最長重複子字串 Longest Repeated Substring)</a></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.youtube.com/watch?v=aPRqocoBsFQ&ab_channel=TusharRoy-CodingMadeSimple" target="_blank" rel="noopener">Suffix Tree using Ukkonen’s algorithm</a><br><a href="https://www.tracholar.top/2018/02/22/ukkonens-suffix-tree-algorithm-in-plain-english/" target="_blank" rel="noopener">简单的英语中的Ukkonen后缀树算法</a><br>上述兩個為我學習此演算法的學習重點<br><a href="https://gist.github.com/makagonov/f7ed8ce729da72621b321f0ab547debb" target="_blank" rel="noopener">github makagonov/ST.cpp Secret</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>學習這演算法花了我很多時間還耗盡了很多腦細胞呢…嗚嗚，太笨了，看網路上的資源都還看不太懂，其實在網路上找資料是一件很花時間的事情，有些 blog 的資訊是錯誤亦或是寫得過於簡單，於是希望我這篇是可以不誤導他人，<del>我想應該很難，不過我的 blog 不太容易被找到吧XD，應該不會禍害大家</del>，學習 Suffix Tree 可能是我方法不對，讓我這次的學習演算法之路非常痛苦，我不會說這一次的學習是快樂的，但確實是在困難中的演算法學習最快的，因為我有壓力，壓力大到連睡覺都睡不著，身體一直記著要趕快學好此演算法。</p>
+<p>我想聊一些關於寫演算法的事情，寫演算法是快樂的，但在<strong>學習</strong>演算法的過程中其實是非常痛苦的，因為你想不透可又不想認輸是件非常痛苦的事情，你會懷疑自己，在這時候我突然認為許多書上講得符合在我的經驗中，「比賽，最大的敵人是你自己」，你在學習演算法時常會遇到新的困境，當你突破時又有可能遇到新的問題，過程中你會不斷詢問自己，自己是對的嗎？我是不是對演算法沒有天賦，到現在就算我學習了這個演算法還是覺得自己很沒有天賦，需要花很多時間學習與準備。</p>
+<p>老實講，我很羨慕台灣頂大的學生，有很好的機會可以遇到好老師發展，在台北科大，會演算法的老師其實並不多，這是一個非常可怕的問題，他導致整間學校的演算法水準都停擺在會 Sort 的情況，這樣寫出來的程式品質怎麼會是好的，然後老師們也不熱心於去學習新的演算法，不在意學生的程式知識水準這樣怎麼可以培養出優秀的人才，當我向老師詢問比較進階的演算法時老師都保持消極的態度導致我只能在網路上自學，不斷遇到錯誤、遇到挫折，懷疑自己。</p>
+<p><strong>如果可以，有誰會想要遇到挫折，我只想要快樂的活著</strong></p>
+<p>總之，我希望台灣頂大的學生都可以好好把握住自己的機會，不然困在北科的我會很難過QQ，之後有空再讓我說說我認為台灣教育制度的不公平。</p>
+<h2 id="Suffix-Tree-無註解程式碼"><a href="#Suffix-Tree-無註解程式碼" class="headerlink" title="Suffix Tree 無註解程式碼"></a>Suffix Tree 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> T 110</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100100</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> root , cnt , pos , needSL , remainder_ , <span class="comment">// note:remainder is cmath function</span></span><br><span class="line">    active_node , active_e , active_len ;</span><br><span class="line"><span class="built_in">string</span> text ;</span><br><span class="line"><span class="keyword">int</span> oo ;</span><br><span class="line"><span class="keyword">int</span> max_lrs = <span class="number">0</span> , lrs_index = <span class="number">0</span> , lrs_repeat = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> start , end ,slink ;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="keyword">int</span>&gt; next ;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">edge_length</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> min(end , pos+<span class="number">1</span>) - start ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> st , <span class="keyword">int</span> ed = oo)</span></span>&#123;</span><br><span class="line">        start = st ;</span><br><span class="line">        end = ed ;</span><br><span class="line">        slink = <span class="number">0</span> ;</span><br><span class="line">        next.clear() ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;tree[<span class="number">2</span>*N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">active_edge</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> text[active_e] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_SL</span><span class="params">(<span class="keyword">int</span> node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(needSL &gt; <span class="number">0</span> ) tree[needSL].slink = node ;</span><br><span class="line">    needSL = node ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">walkdown</span><span class="params">(<span class="keyword">int</span> node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(active_len &gt;= tree[node].edge_length())&#123;</span><br><span class="line">        active_e += tree[node].edge_length() ;</span><br><span class="line">        active_len -= tree[node].edge_length() ;</span><br><span class="line">        active_node = node ;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">st_init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//tree root is 1 not zero</span></span><br><span class="line">    needSL = remainder_ = <span class="number">0</span> ;</span><br><span class="line">    active_node = active_e = active_len = <span class="number">0</span> ;</span><br><span class="line">    pos = <span class="number">-1</span> ;</span><br><span class="line"></span><br><span class="line">    cnt = root = <span class="number">1</span> ;</span><br><span class="line">    active_node = <span class="number">1</span> ;</span><br><span class="line">    tree[cnt++].init(<span class="number">-1</span>,<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">st_extend</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">    pos++;</span><br><span class="line">    needSL = <span class="number">0</span> ;</span><br><span class="line">    remainder_++ ;</span><br><span class="line">    <span class="keyword">while</span>(remainder_ &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(active_len == <span class="number">0</span> ) active_e = pos ;</span><br><span class="line">        <span class="keyword">if</span>(tree[active_node].next[active_edge()] == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> leaf = cnt ;</span><br><span class="line">            tree[cnt++].init(pos) ;</span><br><span class="line">            tree[active_node].next[active_edge()] = leaf ;</span><br><span class="line">            add_SL(active_node) ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> nxt = tree[active_node].next[active_edge()] ;</span><br><span class="line">            <span class="keyword">if</span>(walkdown(nxt)) <span class="keyword">continue</span> ;</span><br><span class="line">            <span class="keyword">if</span>(text[tree[nxt].start + active_len] == c)&#123;</span><br><span class="line">                active_len++ ;</span><br><span class="line">                add_SL(active_node) ;</span><br><span class="line">                <span class="keyword">break</span> ;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> split = cnt ;</span><br><span class="line">            tree[cnt++].init(tree[nxt].start , tree[nxt].start + active_len) ;</span><br><span class="line">            tree[active_node].next[active_edge()] = split ;</span><br><span class="line">            <span class="keyword">int</span> leaf = cnt ;</span><br><span class="line">            tree[cnt++].init(pos) ;</span><br><span class="line">            tree[split].next[c] = leaf ;</span><br><span class="line">            tree[nxt].start += active_len ;</span><br><span class="line">            tree[split].next[text[tree[nxt].start]] = nxt ;</span><br><span class="line">            add_SL(split) ;</span><br><span class="line">        &#125;</span><br><span class="line">        remainder_-- ;</span><br><span class="line">        <span class="keyword">if</span>(active_node == root &amp;&amp; active_len &gt; <span class="number">0</span> )&#123;</span><br><span class="line">            active_len -- ;</span><br><span class="line">            active_e = pos - remainder_ + <span class="number">1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            active_node = tree[active_node].slink &gt; <span class="number">0</span> ? tree[active_node].slink : root ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; cnt ; i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span> &lt;&lt; tree[i].start &lt;&lt; <span class="string">' '</span> &lt;&lt; tree[i].end &lt;&lt; <span class="string">' '</span> &lt;&lt; tree[i].slink &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it : tree[i].next)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; it.first &lt;&lt; <span class="string">' '</span> &lt;&lt; it.second &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用紙筆去模擬-Suffix-Tree"><a href="#用紙筆去模擬-Suffix-Tree" class="headerlink" title="用紙筆去模擬 Suffix Tree"></a>用紙筆去模擬 Suffix Tree</h2><p>因為只是自己在思考過程中隨手做的筆記，覺得不是對讀者這麼有幫助，因此放在文章最下面。</p>
+<p>有時候用想或用看的可能不太能夠懂這演算法，那就用寫的吧！這是大衛我自己學習的手稿，紀錄者我的學習過程。</p>
+<blockquote>
+<p>“xyzxyaxyz$” 圖解步驟表，不含最後一步</p>
+</blockquote>
+<p><img src="/images/suffix-tree/17.jpg" alt=""></p>
+<blockquote>
+<p>“xyzxyaxyz$” 程式實際跑一遍圖表 A</p>
+</blockquote>
+<p><img src="/images/suffix-tree/16.jpg" alt=""></p>
+<blockquote>
+<p>“xyzxyaxyz$” 程式實際跑一遍圖表 B，加上 Suffix Tree 最後一步圖表</p>
+</blockquote>
+<p><img src="/images/suffix-tree/15.jpg" alt=""></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%8C%E7%B6%B4%E6%A8%B9-Suffix-Tree/" rel="tag">後綴樹 Suffix Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E9%87%8D%E8%A4%87%E5%AD%90%E5%AD%97%E4%B8%B2-Longest-Repeated-Substring/" rel="tag">最長重複子字串 Longest Repeated Substring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/11/04/UVa/Uva11512/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa11512 - GATTACA (Suffix Tree 後綴樹 - 最長重複子字串 Longest Repeated Substring)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/11/01/UVa/UVa719/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa719 - Glass Beads (Suffix Automation 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '願你一生努力，一生被愛', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
