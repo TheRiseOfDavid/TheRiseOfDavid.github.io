@@ -111,8 +111,8 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="Suffix-Automation-介紹"><a href="#Suffix-Automation-介紹" class="headerlink" title="Suffix Automation 介紹"></a>Suffix Automation 介紹</h2><blockquote>
-<p>Suffix Automation，簡稱 SAM，(以下內文都簡稱 SAM)，是一個能解決許多字串特定問題的資料結構。</p>
+      <h2 id="Suffix-Automaton-介紹"><a href="#Suffix-Automaton-介紹" class="headerlink" title="Suffix Automaton 介紹"></a>Suffix Automaton 介紹</h2><blockquote>
+<p>Suffix Automaton，簡稱 SAM，(以下內文都簡稱 SAM)，是一個能解決許多字串特定問題的資料結構。</p>
 <p>只要關於這兩個字串問題都可以使用 \(O(n)\) 時間複雜度解決：</p>
 <ul>
 <li>在另一個字串中查詢另一個字串的所有出現位置</li>
@@ -124,13 +124,13 @@ ga('send', 'pageview');
 </blockquote>
 <a id="more"></a>
 
-<h2 id="Suffix-Automation-原理"><a href="#Suffix-Automation-原理" class="headerlink" title="Suffix Automation 原理"></a>Suffix Automation 原理</h2><p>需要用到 struct，此 struct 需要 len , link , next，這些的意義為：</p>
+<h2 id="Suffix-Automaton-原理"><a href="#Suffix-Automaton-原理" class="headerlink" title="Suffix Automaton 原理"></a>Suffix Automaton 原理</h2><p>需要用到 struct，此 struct 需要 len , link , next，這些的意義為：</p>
 <ul>
 <li>len 目前的最長長度</li>
 <li>link 為當前子字串中第一個<strong>最長</strong>後綴結束位置 </li>
 <li>next 連結其他的點的邊，方向是 -&gt;</li>
 </ul>
-<h3 id="Suffix-Automation-圖示說明："><a href="#Suffix-Automation-圖示說明：" class="headerlink" title="Suffix Automation 圖示說明："></a>Suffix Automation 圖示說明：</h3><p>我們假設此字串為 “aabbabd”，下方圖片的線為：</p>
+<h3 id="Suffix-Automaton-圖示說明："><a href="#Suffix-Automaton-圖示說明：" class="headerlink" title="Suffix Automaton 圖示說明："></a>Suffix Automaton 圖示說明：</h3><p>我們假設此字串為 “aabbabd”，下方圖片的線為：</p>
 <ul>
 <li>link 為綠色線</li>
 <li>next 為藍色線</li>
@@ -163,7 +163,7 @@ ga('send', 'pageview');
 <h4 id="EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”"><a href="#EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”" class="headerlink" title="EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”"></a>EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”</h4><h4 id="EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？"><a href="#EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？" class="headerlink" title="EXERCISE B: 根據 Exercise A 甚麼時後會用到 if(st[p].len + 1 == st[q].len) 的 else 情況？"></a>EXERCISE B: 根據 Exercise A 甚麼時後會用到 <code>if(st[p].len + 1 == st[q].len)</code> 的 <code>else</code> 情況？</h4><p>在現在新增字元與現在的 SAM 圖中字元一樣但後綴不大於一時，新增 clone 點，並放棄原本的 q 點，但必須保留以保證先前的 SAM 狀態正確。</p>
 <h2 id="SAM-應用"><a href="#SAM-應用" class="headerlink" title="SAM 應用"></a>SAM 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
 <h3 id="最小循環移位"><a href="#最小循環移位" class="headerlink" title="最小循環移位"></a>最小循環移位</h3><ul>
-<li><a href="https://theriseofdavid.github.io/2020/11/01/UVa/UVa719/" target="_blank" rel="noopener">UVa719 - Glass Beads (Suffix Automation 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)</a></li>
+<li><a href="https://theriseofdavid.github.io/2020/11/01/UVa/UVa719/" target="_blank" rel="noopener">UVa719 - Glass Beads (Suffix Automaton 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)</a></li>
 </ul>
 <h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://oi-wiki.org/string/sam/#_17" target="_blank" rel="noopener">后缀自动机 (SAM)</a><br><a href="https://blog.csdn.net/stevensonson/article/details/81748438?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">后缀自动机学习笔记</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>感覺 SAM 沒有學得很好啊 ಥ⌣ಥ，沒辦法把一個抽象的事物說明的很清楚是我的問題呀，嗚嗚嗚嗚，這次就算有手寫程式碼以後還是有很多的學習盲點沒有意識到，慢慢再看其他教導 SAM 的文章才搞懂了些，SAM 是一個很酷、很強大的資料結構，發明 SAM 的人是一個大神吧。</p>

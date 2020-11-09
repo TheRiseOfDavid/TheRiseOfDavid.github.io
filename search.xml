@@ -5273,6 +5273,15 @@
 <p>比賽名次</p>
 </blockquote>
 <p><img src="/images/ncpc2020_final/8.PNG" alt=""></p>
+<h2 id="在-ICPC-2020-時進行頒獎典禮"><a href="#在-ICPC-2020-時進行頒獎典禮" class="headerlink" title="在 ICPC 2020 時進行頒獎典禮"></a>在 ICPC 2020 時進行頒獎典禮</h2><p>在頒獎時，我們的教練也過來一同拍合照，慶祝我們拿到此獎，拿到這獎項非常開心，代表我們又進步了一些，且這次是有加入普通大學的比賽，還有機會拿到 34th，代表我們實力被認可了吧！雖然 ICPC 2020 發揮失常，但還是可以的吧！還需要在加油，真的。</p>
+<blockquote>
+<p>比賽獎狀</p>
+</blockquote>
+<p><img src="/images/ncpc2020_final/10.jpg" alt=""></p>
+<blockquote>
+<p>頒獎典禮照片</p>
+</blockquote>
+<p><img src="/images/ncpc2020_final/11.jpg" alt=""></p>
 <h2 id="賽後日誌"><a href="#賽後日誌" class="headerlink" title="賽後日誌"></a>賽後日誌</h2><p>比賽完畢後，主辦單位讓我們如果想要帶氣球回家就可以帶氣球回家，於是我就拿了一顆氣球回家綁在機車上，很像馬力歐賽車XD，我都好怕後面的機車騎士看了會覺得我超像智障的XD，但不幸的是她在我騎車的路上因為車速過快就爆炸了ಥ⌣ಥ，在這邊跟大家宣導一下，如果你有綁氣球在機車上需要盡量將低你的車速在約 40km/hr，不然很容易因為車速過快拉扯力道太強而讓氣球破掉…。</p>
 <blockquote>
 <p>馬力歐賽車</p>
@@ -6025,8 +6034,8 @@
   <entry>
     <title>演算法知識 - Suffix Automaton 後綴自動機</title>
     <url>/2020/10/31/Explain_Algorithm/suffix-automaton/</url>
-    <content><![CDATA[<h2 id="Suffix-Automation-介紹"><a href="#Suffix-Automation-介紹" class="headerlink" title="Suffix Automation 介紹"></a>Suffix Automation 介紹</h2><blockquote>
-<p>Suffix Automation，簡稱 SAM，(以下內文都簡稱 SAM)，是一個能解決許多字串特定問題的資料結構。</p>
+    <content><![CDATA[<h2 id="Suffix-Automaton-介紹"><a href="#Suffix-Automaton-介紹" class="headerlink" title="Suffix Automaton 介紹"></a>Suffix Automaton 介紹</h2><blockquote>
+<p>Suffix Automaton，簡稱 SAM，(以下內文都簡稱 SAM)，是一個能解決許多字串特定問題的資料結構。</p>
 <p>只要關於這兩個字串問題都可以使用 \(O(n)\) 時間複雜度解決：</p>
 <ul>
 <li>在另一個字串中查詢另一個字串的所有出現位置</li>
@@ -6038,13 +6047,13 @@
 </blockquote>
 <a id="more"></a>
 
-<h2 id="Suffix-Automation-原理"><a href="#Suffix-Automation-原理" class="headerlink" title="Suffix Automation 原理"></a>Suffix Automation 原理</h2><p>需要用到 struct，此 struct 需要 len , link , next，這些的意義為：</p>
+<h2 id="Suffix-Automaton-原理"><a href="#Suffix-Automaton-原理" class="headerlink" title="Suffix Automaton 原理"></a>Suffix Automaton 原理</h2><p>需要用到 struct，此 struct 需要 len , link , next，這些的意義為：</p>
 <ul>
 <li>len 目前的最長長度</li>
 <li>link 為當前子字串中第一個<strong>最長</strong>後綴結束位置 </li>
 <li>next 連結其他的點的邊，方向是 -&gt;</li>
 </ul>
-<h3 id="Suffix-Automation-圖示說明："><a href="#Suffix-Automation-圖示說明：" class="headerlink" title="Suffix Automation 圖示說明："></a>Suffix Automation 圖示說明：</h3><p>我們假設此字串為 “aabbabd”，下方圖片的線為：</p>
+<h3 id="Suffix-Automaton-圖示說明："><a href="#Suffix-Automaton-圖示說明：" class="headerlink" title="Suffix Automaton 圖示說明："></a>Suffix Automaton 圖示說明：</h3><p>我們假設此字串為 “aabbabd”，下方圖片的線為：</p>
 <ul>
 <li>link 為綠色線</li>
 <li>next 為藍色線</li>
@@ -6077,7 +6086,7 @@
 <h4 id="EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”"><a href="#EXERCISE-A-劃出-SAM-的圖，字串是-“abccba”" class="headerlink" title="EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”"></a>EXERCISE A: 劃出 SAM 的圖，字串是 “abccba”</h4><h4 id="EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？"><a href="#EXERCISE-B-根據-Exercise-A-甚麼時後會用到-if-st-p-len-1-st-q-len-的-else-情況？" class="headerlink" title="EXERCISE B: 根據 Exercise A 甚麼時後會用到 if(st[p].len + 1 == st[q].len) 的 else 情況？"></a>EXERCISE B: 根據 Exercise A 甚麼時後會用到 <code>if(st[p].len + 1 == st[q].len)</code> 的 <code>else</code> 情況？</h4><p>在現在新增字元與現在的 SAM 圖中字元一樣但後綴不大於一時，新增 clone 點，並放棄原本的 q 點，但必須保留以保證先前的 SAM 狀態正確。</p>
 <h2 id="SAM-應用"><a href="#SAM-應用" class="headerlink" title="SAM 應用"></a>SAM 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
 <h3 id="最小循環移位"><a href="#最小循環移位" class="headerlink" title="最小循環移位"></a>最小循環移位</h3><ul>
-<li><a href="https://theriseofdavid.github.io/2020/11/01/UVa/UVa719/" target="_blank" rel="noopener">UVa719 - Glass Beads (Suffix Automation 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)</a></li>
+<li><a href="https://theriseofdavid.github.io/2020/11/01/UVa/UVa719/" target="_blank" rel="noopener">UVa719 - Glass Beads (Suffix Automaton 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)</a></li>
 </ul>
 <h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://oi-wiki.org/string/sam/#_17" target="_blank" rel="noopener">后缀自动机 (SAM)</a><br><a href="https://blog.csdn.net/stevensonson/article/details/81748438?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">后缀自动机学习笔记</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>感覺 SAM 沒有學得很好啊 ಥ⌣ಥ，沒辦法把一個抽象的事物說明的很清楚是我的問題呀，嗚嗚嗚嗚，這次就算有手寫程式碼以後還是有很多的學習盲點沒有意識到，慢慢再看其他教導 SAM 的文章才搞懂了些，SAM 是一個很酷、很強大的資料結構，發明 SAM 的人是一個大神吧。</p>
@@ -6371,7 +6380,24 @@
 <blockquote>
 <p><img src="/images/statistics-ch5/4.PNG" alt=""></p>
 </blockquote>
-<p><strong>目前看到 5-3 ，下次從 5-4 看</strong></p>
+<h4 id="Discrete-Uniform-Probability-Distribution-離散均勻分配"><a href="#Discrete-Uniform-Probability-Distribution-離散均勻分配" class="headerlink" title="Discrete Uniform Probability Distribution 離散均勻分配"></a>Discrete Uniform Probability Distribution 離散均勻分配</h4><p>表示他的每一種實驗結果機率分配都一樣</p>
+<h3 id="Bivariate-Distributions-二元分配"><a href="#Bivariate-Distributions-二元分配" class="headerlink" title="Bivariate Distributions 二元分配"></a>Bivariate Distributions 二元分配</h3><p>用兩種實驗，來找出他們的關係。</p>
+<p>這兩次實驗我用 x,y 來代稱，先算出 x 的變異數與期望值，再算出 y 的變異數與期望值。</p>
+<p>用圖片進行解釋，圖片說明如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/5.PNG" alt=""></p>
+</blockquote>
+<p>其中的 Covariance(共變異數) 怎麼算呢？</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/6.PNG" alt=""></p>
+</blockquote>
+<p>透過範例投資組合結果如下表：</p>
+<blockquote>
+<blockquote>
+<p><img src="/images/statistics-ch5/7.PNG" alt=""></p>
+</blockquote>
+</blockquote>
+<p><strong>目前看到 5-6 ，下次從 5-7 看</strong></p>
 ]]></content>
       <categories>
         <category>北科上課筆記</category>
@@ -6449,6 +6475,128 @@
         <tag>演算法知識</tag>
         <tag>最長重複子字串 Longest Repeated Substring</tag>
         <tag>Suffix Tree 後綴樹</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa/UVa10192</title>
+    <url>/2020/11/07/UVa/UVa10192/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>演算法知識 - Longest Common Subsequence 動態規劃最長共同子序列(時間複雜度 O(nlogn))</title>
+    <url>/2020/10/19/Explain_Algorithm/LCS/</url>
+    <content><![CDATA[<h2 id="Longest-Common-Subsequence-介紹"><a href="#Longest-Common-Subsequence-介紹" class="headerlink" title="Longest Common Subsequence 介紹"></a>Longest Common Subsequence 介紹</h2><blockquote>
+<p>以下簡稱 LCS，在兩個序列中找出最長子序列的問題，序列是甚麼？只要順序一致即可，舉例：</p>
+<ul>
+<li>people</li>
+<li>apple</li>
+</ul>
+<ul>
+<li>這兩個的 LCS 就是 pple，長度為 4，子序列為 pple。</li>
+</ul>
+<p>看懂了嗎？ pple 在前面兩個字串中順序都是保持一致的。<br>被廣泛應用於生物資訊學與版本控制。</p>
+<p>這裡我們是教導時間複雜度為 \(O(n \log n)\) 的寫法，而非 \(O(n^2)\) 的寫法</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Longest-Common-Subsequence-原理"><a href="#Longest-Common-Subsequence-原理" class="headerlink" title="Longest Common Subsequence 原理"></a>Longest Common Subsequence 原理</h2><p>先將 A 字串的值逆向輸入到一個 <code>map&lt;char,vector&lt;int&gt;&gt;</code>裡面，再根據 B 字串的字元依序將 <code>map&lt;char,vector&lt;int&gt;&gt;</code> 取出，之後做 LIS 遞增。</p>
+<p>如果不懂 LIS 是甚麼可以先看<a href=""></a></p>
+<h3 id="QUESTION-為甚麼可以用-O-n-log-n-去解？"><a href="#QUESTION-為甚麼可以用-O-n-log-n-去解？" class="headerlink" title="QUESTION: ??? 為甚麼可以用 \(O(n \log n )\) 去解？"></a>QUESTION: ??? 為甚麼可以用 \(O(n \log n )\) 去解？</h3><p>因為這世界天才太多了。<del>正解</del></p>
+<p>開玩笑的，還記得 (\ O(n^2))\ 的解法怎麼解嗎？是用動態規劃，可是他是不是有點浪費效率，因為她只有在 <code>A[i] == B[i]</code>，才會增加長度，剩下時間都是在延續之前的狀態，我們從這裡進行補強。</p>
+<p>我們只要把 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，放入的順序是大到小，再根據 B 字串的每個字元對應同字元的 <code>vector</code>，在做 LIS 即可，這樣我們就減少了此情況 <code>A[i] != B[i]</code>。</p>
+<h2 id="Longest-Common-Subsequence-說明與舉例"><a href="#Longest-Common-Subsequence-說明與舉例" class="headerlink" title="Longest Common Subsequence 說明與舉例"></a>Longest Common Subsequence 說明與舉例</h2><h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h3><p>先舉個例子，以免被說是騙人XD。</p>
+<p>String A = “abdba”<br>String B = “dbaaba” </p>
+<p>對應 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，字串  index 從 0 開始，<strong>記住是逆序</strong>，如下：</p>
+<p>a(4,0) b(3,1) d(2)</p>
+<p>再來，我們根據根據 B 字串的每個字元對應同字元的 <code>vector</code>，產生序列，於是就變成</p>
+<p>2 3 1 4 0 4 0 3 1 4 0<br>d b   a   a   b   a</p>
+<p>看懂了？對吧！</p>
+<p>而此時，這裡的 LIS 最大長度為 3，其中一種方式為 2 3 4，但這裡也只有這種XD，記住，在其他情況下 LCS 不只有一種表達方式。</p>
+<p>且 d 的 vector 有 2、b 的 vector 有 3、a 的 vector 有 4，剛好能夠組成 dba，符合答案。</p>
+<h3 id="QUESTION-那為甚麼要是逆序？"><a href="#QUESTION-那為甚麼要是逆序？" class="headerlink" title="QUESTION: 那為甚麼要是逆序？"></a>QUESTION: 那為甚麼要是逆序？</h3><p>很簡單，為了要避免重複判斷，一樣用剛剛的例子如下，那 <code>vector</code>會變成。</p>
+<p>a(0,4) b(1,3) d(2)</p>
+<p>2 1 3 0 4 0 4 1 3 0 4<br>d b   a   a   b   a</p>
+<p>這樣出來的最長長度為 4，其中一種方式為 0 1 3 4，但這裡組成的字串會變成 dbba，是不是中間的 b 被重複算到了，因為 LIS 是遞增，如果我們的 <code>vector</code> 也是遞增排序時，則中間的每一個 <code>vector</code> 的 element 都會被我們選中長度會被無限放大，因此在 <code>vector</code> 時要是逆序的元素。</p>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>字串處理</tag>
+        <tag>演算法知識</tag>
+        <tag>動態規劃最長共同子序列 Longest Common Subsequence</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2020 International Collegiate Programming Contest Asia Taipei-Hsinchu Site (ICPC2020) - 65th 心得</title>
+    <url>/2020/10/09/contest_experence/ICPC2020/</url>
+    <content><![CDATA[<blockquote>
+<p>僅此紀錄 2020/11/08 2020 ICPC 心得。<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去<br>沒有得獎拉，只是很可惜自己還不夠好吧。</p>
+<p>明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="第一天的報到"><a href="#第一天的報到" class="headerlink" title="第一天的報到"></a>第一天的報到</h2><h3 id="報到"><a href="#報到" class="headerlink" title="報到"></a>報到</h3><p>由於 ICPC 是非常正式的國際賽事，比賽前必須將自己明天要比賽的資料都<strong>事先</strong>放入考試會場內，才可以進行比賽，於是比賽的前一天 2020/11/07 就要先去報到。</p>
+<p>早上大約 10:00 起床，寫了一下 UVa 的題目，一直 WA 但卻找不出問題所在，嗚嗚，我真沒用。一路寫到 12 點則從家裡出發前往北商，這是我第二次比 ICPC，這次的比賽地點也還是台北商大(北商)，與學長和漢軒在北商的司令台會合後就前往報到。</p>
+<blockquote>
+<p>報到時拍的北商畫面 - A</p>
+</blockquote>
+<p><img src="/images/ICPC2020/1.jpg" alt=""></p>
+<blockquote>
+<p>報到時拍的北商畫面 - B</p>
+</blockquote>
+<p><img src="/images/ICPC2020/2.jpg" alt=""></p>
+<h3 id="進場與開幕典禮"><a href="#進場與開幕典禮" class="headerlink" title="進場與開幕典禮"></a>進場與開幕典禮</h3><p>報到時先給工作人員查看自己的學生證，確認身分無誤後給予我們參賽資料，內容有：比賽手冊、背包、衣服，這次的背包與上次不同，上次的是束口袋，這此則是布背包，讓我感覺到這次的比賽的高級感阿，好開心！之後換上今年的選手衣服後，到這次 ICPC2020 的 logo 前合照，完成了報告的全部事宜。</p>
+<blockquote>
+<p>進場時拍下的比賽場地照片 (Please Do Not Touch Anything)</p>
+</blockquote>
+<p><img src="/images/ICPC2020/2.jpg" alt=""></p>
+<p>接下來上樓後學長放上我們的 NoteBook 與資料夾，整理一下環境隨後就準備要進行開幕典禮，由於今年的開幕典禮沒有國際隊伍，而沒有國際隊伍的原因是因為今年新冠肺炎疫情，因此這次的開幕典禮是用<strong>中文</strong>來開幕，蠻驚奇的，下次應該不會這樣吧www，看來我今年聽到了限量場次的 ICPC 中文演講XD。</p>
+<p>這次的主辦單位總喜歡威脅隊伍www，時常聽到主辦單位說，「只要你XXXXX，我們就取消你的參賽資格。」，就像是國中老師恐嚇學生要記警告一樣XD，讓我想起了國中的恐懼www，沒，我好像到國三就沒有再害怕警告了，太屁孩了。當時不愛讀書，才導致現在只能讀北科，老實講，心情還是有點難過吧，後悔當時沒有再讀點書，想跟未來的自己說對不起，是過去的自己不努力。</p>
+<blockquote>
+<p>選手證</p>
+</blockquote>
+<p><img src="/images/ICPC2020/4.jpg" alt=""></p>
+<h3 id="電腦測試"><a href="#電腦測試" class="headerlink" title="電腦測試"></a>電腦測試</h3><p>開幕典禮結束後，就準備要來寫程式啦！主要是 Demo 電腦有沒有壞掉或是出現異常的情況發生，很幸運地這次沒有，主辦單位這次有提醒我們說由於電腦是<strong>最新的 Ubuntu and CodeBlock</strong>，如果電腦當掉的話我們不負責任，嗚嗚嗚，這樣不好啦，用穩定的版本不是很好嗎，我覺得可以在稍稍改進，臨時突然用新的 IDE 真的不太習慣，不過這次同時我們也注意到這場比賽的椅子有軟墊！鍵盤也不再是那種買桌電會贈送的鍵盤，而是聯想的普通鍵盤，這讓我感到更開心，這場的硬體水準大幅提升，太開心啦，經濟回升了，對吧！</p>
+<p>這一次測試電腦我們有抓出比較有趣的地方，例如我們在 C++ 中寫出 index -1 或是大於陣列的最大 index，都是沒有問題的！且送上去主辦單位的 Judge (Dom Judge) 也都可以順利編譯！這讓我超開心的拉，因為 UVa 是不會通過的，所以有些小地方都還需要注意一下，如果 C++ 會幫我注意那就太好啦，不過會導致我寫程式時越來越不小心XD，我很抱歉，不過話說 C++ 是不是要逐漸 Python 化拉。<del>越來越軟</del></p>
+<p>由於中午太趕都沒有吃午餐，到大概下午 2:00 時肚子就咕嚕咕嚕地叫了，那時候我的肚子感到難過，幸好學長有說後面有一些簡單的小餅乾，我趕快去把那些餅乾吃一些，恩，好吃，好好吃，有我愛吃的，好讚！吃飽了以後就回到比賽位置坐下等待下一個程序。</p>
+<h3 id="小插曲"><a href="#小插曲" class="headerlink" title="小插曲"></a>小插曲</h3><p>由於我們測試完電腦也覺得沒有問題後，我們就在等待測試的時間結束，這一次的比賽有點冷，不對，是每次的比賽都很冷XDDD，這也讓我下定決心明天一定要帶北科資財系的外套，他超級保暖，保暖到我以為這是下雪才可以穿出來的，沒有，只要是 ICPC 都可以穿，因為冷氣都會很冷，北極雄們，我對不起你們QQQ。</p>
+<p>這一次比賽有提到可以帶英漢字典，但我們一開始不知道這些資訊於是沒有事先準備，但這對於英文不好的我是一大福音，於是我就臨時想到家裡小時後把我送去何嘉仁美語補習班補英文時所用的英漢字典，我就趕緊回家再把他帶過來，當我送來後則發現剛好比賽測試時間也剛好結束，時間算得剛剛好，運氣不錯XD。</p>
+<h3 id="回家休息"><a href="#回家休息" class="headerlink" title="回家休息"></a>回家休息</h3><p>大約在下午 4:50 主辦單位則說我們可以準備回去，並回答一些 Q&amp;A 問題，我們稍微聆聽一下問題的回答後就回家進行休息，準備明天比賽。</p>
+<p>但其實我那天睡不太著，凌晨樓下的音樂一直震動使我翻來覆去無法入眠，晚上其實也都在練習 UVa 題目希望可以把他解開，但還是解不太開，我的程式能力真的好弱，好希望可以變強，我可能需要從這一次的經驗中找出最適合我的學習成長方法。</p>
+<h2 id="比賽當天"><a href="#比賽當天" class="headerlink" title="比賽當天"></a>比賽當天</h2><h3 id="報到-1"><a href="#報到-1" class="headerlink" title="報到"></a>報到</h3><p>早上起床後，我稍稍得有點賴床，起床後我則準備出門去吃我的麥當勞早餐，這應該是我人生不到五次的麥當勞早餐吧XD，麥當勞早餐其實蠻好吃的，以後可以多吃一點，而且還看到早上 8:30 竟然有大人在教小孩寫數學，這些小孩真是優秀呀，也感動大人可以從小就引導他們長大。</p>
+<p>吃完了之後則順利地前往北商，由於今天是禮拜日，沒有甚麼塞車，很順利的就抵達了</p>
+<p><strong>內容待補</strong></p>
+<h2 id="比賽心得"><a href="#比賽心得" class="headerlink" title="比賽心得"></a>比賽心得</h2><p>老實說，我很難過，真的非常非常難過，難過到話都說不出來。</p>
+<p>不是氣隊友，是氣自己沒有用處，這一次的題目中 String 只有一題且那題並沒有人解開，使我無用武之地，只能想 Game 題，讓我今天真的很難過，沒有派上用場，也讓我大嘆不公平，我明明是一個想要變得優秀的人卻礙於學校限制而沒辦法變的優秀，今天領悟最深的是，<strong>不是我不努力，是我連努力的資格都沒有</strong>，你說你想要考好 ICPC，那你要怎麼考好？我不知道，台北科大知道嗎？他不知道，我們有資源可以扭轉困境嗎，我感覺不到，已經努力了一年去改變這個困境但這過程很痛苦，至現在又還沒找到方法，你覺得是我們爛嗎？或許是吧，我們不是優秀的人物，可以去更那些已經有學長傳承下來的人競爭、抗戰。</p>
+<p>當然，我不否認，你可以說在網路上真的可以找到很多資料自學，那換我問你？</p>
+<ul>
+<li>你知道怎麼抓資料嗎？</li>
+<li>你有辦法在你對這個演算法都不了解時可以找到一篇沒有錯誤完全正確的資訊網頁嗎？</li>
+<li>你能夠只看資訊網頁就能理解那些演算法的奧妙嗎？</li>
+<li>資訊網頁所述說的邏輯你都能夠看懂嗎？</li>
+<li>資訊網頁的程式碼你不需要解釋就能夠完全理解嗎？</li>
+<li>你能透過上網查到上面這些問題，而不透過別人的教導嗎？</li>
+</ul>
+<p>就算你完成了以上所有問題，你也已經輸了那些有學長有老師的學生們，他們資質比你強、又有學長、老師指導幫你快速解決你的思考盲點，當你學完時發現別人已經學完兩個演算法時，你不會氣餒、你不會難過嗎？</p>
+<p>不是台北科大不好，只是我怨恨我自己在我不懂事的年代沒有多懂事一點，如果真的有讀者願意讀到這裡，我用我那潰不成氣的聲音說，<strong>這過程有多少的痛苦，是永遠沒辦法用比賽成績去衡量的</strong>，比賽永遠不是比你的努力，比賽就像出生一樣，是有貧富差距的，<strong>你是窮人你只能夠比別人懂事，才能贏過那些比你好的人</strong>，憑甚麼沒資源的人一定要用痛苦才能換來有錢人習以為常的事物，我也是人，我也想要資源、我也想要尊嚴。</p>
+<p>管理、NoteBook、練習等，全部都需要一個隊伍包辦，我們都靠著 3 人隊伍硬撐著，沒有人看到我們的辛勞，我們也看不到別人的辛勞，不覺得這很不公平嗎？明明都有最佳女隊伍獎，就不能對於這些沒有資源的隊伍作出一些讚美嗎？我們是不是沒有出名、沒有成就就永遠沒有人看見我們？</p>
+<p>說太多了，但我真的好難過，我好想哭，我不怨恨別人比我強，我只是對我自己的弱小感到難過，憑甚麼我是一個這麼沒有能力的人，沒有辦法與他人競爭，只能打這 BLOG 難過，而不是找到強者與強者一同讀書、成功。</p>
+<p>也許是資源不均，讓我的學習之路已經成為偏差了吧？現在的我真的不知道我還有沒有辦法聽著講師上課來讓我快速學習知識？如果有，我一定要好好把握，<strong>他人習以為常的事物，在我眼中卻像黃金一樣珍貴</strong>。</p>
+<p>很感謝隊伍願意陪我一起練習，包容著這麼沒用的我，即使比賽結束也沒有對隊員做出負面行為，也都將情緒留在自身消化，特別是學長，這一路以來應該最辛苦的就是他了吧，他也都不曾抱怨，願意付出一切，沒有他真的沒辦法，補足了我的缺陷，教導了我許多應該要在未來才能學到的觀念，他提前教倒了我，這一路以來真的很謝謝他，如果可以，我也想為他做些甚麼。</p>
+<p>總而言之，這是一篇負面文，我很抱歉讓大家接受我現在的負面情緒，但是我也不知道我該怎麼辦…，像個走失的小男孩因為找不到媽媽而不安心的四處盼望媽媽身影卻還是不到，那著急著、眼框放紅，強忍著哭意的男孩。</p>
+<p>明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。</p>
+]]></content>
+      <categories>
+        <category>競賽心得</category>
+      </categories>
+      <tags>
+        <tag>大學Life</tag>
+        <tag>ICPC</tag>
+        <tag>程式比賽</tag>
+        <tag>競賽心得</tag>
+        <tag>人生旅途</tag>
       </tags>
   </entry>
 </search>
