@@ -4511,32 +4511,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa245 - Uncompress (String Process)</title>
-    <url>/2020/09/25/UVa/Uva245/</url>
-    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>給你一個經過壓縮的文本，文本中的數字則是代表是前面第幾個單字並輸出，但如果前面那些單字有重複到則只算一次並且是由後往前看的第一次遇到為準，請解壓縮此文本。</p>
-<p>註:單字中間只要遇到非英文字母就全部都視為不一樣的單字。</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題要用 Linked-List 由於每個單字的上一個單字與下一個單字都會隨著壓縮而變不同，剛好符合 Linked-List 的特色。再加上一些優秀的讀取字串技術，就可以輕鬆解決掉這題了XD。</p>
-<p>如果不懂的話，下方程式碼有做解說。相信你會很快理解 Linked-List 的，我很努力想讓讀者都能懂啦。但是我個人不太喜歡在解題時使用指標，所以下面並不是指標實作。<del>對不起我就爛，debug 指標的技術很爛</del></p>
-<h2 id="參考連結："><a href="#參考連結：" class="headerlink" title="參考連結："></a>參考連結：</h2><p><a href="https://www.codeleading.com/article/5927815599/" target="_blank" rel="noopener">UVA245 WF5184 POJ1885 Uncompress【文本】</a></p>
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題應該看的出來他是用 Linked-List 拉XD，我一開始是想要用 vector 但是我卻卡關QQ，可惡腦袋不給力呀！之後就用 Linked-List 解決掉這題，不過太久沒有寫字串題目，讀取字串的能力特別差啊讀取字串的能力特別差啊，腦袋整個完全沒想法。後來看到參考連結中的那篇優秀程式碼文章，才讓我對於讀取字串又有了更新的領悟，好讚。非常感謝作者願意將他的程式碼技術公布出來！</p>
-<p>也希望我自己也能成為獨當一面的演算法程式設計師，不要甚麼都不太會，未來只能領低薪，我要努力，直到看到夢想為止之前！也希望大家可以幫助我。</p>
-<p>不過指標的 Linked-List 我還是覺得寫起來很麻煩阿，常常 Debug 都找不出錯誤，好討厭。我可能之後會變成愛用 C++，但不喜歡指標的怪人吧www。<del>C++ 的優勢根本沒有發揮出來</del></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> ch ;</span><br><span class="line"><span class="built_in">string</span> strTemp = <span class="string">""</span> ;</span><br><span class="line"><span class="keyword">int</span> wcnt = <span class="number">0</span> , head = <span class="number">0</span> , num =<span class="number">0</span>   ;</span><br><span class="line"><span class="comment">//wcnt linklist 的總量</span></span><br><span class="line"><span class="comment">//head 上一個單字的 index</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu_words</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> next ;</span><br><span class="line">    <span class="built_in">string</span> word ;</span><br><span class="line">&#125;word[MAXN] ;</span><br><span class="line"><span class="comment">// next 上一個單字的 index</span></span><br><span class="line"><span class="comment">// word 此單字</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    <span class="comment">//freopen("out.txt" , "w" , stdout );</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        ch = getchar() ;</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'0'</span>)</span><br><span class="line">            <span class="keyword">break</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">isalpha</span>(ch))&#123;</span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">isalpha</span>(ch))&#123; <span class="comment">//不斷讀取單字，直到遇到其他</span></span><br><span class="line">                strTemp += ch ;</span><br><span class="line">                ch = getchar() ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; strTemp ;</span><br><span class="line">            word[wcnt].word = strTemp ; <span class="comment">//添加新單字</span></span><br><span class="line">            word[wcnt].next = head ; <span class="comment">//上一個單字 index</span></span><br><span class="line">            head = wcnt++ ; <span class="comment">//長度增加</span></span><br><span class="line">            strTemp = <span class="string">""</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">isdigit</span>(ch))&#123; </span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))&#123; <span class="comment">//不斷讀取數字，直到遇到其他</span></span><br><span class="line">                num = num * <span class="number">10</span> + (ch - <span class="string">'0'</span>) ;</span><br><span class="line">                ch = getchar() ;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> cur = head , prev  ; </span><br><span class="line">            <span class="comment">//cur = 數字的那個單字</span></span><br><span class="line">            <span class="comment">//prev = 數字的下一個單字</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; num ; i++)&#123; <span class="comment">// 向上追蹤單字</span></span><br><span class="line">                prev = cur ;</span><br><span class="line">                cur = word[cur].next ;</span><br><span class="line">            &#125;</span><br><span class="line">            num = <span class="number">0</span> ;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; word[cur].word ;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(head != cur )&#123; <span class="comment">// 要將當前的單字搬到後面，所以單字的上一個 index 也需要更新</span></span><br><span class="line">                word[prev].next = word[cur].next ; </span><br><span class="line">                <span class="comment">// 因為要移動當前單字所以必須要將當前單字的下一個單字的 next，往前到現在這單字的 next</span></span><br><span class="line">                word[cur].next = head ;</span><br><span class="line">                <span class="comment">// 當前的單字 next 改為現在讀取中的上一個單字</span></span><br><span class="line">                head = cur ; <span class="comment">// 現在這個單字變成結尾</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(ch) ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>UVa</category>
-      </categories>
-      <tags>
-        <tag>UVa</tag>
-        <tag>程式解題</tag>
-        <tag>String Processing Problems</tag>
-        <tag>Competitive Programming3</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ERROR! Your local changes to the following files would be overwritten by merge</title>
     <url>/2020/09/25/git/git-error-local-changes-to-the-following-files-would-be-overwritten/</url>
     <content><![CDATA[<h2 id="文章大意："><a href="#文章大意：" class="headerlink" title="文章大意："></a>文章大意：</h2><blockquote>
@@ -5291,21 +5265,15 @@
 <p>後來學長去查看我們有沒有得獎，沒想到竟然還有！我們有佳作，好開心呀，這樣代表我們可以跟北科領取獎學金了，希望可以領取到拉，每次都覺得學校的行政效率很慢不知道獎學金到底能不能拿到，不過至少現在的我們狀況越來越好了，要繼續保持到 11 月呀，只剩下最後一場大戰 <strong>2020 ICPC TAIWAN　 REIGON</strong></p>
 <h2 id="賽後檢討"><a href="#賽後檢討" class="headerlink" title="賽後檢討"></a>賽後檢討</h2><p>對於我參加這次比賽，我將針對幾點進行檢討：</p>
 <ul>
-<li><p>檔案整理很重要，我覺得今天檔案管理有點太亂，可以嘗試買一個資料夾管理。</p>
-</li>
-<li><p>針對每個比賽，要稍微看一下題目規章可以用的 IDE。</p>
-</li>
-<li><p>5個小時會讓自己的體力明顯不足，比賽的時候需要喝咖啡</p>
-</li>
-<li><p>滴眼藥水，不然眼睛會模糊</p>
-</li>
-<li><p>程式碼如果髒了評估後考量，給其他人評估會不會比較適當</p>
-</li>
-<li><p>適當的在中途進行debug，以免遇到問題</p>
+<li>檔案整理很重要，我覺得今天檔案管理有點太亂，可以嘗試買一個資料夾管理。</li>
+<li>針對每個比賽，要稍微看一下題目規章可以用的 IDE。</li>
+<li>5個小時會讓自己的體力明顯不足，比賽的時候需要喝咖啡</li>
+<li>滴眼藥水，不然眼睛會模糊</li>
+<li>程式碼如果髒了評估後考量，給其他人評估會不會比較適當</li>
+<li>適當的在中途進行debug，以免遇到問題</li>
+</ul>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這一次的比賽我並不是主力在負責解題，有點無用武之地，我負責 String，但那題 String 是難題只有一組解開，於是我不敢去嘗試。所以大部分都是在做 Support 的工作，幫助大家手邊的一些雜事，感覺這一次我在做雜事的時候效率並沒有到太好，沒有把雜事分工處理的很優秀，還需要改進。</p>
 <p><strong>如果沒辦法成為主力上台打 Code 去 AC 題目，那就要做好 Support 的工作讓前方的主力在需要資源的時候可以最快速的給他不會讓他在思考的過程中還需要翻找答案讓他更加忙碌。我是他的隊友，不是他的敵人。</strong></p>
-</li>
-</ul>
 <p>最後要謝謝家人可以支持我參加演算法這條不歸路，雖然在讀書的過程中家庭沒有辦法讓我完全的去努力準備演算法，總還是有一些事情要溝通，不過還是很感謝自己跟父母可以讓我走到現在，雖然沒有很好的成就但也不是輸的那麼徹底。</p>
 ]]></content>
       <categories>
@@ -5548,7 +5516,8 @@
 <p><img src="/images/statistics-ch3B/9.PNG" alt=""></p>
 </blockquote>
 <h3 id="Measures-of-Association-Between-Two-Variables-兩個變數的關係"><a href="#Measures-of-Association-Between-Two-Variables-兩個變數的關係" class="headerlink" title="Measures of Association Between Two Variables 兩個變數的關係"></a>Measures of Association Between Two Variables 兩個變數的關係</h3><p>把散佈圖切成4塊，如果散佈圖數值集中在一、三象限代表有線性關係，二、四象限也是，如果數值散步則代表沒有線性關系。</p>
-<h3 id="Covariance-共變異數"><a href="#Covariance-共變異數" class="headerlink" title="Covariance 共變異數"></a>Covariance 共變異數</h3><p>公式如下：</p>
+<h3 id="Covariance-共變異數"><a href="#Covariance-共變異數" class="headerlink" title="Covariance 共變異數"></a>Covariance 共變異數</h3><p>當共變異數為負時表示當一方正成長另一方則會反向成長，反之亦同。</p>
+<p>公式如下：</p>
 <blockquote>
 <p><img src="/images/statistics-ch3B/10.PNG" alt=""></p>
 </blockquote>
@@ -6364,6 +6333,10 @@
 <li>Finite Number of Values<br>在已知的集合中隨機抽出的元素。</li>
 <li>Infinite Sequence of Values<br>在<strong>無限</strong>的集合中隨機抽出的元素，此集合大小為<strong>Infinite</strong>。</li>
 </ul>
+<h3 id="Continuous-Random-Variable-連續隨機變數"><a href="#Continuous-Random-Variable-連續隨機變數" class="headerlink" title="Continuous Random Variable 連續隨機變數"></a>Continuous Random Variable 連續隨機變數</h3><ul>
+<li>元素是取區間，類似此概念 \([a,b]\)</li>
+<li>或數值無法一一列舉，例如關於小數點的實驗</li>
+</ul>
 <h3 id="Discrete-Probability-Distributions-離散機率"><a href="#Discrete-Probability-Distributions-離散機率" class="headerlink" title="Discrete Probability Distributions 離散機率"></a>Discrete Probability Distributions 離散機率</h3><ul>
 <li>用指派來指派每一個元素的機率</li>
 <li>用<strong>公式</strong>推出，且要符合此公式 \(f(x) \geq 0\) and \( \sum_{}^{} f(x) = 1 \)</li>
@@ -6490,13 +6463,41 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa/UVa10192</title>
+    <title>UVa10192 - Vacation (LCS)</title>
     <url>/2020/11/07/UVa/UVa10192/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>爸媽想要出國出去玩，<del>可是今年有疫情欸，拔麻</del>，反正爸媽不管且還要求出國的遊玩順序一定要按照他們想法，這讓我非常煩惱，但他們願意略過一些他們想去的地方，但順序必須一樣，試問如果爸媽都有自己的出國遊玩順序再不影響他們順序時他們可以去的最大長度？</p>
+<p>注意：這題輸入字串會有 space , uppercase letters , lowercase letters<br>所以要使用 <code>getline(string,cin)</code> 會是最好的方法</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題是標準的 LCS 問題，可以用 \(O(n^2\) and \(O(n \log n) \) 解開，這裡使用 \(O(n \log n)\) 來解決此問題。</p>
+<p>如果還不太懂 LCS 是甚麼問題，建議看看 <a href="https://theriseofdavid.github.io/2020/11/11/Explain_Algorithm/LCS/" target="_blank" rel="noopener">演算法知識 - Longest Common Subsequence 最長共同子序列(時間複雜度 O(nlogn))</a>，這裡有對於此演算法有完整的介紹</p>
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>記住他的輸出還要輸出一些文字，不是只直接輸出 LCS 的長度即可。</p>
+<p>P.S. 下方題目程式碼的 string index 由 1 開始方便編寫程式碼，主要方便用來 LIS 如果要更改 cur 成 0 時會造成 <code>t[-1]</code> ，只需要在 <code>string = &quot;$&quot; + string</code>，即可達到此功效</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題其實沒有很難，但是我搞了很久因為 udebug 壞掉了，嗚嗚嗚，沒有 Udebug 我就超像一個白癡一樣甚麼都不會，不可以阿大衛，這樣你打 ICPC 怎麼會進步呢QQ，讓我發現我對 Udebug 就像是小孩子依賴麻麻一般，要是沒有了她我則甚麼都不會。</p>
+<p>盡量不要這樣，可能需要增進自己去 hack 測試資料的能力並想出自己程式碼的漏洞，不過明明寫出自己覺得沒有錯的程式碼然後想錯誤，其實也是一件蠻痛苦的事情呢XD。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> t[N*N] , d[N*N] , num[N*N] ; <span class="comment">//determine</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dict ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v )</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (l+r) /<span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(num[v] &gt; num[t[m]]) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (num[v] &lt; num[t[m]]) r = m ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    dict.clear() ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = strA.length()<span class="number">-1</span> ; i &gt; <span class="number">0</span> ; i--) dict[strA[i]].push_back(i) ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; strB.length() ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; dict[strB[i]].size() ; j++)</span><br><span class="line">            num[++k] = dict[strB[i]][j] ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(k==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">    <span class="comment">//memset(t ,-1 , sizeof(t));</span></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span>, cur ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= k ; i++ )&#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] &gt; num[t[len]]) t[++len] = i , d[i] = t[len<span class="number">-1</span>] ;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//debug</span></span><br><span class="line"><span class="comment">//        for(int i = 1 ; i &lt;= k ; i++)</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; num[t[i]] &lt;&lt; ' ' ;</span></span><br><span class="line"><span class="comment">//        cout &lt;&lt; '\n' ;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> ) ;</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>) ;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    n = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">while</span>(getline(<span class="built_in">cin</span>,strA) &amp;&amp; strA != <span class="string">"#"</span>)&#123;</span><br><span class="line">        getline(<span class="built_in">cin</span>,strB);</span><br><span class="line">        strA = <span class="string">"$"</span> + strA;</span><br><span class="line">        strB = <span class="string">"$"</span> + strB;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; lcs() &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; n++ &lt;&lt; <span class="string">": you can visit at most "</span> &lt;&lt; lcs() &lt;&lt; <span class="string">" cities.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>動態規劃</tag>
+        <tag>程式解題</tag>
+        <tag>字串處理</tag>
+        <tag>最長共同子序列 Longest Common Subsequence</tag>
+        <tag>演算法知識</tag>
+      </tags>
   </entry>
   <entry>
-    <title>演算法知識 - Longest Common Subsequence 動態規劃最長共同子序列(時間複雜度 O(nlogn))</title>
-    <url>/2020/10/19/Explain_Algorithm/LCS/</url>
+    <title>演算法知識 - Longest Common Subsequence 最長共同子序列(時間複雜度 O(nlogn))</title>
+    <url>/2020/11/11/Explain_Algorithm/LCS/</url>
     <content><![CDATA[<h2 id="Longest-Common-Subsequence-介紹"><a href="#Longest-Common-Subsequence-介紹" class="headerlink" title="Longest Common Subsequence 介紹"></a>Longest Common Subsequence 介紹</h2><blockquote>
 <p>以下簡稱 LCS，在兩個序列中找出最長子序列的問題，序列是甚麼？只要順序一致即可，舉例：</p>
 <ul>
@@ -6508,12 +6509,13 @@
 </ul>
 <p>看懂了嗎？ pple 在前面兩個字串中順序都是保持一致的。<br>被廣泛應用於生物資訊學與版本控制。</p>
 <p>這裡我們是教導時間複雜度為 \(O(n \log n)\) 的寫法，而非 \(O(n^2)\) 的寫法</p>
+<p>Longest Increasing Subsequence 最長遞增子序列，以下簡稱 LIS</p>
 </blockquote>
 <a id="more"></a>
 
 <h2 id="Longest-Common-Subsequence-原理"><a href="#Longest-Common-Subsequence-原理" class="headerlink" title="Longest Common Subsequence 原理"></a>Longest Common Subsequence 原理</h2><p>先將 A 字串的值逆向輸入到一個 <code>map&lt;char,vector&lt;int&gt;&gt;</code>裡面，再根據 B 字串的字元依序將 <code>map&lt;char,vector&lt;int&gt;&gt;</code> 取出，之後做 LIS 遞增。</p>
 <p>如果不懂 LIS 是甚麼可以先看<a href=""></a></p>
-<h3 id="QUESTION-為甚麼可以用-O-n-log-n-去解？"><a href="#QUESTION-為甚麼可以用-O-n-log-n-去解？" class="headerlink" title="QUESTION: ??? 為甚麼可以用 \(O(n \log n )\) 去解？"></a>QUESTION: ??? 為甚麼可以用 \(O(n \log n )\) 去解？</h3><p>因為這世界天才太多了。<del>正解</del></p>
+<h3 id="QUESTION-太驚人了！-為甚麼可以用-O-n-log-n-去解？"><a href="#QUESTION-太驚人了！-為甚麼可以用-O-n-log-n-去解？" class="headerlink" title="QUESTION: 太驚人了！ 為甚麼可以用 \(O(n \log n )\) 去解？"></a>QUESTION: 太驚人了！ 為甚麼可以用 \(O(n \log n )\) 去解？</h3><p>因為這世界天才太多了。<del>正解</del></p>
 <p>開玩笑的，還記得 (\ O(n^2))\ 的解法怎麼解嗎？是用動態規劃，可是他是不是有點浪費效率，因為她只有在 <code>A[i] == B[i]</code>，才會增加長度，剩下時間都是在延續之前的狀態，我們從這裡進行補強。</p>
 <p>我們只要把 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，放入的順序是大到小，再根據 B 字串的每個字元對應同字元的 <code>vector</code>，在做 LIS 即可，這樣我們就減少了此情況 <code>A[i] != B[i]</code>。</p>
 <h2 id="Longest-Common-Subsequence-說明與舉例"><a href="#Longest-Common-Subsequence-說明與舉例" class="headerlink" title="Longest Common Subsequence 說明與舉例"></a>Longest Common Subsequence 說明與舉例</h2><h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h3><p>先舉個例子，以免被說是騙人XD。</p>
@@ -6521,23 +6523,128 @@
 <p>對應 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，字串  index 從 0 開始，<strong>記住是逆序</strong>，如下：</p>
 <p>a(4,0) b(3,1) d(2)</p>
 <p>再來，我們根據根據 B 字串的每個字元對應同字元的 <code>vector</code>，產生序列，於是就變成</p>
-<p>2 3 1 4 0 4 0 3 1 4 0<br>d b   a   a   b   a</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>3</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>char</td>
+<td>d</td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+</tr>
+</tbody></table>
 <p>看懂了？對吧！</p>
 <p>而此時，這裡的 LIS 最大長度為 3，其中一種方式為 2 3 4，但這裡也只有這種XD，記住，在其他情況下 LCS 不只有一種表達方式。</p>
 <p>且 d 的 vector 有 2、b 的 vector 有 3、a 的 vector 有 4，剛好能夠組成 dba，符合答案。</p>
 <h3 id="QUESTION-那為甚麼要是逆序？"><a href="#QUESTION-那為甚麼要是逆序？" class="headerlink" title="QUESTION: 那為甚麼要是逆序？"></a>QUESTION: 那為甚麼要是逆序？</h3><p>很簡單，為了要避免重複判斷，一樣用剛剛的例子如下，那 <code>vector</code>會變成。</p>
 <p>a(0,4) b(1,3) d(2)</p>
-<p>2 1 3 0 4 0 4 1 3 0 4<br>d b   a   a   b   a</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>4</td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>char</td>
+<td>d</td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+</tr>
+</tbody></table>
 <p>這樣出來的最長長度為 4，其中一種方式為 0 1 3 4，但這裡組成的字串會變成 dbba，是不是中間的 b 被重複算到了，因為 LIS 是遞增，如果我們的 <code>vector</code> 也是遞增排序時，則中間的每一個 <code>vector</code> 的 element 都會被我們選中長度會被無限放大，因此在 <code>vector</code> 時要是逆序的元素。</p>
+<h3 id="OK-現在問題被我們解決成是-LIS-了，那我們就來做吧！"><a href="#OK-現在問題被我們解決成是-LIS-了，那我們就來做吧！" class="headerlink" title="OK, 現在問題被我們解決成是 LIS 了，那我們就來做吧！"></a>OK, 現在問題被我們解決成是 LIS 了，那我們就來做吧！</h3><p><a href="https://theriseofdavid.github.io/2020/11/13/Explain_Algorithm/LIS/" target="_blank" rel="noopener">關於 LIS 的部分就先去看大衞的筆記即可</a>。</p>
+<h2 id="LCS-實作與說明"><a href="#LCS-實作與說明" class="headerlink" title="LCS 實作與說明"></a>LCS 實作與說明</h2><p>P.S. 這裡的 string index 由 1 開始方便編寫程式碼，主要方便用來 LIS 如果要更改 cur 成 0 時會造成 <code>t[-1]</code> ，只需要在 <code>string = &quot;$&quot; + string</code>，即可達到此功效</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> t[N*N] , d[N*N] , num[N*N] ; <span class="comment">//t and d 是 LIS 要用到 </span></span><br><span class="line"><span class="comment">// d 用來記住 LIS 中此數字的前一個數字</span></span><br><span class="line"><span class="comment">// t 當前 LIS 的數列位置</span></span><br><span class="line"><span class="comment">// num 則是我們根據 strB 的字元生成數列，用來找出最長 LIS 長度 </span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dict ; <span class="comment">//記住每個字串出現的 index 位置</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v )</span></span>&#123; <span class="comment">//binary search </span></span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (l+r) /<span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(num[v] &gt; num[t[m]]) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (num[v] &lt; num[t[m]]) r = m ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    dict.clear() ; <span class="comment">//先將 dict 先清空</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = strA.length()<span class="number">-1</span> ; i &gt; <span class="number">0</span> ; i--) dict[strA[i]].push_back(i) ;</span><br><span class="line">    <span class="comment">// 將每個字串的位置紀錄並放入 vector 中，請記住 i = strA.length() -1 才可以達到逆續效果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span> ; <span class="comment">//紀錄生成數列的長度的最長長度</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; strB.length() ; i++)&#123; <span class="comment">// 依據 strB 的每個字元來生成數列</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; dict[strB[i]].size() ; j++) </span><br><span class="line">        <span class="comment">//將此字元在 strA 出現的位置放入數列</span></span><br><span class="line">            num[++k] = dict[strB[i]][j] ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(k==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ; <span class="comment">//如果 k = 0 就表示他們沒有共同字元都沒有於是就直接輸出 0</span></span><br><span class="line"></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">-1</span> , t[<span class="number">1</span>] = <span class="number">1</span> ; <span class="comment">//LIS init</span></span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span>, cur ; <span class="comment">// len 由於前面已經把 LCS = 0 的機會排除，於是這裡則從 1 開始</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 標準的 LIS 作法，不斷嘗試將 LCS 生長</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= k ; i++ )&#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] &gt; num[t[len]]) t[++len] = i , d[i] = t[len<span class="number">-1</span>] ;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//debug</span></span><br><span class="line"><span class="comment">//        for(int i = 1 ; i &lt;= k ; i++)</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; num[t[i]] &lt;&lt; ' ' ;</span></span><br><span class="line"><span class="comment">//        cout &lt;&lt; '\n' ;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LCS-應用"><a href="#LCS-應用" class="headerlink" title="LCS 應用"></a>LCS 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
+<ul>
+<li><a href="https://theriseofdavid.github.io/2020/11/07/UVa/UVa10192/" target="_blank" rel="noopener">UVa10192 - Vacation (LCS)</a></li>
+<li><a href="https://theriseofdavid.github.io/2020/03/13/UVa/UVa1207/" target="_blank" rel="noopener">UVa1207 - AGTC (LCS)</a> - 這裡採用的是 \(O(n^2)\) 做法。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.51cto.com/karsbin/966387" target="_blank" rel="noopener">lcs 最长公共子序列 O(nlogn)算法</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Binary Search 好難，嗚嗚，太過於依賴 C++ STL 函數，原本心血來潮想說要來寫一遍 Binary Search 沒想到花了 6 小時都還沒寫出來(完全是透過心想)，原本想說這麼簡單的演算法我應該連紙筆都不用吧！沒想到還是需要，嗚嗚，我腦袋的 RAM 是不是連 1 KB 都沒有呀，好討厭喔。</p>
+<p>不過又學了一個新演算法，用於改進 LCS 的時間複雜度其實感覺蠻開心的呢！</p>
+<h2 id="LCS-無註解程式碼"><a href="#LCS-無註解程式碼" class="headerlink" title="LCS 無註解程式碼"></a>LCS 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> t[N*N] , d[N*N] , num[N*N] ; </span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dict ; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v )</span></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (l+r) /<span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(num[v] &gt; num[t[m]]) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (num[v] &lt; num[t[m]]) r = m ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    dict.clear() ; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = strA.length()<span class="number">-1</span> ; i &gt; <span class="number">0</span> ; i--) dict[strA[i]].push_back(i) ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; strB.length() ; i++)&#123; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; dict[strB[i]].size() ; j++) </span><br><span class="line"></span><br><span class="line">            num[++k] = dict[strB[i]][j] ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(k==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line"></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ; </span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span>, cur ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= k ; i++ )&#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] &gt; num[t[len]]) t[++len] = i , d[i] = t[len<span class="number">-1</span>] ;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>演算法知識</category>
       </categories>
       <tags>
+        <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>字串處理</tag>
+        <tag>最長共同子序列 Longest Common Subsequence</tag>
         <tag>演算法知識</tag>
-        <tag>動態規劃最長共同子序列 Longest Common Subsequence</tag>
       </tags>
   </entry>
   <entry>
@@ -6622,6 +6729,267 @@
         <tag>程式比賽</tag>
         <tag>競賽心得</tag>
         <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn))</title>
+    <url>/2020/11/13/Explain_Algorithm/LIS/</url>
+    <content><![CDATA[<h2 id="Longest-Increasing-Subsequence-介紹"><a href="#Longest-Increasing-Subsequence-介紹" class="headerlink" title="Longest Increasing Subsequence 介紹"></a>Longest Increasing Subsequence 介紹</h2><blockquote>
+<p>以下簡稱 LIS，在一個陣列中找出最長遞增的序列，序列是甚麼？舉例：</p>
+<ul>
+<li>1 3 4 2 5<br>則此 LIS 的長度為 3，符合最長長度的有三種：</li>
+</ul>
+<ul>
+<li>1,3,4</li>
+<li>1,2,5</li>
+<li>1,4,5</li>
+</ul>
+<p>只要相對位置有達到遞增，且數值也有遞增則符合<strong>遞增序列</strong>的意思。</p>
+<p>在一些數學研究會涉及此演算法，且此演算法有兩種不一樣的時間複雜度，一種為 \(O(N^2)\) 另一種則為 \(O(n /log n)\)</p>
+<p><strong>這裡我們則是介紹比較快的方法，\(O(n \log n) \)</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Longest-Increasing-Subsequence-原理"><a href="#Longest-Increasing-Subsequence-原理" class="headerlink" title="Longest Increasing Subsequence 原理"></a>Longest Increasing Subsequence 原理</h2><p>二分搜尋 + 陣列 = LIS，這是最好的解釋了XD。</p>
+<p>產生兩個陣列 t , d ， t 用來記錄當前最長序列，d 則用來記錄當前 LIS 有包括此數值的前一個數值位置。</p>
+<h3 id="QUESTION-你在解釋甚麼，太爛了吧XD。"><a href="#QUESTION-你在解釋甚麼，太爛了吧XD。" class="headerlink" title="QUESTION: 你在解釋甚麼，太爛了吧XD。"></a>QUESTION: 你在解釋甚麼，太爛了吧XD。</h3><p><del>我也覺得</del>，所以我們用舉例的。</p>
+<p>假設我們要在 10 30 20 40 50 找出 LIS，那透過我們的原理要怎麼做呢？</p>
+<h4 id="Step1-初始化-t-d-並-i-1-放入-10"><a href="#Step1-初始化-t-d-並-i-1-放入-10" class="headerlink" title="Step1: 初始化 t , d 並 i = 1 , 放入 10"></a>Step1: 初始化 t , d 並 i = 1 , 放入 10</h4><p>由於 t 是紀錄最長陣列，且我們一定能夠保證 LIS 最長長度一定有 1，則是因為隨機在數列中拿出一個元素都可以是 LIS 長度為 1 而得證。</p>
+<p>所以我們就在 t[1] 直接放入<strong>第一個數值的 index</strong>，<strong>這裡很重要，t and d 都是紀錄數值的 index</strong>。</p>
+<p>由於 d[1] 是數列中的第一個 LIS 長度一定只有 1，所以設定成 0，表示他沒有前一個數值</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">t[<span class="number">1</span>] = <span class="number">1</span> ; </span><br><span class="line">d[<span class="number">1</span>] = <span class="number">0</span> ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-2-i-2-放入-30"><a href="#Step-2-i-2-放入-30" class="headerlink" title="Step 2 : i = 2 , 放入 30"></a>Step 2 : i = 2 , 放入 30</h3><p>因為 30 有比 10 大，因此只需要在 LIS 增加長度即可，因此 LIS 的第二個長度放入數值的 index。</p>
+<p>d[2] 則記錄當前最長的 LIS 此數值的前一個值，表示 d[2] 如果要往前回朔就是找此值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">t[<span class="number">2</span>] = <span class="number">2</span> ; </span><br><span class="line">d[<span class="number">2</span>] = t[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-3-i-3-放入-20"><a href="#Step-3-i-3-放入-20" class="headerlink" title="Step 3 : i = 3 , 放入 20"></a>Step 3 : i = 3 , 放入 20</h3><p>由於 20 沒有比 30 大，於是我們必須要使用<strong>二分搜尋</strong>法，找出 2 在 t 這個陣列中適合放入哪個位置，由於二分搜尋的時間複雜度是 \(O(\log n)\)，因此再根據此陣列的長度 \(* n \)，就會符合此演算法的時間複雜度 \(O(n \log \n)\)。</p>
+<p>我們找到 t[2] = 3，所以我們把 t[2] 的值改成 2，為甚麼要這樣做呢？很簡單，因為如果 t[] 的數值越小代表之後可以放進去的數值會<strong>有可能</strong>比現在的數值還更多機會擴增 LIS，假如下一個是 25，那如果這邊沒有先將數值改成 20，25 就沒辦法擴增 LIS 了，因此才要做改值。</p>
+<p>這裡為甚麼 <code>d[3] = t[1]</code> 呢？因為我們將 t[2] 放入當前的值，因此在現在的 t[1] 則是我們現在 d[3] 要記錄的前一個 LIS 數值，之後從 d[3] 不斷回推時可以發現只要回推 2 次就會回到 d[0]。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">t[<span class="number">2</span>] = <span class="number">3</span> ;</span><br><span class="line">d[<span class="number">3</span>] = t[<span class="number">1</span>] ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-4-i-4-放入-40"><a href="#Step-4-i-4-放入-40" class="headerlink" title="Step 4: i = 4 , 放入 40"></a>Step 4: i = 4 , 放入 40</h3><p>因為 40 有比 20 大，因此只需要在 LIS 增加長度即可，因此 LIS 的第三個長度放入數值的 index。</p>
+<p>d[4] 則記錄當前最長的 LIS 此數值的前一個值，表示 d[4] 如果要往前回朔就是找此值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">t[<span class="number">3</span>] = <span class="number">4</span> ; </span><br><span class="line">d[<span class="number">4</span>] = t[<span class="number">2</span>] ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-5-i-5-放入-50"><a href="#Step-5-i-5-放入-50" class="headerlink" title="Step 5: i = 5 , 放入 50"></a>Step 5: i = 5 , 放入 50</h3><p>道理與 Step4 相同<br>因為 50 有比 40 大，因此只需要在 LIS 增加長度即可，因此 LIS 的第四個長度放入數值的 index。</p>
+<p>d[5] 則記錄當前最長的 LIS 此數值的前一個值，表示 d[5] 如果要往前回朔就是找此值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">t[<span class="number">4</span>] = <span class="number">5</span> ;</span><br><span class="line">d[<span class="number">5</span>] = t[<span class="number">3</span>] ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-6-完成了！此時我們簡單檢查一下，t-陣列裡的數值是不是最長-LIS"><a href="#Step-6-完成了！此時我們簡單檢查一下，t-陣列裡的數值是不是最長-LIS" class="headerlink" title="Step 6: 完成了！此時我們簡單檢查一下，t 陣列裡的數值是不是最長 LIS"></a>Step 6: 完成了！此時我們簡單檢查一下，t 陣列裡的數值是不是最長 LIS</h3><table>
+<thead>
+<tr>
+<th>array</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>t</td>
+<td>0</td>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>-</td>
+</tr>
+<tr>
+<td>value</td>
+<td>0</td>
+<td>10</td>
+<td>20</td>
+<td>40</td>
+<td>50</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>OK，沒錯，LIS 正確無誤。</p>
+<h3 id="OK-現在問題被我們解決成是-Binary-Search-了，那我們就來做吧！"><a href="#OK-現在問題被我們解決成是-Binary-Search-了，那我們就來做吧！" class="headerlink" title="OK, 現在問題被我們解決成是 Binary Search 了，那我們就來做吧！"></a>OK, 現在問題被我們解決成是 Binary Search 了，那我們就來做吧！</h3><p>關於 <a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">Binary Search 的部分就先去看大衞的筆記</a>即可。</p>
+<h2 id="LIS-實作與說明"><a href="#LIS-實作與說明" class="headerlink" title="LIS 實作與說明"></a>LIS 實作與說明</h2><p>在程式碼進行說明，相信會比較好理解些。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> b[N] , t[N] , d[N] , n ; </span><br><span class="line"><span class="comment">// b 是原本的數列</span></span><br><span class="line"><span class="comment">// t 則是當前 LIS 的數列</span></span><br><span class="line"><span class="comment">// d 則是在 LIS 中此數值的前一個數值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123; <span class="comment">//二分搜尋法</span></span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span> , cur ; <span class="comment">//LIS 最小長度為 1，因此 len = 1</span></span><br><span class="line">    <span class="comment">//cur 則是二分搜尋中找到的位置</span></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ; <span class="comment">//初始化 LIS 需要用到的兩個陣列</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123; <span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[t[len]] )&#123; <span class="comment">//如果此數值比 LIS 中最長的數值還大時就直接增長</span></span><br><span class="line">            d[i] = t[len] ; <span class="comment">//d[i] 就則是在 LIS 中此數值的前一個數值</span></span><br><span class="line">            t[++len] = i ; <span class="comment">//增長 t 的長度</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// 表示目前的數值可以替換此 LIS 中某個數值</span></span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);  <span class="comment">// 二分搜尋找出此位置</span></span><br><span class="line">            t[cur] = i ; <span class="comment">//將原本 LIS 的 cur 值替換成 i </span></span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>] ; <span class="comment">// 由於我們將 i 放入 t[cur]，所以我們的 d 就是找 t[cur-1]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ; <span class="comment">//回傳最長 LIS</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LCS-應用"><a href="#LCS-應用" class="headerlink" title="LCS 應用"></a>LCS 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
+<ul>
+<li><a href="https://theriseofdavid.github.io/2020/11/14/UVa/UVa111/" target="_blank" rel="noopener">UVa 111 - History Grading (LIS)</a></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.youtube.com/watch?v=S9oUiVYEq7E&t=0s" target="_blank" rel="noopener">Longest Increasing Subsequence in nlogn time - Tushar Roy - Coding Made Simple </a><br><a href="https://forgoal.gitbooks.io/-/content/longest_increasing_subsequence.html" target="_blank" rel="noopener">Longest Increasing Subsequence (LIS)</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>複習一些之前所學習的演算法並加入我的 blog 中感覺其實還真不賴呢！感覺以後如果有些忘記就可以直接拿過來用了XD，而且又是變相地複習我的演算法知識，只是在打演算法解釋有點麻煩QQ，語言障礙不太行阿，希望之後可以把自己的文字表達能力練強，才不會讓別人都聽不懂我在說甚麼…。</p>
+<p>總感覺自學就像盲人摸象一般，有時候別人跟你說專業的你反而聽不懂呢。因為你學習並不是一個完整的系統導致有些部分會 miss，但教授都會假設你是完整的學過，所以要盡量補起來這些坑呢！</p>
+<h2 id="LCS-無註解程式碼"><a href="#LCS-無註解程式碼" class="headerlink" title="LCS 無註解程式碼"></a>LCS 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> b[N] , t[N] , d[N] , n ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span> , cur ;</span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[t[len]] )&#123;</span><br><span class="line">            d[i] = t[len] ;</span><br><span class="line">            t[++len] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>] ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>最長遞增子序列 Longest Increasing Subsequence</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa 111 - History Grading (LIS)</title>
+    <url>/2020/11/14/UVa/UVa111/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>老師要改考卷關於歷史的事件排序，我們要寫程式幫老師解決其中一道題目，簡單來說，歷史有很多事件，只要學生們排序歷史事件順序有對，就給予相對應的分數，我們將歷史事件定義成數字，順序則就是數學的遞增。</p>
+<p>1,2,3,4 得四分 因為遞增的數列最長可以來到 4<br>2,1,3,4 得三分，因為 1,3,4 or 2,3,4 這樣的順序都有正確，但順序長度只有 3，所以就輸出 3 分<br>4,3,2,1 得一分，有這四種 1 or 2 or 3 or 4，而他們遞增長度最高都只能來到 1，因此只有一分。</p>
+<p>我們就是要找出，最長的數值遞增長度。</p>
+<p>這題的格式： 1 3 2 4 ，其中 1 是表示歷史事件 1 是在第 1 個位置、 3 則是表示歷史事件 <strong>2</strong> 是在第三個位置，全部的數值都是用此表達方式表達。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>看得出來嗎XD，這題其實就是詢問你最長的 LIS 長度。</p>
+<p>這題就是標準的最長遞增子序列 Longest Increasing Subsequence (以下簡稱 LIS) 問題，這裡使用 \(O(n \log n)\) 來解決此問題。</p>
+<p>如果還不太懂 LIS 是甚麼問題，建議看看 <a href="https://theriseofdavid.github.io/2020/11/13/Explain_Algorithm/LIS/" target="_blank" rel="noopener">演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn))</a>，這裡有對於此演算法有完整的介紹 </p>
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>這題有個巨大的坑，他並不是一開始就排好順序的，他有一個特殊格式，還有在題目卷下寫一個 <strong>warning</strong>，要你好好看懂。<del>那時候我還以為我自己有看懂了，英文差的人就是這麼爛嘛 ಥ⌣ಥ</del></p>
+<p>重點是我還花了兩小時！完全沒有找出錯誤…，看別人的解答才知道…，我好爛QQ。</p>
+<p>於是我們要怎麼解決這個問題呢，index 上的值是 rank(他們的順序)，其實這裡有點腦筋急轉彎，我還以為出題者可能就是要考這個呢XD。</p>
+<p>先直接將老師的答案直接存到陣列中，我們舉例一下：</p>
+<p>正確解答： 3 2 1 4 ，我們定義正確解答為 a[]<br>你的答案： 2 1 3 4 ，我們定義你的答案為 b[]</p>
+<p>於是我們先這樣做</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">a[<span class="number">1</span>] = <span class="number">3</span> <span class="comment">//因為 1 應該要排在第 3 個位置，我們先透過 a 進行記錄</span></span><br><span class="line">a[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">a[<span class="number">3</span>] = <span class="number">1</span></span><br><span class="line">a[<span class="number">4</span>] = <span class="number">4</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 透過此方式可以直接產生符合題目要求且方便 LIS 撰寫的陣列</span></span><br><span class="line">b[<span class="number">2</span>] = a[<span class="number">1</span>] = <span class="number">3</span>  <span class="comment">// 由於你的答案歷史事件 1 的 rank 是 2，表示他應該是要在生成數列中的第二個位置，因此設定成 b[2]</span></span><br><span class="line"><span class="comment">// a[1] 則是 1 事件的 rank 位置，也就是他其實是第 3 個發生的事情，所以 b[2] = 3</span></span><br><span class="line">b[<span class="number">1</span>] = a[<span class="number">2</span>] = <span class="number">2</span> </span><br><span class="line">b[<span class="number">3</span>] = a[<span class="number">3</span>] = <span class="number">1</span></span><br><span class="line">b[<span class="number">4</span>] = a[<span class="number">4</span>] = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>透過此方式可以得知，b[] 按照 index 順序並從 1 開始應該是這樣的 2 3 1 4，肉眼不難找出最長的 LIS 有 3，且為 2 1 4，我們再來驗證看是否正確，對的，沒錯正確解答與你的解答確實 2 1 4 有符合順序，因此得證。</p>
+<p>OK，解開題目得小設計後，其他就與 LIS 沒有不同拉XD，記住要用迴圈寫就好，不可以手寫喔，會累死你的。</p>
+<h2 id="參考連結："><a href="#參考連結：" class="headerlink" title="參考連結："></a>參考連結：</h2><p><a href="https://www.itdaan.com/tw/ff7a789caa729620e32dffbb7eed755c" target="_blank" rel="noopener">UVa 111 History Grading （簡單DP，LIS或LCS）</a></p>
+<h2 id="心得："><a href="#心得：" class="headerlink" title="心得："></a>心得：</h2><p>老話一句，英文很重要QQ，我到底因為英文不好吃了幾次虧啦…，好討厭。這麼簡單的一個題目我也可以拖 3 個小時都沒辦法解開而且還是錯在這種腦筋急轉彎的部分，是欺負我英文不好跟嫌我腦袋太笨嘛ಥ⌣ಥ，不行，我要讀好英文、增加自己的思維，成為一個優秀的人不會被再被這種問題給打倒，如果我沒辦法當一位聰明的人，至少我要當一個很有經驗的人！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 25</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[N] , b[N] , t[N] , d[N] , n ;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; dict ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span> , cur ;</span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[t[len]] )&#123;</span><br><span class="line">            d[i] = t[len] ;</span><br><span class="line">            t[++len] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>] ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt" , "w" , stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">    <span class="keyword">int</span> j , temp ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; temp ;</span><br><span class="line">        a[i] = temp ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; j )&#123;</span><br><span class="line">        b[j] = a[<span class="number">1</span>]  ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp ;</span><br><span class="line">            b[temp] = a[i] ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//debug</span></span><br><span class="line">        <span class="comment">//for(int i = 1 ; i &lt;= n ; i++) cout &lt;&lt; b[i] &lt;&lt; ' ' ;</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; lis() &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>最長遞增子序列 Longest Increasing Subsequence</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa245 - Uncompress (String Process)</title>
+    <url>/2020/09/25/UVa/UVa245/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一個經過壓縮的文本，文本中的數字則是代表是前面第幾個單字並輸出，但如果前面那些單字有重複到則只算一次並且是由後往前看的第一次遇到為準，請解壓縮此文本。</p>
+<p>註:單字中間只要遇到非英文字母就全部都視為不一樣的單字。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題要用 Linked-List 由於每個單字的上一個單字與下一個單字都會隨著壓縮而變不同，剛好符合 Linked-List 的特色。再加上一些優秀的讀取字串技術，就可以輕鬆解決掉這題了XD。</p>
+<p>如果不懂的話，下方程式碼有做解說。相信你會很快理解 Linked-List 的，我很努力想讓讀者都能懂啦。但是我個人不太喜歡在解題時使用指標，所以下面並不是指標實作。<del>對不起我就爛，debug 指標的技術很爛</del></p>
+<h2 id="參考連結："><a href="#參考連結：" class="headerlink" title="參考連結："></a>參考連結：</h2><p><a href="https://www.codeleading.com/article/5927815599/" target="_blank" rel="noopener">UVA245 WF5184 POJ1885 Uncompress【文本】</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題應該看的出來他是用 Linked-List 拉XD，我一開始是想要用 vector 但是我卻卡關QQ，可惡腦袋不給力呀！之後就用 Linked-List 解決掉這題，不過太久沒有寫字串題目，讀取字串的能力特別差啊讀取字串的能力特別差啊，腦袋整個完全沒想法。後來看到參考連結中的那篇優秀程式碼文章，才讓我對於讀取字串又有了更新的領悟，好讚。非常感謝作者願意將他的程式碼技術公布出來！</p>
+<p>也希望我自己也能成為獨當一面的演算法程式設計師，不要甚麼都不太會，未來只能領低薪，我要努力，直到看到夢想為止之前！也希望大家可以幫助我。</p>
+<p>不過指標的 Linked-List 我還是覺得寫起來很麻煩阿，常常 Debug 都找不出錯誤，好討厭。我可能之後會變成愛用 C++，但不喜歡指標的怪人吧www。<del>C++ 的優勢根本沒有發揮出來</del></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> ch ;</span><br><span class="line"><span class="built_in">string</span> strTemp = <span class="string">""</span> ;</span><br><span class="line"><span class="keyword">int</span> wcnt = <span class="number">0</span> , head = <span class="number">0</span> , num =<span class="number">0</span>   ;</span><br><span class="line"><span class="comment">//wcnt linklist 的總量</span></span><br><span class="line"><span class="comment">//head 上一個單字的 index</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu_words</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> next ;</span><br><span class="line">    <span class="built_in">string</span> word ;</span><br><span class="line">&#125;word[MAXN] ;</span><br><span class="line"><span class="comment">// next 上一個單字的 index</span></span><br><span class="line"><span class="comment">// word 此單字</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    <span class="comment">//freopen("out.txt" , "w" , stdout );</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        ch = getchar() ;</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'0'</span>)</span><br><span class="line">            <span class="keyword">break</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">isalpha</span>(ch))&#123;</span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">isalpha</span>(ch))&#123; <span class="comment">//不斷讀取單字，直到遇到其他</span></span><br><span class="line">                strTemp += ch ;</span><br><span class="line">                ch = getchar() ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; strTemp ;</span><br><span class="line">            word[wcnt].word = strTemp ; <span class="comment">//添加新單字</span></span><br><span class="line">            word[wcnt].next = head ; <span class="comment">//上一個單字 index</span></span><br><span class="line">            head = wcnt++ ; <span class="comment">//長度增加</span></span><br><span class="line">            strTemp = <span class="string">""</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">isdigit</span>(ch))&#123; </span><br><span class="line">            <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))&#123; <span class="comment">//不斷讀取數字，直到遇到其他</span></span><br><span class="line">                num = num * <span class="number">10</span> + (ch - <span class="string">'0'</span>) ;</span><br><span class="line">                ch = getchar() ;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> cur = head , prev  ; </span><br><span class="line">            <span class="comment">//cur = 數字的那個單字</span></span><br><span class="line">            <span class="comment">//prev = 數字的下一個單字</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; num ; i++)&#123; <span class="comment">// 向上追蹤單字</span></span><br><span class="line">                prev = cur ;</span><br><span class="line">                cur = word[cur].next ;</span><br><span class="line">            &#125;</span><br><span class="line">            num = <span class="number">0</span> ;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; word[cur].word ;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(head != cur )&#123; <span class="comment">// 要將當前的單字搬到後面，所以單字的上一個 index 也需要更新</span></span><br><span class="line">                word[prev].next = word[cur].next ; </span><br><span class="line">                <span class="comment">// 因為要移動當前單字所以必須要將當前單字的下一個單字的 next，往前到現在這單字的 next</span></span><br><span class="line">                word[cur].next = head ;</span><br><span class="line">                <span class="comment">// 當前的單字 next 改為現在讀取中的上一個單字</span></span><br><span class="line">                head = cur ; <span class="comment">// 現在這個單字變成結尾</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(ch) ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>String Processing Problems</tag>
+        <tag>Competitive Programming3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - Binary Search 二分搜尋</title>
+    <url>/2020/11/15/Explain_Algorithm/binary_search/</url>
+    <content><![CDATA[<h2 id="Binary-Search-介紹與應用"><a href="#Binary-Search-介紹與應用" class="headerlink" title="Binary Search 介紹與應用"></a>Binary Search 介紹與應用</h2><blockquote>
+<p>Binary Search 是我們常見的搜尋方式，相對簡單但也非常使用的演算法，其使用方式需要先在一個經過排序的陣列中找出我們想找出的值。</p>
+<p>時間複雜度是 \(O(\log n)\)</p>
+<p>應用類型相當廣泛，在常見的資料型態中都可以見到</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Binary-Search-原理"><a href="#Binary-Search-原理" class="headerlink" title="Binary Search 原理"></a>Binary Search 原理</h2><p>在一個有排序的陣列中，假設我們要找出的是 x，找出最中間的值，與 x 進行比較，如果比中間的值大，那我們只需要再從此陣列中區間範圍 [ Mid , Right ] 即可，為甚麼可以這樣子呢？</p>
+<p>因為是經過排序的，所以表示我們只要再往右邊的那些數值再去查詢，同樣地，如果比中間的值小那我們就只需要在從 [ Left , Mid] 去找即可。</p>
+<p>其中 \( mid = (Left + Right ) / 2 \)</p>
+<p>舉例一下，我們要在數列中 10 20 30 40 50，找出 1，要怎麼做呢？<br>P.S. 這裡的 index 從 1 開始</p>
+<h3 id="Step1-這時-Left-1-Right-5-，找出此數列的中間值-30，並跟-10-比較"><a href="#Step1-這時-Left-1-Right-5-，找出此數列的中間值-30，並跟-10-比較" class="headerlink" title="Step1 : 這時 Left = 1 , Right = 5 ，找出此數列的中間值 30，並跟 10 比較"></a>Step1 : 這時 Left = 1 , Right = 5 ，找出此數列的中間值 30，並跟 10 比較</h3><p>\( Mid = (Left + Right ) / 2 = 3 \)<br>由於 10 &lt; 30，所以我們接下來要搜尋的範圍就是 \( [left=1 , Right=3 ] \)</p>
+<h3 id="Step2-這時-Left-1-Right-3-，找出此數列的中間值-20，並跟-10-比較"><a href="#Step2-這時-Left-1-Right-3-，找出此數列的中間值-20，並跟-10-比較" class="headerlink" title="Step2 : 這時 Left = 1 , Right = 3 ，找出此數列的中間值 20，並跟 10 比較"></a>Step2 : 這時 Left = 1 , Right = 3 ，找出此數列的中間值 20，並跟 10 比較</h3><p>\( Mid = (Left + Right ) / 2 = 2 \)<br>由於 10 &lt; 20，所以我們接下來要搜尋的範圍就是 \( [left=1 , Right=2 ] \)</p>
+<h3 id="Step3-這時-Left-1-Right-2-，找出此數列的中間值-10，並跟-10-比較"><a href="#Step3-這時-Left-1-Right-2-，找出此數列的中間值-10，並跟-10-比較" class="headerlink" title="Step3 : 這時 Left = 1 , Right = 2 ，找出此數列的中間值 10，並跟 10 比較"></a>Step3 : 這時 Left = 1 , Right = 2 ，找出此數列的中間值 10，並跟 10 比較</h3><p>\( Mid = (Left + Right ) / 2 = 1 \)，這裡是採用 C++，C++ 在整數除法時會無條件捨去。<br>由於 10 == 10，我們就可以知道我們想找的值在此數列中的 1 號位置。</p>
+<h3 id="Situation-在寫二分搜尋時一些小注意"><a href="#Situation-在寫二分搜尋時一些小注意" class="headerlink" title="Situation: 在寫二分搜尋時一些小注意"></a>Situation: 在寫二分搜尋時一些小注意</h3><p>值得提醒的是，二分搜尋法固然簡單，但常常會有一些小問題自己沒有注意到，因此如果是系統已經有內建好的函數盡量使用系統內建函數會相對輕鬆一些。<del>簡單來說就是套件保證沒有 bug，但我不敢保證自己沒有 bug</del></p>
+<p>容易出現的問題：數列中有重複的值，我想要的是找出此數列中大於 or 小於此數字的值</p>
+<h2 id="C-語法介紹"><a href="#C-語法介紹" class="headerlink" title="C++ 語法介紹"></a>C++ 語法介紹</h2><p>在 C++ 中已經有函數可以方便我們直接套用分別是：</p>
+<ul>
+<li><code>lower_bound</code> 找出此數列中第一個數值是大於等於想查詢的值</li>
+<li><code>upper_bound</code> 找出此數列中最後一個數值是大於等於想查詢的值<br>詳細用法請看 <a href="http://www.cplusplus.com/reference/algorithm/lower_bound/" target="_blank" rel="noopener">C++ Refence</a> 或是 <a href="https://www.cnblogs.com/cobbliu/archive/2012/05/21/2512249.html" target="_blank" rel="noopener">STL源码学习—-lower_bound和upper_bound算法</a></li>
+</ul>
+<p>如果看不太懂文字說明，可以看看這張圖，我想就了解了：</p>
+<p><img src="/images/Binary_Search/1.png" alt=""></p>
+<h2 id="Binary-Search-實作與說明"><a href="#Binary-Search-實作與說明" class="headerlink" title="Binary Search 實作與說明"></a>Binary Search 實作與說明</h2><p>在程式碼進行說明，相信會比較好理解些。</p>
+<h3 id="找出此數列中第一個數值是大於等於想查詢的值，類似於-C-的-lower-bound"><a href="#找出此數列中第一個數值是大於等於想查詢的值，類似於-C-的-lower-bound" class="headerlink" title="找出此數列中第一個數值是大於等於想查詢的值，類似於 C++ 的 lower_bound"></a>找出此數列中第一個數值是大於等於想查詢的值，類似於 C++ 的 <code>lower_bound</code></h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> num[n] <span class="comment">//以排序過且要進行查詢的數列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123; <span class="comment">//bs binary search , l =left , r= right , v = value</span></span><br><span class="line">    <span class="keyword">int</span> m ; <span class="comment">// m = mid </span></span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123; <span class="comment">// 假如 r &gt; 1 表示尚未二分搜尋完畢</span></span><br><span class="line">        m = (r+l) / <span class="number">2</span> ; <span class="comment">// m 找出中間值 </span></span><br><span class="line">        <span class="keyword">if</span>(num[v] &gt; num[t[m]] ) l = m+<span class="number">1</span> ; <span class="comment">//如果要查詢的值大於中間值，那範圍將被改成[M id , Right]</span></span><br><span class="line">        <span class="comment">//但因為 mid 已經有被查詢過因此 mid +1</span></span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">        <span class="comment">//如果沒有那範圍則被改成 [Left , Mid]，沒有做 mid -1 是因為有可能是要查詢的值與 mid 值相同</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ; <span class="comment">//回傳被查詢到的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="找出此數列中最後一個數值是大於等於想查詢的值，類似於-C-的-upper-bound"><a href="#找出此數列中最後一個數值是大於等於想查詢的值，類似於-C-的-upper-bound" class="headerlink" title="找出此數列中最後一個數值是大於等於想查詢的值，類似於 C++ 的 upper_bound"></a>找出此數列中最後一個數值是大於等於想查詢的值，類似於 C++ 的 <code>upper_bound</code></h3><p>讀者在觀看此程式碼前，必須先將前一個程式碼熟悉。</p>
+<p>稍微要記住的是，這裡的區間範圍是 \( [ left , Right) \)</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> num[n] <span class="comment">//以排序過且要進行查詢的數列</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123; <span class="comment">//bs binary search , l =left , r= right , v = value</span></span><br><span class="line">    <span class="keyword">int</span> m ;  <span class="comment">// m = mid </span></span><br><span class="line">    <span class="keyword">while</span>(r &gt; l)&#123; <span class="comment">// 假如 r &gt; 1 表示尚未二分搜尋完畢</span></span><br><span class="line">        m = (l+r) / <span class="number">2</span> ; <span class="comment">// m 找出中間值 </span></span><br><span class="line">        <span class="keyword">if</span>(num[m] &lt;= v) l = ++m; <span class="comment">//與上份程式碼章節相同</span></span><br><span class="line">        <span class="comment">//值得注意的是，因為區間範圍是 [ Mid , Right )，我們要防範 Right = mid 時，</span></span><br><span class="line">        <span class="comment">//會造成錯亂，於是我們先幫 mid+1，之後再減回來</span></span><br><span class="line">        <span class="keyword">else</span> r = m; <span class="comment">//與上份程式碼章節相同 </span></span><br><span class="line">        <span class="comment">//值得注意的是，因為區間範圍是 [ Left , Mid )，但因為 C++ 在計算 mid 時小數會捨取，</span></span><br><span class="line">        <span class="comment">//因此如果我們只要讓 else 只處理 中間值 &gt; 查詢值，就不會造成錯亂</span></span><br><span class="line">        <span class="comment">//我們在下方將會進行舉例，代號為 Q-A</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m<span class="number">-1</span> ; <span class="comment">//為甚麼要 m-1？</span></span><br><span class="line">    <span class="comment">//因為</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Q-A"><a href="#Q-A" class="headerlink" title="Q-A"></a>Q-A</h4><p>舉例：<br>L = 1 , R = 2 , M = 1 ，進入 if statement ， L = 2 , M = 2，此時區間是向 R 靠近，但 R 是 <strong>)</strong> 會超出查詢範圍，因此必須要 -1。<br>L = 1 , R = 2 , M = 1 ，進入 else statement ， R = 1 , M = 1，此時區間是向 L 靠近，L 本身範圍是 <strong>[</strong>，因此沒有問題。</p>
+<p>主要就是這個樣子，希望讀者都能看懂XD。</p>
+<h3 id="未來如果我還有寫更多版本，我將會放上"><a href="#未來如果我還有寫更多版本，我將會放上" class="headerlink" title="未來如果我還有寫更多版本，我將會放上"></a>未來如果我還有寫更多版本，我將會放上</h3><h2 id="Binary-Search-應用"><a href="#Binary-Search-應用" class="headerlink" title="Binary Search 應用"></a>Binary Search 應用</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2020/11/15/UVa/UVa957/" target="_blank" rel="noopener">UVa957 - Popes (Binary Search)</a></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.cnblogs.com/cobbliu/archive/2012/05/21/2512249.html" target="_blank" rel="noopener">STL源码学习—-lower_bound和upper_bound算法</a><br><a href="http://www.cplusplus.com/reference/algorithm/lower_bound/" target="_blank" rel="noopener">std::lower_bound</a><br><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%88%86%E6%90%9C%E5%B0%8B%E6%BC%94%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">二分搜尋演算法</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>二分搜尋好多毛病要解決，真麻煩，好想用套件XD，其實此演算法在我高中時就已經學會了，為甚麼會想打這一篇呢？主要是因為想要幫自己的演算法建立模板，方便未來的我用上，也害怕假如未來的我以後忘記怎麼寫時就在也真的想不起來了，因為找不到<strong>過去</strong>讓我參考，希望未來的我還能記住，也希望看到此篇的讀者不會忘記。</p>
+<p>寫 Blog 真的非常吃力不討好，真的好累又好麻煩，學習速度比別人慢，別人可以在你打 Blog 的時間學習更多演算法、更多知識，那你為甚麼還要打呢？因為我笨，我學習差，我需要讓瞭解演算法的自己來幫助未來可能會遺忘此演算法的自己，幫助他，讓我的未來不遺失我的過去。</p>
+<h2 id="Binary-Search-無助解程式碼"><a href="#Binary-Search-無助解程式碼" class="headerlink" title="Binary Search 無助解程式碼"></a>Binary Search 無助解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<h3 id="找出此數列中第一個數值是大於等於想查詢的值，類似於-C-的-lower-bound-1"><a href="#找出此數列中第一個數值是大於等於想查詢的值，類似於-C-的-lower-bound-1" class="headerlink" title="找出此數列中第一個數值是大於等於想查詢的值，類似於 C++ 的 lower_bound"></a>找出此數列中第一個數值是大於等於想查詢的值，類似於 C++ 的 <code>lower_bound</code></h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> num[n] </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="找出此數列中最後一個數值是大於等於想查詢的值，類似於-C-的-upper-bound-1"><a href="#找出此數列中最後一個數值是大於等於想查詢的值，類似於-C-的-upper-bound-1" class="headerlink" title="找出此數列中最後一個數值是大於等於想查詢的值，類似於 C++ 的 upper_bound"></a>找出此數列中最後一個數值是大於等於想查詢的值，類似於 C++ 的 <code>upper_bound</code></h3><p>讀者在觀看此程式碼前，必須先將前一個程式碼熟悉。</p>
+<p>稍微要記住的是，這裡的區間範圍是 \( [ left , Right) \)</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> num[n] </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">        <span class="comment">//debug</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; num[l] &lt;&lt; ' ' &lt;&lt; num[r] &lt;&lt; '\n' ;</span></span><br><span class="line">        m = (l+r) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(num[m] &lt;= v) l = ++m;</span><br><span class="line">        <span class="keyword">else</span> r = m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m<span class="number">-1</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa957 - Popes (Binary Search)</title>
+    <url>/2020/11/15/UVa/UVa957/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>我們有過去歷史教皇選舉的資料，現在我們需要知道在 x 年期間中的教皇選舉最多次，並告訴我們期間開始選舉的教皇與期間最後選舉教皇</p>
+<p>我們會給定<strong>已經排序</strong>好的選舉日期，就請寫出程式找出答案吧！</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題可以用兩種方式去解，一種是最長區間覆蓋長，屬於動態規劃，另一種是 Binary Search，這裡我們使用 Binary Search 去 AC 此題。</p>
+<p>如果還不太懂 LIS 是甚麼問題，建議看看 <a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">演算法知識 - Binary Search 二分搜尋</a>，這裡有對於此演算法有完整的介紹 </p>
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>這題總共需要求出 3 個答案，第一是期間內的最多選舉次數，再來是期間內的第一次選舉與最後一次選舉。</p>
+<p>我們透過題目的公式 \( N+Y-1 \)，其中 N 等於 \(一開始可查詢選舉年份 + Y 期間 - 1 = 符合題目條件的最終可查詢選舉年份 \)，我們只需要對每一個選舉年份 + Y - 1，就可以找出每個期間的選舉次數，並記錄最大的選舉次數與一開始可選舉日期以及 Binary Search 找到的最後大於等於最終可查詢的選舉年份即可。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">last = bs(i,p,num[i]+y<span class="number">-1</span>) ; <span class="comment">//bs binary Search，以下簡稱 bs</span></span><br><span class="line"><span class="comment">// num[i]+y-1 表示最終可查詢年份 , last = 透過 bs 找出在此數列中的大於等於最終可查詢年份之選舉年份位置</span></span><br><span class="line">first = i ; <span class="comment">// first = 一開始可查詢選舉年份在此數列中的位置</span></span><br><span class="line">large = last - first +<span class="number">1</span> ; <span class="comment">// large = 最終可查詢年份 - 最初可查詢年份 + 1，表示裡面有多少選舉</span></span><br></pre></td></tr></table></figure>
+
+<p>透過迴圈針對每一次的選舉進行查詢，並記錄最大即可。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老話一句，英文很重要QQ，我到底因為英文不好吃了幾次虧啦…。</p>
+<p>我看了很久QQ，查了好多英文單字，我竟然連 Popes 都不知道是甚麼QQ，我還需要好好磨練、好好讓自己的英文能力進步啦，英文真的好重要好重要，可是我每次只要回到家都沒有再讀英文…，我也太沒用了八。</p>
+<p>好啦，題外話講多了，其實我在寫這一題時，我發現這題其實沒有很難寫，但是卡在解決二分搜尋的一些小毛病，例如要大於等於…之類的，最近在增強自己沒有透過紙筆也能夠進行表達以及程式思考的方式，加強我自己對於一些簡單判斷的基礎能力，如果可以將簡單判斷減少依賴，或許我在表達時就可以表達的流暢些，我常常在口述表達自己時長不完善，但只要透過文字我就可以很能夠表達我自己，因為文字我可以做 Review，但口述卻沒辦法。</p>
+<p>之後也要好好努力，成為一位不愧對過去自己的人。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1000010</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> y , p , temp , num[MAX] ;</span><br><span class="line"><span class="keyword">int</span> max_large , max_first , max_last ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">        <span class="comment">//debug</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; num[l] &lt;&lt; ' ' &lt;&lt; num[r] &lt;&lt; '\n' ;</span></span><br><span class="line">        m = (l+r) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(num[m] &lt;= v) l = ++m;</span><br><span class="line">        <span class="keyword">else</span> r = m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m<span class="number">-1</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    <span class="comment">//freopen("out.txt" , "w" , stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> large , first , last ;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; y)&#123;</span><br><span class="line">        max_large = max_first = max_last = <span class="number">0</span> ;</span><br><span class="line">        large = first = last = <span class="number">0</span> ;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; p ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; p ; i++) <span class="built_in">cin</span> &gt;&gt; num[i] ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; p ; i++)&#123;</span><br><span class="line">            last = bs(i,p,num[i]+y<span class="number">-1</span>) ;</span><br><span class="line">            first = i ;</span><br><span class="line">            large = last - first +<span class="number">1</span> ;</span><br><span class="line">            <span class="comment">//debug</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; "i = " &lt;&lt; i &lt;&lt; " binary search range " &lt;&lt; num[first] &lt;&lt; "-" &lt;&lt; num[last] &lt;&lt; " result is " &lt;&lt; large &lt;&lt; '\n' ;</span></span><br><span class="line">            <span class="keyword">if</span>(large &gt;  max_large)&#123;</span><br><span class="line">                max_large = large ;</span><br><span class="line">                max_first = first ;</span><br><span class="line">                max_last = last ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; max_large &lt;&lt; <span class="string">" "</span> &lt;&lt; num[max_first] &lt;&lt; <span class="string">" "</span> &lt;&lt; num[max_last] &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
       </tags>
   </entry>
 </search>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    演算法知識 - Longest Common Subsequence 最長共同子序列(時間複雜度 O(nlogn)) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Explain_Algorithm/LCS" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  演算法知識 - Longest Common Subsequence 最長共同子序列(時間複雜度 O(nlogn))
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/11/Explain_Algorithm/LCS/" class="article-date">
+  <time datetime="2020-11-10T16:37:07.000Z" itemprop="datePublished">2020-11-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Longest-Common-Subsequence-介紹"><a href="#Longest-Common-Subsequence-介紹" class="headerlink" title="Longest Common Subsequence 介紹"></a>Longest Common Subsequence 介紹</h2><blockquote>
+<p>以下簡稱 LCS，在兩個序列中找出最長子序列的問題，序列是甚麼？只要順序一致即可，舉例：</p>
+<ul>
+<li>people</li>
+<li>apple</li>
+</ul>
+<ul>
+<li>這兩個的 LCS 就是 pple，長度為 4，子序列為 pple。</li>
+</ul>
+<p>看懂了嗎？ pple 在前面兩個字串中順序都是保持一致的。<br>被廣泛應用於生物資訊學與版本控制。</p>
+<p>這裡我們是教導時間複雜度為 \(O(n \log n)\) 的寫法，而非 \(O(n^2)\) 的寫法</p>
+<p>Longest Increasing Subsequence 最長遞增子序列，以下簡稱 LIS</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Longest-Common-Subsequence-原理"><a href="#Longest-Common-Subsequence-原理" class="headerlink" title="Longest Common Subsequence 原理"></a>Longest Common Subsequence 原理</h2><p>先將 A 字串的值逆向輸入到一個 <code>map&lt;char,vector&lt;int&gt;&gt;</code>裡面，再根據 B 字串的字元依序將 <code>map&lt;char,vector&lt;int&gt;&gt;</code> 取出，之後做 LIS 遞增。</p>
+<p>如果不懂 LIS 是甚麼可以先看<a href=""></a></p>
+<h3 id="QUESTION-太驚人了！-為甚麼可以用-O-n-log-n-去解？"><a href="#QUESTION-太驚人了！-為甚麼可以用-O-n-log-n-去解？" class="headerlink" title="QUESTION: 太驚人了！ 為甚麼可以用 \(O(n \log n )\) 去解？"></a>QUESTION: 太驚人了！ 為甚麼可以用 \(O(n \log n )\) 去解？</h3><p>因為這世界天才太多了。<del>正解</del></p>
+<p>開玩笑的，還記得 (\ O(n^2))\ 的解法怎麼解嗎？是用動態規劃，可是他是不是有點浪費效率，因為她只有在 <code>A[i] == B[i]</code>，才會增加長度，剩下時間都是在延續之前的狀態，我們從這裡進行補強。</p>
+<p>我們只要把 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，放入的順序是大到小，再根據 B 字串的每個字元對應同字元的 <code>vector</code>，在做 LIS 即可，這樣我們就減少了此情況 <code>A[i] != B[i]</code>。</p>
+<h2 id="Longest-Common-Subsequence-說明與舉例"><a href="#Longest-Common-Subsequence-說明與舉例" class="headerlink" title="Longest Common Subsequence 說明與舉例"></a>Longest Common Subsequence 說明與舉例</h2><h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h3><p>先舉個例子，以免被說是騙人XD。</p>
+<p>String A = “abdba”<br>String B = “dbaaba” </p>
+<p>對應 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，字串  index 從 0 開始，<strong>記住是逆序</strong>，如下：</p>
+<p>a(4,0) b(3,1) d(2)</p>
+<p>再來，我們根據根據 B 字串的每個字元對應同字元的 <code>vector</code>，產生序列，於是就變成</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>3</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>char</td>
+<td>d</td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>看懂了？對吧！</p>
+<p>而此時，這裡的 LIS 最大長度為 3，其中一種方式為 2 3 4，但這裡也只有這種XD，記住，在其他情況下 LCS 不只有一種表達方式。</p>
+<p>且 d 的 vector 有 2、b 的 vector 有 3、a 的 vector 有 4，剛好能夠組成 dba，符合答案。</p>
+<h3 id="QUESTION-那為甚麼要是逆序？"><a href="#QUESTION-那為甚麼要是逆序？" class="headerlink" title="QUESTION: 那為甚麼要是逆序？"></a>QUESTION: 那為甚麼要是逆序？</h3><p>很簡單，為了要避免重複判斷，一樣用剛剛的例子如下，那 <code>vector</code>會變成。</p>
+<p>a(0,4) b(1,3) d(2)</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+<td>0</td>
+<td>4</td>
+<td>1</td>
+<td>3</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>char</td>
+<td>d</td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>a</td>
+<td></td>
+<td>b</td>
+<td></td>
+<td>a</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>這樣出來的最長長度為 4，其中一種方式為 0 1 3 4，但這裡組成的字串會變成 dbba，是不是中間的 b 被重複算到了，因為 LIS 是遞增，如果我們的 <code>vector</code> 也是遞增排序時，則中間的每一個 <code>vector</code> 的 element 都會被我們選中長度會被無限放大，因此在 <code>vector</code> 時要是逆序的元素。</p>
+<h3 id="OK-現在問題被我們解決成是-LIS-了，那我們就來做吧！"><a href="#OK-現在問題被我們解決成是-LIS-了，那我們就來做吧！" class="headerlink" title="OK, 現在問題被我們解決成是 LIS 了，那我們就來做吧！"></a>OK, 現在問題被我們解決成是 LIS 了，那我們就來做吧！</h3><p><a href="https://theriseofdavid.github.io/2020/11/13/Explain_Algorithm/LIS/" target="_blank" rel="noopener">關於 LIS 的部分就先去看大衞的筆記即可</a>。</p>
+<h2 id="LCS-實作與說明"><a href="#LCS-實作與說明" class="headerlink" title="LCS 實作與說明"></a>LCS 實作與說明</h2><p>P.S. 這裡的 string index 由 1 開始方便編寫程式碼，主要方便用來 LIS 如果要更改 cur 成 0 時會造成 <code>t[-1]</code> ，只需要在 <code>string = &quot;$&quot; + string</code>，即可達到此功效</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> t[N*N] , d[N*N] , num[N*N] ; <span class="comment">//t and d 是 LIS 要用到 </span></span><br><span class="line"><span class="comment">// d 用來記住 LIS 中此數字的前一個數字</span></span><br><span class="line"><span class="comment">// t 當前 LIS 的數列位置</span></span><br><span class="line"><span class="comment">// num 則是我們根據 strB 的字元生成數列，用來找出最長 LIS 長度 </span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dict ; <span class="comment">//記住每個字串出現的 index 位置</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v )</span></span>&#123; <span class="comment">//binary search </span></span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (l+r) /<span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(num[v] &gt; num[t[m]]) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (num[v] &lt; num[t[m]]) r = m ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    dict.clear() ; <span class="comment">//先將 dict 先清空</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = strA.length()<span class="number">-1</span> ; i &gt; <span class="number">0</span> ; i--) dict[strA[i]].push_back(i) ;</span><br><span class="line">    <span class="comment">// 將每個字串的位置紀錄並放入 vector 中，請記住 i = strA.length() -1 才可以達到逆續效果</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span> ; <span class="comment">//紀錄生成數列的長度的最長長度</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; strB.length() ; i++)&#123; <span class="comment">// 依據 strB 的每個字元來生成數列</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; dict[strB[i]].size() ; j++) </span><br><span class="line">        <span class="comment">//將此字元在 strA 出現的位置放入數列</span></span><br><span class="line">            num[++k] = dict[strB[i]][j] ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(k==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ; <span class="comment">//如果 k = 0 就表示他們沒有共同字元都沒有於是就直接輸出 0</span></span><br><span class="line"></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">-1</span> , t[<span class="number">1</span>] = <span class="number">1</span> ; <span class="comment">//LIS init</span></span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span>, cur ; <span class="comment">// len 由於前面已經把 LCS = 0 的機會排除，於是這裡則從 1 開始</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 標準的 LIS 作法，不斷嘗試將 LCS 生長</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= k ; i++ )&#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] &gt; num[t[len]]) t[++len] = i , d[i] = t[len<span class="number">-1</span>] ;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//debug</span></span><br><span class="line"><span class="comment">//        for(int i = 1 ; i &lt;= k ; i++)</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; num[t[i]] &lt;&lt; ' ' ;</span></span><br><span class="line"><span class="comment">//        cout &lt;&lt; '\n' ;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LCS-應用"><a href="#LCS-應用" class="headerlink" title="LCS 應用"></a>LCS 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
+<ul>
+<li><a href="https://theriseofdavid.github.io/2020/11/07/UVa/UVa10192/" target="_blank" rel="noopener">UVa10192 - Vacation (LCS)</a></li>
+<li><a href="https://theriseofdavid.github.io/2020/03/13/UVa/UVa1207/" target="_blank" rel="noopener">UVa1207 - AGTC (LCS)</a> - 這裡採用的是 \(O(n^2)\) 做法。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.51cto.com/karsbin/966387" target="_blank" rel="noopener">lcs 最长公共子序列 O(nlogn)算法</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Binary Search 好難，嗚嗚，太過於依賴 C++ STL 函數，原本心血來潮想說要來寫一遍 Binary Search 沒想到花了 6 小時都還沒寫出來(完全是透過心想)，原本想說這麼簡單的演算法我應該連紙筆都不用吧！沒想到還是需要，嗚嗚，我腦袋的 RAM 是不是連 1 KB 都沒有呀，好討厭喔。</p>
+<p>不過又學了一個新演算法，用於改進 LCS 的時間複雜度其實感覺蠻開心的呢！</p>
+<h2 id="LCS-無註解程式碼"><a href="#LCS-無註解程式碼" class="headerlink" title="LCS 無註解程式碼"></a>LCS 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="built_in">string</span> strA , strB ;</span><br><span class="line"><span class="keyword">int</span> t[N*N] , d[N*N] , num[N*N] ; </span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">char</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dict ; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v )</span></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (l+r) /<span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(num[v] &gt; num[t[m]]) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (num[v] &lt; num[t[m]]) r = m ;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    dict.clear() ; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = strA.length()<span class="number">-1</span> ; i &gt; <span class="number">0</span> ; i--) dict[strA[i]].push_back(i) ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; strB.length() ; i++)&#123; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; dict[strB[i]].size() ; j++) </span><br><span class="line"></span><br><span class="line">            num[++k] = dict[strB[i]][j] ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(k==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span> ; </span><br><span class="line"></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ; </span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span>, cur ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= k ; i++ )&#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] &gt; num[t[len]]) t[++len] = i , d[i] = t[len<span class="number">-1</span>] ;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83/" rel="tag">動態規劃</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/11/13/Explain_Algorithm/LIS/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn))
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/11/10/contest_experence/ICPC2020/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">2020 International Collegiate Programming Contest Asia Taipei-Hsinchu Site (ICPC2020) - 65th 心得</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

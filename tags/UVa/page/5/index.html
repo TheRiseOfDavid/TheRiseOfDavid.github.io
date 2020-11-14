@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    演算法知識 - Longest Common Subsequence 動態規劃最長共同子序列(時間複雜度 O(nlogn)) |  大衞的筆記
+    Tag: UVa |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,219 +43,86 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-Explain_Algorithm/LCS" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">#&nbspUVa</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2020" class="archive-year">2020</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/03/08/UVa/UVa544/" class="archive-article-date">
+  <time datetime="2020-03-08T07:36:12.000Z" itemprop="datePublished">03/08</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  演算法知識 - Longest Common Subsequence 動態規劃最長共同子序列(時間複雜度 O(nlogn))
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2020/03/08/UVa/UVa544/"
+    >UVa544 - Heavy Cargo (Kruskal)</a
+  >
+</h2>
   
 
     </header>
     
+    
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kruskal-s-algorithm/" rel="tag">Kruskal's algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A8%B9-MST/" rel="tag">最小生成樹 MST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
     
-    <div class="article-meta">
-      <a href="/2020/10/19/Explain_Algorithm/LCS/" class="article-date">
-  <time datetime="2020-10-18T16:37:07.000Z" itemprop="datePublished">2020-10-19</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
   </div>
-
-      
-      
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">750</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">2分鐘</span>
-        </span>
-    </span>
-</div>
-
-      
-    </div>
-    
-
-    
-    
-    <div class="tocbot"></div>
-
-
-
-
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="Longest-Common-Subsequence-介紹"><a href="#Longest-Common-Subsequence-介紹" class="headerlink" title="Longest Common Subsequence 介紹"></a>Longest Common Subsequence 介紹</h2><blockquote>
-<p>以下簡稱 LCS，在兩個序列中找出最長子序列的問題，序列是甚麼？只要順序一致即可，舉例：</p>
-<ul>
-<li>people</li>
-<li>apple</li>
-</ul>
-<ul>
-<li>這兩個的 LCS 就是 pple，長度為 4，子序列為 pple。</li>
-</ul>
-<p>看懂了嗎？ pple 在前面兩個字串中順序都是保持一致的。<br>被廣泛應用於生物資訊學與版本控制。</p>
-<p>這裡我們是教導時間複雜度為 \(O(n \log n)\) 的寫法，而非 \(O(n^2)\) 的寫法</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="Longest-Common-Subsequence-原理"><a href="#Longest-Common-Subsequence-原理" class="headerlink" title="Longest Common Subsequence 原理"></a>Longest Common Subsequence 原理</h2><p>先將 A 字串的值逆向輸入到一個 <code>map&lt;char,vector&lt;int&gt;&gt;</code>裡面，再根據 B 字串的字元依序將 <code>map&lt;char,vector&lt;int&gt;&gt;</code> 取出，之後做 LIS 遞增。</p>
-<p>如果不懂 LIS 是甚麼可以先看<a href=""></a></p>
-<h3 id="QUESTION-為甚麼可以用-O-n-log-n-去解？"><a href="#QUESTION-為甚麼可以用-O-n-log-n-去解？" class="headerlink" title="QUESTION: ??? 為甚麼可以用 \(O(n \log n )\) 去解？"></a>QUESTION: ??? 為甚麼可以用 \(O(n \log n )\) 去解？</h3><p>因為這世界天才太多了。<del>正解</del></p>
-<p>開玩笑的，還記得 (\ O(n^2))\ 的解法怎麼解嗎？是用動態規劃，可是他是不是有點浪費效率，因為她只有在 <code>A[i] == B[i]</code>，才會增加長度，剩下時間都是在延續之前的狀態，我們從這裡進行補強。</p>
-<p>我們只要把 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，放入的順序是大到小，再根據 B 字串的每個字元對應同字元的 <code>vector</code>，在做 LIS 即可，這樣我們就減少了此情況 <code>A[i] != B[i]</code>。</p>
-<h2 id="Longest-Common-Subsequence-說明與舉例"><a href="#Longest-Common-Subsequence-說明與舉例" class="headerlink" title="Longest Common Subsequence 說明與舉例"></a>Longest Common Subsequence 說明與舉例</h2><h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h3><p>先舉個例子，以免被說是騙人XD。</p>
-<p>String A = “abdba”<br>String B = “dbaaba” </p>
-<p>對應 A 字串的每個字元的 index 做紀錄，並將同個字元出現的多個位置放入 <code>vector</code>，字串  index 從 0 開始，<strong>記住是逆序</strong>，如下：</p>
-<p>a(4,0) b(3,1) d(2)</p>
-<p>再來，我們根據根據 B 字串的每個字元對應同字元的 <code>vector</code>，產生序列，於是就變成</p>
-<p>2 3 1 4 0 4 0 3 1 4 0<br>d b   a   a   b   a</p>
-<p>看懂了？對吧！</p>
-<p>而此時，這裡的 LIS 最大長度為 3，其中一種方式為 2 3 4，但這裡也只有這種XD，記住，在其他情況下 LCS 不只有一種表達方式。</p>
-<p>且 d 的 vector 有 2、b 的 vector 有 3、a 的 vector 有 4，剛好能夠組成 dba，符合答案。</p>
-<h3 id="QUESTION-那為甚麼要是逆序？"><a href="#QUESTION-那為甚麼要是逆序？" class="headerlink" title="QUESTION: 那為甚麼要是逆序？"></a>QUESTION: 那為甚麼要是逆序？</h3><p>很簡單，為了要避免重複判斷，一樣用剛剛的例子如下，那 <code>vector</code>會變成。</p>
-<p>a(0,4) b(1,3) d(2)</p>
-<p>2 1 3 0 4 0 4 1 3 0 4<br>d b   a   a   b   a</p>
-<p>這樣出來的最長長度為 4，其中一種方式為 0 1 3 4，但這裡組成的字串會變成 dbba，是不是中間的 b 被重複算到了，因為 LIS 是遞增，如果我們的 <code>vector</code> 也是遞增排序時，則中間的每一個 <code>vector</code> 的 element 都會被我們選中長度會被無限放大，因此在 <code>vector</code> 時要是逆序的元素。</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-        <div class="declare">
-          <ul class="post-copyright">
-            <li>
-              <i class="ri-copyright-line"></i>
-              <strong>版權聲明： </strong s>
-              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
-                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
-            </li>
-          </ul>
-        </div>
-        
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">動態規劃最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-  
-  <nav class="article-nav">
-    
-      <a href="/2020/10/19/Explain_Algorithm/Suffix-Array/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            演算法知識 - Suffix Array 後綴陣列
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2020/10/15/NTUT_note/statistcs-ch3B/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">統計學(一) 筆記 - 第三章B</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-  
-<!-- valine评论 -->
-<div id="vcomments-box">
-    <div id="vcomments">
-    </div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: '',
-        app_key: '',
-        path: window.location.pathname,
-        notify: 'false',
-        verify: 'false',
-        avatar: 'mp',
-        placeholder: '給我的文章加點評論吧~',
-        recordIP: true
-    });
-    const infoEle = document.querySelector('#vcomments .info');
-    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-        infoEle.childNodes.forEach(function (item) {
-            item.parentNode.removeChild(item);
-        });
-    }
-</script>
-<style>
-    #vcomments-box {
-        padding: 5px 30px;
-    }
-
-    @media screen and (max-width: 800px) {
-        #vcomments-box {
-            padding: 5px 0px;
-        }
-    }
-
-    #vcomments-box #vcomments {
-        background-color: #fff;
-    }
-
-    .v .vlist .vcard .vh {
-        padding-right: 20px;
-    }
-
-    .v .vlist .vcard {
-        padding-left: 10px;
-    }
-</style>
-
-  
-
-  
-  
-  
-
 </article>
+      
+  
+  
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/03/07/UVa/UVa255/" class="archive-article-date">
+  <time datetime="2020-03-07T11:59:35.000Z" itemprop="datePublished">03/07</time>
+</a>
+       
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2020/03/07/UVa/UVa255/"
+    >UVa255 - Correct Move (水題)</a
+  >
+</h2>
+  
+
+    </header>
+    
+    
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B0%B4%E9%A1%8C/" rel="tag">水題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+    
+  </div>
+</article>
+      
+      
+    </div>
+  </div>
+  
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/tags/UVa/page/4/">上一頁</a><a class="page-number" href="/tags/UVa/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/UVa/page/3/">3</a><a class="page-number" href="/tags/UVa/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -390,30 +257,6 @@ ga('send', 'pageview');
 </script>
 
 
-
-
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: 'main',
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-    onClick: (e) => {
-      $('.toc-link').removeClass('is-active-link');
-      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
-      $(e.target.hash).scrollIntoView();
-      return false;
-    }
-  });
-</script>
 
 
 
