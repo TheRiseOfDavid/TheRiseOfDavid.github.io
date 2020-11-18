@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">537</span>
+            <span class="post-count">893</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">1分鐘</span>
+            <span class="post-count">3分鐘</span>
         </span>
     </span>
 </div>
@@ -168,9 +168,64 @@ ga('send', 'pageview');
 </blockquote>
 <p>舉例實驗如下：</p>
 <blockquote>
-<p><img src="/images/statistics-ch5/8.PNG" alt=""><br><img src="/images/statistics-ch5/9.PNG" alt=""><br><img src="/images/statistics-ch5/11.PNG" alt=""></p>
+<p><img src="/images/statistics-ch5/8.PNG" alt=""><br><img src="/images/statistics-ch5/9.PNG" alt=""><br><img src="/images/statistics-ch5/11.PNG" alt=""><br><img src="/images/statistics-ch5/12.PNG" alt=""><br><img src="/images/statistics-ch5/13.PNG" alt=""></p>
 </blockquote>
-<p><strong>目前看到 5-8 ，下次從 5-9 看</strong></p>
+<h3 id="Negative-Binomial-Probability-Distribution-負二項機率分配"><a href="#Negative-Binomial-Probability-Distribution-負二項機率分配" class="headerlink" title="Negative Binomial Probability Distribution 負二項機率分配"></a>Negative Binomial Probability Distribution 負二項機率分配</h3><ul>
+<li>此實驗包括 n 次相同試驗</li>
+<li>實驗獨立</li>
+<li>只有成功與失敗</li>
+<li>通常是找出在第 r 次時，失敗與成功的機率與多少</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/14.PNG" alt=""></p>
+</blockquote>
+<p>假設我們要找出可以兩次的正面實驗機率，圖表如下：<br>注意：你可能會有一個疑問是應該擲越多次機率越高阿？假設在第二次就擲成功時，那就是在第二次成功，往上的每次都不會紀錄</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/15.PNG" alt=""><br><img src="/images/statistics-ch5/16.PNG" alt=""></p>
+</blockquote>
+<h3 id="Geometric-Probability-Distribution-幾何機率分配"><a href="#Geometric-Probability-Distribution-幾何機率分配" class="headerlink" title="Geometric Probability Distribution 幾何機率分配"></a>Geometric Probability Distribution 幾何機率分配</h3><ul>
+<li>此實驗包括 n 次相同試驗</li>
+<li>實驗獨立</li>
+<li>只有成功與失敗</li>
+<li>找出<strong>第一次成功</strong>的機率分配</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/17.PNG" alt=""></p>
+</blockquote>
+<p>舉例如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/18.PNG" alt=""><br><img src="/images/statistics-ch5/19.PNG" alt=""></p>
+</blockquote>
+<h4 id="統整負二項機率分配-and-幾何機率分配"><a href="#統整負二項機率分配-and-幾何機率分配" class="headerlink" title="統整負二項機率分配 and 幾何機率分配"></a>統整負二項機率分配 and 幾何機率分配</h4><blockquote>
+<p><img src="/images/statistics-ch5/20.PNG" alt=""></p>
+</blockquote>
+<h3 id="Poisson-Probability-Distribution-卜瓦松機率分配"><a href="#Poisson-Probability-Distribution-卜瓦松機率分配" class="headerlink" title="Poisson Probability Distribution 卜瓦松機率分配"></a>Poisson Probability Distribution 卜瓦松機率分配</h3><p>在一個時段內找出有 x 個一樣結果的機率為和，例如在一個期間有多少車子通過高速公路收費站</p>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>任一個長度區間兩個發生事件的機率相同</li>
+<li>在各個區間發生的事件都是獨立</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/21.PNG" alt=""></p>
+</blockquote>
+<h4 id="舉例："><a href="#舉例：" class="headerlink" title="舉例："></a>舉例：</h4><p>在 30 分鐘來 4 個病人的機率是多少，且平均一小時會來 6 個病人</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/22.PNG" alt=""></p>
+</blockquote>
+<h3 id="Hypergeometric-Probability-Distribution-超幾何機率分配"><a href="#Hypergeometric-Probability-Distribution-超幾何機率分配" class="headerlink" title="Hypergeometric Probability Distribution 超幾何機率分配"></a>Hypergeometric Probability Distribution 超幾何機率分配</h3><p>在 n 個試驗中成功的機率。</p>
+<ul>
+<li>實驗並不獨立</li>
+<li>只要做完一個實驗就會影響到其他機率</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/23.PNG" alt=""><br><img src="/images/statistics-ch5/24.PNG" alt=""></p>
+</blockquote>
+<h4 id="舉例：-1"><a href="#舉例：-1" class="headerlink" title="舉例："></a>舉例：</h4><blockquote>
+<p><img src="/images/statistics-ch5/25.PNG" alt=""><br><img src="/images/statistics-ch5/26.PNG" alt=""></p>
+</blockquote>
 
       
       <!-- reward -->

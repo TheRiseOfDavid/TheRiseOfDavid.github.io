@@ -3991,8 +3991,13 @@
 <td>\cap</td>
 <td></td>
 </tr>
+<tr>
+<td>+-(加減)</td>
+<td>\pm</td>
+<td></td>
+</tr>
 </tbody></table>
-<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a></p>
+<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a></p>
 ]]></content>
       <categories>
         <category>blog</category>
@@ -6380,9 +6385,64 @@
 </blockquote>
 <p>舉例實驗如下：</p>
 <blockquote>
-<p><img src="/images/statistics-ch5/8.PNG" alt=""><br><img src="/images/statistics-ch5/9.PNG" alt=""><br><img src="/images/statistics-ch5/11.PNG" alt=""></p>
+<p><img src="/images/statistics-ch5/8.PNG" alt=""><br><img src="/images/statistics-ch5/9.PNG" alt=""><br><img src="/images/statistics-ch5/11.PNG" alt=""><br><img src="/images/statistics-ch5/12.PNG" alt=""><br><img src="/images/statistics-ch5/13.PNG" alt=""></p>
 </blockquote>
-<p><strong>目前看到 5-8 ，下次從 5-9 看</strong></p>
+<h3 id="Negative-Binomial-Probability-Distribution-負二項機率分配"><a href="#Negative-Binomial-Probability-Distribution-負二項機率分配" class="headerlink" title="Negative Binomial Probability Distribution 負二項機率分配"></a>Negative Binomial Probability Distribution 負二項機率分配</h3><ul>
+<li>此實驗包括 n 次相同試驗</li>
+<li>實驗獨立</li>
+<li>只有成功與失敗</li>
+<li>通常是找出在第 r 次時，失敗與成功的機率與多少</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/14.PNG" alt=""></p>
+</blockquote>
+<p>假設我們要找出可以兩次的正面實驗機率，圖表如下：<br>注意：你可能會有一個疑問是應該擲越多次機率越高阿？假設在第二次就擲成功時，那就是在第二次成功，往上的每次都不會紀錄</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/15.PNG" alt=""><br><img src="/images/statistics-ch5/16.PNG" alt=""></p>
+</blockquote>
+<h3 id="Geometric-Probability-Distribution-幾何機率分配"><a href="#Geometric-Probability-Distribution-幾何機率分配" class="headerlink" title="Geometric Probability Distribution 幾何機率分配"></a>Geometric Probability Distribution 幾何機率分配</h3><ul>
+<li>此實驗包括 n 次相同試驗</li>
+<li>實驗獨立</li>
+<li>只有成功與失敗</li>
+<li>找出<strong>第一次成功</strong>的機率分配</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/17.PNG" alt=""></p>
+</blockquote>
+<p>舉例如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/18.PNG" alt=""><br><img src="/images/statistics-ch5/19.PNG" alt=""></p>
+</blockquote>
+<h4 id="統整負二項機率分配-and-幾何機率分配"><a href="#統整負二項機率分配-and-幾何機率分配" class="headerlink" title="統整負二項機率分配 and 幾何機率分配"></a>統整負二項機率分配 and 幾何機率分配</h4><blockquote>
+<p><img src="/images/statistics-ch5/20.PNG" alt=""></p>
+</blockquote>
+<h3 id="Poisson-Probability-Distribution-卜瓦松機率分配"><a href="#Poisson-Probability-Distribution-卜瓦松機率分配" class="headerlink" title="Poisson Probability Distribution 卜瓦松機率分配"></a>Poisson Probability Distribution 卜瓦松機率分配</h3><p>在一個時段內找出有 x 個一樣結果的機率為和，例如在一個期間有多少車子通過高速公路收費站</p>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>任一個長度區間兩個發生事件的機率相同</li>
+<li>在各個區間發生的事件都是獨立</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/21.PNG" alt=""></p>
+</blockquote>
+<h4 id="舉例："><a href="#舉例：" class="headerlink" title="舉例："></a>舉例：</h4><p>在 30 分鐘來 4 個病人的機率是多少，且平均一小時會來 6 個病人</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/22.PNG" alt=""></p>
+</blockquote>
+<h3 id="Hypergeometric-Probability-Distribution-超幾何機率分配"><a href="#Hypergeometric-Probability-Distribution-超幾何機率分配" class="headerlink" title="Hypergeometric Probability Distribution 超幾何機率分配"></a>Hypergeometric Probability Distribution 超幾何機率分配</h3><p>在 n 個試驗中成功的機率。</p>
+<ul>
+<li>實驗並不獨立</li>
+<li>只要做完一個實驗就會影響到其他機率</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch5/23.PNG" alt=""><br><img src="/images/statistics-ch5/24.PNG" alt=""></p>
+</blockquote>
+<h4 id="舉例：-1"><a href="#舉例：-1" class="headerlink" title="舉例："></a>舉例：</h4><blockquote>
+<p><img src="/images/statistics-ch5/25.PNG" alt=""><br><img src="/images/statistics-ch5/26.PNG" alt=""></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>北科上課筆記</category>
@@ -6990,6 +7050,60 @@
         <tag>UVa</tag>
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Rselenium 一些應用與教學</title>
+    <url>/2020/11/15/R/R-Rselenium/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>主要是透過 Rselenium 來模擬人類打開網頁並對其進行操作，以下是一些 Rselenium 下載的教學步驟</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="安裝-Rselenium"><a href="#安裝-Rselenium" class="headerlink" title="安裝 Rselenium"></a>安裝 Rselenium</h2><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">install.packages(<span class="string">"RSelenium"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="安裝-WebDriver"><a href="#安裝-WebDriver" class="headerlink" title="安裝 WebDriver"></a>安裝 WebDriver</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>由於我們安裝好 Selenium 後，Selenium 是程式語言與 browser 溝通的關鍵，於是我們還需要安裝一個機器人專用的<strong>瀏覽器</strong>來給他進行操控，目前支持機器人操控瀏覽器的有 Google Chrome and Firefox</p>
+<p>首先先去<a href="https://www.selenium.dev/downloads/" target="_blank" rel="noopener">這裡</a>，找到目前最新的 Selenium Server 版本，作者在寫此文章時是這個版本。</p>
+<p><strong>如果電腦沒有 java 必須先去下載 java 才能安裝成功，建議可以將命令先 cd 至爬蟲資料夾</strong></p>
+<p><img src="/images/R-Rselenium/1.PNG" alt=""></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta"># java -jar selenium-server-standalone-X.XXX.XX.jar</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><p>下一步則是我們要將 Google Chrome 專用的瀏覽器進行下載，先在 R console 中輸入</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">binman::list_versions(<span class="string">"chromedriver"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>應該要能夠出現，以下的感覺</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="string">"85.0.4183.87"</span> <span class="string">"86.0.4240.22"</span> <span class="string">"87.0.4280.20"</span></span><br></pre></td></tr></table></figure>
+
+<p>接著去<a href="https://chromedriver.chromium.org/downloads" target="_blank" rel="noopener">此網站</a>，下載最適合的版本，並放入你寫程式的資料夾內，建議放入與上述 <code>selenium-server-standalone-X.XXX.XX.jar</code>相同位置</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.gtwang.org/r/rselenium-r-selenium-browser-web-scraping-tutorial/" target="_blank" rel="noopener">RSelenium：R 使用 Selenium 操控瀏覽器下載網頁資料</a><br><a href="https://www.selenium.dev/downloads/" target="_blank" rel="noopener">Selenium</a><br><a href="https://mran.microsoft.com/snapshot/2017-12-11/web/packages/RSelenium/vignettes/RSelenium-basics.html" target="_blank" rel="noopener">RSelenium: Basics</a><br><a href="https://stackoverflow.com/questions/56857745/chromedriver-vs-chrome-update-incompatibility" target="_blank" rel="noopener">Chromedriver vs. Chrome update incompatibility</a></p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>網路爬蟲</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QUESTION! 在 R 語言中數字後面有 L 是甚麼意思呢？</title>
+    <url>/2020/11/15/R/R-L_meaning/</url>
+    <content><![CDATA[<h2 id="內容說明："><a href="#內容說明：" class="headerlink" title="內容說明："></a>內容說明：</h2><blockquote>
+<p>在 R 語言中數字後面有 L 是甚麼意思呢？<br>例如： 1233L 是甚麼意思？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Answer-表示長整數"><a href="#Answer-表示長整數" class="headerlink" title="Answer: 表示長整數"></a>Answer: 表示長整數</h2><p>如果有再寫 C++ 的人可以知道，在 C++ 中有一個資料型態叫做 <code>int</code>，可以表達數字在 \(\pm 2^{31}-1\)，在 R 語言中數字後面加上 L 也是此意思。</p>
+<p>主要是因為 R 語言中數值型態有分，數值(numeric) or 整數 (integer)，因此才需要再有一些些麻煩的設定。</p>
+<h2 id="參考連結："><a href="#參考連結：" class="headerlink" title="參考連結："></a>參考連結：</h2><p><a href="https://bookdown.org/tonykuoyj/eloquentr/variable-types.html" target="_blank" rel="noopener">8 精簡的變數型別</a></p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
       </tags>
   </entry>
 </search>
