@@ -77,7 +77,7 @@ ga('send', 'pageview');
     
     
     
-    <article id="post-Explain_Algorithm/Suffix-Array" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa111" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -85,8 +85,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/10/19/Explain_Algorithm/Suffix-Array/"
-    >演算法知識 - Suffix Array 後綴陣列</a
+  <a class="article-title" href="/2020/11/14/UVa/UVa111/"
+    >UVa 111 - History Grading (LIS)</a
   >
 </h2>
   
@@ -96,8 +96,8 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/10/19/Explain_Algorithm/Suffix-Array/" class="article-date">
-  <time datetime="2020-10-18T16:37:07.000Z" itemprop="datePublished">2020-10-19</time>
+      <a href="/2020/11/14/UVa/UVa111/" class="article-date">
+  <time datetime="2020-11-13T16:37:07.000Z" itemprop="datePublished">2020-11-14</time>
 </a>
       
   <div class="article-category">
@@ -120,25 +120,102 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="Suffix-Array-介紹"><a href="#Suffix-Array-介紹" class="headerlink" title="Suffix Array 介紹"></a>Suffix Array 介紹</h2><blockquote>
-<p>對某一字串的所有後綴進行字典排序，常用於全文索引、數據壓縮算法與生物資訊學。<br>這裡介紹的演算法寫法時間複雜度為 \(O(n \log n)\)</p>
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>老師要改考卷關於歷史的事件排序，我們要寫程式幫老師解決其中一道題目，簡單來說，歷史有很多事件，只要學生們排序歷史事件順序有對，就給予相對應的分數，我們將歷史事件定義成數字，順序則就是數學的遞增。</p>
+<p>1,2,3,4 得四分 因為遞增的數列最長可以來到 4<br>2,1,3,4 得三分，因為 1,3,4 or 2,3,4 這樣的順序都有正確，但順序長度只有 3，所以就輸出 3 分<br>4,3,2,1 得一分，有這四種 1 or 2 or 3 or 4，而他們遞增長度最高都只能來到 1，因此只有一分。</p>
+<p>我們就是要找出，最長的數值遞增長度。</p>
+<p>這題的格式： 1 3 2 4 ，其中 1 是表示歷史事件 1 是在第 1 個位置、 3 則是表示歷史事件 <strong>2</strong> 是在第三個位置，全部的數值都是用此表達方式表達。</p>
 </blockquote>
-<h2 id="Suffix-Array-原理"><a href="#Suffix-Array-原理" class="headerlink" title="Suffix Array 原理"></a>Suffix Array 原理</h2><p>Suffix Array 主要是用 \(sa\) and \(rk\) 這兩個陣列組合而成。<br>且滿足此性質 \(sa[rk[i]] = rk[sa[i]] = i \)</p>
-<p>Suffix Array 圖示說明：<br><img src="/images/Suffix-Array/1.png" alt=""></p>
-<h3 id="QUESTION-1-sa-suffix-array-用途是甚麼呢？"><a href="#QUESTION-1-sa-suffix-array-用途是甚麼呢？" class="headerlink" title="QUESTION 1: sa (suffix array) 用途是甚麼呢？"></a>QUESTION 1: sa (suffix array) 用途是甚麼呢？</h3><p>\(sa[i]\) 表示此字串所有後綴排序後第 i 大的 index。</p>
-<h3 id="QUESTION-2-rk-rank-array-用途是甚麼呢？"><a href="#QUESTION-2-rk-rank-array-用途是甚麼呢？" class="headerlink" title="QUESTION 2: rk (rank array) 用途是甚麼呢？"></a>QUESTION 2: rk (rank array) 用途是甚麼呢？</h3><p>\(rk[i]\) 表示此字串所有後綴排序後，字串中 index 後綴的排名。</p>
-<h3 id="QUESTION-3-甚麼是所有後綴？"><a href="#QUESTION-3-甚麼是所有後綴？" class="headerlink" title="QUESTION 3: 甚麼是所有後綴？"></a>QUESTION 3: 甚麼是所有後綴？</h3><blockquote>
-<p>從第 i 個字元開始到最後一個字元的字串，i 的範圍是 string[0] ~ string.length()<br>所有後綴舉例如下，舉例單字為 <strong>apple</strong>：</p>
-</blockquote>
+      
+      <a class="article-more-link" href="/2020/11/14/UVa/UVa111/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E9%81%9E%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Increasing-Subsequence/" rel="tag">最長遞增子序列 Longest Increasing Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Explain_Algorithm/LIS" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/13/Explain_Algorithm/LIS/"
+    >演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn))</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/13/Explain_Algorithm/LIS/" class="article-date">
+  <time datetime="2020-11-13T04:38:07.000Z" itemprop="datePublished">2020-11-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Longest-Increasing-Subsequence-介紹"><a href="#Longest-Increasing-Subsequence-介紹" class="headerlink" title="Longest Increasing Subsequence 介紹"></a>Longest Increasing Subsequence 介紹</h2><blockquote>
+<p>以下簡稱 LIS，在一個陣列中找出最長遞增的序列，序列是甚麼？舉例：</p>
 <ul>
-<li>apple</li>
-<li>pple </li>
-<li>ple</li>
-<li>le</li>
-<li>e</li>
+<li>1 3 4 2 5<br>則此 LIS 的長度為 3，符合最長長度的有三種：</li>
 </ul>
+<ul>
+<li>1,3,4</li>
+<li>1,2,5</li>
+<li>1,4,5</li>
+</ul>
+<p>只要相對位置有達到遞增，且數值也有遞增則符合<strong>遞增序列</strong>的意思。</p>
+<p>在一些數學研究會涉及此演算法，且此演算法有兩種不一樣的時間複雜度，一種為 \(O(N^2)\) 另一種則為 \(O(n /log n)\)</p>
+<p><strong>這裡我們則是介紹比較快的方法，\(O(n \log n) \)</strong></p>
+</blockquote>
       
-      <a class="article-more-link" href="/2020/10/19/Explain_Algorithm/Suffix-Array/">閱讀更多...</a>
+      <a class="article-more-link" href="/2020/11/13/Explain_Algorithm/LIS/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -151,7 +228,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Suffix-Array/" rel="tag">Suffix Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%89%8D%E7%B6%B4-Longest-Common-Prefix-Array/" rel="tag">最長共同前綴 Longest Common Prefix Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E9%81%9E%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Increasing-Subsequence/" rel="tag">最長遞增子序列 Longest Increasing Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -168,7 +245,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-NTUT_note/statistcs-ch3B" class="article article-type-post" itemscope
+    <article id="post-Explain_Algorithm/LCS" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -176,8 +253,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/10/15/NTUT_note/statistcs-ch3B/"
-    >統計學(一) 筆記 - 第三章B</a
+  <a class="article-title" href="/2020/11/11/Explain_Algorithm/LCS/"
+    >演算法知識 - Longest Common Subsequence 最長共同子序列(時間複雜度 O(nlogn))</a
   >
 </h2>
   
@@ -187,12 +264,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/10/15/NTUT_note/statistcs-ch3B/" class="article-date">
-  <time datetime="2020-10-15T12:58:50.000Z" itemprop="datePublished">2020-10-15</time>
+      <a href="/2020/11/11/Explain_Algorithm/LCS/" class="article-date">
+  <time datetime="2020-11-10T16:37:07.000Z" itemprop="datePublished">2020-11-11</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
   </div>
 
       
@@ -211,11 +288,21 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+      <h2 id="Longest-Common-Subsequence-介紹"><a href="#Longest-Common-Subsequence-介紹" class="headerlink" title="Longest Common Subsequence 介紹"></a>Longest Common Subsequence 介紹</h2><blockquote>
+<p>以下簡稱 LCS，在兩個序列中找出最長子序列的問題，序列是甚麼？只要順序一致即可，舉例：</p>
+<ul>
+<li>people</li>
+<li>apple</li>
+</ul>
+<ul>
+<li>這兩個的 LCS 就是 pple，長度為 4，子序列為 pple。</li>
+</ul>
+<p>看懂了嗎？ pple 在前面兩個字串中順序都是保持一致的。<br>被廣泛應用於生物資訊學與版本控制。</p>
+<p>這裡我們是教導時間複雜度為 \(O(n \log n)\) 的寫法，而非 \(O(n^2)\) 的寫法</p>
+<p>Longest Increasing Subsequence 最長遞增子序列，以下簡稱 LIS</p>
 </blockquote>
       
-      <a class="article-more-link" href="/2020/10/15/NTUT_note/statistcs-ch3B/">閱讀更多...</a>
+      <a class="article-more-link" href="/2020/11/11/Explain_Algorithm/LCS/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -228,7 +315,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83/" rel="tag">動態規劃</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -245,7 +332,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa10163" class="article article-type-post" itemscope
+    <article id="post-contest_experence/ICPC2020" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -253,8 +340,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/10/12/UVa/UVa10163/"
-    >UVa10163 - Storage Keepers (Knapsack Problem)</a
+  <a class="article-title" href="/2020/11/10/contest_experence/ICPC2020/"
+    >2020 International Collegiate Programming Contest Asia Taipei-Hsinchu Site (ICPC2020) - 65th 心得</a
   >
 </h2>
   
@@ -264,162 +351,8 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/10/12/UVa/UVa10163/" class="article-date">
-  <time datetime="2020-10-11T17:08:26.000Z" itemprop="datePublished">2020-10-12</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>有 X 的倉庫需要有人看守，每個人可以看守多個倉庫，但一個倉庫只能被一人看守，看守的規定如下：<br>每位看守人員的能力值與報酬相同<br>如果要讓一看守人員看多個倉庫則其能力值會依照此公式下降 <strong>\( \text{倉庫安全值} = \text{看守人員能力值} / \text{倉庫數量} \)</strong>，有小數點時取整數。<br>目標是要讓我們花費在看守人員的<strong>報酬最低</strong>並讓倉庫的<strong>安全值最高</strong>。</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/10/12/UVa/UVa10163/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E5%95%8F%E9%A1%8C/" rel="tag">動態問題　</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%83%8C%E5%8C%85%E5%95%8F%E9%A1%8C-Knapsack-Problem/" rel="tag">背包問題 Knapsack Problem</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-life_experence/Dimdimsum20200920" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/11/life_experence/Dimdimsum20200920/"
-    >NTUT_Kn1ghts 點點心聚餐</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/10/11/life_experence/Dimdimsum20200920/" class="article-date">
-  <time datetime="2020-10-10T17:35:16.000Z" itemprop="datePublished">2020-10-11</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/">人生旅途</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><blockquote>
-<p>記錄我在 2020/09/20 跟參加ICPC 競賽的隊友去餐廳吃飯紀錄<br>謝謝學長(風平) and 學弟(漢軒) 陪我參加這場比賽<br>沒有它們我根本甚麼都沒辦法完成，有他們我才有機會去嘗試夢想</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/10/11/life_experence/Dimdimsum20200920/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8Life/" rel="tag">大學Life</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-contest_experence/topc2020" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/11/contest_experence/topc2020/"
-    >TOPC2020 ICPC Asia Taiwan Online Programming Contest - 30th 心得</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/10/11/contest_experence/topc2020/" class="article-date">
-  <time datetime="2020-10-10T17:34:09.000Z" itemprop="datePublished">2020-10-11</time>
+      <a href="/2020/11/10/contest_experence/ICPC2020/" class="article-date">
+  <time datetime="2020-11-10T15:33:09.000Z" itemprop="datePublished">2020-11-10</time>
 </a>
       
   <div class="article-category">
@@ -443,10 +376,11 @@ ga('send', 'pageview');
 
       
       <blockquote>
-<p>僅此紀錄 2020/10/07 2020 ICPC Asia Taiwan Online Programming Contest 心得<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去<br>僅只有 30th，還需要努力</p>
+<p>僅此紀錄 2020/11/08 2020 ICPC 心得。<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去<br>沒有得獎拉，只是很可惜自己還不夠好吧。</p>
+<p><strong>明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。</strong></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2020/10/11/contest_experence/topc2020/">閱讀更多...</a>
+      <a class="article-more-link" href="/2020/11/10/contest_experence/ICPC2020/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -476,7 +410,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-blog/hexo-insert-movie" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa10192" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -484,8 +418,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/10/10/blog/hexo-insert-movie/"
-    >QUESTION! 如何在 Hexo or Markdown 插入 youtube 影片呢？</a
+  <a class="article-title" href="/2020/11/07/UVa/UVa10192/"
+    >UVa10192 - Vacation (LCS)</a
   >
 </h2>
   
@@ -495,166 +429,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/10/10/blog/hexo-insert-movie/" class="article-date">
-  <time datetime="2020-10-09T18:14:30.000Z" itemprop="datePublished">2020-10-10</time>
+      <a href="/2020/11/07/UVa/UVa10192/" class="article-date">
+  <time datetime="2020-11-06T17:08:26.000Z" itemprop="datePublished">2020-11-07</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="使用-Hexo-or-Markdown-插入影片："><a href="#使用-Hexo-or-Markdown-插入影片：" class="headerlink" title="使用 Hexo or Markdown 插入影片："></a>使用 Hexo or Markdown 插入影片：</h2><blockquote>
-<p>此文章教學如何用 Hexo or Markdown 中放入 youtube 影片</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/10/10/blog/hexo-insert-movie/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-contest_experence/ncpc2020_final" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/09/contest_experence/ncpc2020_final/"
-    >NCPC2020 109年度全國大專電腦軟體設計決賽 - 34th(佳作) 心得</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/10/09/contest_experence/ncpc2020_final/" class="article-date">
-  <time datetime="2020-10-09T15:33:09.000Z" itemprop="datePublished">2020-10-09</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/">競賽心得</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <blockquote>
-<p>僅此紀錄 2020/10/09 109年度全國大專電腦軟體設計決賽心得。<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去<br>僅只有 34th，還需要努力</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/10/09/contest_experence/ncpc2020_final/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICPC/" rel="tag">ICPC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8Life/" rel="tag">大學Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E6%AF%94%E8%B3%BD/" rel="tag">程式比賽</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/" rel="tag">競賽心得</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa11362" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/09/UVa/UVa11362/"
-    >UVa11362 - Phone List (字典樹 詳解)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/10/09/UVa/UVa11362/" class="article-date">
-  <time datetime="2020-10-08T16:30:26.000Z" itemprop="datePublished">2020-10-09</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a> / <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
   </div>
 
       
@@ -674,10 +454,11 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>給你一組電話號碼，不超過 10 位數，如果這一組的電話號碼內只要有一個電話號碼是另外一個電話號碼的前綴就輸出 “NO”，否則就輸出 “YES”</p>
+<p>爸媽想要出國出去玩，<del>可是今年有疫情欸，拔麻</del>，反正爸媽不管且還要求出國的遊玩順序一定要按照他們想法，這讓我非常煩惱，但他們願意略過一些他們想去的地方，但順序必須一樣，試問如果爸媽都有自己的出國遊玩順序再不影響他們順序時他們可以去的最大長度？</p>
+<p>注意：這題輸入字串會有 space , uppercase letters , lowercase letters<br>所以要使用 <code>getline(string,cin)</code> 會是最好的方法</p>
 </blockquote>
       
-      <a class="article-more-link" href="/2020/10/09/UVa/UVa11362/">閱讀更多...</a>
+      <a class="article-more-link" href="/2020/11/07/UVa/UVa10192/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -690,7 +471,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E5%85%B8%E6%A8%B9-trie/" rel="tag">字典樹 trie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83/" rel="tag">動態規劃</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -707,7 +488,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-NTUT_note/statistics-ch3A" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa1223" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -715,8 +496,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/10/05/NTUT_note/statistics-ch3A/"
-    >統計學(一) 筆記 - 第三章A</a
+  <a class="article-title" href="/2020/11/05/UVa/UVa1223/"
+    >UVa1223 - Editor (Suffix Tree 後綴樹 - 最長重複子字串 Longest Repeated Substring)</a
   >
 </h2>
   
@@ -726,8 +507,85 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/10/05/NTUT_note/statistics-ch3A/" class="article-date">
-  <time datetime="2020-10-05T13:44:50.000Z" itemprop="datePublished">2020-10-05</time>
+      <a href="/2020/11/05/UVa/UVa1223/" class="article-date">
+  <time datetime="2020-11-05T03:50:07.000Z" itemprop="datePublished">2020-11-05</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>有一位優秀的程式設計師想要寫出一個 Editor，他希望你幫他寫出一個功能關於在一個字串中找出最長重複子字串，並輸出總共出現幾次。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/11/05/UVa/UVa1223/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Suffix-Tree-%E5%BE%8C%E7%B6%B4%E6%A8%B9/" rel="tag">Suffix Tree 後綴樹</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E9%87%8D%E8%A4%87%E5%AD%90%E5%AD%97%E4%B8%B2-Longest-Repeated-Substring/" rel="tag">最長重複子字串 Longest Repeated Substring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-NTUT_note/statistics-ch5" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/04/NTUT_note/statistics-ch5/"
+    >統計學(一) 筆記 - 第五章 離散機率分配(Discrete Probability Distributions)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/04/NTUT_note/statistics-ch5/" class="article-date">
+  <time datetime="2020-11-04T04:13:50.000Z" itemprop="datePublished">2020-11-04</time>
 </a>
       
   <div class="article-category">
@@ -754,7 +612,7 @@ ga('send', 'pageview');
 <p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2020/10/05/NTUT_note/statistics-ch3A/">閱讀更多...</a>
+      <a class="article-more-link" href="/2020/11/04/NTUT_note/statistics-ch5/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -784,7 +642,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa11151" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa11512" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -792,8 +650,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/10/05/UVa/UVa11151/"
-    >UVa11151 - Longest Palindrome (LCS)</a
+  <a class="article-title" href="/2020/11/04/UVa/UVa11512/"
+    >UVa11512 - GATTACA (Suffix Tree 後綴樹 - 最長重複子字串 Longest Repeated Substring)</a
   >
 </h2>
   
@@ -803,8 +661,8 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/10/05/UVa/UVa11151/" class="article-date">
-  <time datetime="2020-10-05T12:09:12.000Z" itemprop="datePublished">2020-10-05</time>
+      <a href="/2020/11/04/UVa/UVa11512/" class="article-date">
+  <time datetime="2020-11-03T16:52:07.000Z" itemprop="datePublished">2020-11-04</time>
 </a>
       
   <div class="article-category">
@@ -828,10 +686,10 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>給你一個字串，詢問在這字串中能夠找到的最長迴文長度為多少。<br>迴文：從左邊讀與右邊讀相同</p>
+<p>生物學家們要透過 DNA bases(A,C,G,T) 在人類的 DNA 片段中找出最長重複的子字串並且告訴生物學家出現幾遍。</p>
 </blockquote>
       
-      <a class="article-more-link" href="/2020/10/05/UVa/UVa11151/">閱讀更多...</a>
+      <a class="article-more-link" href="/2020/11/04/UVa/UVa11512/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -844,7 +702,171 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83/" rel="tag">動態規劃</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E8%BF%B4%E6%96%87%E5%AD%90%E5%AD%97%E4%B8%B2-Longest-Palindromic-Substrings/" rel="tag">最長迴文子字串 Longest Palindromic Substrings</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Suffix-Tree-%E5%BE%8C%E7%B6%B4%E6%A8%B9/" rel="tag">Suffix Tree 後綴樹</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E9%87%8D%E8%A4%87%E5%AD%90%E5%AD%97%E4%B8%B2-Longest-Repeated-Substring/" rel="tag">最長重複子字串 Longest Repeated Substring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Explain_Algorithm/suffix-tree" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/03/Explain_Algorithm/suffix-tree/"
+    >演算法知識 - Suffix Tree 後綴樹 (Using Ukkonen Algorithm)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/03/Explain_Algorithm/suffix-tree/" class="article-date">
+  <time datetime="2020-11-03T12:42:07.000Z" itemprop="datePublished">2020-11-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Suffix-Tree-介紹"><a href="#Suffix-Tree-介紹" class="headerlink" title="Suffix Tree 介紹"></a>Suffix Tree 介紹</h2><blockquote>
+<p>Suffix Tree 是字典樹(Trie) 的延伸，透過對一字串的所有後綴去建構樹，是一個能解決許多字串特定問題的資料結構。</p>
+<p>以下是 Suffix Tree 能解決的問題：</p>
+<ul>
+<li>尋找 A 字串是否在字串 B 中</li>
+<li>找出 B 在 A 字串重複的次數</li>
+<li>最長共同子字串</li>
+</ul>
+<p>簡單來說 Suffix Tree 是將字串的所有後綴建構成 Trie，再將其壓縮(沒有分支的節點都放在同個節點)。</p>
+<p><strong>建立 Suffix Tree 的時間複雜度為 \(O(n)\)，使用 Ukkonen Algorithm</strong><br>通常建構 Suffix Tree 有兩種方法，一種時間複雜度為 \(O(n)\)，另一種為 \(O(n^2)\)，這裡只介紹普遍比賽會經用的演算法(Ukkonen Algorithm)</p>
+<p>此文章跳開蠻多證明與理論，如果想要知道可再從下方參考連結點選即可</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/11/03/Explain_Algorithm/suffix-tree/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%8C%E7%B6%B4%E6%A8%B9-Suffix-Tree/" rel="tag">後綴樹 Suffix Tree</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E9%87%8D%E8%A4%87%E5%AD%90%E5%AD%97%E4%B8%B2-Longest-Repeated-Substring/" rel="tag">最長重複子字串 Longest Repeated Substring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa719" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/01/UVa/UVa719/"
+    >UVa719 - Glass Beads (Suffix Automation 後綴自動機 - 最小循環移位 Lexicographically minimum string rotation)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/01/UVa/UVa719/" class="article-date">
+  <time datetime="2020-10-31T16:52:07.000Z" itemprop="datePublished">2020-11-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>有一串項鍊由於線繩脆弱，可能會在最重與最輕的珠子的中間因為重力關係而導致繩線裂開，這些珠子的權重分別用英文字母表示，由於這些英文字母是循環的，給你一組字串試問怎麼樣找出此字串<strong>字典序</strong>最小的循環字串。</p>
+<p>循環字串：假如字串有 “abc”，那則會 abcabcabc… 不斷循環下去，但總長度必定為原本字串長度，類似於項鍊。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/11/01/UVa/UVa719/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Suffix-Automation-%E5%BE%8C%E7%B6%B4%E8%87%AA%E5%8B%95%E6%A9%9F/" rel="tag">Suffix Automation 後綴自動機</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E5%BE%AA%E7%92%B0%E7%A7%BB%E4%BD%8D-Lexicographically-minimum-string-rotation/" rel="tag">最小循環移位 Lexicographically minimum string rotation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -867,7 +889,7 @@ ga('send', 'pageview');
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一頁</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/">下一頁</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一頁</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/">下一頁</a>
   </nav>
   
 </section>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Python 使用 Pymysql 套件來在 Python 中執行資料庫 (for windows) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Python/Python_Mysql_pymysql" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Python 使用 Pymysql 套件來在 Python 中執行資料庫 (for windows)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/30/Python/Python_Mysql_pymysql/" class="article-date">
+  <time datetime="2020-11-30T12:02:52.000Z" itemprop="datePublished">2020-11-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a> / <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>寫程式如果需要讀取大量資料或抓取資料時，使用資料庫是在好不過的選擇了！這裡就來說說 MySQL 應用在 Python 的教學八！</p>
+<p>此文章只針對 Windows OS，沒有對 Linux 進行解說，未來有機會會寫一篇</p>
+<p><a href="http://note.drx.tw/2012/12/mysql-syntax.html" target="_blank" rel="noopener">MySQL 語法連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="安裝-MySQL"><a href="#安裝-MySQL" class="headerlink" title="安裝 MySQL"></a>安裝 MySQL</h2><p>沒有資料庫，你要怎麼應用資料庫XD。</p>
+<h3 id="下載-MySQL-for-windows"><a href="#下載-MySQL-for-windows" class="headerlink" title="下載 MySQL (for windows)"></a>下載 MySQL (for windows)</h3><p>這裡的下載 MySQL 以 Windows 為主，如果想要知道 Linux 的使用方法話，就去看其他文章吧！作者目前還沒遇到此問題www，相信以後就會碰到QQ。</p>
+<p>從這裡 <a href="https://dev.mysql.com/downloads/installer/" target="_blank" rel="noopener">下載 MySQL</a>後，點選此下載<br><img src="/images/Python_Mysql_pymysql/1.PNG" alt=""></p>
+<p>下載後，在點擊下方的 <strong>No thanks, just start my download.</strong> 後則立即下載。<br><img src="/images/Python_Mysql_pymysql/2.PNG" alt=""></p>
+<ul>
+<li><p>開啟安裝檔後，點 Developer Default，之後點選 Next</p>
+</li>
+<li><p>接下來設定 MySQL 的資料庫帳號，必須設置，<strong>無法跳過</strong></p>
+</li>
+<li><p>設置完成後接下來則需要登入帳密檢查</p>
+</li>
+<li><p>之後點擊灰色方塊即可，並輸入帳號密碼即可<br><img src="/images/Python_Mysql_pymysql/3.PNG" alt=""></p>
+</li>
+</ul>
+<h2 id="建立-MySQL-資料庫"><a href="#建立-MySQL-資料庫" class="headerlink" title="建立 MySQL 資料庫"></a>建立 MySQL 資料庫</h2><ul>
+<li><p>登入成功並進去後，點擊資料庫圖示，建立資料庫，改成自己想要的名子、並將 Charset 改成 UTF-8，並點選右下角的 Apply 建立資料庫，並一直點擊 apply、Finish 就可以建立成功。<br><img src="/images/Python_Mysql_pymysql/4.PNG" alt=""></p>
+</li>
+<li><p>接下來找到 Schemas 點擊<br><img src="/images/Python_Mysql_pymysql/5.PNG" alt=""></p>
+</li>
+<li><p>點擊 table(1)，再來點 table 右鍵為新增<strong>資料表</strong>(英文為 create table)，新增資料庫欄位(2)，完成後點擊 Apply(3)<br>注意：新增資料庫欄位(2)，Primary key 一定要對 PK、NN 打勾。<br><img src="/images/Python_Mysql_pymysql/6.PNG" alt=""></p>
+<h3 id="MySQL-pk、nn、qu、b、un、zf、ai、g-的意思"><a href="#MySQL-pk、nn、qu、b、un、zf、ai、g-的意思" class="headerlink" title="MySQL pk、nn、qu、b、un、zf、ai、g 的意思"></a>MySQL pk、nn、qu、b、un、zf、ai、g 的意思</h3></li>
+<li><p>PK primary key 主键</p>
+</li>
+<li><p>NN not null 欄位不可為空</p>
+</li>
+<li><p>UQ unique 唯一索引</p>
+</li>
+<li><p>BIN binary 二進位資料，比 text 更大的二進位資料</p>
+</li>
+<li><p>UN unsigned 沒有正負符號</p>
+</li>
+<li><p>ZF zero fill 將剩餘的位數填 0，舉例： int(4) 內容顯現為 0001</p>
+</li>
+<li><p>AI auto increment 自增</p>
+</li>
+<li><p>G generated column 生成列</p>
+</li>
+<li><p>\g 等同於 MySQL 中的 “;” </p>
+</li>
+<li><p>\G 等同於將資料轉向，舉例：縱向資料表轉變成橫向資料表</p>
+</li>
+</ul>
+<h2 id="在-Python-操作-MySQL"><a href="#在-Python-操作-MySQL" class="headerlink" title="在 Python 操作 MySQL"></a>在 Python 操作 MySQL</h2><p>MySQL 建置完成後，透過 Python 進行操作。</p>
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><ul>
+<li>在 cmd 安裝 <code>pip install pymysql</code></li>
+</ul>
+<h3 id="測試資料庫"><a href="#測試資料庫" class="headerlink" title="測試資料庫"></a>測試資料庫</h3><p>如果下方程式碼成功印出連線成功，就表示資料庫連線成功了！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"資料庫管理員帳號"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"資料庫管理員密碼"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,　<span class="comment"># 根據你的資料庫名稱</span></span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span>　</span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 建立Connection物件</span></span><br><span class="line">    conn = pymysql.connect(**db_settings)</span><br><span class="line">    print(<span class="string">"連線成功"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor: </span><br><span class="line">    <span class="comment">#稍微注意一下 with statement 完成後，會自動關閉資料庫的連線操作，詳請需要 with 指令</span></span><br><span class="line">      <span class="comment">#資料表相關操作</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex: <span class="comment"># 出現意外時印出</span></span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="新增資料"><a href="#新增資料" class="headerlink" title="新增資料"></a>新增資料</h3><p>檢查 MySQL Workbench 如果成功有出現一筆資料則表示成功！</p>
+<p>應該會出現如下：<br><img src="/images/Python_Mysql_pymysql/7.PNG" alt=""></p>
+<p>P.S. 需要點擊 MySQL 指令的閃電，才會重新執行指令呦！位置如下：<br><img src="/images/Python_Mysql_pymysql/9.PNG" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"資料庫管理員帳號"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"資料庫管理員密碼"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"INSERT INTO class(id,name) VALUES (%s,%s)"</span> </span><br><span class="line">    <span class="comment"># 需要特別注意，我們要新增的值，並不是根據資料庫的類型，而是要能夠符合 Python String 要求</span></span><br><span class="line">    <span class="comment"># 於是全部的值都設定成 %s</span></span><br><span class="line">    cursor.execute(command,(<span class="string">"1"</span>,<span class="string">"science"</span>)) <span class="comment">#後面則是我們 %s 要傳給 MySQL 的值</span></span><br><span class="line">    <span class="comment"># 記住： 一定要用小括號包住，即使是只有傳回一個值也是如此，語法規定。</span></span><br><span class="line">    print(<span class="string">"新增資料完成"</span>)</span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line">    <span class="comment"># 而導致 MySQL 被占用，而無法被其他程式呼叫或使用</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查詢資料"><a href="#查詢資料" class="headerlink" title="查詢資料"></a>查詢資料</h3><p>剛剛已經新增過資料，那現在我們來測試查詢資料，我們透過 Primary key 來查詢！</p>
+<p>查詢的 id = ‘1’，應該要傳回的值如下：<br><img src="/images/Python_Mysql_pymysql/8.PNG" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"資料庫管理員帳號"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"資料庫管理員密碼"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"select * from class where id = %s"</span> </span><br><span class="line">    cursor.execute(command,(<span class="string">"1"</span>)) </span><br><span class="line">    print(<span class="string">"查詢資料完成"</span>)</span><br><span class="line">    results = cursor.fetchall() <span class="comment">#傳回資料，P.S. 這裡會傳回全部的資料，並使用 tuple 包裝</span></span><br><span class="line">    print(results[<span class="number">0</span>]) <span class="comment">#傳回的那行會用 tuple 包裝</span></span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line">    <span class="comment"># 而導致 MySQL 被占用，而無法被其他程式呼叫或使用</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改資料"><a href="#修改資料" class="headerlink" title="修改資料"></a>修改資料</h3><p>剛剛也成功查詢了，現在我們來修改吧！應該要能夠出來以下的值才表示成功：<br><img src="/images/Python_Mysql_pymysql/10.PNG" alt=""></p>
+<p>P.S. 記住要重新執行一次查詢指令XD</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"root"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"1234"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"update class set name= %s where id = %s"</span> </span><br><span class="line">    <span class="comment"># 需要特別注意，我們要新增的值，並不是根據資料庫的類型，而是要能夠符合 Python String 要求</span></span><br><span class="line">    <span class="comment"># 於是全部的值都設定成 %s</span></span><br><span class="line">    cursor.execute(command,(<span class="string">"math"</span>,<span class="string">"1"</span>)) <span class="comment">#後面則是我們 %s 要傳給 MySQL 的值</span></span><br><span class="line">    <span class="comment"># 記住： 一定要用小括號包住，即使是只有傳回一個值也是如此，語法規定。</span></span><br><span class="line">    print(<span class="string">"修改資料完成"</span>)</span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="刪除資料"><a href="#刪除資料" class="headerlink" title="刪除資料"></a>刪除資料</h3><p>修改完資料後，接下來就是刪除資料拉。刪除資料後資料庫應該要為空，如下：<br><img src="/images/Python_Mysql_pymysql/11.PNG" alt=""></p>
+<p>記住也要重新執行查詢指令XD。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"root"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"1234"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"delete from class where id =%s"</span> </span><br><span class="line">    <span class="comment"># 需要特別注意，我們要新增的值，並不是根據資料庫的類型，而是要能夠符合 Python String 要求</span></span><br><span class="line">    <span class="comment"># 於是全部的值都設定成 %s</span></span><br><span class="line">    cursor.execute(command,(<span class="string">"1"</span>)) <span class="comment">#後面則是我們 %s 要傳給 MySQL 的值</span></span><br><span class="line">    <span class="comment"># 記住： 一定要用小括號包住，即使是只有傳回一個值也是如此，語法規定。</span></span><br><span class="line">    print(<span class="string">"刪除資料完成"</span>)</span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h2 id="可能會遇到的問題"><a href="#可能會遇到的問題" class="headerlink" title="可能會遇到的問題"></a>可能會遇到的問題</h2><p>這裡收錄大衛在學習 Py MySQL 操作時一些遇到的小錯誤，如果讀者也剛好有此問題剛好能看我文章解決那就再好不過了。<br><a href="https://theriseofdavid.github.io/2020/11/30/Python/Python_Pymysql_fetchone_fetchall/" target="_blank" rel="noopener">Python 套件中 Pymysql 的 fetchone() 與 fetchall() 差別</a><br><a href="https://theriseofdavid.github.io/2020/11/30/MySQL/MySQL_stop_windows_server/" target="_blank" rel="noopener">MySQL 停止在 windows 上的服務</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.learncodewithmike.com/2020/02/python-mysql.html" target="_blank" rel="noopener">[Python實戰應用]掌握Python連結MySQL資料庫的重要操作</a><br><a href="https://blog.csdn.net/ZeroBz/article/details/79136926" target="_blank" rel="noopener">mysql pk、nn、qu、b、un、zf、ai、g代表的意思</a><br><a href="http://note.drx.tw/2012/12/mysql-syntax.html" target="_blank" rel="noopener">MySQL 語法連結</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>寫教學文章真的好難…，其實我發現我寫應用的教學文章比較沒有甚麼心得感言XD，因為都是使用別人的套件，偶爾採坑上網查資料去換另外一種寫法，直到找出可以寫的方法，不得不說有了資料庫與 Python 後我的學習路上一帆風順，我不需要懂基礎知識就可以應用，但這也同時讓我感到害怕，我是不是就只學會如何找工具，並拿來放，有點像是工人，而散播套件的人則是工廠，大量產生工具給我們用。</p>
+<p>工人永遠都不懂工具是怎麼被製造而成，但工人會不斷地應用，我覺得這似乎是一件很可怕的事情，應該要懂工具是怎麼被製作、應用，學習才有踏實感也有意義吧，不然感覺現在的我似乎還是沒有像學習演算法時那樣，了解整個套件的應用。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/11/30/Python/Python_argument_after_must_be_an_iterable_not_int/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Python ERROR !  argument after * must be an iterable, not int
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/11/27/git/git_login_repeat/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">QUESTION! git push 需要不斷重複輸入帳號密碼，並且還是出現登入失敗</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

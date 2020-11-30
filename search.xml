@@ -5258,7 +5258,15 @@
 </blockquote>
 <p><img src="/images/ncpc2020_final/10.jpg" alt=""></p>
 <blockquote>
-<p>頒獎典禮照片</p>
+<p>頒獎典禮照片-A</p>
+</blockquote>
+<p><img src="/images/ncpc2020_final/12.JPG" alt=""></p>
+<blockquote>
+<p>頒獎典禮照片-B</p>
+</blockquote>
+<p><img src="/images/ncpc2020_final/13.JPG" alt=""></p>
+<blockquote>
+<p>頒獎典禮照片-C</p>
 </blockquote>
 <p><img src="/images/ncpc2020_final/11.jpg" alt=""></p>
 <h2 id="賽後日誌"><a href="#賽後日誌" class="headerlink" title="賽後日誌"></a>賽後日誌</h2><p>比賽完畢後，主辦單位讓我們如果想要帶氣球回家就可以帶氣球回家，於是我就拿了一顆氣球回家綁在機車上，很像馬力歐賽車XD，我都好怕後面的機車騎士看了會覺得我超像智障的XD，但不幸的是她在我騎車的路上因為車速過快就爆炸了ಥ⌣ಥ，在這邊跟大家宣導一下，如果你有綁氣球在機車上需要盡量將低你的車速在約 40km/hr，不然很容易因為車速過快拉扯力道太強而讓氣球破掉…。</p>
@@ -6326,14 +6334,15 @@
       </tags>
   </entry>
   <entry>
-    <title>統計學(一) 筆記 - 第五章A 離散機率分配(Discrete Probability Distributions)</title>
+    <title>統計學(一) 筆記 - 第五章 離散機率分配(Discrete Probability Distributions)</title>
     <url>/2020/11/04/NTUT_note/statistics-ch5/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
 <p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="Random-Variables-隨機變數"><a href="#Random-Variables-隨機變數" class="headerlink" title="Random Variables 隨機變數"></a>Random Variables 隨機變數</h2><p>隨機變數共有三種，如下圖：</p>
+<h2 id="Random-Variables-隨機變數"><a href="#Random-Variables-隨機變數" class="headerlink" title="Random Variables 隨機變數"></a>Random Variables 隨機變數</h2><h3 id="使用哪一個機率分配的用法教學"><a href="#使用哪一個機率分配的用法教學" class="headerlink" title="使用哪一個機率分配的用法教學"></a>使用哪一個機率分配的用法教學</h3><p>離散均勻 發生n次 則每一次的機率就是1/n<br>二項         N次試驗中成功的次數<br>負二項     N次試驗中r次成功的次數<br>幾何         在第一次成功的次數<br>卜瓦松     在特定的空間內發生的次數<br>超幾何     N次試驗中成功的機率(但取後不放回)</p>
+<p>隨機變數共有三種，如下圖：</p>
 <h3 id="Discrete-Random-Variable-離散隨機變數"><a href="#Discrete-Random-Variable-離散隨機變數" class="headerlink" title="Discrete Random Variable 離散隨機變數"></a>Discrete Random Variable 離散隨機變數</h3><ul>
 <li>Finite Number of Values<br>在已知的集合中隨機抽出的元素。</li>
 <li>Infinite Sequence of Values<br>在<strong>無限</strong>的集合中隨機抽出的元素，此集合大小為<strong>Infinite</strong>。</li>
@@ -6726,6 +6735,10 @@
 <p>報到時拍的北商畫面 - B</p>
 </blockquote>
 <p><img src="/images/ICPC2020/2.jpg" alt=""></p>
+<blockquote>
+<p>隊伍留念拍照</p>
+</blockquote>
+<p><img src="/images/ICPC2020/11.JPG" alt=""></p>
 <h3 id="進場與開幕典禮"><a href="#進場與開幕典禮" class="headerlink" title="進場與開幕典禮"></a>進場與開幕典禮</h3><p>報到時先給工作人員查看自己的學生證，確認身分無誤後給予我們參賽資料，內容有：比賽手冊、背包、衣服，這次的背包與上次不同，上次的是束口袋，這此則是布背包，讓我感覺到這次的比賽的高級感阿，好開心！之後換上今年的選手衣服後，到這次 ICPC2020 的 logo 前合照，完成了報告的全部事宜。</p>
 <blockquote>
 <p>進場時拍下的比賽場地照片 (Please Do Not Touch Anything)</p>
@@ -6750,6 +6763,10 @@
 <p>比賽前期我們順利解完 3 題，雖然時間稍微輸別人一些但並不差，我先拿了一題 game 題來解，但是因為英文問題導致我在閱讀題目時有了些許浪費時間 Coding 錯方向，後來漢軒有幫我引導到對的方向真的要感謝他，嗚嗚。但其實只有小方向不對我很快就修正回來，但是遇到一個難題就是他還是 WA，我們百思不得其解為甚麼會 WA，到現在還是沒有想出來，只能趁比賽結束後去找答案了，過程中也有點對題目分配感到不公平，這一次圖論的比例非常高，讓我們隊伍原本是平均分配的重心失衡，但反過來也有可能是我們的策略有些許的問題還需要再修正，因為這樣就表示我們的 model 並沒有符合這次 ICPC 的題目本。</p>
 <p>寫到後面時，學長也不斷的在 Coding Problem H 但那題一直不斷的 TLE，學長陷入的思考深淵想不出這題為甚麼會超時也不斷在賽程中優化但還是沒有成功 AC，到賽後結束時向其他隊伍詢問卻發現明明方法卻是相同的！但只有我們的 TLE，真的有點可惜，如果我的題目或是學長的題目有成功解出一題那我們一定會有銅獎的，但是這一出的 String 題過難也讓我相當難過，我沒辦法在自己的能力範圍內做出貢獻，而是當場直接測試自己的想法卻無法驗證。</p>
 <p>這場比賽五小時過得飛快，腦力激盪相當過癮但也讓比賽結束後的我相當難過。</p>
+<blockquote>
+<p>比賽過程時，主辦單位拍下的照片</p>
+</blockquote>
+<p><img src="/images/ICPC2020/12.JPG" alt=""></p>
 <h3 id="賽後結束-晚宴時間"><a href="#賽後結束-晚宴時間" class="headerlink" title="賽後結束 - 晚宴時間"></a>賽後結束 - 晚宴時間</h3><p>今年的晚宴相當不賴，雖然隊員們都提早離開，但我還是想留在台北商大沉思，一邊想著自己哪裡還有地方可以改進一邊吃著食物，雖然非常的不甘心，但是我知道比賽本來就是贏者全拿，我只要能夠當上贏者我也可以贏者全拿，一邊吃著食物邊默默想著未來要怎麼拿到銀獎。</p>
 <blockquote>
 <p>晚宴的甜點</p>
@@ -6779,6 +6796,7 @@
 <p>激勵自己的話 - 成功不是憑夢想和希望而是憑努力和實踐</p>
 </blockquote>
 <p><img src="/images/ICPC2020/6.jpg" alt=""></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://drive.google.com/drive/folders/1fJutJ9MN6THv0MeKBPWvk8Jy2TJsWzSF" target="_blank" rel="noopener">ICPC2020 照片</a></p>
 ]]></content>
       <categories>
         <category>競賽心得</category>
@@ -7104,6 +7122,543 @@
       <tags>
         <tag>R語言</tag>
         <tag>學習筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第六章 均勻機率分配(Continuous Probability Distributions)</title>
+    <url>/2020/11/23/NTUT_note/statistics-ch6/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Continuous-Probability-Distributions"><a href="#Continuous-Probability-Distributions" class="headerlink" title="Continuous Probability Distributions"></a>Continuous Probability Distributions</h1><p>給定一個區間，在此發生的機率是多少，下圖則是透過圖片介紹：</p>
+<blockquote>
+<p><img src="/images/statistics-ch6/1.PNG" alt=""></p>
+</blockquote>
+<h3 id="Continuous-Random-Variable"><a href="#Continuous-Random-Variable" class="headerlink" title="Continuous Random Variable"></a>Continuous Random Variable</h3><p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch6/2.PNG" alt=""></p>
+</blockquote>
+<h2 id="Uniform-Probability-Distribution-均勻機率分配"><a href="#Uniform-Probability-Distribution-均勻機率分配" class="headerlink" title="Uniform Probability Distribution (均勻機率分配)"></a>Uniform Probability Distribution (均勻機率分配)</h2><p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch6/3.PNG" alt=""><br><img src="/images/statistics-ch6/4.PNG" alt=""></p>
+</blockquote>
+<h3 id="Area"><a href="#Area" class="headerlink" title="Area"></a>Area</h3><p>我們再算均勻機率分配時要注意，如果不是區間的時機率值都是 0，因為沒有面積 </p>
+<h2 id="Normal-Probability-Distribution-常態機率分配"><a href="#Normal-Probability-Distribution-常態機率分配" class="headerlink" title="Normal Probability Distribution (常態機率分配)"></a>Normal Probability Distribution (常態機率分配)</h2><p>最重要的一種機率分配之一，舉例可以用在身高、考試成績。</p>
+<h3 id="Normal-Probability-Density-Function"><a href="#Normal-Probability-Density-Function" class="headerlink" title="Normal Probability Density Function"></a>Normal Probability Density Function</h3><p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch6/5.PNG" alt=""></p>
+</blockquote>
+<h3 id="Characterustucs-特點"><a href="#Characterustucs-特點" class="headerlink" title="Characterustucs (特點)"></a>Characterustucs (特點)</h3><ul>
+<li>從中間切開後，左右機率各 0.5</li>
+<li>68.26% 會落在正負一個標準差</li>
+<li>95.44% 會落在正負兩個標準差 </li>
+<li>99.72% 或落在正負三個標準差<h3 id="Standard-Normal-Probability-Distribution-標準常態隨機變數"><a href="#Standard-Normal-Probability-Distribution-標準常態隨機變數" class="headerlink" title="Standard Normal Probability Distribution (標準常態隨機變數)"></a>Standard Normal Probability Distribution (標準常態隨機變數)</h3>當平均數等於 0、標準差等於 1 時才符合條件，此時 z 表示標準常態隨機分配。</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch6/6.PNG" alt=""></p>
+</blockquote>
+<h2 id="Normal-Approximation-of-Binomial-Probabilities-二項機率的常態分配近似值"><a href="#Normal-Approximation-of-Binomial-Probabilities-二項機率的常態分配近似值" class="headerlink" title="Normal Approximation of Binomial Probabilities (二項機率的常態分配近似值)"></a>Normal Approximation of Binomial Probabilities (二項機率的常態分配近似值)</h2><p>其實本身是<strong>離散時機率分配</strong>，但在實驗次數增加後，要計算相對不容易就可以使用二項機率的常態分配近似值，條件如下：</p>
+<ul>
+<li>\(成功機率(n) * 實驗次數(p) \geq 5  \) </li>
+<li>\(實驗次數(n) * (1-成功機率(p)) \geq 5 \)</li>
+<li>因為二項機率通常是找某一個特定值，但是 ormal Approximation of Binomial Probabilities 則是區間，於是就盡量用，與此 \( (特定值 + 特定值前一個元素) / 2 \) and \( (特定值 + 特定值後一個元素) / 2 \)，設定為區間即可。</li>
+</ul>
+<p>公式如下：</p>
+<blockquote>
+<p><img src="/images/statistics-ch6/7.PNG" alt=""></p>
+</blockquote>
+<h2 id="Expeonential-Probability-Distribution-指數機率分配"><a href="#Expeonential-Probability-Distribution-指數機率分配" class="headerlink" title="Expeonential Probability Distribution (指數機率分配)"></a>Expeonential Probability Distribution (指數機率分配)</h2><p>獨立隨機事件發生的時間間隔，舉例：完成一個實驗的時間之類等。</p>
+<p>公式如下:</p>
+<blockquote>
+<p><img src="/images/statistics-ch6/8.PNG" alt=""></p>
+</blockquote>
+<h3 id="Relationship-between-the-Poisson-and-Exponential-Distributions-指數機率分配與卜瓦松的關係"><a href="#Relationship-between-the-Poisson-and-Exponential-Distributions-指數機率分配與卜瓦松的關係" class="headerlink" title="Relationship between the Poisson and Exponential Distributions (指數機率分配與卜瓦松的關係)"></a>Relationship between the Poisson and Exponential Distributions (指數機率分配與卜瓦松的關係)</h3><ul>
+<li>兩個方法的 x 互為<strong>倒數關係</strong><blockquote>
+<p><img src="/images/statistics-ch6/9.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 比較時間先後</title>
+    <url>/2020/11/24/Python/Python_compare_time/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>有時候在寫程式的時候，需要比較兩個時間的先來後到，那我們應該要怎麼比較呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="最簡單的比較方式"><a href="#最簡單的比較方式" class="headerlink" title="最簡單的比較方式"></a>最簡單的比較方式</h2><p>在擁有著大量套件的 Python 中，如果要比較時間大小不一定需要使用到數學XD，Python 可以用一個語法 <code>time.strftime</code> 透過<strong>日期格式</strong>轉換成數字，就變成了單純的比數字大小遊戲XD。</p>
+<h3 id="比較沒有紀錄天數的時間點"><a href="#比較沒有紀錄天數的時間點" class="headerlink" title="比較沒有紀錄天數的時間點"></a>比較沒有紀錄天數的時間點</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">int(time.strftime(<span class="string">"%H%M%S"</span>))</span><br><span class="line"></span><br><span class="line">int(time.strftime(<span class="string">"%H%M%S"</span>,<span class="string">"09:12:22"</span>)) = <span class="number">091222</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="比較日期"><a href="#比較日期" class="headerlink" title="比較日期"></a>比較日期</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">int(time.strftime(<span class="string">"%Y-%m-%d"</span>))</span><br><span class="line"></span><br><span class="line">int(time.strftime(<span class="string">"%Y-%m-%d"</span>,<span class="string">"2020-11-24"</span>)) = <span class="number">20201124</span></span><br></pre></td></tr></table></figure>
+
+<p>注意:不需要擔心數字會不會超過 int or long long 的長度，因為 Python 的數字內建支援大數運算XD。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/junbujianwpl/article/details/60984757" target="_blank" rel="noopener">Python比较2个时间的大小</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Python 好簡單，可以把一些比較麻煩的事情都解決掉，設計出 Python 的人是天才八，好感謝這個世界有這麼多人無私的奉獻才有辦法讓我自學努力到現在。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 有沒有 do...until 迴圈</title>
+    <url>/2020/11/24/Python/Python_do_until/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>Python 有沒有 do…until 迴圈來幫助我們寫呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="答案是…沒有！"><a href="#答案是…沒有！" class="headerlink" title="答案是…沒有！"></a>答案是…沒有！</h2><p>很意外八！但還是有解決方案的，不然我就不會寫一篇了對吧！</p>
+<p>寫法主要如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    do_something()</span><br><span class="line">    <span class="keyword">if</span> condition():</span><br><span class="line">       <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>透過在最後用一個 if 進行判斷，來模擬成 do..until 迴圈。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/1662161/is-there-a-do-until-in-python" target="_blank" rel="noopener">Is there a “do … until” in Python? [duplicate]</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>雖然是有點麻煩的事情，不過其實還算是可以接受啦，有沒有改進其實都還可以，沒有問題的XD。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 操控 Excel 利用 openpyxl 套件</title>
+    <url>/2020/11/24/Python/Python_openpyxl/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>說明大衛在 Python openpyxl 套件學習的路上，有用到的語法紀錄</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>如果你跟我用的一樣，都是用 Spyder 此軟體來寫程式的話，只需要去旁邊的 Console 打下方指令即可。</p>
+<p>如果不是，那就在 terminal 中打此指令也是可以的。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install openpyxl</span><br></pre></td></tr></table></figure>
+
+<h2 id="在程式中匯入套件"><a href="#在程式中匯入套件" class="headerlink" title="在程式中匯入套件"></a>在程式中匯入套件</h2><p>沒有匯入的話，這份程式碼是沒辦法使用此套件的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br></pre></td></tr></table></figure>
+
+<h2 id="Python-Openpyxl-的一些用法"><a href="#Python-Openpyxl-的一些用法" class="headerlink" title="Python Openpyxl 的一些用法"></a>Python Openpyxl 的一些用法</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一個 Excel </span></span><br><span class="line">workbook = openpyxl.Workbook()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 焦點放在第一張工作表</span></span><br><span class="line">sheet = workbook.worksheets[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一張工作表 A1 儲存格設定值為 "Hello David and Openpyxl."</span></span><br><span class="line">sheet[<span class="string">"A1"</span>] = <span class="string">"Hello David and Openpyxl."</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 將 text 設定成第一張工作表 A1 儲存格</span></span><br><span class="line">text = sheet[<span class="string">"A1"</span>].value</span><br><span class="line"></span><br><span class="line"><span class="comment"># row 最大數量</span></span><br><span class="line">print(sheet.max_row)</span><br><span class="line"></span><br><span class="line"><span class="comment"># column 最大數量</span></span><br><span class="line">print(sheet.max_column)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 儲存檔案</span></span><br><span class="line">workbook.save(<span class="string">'test.xlsx'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://ithelp.ithome.com.tw/articles/10246377" target="_blank" rel="noopener">[2020鐵人賽Day16]糊裡糊塗Python就上手-Python Excel 操縱套餐(使用openpyxl)</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Python 操作 Excel 比起 C++ 真的是優秀太多了，很不賴欸，怪不得會有那麼多人喜歡寫 Python，如果是要寫應用，我自己也會越來越喜歡寫 Python XD，不過可能要注意一下還是要懂那些內涵，不然就像是一個會用的麻瓜。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 一個 function 回傳兩個值</title>
+    <url>/2020/11/24/Python/Python_return_two_value_from_a_function/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>在寫程式的時候，偶爾會需要一個 function 回傳兩個值，但你卻很懶惰的不想用一個 list 裝，此時又想到 C++ 有 pair 可以用，那 Python 有沒有呢？</p>
+</blockquote>
+<h2 id="答案是…沒有！"><a href="#答案是…沒有！" class="headerlink" title="答案是…沒有！"></a>答案是…沒有！</h2><p>但有兩種解決方案，如果你非常需要用到 pair 這資料結構時，那就直接自己寫一個 class 來定義吧！或是將兩個變數丟給 function，之後再回傳兩個 value。</p>
+<h3 id="解決方案-寫一個-Class"><a href="#解決方案-寫一個-Class" class="headerlink" title="解決方案 - 寫一個 Class"></a>解決方案 - 寫一個 Class</h3><p>就…手寫阿XD，之後宣告一個 pair 即可。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">pair</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,key,value)</span>:</span></span><br><span class="line">    self.key = key </span><br><span class="line">    self.value = value</span><br></pre></td></tr></table></figure>
+
+<h3 id="解決方案-function-return-two-value"><a href="#解決方案-function-return-two-value" class="headerlink" title="解決方案 - function return two value"></a>解決方案 - function return two value</h3><p>透過 function 回傳兩個值來解決此問題。</p>
+<p>觀看下方 function 可以了解到，<code>thing function</code>回傳了兩個值 a,b，並將 a 給予 c、b 給予 d。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">thing</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a , b </span><br><span class="line"></span><br><span class="line">c , d = thing()</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/9752958/how-can-i-return-two-values-from-a-function-in-python" target="_blank" rel="noopener">How can I return two values from a function in Python?</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Python 好簡單，可以把一些比較麻煩的事情都解決掉，設計出 Python 的人是天才八，好感謝這個世界有這麼多人無私的奉獻才有辦法讓我自學努力到現在。</p>
+<p>我想應該是有人有寫出這種類似 C++ pair 的套件，不過我不確定就是了。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 切割字串</title>
+    <url>/2020/11/24/Python/Python_split/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>通常在寫程式時都會需要用到字串切割，那 Python 的字串切割要怎麼做呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Python-String-split-切割字串函數"><a href="#Python-String-split-切割字串函數" class="headerlink" title="Python String.split 切割字串函數"></a>Python String.split 切割字串函數</h2><p>只要在 <code>string.split()</code> 就可以切割函數</p>
+<p>通常會用到的有這幾種，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">str = <span class="string">"this is David and ...!!"</span></span><br><span class="line">print(str.split()) # 用空格來切割</span><br><span class="line">print(str.split(<span class="string">"i"</span>,<span class="number">1</span>)) # 以 i 來切割，但只切割第一次</span><br><span class="line">print(str.split(<span class="string">"a"</span>)) # 以 a 來切割，但不斷切割，直到字串結尾</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.runoob.com/python3/python3-string-split.html" target="_blank" rel="noopener">Python3 split()方法</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Python 好簡單，可以把一些比較麻煩的事情都解決掉，設計出 Python 的人是天才八，好感謝這個世界有這麼多人無私的奉獻才有辦法讓我自學努力到現在。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 使用 threading 套件來讓多執行緒來加速運算速度</title>
+    <url>/2020/11/25/Python/Python_threading/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>有的時候會需要用到多執行緒來讓整個程式加速運算，在現代電腦中擁有多核心 CPU 以是常態，但通常一份程式碼都是使用單核心來操控，如果我們讓他多核心操控就可以擁有更快速度啦！</p>
+<p>一種自己程式碼寫不好就幫硬體升級的概念XD。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一些說明："><a href="#一些說明：" class="headerlink" title="一些說明："></a>一些說明：</h2><ul>
+<li>在使用 threading 套件時，不可以將 list 傳給多個 threading<br>舉例： A threading 移除 list index 0 的值，B 則呼叫 list index 0 的值，此時會產生錯誤，原因是因為 B threading 還認為 list index 0 的 memory 還在那位置，但卻發現不再、被移除。</li>
+<li><em>因此我們無法保證 List 在多執行緒時能被正常使用。*</em></li>
+<li>在多執行緒需要同時用到一個陣列時，建議使用 deque(內建)，<code>import queue</code><br>Python 有保證 queue 在 threading 時絕對安全，因此個人建議盡量使用他。</li>
+</ul>
+<h2 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h2><p>沒有！他是內建的，完全不需要安裝喔，讚啦。</p>
+<h2 id="在程式中匯入套件"><a href="#在程式中匯入套件" class="headerlink" title="在程式中匯入套件"></a>在程式中匯入套件</h2><p>還是要的，這是必備。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立子執行緒的例子"><a href="#建立子執行緒的例子" class="headerlink" title="建立子執行緒的例子"></a>建立子執行緒的例子</h2><p>要稍微注意一下：<code>threading.Thread(target= function,args= (A,B))</code> ，這裡的 <code>function</code> <strong>不可以加括號</strong>，因為這裡是找他記憶體位置，但如果你想要執行的 function 有參數要傳進去則要在後面加入 <code>args= (A,B)</code>，並記住，<strong>他一定要是一個 list or tuple</strong>，不可以只是一個 int or string..，一定是要一個陣列。</p>
+<p>如果要問我為甚麼？我只知道這是寫套建時的規則，我也沒辦法說出一個很好的大概。</p>
+<p>如果需要不斷的讓這些執行緒工作，這裡有一個不錯的寫法，建議看看：<br><a href="https://theriseofdavid.github.io/2020/11/30/Python/Python_Open_multiple_threads_and_find_idle_threads/" target="_blank" rel="noopener">Python 開多執行緒並找出空閒執行緒的方法 (使用 threading 套件)</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> threading <span class="comment"># 匯入套件</span></span><br><span class="line"><span class="keyword">import</span> time <span class="comment"># 匯入套件</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">job</span><span class="params">(it,nu)</span>:</span>  <span class="comment"># thread 要執行的工作內容</span></span><br><span class="line">  print(<span class="string">"thread"</span> , it , <span class="string">" is ready to work."</span>)</span><br><span class="line">  time.sleep(<span class="number">2</span>)</span><br><span class="line">  print(<span class="string">"thread"</span> , it , <span class="string">"is finished."</span>)</span><br><span class="line"></span><br><span class="line">t = [] <span class="comment"># 這是 threading 的陣列，我們用這個陣列來表示裡面的某個執行緒。</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>): <span class="comment"># 這裡我們假設給 3 個執行緒</span></span><br><span class="line">    t.append(threading.Thread(target = job , args=(i,<span class="string">""</span> )))</span><br><span class="line">    <span class="comment"># t 陣列增加一個執行緒，執行 function 為 job ， 參數為 args</span></span><br><span class="line">    t[i].start() <span class="comment"># 執行此執行緒</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>): <span class="comment"># 檢查這些執行緒有沒有都做完，才特別寫的</span></span><br><span class="line">    <span class="keyword">if</span>(t[i].isAlive()): <span class="comment">#確認這個執行緒有沒有正在被使用，如果有則是 True</span></span><br><span class="line">      t[i].join() <span class="comment">#等待這個執行緒工作完畢</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="將執行緒寫成-OOP"><a href="#將執行緒寫成-OOP" class="headerlink" title="將執行緒寫成 OOP"></a>將執行緒寫成 OOP</h2><p>作者還沒讀到，未來會看看。</p>
+<h2 id="QUEUE-搭配-執行續"><a href="#QUEUE-搭配-執行續" class="headerlink" title="QUEUE 搭配 執行續"></a>QUEUE 搭配 執行續</h2><p>作者還沒讀到，未來會看看。</p>
+<h2 id="防止兩個多執行緒同時寫入一個檔案-LOCK"><a href="#防止兩個多執行緒同時寫入一個檔案-LOCK" class="headerlink" title="防止兩個多執行緒同時寫入一個檔案 (LOCK)"></a>防止兩個多執行緒同時寫入一個檔案 (LOCK)</h2><p>作者還沒讀到，未來會看看。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.gtwang.org/programming/python-threading-multithreaded-programming-tutorial/" target="_blank" rel="noopener">Python 多執行緒 threading 模組平行化程式設計教學</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Python 好簡單，可以把一些比較麻煩的事情都解決掉，設計出 Python 的人是天才八，好感謝這個世界有這麼多人無私的奉獻才有辦法讓我自學努力到現在。</p>
+<p>多執行緒真的好方便，初學者如果想要略過一些複雜的理論或實作時，用 Python 可以省去很多麻煩呢。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 使用 Pymysql 套件來在 Python 中執行資料庫 (for windows)</title>
+    <url>/2020/11/30/Python/Python_Mysql_pymysql/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>寫程式如果需要讀取大量資料或抓取資料時，使用資料庫是在好不過的選擇了！這裡就來說說 MySQL 應用在 Python 的教學八！</p>
+<p>此文章只針對 Windows OS，沒有對 Linux 進行解說，未來有機會會寫一篇</p>
+<p><a href="http://note.drx.tw/2012/12/mysql-syntax.html" target="_blank" rel="noopener">MySQL 語法連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="安裝-MySQL"><a href="#安裝-MySQL" class="headerlink" title="安裝 MySQL"></a>安裝 MySQL</h2><p>沒有資料庫，你要怎麼應用資料庫XD。</p>
+<h3 id="下載-MySQL-for-windows"><a href="#下載-MySQL-for-windows" class="headerlink" title="下載 MySQL (for windows)"></a>下載 MySQL (for windows)</h3><p>這裡的下載 MySQL 以 Windows 為主，如果想要知道 Linux 的使用方法話，就去看其他文章吧！作者目前還沒遇到此問題www，相信以後就會碰到QQ。</p>
+<p>從這裡 <a href="https://dev.mysql.com/downloads/installer/" target="_blank" rel="noopener">下載 MySQL</a>後，點選此下載<br><img src="/images/Python_Mysql_pymysql/1.PNG" alt=""></p>
+<p>下載後，在點擊下方的 <strong>No thanks, just start my download.</strong> 後則立即下載。<br><img src="/images/Python_Mysql_pymysql/2.PNG" alt=""></p>
+<ul>
+<li><p>開啟安裝檔後，點 Developer Default，之後點選 Next</p>
+</li>
+<li><p>接下來設定 MySQL 的資料庫帳號，必須設置，<strong>無法跳過</strong></p>
+</li>
+<li><p>設置完成後接下來則需要登入帳密檢查</p>
+</li>
+<li><p>之後點擊灰色方塊即可，並輸入帳號密碼即可<br><img src="/images/Python_Mysql_pymysql/3.PNG" alt=""></p>
+</li>
+</ul>
+<h2 id="建立-MySQL-資料庫"><a href="#建立-MySQL-資料庫" class="headerlink" title="建立 MySQL 資料庫"></a>建立 MySQL 資料庫</h2><ul>
+<li><p>登入成功並進去後，點擊資料庫圖示，建立資料庫，改成自己想要的名子、並將 Charset 改成 UTF-8，並點選右下角的 Apply 建立資料庫，並一直點擊 apply、Finish 就可以建立成功。<br><img src="/images/Python_Mysql_pymysql/4.PNG" alt=""></p>
+</li>
+<li><p>接下來找到 Schemas 點擊<br><img src="/images/Python_Mysql_pymysql/5.PNG" alt=""></p>
+</li>
+<li><p>點擊 table(1)，再來點 table 右鍵為新增<strong>資料表</strong>(英文為 create table)，新增資料庫欄位(2)，完成後點擊 Apply(3)<br>注意：新增資料庫欄位(2)，Primary key 一定要對 PK、NN 打勾。<br><img src="/images/Python_Mysql_pymysql/6.PNG" alt=""></p>
+<h3 id="MySQL-pk、nn、qu、b、un、zf、ai、g-的意思"><a href="#MySQL-pk、nn、qu、b、un、zf、ai、g-的意思" class="headerlink" title="MySQL pk、nn、qu、b、un、zf、ai、g 的意思"></a>MySQL pk、nn、qu、b、un、zf、ai、g 的意思</h3></li>
+<li><p>PK primary key 主键</p>
+</li>
+<li><p>NN not null 欄位不可為空</p>
+</li>
+<li><p>UQ unique 唯一索引</p>
+</li>
+<li><p>BIN binary 二進位資料，比 text 更大的二進位資料</p>
+</li>
+<li><p>UN unsigned 沒有正負符號</p>
+</li>
+<li><p>ZF zero fill 將剩餘的位數填 0，舉例： int(4) 內容顯現為 0001</p>
+</li>
+<li><p>AI auto increment 自增</p>
+</li>
+<li><p>G generated column 生成列</p>
+</li>
+<li><p>\g 等同於 MySQL 中的 “;” </p>
+</li>
+<li><p>\G 等同於將資料轉向，舉例：縱向資料表轉變成橫向資料表</p>
+</li>
+</ul>
+<h2 id="在-Python-操作-MySQL"><a href="#在-Python-操作-MySQL" class="headerlink" title="在 Python 操作 MySQL"></a>在 Python 操作 MySQL</h2><p>MySQL 建置完成後，透過 Python 進行操作。</p>
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><ul>
+<li>在 cmd 安裝 <code>pip install pymysql</code></li>
+</ul>
+<h3 id="測試資料庫"><a href="#測試資料庫" class="headerlink" title="測試資料庫"></a>測試資料庫</h3><p>如果下方程式碼成功印出連線成功，就表示資料庫連線成功了！</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"資料庫管理員帳號"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"資料庫管理員密碼"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,　<span class="comment"># 根據你的資料庫名稱</span></span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span>　</span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 建立Connection物件</span></span><br><span class="line">    conn = pymysql.connect(**db_settings)</span><br><span class="line">    print(<span class="string">"連線成功"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor: </span><br><span class="line">    <span class="comment">#稍微注意一下 with statement 完成後，會自動關閉資料庫的連線操作，詳請需要 with 指令</span></span><br><span class="line">      <span class="comment">#資料表相關操作</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex: <span class="comment"># 出現意外時印出</span></span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="新增資料"><a href="#新增資料" class="headerlink" title="新增資料"></a>新增資料</h3><p>檢查 MySQL Workbench 如果成功有出現一筆資料則表示成功！</p>
+<p>應該會出現如下：<br><img src="/images/Python_Mysql_pymysql/7.PNG" alt=""></p>
+<p>P.S. 需要點擊 MySQL 指令的閃電，才會重新執行指令呦！位置如下：<br><img src="/images/Python_Mysql_pymysql/9.PNG" alt=""></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"資料庫管理員帳號"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"資料庫管理員密碼"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"INSERT INTO class(id,name) VALUES (%s,%s)"</span> </span><br><span class="line">    <span class="comment"># 需要特別注意，我們要新增的值，並不是根據資料庫的類型，而是要能夠符合 Python String 要求</span></span><br><span class="line">    <span class="comment"># 於是全部的值都設定成 %s</span></span><br><span class="line">    cursor.execute(command,(<span class="string">"1"</span>,<span class="string">"science"</span>)) <span class="comment">#後面則是我們 %s 要傳給 MySQL 的值</span></span><br><span class="line">    <span class="comment"># 記住： 一定要用小括號包住，即使是只有傳回一個值也是如此，語法規定。</span></span><br><span class="line">    print(<span class="string">"新增資料完成"</span>)</span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line">    <span class="comment"># 而導致 MySQL 被占用，而無法被其他程式呼叫或使用</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查詢資料"><a href="#查詢資料" class="headerlink" title="查詢資料"></a>查詢資料</h3><p>剛剛已經新增過資料，那現在我們來測試查詢資料，我們透過 Primary key 來查詢！</p>
+<p>查詢的 id = ‘1’，應該要傳回的值如下：<br><img src="/images/Python_Mysql_pymysql/8.PNG" alt=""></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"資料庫管理員帳號"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"資料庫管理員密碼"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"select * from class where id = %s"</span> </span><br><span class="line">    cursor.execute(command,(<span class="string">"1"</span>)) </span><br><span class="line">    print(<span class="string">"查詢資料完成"</span>)</span><br><span class="line">    results = cursor.fetchall() <span class="comment">#傳回資料，P.S. 這裡會傳回全部的資料，並使用 tuple 包裝</span></span><br><span class="line">    print(results[<span class="number">0</span>]) <span class="comment">#傳回的那行會用 tuple 包裝</span></span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line">    <span class="comment"># 而導致 MySQL 被占用，而無法被其他程式呼叫或使用</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改資料"><a href="#修改資料" class="headerlink" title="修改資料"></a>修改資料</h3><p>剛剛也成功查詢了，現在我們來修改吧！應該要能夠出來以下的值才表示成功：<br><img src="/images/Python_Mysql_pymysql/10.PNG" alt=""></p>
+<p>P.S. 記住要重新執行一次查詢指令XD</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"root"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"1234"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"update class set name= %s where id = %s"</span> </span><br><span class="line">    <span class="comment"># 需要特別注意，我們要新增的值，並不是根據資料庫的類型，而是要能夠符合 Python String 要求</span></span><br><span class="line">    <span class="comment"># 於是全部的值都設定成 %s</span></span><br><span class="line">    cursor.execute(command,(<span class="string">"math"</span>,<span class="string">"1"</span>)) <span class="comment">#後面則是我們 %s 要傳給 MySQL 的值</span></span><br><span class="line">    <span class="comment"># 記住： 一定要用小括號包住，即使是只有傳回一個值也是如此，語法規定。</span></span><br><span class="line">    print(<span class="string">"修改資料完成"</span>)</span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h3 id="刪除資料"><a href="#刪除資料" class="headerlink" title="刪除資料"></a>刪除資料</h3><p>修改完資料後，接下來就是刪除資料拉。刪除資料後資料庫應該要為空，如下：<br><img src="/images/Python_Mysql_pymysql/11.PNG" alt=""></p>
+<p>記住也要重新執行查詢指令XD。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">db_settings = &#123;</span><br><span class="line">  <span class="string">"host"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"port"</span> : <span class="number">3306</span>,</span><br><span class="line">  <span class="string">"user"</span> : <span class="string">"root"</span> ,</span><br><span class="line">  <span class="string">"password"</span> : <span class="string">"1234"</span> ,</span><br><span class="line">  <span class="string">"db"</span> : <span class="string">"demo"</span> ,</span><br><span class="line">  <span class="string">"charset"</span> : <span class="string">"utf8"</span></span><br><span class="line">&#125;</span><br><span class="line">conn = pymysql.connect(**db_settings)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">  <span class="keyword">with</span> conn.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">    command = <span class="string">f"delete from class where id =%s"</span> </span><br><span class="line">    <span class="comment"># 需要特別注意，我們要新增的值，並不是根據資料庫的類型，而是要能夠符合 Python String 要求</span></span><br><span class="line">    <span class="comment"># 於是全部的值都設定成 %s</span></span><br><span class="line">    cursor.execute(command,(<span class="string">"1"</span>)) <span class="comment">#後面則是我們 %s 要傳給 MySQL 的值</span></span><br><span class="line">    <span class="comment"># 記住： 一定要用小括號包住，即使是只有傳回一個值也是如此，語法規定。</span></span><br><span class="line">    print(<span class="string">"刪除資料完成"</span>)</span><br><span class="line">    conn.commit() <span class="comment">#這是最重要的，如果沒有儲存變更，則 Py 會一直操作 MySQL 不會退出</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">    print(ex)</span><br></pre></td></tr></table></figure>
+
+<h2 id="可能會遇到的問題"><a href="#可能會遇到的問題" class="headerlink" title="可能會遇到的問題"></a>可能會遇到的問題</h2><p>這裡收錄大衛在學習 Py MySQL 操作時一些遇到的小錯誤，如果讀者也剛好有此問題剛好能看我文章解決那就再好不過了。<br><a href="https://theriseofdavid.github.io/2020/11/30/Python/Python_Pymysql_fetchone_fetchall/" target="_blank" rel="noopener">Python 套件中 Pymysql 的 fetchone() 與 fetchall() 差別</a><br><a href="https://theriseofdavid.github.io/2020/11/30/MySQL/MySQL_stop_windows_server/" target="_blank" rel="noopener">MySQL 停止在 windows 上的服務</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.learncodewithmike.com/2020/02/python-mysql.html" target="_blank" rel="noopener">[Python實戰應用]掌握Python連結MySQL資料庫的重要操作</a><br><a href="https://blog.csdn.net/ZeroBz/article/details/79136926" target="_blank" rel="noopener">mysql pk、nn、qu、b、un、zf、ai、g代表的意思</a><br><a href="http://note.drx.tw/2012/12/mysql-syntax.html" target="_blank" rel="noopener">MySQL 語法連結</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>寫教學文章真的好難…，其實我發現我寫應用的教學文章比較沒有甚麼心得感言XD，因為都是使用別人的套件，偶爾採坑上網查資料去換另外一種寫法，直到找出可以寫的方法，不得不說有了資料庫與 Python 後我的學習路上一帆風順，我不需要懂基礎知識就可以應用，但這也同時讓我感到害怕，我是不是就只學會如何找工具，並拿來放，有點像是工人，而散播套件的人則是工廠，大量產生工具給我們用。</p>
+<p>工人永遠都不懂工具是怎麼被製造而成，但工人會不斷地應用，我覺得這似乎是一件很可怕的事情，應該要懂工具是怎麼被製作、應用，學習才有踏實感也有意義吧，不然感覺現在的我似乎還是沒有像學習演算法時那樣，了解整個套件的應用。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 開多執行緒並找出空閒執行緒的方法 (使用 threading 套件)</title>
+    <url>/2020/11/30/Python/Python_Open_multiple_threads_and_find_idle_threads/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>這裡留存大衛在寫 Python 開多執行緒並找出空閒執行緒的方法，大衛認為此寫法不錯，因此放在這裡供各位與未來的我參考</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="寫法"><a href="#寫法" class="headerlink" title="寫法"></a>寫法</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"><span class="keyword">import</span> threading </span><br><span class="line"></span><br><span class="line">workers = queue.deque()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    workers.append(threading.Thread(target=function,args=(<span class="number">1</span>,)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> workers[<span class="number">0</span>].isAlive(): <span class="comment">#找出沒有工作的執行緒</span></span><br><span class="line">    labor = workers[<span class="number">0</span>]  <span class="comment"># labor 就是 workers[0] 並且她正在工作</span></span><br><span class="line">    workers.popleft() <span class="comment"># 將wokrers 0 移除</span></span><br><span class="line">    workers.append(labor) <span class="comment"># 再將 labor 放入，即將 workers[0] 放到 queue 的最後</span></span><br><span class="line">    time.sleep(<span class="number">1</span>) <span class="comment"># 等待一秒，在查詢下一個執行緒有沒有工作</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有時候真的好佩服我自己可以寫得出這種想法，我發現我的想法都是在浴室洗澡的時候想出來，看來我有一個很棒的理由可以說自己為甚麼每天要洗兩次澡了XD，因為只有在那個時候我的腦袋思緒會特別清楚，會不會是因為我把身體洗乾淨，所以腦袋也乾淨了呢wwww。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+        <tag>優秀寫法紀錄</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python ERROR !  argument after * must be an iterable, not int</title>
+    <url>/2020/11/30/Python/Python_argument_after_must_be_an_iterable_not_int/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>記錄我在學習 Python 路上遇到的坑，並將以補足。 </p>
+</blockquote>
+<a id="more"></a> 
+
+<h2 id="Python-ERROR-argument-after-must-be-an-iterable-not-int"><a href="#Python-ERROR-argument-after-must-be-an-iterable-not-int" class="headerlink" title="Python ERROR !  argument after * must be an iterable, not int"></a>Python ERROR !  argument after * must be an iterable, not int</h2><p>這問題主要是在講例如使用 <code>threading</code> 套件時，可能會遇到的問題。</p>
+<p>以 <code>threading</code> 套件而立，args 不可以是一個數字，就算 function 的值只需要一個參數，也必須要用 tuple(或可迭代的 object)，此指令才允許被執行。</p>
+<p>通常是語法規定，原因可能要問當初設計這樣的用意XD。</p>
+<h3 id="正確寫法"><a href="#正確寫法" class="headerlink" title="正確寫法"></a>正確寫法</h3><p>使用正確寫法後，相信就能執行成功了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">threading.Thread(target=function, args=(<span class="number">1</span>,))</span><br></pre></td></tr></table></figure>
+
+<h3 id="錯誤寫法"><a href="#錯誤寫法" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">threading.Thread(target=function, args=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/52575418/reverse-with-prefix-argument-after-must-be-an-iterable-not-int" target="_blank" rel="noopener">_reverse_with_prefix() argument after * must be an iterable, not int</a><br><a href="https://stackoverflow.com/questions/56545387/typeerror-start-argument-after-must-be-an-iterable-not-int" target="_blank" rel="noopener">TypeError: start() argument after * must be an iterable, not int [duplicate]</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Python 真的很方便，但即使再方便的程式語言也必須合乎套件要求才有辦法正常執行，只有學會正確的使用方式才可以完整的操作 Python，一起加油吧！</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QUESTION! git push 需要不斷重複輸入帳號密碼，並且還是出現登入失敗</title>
+    <url>/2020/11/27/git/git_login_repeat/</url>
+    <content><![CDATA[<h2 id="文章大意："><a href="#文章大意：" class="headerlink" title="文章大意："></a>文章大意：</h2><blockquote>
+<p>解決 <code>git push</code> 需要一直登入帳號密碼，但還是沒辦法推上去的問題。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-git-push-需要不斷重複輸入帳號密碼，並且還是出現登入失敗"><a href="#QUESTION-git-push-需要不斷重複輸入帳號密碼，並且還是出現登入失敗" class="headerlink" title="QUESTION! git push 需要不斷重複輸入帳號密碼，並且還是出現登入失敗"></a>QUESTION! git push 需要不斷重複輸入帳號密碼，並且還是出現登入失敗</h2><p>在使用 <code>git push</code> 時，可能會遇到一種狀況時，系統不斷跳出要你輸出帳號 and 密碼，你重新輸入過後，又跳出一個新視窗，此視窗與先前的不同，輸入帳號密碼後，明明正確還是說你驗證失敗時要怎麼辦呢？</p>
+<h2 id="situlation-Creating-a-personal-access-token-建立個人訪問令牌"><a href="#situlation-Creating-a-personal-access-token-建立個人訪問令牌" class="headerlink" title="situlation : Creating a personal access token (建立個人訪問令牌)"></a>situlation : Creating a personal access token (建立個人訪問令牌)</h2><p>透過此方式，就可以回復到像其他教學文章、或你之前的使用體驗一樣，只需要 <code>git push</code> 就可以成功放到 github 了！</p>
+<h3 id="Step-1-先從-Github-拿到-access-token"><a href="#Step-1-先從-Github-拿到-access-token" class="headerlink" title="Step 1: 先從 Github 拿到 access token"></a>Step 1: 先從 Github 拿到 access token</h3><p>先去 github 找出設定後並點擊，先點右上角的頭像，之後點下方 Setting<br><img src="/images/git_login_repeat/1.PNG" alt=""></p>
+<p>接下來點擊 Developer settings<br><img src="/images/git_login_repeat/2.PNG" alt=""></p>
+<p>點擊 Personal access token<br><img src="/images/git_login_repeat/3.PNG" alt=""></p>
+<p>點擊 Generate new token，之後輸入密碼<br><img src="/images/git_login_repeat/4.PNG" alt=""></p>
+<p>有打藍色勾勾的，都要勾起來，之後點擊 Generate token<br><img src="/images/git_login_repeat/5.PNG" alt=""></p>
+<p>之後會看到一組 token，複製此 token<br><img src="/images/git_login_repeat/6.PNG" alt=""></p>
+<h2 id="Step-2-將此-token-套用在我們電腦中的-git"><a href="#Step-2-將此-token-套用在我們電腦中的-git" class="headerlink" title="Step 2: 將此 token 套用在我們電腦中的 git"></a>Step 2: 將此 token 套用在我們電腦中的 git</h2><p>這次我們就先使用 <code>git clone https://.../repo.git</code>，來呼叫出我們要不斷登入的畫面，之後只要是 Username 的部分我們就一樣打 Username，另外一個 Password 則是打 <strong>token</strong>，如果需要打兩次是屬於正常，但如果還是一直失敗就要注意可能是哪裡有問題了。</p>
+<p>統整一下的話則像這樣子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;......&#x2F;repo.git</span><br><span class="line">Username: your_username</span><br><span class="line">Password: your_token</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token" target="_blank" rel="noopener">Creating a personal access token</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>此參考連結救了大衞長久以來的問題了QQ，原本是想說只是要登入兩次也不是甚麼太麻煩的事情，但到了最近卻發現登入兩次也沒辦法拯救此問題，實在是忍不了，就上網爬文求 solution，不過不要學我拉，我是不好示範，我等到我受不了才去找問題，通常只要有一些小毛病就要去解決，不要拖。</p>
+<p><strong>拖只會讓問題越來越嚴重</strong>，所以要盡早解決，不要變成大病了才來重視他，有點為時已晚。</p>
+<p>不過我又學了好多知識，好開心喔&gt;&lt;</p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL Boolean 資料類別</title>
+    <url>/2020/11/30/MySQL/MySQL_boolean/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>簡單紀錄在 MySQL 新增 Boolean 型態的 column(欄位)，會突然變成 tinyint</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="MySQL-Boolean-資料類別簡單介紹："><a href="#MySQL-Boolean-資料類別簡單介紹：" class="headerlink" title="MySQL Boolean 資料類別簡單介紹："></a>MySQL Boolean 資料類別簡單介紹：</h2><p>因為 MySQL 並沒有內建 Boolean 類別，為了更方便的使用，於是他使用了 TINYINT(1) - 只能存放 0 與 1 數字的資料型態，通常 0 表示 FALSE、1 表示 TRUE。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.yiibai.com/mysql/boolean.html" target="_blank" rel="noopener">MySQL boolean类型</a><br><a href="https://stackoverflow.com/questions/7156147/inserting-boolean-value-into-mysql-with-python" target="_blank" rel="noopener">Inserting boolean value into MySQL with Python</a></p>
+<h2 id="心得："><a href="#心得：" class="headerlink" title="心得："></a>心得：</h2><p>學了一課，我對於 MySQL 原本一點認識都沒有，透過這幾天的自學，慢慢學到了許多東西，MySQL 真的是太贊了，也要謝謝各位願意將技術文章放在網路上才能夠讓我學習。</p>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 套件中 Pymysql 的 fetchone() 與 fetchall() 差別</title>
+    <url>/2020/11/30/Python/Python_Pymysql_fetchone_fetchall/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>簡單介紹 Python 套件中 Pymysql 的 fetchone() 與 fetchall() 差別</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="fetchone"><a href="#fetchone" class="headerlink" title="fetchone():"></a>fetchone():</h2><p>回傳 Python 呼叫 MySQL 指令的<strong>一條</strong>紀錄(row)，如果沒有回傳值則返回 <code>None</code></p>
+<h2 id="fetchall"><a href="#fetchall" class="headerlink" title="fetchall()"></a>fetchall()</h2><p>回傳 Python 呼叫 MySQL 指令的<strong>多條</strong>紀錄(row)，如果沒有則回傳 <code>()</code></p>
+<h2 id="兩者差異"><a href="#兩者差異" class="headerlink" title="兩者差異"></a>兩者差異</h2><p>稍微看得出來差異吧XD，<code>fetchone()</code> 回傳一條紀錄，於是如果回傳超過一條紀錄時，只會回傳<strong>第一條</strong>紀錄，且是<strong>一維 tuple</strong></p>
+<p><code>fetchall()</code> 如果只有回傳一條紀錄時一樣是傳回 <strong>二維 tuple</strong>。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/u014234260/article/details/79581041" target="_blank" rel="noopener">【Python】fetchone()和fetchall()</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>學起來了，學起來了，學習這些知識使我在未來想要實踐自己的程式能力時，可以更好發揮。</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL 停止在 windows 上的服務</title>
+    <url>/2020/11/30/MySQL/MySQL_stop_windows_server/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>有時候 MySQL 可能會出點 Bug，我們會需要 MySQL 先關閉再開啟，來解決遇到 Bug 或卡頓的問題，對不起，我就懶，想要暴力解。</p>
+<p>這篇只適用 windows，其他作業系統不適合QQ。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="找到-services-msc-並關閉-MySQL"><a href="#找到-services-msc-並關閉-MySQL" class="headerlink" title="找到 services.msc 並關閉 MySQL"></a>找到 services.msc 並關閉 MySQL</h3><p>在搜尋框內輸入 services.msc，並且點擊那圖是有<strong>齒輪</strong>的唯一搜尋資料。</p>
+<blockquote>
+<p><img src="/images/MySQL_stop_windows_server/1.PNG" alt=""></p>
+</blockquote>
+<p>之後點開後畫面則像這樣</p>
+<blockquote>
+<p><img src="/images/MySQL_stop_windows_server/2.PNG" alt=""></p>
+</blockquote>
+<h3 id="開啟-services-ms"><a href="#開啟-services-ms" class="headerlink" title="開啟 services.ms"></a>開啟 services.ms</h3><p>找到 MySQL，通常是 MySQLXX，XX 為版本</p>
+<blockquote>
+<p><img src="/images/MySQL_stop_windows_server/3.PNG" alt=""></p>
+</blockquote>
+<p>並對她按右鍵後，點擊停止就立即停止 MySQL 服務。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/10885038/stop-mysql-service-windows" target="_blank" rel="noopener">Stop MySQL service windows</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這篇參考連結救了我…，嗚嗚，要是沒了他我不知道還要找多久資料…</p>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL 輸出資料至 EXCEL</title>
+    <url>/2020/11/30/MySQL/MySQL_Export_Excel/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>說明如何透過 SQL 語法輸出資料至 EXCEL</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h2><p>在 MySQL 沒有辦法直接將資料輸出成 Excel 格式，但可以輸出成 csv 之後並透過 Excel 進行打開，範例如下：</p>
+<h3 id="不含標題"><a href="#不含標題" class="headerlink" title="不含標題"></a>不含標題</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT ... FROM ... WHERE ... </span><br><span class="line">INTO OUTFILE &#39;file.csv&#39;</span><br><span class="line">FIELDS TERMINATED BY &#39;,&#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="含標題"><a href="#含標題" class="headerlink" title="含標題"></a>含標題</h3><p>如果需要標題時要怎麼辦呢？自己打，對，我真的沒有開玩笑…，我也很難過，嗚嗚。不過這樣自由度也高拉，其實也不差，範例如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT &#39;ColName1&#39;, &#39;ColName2&#39;, &#39;ColName3&#39;</span><br><span class="line">UNION ALL</span><br><span class="line">SELECT ... FROM ... WHERE ... </span><br><span class="line">INTO OUTFILE &#39;file.csv&#39;</span><br><span class="line">FIELDS TERMINATED BY &#39;,&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="可能會遇到的問題"><a href="#可能會遇到的問題" class="headerlink" title="可能會遇到的問題"></a>可能會遇到的問題</h2><p>這裡收錄大衛在輸出 MySQL csv 時一些遇到的小錯誤，如果讀者也剛好有此問題剛好能看我文章解決那就再好不過了。<br><a href="https://theriseofdavid.github.io/2020/11/30/MySQL/MySQL_ERROR_1290_(HY000)_secure_file_priv%20option/" target="_blank" rel="noopener">MySQL ERROR 1290 (HY000) he MySQL server is running with the –secure-file-priv option so it cannot execute this statement (for windows)</a></p>
+<h2 id="參考連結："><a href="#參考連結：" class="headerlink" title="參考連結："></a>參考連結：</h2><p><a href="https://stackoverflow.com/questions/10295228/exporting-results-of-a-mysql-query-to-excel" target="_blank" rel="noopener">Exporting results of a Mysql query to excel?</a><br><a href="https://stackoverflow.com/questions/5941809/include-headers-when-using-select-into-outfile" target="_blank" rel="noopener">Include headers when using SELECT INTO OUTFILE?</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Stackoverflow 是甚麼網站阿，為甚麼我想要答案都會在哪裡，其他隔壁的農場文章都是負責抄襲此網站，而且水準以及翻譯水平即差，希望 Google 可以將一些垃圾資訊移除，才會方便需要學習的讀者可以查詢到需要的網頁，而不是一直搜尋到品質低劣的網站。</p>
+<p>Stackoverflow 你好偉大…，嗚嗚嗚嗚，沒有你的我好爛。</p>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL ERROR 1290 (HY000) he MySQL server is running with the --secure-file-priv option so it cannot execute this statement (for windows)</title>
+    <url>/2020/11/30/MySQL/MySQL_ERROR_1290_(HY000)_secure_file_priv_option/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>當你在寫 MySQL 並輸出檔案時可能會遇到一些問題，這裡提供一種解決方式。</p>
+<p>目前只提供 Windows 方案，之後如果 Linux 我也有遇到此問題我則會補上。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>在 MySQL 中檔案輸出是有嚴格的要求，我不確定是甚麼因素導致 MySQL 對於輸出資料庫檔案如此要求，但他要求了，不符合我們的需求，那我們就要來調整至我們的需求瞜XD。</p>
+<h3 id="查詢此位置-SECURE-FILE-PRIV"><a href="#查詢此位置-SECURE-FILE-PRIV" class="headerlink" title="查詢此位置 SECURE-FILE-PRIV"></a>查詢此位置 SECURE-FILE-PRIV</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SHOW GLOBAL VARIABLES LIKE &#39;%secure%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>通常在進行此查詢後，會看到一段路徑，移動到此路徑，以我為範例，我輸出的路徑則是 <code>C:\ProgramData\MySQL\MySQL Server 8.0</code></p>
+<p><img src="/images/MySQL_ERROR_1290_(HY000)_secure_file_priv_option/1.PNG" alt=""></p>
+<h3 id="找到-MySQL-Server-X-X-的-my-ini-並修改"><a href="#找到-MySQL-Server-X-X-的-my-ini-並修改" class="headerlink" title="找到 MySQL Server X.X 的 my.ini 並修改"></a>找到 MySQL Server X.X 的 my.ini 並修改</h3><p>由於問題是 secure-file-priv 此參數設定我們輸出的檔案只能在他規定的路徑下，於是我們要修改他的路徑，要如何修改呢，首先就是要先找到 <code>my.ini</code>，通常位置如果沒有被改變，應該是預設在 <code>C:\ProgramData\MySQL\MySQL Server 8.0</code></p>
+<p>找到  secure-file-priv 並修改值為 <code>&quot;&quot;</code>，當值被設定為<code>&quot;&quot;</code>時表示不監控檔案輸出路徑，即你想輸出在哪個位置都可以。<br><img src="/images/MySQL_ERROR_1290_(HY000)_secure_file_priv_option/2.PNG" alt=""></p>
+<h3 id="重開-MySQL-server"><a href="#重開-MySQL-server" class="headerlink" title="重開 MySQL server"></a>重開 MySQL server</h3><p>注意，並不是只將 MySQL Workbench 關掉重開即可，要<strong>完整關掉</strong>。</p>
+<p>詳細步驟可以看此連結 <a href="https://theriseofdavid.github.io/2020/11/30/MySQL/MySQL_stop_windows_server/" target="_blank" rel="noopener">MySQL 停止在 windows 上的服務</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/34102562/mysql-error-1290-hy000-secure-file-priv-option" target="_blank" rel="noopener">MySQL ERROR 1290 (HY000) –secure-file-priv option</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Stackoverflow 是甚麼網站阿，為甚麼我想要答案都會在哪裡，其他隔壁的農場文章都是負責抄襲此網站，而且水準以及翻譯水平即差，希望 Google 可以將一些垃圾資訊移除，才會方便需要學習的讀者可以查詢到需要的網頁，而不是一直搜尋到品質低劣的網站。</p>
+<p>Stackoverflow 你好偉大…，嗚嗚嗚嗚，沒有你的我好爛。</p>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
 </search>
