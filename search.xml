@@ -7661,4 +7661,224 @@
         <tag>MySQL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>資料庫管理 筆記 - 大二上期中考</title>
+    <url>/2020/12/01/NTUT_note/database_1/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="資料庫管理期中考"><a href="#資料庫管理期中考" class="headerlink" title="資料庫管理期中考"></a>資料庫管理期中考</h1><h2 id="老師說得必考"><a href="#老師說得必考" class="headerlink" title="老師說得必考"></a>老師說得必考</h2><ul>
+<li>非主鍵的外來鍵(Foreign key) 畫虛線</li>
+<li>外來鍵用其他表的主鍵表示兩表格的關係</li>
+<li>候選鍵一定要有值，非候選鍵不一定有值</li>
+<li>主鍵是從候選鍵挑出來的<h3 id="determinant-行列式-and-Candidate-key-候選鍵"><a href="#determinant-行列式-and-Candidate-key-候選鍵" class="headerlink" title="determinant(行列式) and Candidate key(候選鍵)"></a>determinant(行列式) and Candidate key(候選鍵)</h3>可以識別一筆row的資料，但若為複合鍵的情況下，Candidate key的所有屬性都不能是多餘的(redundancy)，也就是不能有屬性是刪除後對於Candidate key識別一筆row資料沒有影響；Candidate key 一定是 Determinant，但Determinant不一定是Candidate key。<h3 id="問你主鍵-Primary-Keys-是什麼-參考限制條件"><a href="#問你主鍵-Primary-Keys-是什麼-參考限制條件" class="headerlink" title="問你主鍵(Primary Keys)是什麼 參考限制條件"></a>問你主鍵(Primary Keys)是什麼 參考限制條件</h3></li>
+<li>一定要畫<strong>實線</strong></li>
+<li>不可有空值(Not Null)</li>
+<li>永遠不會改變(Never Change)</li>
+<li>非識別值(Nonidentifying Value)<br>即「值」本身沒有意義。例如買電子產品都會有一個「序號」，假設第一碼代表供應商麼，第二碼代表所在地區(台北、台中…)，有一天供應商搬家了，從台北搬到台中，那第二碼就不會符合現況。</li>
+<li>主鍵是關係的唯一標識符。 示例包括員工編號，社會保險號等。這可以確保所有行都是唯一的。</li>
+<li>Primary keys are unique identifiers of the relation. Examples include employee numbers, social security numbers, etc. This guarantees that all rows are unique.</li>
+</ul>
+<h4 id="Domain-Constraints-域約束"><a href="#Domain-Constraints-域約束" class="headerlink" title="Domain Constraints 域約束"></a>Domain Constraints 域約束</h4><ul>
+<li>Allowable values for an attribute (includes data types and restrictions on values)</li>
+<li>屬性的允許值（包括數據類型和值限制）</li>
+</ul>
+<h4 id="Entity-Integrity-實體完整性"><a href="#Entity-Integrity-實體完整性" class="headerlink" title="Entity Integrity 實體完整性"></a>Entity Integrity 實體完整性</h4><ul>
+<li>No primary key attribute may be null. All primary key fields MUST contain data values.</li>
+<li>主鍵屬性不能為空。 所有主鍵字段必須包含數據值。</li>
+</ul>
+<h4 id="Referential-Integrity-參照完整性"><a href="#Referential-Integrity-參照完整性" class="headerlink" title="Referential Integrity 參照完整性"></a>Referential Integrity 參照完整性</h4><ul>
+<li>Rules that maintain consistency between the rows of two related tables.</li>
+<li>維護兩個相關表的行之間一致性的規則。</li>
+</ul>
+<h3 id="資料正規化-3個異常-4-38-4-39"><a href="#資料正規化-3個異常-4-38-4-39" class="headerlink" title="資料正規化 3個異常 4-38 4-39"></a>資料正規化 3個異常 4-38 4-39</h3><p><img src="https://i.imgur.com/pQz0S5h.png" alt=""></p>
+<h4 id="Insertion"><a href="#Insertion" class="headerlink" title="Insertion"></a>Insertion</h4><ul>
+<li>can’t enter a new employee without having the employee take a class (or at least empty fields of class information)</li>
+<li>在沒有讓員工參加課程的情況下（或至少在課程信息的空白字段中）不能輸入新員工</li>
+</ul>
+<h4 id="Deletion"><a href="#Deletion" class="headerlink" title="Deletion"></a>Deletion</h4><ul>
+<li>if we remove employee 140, we lose information about the existence of a Tax Acc class</li>
+<li>如果我們刪除員工140，我們將丟失有關Tax Acc類的信息</li>
+</ul>
+<h4 id="Modification"><a href="#Modification" class="headerlink" title="Modification"></a>Modification</h4><ul>
+<li>giving a salary increase to employee 100 forces us to update multiple records</li>
+<li>給員工100加薪迫使我們更新多個記錄</li>
+</ul>
+<h2 id="資料正規化"><a href="#資料正規化" class="headerlink" title="資料正規化"></a>資料正規化</h2><h3 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h3><ul>
+<li>是指在資料表中的所有記錄之屬性內含值都是基元值(Atomic Value)。<br>基元值(Atomic Value) = 亦即無重覆項目群</li>
+<li>沒有任何兩筆以上的資料是完全重覆</li>
+<li>資料表中有主鍵, 而其他所有的欄位都相依於「主鍵」。<h3 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h3><a href="https://hackmd.io/DafKP08ARwKBz-78gBSFYQ#%E8%B3%87%E6%96%99%E6%AD%A3%E8%A6%8F%E5%8C%96-3%E5%80%8B%E7%95%B0%E5%B8%B8-4-38-4-39" target="_blank" rel="noopener">看這裡就可以</a><h3 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h3>各欄位與「主鍵」之間沒有「遞移相依」的關係。</li>
+<li>遞移相依<br>A 跟 B 有關係，B 跟 C 有關係，則 A 跟 C 就是<strong>遞移相依</strong><h3 id="實務範例"><a href="#實務範例" class="headerlink" title="實務範例"></a>實務範例</h3><img src="https://i.imgur.com/YLLLT5T.png" alt=""></li>
+</ul>
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><p><a href="https://blog.kkbruce.net/2010/10/normalization-key.html#.X7qQVM0zaUl" target="_blank" rel="noopener">關聯資料表正規化(NORMALIZATION)–鍵,KEY</a><br><a href="https://answers.sap.com/questions/2689632/key-and-non-key-fields.html" target="_blank" rel="noopener">Key and Non-Key Fields</a><br><a href="http://abbydoubleb.blogspot.com/2014/10/1031-chapter-4-database-design.html" target="_blank" rel="noopener">1031 - 資料庫管理概論 Chapter 4 Database design</a><br><a href="http://cc.cust.edu.tw/~ccchen/doc/db_04.pdf" target="_blank" rel="noopener">資料庫正規化</a></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>資料庫管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>投資學 筆記 - 股票交易制度</title>
+    <url>/2020/12/01/NTUT_note/investment_stock_trading_system/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
+<ul>
+<li>上市櫃股票交易流程</li>
+<li>上市櫃股票交易成本</li>
+<li>上市櫃股價漲跌幅與檔次</li>
+<li>上市櫃股票信用交易</li>
+<li>上市櫃股票鉅額交易與零股交易</li>
+<li>興櫃股票交易制度</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="基本觀念"><a href="#基本觀念" class="headerlink" title="基本觀念"></a>基本觀念</h2><p>台灣的股票交易採用兩層式架構，股票交易人將買或賣的委託單交由證券經紀商，輸入證交所或櫃買中心的交易系統中，進行撮合交易。</p>
+<ul>
+<li>2020 年 3 月 23 日 開始進行盤中逐筆交易</li>
+<li>2020 年 10 月 26 日 盤中集合競價</li>
+</ul>
+<h3 id="股票交易程序"><a href="#股票交易程序" class="headerlink" title="股票交易程序"></a>股票交易程序</h3><ul>
+<li>投資人需要開立三個帳戶 <ul>
+<li>有價證券受託買賣帳戶 (交易帳戶)</li>
+<li>證券集中保管帳戶 (證券存摺)</li>
+<li>款券劃撥帳戶 (銀行活期存款存摺)</li>
+</ul>
+</li>
+<li>開戶<br>個人需帶身分證、第二證件與印章至證券經紀商營業處，法人則須被授權人辦理，帶法人證件等、公司印鑑、被授權人身分證影本。</li>
+<li>委託<ul>
+<li>時間<br>委託時間在 8:30(開盤) ~ 13:30(收盤)，可進行交易，14:00 ~ 14:30(收盤)則可以根據收盤價進行交易，且盤後交易不可超過 499 單位</li>
+<li>有效時間<br>可以在還沒成交前，取消委託，委託只限當日有效，到隔天則須重新委託。</li>
+</ul>
+</li>
+<li>結算 (三種方式結算) <ul>
+<li>公式<br>結算公式： \(結算 = 券的交割 + 結清款項\)</li>
+<li>當日交割<br>必須當日完成，鉅額買賣為超過 500 交易單位</li>
+<li>普通交易交割<br>成交日後的第二天(營業日)辦理交割，通常使用此方式。</li>
+<li>違約交割<br>沒有在成交日後的第二天(營業日)辦理交割，違約，三年內不可再開戶與委託買賣。</li>
+</ul>
+</li>
+<li>股票保管<ul>
+<li>線上管理，都放在<strong>證券存摺</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="集合競價與逐筆競價制度"><a href="#集合競價與逐筆競價制度" class="headerlink" title="集合競價與逐筆競價制度"></a>集合競價與逐筆競價制度</h2><p>8:30-9:00(開盤前)、13:25-13:30(開盤即將結束)為集合競價，9:00-13:25 則採用逐筆競價</p>
+<h3 id="集合競價"><a href="#集合競價" class="headerlink" title="集合競價"></a>集合競價</h3><p>買入累計與賣出累計為全部價位中的最大值，則此價位為成交價。<br>P.S. 買方必須都先 -100，圖片有問題</p>
+<blockquote>
+<p><img src="/images/investment_stock_trading_system/1.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>只能下限價單，低於此價位就不賣出。(以賣出為例)</li>
+</ul>
+<h3 id="逐筆競價"><a href="#逐筆競價" class="headerlink" title="逐筆競價"></a>逐筆競價</h3><p>看圖說明即可，注意：如果有比你低的價位可買入，則優先買入</p>
+<blockquote>
+<p><img src="/images/investment_stock_trading_system/2.PNG" alt=""></p>
+</blockquote>
+<ul>
+<li>可以下市價單、立即成交取消、全部成交或取消的委託單</li>
+<li>限價委託<br>以買入為例，限價 50 表示在成交價 50 以下(含)才買入。</li>
+<li>市價單<br>根據市場成交價買賣。</li>
+</ul>
+<h2 id="股票交易成本"><a href="#股票交易成本" class="headerlink" title="股票交易成本"></a>股票交易成本</h2><ul>
+<li>手續費<br>股票、ETF、基金，證券商自訂，憑證上限為 0.1425%</li>
+<li>證券交易稅<br>3%，完全不可變動。</li>
+</ul>
+<h2 id="股票信用交易"><a href="#股票信用交易" class="headerlink" title="股票信用交易"></a>股票信用交易</h2><p>期限通常為一年，最多可延兩次半年</p>
+<h3 id="融資"><a href="#融資" class="headerlink" title="融資"></a>融資</h3><p>投資人以部分自備款擔保，向證券商購買股票</p>
+<ul>
+<li>融資對象<ul>
+<li>20歲以上國民</li>
+<li>開立買賣帳戶 3 個月以上</li>
+<li>近一年委託買賣達 10 筆，融資額度只能到累積成交金額 50%。</li>
+<li>融資額度為所得與全部財產的 30%。<h3 id="融券"><a href="#融券" class="headerlink" title="融券"></a>融券</h3>手上沒有股票但先賣股票，此時我們則欠證券商股票，必須在規定期限內買入股票歸還。</li>
+</ul>
+</li>
+</ul>
+<h3 id="融資融券的證券"><a href="#融資融券的證券" class="headerlink" title="融資融券的證券"></a>融資融券的證券</h3><ul>
+<li>股票<br>上市櫃 6 個月且每股淨值都在票面之上的普通股股票。</li>
+<li>台灣存託憑證<br>上市櫃滿六個月，且無累積虧損</li>
+<li>受益憑證<br>上市須滿六個月，但 ETF 除外。</li>
+<li><strong>股價波動劇烈、成交量異常、股權或受益權集中都不可融資融券</strong></li>
+<li><strong>零股買賣、鉅額買賣不可融資融券</strong></li>
+</ul>
+<h4 id="規定事項"><a href="#規定事項" class="headerlink" title="規定事項"></a>規定事項</h4><blockquote>
+<p><img src="/images/investment_stock_trading_system/3.PNG" alt=""></p>
+</blockquote>
+<h4 id="擔保維持率"><a href="#擔保維持率" class="headerlink" title="擔保維持率"></a>擔保維持率</h4><p>必須要維持<strong>擔保維持率</strong>，如果低於一定比率(2019 為 130%)，則委託人必須先補繳融資自備款達到比例，且期限為兩天，若沒達成條件則處分擔保品(俗稱斷頭)。<br>擔保維持率公式： \(\frac{融資擔保品市值+原融券擔保品及保証金}{原融資金額+融券標的証券市價}\)</p>
+<h4 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h4><blockquote>
+<p><img src="/images/investment_stock_trading_system/4.PNG" alt=""><br><img src="/images/investment_stock_trading_system/5.PNG" alt=""></p>
+</blockquote>
+<h4 id="暫停融資融券"><a href="#暫停融資融券" class="headerlink" title="暫停融資融券"></a>暫停融資融券</h4><ul>
+<li>發行公司停止過戶日前五個營業日，停止融資買進三天</li>
+<li>聽止過戶日前七個營業日，停止融券賣出五天</li>
+</ul>
+<blockquote>
+<p><img src="/images/investment_stock_trading_system/6.PNG" alt=""></p>
+</blockquote>
+<h3 id="當日沖銷-當沖"><a href="#當日沖銷-當沖" class="headerlink" title="當日沖銷 (當沖)"></a>當日沖銷 (當沖)</h3><p>指投資人當天融資買入又融券賣出相同的股票，以兩者相抵後的餘額交割。</p>
+<h4 id="範例-1"><a href="#範例-1" class="headerlink" title="範例"></a>範例</h4><blockquote>
+<p><img src="/images/investment_stock_trading_system/7.PNG" alt=""></p>
+</blockquote>
+<h2 id="標借、議借與標購"><a href="#標借、議借與標購" class="headerlink" title="標借、議借與標購"></a>標借、議借與標購</h2><p>當某股票的融券數量超過證券金融公司的可融券數量時則會發生<strong>融券券源不足</strong>，可以向證交所貨櫃買中心申請，在網站上公告向投資人借股票，並由證券金融公司支付費用。</p>
+<p>程序如下：</p>
+<ol>
+<li>先辦理<strong>標借</strong></li>
+<li>券源不足，可<strong>議借</strong></li>
+<li>還是不足，可<strong>標購</strong></li>
+</ol>
+<h3 id="標借"><a href="#標借" class="headerlink" title="標借"></a>標借</h3><ul>
+<li>時間<br>8:30 開始公告<strong>標借</strong>證券，8:30-12:10 接受投標，12:30 電腦自動投標</li>
+<li>價格<ul>
+<li><strong>標借</strong>價格不超過融券差額發生日的收盤價或參考價的 7%。</li>
+<li>開標按當日決標之借券費率，由低而高依序取借</li>
+<li>當數量大過於需要的標借數量時按照輸入時間順序標借</li>
+</ul>
+</li>
+</ul>
+<h3 id="議借"><a href="#議借" class="headerlink" title="議借"></a>議借</h3><p>如果<strong>標借</strong>後仍有券源不足，可在 14:00 前<strong>議借</strong>，議借差額不可大於收盤價 10%</p>
+<h3 id="標購"><a href="#標購" class="headerlink" title="標購"></a>標購</h3><p>如果<strong>議借</strong>後仍有券源不足，則在 14:30 委託證交所標購，差額不可大於 15%</p>
+<h2 id="上市櫃股票鉅額交易與零股交易"><a href="#上市櫃股票鉅額交易與零股交易" class="headerlink" title="上市櫃股票鉅額交易與零股交易"></a>上市櫃股票鉅額交易與零股交易</h2><h3 id="鉅額交易"><a href="#鉅額交易" class="headerlink" title="鉅額交易"></a>鉅額交易</h3><ul>
+<li>單一證券交易超過 500 個</li>
+<li>單一證券交易超過 1500 萬</li>
+<li>五種股票以上，總金額大於 1500 萬</li>
+</ul>
+<h4 id="交易方式"><a href="#交易方式" class="headerlink" title="交易方式"></a>交易方式</h4><ul>
+<li>逐筆交易<br>採取撮合成交，採 T+2 日交割，申報時間為周一至周五 9:00-17:00</li>
+<li>配對交易<br>採撮合成交，<strong>可以指定對象</strong>，採 T+2 日交割，申報時間為周一至周五 8:00-8:30 and 9:00-17:00</li>
+</ul>
+<h3 id="零股交易"><a href="#零股交易" class="headerlink" title="零股交易"></a>零股交易</h3><ul>
+<li>不滿一個成交單位，即不滿 1000 股</li>
+<li>盤中可以交易，且每三分鐘撮合一次</li>
+<li>不可融資融券</li>
+<li>圖表<blockquote>
+<p><img src="/images/investment_stock_trading_system/8.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="定期定額買股票與自行買零股差異"><a href="#定期定額買股票與自行買零股差異" class="headerlink" title="定期定額買股票與自行買零股差異"></a>定期定額買股票與自行買零股差異</h3><ul>
+<li>定期定額只需要設定一次之後就自動扣款，幫助投資人有紀律的投資</li>
+<li>成交機率較高，券商可以匯總所有客戶款項再根據實際成交價、委託申購股數比例來進行分配</li>
+</ul>
+<h2 id="興櫃股票交易制"><a href="#興櫃股票交易制" class="headerlink" title="興櫃股票交易制"></a>興櫃股票交易制</h2><p><strong>未上市市櫃的股票也可以進行交易</strong>，台灣要上市上櫃的股票都必須要先在興櫃市場掛牌交易六個月以上，興櫃市場交易制度則是投資人透過交易系統與證券商進行議價交易。</p>
+<h3 id="興櫃股票成交方式"><a href="#興櫃股票成交方式" class="headerlink" title="興櫃股票成交方式"></a>興櫃股票成交方式</h3><ul>
+<li>到價委託單<br>\(投資人買價 \geq 證券商報賣價 \)，反之亦同，以價格優先，根據時間優先分配給推薦證券商成交</li>
+<li>未到價委託單<br>\(投資人委託買價 &lt; 推薦證券商賣價 \)，證券商沒有成交義務，但可以點選成交 </li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大二上投資學筆記</tag>
+      </tags>
+  </entry>
 </search>
