@@ -3996,6 +3996,11 @@
 <td>\pm</td>
 <td></td>
 </tr>
+<tr>
+<td>文字上面加一槓</td>
+<td>\bar{}</td>
+<td></td>
+</tr>
 </tbody></table>
 <h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a></p>
 ]]></content>
@@ -7879,6 +7884,60 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>北科大二上投資學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第七章 抽樣與抽樣分配(Sampling and Sampling Distributions)</title>
+    <url>/2020/11/23/NTUT_note/statistics-ch7/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="名詞介紹"><a href="#名詞介紹" class="headerlink" title="名詞介紹"></a>名詞介紹</h2><ul>
+<li>element<br>我們收集到的每一個資料</li>
+<li>population 母體<br>我們資料整體，樣本(sample)則是資料裡面的其中一個集合</li>
+<li>target population (目標母體)<br>我們想要選擇的母體</li>
+<li>sampled population 抽樣母體<br>我們抽樣的整體資料</li>
+<li>frame 抽樣清單<br>從 sampled population 抽取的清單</li>
+</ul>
+<h2 id="Selecting-Sample-選擇樣本"><a href="#Selecting-Sample-選擇樣本" class="headerlink" title="Selecting Sample 選擇樣本"></a>Selecting Sample 選擇樣本</h2><h3 id="Sampling-from-a-Finite-Population-有限母體"><a href="#Sampling-from-a-Finite-Population-有限母體" class="headerlink" title="Sampling from a Finite Population (有限母體)"></a>Sampling from a Finite Population (有限母體)</h3><p>舉例，信用卡名單、倉庫存貨、公司股東。</p>
+<ul>
+<li>簡單隨機樣本<br>每一個元素被抽出的機率相同</li>
+<li>sampling with replacement 歸還抽樣<br>抽完放回去</li>
+<li>sampling without replacement 不歸還抽樣<br>抽完不放回去<h3 id="Sampling-from-a-Infinite-Population-無限母體"><a href="#Sampling-from-a-Infinite-Population-無限母體" class="headerlink" title="Sampling from a Infinite Population (無限母體)"></a>Sampling from a Infinite Population (無限母體)</h3>在無限母體中沒有 frame，因為 frame 會等於無限。<br>舉例：銀行產生的交易，因為會不斷產生因此不確定性很高。</li>
+<li>random sample <ul>
+<li>每一個元素都是從相同母題抽出來</li>
+<li>每一個元素都是獨立，即抽完不放回</li>
+</ul>
+</li>
+</ul>
+<h2 id="Point-Estimation-點估計量"><a href="#Point-Estimation-點估計量" class="headerlink" title="Point Estimation 點估計量"></a>Point Estimation 點估計量</h2><p>推測母體參數中某個數值。</p>
+<ul>
+<li>\(\bar{x} \) 的點估計量就是平均值</li>
+<li>s 點估計量為母體標準差</li>
+<li>\(\bar{p} \) 為母體比例 p 的點估計量</li>
+</ul>
+<h3 id="舉例："><a href="#舉例：" class="headerlink" title="舉例："></a>舉例：</h3><p>P.S. 這裡的資料是在影片前面有抽過，但我沒有截圖作為紀錄，這裡的數字看看就好</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/1.PNG" alt=""><br><img src="/images/statistics-ch7/2.PNG" alt=""></p>
+</blockquote>
+<p>下面這張圖片則是透過<strong>完整原始資料</strong>來進行計算</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/3.PNG" alt=""></p>
+</blockquote>
+<h4 id="比較："><a href="#比較：" class="headerlink" title="比較："></a>比較：</h4><blockquote>
+<p><img src="/images/statistics-ch7/4.PNG" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
       </tags>
   </entry>
 </search>
