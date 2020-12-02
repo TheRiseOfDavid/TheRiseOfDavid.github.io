@@ -3944,7 +3944,7 @@
 <tr>
 <td>總和</td>
 <td>\sum_{i=1}^n a_n</td>
-<td></td>
+<td>如果不需要其他係數，只需要符號時使用 \Sigma</td>
 </tr>
 <tr>
 <td>大於等於</td>
@@ -4001,8 +4001,23 @@
 <td>\bar{}</td>
 <td></td>
 </tr>
+<tr>
+<td>大約</td>
+<td>\approx</td>
+<td></td>
+</tr>
+<tr>
+<td>變異數符號</td>
+<td>\sigma</td>
+<td></td>
+</tr>
+<tr>
+<td>根號</td>
+<td>\sqrt[ n ]{}</td>
+<td>裡面的 n 為開幾次跟號</td>
+</tr>
 </tbody></table>
-<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a></p>
+<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a><br><a href="https://16sixteen.github.io/jekyll-study/mathjax" target="_blank" rel="noopener">常用的mathjax符号</a><br><a href="https://math.meta.stackexchange.com/questions/29609/how-to-type-sigma-and-other-symbols-in-mathjax" target="_blank" rel="noopener">How to type Sigma and other symbols in MathJax [duplicate]</a></p>
 ]]></content>
       <categories>
         <category>blog</category>
@@ -7938,6 +7953,90 @@
         <tag>北科上課筆記</tag>
         <tag>統計學筆記</tag>
         <tag>北科大二上統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>投資學 筆記 - 股票資產組合管理基礎篇(報酬與風險)</title>
+    <url>/2020/12/02/NTUT_note/investment-stock-Asset-Portfolio-Management-Basic/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
+<ul>
+<li>量化金融資產用預期報酬與風險</li>
+<li>了解預期報酬與風險</li>
+<li>透過過去歷史資料計算每種資產預期報酬率</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="名目利率與實質利率和報酬率"><a href="#名目利率與實質利率和報酬率" class="headerlink" title="名目利率與實質利率和報酬率"></a>名目利率與實質利率和報酬率</h2><h3 id="實質利率"><a href="#實質利率" class="headerlink" title="實質利率"></a>實質利率</h3><p>每借 1 元，一年所要付出的代價，反之亦同。</p>
+<p>\(實際利率 \approx 名目利率 - 通貨膨脹率 \)</p>
+<h3 id="名目利率"><a href="#名目利率" class="headerlink" title="名目利率"></a>名目利率</h3><p>名目利率會隨著預期通貨膨脹率同步增加，公式則是 \(rn = rr + E(i) \)。</p>
+<ul>
+<li>\(rn\) 名目年利率</li>
+<li>\(rr\) 實際年利率</li>
+<li>\(E(i)\) 下一期通貨膨脹率的預測</li>
+</ul>
+<h3 id="報酬率"><a href="#報酬率" class="headerlink" title="報酬率"></a>報酬率</h3><p>\(預期報酬率 = 無風險利率 + 承擔通貨膨脹風險\)，換句換說則表示 \(金融資產的預期報酬 = 無風險利率+各種可能風險之溢酬\)</p>
+<h2 id="金融資產可能的風險溢酬"><a href="#金融資產可能的風險溢酬" class="headerlink" title="金融資產可能的風險溢酬"></a>金融資產可能的風險溢酬</h2><ul>
+<li>物價膨脹風險溢酬</li>
+<li>信用與違約風險溢酬</li>
+<li>變現性風險溢酬</li>
+<li>到期日風險溢酬</li>
+</ul>
+<h3 id="預期報酬與實際報酬"><a href="#預期報酬與實際報酬" class="headerlink" title="預期報酬與實際報酬"></a>預期報酬與實際報酬</h3><ul>
+<li>無風險利率<br>將資金投資於短期政府國庫券、銀行存款能賺取的報酬率</li>
+<li>風險溢酬<br>股票風險與無風險利率的差距，則稱為股票的風險溢酬</li>
+<li>超額報酬<br>風險性資產的實際報酬高於國庫券利率水準的為超額報酬，超額報酬的標準差很合適做為<strong>風險衡量值</strong></li>
+</ul>
+<h3 id="金融資產的預期報酬率與風險"><a href="#金融資產的預期報酬率與風險" class="headerlink" title="金融資產的預期報酬率與風險"></a>金融資產的預期報酬率與風險</h3><p>持有期間報酬 (HPR) 為\(HPR = \frac{期末股價-期初股價+現金股利}{期初股價}\)</p>
+<h4 id="報酬的機率分配"><a href="#報酬的機率分配" class="headerlink" title="報酬的機率分配"></a>報酬的機率分配</h4><p>設第 s 種情境的持有期間報酬 \(r(s)\)<br>第 s 種情境的發生機率 \(p(s)\)</p>
+<ul>
+<li>預期報酬為機率分配的期望值<br>\(E(r) =\Sigma p(s)r(s)  \)</li>
+<li>風險為機率分配的標準差(變異數取平方根)<br>\(\sigma^2 = \Sigma p(x)[r(s)-E(r)]^2\)<h5 id="例題"><a href="#例題" class="headerlink" title="例題"></a>例題</h5><blockquote>
+<p><img src="/images/investment-stock-Asset-Portfolio-Management-Basic/1.PNG" alt=""><br><img src="/images/investment-stock-Asset-Portfolio-Management-Basic/2.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="預期報酬與風險的估計"><a href="#預期報酬與風險的估計" class="headerlink" title="預期報酬與風險的估計"></a>預期報酬與風險的估計</h2><p>資產報酬的真實分配可視為母體，一般會用樣本資料推估，使用過去的歷史資料作為樣本來推估資產的預期報酬與波動是非常有用的方法之一</p>
+<h3 id="樣本平均數"><a href="#樣本平均數" class="headerlink" title="樣本平均數"></a>樣本平均數</h3><p>樣本平均數則表示報酬率分配的期望值，樣本標準差則為報酬率分配的標準差。</p>
+<p>先找出一段時間的每一期(如每天、每月或每年)的期間實際報酬率計算，再做為樣本計算樣本平均數與標準差</p>
+<h4 id="樣本平均報酬-共有兩種辦法"><a href="#樣本平均報酬-共有兩種辦法" class="headerlink" title="樣本平均報酬 (共有兩種辦法)"></a>樣本平均報酬 (共有兩種辦法)</h4><ul>
+<li>算術平均報酬<br>\(\bar{r_{A}} = \frac{r_1 + r_2 + … + r_n}{n} \)</li>
+<li>幾何平均報酬<br>\(\bar{r_G} = \sqrt[n]{(1+r_1) * (1+r_2) * … * (1+r_n) } -1\)</li>
+<li>算術與幾何平均報酬比較<ul>
+<li>幾何平均報酬以<strong>每期末投資計算複利</strong>收益較精確</li>
+<li>算數大於幾何報酬率時，稱為<strong>平均數不等式</strong></li>
+<li>\(幾何平均 = 算數平均 - 1/2 \sigma^2\)<h4 id="例題-1"><a href="#例題-1" class="headerlink" title="例題"></a>例題</h4><blockquote>
+<p><img src="/images/investment-stock-Asset-Portfolio-Management-Basic/3.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="樣本標準差"><a href="#樣本標準差" class="headerlink" title="樣本標準差"></a>樣本標準差</h3><p>樣本標準差公式為 \(\sigma = \sqrt{\frac{1}{n-1} \sum_{t=1}^{n} (r_t - \bar{r_A})^2 } \)</p>
+<h4 id="例題-2"><a href="#例題-2" class="headerlink" title="例題"></a>例題</h4><blockquote>
+<p><img src="/images/investment-stock-Asset-Portfolio-Management-Basic/4.PNG" alt=""></p>
+</blockquote>
+<h2 id="國庫券風險與報酬"><a href="#國庫券風險與報酬" class="headerlink" title="國庫券風險與報酬"></a>國庫券風險與報酬</h2><p>國庫券通常視為最沒有風險的金融資產，但他還是用通貨膨脹的風險。</p>
+<h2 id="風險性資產組合的歷史報酬與風險"><a href="#風險性資產組合的歷史報酬與風險" class="headerlink" title="風險性資產組合的歷史報酬與風險"></a>風險性資產組合的歷史報酬與風險</h2><p>只要有投資風險的資產都被稱為風險性資產</p>
+<ul>
+<li>高帳面市值比則稱為價值型股票組合</li>
+<li>低帳面市值比則稱為成長型股票組合</li>
+</ul>
+<h3 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h3><ul>
+<li>市值<br>\(流通在外股數 * 每股市價 \)</li>
+<li>帳面市價比<br>\( 每股帳面價值 / 每股市價 \)</li>
+<li>價值型股票<br>股價相對獲利能力被低估的股票</li>
+<li>成長型股票<br>股價相對於目前的獲利能力被高估的股票</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大二上投資學筆記</tag>
       </tags>
   </entry>
 </search>
