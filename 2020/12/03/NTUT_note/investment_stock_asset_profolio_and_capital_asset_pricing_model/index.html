@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    投資學 筆記 - 股票資產組合管理資產組合與資本資產定價模型篇 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-NTUT_note/investment_stock_asset_profolio_and_capital_asset_pricing_model" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  投資學 筆記 - 股票資產組合管理資產組合與資本資產定價模型篇
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/03/NTUT_note/investment_stock_asset_profolio_and_capital_asset_pricing_model/" class="article-date">
+  <time datetime="2020-12-03T09:11:50.000Z" itemprop="datePublished">2020-12-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">4.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">17分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
+<ul>
+<li>資產多元化配置以降低風險</li>
+<li>判斷市場均衡時定出資本資產定價模型，並判定個別資產是否有被高估或低估</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="資金配置於風險及無風險兩個組合"><a href="#資金配置於風險及無風險兩個組合" class="headerlink" title="資金配置於風險及無風險兩個組合"></a>資金配置於風險及無風險兩個組合</h2><p>資金配置是指將資金配置到數種不同的資產類別，</p>
+<h3 id="無風險資產"><a href="#無風險資產" class="headerlink" title="無風險資產"></a>無風險資產</h3><p><strong>真正的無風險資產可以對抗違約風險、利率風險、通貨膨脹風險的金融資產</strong>，實務上通常將國庫券視為無風險資產，但實務上一般投資人將定存單(CD)、商業本票(CP)或貨幣市場基金視為無風險資產，但因為是短期工具，因此對利率與通貨膨脹反映比較有限。</p>
+<p>相較於國庫券，CP 與 CD 的殖利率較高，但發生金融動盪時，實際上與國庫券的殖利率差也會突然暴增。</p>
+<p>通常在大型事件發生時，大部份投資人會轉向無風險資產，如第一次石油危機、股市崩盤。</p>
+<h3 id="單一風險資產與單一無風險資產組合"><a href="#單一風險資產與單一無風險資產組合" class="headerlink" title="單一風險資產與單一無風險資產組合"></a>單一風險資產與單一無風險資產組合</h3><h4 id="名詞定義"><a href="#名詞定義" class="headerlink" title="名詞定義"></a>名詞定義</h4><ul>
+<li>\(C=P+F\)，C = 財富金額、P = 投資於風險資產、F = 投資無風險資產，<del>廢話</del>。</li>
+<li>\(r = 報酬 \) </li>
+<li>風險資產 P 的預期報酬與風險以 \(E(r_p)\)及 \(\sigma_p\)表示</li>
+<li>\(y = 無風險資產 \)、 \( 1-y = 風險資產 \)</li>
+</ul>
+<h3 id="舉例找出資產組合的資本配置線-CAL-："><a href="#舉例找出資產組合的資本配置線-CAL-：" class="headerlink" title="舉例找出資產組合的資本配置線 (CAL)："></a>舉例找出資產組合的資本配置線 (CAL)：</h3><p><del>這次沒有圖片拉，大衛用手打的</del></p>
+<p>有下列兩種風險資產 p and f :</p>
+<p>如果  \(E(r_p) = 15\%\)、\(\sigma_p = 22\%\)，且 \(E(r_p)-r_f = 7 \% \) 則完整組合的報酬率與風險分別為：<br>\(E(r_c) = y * 15\% + (1-y) * 7\% \)<br>\(\sigma_c^2 = Var(r_c) = Var(y* r_p + (1-y) * r_F) = y^2 \sigma_{P}^2 = y * \sigma_P = y * 22 \%  \)</p>
+<p>將資產組合預期報酬率作為縱軸、標準差做為橫軸並將 y=0 and y=1 的兩個座標連起來則可以得到資本配置線 (CAL)</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/24.PNG" alt=""></p>
+</blockquote>
+<h3 id="資本配置線"><a href="#資本配置線" class="headerlink" title="資本配置線"></a>資本配置線</h3><p>當資本配置線的 y(標準差)，介於 0 與 1 之間時表示投資人資金分配在兩種不同資產；但相對投資人如果<strong>不分配無風險資產且借入資金購買風險資產</strong>則表示 \(y &gt; 1\)，也就是投資人不止將全部的資金都投資在風險資產上，同時還用無風險利率借入資金投資風險資產</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/25.PNG" alt=""></p>
+</blockquote>
+<p>根據前面的例題配合上方圖片的 y = 140% 時，投資人完整組合的預期報酬率與風險如下：\(E(r_C)=7\% + y * (15\% - 7\%) = 7\% + 140\% * (15\% - 7\%) = 18.2\% \)<br>\(\sigma_C = y * 22\% = 140\% * 22\% = 30.8\% \)</p>
+<h4 id="CAL-的方程式"><a href="#CAL-的方程式" class="headerlink" title="CAL 的方程式"></a>CAL 的方程式</h4><p>透過點斜式計算方程式，透過 F 或 P 其中一點找出該直線的斜率，斜率的計算方式則是 \(\frac{E(r_P)-r_F}{\sigma_P}\)，此斜率的意義為：平均每一一單位風險所要求的風險溢酬，也就是後面提到的<a href="#Sharpe_ratio_找出兩個風險資產最適配置">Sharpe_ratio</a>因此該直線的方程式為 \(E(r_C) = r_F+\frac{E(r_P)-r_F}{\sigma_P} * \sigma_C = r_F + \frac{\sigma_C}{\sigma_P} * [E(r_P)-r_F ]\)</p>
+<ul>
+<li>實務上通常借款利率會比無風險利率高，<del>不然就不會有人借你</del>，此時 CAL 會有所變化，不再是原本的一直線，因為會變成報酬利率減去借款利率，用圖來說明，假設 \(r_B = 9\% &gt; 7\% = r_F \)<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/26.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="例題"><a href="#例題" class="headerlink" title="例題"></a>例題</h4><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/27.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/28.PNG" alt=""></p>
+</blockquote>
+<h2 id="被動投資策略與資本市場線"><a href="#被動投資策略與資本市場線" class="headerlink" title="被動投資策略與資本市場線"></a>被動投資策略與資本市場線</h2><p>被動投資策略為認定所有金融資產都充分表達在價格，因此不直接或間接分析證券價值來建立資產組合，而改成直接投資與市場指數相同報酬的組合。</p>
+<p>如果一個投資者採用被動投資策略，則風險組合只會選擇含系統風險的指數型基金或追蹤市場指數的 ETF，也就是<strong>資本配置線(CAL)</strong>，中的 P 點為指數基金或 ETF，這時候的 CAL 則變成資本市場線(CML)。</p>
+<p>通常 CML 表示投資人以被動投資策略搭配國庫券的各種投資機會集合。</p>
+<p>資本配置線(CAL) 為風險資產與任一風險組合的連線</p>
+<h3 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h3><ul>
+<li>CML 中的 P 點為市場組合</li>
+<li>\(E(r_m)\) 為預期報酬率</li>
+<li>\(\sigma_m\) 為風險</li>
+<li>CML 的數學方程式則是 \(E(r_C)= r_F + \frac{E(r_M)-r_F}{\sigma_M} * \sigma_C\)</li>
+</ul>
+<h2 id="Reviews"><a href="#Reviews" class="headerlink" title="Reviews"></a>Reviews</h2><ul>
+<li>期望值的定義<br>\(E(X) = \sum_{i=1}^N P(X_i)X_i \)</li>
+<li>運算規則<ul>
+<li>\(E(aX+b) = aE(X) + b\)</li>
+<li>\(E(aX+bY) =  aE(X) + bE(Y) \)</li>
+</ul>
+</li>
+<li>變異數與共變異數的定義<ul>
+<li>\(V(X) = \sigma_X^2 = E(X^2)-[E(X)]^2 \)</li>
+<li>\(Cov(X,Y) =\sigma_{X,Y} = E(XY)-E(X)E(Y) \)</li>
+<li>\(Cov(X,X) = \sigma_{X,X} = V(X) = \sigma_X^2 \)</li>
+</ul>
+</li>
+<li>變異數與共變異數的運算規則<ul>
+<li>\(V(aX+b) = V(aX) = a^2V(X) = a^2 \sigma_X^2 \)</li>
+<li>\(V(aX \pm bY)=V(aX) + V(bY) \pm 2ab Cov(X,Y) = a^2 \sigma_X^2 + b^2 \sigma_Y^2 \pm 2ab \sigma_{X,Y}  \)</li>
+<li>\(Cov(aX+bY , Z) = Cov(aX,Z) + Cov(bY,Z) = aCov(X,Z) + bCov(Y,Z) = a \sigma_{X,Z} + b \sigma_{Y,Z} \)</li>
+</ul>
+</li>
+</ul>
+<h2 id="兩種風險性資產組合"><a href="#兩種風險性資產組合" class="headerlink" title="兩種風險性資產組合"></a>兩種風險性資產組合</h2><p>假設兩種資產分別為 D and S，投資 D 的資金比重為 \(w_D\)，投資於 S 的資金比重為 \(w_S\)，且 \(w_D + w_S = 1\)，則此風顯資產組合報酬率為 \(r_p = w_D * r_D + w_S * r_S\)</p>
+<ul>
+<li>資產組合的預期報酬率<br>\(E(r_p) = E(w_D * r_D + w_S * r_S) = w_D * E(r_D) + w_S * E(r_S) \)</li>
+<li>變異數<br>\(\sigma_{P}^2 = V(r_P) \\ = w_D^2 * \sigma_D^2 + w_S^2 * \sigma_S^2 + 2 w_D w_S \sigma_{D,S} \\ = w_D^2 * \sigma_D^2 + w_S^2 * \sigma_S^2 + 2 w_D w_S \sigma_{D} \sigma_{S} \rho_{D,S}  \)</li>
+<li>\(\rho_{D,S} \) 為 D 及 S 報酬率的相關係數，\( -1 \leq \rho_{D,S} \leq 1 \)</li>
+</ul>
+<h3 id="相關係數"><a href="#相關係數" class="headerlink" title="相關係數"></a>相關係數</h3><p>相關係數是一種統計工具，用來衡量兩個隨機變數的線性關係，其值介於 -1 ~ +1。<br>公式為  \( \rho_{a,b} = \frac{\sigma_{a,b}}{\sigma_a \sigma_b}\)</p>
+<h4 id="係數說明"><a href="#係數說明" class="headerlink" title="係數說明"></a>係數說明</h4><ul>
+<li>相關係數為正時表示兩變數為正相關</li>
+<li>為負時表示兩變數成負相關</li>
+<li>為零時表示兩者變動互不相關</li>
+</ul>
+<h4 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h4><ul>
+<li>當 \(\rho_{D,S} = 1 \) 表示兩者完全正相關，因此當 D 及 S 報酬率爭相關時，資產組合的標準差為兩資產個別標準查的加權平均，其係數為投資比重</li>
+<li>當 \(\rho_{D,S} = -1 \) 表示兩者完全負相關，因此表示為對沖性的資產組合，可以降低資產組合的粽風險，因此對於其他組合，喜歡規避風險的投資人會喜歡對沖姓資產組合</li>
+<li>只要相關係數不是完全正相關，則風險會比個別資產的風險低，因此只要相關係數不等於 1 就有分散風險效果，-1 時降低風險效果最大</li>
+</ul>
+<h4 id="例題-1"><a href="#例題-1" class="headerlink" title="例題"></a>例題</h4><p>假設 \(E(r_D) = 0.08\)，\(E(r_S) = 0.13\)、\(\sigma_D = 0.12\)、\(\rho_{D,S} = 0.3\)，則風險最小的資產配置為？</p>
+<p>由於 \(w_D + w_S = 1 \)，且 \(\sigma_{p}^{2} \geq 0\)，因此一定存在全域最小值，求解時只需要利用一階必要條件。<br>\(\frac{d \sigma_{P}^{2}}{d w_D} = 2(0.12)^2 w_D  + 2(0.2)^2(1-w_D)(-1) \\ + 2(0.12)(0.2)(0.3)-2 * 2(0.12)(0.2)(0.3) w_D = 0 \)<br>需要注意的是最後兩項 \(w_D w_S = (1-w_D)w_D = w_D - w_D^2\)，因此式子會變得非常複雜QQ。</p>
+<p>答案： \(w_D = 0.82\), \(w_S = 1 - w_D = 0.18 \)；\(E(r_p) = 0.089\)，\(\sigma_{P}^{2} = (0.115)^2 \)</p>
+<p>紅色圈圈為註解：</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/1.PNG" alt=""></p>
+</blockquote>
+<ol>
+<li>\( E(r_P) = 0.08(w_D) + 0.13(1 - w_D) = 0.08(w_D) + 0.13 - 0.13(w_D)\)<br>放大 20 倍後並移項則變成 \(20 E(r_P) = (w_D) + 2.6(1 - w_D)\)</li>
+<li>透過 1. 推出 \((1-w_D) = w_S \)，就變成 \(w_S = -1.6 + 20E(r_p)\)，再把 \(w_S \) 改回 \(1-w_D\) 即可</li>
+<li>真的太複雜了，我真的不算</li>
+</ol>
+<h2 id="股票、債券及無風險資產所構成組合的最適選擇"><a href="#股票、債券及無風險資產所構成組合的最適選擇" class="headerlink" title="股票、債券及無風險資產所構成組合的最適選擇"></a>股票、債券及無風險資產所構成組合的最適選擇</h2><p>如果有兩個風險資產與一個無風險資產時，通常是先決定好兩個風險資產的最適當配置，再將其視為一個風險資產，將資金分配在一個無風險資產與<strong>合併的一個風險資產</strong></p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/2.PNG" alt=""></p>
+</blockquote>
+<p>我們在<a href="#單一風險資產與單一無風險資產組合">前面章節</a>已經知道 CAL 為無風險資產與任一風險組合的連線</p>
+<h3 id="Sharpe-ratio-找出兩個風險資產最適配置"><a href="#Sharpe-ratio-找出兩個風險資產最適配置" class="headerlink" title="Sharpe ratio 找出兩個風險資產最適配置"></a>Sharpe ratio 找出兩個風險資產最適配置</h3><p>Sharpe ratio 可以用來作為資產組合績效的指標，績效越好的資產組合會是投資人所偏愛的組合，因此我們要找出 Sharpe ratio 最大，也就是 CAL 斜率最大的組合，也就是最適當的風險資產組合。</p>
+<p>公式為：</p>
+<ul>
+<li>\(E(r_P) = w_D E(r_D) + w_S E(r_S)\)</li>
+<li>\( \sigma_{P}^{2} = w_D^2 * \sigma_D^2 + w_S^2 * \sigma_S^2 + 2 w_D w_S \sigma_{D} \sigma_{S} \rho_{D,S}  \)</li>
+<li>找出 \(w_D\)，再找出 \(w_S\) 即可，\(w_S = 1 - w_D \)</li>
+<li>\(Sharpe_Ratio  = (報酬率 - 無風險利率) /  標準差 \)<h4 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h4>\(E(r_D) = 0.08 \), \(E(r_S)=0.13\),\(\sigma_{D} =0.12\),\(\sigma_{S}=0.2\),\(\rho_{D,S}=0.03\)，試問 ratio 極大的資產配置組合、該組合的預期報酬率、標準差與 Sharpe ratio</li>
+</ul>
+<p>5 % 應該是無風險利率，但此題並沒有說無風險利率是幾 % </p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/3.PNG" alt=""></p>
+</blockquote>
+<h3 id="將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置"><a href="#將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置" class="headerlink" title="將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置"></a>將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置</h3><p>透過 Sharpe ratio 合併兩個風險資產後，將其視為一個風險資產，並找出風險資產與無風險資產最適配置，透過受限制條件下的預期效用函數極大化求值即可。</p>
+<p>公式如下： 基本上都是先前的知識結合應用就不贅述</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/4.PNG" alt=""></p>
+</blockquote>
+<h3 id="note-預期效用函數"><a href="#note-預期效用函數" class="headerlink" title="note 預期效用函數"></a>note 預期效用函數</h3><p>設定絕對風險規避衡量值為 A(課本沒有告訴我們怎麼算)，當投資人風險規避 \(A &gt; 0\)，且規避風險越高時 A 值越大，如果投資活動對投資人財富的變動率為常態分配時，則可以推出預期效用函數 \(U = U(E(r),\sigma ) = E(r) - \frac{1}{2}A \sigma^2\)</p>
+<p>注意，這裡的 \(y = 風險資產\)，與前面的不同</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/5.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/6.PNG" alt=""></p>
+</blockquote>
+<h3 id="複習"><a href="#複習" class="headerlink" title="複習"></a>複習</h3><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/7.PNG" alt=""></p>
+</blockquote>
+<h2 id="馬可維茲組合-多種風險資產及一種無風險資產組合的最適選擇"><a href="#馬可維茲組合-多種風險資產及一種無風險資產組合的最適選擇" class="headerlink" title="馬可維茲組合 - 多種風險資產及一種無風險資產組合的最適選擇"></a>馬可維茲組合 - 多種風險資產及一種無風險資產組合的最適選擇</h2><p>此決策方式，與先前提到的方式相同，但他的方程式更為複雜，此方程式的正式名稱為最小變異數前緣 (minimun-variance frontier)</p>
+<p>在寫出求解過程前，我們先了解多種風險資產組合的預期報酬率及風險，先來說明一下我們會用的公式，目前我還沒想出標準差是怎麼來的。</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/8.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/9.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/10.PNG" alt=""></p>
+</blockquote>
+<h3 id="效率組合與效率前緣"><a href="#效率組合與效率前緣" class="headerlink" title="效率組合與效率前緣"></a>效率組合與效率前緣</h3><ul>
+<li>風險資產效率組合定義<ul>
+<li>所有相同期望報酬率組合最低風險</li>
+<li>所有相同風險組合中最高預期報酬率</li>
+</ul>
+</li>
+<li>風險資產組合效率前緣<br>效率前緣就是最小變異數(最低風險)，也就是前緣中正斜率處</li>
+</ul>
+<h4 id="效率前緣"><a href="#效率前緣" class="headerlink" title="效率前緣"></a>效率前緣</h4><p>找出效率式非常麻煩的一件事情，假如有 30 種資產就必須先預測 30 種資產預期報酬率，接著要計算 30 個標準差，再來要計算相關係數，標準差與相關係數共有 435 個。</p>
+<p>假如你負責配置資產組合，在有限制條件的情況下建立出的效率前緣條件則會與完全自由無限制時不同，如限制你投資高配息的股票或只能投資某產業等。</p>
+<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><ul>
+<li>決定風險資產組合與無風險資產間配置為 \(y=\frac{E(r_P)-r_F}{A \sigma_{P}^2}\)</li>
+<li>風險資產組合的數學模型為<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/11.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="階段性區隔特性-由多種風險資產與一種風險資產構成的資產組合決策"><a href="#階段性區隔特性-由多種風險資產與一種風險資產構成的資產組合決策" class="headerlink" title="階段性區隔特性 - 由多種風險資產與一種風險資產構成的資產組合決策"></a>階段性區隔特性 - 由多種風險資產與一種風險資產構成的資產組合決策</h3><p>風險資產組合建構過程中，最適當的風險資產一定是 \(\rho \) 點，不論他的風險規避程度，也就是風險資產組合的選擇與其風險偏好程度是完全無關，決定過程是<strong>客觀且技術性</strong>。</p>
+<p>決定配置比例時，是根據投資人能接受的風險規避，此時決定過程是<strong>主觀且策略性的</strong>，此時投資人根據自身策略在風險資產組合 \(\rho\)點間抉擇，差異只會在風險規避程度不同與資產組合分配比率不同。</p>
+<h2 id="風險資產組合之風險分散效果"><a href="#風險資產組合之風險分散效果" class="headerlink" title="風險資產組合之風險分散效果"></a>風險資產組合之風險分散效果</h2><p>透過投資資產多元化可以消除個別資產的獨立風險，主要是透過不同公司的好消息與壞消息，獲得的正報酬與負報酬抵銷，而讓風險分散。</p>
+<p>但如果是共同風險，如：市場風險、系統風險，這些風險都沒辦法透過多元化投資不同股票消除，當往好消息成長時，會增加所有報酬，反之亦同。</p>
+<h3 id="表達式"><a href="#表達式" class="headerlink" title="表達式"></a>表達式</h3><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/12.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/13.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/14.PNG" alt=""></p>
+</blockquote>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>根據最後一張圖片的 \(\rho = 0\)，當 n 趨近於無限時，則 \(\sigma_{P}^2 = 0\)，表示完全沒有共同風險。</p>
+<p>如果 \(\rho &gt; 0 \)，實務上的正常情況，儘管有些資產的相關係數為負，但整體平均為正，則當 n 趨近於無限時，\(\sigma_{P}^2 \) 趨近於某一正數，且 \(\rho \) 越大則代表資產組合風險越高。</p>
+<p>最極端的情況下，\(\rho = 1\)，不論 n 是多少，資產組合的風險都會是\(\sigma_{P}^2 \) 表示資產多元化對於<strong>風險分散完全沒有任何效果</strong></p>
+<h2 id="資本資產定價模型-CAPM"><a href="#資本資產定價模型-CAPM" class="headerlink" title="資本資產定價模型 CAPM"></a>資本資產定價模型 CAPM</h2><h3 id="基本觀念"><a href="#基本觀念" class="headerlink" title="基本觀念"></a>基本觀念</h3><ul>
+<li>CPAM 是財務領域第一個資產定價模型，雖然假設多且簡化人類投資，但清楚地描述風險資產的預期報酬率與其風險關係。</li>
+<li>CAPM 描述的預期報酬與風險關係在實務上的應用</li>
+</ul>
+<ul>
+<li>描述的均衡關係用來判定任何一風險資產是否偏離此關係，從中發現被低估或高估的可能性</li>
+<li>描述的預期報酬率可作為資本財的成本，並賴以評估投資案的選擇決策</li>
+</ul>
+<h3 id="假設條件"><a href="#假設條件" class="headerlink" title="假設條件"></a>假設條件</h3><ol>
+<li>所有投資人都是資產價格的接受者，不會因為某些投資人的交易結果而發生重大改變，即風險資產的市場為完全競爭市場。</li>
+<li>投資人的活動都是一期，不會有多期</li>
+<li>只能投資在市場上交易的資產，如股票</li>
+<li>投資人不需要負擔交易稅、佣金，沒有交易成本</li>
+<li>投資人的目的都是為了找到效率前緣</li>
+<li>所有投資人的未來資產報酬分配具有同質性預期，也就是他們面對的效率前緣完全相同，沒有個別差異</li>
+</ol>
+<h3 id="重要結論"><a href="#重要結論" class="headerlink" title="重要結論"></a>重要結論</h3><ul>
+<li>投資人只能夠持有市場組合(股票、無風險)，投資人之間的差異只有在市場組合的比重不同</li>
+<li>市場組合一定是效率前緣上的組合，更是所有投資人面對的最適風險組合，由無風險資產與市場風險組合間的連結為最佳的 CAL，我們稱之為 CML</li>
+</ul>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/15.PNG" alt=""></p>
+</blockquote>
+<h3 id="QUESTION-為何投資人都會持有市場投資組合"><a href="#QUESTION-為何投資人都會持有市場投資組合" class="headerlink" title="QUESTION: 為何投資人都會持有市場投資組合"></a>QUESTION: 為何投資人都會持有市場投資組合</h3><ul>
+<li>投資人採用相同平均值 - 變異數分析(假設條件 5 )</li>
+<li>投資人將資金投資在相同投資機會 (假設條件 3)</li>
+<li>投資人有相同的持有期間 (假設條件 2)</li>
+<li>投資人有相同的效率前緣 (假設條件 6)</li>
+<li>投資人有相同的交易成本 (假設條件 4)</li>
+</ul>
+<h3 id="全體投資人必然會選擇持有相同的最適風險投資組合"><a href="#全體投資人必然會選擇持有相同的最適風險投資組合" class="headerlink" title="全體投資人必然會選擇持有相同的最適風險投資組合"></a>全體投資人必然會選擇持有相同的最適風險投資組合</h3><p>根據前面的 QUESTION，投資人可導出相同的效率前緣線，進而得到相同的最適風險性投資組合，即潔具向無風險利率水準的資本配置線與效率前緣線的切點 M，如下圖。</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/16.PNG" alt=""></p>
+</blockquote>
+<h3 id="市場組合的風險溢酬"><a href="#市場組合的風險溢酬" class="headerlink" title="市場組合的風險溢酬"></a>市場組合的風險溢酬</h3><p>投資者每個人都會找到同樣的效率前緣，因此每個人不同只因為每個人有不同的 \(A_i\)，因此平均每個人擁有的無風險資產為 0%，也表示每一個人持有的風險部位為 100%，也就表示市場組合的風險溢酬與市場組合的風險和風險規避平均值呈比率關係。</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/17.PNG" alt=""></p>
+</blockquote>
+<h3 id="CAPM-特性"><a href="#CAPM-特性" class="headerlink" title="CAPM 特性"></a>CAPM 特性</h3><ul>
+<li>個別資產的風險溢酬是對整個市場組合的風險大小而定，風險大小等於 beta。<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/18.PNG" alt=""></p>
+</blockquote>
+</li>
+<li>風險溢酬也亦是如此<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/19.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>市場組合的 beta 值為 1，將組合個別資產的 beta 市值比例加權總計必等於 1，因此推論任何一個資產組合 beta 值大於 1 表示主動性策略，組合中大部分所選的投資產品 beta 值多數大於 1；反之則稱為防禦型投資策略。</p>
+<h2 id="證券市場線-SML"><a href="#證券市場線-SML" class="headerlink" title="證券市場線 SML"></a>證券市場線 SML</h2><p>將預期報酬視為 Y 軸，Beta 係數視為 X 軸，則預期報酬與 Beta 則有線性關係，斜率就是市場風險溢酬，如下圖</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/20.PNG" alt=""></p>
+</blockquote>
+<h3 id="SML-應用"><a href="#SML-應用" class="headerlink" title="SML 應用"></a>SML 應用</h3><p>如果某一種風險資產價格被低估則預期報酬率必然高於 SML 線對應的均衡預期報酬率；反之，如果風險資產價格被高估則預期報酬率則會低於 SML 所對應的均衡預期報酬率</p>
+<p>通常風險資產組合的預期報酬率與 SML 線所對應的均衡報酬率之間差額為風險資產的 Alpha，部分投資分析則是在尋找 Alpho 的投資組合，在 CAPM 的前提下買入有正 Alpha，賣出負 Alpha 的資產。</p>
+<p>如下圖： 下圖為 Alpha 的差額</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/21.PNG" alt=""></p>
+</blockquote>
+<h4 id="例題-2"><a href="#例題-2" class="headerlink" title="例題"></a>例題</h4><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/22.PNG" alt=""><br>看圖可以得知 0.12 時比 SML 線還高，但 0.13 則比 SML 線還低<br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/23.PNG" alt=""></p>
+</blockquote>
+<h2 id="Fama-and-French-的-3-因子模型"><a href="#Fama-and-French-的-3-因子模型" class="headerlink" title="Fama and French 的 3 因子模型"></a>Fama and French 的 3 因子模型</h2><p>CAPM 的研究發現，單獨市場組合風險溢酬(beta)沒辦法完全解釋資產的風險溢酬，於是考量了其他變數，在此模型中加入了公司規模、帳面市值比兩項因素，模型為 \(E(r_i) = r_F + [E(r_M) - r_F] * \beta_{i,1} + E(SMB) * \beta_{i,2} + E(HML) * \beta_{i,3} \)</p>
+<p>上面模型為小公司預期報酬率減大公司預期報酬率，稱為公司規模溢酬；HML為高 B/M 股票預期報酬率減低 B/M 股票預期報酬率，稱為公司價值溢酬。</p>
+<h2 id="Fama-and-French-的-4-因子模型"><a href="#Fama-and-French-的-4-因子模型" class="headerlink" title="Fama and French 的 4 因子模型"></a>Fama and French 的 4 因子模型</h2><p>接下來又建立了一個四因子模型，模型為<br>\(E(r_i)=r_F + [E(r_M)-r_F] * \beta_{i,1} + E(SMB) * \beta_{i,2} + E(HML) * \beta_{i,3} + E(PR1YR) * \beta_{i,4}\)</p>
+<ul>
+<li>PR1YR 前一年動能組合<br>前 12 個月報酬較高的股票，繼續投資能有獲得超額報酬機會，因此我們可以放空前 12 個月低報酬的公司股票組合去投資前 12 個月高報酬公司股票組合來獲得風險溢酬。</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上投資學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E6%9C%9F%E4%B8%AD%E8%80%83%E7%AD%86%E8%A8%98/" rel="tag">北科大大二上投資學期中考筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/12/04/NTUT_note/statistics-1081-mid/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            統計學(一) 筆記 - 第二次段考 (L4-L6)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/12/02/NTUT_note/investment-stock-Asset-Portfolio-Management-Basic/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">投資學 筆記 - 股票資產組合管理基礎篇(報酬與風險)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

@@ -4016,8 +4016,23 @@
 <td>\sqrt[ n ]{}</td>
 <td>裡面的 n 為開幾次跟號</td>
 </tr>
+<tr>
+<td>換行</td>
+<td>\ \ \ \</td>
+<td>四個斜線，需要把中間空格消除</td>
+</tr>
+<tr>
+<td>相關係數</td>
+<td>\rho</td>
+<td></td>
+</tr>
+<tr>
+<td>beta</td>
+<td>\beta</td>
+<td></td>
+</tr>
 </tbody></table>
-<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a><br><a href="https://16sixteen.github.io/jekyll-study/mathjax" target="_blank" rel="noopener">常用的mathjax符号</a><br><a href="https://math.meta.stackexchange.com/questions/29609/how-to-type-sigma-and-other-symbols-in-mathjax" target="_blank" rel="noopener">How to type Sigma and other symbols in MathJax [duplicate]</a></p>
+<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a><br><a href="https://16sixteen.github.io/jekyll-study/mathjax" target="_blank" rel="noopener">常用的mathjax符号</a><br><a href="https://math.meta.stackexchange.com/questions/29609/how-to-type-sigma-and-other-symbols-in-mathjax" target="_blank" rel="noopener">How to type Sigma and other symbols in MathJax [duplicate]</a><br><a href="https://blog.csdn.net/xm_ovo/article/details/107536132" target="_blank" rel="noopener">解决mathjax公式不换行问题</a></p>
 ]]></content>
       <categories>
         <category>blog</category>
@@ -4232,7 +4247,7 @@
 <p>markdown 中常用 # 來建立段落標題，於是就利用段落標題來添加錨點</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">標題1</span>](<span class="link">#標題1</span>)</span><br><span class="line">[<span class="string">標題2</span>](<span class="link">#標題2</span>)</span><br><span class="line">[<span class="string">標題3</span>](<span class="link">#標題3</span>)</span><br><span class="line"></span><br><span class="line"><span class="section"># 標題一</span></span><br><span class="line"><span class="section">## 標題二</span></span><br><span class="line"><span class="section">### 標題三</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="需要注意的小細節"><a href="#需要注意的小細節" class="headerlink" title="需要注意的小細節:"></a>需要注意的小細節:</h3><p>如果我們的標題有空白時則使用 - 號代替</p>
+<h3 id="需要注意的小細節"><a href="#需要注意的小細節" class="headerlink" title="需要注意的小細節:"></a>需要注意的小細節:</h3><p><strong>如果我們的標題有空白時則使用 - 號代替，如果標題有小括號則不須寫出。</strong></p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">標題2 Test</span>](<span class="link">#標題2-test</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### 標題2 Test</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="快速找到錨點的小步驟"><a href="#快速找到錨點的小步驟" class="headerlink" title="快速找到錨點的小步驟"></a>快速找到錨點的小步驟</h3><p>如果你是用來寫 blog 文章，建議可以 localhost 後直接點標題(圖片中的 1)，就可以看到 url 上有錨點(圖片中的二)，就可以直接貼在 markdown 中，是不是很方便呢！<br><img src="/images/markdown-anchor/1.PNG" alt=""></p>
@@ -7899,6 +7914,7 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>北科大二上投資學筆記</tag>
+        <tag>北科大大二上投資學期中考筆記</tag>
       </tags>
   </entry>
   <entry>
@@ -8029,6 +8045,639 @@
 <li>價值型股票<br>股價相對獲利能力被低估的股票</li>
 <li>成長型股票<br>股價相對於目前的獲利能力被高估的股票</li>
 </ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大二上投資學筆記</tag>
+        <tag>北科大大二上投資學期中考筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>投資學 筆記 - 股票資產組合管理資產組合與資本資產定價模型篇</title>
+    <url>/2020/12/03/NTUT_note/investment_stock_asset_profolio_and_capital_asset_pricing_model/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
+<ul>
+<li>資產多元化配置以降低風險</li>
+<li>判斷市場均衡時定出資本資產定價模型，並判定個別資產是否有被高估或低估</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="資金配置於風險及無風險兩個組合"><a href="#資金配置於風險及無風險兩個組合" class="headerlink" title="資金配置於風險及無風險兩個組合"></a>資金配置於風險及無風險兩個組合</h2><p>資金配置是指將資金配置到數種不同的資產類別，</p>
+<h3 id="無風險資產"><a href="#無風險資產" class="headerlink" title="無風險資產"></a>無風險資產</h3><p><strong>真正的無風險資產可以對抗違約風險、利率風險、通貨膨脹風險的金融資產</strong>，實務上通常將國庫券視為無風險資產，但實務上一般投資人將定存單(CD)、商業本票(CP)或貨幣市場基金視為無風險資產，但因為是短期工具，因此對利率與通貨膨脹反映比較有限。</p>
+<p>相較於國庫券，CP 與 CD 的殖利率較高，但發生金融動盪時，實際上與國庫券的殖利率差也會突然暴增。</p>
+<p>通常在大型事件發生時，大部份投資人會轉向無風險資產，如第一次石油危機、股市崩盤。</p>
+<h3 id="單一風險資產與單一無風險資產組合"><a href="#單一風險資產與單一無風險資產組合" class="headerlink" title="單一風險資產與單一無風險資產組合"></a>單一風險資產與單一無風險資產組合</h3><h4 id="名詞定義"><a href="#名詞定義" class="headerlink" title="名詞定義"></a>名詞定義</h4><ul>
+<li>\(C=P+F\)，C = 財富金額、P = 投資於風險資產、F = 投資無風險資產，<del>廢話</del>。</li>
+<li>\(r = 報酬 \) </li>
+<li>風險資產 P 的預期報酬與風險以 \(E(r_p)\)及 \(\sigma_p\)表示</li>
+<li>\(y = 無風險資產 \)、 \( 1-y = 風險資產 \)</li>
+</ul>
+<h3 id="舉例找出資產組合的資本配置線-CAL-："><a href="#舉例找出資產組合的資本配置線-CAL-：" class="headerlink" title="舉例找出資產組合的資本配置線 (CAL)："></a>舉例找出資產組合的資本配置線 (CAL)：</h3><p><del>這次沒有圖片拉，大衛用手打的</del></p>
+<p>有下列兩種風險資產 p and f :</p>
+<p>如果  \(E(r_p) = 15\%\)、\(\sigma_p = 22\%\)，且 \(E(r_p)-r_f = 7 \% \) 則完整組合的報酬率與風險分別為：<br>\(E(r_c) = y * 15\% + (1-y) * 7\% \)<br>\(\sigma_c^2 = Var(r_c) = Var(y* r_p + (1-y) * r_F) = y^2 \sigma_{P}^2 = y * \sigma_P = y * 22 \%  \)</p>
+<p>將資產組合預期報酬率作為縱軸、標準差做為橫軸並將 y=0 and y=1 的兩個座標連起來則可以得到資本配置線 (CAL)</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/24.PNG" alt=""></p>
+</blockquote>
+<h3 id="資本配置線"><a href="#資本配置線" class="headerlink" title="資本配置線"></a>資本配置線</h3><p>當資本配置線的 y(標準差)，介於 0 與 1 之間時表示投資人資金分配在兩種不同資產；但相對投資人如果<strong>不分配無風險資產且借入資金購買風險資產</strong>則表示 \(y &gt; 1\)，也就是投資人不止將全部的資金都投資在風險資產上，同時還用無風險利率借入資金投資風險資產</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/25.PNG" alt=""></p>
+</blockquote>
+<p>根據前面的例題配合上方圖片的 y = 140% 時，投資人完整組合的預期報酬率與風險如下：\(E(r_C)=7\% + y * (15\% - 7\%) = 7\% + 140\% * (15\% - 7\%) = 18.2\% \)<br>\(\sigma_C = y * 22\% = 140\% * 22\% = 30.8\% \)</p>
+<h4 id="CAL-的方程式"><a href="#CAL-的方程式" class="headerlink" title="CAL 的方程式"></a>CAL 的方程式</h4><p>透過點斜式計算方程式，透過 F 或 P 其中一點找出該直線的斜率，斜率的計算方式則是 \(\frac{E(r_P)-r_F}{\sigma_P}\)，此斜率的意義為：平均每一一單位風險所要求的風險溢酬，也就是後面提到的<a href="#Sharpe_ratio_找出兩個風險資產最適配置">Sharpe_ratio</a>因此該直線的方程式為 \(E(r_C) = r_F+\frac{E(r_P)-r_F}{\sigma_P} * \sigma_C = r_F + \frac{\sigma_C}{\sigma_P} * [E(r_P)-r_F ]\)</p>
+<ul>
+<li>實務上通常借款利率會比無風險利率高，<del>不然就不會有人借你</del>，此時 CAL 會有所變化，不再是原本的一直線，因為會變成報酬利率減去借款利率，用圖來說明，假設 \(r_B = 9\% &gt; 7\% = r_F \)<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/26.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="例題"><a href="#例題" class="headerlink" title="例題"></a>例題</h4><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/27.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/28.PNG" alt=""></p>
+</blockquote>
+<h2 id="被動投資策略與資本市場線"><a href="#被動投資策略與資本市場線" class="headerlink" title="被動投資策略與資本市場線"></a>被動投資策略與資本市場線</h2><p>被動投資策略為認定所有金融資產都充分表達在價格，因此不直接或間接分析證券價值來建立資產組合，而改成直接投資與市場指數相同報酬的組合。</p>
+<p>如果一個投資者採用被動投資策略，則風險組合只會選擇含系統風險的指數型基金或追蹤市場指數的 ETF，也就是<strong>資本配置線(CAL)</strong>，中的 P 點為指數基金或 ETF，這時候的 CAL 則變成資本市場線(CML)。</p>
+<p>通常 CML 表示投資人以被動投資策略搭配國庫券的各種投資機會集合。</p>
+<p>資本配置線(CAL) 為風險資產與任一風險組合的連線</p>
+<h3 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h3><ul>
+<li>CML 中的 P 點為市場組合</li>
+<li>\(E(r_m)\) 為預期報酬率</li>
+<li>\(\sigma_m\) 為風險</li>
+<li>CML 的數學方程式則是 \(E(r_C)= r_F + \frac{E(r_M)-r_F}{\sigma_M} * \sigma_C\)</li>
+</ul>
+<h2 id="Reviews"><a href="#Reviews" class="headerlink" title="Reviews"></a>Reviews</h2><ul>
+<li>期望值的定義<br>\(E(X) = \sum_{i=1}^N P(X_i)X_i \)</li>
+<li>運算規則<ul>
+<li>\(E(aX+b) = aE(X) + b\)</li>
+<li>\(E(aX+bY) =  aE(X) + bE(Y) \)</li>
+</ul>
+</li>
+<li>變異數與共變異數的定義<ul>
+<li>\(V(X) = \sigma_X^2 = E(X^2)-[E(X)]^2 \)</li>
+<li>\(Cov(X,Y) =\sigma_{X,Y} = E(XY)-E(X)E(Y) \)</li>
+<li>\(Cov(X,X) = \sigma_{X,X} = V(X) = \sigma_X^2 \)</li>
+</ul>
+</li>
+<li>變異數與共變異數的運算規則<ul>
+<li>\(V(aX+b) = V(aX) = a^2V(X) = a^2 \sigma_X^2 \)</li>
+<li>\(V(aX \pm bY)=V(aX) + V(bY) \pm 2ab Cov(X,Y) = a^2 \sigma_X^2 + b^2 \sigma_Y^2 \pm 2ab \sigma_{X,Y}  \)</li>
+<li>\(Cov(aX+bY , Z) = Cov(aX,Z) + Cov(bY,Z) = aCov(X,Z) + bCov(Y,Z) = a \sigma_{X,Z} + b \sigma_{Y,Z} \)</li>
+</ul>
+</li>
+</ul>
+<h2 id="兩種風險性資產組合"><a href="#兩種風險性資產組合" class="headerlink" title="兩種風險性資產組合"></a>兩種風險性資產組合</h2><p>假設兩種資產分別為 D and S，投資 D 的資金比重為 \(w_D\)，投資於 S 的資金比重為 \(w_S\)，且 \(w_D + w_S = 1\)，則此風顯資產組合報酬率為 \(r_p = w_D * r_D + w_S * r_S\)</p>
+<ul>
+<li>資產組合的預期報酬率<br>\(E(r_p) = E(w_D * r_D + w_S * r_S) = w_D * E(r_D) + w_S * E(r_S) \)</li>
+<li>變異數<br>\(\sigma_{P}^2 = V(r_P) \\ = w_D^2 * \sigma_D^2 + w_S^2 * \sigma_S^2 + 2 w_D w_S \sigma_{D,S} \\ = w_D^2 * \sigma_D^2 + w_S^2 * \sigma_S^2 + 2 w_D w_S \sigma_{D} \sigma_{S} \rho_{D,S}  \)</li>
+<li>\(\rho_{D,S} \) 為 D 及 S 報酬率的相關係數，\( -1 \leq \rho_{D,S} \leq 1 \)</li>
+</ul>
+<h3 id="相關係數"><a href="#相關係數" class="headerlink" title="相關係數"></a>相關係數</h3><p>相關係數是一種統計工具，用來衡量兩個隨機變數的線性關係，其值介於 -1 ~ +1。<br>公式為  \( \rho_{a,b} = \frac{\sigma_{a,b}}{\sigma_a \sigma_b}\)</p>
+<h4 id="係數說明"><a href="#係數說明" class="headerlink" title="係數說明"></a>係數說明</h4><ul>
+<li>相關係數為正時表示兩變數為正相關</li>
+<li>為負時表示兩變數成負相關</li>
+<li>為零時表示兩者變動互不相關</li>
+</ul>
+<h4 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h4><ul>
+<li>當 \(\rho_{D,S} = 1 \) 表示兩者完全正相關，因此當 D 及 S 報酬率爭相關時，資產組合的標準差為兩資產個別標準查的加權平均，其係數為投資比重</li>
+<li>當 \(\rho_{D,S} = -1 \) 表示兩者完全負相關，因此表示為對沖性的資產組合，可以降低資產組合的粽風險，因此對於其他組合，喜歡規避風險的投資人會喜歡對沖姓資產組合</li>
+<li>只要相關係數不是完全正相關，則風險會比個別資產的風險低，因此只要相關係數不等於 1 就有分散風險效果，-1 時降低風險效果最大</li>
+</ul>
+<h4 id="例題-1"><a href="#例題-1" class="headerlink" title="例題"></a>例題</h4><p>假設 \(E(r_D) = 0.08\)，\(E(r_S) = 0.13\)、\(\sigma_D = 0.12\)、\(\rho_{D,S} = 0.3\)，則風險最小的資產配置為？</p>
+<p>由於 \(w_D + w_S = 1 \)，且 \(\sigma_{p}^{2} \geq 0\)，因此一定存在全域最小值，求解時只需要利用一階必要條件。<br>\(\frac{d \sigma_{P}^{2}}{d w_D} = 2(0.12)^2 w_D  + 2(0.2)^2(1-w_D)(-1) \\ + 2(0.12)(0.2)(0.3)-2 * 2(0.12)(0.2)(0.3) w_D = 0 \)<br>需要注意的是最後兩項 \(w_D w_S = (1-w_D)w_D = w_D - w_D^2\)，因此式子會變得非常複雜QQ。</p>
+<p>答案： \(w_D = 0.82\), \(w_S = 1 - w_D = 0.18 \)；\(E(r_p) = 0.089\)，\(\sigma_{P}^{2} = (0.115)^2 \)</p>
+<p>紅色圈圈為註解：</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/1.PNG" alt=""></p>
+</blockquote>
+<ol>
+<li>\( E(r_P) = 0.08(w_D) + 0.13(1 - w_D) = 0.08(w_D) + 0.13 - 0.13(w_D)\)<br>放大 20 倍後並移項則變成 \(20 E(r_P) = (w_D) + 2.6(1 - w_D)\)</li>
+<li>透過 1. 推出 \((1-w_D) = w_S \)，就變成 \(w_S = -1.6 + 20E(r_p)\)，再把 \(w_S \) 改回 \(1-w_D\) 即可</li>
+<li>真的太複雜了，我真的不算</li>
+</ol>
+<h2 id="股票、債券及無風險資產所構成組合的最適選擇"><a href="#股票、債券及無風險資產所構成組合的最適選擇" class="headerlink" title="股票、債券及無風險資產所構成組合的最適選擇"></a>股票、債券及無風險資產所構成組合的最適選擇</h2><p>如果有兩個風險資產與一個無風險資產時，通常是先決定好兩個風險資產的最適當配置，再將其視為一個風險資產，將資金分配在一個無風險資產與<strong>合併的一個風險資產</strong></p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/2.PNG" alt=""></p>
+</blockquote>
+<p>我們在<a href="#單一風險資產與單一無風險資產組合">前面章節</a>已經知道 CAL 為無風險資產與任一風險組合的連線</p>
+<h3 id="Sharpe-ratio-找出兩個風險資產最適配置"><a href="#Sharpe-ratio-找出兩個風險資產最適配置" class="headerlink" title="Sharpe ratio 找出兩個風險資產最適配置"></a>Sharpe ratio 找出兩個風險資產最適配置</h3><p>Sharpe ratio 可以用來作為資產組合績效的指標，績效越好的資產組合會是投資人所偏愛的組合，因此我們要找出 Sharpe ratio 最大，也就是 CAL 斜率最大的組合，也就是最適當的風險資產組合。</p>
+<p>公式為：</p>
+<ul>
+<li>\(E(r_P) = w_D E(r_D) + w_S E(r_S)\)</li>
+<li>\( \sigma_{P}^{2} = w_D^2 * \sigma_D^2 + w_S^2 * \sigma_S^2 + 2 w_D w_S \sigma_{D} \sigma_{S} \rho_{D,S}  \)</li>
+<li>找出 \(w_D\)，再找出 \(w_S\) 即可，\(w_S = 1 - w_D \)</li>
+<li>\(Sharpe_Ratio  = (報酬率 - 無風險利率) /  標準差 \)<h4 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h4>\(E(r_D) = 0.08 \), \(E(r_S)=0.13\),\(\sigma_{D} =0.12\),\(\sigma_{S}=0.2\),\(\rho_{D,S}=0.03\)，試問 ratio 極大的資產配置組合、該組合的預期報酬率、標準差與 Sharpe ratio</li>
+</ul>
+<p>5 % 應該是無風險利率，但此題並沒有說無風險利率是幾 % </p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/3.PNG" alt=""></p>
+</blockquote>
+<h3 id="將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置"><a href="#將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置" class="headerlink" title="將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置"></a>將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置</h3><p>透過 Sharpe ratio 合併兩個風險資產後，將其視為一個風險資產，並找出風險資產與無風險資產最適配置，透過受限制條件下的預期效用函數極大化求值即可。</p>
+<p>公式如下： 基本上都是先前的知識結合應用就不贅述</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/4.PNG" alt=""></p>
+</blockquote>
+<h3 id="note-預期效用函數"><a href="#note-預期效用函數" class="headerlink" title="note 預期效用函數"></a>note 預期效用函數</h3><p>設定絕對風險規避衡量值為 A(課本沒有告訴我們怎麼算)，當投資人風險規避 \(A &gt; 0\)，且規避風險越高時 A 值越大，如果投資活動對投資人財富的變動率為常態分配時，則可以推出預期效用函數 \(U = U(E(r),\sigma ) = E(r) - \frac{1}{2}A \sigma^2\)</p>
+<p>注意，這裡的 \(y = 風險資產\)，與前面的不同</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/5.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/6.PNG" alt=""></p>
+</blockquote>
+<h3 id="複習"><a href="#複習" class="headerlink" title="複習"></a>複習</h3><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/7.PNG" alt=""></p>
+</blockquote>
+<h2 id="馬可維茲組合-多種風險資產及一種無風險資產組合的最適選擇"><a href="#馬可維茲組合-多種風險資產及一種無風險資產組合的最適選擇" class="headerlink" title="馬可維茲組合 - 多種風險資產及一種無風險資產組合的最適選擇"></a>馬可維茲組合 - 多種風險資產及一種無風險資產組合的最適選擇</h2><p>此決策方式，與先前提到的方式相同，但他的方程式更為複雜，此方程式的正式名稱為最小變異數前緣 (minimun-variance frontier)</p>
+<p>在寫出求解過程前，我們先了解多種風險資產組合的預期報酬率及風險，先來說明一下我們會用的公式，目前我還沒想出標準差是怎麼來的。</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/8.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/9.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/10.PNG" alt=""></p>
+</blockquote>
+<h3 id="效率組合與效率前緣"><a href="#效率組合與效率前緣" class="headerlink" title="效率組合與效率前緣"></a>效率組合與效率前緣</h3><ul>
+<li>風險資產效率組合定義<ul>
+<li>所有相同期望報酬率組合最低風險</li>
+<li>所有相同風險組合中最高預期報酬率</li>
+</ul>
+</li>
+<li>風險資產組合效率前緣<br>效率前緣就是最小變異數(最低風險)，也就是前緣中正斜率處</li>
+</ul>
+<h4 id="效率前緣"><a href="#效率前緣" class="headerlink" title="效率前緣"></a>效率前緣</h4><p>找出效率式非常麻煩的一件事情，假如有 30 種資產就必須先預測 30 種資產預期報酬率，接著要計算 30 個標準差，再來要計算相關係數，標準差與相關係數共有 435 個。</p>
+<p>假如你負責配置資產組合，在有限制條件的情況下建立出的效率前緣條件則會與完全自由無限制時不同，如限制你投資高配息的股票或只能投資某產業等。</p>
+<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><ul>
+<li>決定風險資產組合與無風險資產間配置為 \(y=\frac{E(r_P)-r_F}{A \sigma_{P}^2}\)</li>
+<li>風險資產組合的數學模型為<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/11.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="階段性區隔特性-由多種風險資產與一種風險資產構成的資產組合決策"><a href="#階段性區隔特性-由多種風險資產與一種風險資產構成的資產組合決策" class="headerlink" title="階段性區隔特性 - 由多種風險資產與一種風險資產構成的資產組合決策"></a>階段性區隔特性 - 由多種風險資產與一種風險資產構成的資產組合決策</h3><p>風險資產組合建構過程中，最適當的風險資產一定是 \(\rho \) 點，不論他的風險規避程度，也就是風險資產組合的選擇與其風險偏好程度是完全無關，決定過程是<strong>客觀且技術性</strong>。</p>
+<p>決定配置比例時，是根據投資人能接受的風險規避，此時決定過程是<strong>主觀且策略性的</strong>，此時投資人根據自身策略在風險資產組合 \(\rho\)點間抉擇，差異只會在風險規避程度不同與資產組合分配比率不同。</p>
+<h2 id="風險資產組合之風險分散效果"><a href="#風險資產組合之風險分散效果" class="headerlink" title="風險資產組合之風險分散效果"></a>風險資產組合之風險分散效果</h2><p>透過投資資產多元化可以消除個別資產的獨立風險，主要是透過不同公司的好消息與壞消息，獲得的正報酬與負報酬抵銷，而讓風險分散。</p>
+<p>但如果是共同風險，如：市場風險、系統風險，這些風險都沒辦法透過多元化投資不同股票消除，當往好消息成長時，會增加所有報酬，反之亦同。</p>
+<h3 id="表達式"><a href="#表達式" class="headerlink" title="表達式"></a>表達式</h3><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/12.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/13.PNG" alt=""><br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/14.PNG" alt=""></p>
+</blockquote>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>根據最後一張圖片的 \(\rho = 0\)，當 n 趨近於無限時，則 \(\sigma_{P}^2 = 0\)，表示完全沒有共同風險。</p>
+<p>如果 \(\rho &gt; 0 \)，實務上的正常情況，儘管有些資產的相關係數為負，但整體平均為正，則當 n 趨近於無限時，\(\sigma_{P}^2 \) 趨近於某一正數，且 \(\rho \) 越大則代表資產組合風險越高。</p>
+<p>最極端的情況下，\(\rho = 1\)，不論 n 是多少，資產組合的風險都會是\(\sigma_{P}^2 \) 表示資產多元化對於<strong>風險分散完全沒有任何效果</strong></p>
+<h2 id="資本資產定價模型-CAPM"><a href="#資本資產定價模型-CAPM" class="headerlink" title="資本資產定價模型 CAPM"></a>資本資產定價模型 CAPM</h2><h3 id="基本觀念"><a href="#基本觀念" class="headerlink" title="基本觀念"></a>基本觀念</h3><ul>
+<li>CPAM 是財務領域第一個資產定價模型，雖然假設多且簡化人類投資，但清楚地描述風險資產的預期報酬率與其風險關係。</li>
+<li>CAPM 描述的預期報酬與風險關係在實務上的應用</li>
+</ul>
+<ul>
+<li>描述的均衡關係用來判定任何一風險資產是否偏離此關係，從中發現被低估或高估的可能性</li>
+<li>描述的預期報酬率可作為資本財的成本，並賴以評估投資案的選擇決策</li>
+</ul>
+<h3 id="假設條件"><a href="#假設條件" class="headerlink" title="假設條件"></a>假設條件</h3><ol>
+<li>所有投資人都是資產價格的接受者，不會因為某些投資人的交易結果而發生重大改變，即風險資產的市場為完全競爭市場。</li>
+<li>投資人的活動都是一期，不會有多期</li>
+<li>只能投資在市場上交易的資產，如股票</li>
+<li>投資人不需要負擔交易稅、佣金，沒有交易成本</li>
+<li>投資人的目的都是為了找到效率前緣</li>
+<li>所有投資人的未來資產報酬分配具有同質性預期，也就是他們面對的效率前緣完全相同，沒有個別差異</li>
+</ol>
+<h3 id="重要結論"><a href="#重要結論" class="headerlink" title="重要結論"></a>重要結論</h3><ul>
+<li>投資人只能夠持有市場組合(股票、無風險)，投資人之間的差異只有在市場組合的比重不同</li>
+<li>市場組合一定是效率前緣上的組合，更是所有投資人面對的最適風險組合，由無風險資產與市場風險組合間的連結為最佳的 CAL，我們稱之為 CML</li>
+</ul>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/15.PNG" alt=""></p>
+</blockquote>
+<h3 id="QUESTION-為何投資人都會持有市場投資組合"><a href="#QUESTION-為何投資人都會持有市場投資組合" class="headerlink" title="QUESTION: 為何投資人都會持有市場投資組合"></a>QUESTION: 為何投資人都會持有市場投資組合</h3><ul>
+<li>投資人採用相同平均值 - 變異數分析(假設條件 5 )</li>
+<li>投資人將資金投資在相同投資機會 (假設條件 3)</li>
+<li>投資人有相同的持有期間 (假設條件 2)</li>
+<li>投資人有相同的效率前緣 (假設條件 6)</li>
+<li>投資人有相同的交易成本 (假設條件 4)</li>
+</ul>
+<h3 id="全體投資人必然會選擇持有相同的最適風險投資組合"><a href="#全體投資人必然會選擇持有相同的最適風險投資組合" class="headerlink" title="全體投資人必然會選擇持有相同的最適風險投資組合"></a>全體投資人必然會選擇持有相同的最適風險投資組合</h3><p>根據前面的 QUESTION，投資人可導出相同的效率前緣線，進而得到相同的最適風險性投資組合，即潔具向無風險利率水準的資本配置線與效率前緣線的切點 M，如下圖。</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/16.PNG" alt=""></p>
+</blockquote>
+<h3 id="市場組合的風險溢酬"><a href="#市場組合的風險溢酬" class="headerlink" title="市場組合的風險溢酬"></a>市場組合的風險溢酬</h3><p>投資者每個人都會找到同樣的效率前緣，因此每個人不同只因為每個人有不同的 \(A_i\)，因此平均每個人擁有的無風險資產為 0%，也表示每一個人持有的風險部位為 100%，也就表示市場組合的風險溢酬與市場組合的風險和風險規避平均值呈比率關係。</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/17.PNG" alt=""></p>
+</blockquote>
+<h3 id="CAPM-特性"><a href="#CAPM-特性" class="headerlink" title="CAPM 特性"></a>CAPM 特性</h3><ul>
+<li>個別資產的風險溢酬是對整個市場組合的風險大小而定，風險大小等於 beta。<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/18.PNG" alt=""></p>
+</blockquote>
+</li>
+<li>風險溢酬也亦是如此<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/19.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>市場組合的 beta 值為 1，將組合個別資產的 beta 市值比例加權總計必等於 1，因此推論任何一個資產組合 beta 值大於 1 表示主動性策略，組合中大部分所選的投資產品 beta 值多數大於 1；反之則稱為防禦型投資策略。</p>
+<h2 id="證券市場線-SML"><a href="#證券市場線-SML" class="headerlink" title="證券市場線 SML"></a>證券市場線 SML</h2><p>將預期報酬視為 Y 軸，Beta 係數視為 X 軸，則預期報酬與 Beta 則有線性關係，斜率就是市場風險溢酬，如下圖</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/20.PNG" alt=""></p>
+</blockquote>
+<h3 id="SML-應用"><a href="#SML-應用" class="headerlink" title="SML 應用"></a>SML 應用</h3><p>如果某一種風險資產價格被低估則預期報酬率必然高於 SML 線對應的均衡預期報酬率；反之，如果風險資產價格被高估則預期報酬率則會低於 SML 所對應的均衡預期報酬率</p>
+<p>通常風險資產組合的預期報酬率與 SML 線所對應的均衡報酬率之間差額為風險資產的 Alpha，部分投資分析則是在尋找 Alpho 的投資組合，在 CAPM 的前提下買入有正 Alpha，賣出負 Alpha 的資產。</p>
+<p>如下圖： 下圖為 Alpha 的差額</p>
+<blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/21.PNG" alt=""></p>
+</blockquote>
+<h4 id="例題-2"><a href="#例題-2" class="headerlink" title="例題"></a>例題</h4><blockquote>
+<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/22.PNG" alt=""><br>看圖可以得知 0.12 時比 SML 線還高，但 0.13 則比 SML 線還低<br><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/23.PNG" alt=""></p>
+</blockquote>
+<h2 id="Fama-and-French-的-3-因子模型"><a href="#Fama-and-French-的-3-因子模型" class="headerlink" title="Fama and French 的 3 因子模型"></a>Fama and French 的 3 因子模型</h2><p>CAPM 的研究發現，單獨市場組合風險溢酬(beta)沒辦法完全解釋資產的風險溢酬，於是考量了其他變數，在此模型中加入了公司規模、帳面市值比兩項因素，模型為 \(E(r_i) = r_F + [E(r_M) - r_F] * \beta_{i,1} + E(SMB) * \beta_{i,2} + E(HML) * \beta_{i,3} \)</p>
+<p>上面模型為小公司預期報酬率減大公司預期報酬率，稱為公司規模溢酬；HML為高 B/M 股票預期報酬率減低 B/M 股票預期報酬率，稱為公司價值溢酬。</p>
+<h2 id="Fama-and-French-的-4-因子模型"><a href="#Fama-and-French-的-4-因子模型" class="headerlink" title="Fama and French 的 4 因子模型"></a>Fama and French 的 4 因子模型</h2><p>接下來又建立了一個四因子模型，模型為<br>\(E(r_i)=r_F + [E(r_M)-r_F] * \beta_{i,1} + E(SMB) * \beta_{i,2} + E(HML) * \beta_{i,3} + E(PR1YR) * \beta_{i,4}\)</p>
+<ul>
+<li>PR1YR 前一年動能組合<br>前 12 個月報酬較高的股票，繼續投資能有獲得超額報酬機會，因此我們可以放空前 12 個月低報酬的公司股票組合去投資前 12 個月高報酬公司股票組合來獲得風險溢酬。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大二上投資學筆記</tag>
+        <tag>北科大大二上投資學期中考筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第二次段考 (L4-L6)</title>
+    <url>/2020/12/04/NTUT_note/statistics-1081-mid/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Chapter-4-Introduction-to-Probability-介紹機率"><a href="#Chapter-4-Introduction-to-Probability-介紹機率" class="headerlink" title="Chapter 4 Introduction to Probability (介紹機率)"></a>Chapter 4 Introduction to Probability (介紹機率)</h1><h2 id="名詞介紹"><a href="#名詞介紹" class="headerlink" title="名詞介紹"></a>名詞介紹</h2><ul>
+<li>Random Experiments 隨機實驗</li>
+<li>Counting Rules 計數規則</li>
+<li>Assigning Probabilities 分配機率</li>
+<li>Event 事件</li>
+<li>Conditional Probability 條件機率</li>
+<li>Bayes’ Theorem 貝式定理</li>
+</ul>
+<h2 id="Uncertainties-不確定性"><a href="#Uncertainties-不確定性" class="headerlink" title="Uncertainties 不確定性"></a>Uncertainties 不確定性</h2><p>管理人員對於不確定性的選擇進行分析，如</p>
+<ul>
+<li>提高物品售價時，銷售機會減少?</li>
+<li>透過新的組裝方式會不會增加生產率</li>
+<li>新投資獲利的機會會多少</li>
+</ul>
+<h2 id="Probability-機率"><a href="#Probability-機率" class="headerlink" title="Probability 機率"></a>Probability 機率</h2><ul>
+<li>用數字表示事件發生的可能性</li>
+<li>機率的值只會在 0 - 1 之間</li>
+<li>機率值越靠近零表示越不容易發生</li>
+<li>機率值越靠近一表示越容易發生</li>
+</ul>
+<h2 id="Statistical-Experiments-統計實驗"><a href="#Statistical-Experiments-統計實驗" class="headerlink" title="Statistical Experiments 統計實驗"></a>Statistical Experiments 統計實驗</h2><ul>
+<li>統計學中的實驗概念與物理實驗不同</li>
+<li>在統計實驗中，機率表示結果</li>
+<li>即使實驗完全相同，出來的結果也有可能完全不同</li>
+<li>統計實驗有時候又被稱為隨機實驗</li>
+</ul>
+<h2 id="Random-Experiment-and-Its-Sample-Space-隨機實驗與樣本空間"><a href="#Random-Experiment-and-Its-Sample-Space-隨機實驗與樣本空間" class="headerlink" title="Random Experiment and Its Sample Space 隨機實驗與樣本空間"></a>Random Experiment and Its Sample Space 隨機實驗與樣本空間</h2><ul>
+<li>隨機實驗<br>產生一個明顯的實驗結果</li>
+<li>樣本空間<br>所有實驗結果的集合(set)</li>
+<li>樣本點<br>其中一個實驗結果的集合(set)的一個元素為 sample point(樣本點)</li>
+</ul>
+<h2 id="A-Counting-Rule-for-Multiple-Step-Experiments-多步驟的實驗技術"><a href="#A-Counting-Rule-for-Multiple-Step-Experiments-多步驟的實驗技術" class="headerlink" title="A Counting Rule for Multiple-Step Experiments 多步驟的實驗技術"></a>A Counting Rule for Multiple-Step Experiments 多步驟的實驗技術</h2><p>如果實驗中需要 k 個步驟，那假設第一步可能有 \(n_1\) 個結果，第二步有 \(n_2\) 個結果，依此類推，那實驗結果的總數為 \(n_1 * n_2 * … * n_k \)。</p>
+<p>多步驟實驗的圖形表示大都是<strong>樹狀圖</strong></p>
+<h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h3><blockquote>
+<p><img src="/images/statistics-1081-mid/1.PNG" alt=""><br><img src="/images/statistics-1081-mid/2.PNG" alt=""></p>
+</blockquote>
+<h3 id="Counting-Rule-for-Combinations-計數規則的組合"><a href="#Counting-Rule-for-Combinations-計數規則的組合" class="headerlink" title="Counting Rule for Combinations 計數規則的組合"></a>Counting Rule for Combinations 計數規則的組合</h3><p>使用 Combinations 進行計數，在 \(N)\ 個實驗中拿出 \(n\) 個結果，則使用 \(C_n^N = \frac{N!}{n!(N-n)!}\)</p>
+<p><strong>組合是沒有注意順序的，即 1,2,3 與 1,3,2 視為相同</strong></p>
+<h3 id="Counting-Rule-for-Permutations-計數規則的排列"><a href="#Counting-Rule-for-Permutations-計數規則的排列" class="headerlink" title="Counting Rule for Permutations 計數規則的排列"></a>Counting Rule for Permutations 計數規則的排列</h3><p>使用 Permutations 進行計數，在 \(N)\ 個實驗中拿出 \(n\) 個結果，使用 \(P_n^N = \frac{N!}{(N-n)!}\)</p>
+<p><strong>組合是有注意順序的，即 1,2,3 與 1,3,2 不相同</strong></p>
+<h2 id="Assigning-Probabilities-指派機率"><a href="#Assigning-Probabilities-指派機率" class="headerlink" title="Assigning Probabilities 指派機率"></a>Assigning Probabilities 指派機率</h2><h3 id="Basic-Requirements-for-Assigning-Probabilities"><a href="#Basic-Requirements-for-Assigning-Probabilities" class="headerlink" title="Basic Requirements for Assigning Probabilities"></a>Basic Requirements for Assigning Probabilities</h3><ul>
+<li>每一個實驗結果機率都必須介於 0-1 之間</li>
+<li>所有的實驗結果相加起來必等於 1 <h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3></li>
+<li>Classical Method<br>將所有的實驗結果機率<strong>平均</strong>分配，分配為 \(1\n \)</li>
+<li>Relative Frequency Method<br>根據<strong>實驗或歷史數據</strong>分配機率</li>
+<li>Subjective Method 主觀方法，通常是用百分比進行分配<br>透過<strong>主觀方式</strong>分配機率，爽，想怎麼分配就怎麼分配</li>
+<li>通常會結合上面三種方法，來找到最正確的實驗結果機率</li>
+</ul>
+<h2 id="Events-and-Their-Probabilities-事件與他們的機率"><a href="#Events-and-Their-Probabilities-事件與他們的機率" class="headerlink" title="Events and Their Probabilities 事件與他們的機率"></a>Events and Their Probabilities 事件與他們的機率</h2><ul>
+<li>事件是樣本點的集合</li>
+<li>每一個事件的機率等同於此事件總和的樣本點機率，如：事件 A 發生機率是 40%，那 A 事件中的每個樣本點發生機率總和一定等於 40%</li>
+<li>如果我們可以識別實驗中的每個樣本點並幫她分配機率，就可以算出此事件的機率</li>
+<li>事件 = 樣本空間每一個元素分配到的機率</li>
+</ul>
+<h2 id="Some-Basic-Relationships-of-Probability-機率的基本觀念"><a href="#Some-Basic-Relationships-of-Probability-機率的基本觀念" class="headerlink" title="Some Basic Relationships of Probability 機率的基本觀念"></a>Some Basic Relationships of Probability 機率的基本觀念</h2><ul>
+<li>Complement (餘集)<blockquote>
+<p><img src="/images/statistics-1081-mid/3.PNG" alt=""></p>
+</blockquote>
+</li>
+<li>Union 聯集<ul>
+<li>Addition Law(加法律)<br>\(P(A \cup B) = P(A) + P(B) - P(A \cap B) \)<blockquote>
+<p><img src="/images/statistics-1081-mid/4.PNG" alt="">  </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Intersection 交集<ul>
+<li>Multiplication Law(乘法律)<br>\(P(A \cap B) = P(B)P(A|B) = P(A)P(B|A) )\)，其中 \(P(A|B)\)為<a href="#Conditional-Probability-條件機率">條件機率</a><blockquote>
+<p><img src="/images/statistics-1081-mid/6.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Mutually Exclusive 互斥<ul>
+<li>如果一個事件發生，那另外一個事件就一定無法發聲</li>
+<li>Addition Law(加法律)<br>\(P(A \cup B ) = P(A) + P(B) \)<blockquote>
+<p><img src="/images/statistics-1081-mid/7.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Conditional-Probability-條件機率"><a href="#Conditional-Probability-條件機率" class="headerlink" title="Conditional Probability 條件機率"></a>Conditional Probability 條件機率</h2><p>一個事件(A)中又發生另外一個事件(B)的機率稱為條件機率，例如選出撲克牌為偶數(A)且大於 6 (B)的機率是多少</p>
+<p>條件機率符號通常用 \(P(A|B) \)，計算方式為 \(P(A|B) = \frac{P(A \cap B)}{P(B)}\)</p>
+<h3 id="Joint-Probability-Table-聯合機率表"><a href="#Joint-Probability-Table-聯合機率表" class="headerlink" title="Joint Probability Table 聯合機率表"></a>Joint Probability Table 聯合機率表</h3><ul>
+<li>Joint Probabilities 出現在表格的主體，即 1 處</li>
+<li>Marginal Probabilties(邊際機率，即單獨只看某事件的機率)通常在表格的邊界，即 2 處<blockquote>
+<p><img src="/images/statistics-1081-mid/8.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Independent-Events-獨立事件"><a href="#Independent-Events-獨立事件" class="headerlink" title="Independent Events 獨立事件"></a>Independent Events 獨立事件</h3><p>如果 A 事件不會影響到 B 事件，我們就說 A 跟 B 是獨立事件，因此可以這樣表達 \(P(A|B) = P(A) \) or \(P(B|A) = P(B) \)</p>
+<ul>
+<li>multiplication law 乘法律 <ul>
+<li>此 Law 也可以用來驗證這兩個事件是不是獨立事件</li>
+<li>如果是獨立事件則乘法律出來的答案應該是 \(P(A \cap B ) = P(A)P(B) \)<br><a href="#Some-Basic-Relationships-of-Probability-機率的基本觀念">multiplication law 乘法律</a>公式可以點擊此連結並移到下方的<strong>Intersection 交集</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Mutual-Exclusiveness-and-Independence-互斥與獨立"><a href="#Mutual-Exclusiveness-and-Independence-互斥與獨立" class="headerlink" title="Mutual Exclusiveness and Independence 互斥與獨立"></a>Mutual Exclusiveness and Independence 互斥與獨立</h3><ul>
+<li>互斥事件與獨立事件<strong>不同</strong></li>
+<li>機率不等於 0 的兩個事件不可以互斥或獨立，即兩個事件只要機率 \(&gt; 0\)，就表示一定有關係</li>
+<li>如果知道事件 A , B 是互斥事件，當 A 發生時 B 不會發生，因此他們是有相關的，並不是<strong>獨立事件</strong>，因為會互相影響</li>
+<li>如果事件 A , B 不是互斥事件，那他們<strong>有可能是</strong>獨立事件</li>
+</ul>
+<h2 id="Bayes’-Theorem-貝式定理"><a href="#Bayes’-Theorem-貝式定理" class="headerlink" title="Bayes’ Theorem 貝式定理"></a>Bayes’ Theorem 貝式定理</h2><h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><blockquote>
+<p><img src="/images/statistics-1081-mid/11.PNG" alt=""></p>
+</blockquote>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>根據已知的 A 機率推出 B 機率</p>
+<p>流程圖如下：</p>
+<blockquote>
+<p><img src="/images/statistics-1081-mid/9.PNG" alt=""></p>
+</blockquote>
+<h3 id="舉例-1"><a href="#舉例-1" class="headerlink" title="舉例"></a>舉例</h3><p>在鎮上興建購物中心是一個很好的主意，可以帶來不錯的收益，但必須通過鎮公所的允許，否則不能建照。規畫委員會要向鎮公所提出建議，來獲得支持或反對興建購物中心</p>
+<p>\(A_1 \) = 支持興建 , 機率為 0.7<br>\(A_2 \) = 反對興建 , 機率為 0.3</p>
+<h4 id="situlation-A"><a href="#situlation-A" class="headerlink" title="situlation A"></a>situlation A</h4><p>目前規畫委員會建議不要興建購物中心(B)，此事件的發生會不會影響到鎮公所支持或反對興建購物中心的機率?</p>
+<p>根據過去歷史 \(P(B|A_1)=0.2\) and \(P(B|A_2)=0.9\)</p>
+<p>我們可以透過歷史推出 \(P(B_C | A_1) = 0.8 \) and \(P(B_C | A_2) = 0.1 \)</p>
+<p>樹狀圖則如下：</p>
+<blockquote>
+<p><img src="/images/statistics-1081-mid/10.PNG" alt=""></p>
+</blockquote>
+<p>根據我們規畫委員會的建議後，我們可以得出<br>\(P(A_1 |B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A^2)P(B|A_2)} \\ = \frac{(0.7)(0.2)}{(0.7)(0.2) + (0.3)(0.9)} = 0.34 \)</p>
+<p>其中 \(P(B) = P(A_1 \cap B) + P(A_2 \cap B) \)</p>
+<h4 id="conclusion-A-1"><a href="#conclusion-A-1" class="headerlink" title="conclusion A-1"></a>conclusion A-1</h4><p>這對不想要興建購物中心的人認為是一個好消息，因為從原本支持興建的機率 0.7 降至 0.34</p>
+<p>透過表來解讀則是</p>
+<ul>
+<li>(4) 是表示在歷史資料中遇到的情況去乘這次的情況，來說明這次有可能成功的機率，但必須注意的是小數相乘會越來越小，因此不可以透過 14% 去算，分母已經不再是 1 了</li>
+<li>P(B) 則表示這兩種可能總共的機率</li>
+<li>(5) 再來則是透過 P(B) 來找出每一個 \(P(A_i)\) 的機率<blockquote>
+<p><img src="/images/statistics-1081-mid/11.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>投資學 筆記 - 股票價值基本分析 (產業分析與個別公司績效分析)</title>
+    <url>/2020/12/06/NTUT_note/investment_stock_value_analysis_company_performance/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
+<ul>
+<li>公司在產業中的競爭力分析</li>
+<li>台灣產業分類與特性</li>
+<li>利用經營指標分析公司股價</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="產業分析"><a href="#產業分析" class="headerlink" title="產業分析"></a>產業分析</h1><h2 id="景氣循環"><a href="#景氣循環" class="headerlink" title="景氣循環"></a>景氣循環</h2><h3 id="產業景氣循環"><a href="#產業景氣循環" class="headerlink" title="產業景氣循環"></a>產業景氣循環</h3><p>經濟活動會重複性的經歷擴張與收縮，稱為景氣循環，循環的轉折點稱為高峰、低谷，高峰為擴張期結束和收縮期結束的交接點，谷底則出現在衰退期的底部，準備開始復甦</p>
+<ul>
+<li>成長性產業<br>具有高成長性，不受景氣循環影響，如：網通業、太陽能產業等，新產品或新技術有重大突破的產業</li>
+<li>循環性產業<br>受景氣循環影響，如：汽車、家電產業</li>
+<li>防禦性產業<br>受景氣循環小，如：食品生產、加工業、製藥業</li>
+</ul>
+<blockquote>
+<p><img src="/images/investment_stock_value_analysis_company_performance/1.PNG" alt=""></p>
+</blockquote>
+<h3 id="產業競爭力分析架構"><a href="#產業競爭力分析架構" class="headerlink" title="產業競爭力分析架構"></a>產業競爭力分析架構</h3><blockquote>
+<p><img src="/images/investment_stock_value_analysis_company_performance/2.PNG" alt=""></p>
+</blockquote>
+<h3 id="產業生命週期"><a href="#產業生命週期" class="headerlink" title="產業生命週期"></a>產業生命週期</h3><ul>
+<li>開創期<br>產業發展的早期階段，特徵是擁有新技術與新產品，新產品在市場上尚未飽和，銷貨和盈餘成長很快，但不確定性也高，因為機器設備投資而讓資金大量流出</li>
+<li>成長期<br>產業領導者開始出現，市場占有率容易被預測，產業的領頭羊廠商績效帶領著整體產業績效，此時產品普遍被消費者使用，在成長後期開始有大量現金流入</li>
+<li>成熟期<br>產品已經廣為消費者使用，各公司的產品逐漸標準化，產品創新不多，開始進入價格戰爭，導致邊際利潤減少，現金流入極大後開始慢慢減少</li>
+<li>衰退期<br>開始有新的替代產品出現或有低價產品入侵，產業成長率開始低於整體經濟社會甚至為負，現金流入不斷減少</li>
+</ul>
+<blockquote>
+<p><img src="/images/investment_stock_value_analysis_company_performance/3.PNG" alt=""></p>
+</blockquote>
+<h2 id="台灣股票分類"><a href="#台灣股票分類" class="headerlink" title="台灣股票分類"></a>台灣股票分類</h2><h3 id="台灣對特定類股專有名詞"><a href="#台灣對特定類股專有名詞" class="headerlink" title="台灣對特定類股專有名詞"></a>台灣對特定類股專有名詞</h3><ul>
+<li>主流股 投資人在短期內看好某類股票</li>
+<li>內需股 產品以內銷為主，如水泥、食品、營建</li>
+<li>資產股 公司有大量的不動產，如飯店、營建</li>
+<li>投機股 股價波動大的股票</li>
+<li>中國概念股 在中國設廠投資的股票</li>
+<li>摩根概念股 納入<strong>新興市場自由指數(EMF)</strong>的股票</li>
+</ul>
+<h3 id="傳產股"><a href="#傳產股" class="headerlink" title="傳產股"></a>傳產股</h3><p>台灣投資人除了<strong>電子業</strong>與<strong>金融業</strong>之外的產業稱為傳統產業</p>
+<ul>
+<li>傳統產業的特性<ul>
+<li>大多為成熟型產業，毛利率較低，不容易有獲利大幅成長情況</li>
+<li>產品生命週期比較長</li>
+</ul>
+</li>
+<li>須注意事項<ul>
+<li>營建業為<strong>火車頭工業</strong>，他帶動著其他傳產業的發展，如：水泥、玻璃、鋼鐵</li>
+<li>傳產業也有高科技技術產品，如：紡織股</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><img src="/images/investment_stock_value_analysis_company_performance/4.PNG" alt=""><br><img src="/images/investment_stock_value_analysis_company_performance/5.PNG" alt=""></p>
+</blockquote>
+<h3 id="資訊電子業"><a href="#資訊電子業" class="headerlink" title="資訊電子業"></a>資訊電子業</h3><ul>
+<li>台灣電子產業特性<ul>
+<li>電子產業生命週期短，如果沒有開發新產品或創造有營利的產品，股價容易一落千丈</li>
+<li>國內電子產業主要以代工為主，因此當國外廠商抽單時，營運馬上就發生危機</li>
+<li>大多以出口為主，因此很受國外景氣與匯率影響極大</li>
+<li>台灣的電子類股通常會引領大盤走向</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><img src="/images/investment_stock_value_analysis_company_performance/6.PNG" alt=""></p>
+</blockquote>
+<h3 id="金融-保險-股"><a href="#金融-保險-股" class="headerlink" title="金融(保險)股"></a>金融(保險)股</h3><p>台灣的金融類股共有</p>
+<ul>
+<li>金融股<br>允許業者提供各種金融產品與服務，金控公司開始成立</li>
+<li>商業銀行股<ul>
+<li>銀行傳統收入大多來源放款與存款的利息差額，與外匯買賣、消費金融，近年改以手續費收入為收入來源</li>
+<li>銀行放款大多為不動產抵押貸款，因此當房地產行情不佳時，呆帳增加則會降低銀行利潤</li>
+</ul>
+</li>
+<li>保險股<br>分為<strong>壽險</strong>與<strong>產險</strong>，國人重視保險時有助於此產業的發展，但保險資金的投資運用有<strong>嚴格限制</strong>，經營上多投資不動產或國內外債券</li>
+</ul>
+<h2 id="國家發展計畫-2021年-2014年"><a href="#國家發展計畫-2021年-2014年" class="headerlink" title="國家發展計畫 2021年 - 2014年"></a>國家發展計畫 2021年 - 2014年</h2><ul>
+<li>2016 年的 5+2 產業政策<br>加速台灣產業轉型並升級，提出<strong>智慧機械、亞洲矽谷、綠能產業、生醫產業、國防產業、新農業、循環經濟</strong>，來驅動台灣產業成長的核心</li>
+<li>2020 年的 5+2 產業政策</li>
+<li><em>強化半導體，建構 5G 與 AI 應用*</em>，鼓勵領航企業進行前瞻技術布局，提供研發經費補助，希望台灣成為亞洲研發核心</li>
+<li>2021 - 2024 國家發展策略圖表<blockquote>
+<p><img src="/images/investment_stock_value_analysis_company_performance/7.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="公司績效"><a href="#公司績效" class="headerlink" title="公司績效"></a>公司績效</h2><p>利用財報資訊來理解公司績效是<strong>基本分析</strong>的重要關鍵，通常透過 3 項財務數據作為指標</p>
+<ul>
+<li>ROE 股東權益報酬率 <ul>
+<li>股東權益報酬率為企業為股東資金創造獲利的效率，比率越高表示股東獲利越多</li>
+<li>\(ROE = (稅後淨利 / 銷售收入) * (銷貨收入 \ 平均總資產 ) * (平均總資產 \ 股東權利 ) = 稅後淨利率 * 總資產周轉率 * 權益乘數\)</li>
+<li>權益乘數<br>資產總額除以股東權益，表示企業負債程度，比率越高表示負債越高</li>
+<li>通常 ROE 的主要變因在於<strong>稅後淨利率</strong></li>
+<li><blockquote>
+<p><img src="/images/investment_stock_value_analysis_company_performance/7.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>ROA 總資產報酬率<br>評價企業運用全部資產的總體獲利能力，比率越高表示企業資產利用效益越好，企業盈利越強</li>
+<li>EPS 每股盈餘</li>
+<li><em>三項指標最為重要*</em>，對於有將股票在公開交易市場的企業而言，每股盈餘對企業的股價有一定的連動性</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大二上投資學筆記</tag>
+        <tag>北科大大二上投資學期中考筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>投資學 筆記 - 股票價值基本分析 (國內外政經事件與國內總經因素)</title>
+    <url>/2020/12/05/NTUT_note/investment_stock_value_analysis_economic/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
+<ul>
+<li>討論股票每股真實價值</li>
+<li>分析影響股票市價因素</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a>基本分析</h1><h2 id="基本分析架構圖"><a href="#基本分析架構圖" class="headerlink" title="基本分析架構圖"></a>基本分析架構圖</h2><blockquote>
+<p><img src="/images/investment_stock_value_analysis_economic/1.PNG" alt=""></p>
+</blockquote>
+<h3 id="國際與國內政經事件"><a href="#國際與國內政經事件" class="headerlink" title="國際與國內政經事件"></a>國際與國內政經事件</h3><ul>
+<li>重大政治、金融風暴、戰爭與天災都會讓股市產生劇烈波動</li>
+<li>經濟體越小的國家，國內政經動盪影響股市越大，反之亦同</li>
+<li>政治變動，特別是民主國家的政權替換，通常會造成<strong>短期股市震盪</strong>，當大部分會回到原本走勢</li>
+<li>天災、金融風暴、戰爭對股市影響特別大，基本上都需要非常長的時間才能回復到原本走勢</li>
+</ul>
+<h2 id="全球經濟"><a href="#全球經濟" class="headerlink" title="全球經濟"></a>全球經濟</h2><p>經濟成長率通長以一國的生產毛額(GDP)的年增率表示。</p>
+<h5 id="QUESTION-What-is-the-difference-between-GDP-and-GNP"><a href="#QUESTION-What-is-the-difference-between-GDP-and-GNP" class="headerlink" title="QUESTION: What is the difference between GDP and GNP"></a>QUESTION: What is the difference between GDP and GNP</h5><ul>
+<li>GDP 國內生產毛額<br>計算<strong>國內</strong>全部的生產毛額</li>
+<li>GNP 國民生產毛額<br>計算<strong>國民</strong>全部的生產毛額，此國民無論人在國內國外都應該要被計算</li>
+</ul>
+<h3 id="各國經濟成長率與股市報酬率"><a href="#各國經濟成長率與股市報酬率" class="headerlink" title="各國經濟成長率與股市報酬率"></a>各國經濟成長率與股市報酬率</h3><ul>
+<li>各國經濟成長率表示各國整體購買力，成長率越高就表示對未來的經濟發展越有淺力，國民投資能力越強</li>
+<li>台灣是<strong>小型經濟開放體</strong>，依賴貿易，因此會受國際經濟景氣影響，特別是其他大型經濟體，如美國、中國、日本</li>
+<li>股市通常比景氣更快反應，也就是說景氣要好轉前股市就會先好轉。P.S. 因為股市帶動景氣</li>
+</ul>
+<h2 id="匯率"><a href="#匯率" class="headerlink" title="匯率"></a>匯率</h2><ul>
+<li>表示本國貨幣轉換成外國貨幣的比率，當本國貨幣可以換得更多外國貨幣則為<strong>升值</strong>，反之貶值</li>
+<li>匯率會影響一國產品在國際市場的競爭力，匯率會影響整個產業，尤其以進出口為主要經濟活動的產業</li>
+<li>新台幣升值時對進口廠商有利，對出口商不利；反之亦同。<br>因為我們進口時是給予外國貨幣，因此當新台幣升值時可以換得更多外國貨幣；出口時是對方給予我們外國貨幣，但因為本國貨幣升值，導致我們換回的新台幣變少而貶值。</li>
+</ul>
+<p>台灣進口美國產品，台灣廠商先換成美國貨幣在交易；台灣出口美國產品，美國則給予我們美國貨幣交易。</p>
+<p>為甚麼都是以美國貨幣為主？因為在大多數情況下，交易都是用國際貨幣(通常是美金)為主</p>
+<h3 id="貨幣通常被三項因素控制"><a href="#貨幣通常被三項因素控制" class="headerlink" title="貨幣通常被三項因素控制"></a>貨幣通常被三項因素控制</h3><ul>
+<li>物價膨脹</li>
+<li>國民所得、經濟成長率</li>
+<li>利率水準</li>
+<li>除了上面此三項因素，通常資金控制越開放的國家，匯率變動頻率也會越高</li>
+<li>當市場預期新台幣貶值時，會擔心以新臺幣為主的資產縮水，因此市場投資人(特別是外資)會傾向將資金移出，造成資金外流，股市缺乏資金隨之下跌。</li>
+</ul>
+<h3 id="央行對於外匯管理措施"><a href="#央行對於外匯管理措施" class="headerlink" title="央行對於外匯管理措施"></a>央行對於外匯管理措施</h3><p>為了防止外資炒作外匯，中央銀行有對外資做些限制：</p>
+<ul>
+<li>資金停泊<br>外資匯入後，要在一周之內將新台幣投入股市，以免被誤認為有炒匯嫌疑</li>
+<li>投資限額<br>央行規定，外資匯入後，購買公債等固定收益商品，不可超過匯入資金的三成，以免之後台灣匯率被國外控制</li>
+<li>匯入<br>外資將外國貨幣轉入新台幣</li>
+</ul>
+<h2 id="經濟循環"><a href="#經濟循環" class="headerlink" title="經濟循環"></a>經濟循環</h2><p>一國的經濟循環變動稱為景氣循環，通常是指經過衰退、蕭條、復甦、繁榮，不斷來回的現象，股市可以看出景氣變得的特性，當股價上升時通常表時景氣準備上升、反之亦同。</p>
+<p>用來觀測總體經濟景氣變化的指標為：景氣對策訊號、景氣動向指標</p>
+<p>主要的總體經濟變數則包括：物價與油價、貨幣供給量、利率、採購經理人指數</p>
+<h3 id="景氣對策信號"><a href="#景氣對策信號" class="headerlink" title="景氣對策信號"></a>景氣對策信號</h3><p>通常由國發會發布，透過利用多項經濟指標量化產生分數後，再將分數分級成某種燈號，來判斷經濟景氣的情況</p>
+<ul>
+<li><p>燈號</p>
+<ul>
+<li>綠燈 = 穩定</li>
+<li>紅燈 = 熱絡</li>
+<li>藍燈 = 低迷</li>
+<li>紅黃燈 = 紅燈準備轉向綠燈</li>
+<li>黃藍燈 = 藍燈準備轉向綠燈</li>
+</ul>
+</li>
+<li><p>台灣股市與景氣對策訊號</p>
+<ul>
+<li>當藍燈出現時股價比較低，紅燈時股價高</li>
+<li><strong>但景氣對策訊號有一項為股價指數，因此用來預測股市繁榮效用不高</strong></li>
+<li>但如果長期持有股票且經濟體發展穩健，那反應到股價則時遲早問題</li>
+</ul>
+</li>
+</ul>
+<h3 id="景氣動向指標"><a href="#景氣動向指標" class="headerlink" title="景氣動向指標"></a>景氣動向指標</h3><p>將季節調整、標準化因子調整、加權平均後建構出的綜合性指標，可以反應出景氣的變動與幅度，且<strong>領先指標可以被投資分析所使用</strong></p>
+<p>領先指標能夠<strong>提前</strong>反應景氣變動，轉折點也領先於景氣循環的轉折點，如果連續三個月往上則表示景氣將好轉，股價也會有好的表現</p>
+<h3 id="油價與物價"><a href="#油價與物價" class="headerlink" title="油價與物價"></a>油價與物價</h3><ul>
+<li>物價<ul>
+<li>物價膨脹率可以用物價指數(CPI or WPI)的變動率計算，上升時會提高生產成本，產商如果沒辦法將成本轉嫁給消費者，將會影響到公司獲利而降低股價</li>
+<li>中央銀行會抑止股價上速上揚，會採取緊縮性貨幣政策，例如調高利率或減少市面貨幣供給量，導致股市失去資金動能而下跌</li>
+</ul>
+</li>
+<li>油價<ul>
+<li>原油屬於上游原料，當油價上漲大多數的產品成本也會上漲，而影響產品價格進而間接影響股價(造成公司獲利減少)</li>
+<li>如果是原油供給面減少則會讓經濟與股價<strong>全面性衰退</strong>；如果是需求面增加則有可能造成經濟與股價<strong>全面性上揚</strong><br>因為有更多需求表示可以為公司增加更多財富，但供給減少表示沒辦法讓公司增加財富還會增加公司生產成本</li>
+</ul>
+</li>
+</ul>
+<h3 id="貨幣供給量"><a href="#貨幣供給量" class="headerlink" title="貨幣供給量"></a>貨幣供給量</h3><p>在某一個特定時間，銀行體系的企業與個人能保油的通貨與存款總額，當貨幣供給量增加，市場上的資金不缺乏，充滿資金動能，股價容易上漲；當貨幣供給量減少則缺乏資金動能，股價容易下跌。</p>
+<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><ul>
+<li>\(M_{1a} = 通貨發行淨額 + 支票存款 + 活期存款\)</li>
+<li>\(M_{1b} = M_{1a} + 活期儲蓄存款 \)</li>
+<li>\(M_2 = M_{1b} + 定期存款 + 郵政儲金 + 外國人持有本國貨幣 + 外幣定存 + 附買回交易\)</li>
+<li>活期存款是<strong>法人或公司</strong>所持有</li>
+<li>活期儲蓄存款為<strong>個人</strong>所持有</li>
+</ul>
+<h4 id="觀念"><a href="#觀念" class="headerlink" title="觀念"></a>觀念</h4><p>當 \(M_{1b}\) 年增率上升時表示有多餘的資金動能帶動股市上漲，特別是當年的 \(M_{1b}\) 年增率高於 \(M_2\) 且交叉向上形成黃金交叉表示市場資金充沛，資金動能更多，股票會有一段時間上漲(因為可以支配的錢已經比被鎖住的錢還多)</p>
+<p>當 \(M_{1b}\) 年增率上升時會帶動股市上漲，當 \(M_{1b}\) 下降時常會造成股價下跌，\(M_2\) 則不明顯，因為大部分都是被鎖住資金，操作自由度不高</p>
+<h3 id="利率"><a href="#利率" class="headerlink" title="利率"></a>利率</h3><ul>
+<li>利率上升時會使投資人的報酬要求率上升，評估企業價值時，其價值會降低，股價也會降低</li>
+<li>當利率上升時，如果股票投資率不高於銀行存款利率時，投資人會將資金放入銀行而不是股市</li>
+<li>利率上升表示公司資金成本上升，使其獲利下降、股價下挫</li>
+<li>長期利率的差距<br>長期的負斜率狀態與經濟率退有很高的關聯性，且經濟衰退又會導致股價下跌</li>
+</ul>
+<h3 id="採購經理人指數-PMI"><a href="#採購經理人指數-PMI" class="headerlink" title="採購經理人指數 PMI"></a>採購經理人指數 PMI</h3><p>以 50 作為製造業景氣好壞的分水嶺，當該指數高於 50 時表示景氣熱絡、對股市有利；反之亦同。</p>
+<p>在台灣，2011 年開始有台灣製造業採購經理人指數，可作為投資人掌握台灣景氣波動的參考指標</p>
+<h3 id="台灣經濟指標公布時間"><a href="#台灣經濟指標公布時間" class="headerlink" title="台灣經濟指標公布時間"></a>台灣經濟指標公布時間</h3><blockquote>
+<p><img src="/images/investment_stock_value_analysis_economic/2.PNG" alt=""></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>北科上課筆記</category>
