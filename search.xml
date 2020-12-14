@@ -8364,8 +8364,8 @@
 </ul>
 <h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><ul>
 <li>Classical Method<br>將所有的實驗結果機率<strong>平均</strong>分配，分配為 \(1 \ n \)</li>
-<li>Relative Frequency Method<br>根據<strong>實驗或歷史數據</strong>分配機率</li>
-<li>Subjective Method 主觀方法，通常是用百分比進行分配<br>透過<strong>主觀方式</strong>分配機率，爽，想怎麼分配就怎麼分配</li>
+<li>Relative Frequency Method<br>根據<strong>實驗或歷史數據</strong>分配機率，通常是用百分比進行分配</li>
+<li>Subjective Method 主觀方法<br>透過<strong>主觀方式</strong>分配機率，爽，想怎麼分配就怎麼分配</li>
 <li>通常會結合上面三種方法，來找到最正確的實驗結果機率</li>
 </ul>
 <h2 id="Events-and-Their-Probabilities-事件與他們的機率"><a href="#Events-and-Their-Probabilities-事件與他們的機率" class="headerlink" title="Events and Their Probabilities 事件與他們的機率"></a>Events and Their Probabilities 事件與他們的機率</h2><ul>
@@ -8387,7 +8387,7 @@
 </ul>
 </li>
 <li>Intersection 交集<ul>
-<li>Multiplication Law(乘法律)<br>\(P(A \cap B) = P(B)P(A|B) = P(A)P(B|A) )\)，其中 \(P(A|B)\)為<a href="#Conditional-Probability-條件機率">條件機率</a><blockquote>
+<li>Multiplication Law(乘法律)<br>\(P(A \cap B) = P(B)P(A|B) = P(A)P(B|A) \)，其中 \(P(A|B)\)為<a href="#Conditional-Probability-條件機率">條件機率</a><blockquote>
 <p><img src="/images/statistics-1081-mid/6.PNG" alt=""></p>
 </blockquote>
 </li>
@@ -8421,7 +8421,7 @@
 </ul>
 <h3 id="Mutual-Exclusiveness-and-Independence-互斥與獨立"><a href="#Mutual-Exclusiveness-and-Independence-互斥與獨立" class="headerlink" title="Mutual Exclusiveness and Independence 互斥與獨立"></a>Mutual Exclusiveness and Independence 互斥與獨立</h3><ul>
 <li>互斥事件與獨立事件<strong>不同</strong></li>
-<li>機率不等於 0 的兩個事件不可以互斥或獨立，即兩個事件只要機率 \(&gt; 0\)，就表示一定有關係</li>
+<li>機率大於 0 的兩個事件不會<strong>同時</strong>有互斥與獨立，即兩個事件只要機率 \(&gt; 0\)，就表示一定有關係</li>
 <li>如果知道事件 A , B 是互斥事件，當 A 發生時 B 不會發生，因此他們是有相關的，並不是<strong>獨立事件</strong>，因為會互相影響</li>
 <li>如果事件 A , B 不是互斥事件，那他們<strong>有可能是</strong>獨立事件</li>
 </ul>
@@ -8442,7 +8442,7 @@
 <blockquote>
 <p><img src="/images/statistics-1081-mid/10.PNG" alt=""></p>
 </blockquote>
-<p>根據我們規畫委員會的建議後，我們可以得出<br>\(P(A_1 |B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A^2)P(B|A_2)} \\ = \frac{(0.7)(0.2)}{(0.7)(0.2) + (0.3)(0.9)} = 0.34 \)</p>
+<p>根據我們規畫委員會的建議後，我們可以得出<br>\(P(A_1 |B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A_2)P(B|A_2)} \\ = \frac{(0.7)(0.2)}{(0.7)(0.2) + (0.3)(0.9)} = 0.34 \)</p>
 <p>其中 \(P(B) = P(A_1 \cap B) + P(A_2 \cap B) \)</p>
 <h4 id="conclusion-A-1"><a href="#conclusion-A-1" class="headerlink" title="conclusion A-1"></a>conclusion A-1</h4><p>這對不想要興建購物中心的人認為是一個好消息，因為從原本支持興建的機率 0.7 降至 0.34</p>
 <p>透過表來解讀則是</p>
@@ -8481,11 +8481,11 @@
 </tr>
 <tr>
 <td><a href="#binomial-二項">二項</a></td>
-<td>N次試驗中成功的次數</td>
+<td>求在 n 是實驗中 x 次成功才能達到期望結果的機率</td>
 </tr>
 <tr>
 <td><a href="#negative-binomial-負二項">負二項</a></td>
-<td>N次試驗中r次成功的機率</td>
+<td>需要x 次實驗才能夠達到期望結果的機率</td>
 </tr>
 <tr>
 <td><a href="#geometric-幾何">幾何</a></td>
@@ -8954,11 +8954,11 @@
 <ul>
 <li>ROE 股東權益報酬率 <ul>
 <li>股東權益報酬率為企業為股東資金創造獲利的效率，比率越高表示股東獲利越多</li>
-<li>\(ROE = (稅後淨利 / 銷售收入) * (銷貨收入 \ 平均總資產 ) * (平均總資產 \ 股東權利 ) = 稅後淨利率 * 總資產周轉率 * 權益乘數\)</li>
+<li>\(ROE = (稅後淨利 / 銷售收入) * (銷貨收入 / 平均總資產 ) * (平均總資產 / 股東權利 ) \\ = 稅後淨利率 * 總資產周轉率 * 權益乘數\)</li>
 <li>權益乘數<br>資產總額除以股東權益，表示企業負債程度，比率越高表示負債越高</li>
 <li>通常 ROE 的主要變因在於<strong>稅後淨利率</strong></li>
 <li><blockquote>
-<p><img src="/images/investment_stock_value_analysis_company_performance/7.PNG" alt=""></p>
+<p><img src="/images/investment_stock_value_analysis_company_performance/8.PNG" alt=""></p>
 </blockquote>
 </li>
 </ul>
@@ -9095,6 +9095,187 @@
         <tag>北科上課筆記</tag>
         <tag>北科大二上投資學筆記</tag>
         <tag>北科大大二上投資學期中考筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - Two way search 雙向搜尋</title>
+    <url>/2020/12/14/Explain_Algorithm/Two-way-search/</url>
+    <content><![CDATA[<h2 id="Two-way-search-介紹"><a href="#Two-way-search-介紹" class="headerlink" title="Two way search 介紹"></a>Two way search 介紹</h2><blockquote>
+<p>雙向搜尋主要是透過起點與終點都進都進行搜尋來獲得答案，主要是為了加快搜尋效率而產生的一種新觀念</p>
+<p>下面將介紹兩種雙向搜尋演算法</p>
+<ul>
+<li>雙向同時搜尋</li>
+<li>Meet in the middle </li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="雙向同時搜尋"><a href="#雙向同時搜尋" class="headerlink" title="雙向同時搜尋"></a>雙向同時搜尋</h2><p>基本作法是先透過起點端或終點端進行一次搜尋(BFS or DFS)，其中當起點在進行的搜尋與終點在進行的搜尋遇到時則表示找到答案解，在其必要時透過<strong>兩次搜尋</strong>，將沒有連接終點與起點的節點進行刪除(枝剪)。</p>
+<h3 id="例題"><a href="#例題" class="headerlink" title="例題"></a>例題</h3><ul>
+<li><a href="https://theriseofdavid.github.io/2020/12/14/UVa/UVa208/" target="_blank" rel="noopener">UVa 208 – Firetruck</a> </li>
+</ul>
+<h2 id="Meet-in-the-middle-中間相遇法"><a href="#Meet-in-the-middle-中間相遇法" class="headerlink" title="Meet in the middle 中間相遇法"></a>Meet in the middle 中間相遇法</h2><p>Meet in the middle 沒有正式的中文名稱，常見名稱<strong>中間相遇法</strong>，此觀念適用在於輸入數據較小，但並沒有小到能夠直接 brute force 的情況時就適合用 Meet in the middle。</p>
+<p>基本作法為將一張圖切成兩部分，分別進行搜尋，最後再將兩邊的結果合併，brute force 的時間複雜度通常為 \(O(N_n)\)，但透過 Meet in the middle 可以將時間複雜度降為 \(O(N^{n/2})\)，方便我們去嘗試 brute force。</p>
+<h3 id="例題-1"><a href="#例題-1" class="headerlink" title="例題"></a>例題</h3>]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>雙向搜尋</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa208 - Firetruck (雙向搜尋-逆向搜尋)</title>
+    <url>/2020/12/14/UVa/UVa208/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>在一個區域中必定會有一個消防局，現在有一個點失火，我們想知道從消防局到失火點的所有路徑，並且輸出。<br>請注意：消防員不願意接受繞圓此動作(繞了一個圓圈再回到某個點，即形成一個循環)，因為會影響他們的行進速度。</p>
+<p>題目測資的點不會超過 22 個點，也就是路徑最多不會超過 22 條路徑。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題是使用雙向搜尋是最適合的題目之一，由於此題目必須要輸出每一個路徑，因此用 brute force 是最好的應用，但如果想到這邊然後就直接進行 DFS or BFS 搜尋就會遇到一個大麻煩，時間 TLE。</p>
+<p>為甚麼會遇到 TLE 呢？我們舉個例子：我們假設道路都是單行道，只能向北走，想請問有沒有辦法從台北走到高雄？</p>
+<p>答案是不行的，因為道路都是<strong>單行道且只能往北走</strong>台北往到高雄勢必是不可能，但程式會不斷嘗試的從台北出發往北的道路不斷進行搜尋，因此在道路複雜許多後就會造成 TLE 的問題，這時候就要用到一個觀念，<strong>雙向搜尋</strong>。</p>
+<h2 id="雙向搜尋-同時搜尋"><a href="#雙向搜尋-同時搜尋" class="headerlink" title="雙向搜尋-同時搜尋"></a><a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-同時搜尋</a></h2><p>我們先從終點進行搜尋(<strong>反向搜尋</strong>)，透過終點搜尋(BFS,DFS)可以接觸到的所有節點，並記錄下來；之後再透過起點進行搜尋(<strong>正向搜尋</strong>)，在正向搜尋時再附加一個條件為<strong>必須要是反向搜尋有經過的節點</strong>，才可以確保目前正向搜尋的路線中是正確的方向，而不是在往錯誤的方向前進。</p>
+<p>這裡我們則使用 DFS 進行撰寫。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse_dfs</span><span class="params">(<span class="keyword">int</span> u )</span></span>&#123; <span class="comment">//反向搜尋</span></span><br><span class="line">    join[u] = <span class="number">1</span> ; <span class="comment">//join 紀錄反向搜尋會經過的點，1表示會經過</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; MAXN ; i++)</span><br><span class="line">        <span class="keyword">if</span>( !join[i] &amp;&amp; road[u][i] ) reverse_dfs(i);</span><br><span class="line">        <span class="comment">//road 表示這條路徑目前已經被用過</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="焦點回到題目上，解開題目的小設計"><a href="#焦點回到題目上，解開題目的小設計" class="headerlink" title="焦點回到題目上，解開題目的小設計"></a>焦點回到題目上，解開題目的小設計</h2><p>之後只需要做好每一次在讀取測試資料時要清除上筆測試的資料且<strong>題目輸出格式正確，輸出的路徑那行最後不可以有空白</strong>，即<code>1 3 5</code>，以及不要將 DFS 寫爛即可。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://acm.zzkun.com/archives/92" target="_blank" rel="noopener">UVa 208 – Firetruck [双向DFS]</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>雙向搜尋是我這一周碰到的新觀念，觀念雖然是簡單但其實如果用在題目上，我還會傻住，這也驗證了演算法一向都是觀念好懂，實作很難的事物阿，希望我之後可以善用此演算法在未來或是大型的演算法比賽中。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 22</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n , kase , cnt , vis[MAXN] , road[MAXN][MAXN] , join[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse_dfs</span><span class="params">(<span class="keyword">int</span> u )</span></span>&#123;</span><br><span class="line">    join[u] = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; MAXN ; i++)</span><br><span class="line">        <span class="keyword">if</span>( !join[i] &amp;&amp; road[u][i] ) reverse_dfs(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(u == n )&#123; <span class="comment">//到達終點，輸出路徑</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; res.size()<span class="number">-1</span> ; i++) <span class="built_in">cout</span> &lt;&lt; res[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; res[res.size()<span class="number">-1</span>] ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        cnt++ ;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; MAXN ; i++)&#123; </span><br><span class="line">        <span class="keyword">if</span>(!vis[i] &amp;&amp; road[u][i] &amp;&amp; join[i] )&#123; <span class="comment">//符合條件後記錄節點 </span></span><br><span class="line">            vis[i] = <span class="number">1</span> ;</span><br><span class="line">            res.push_back(i);</span><br><span class="line">            dfs(i);</span><br><span class="line">            res.pop_back();</span><br><span class="line">            vis[i] = <span class="number">0</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">//清除資料並重新整理</span></span><br><span class="line">    <span class="built_in">memset</span>(road,<span class="number">0</span>,<span class="keyword">sizeof</span>(road));</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">memset</span>(join,<span class="number">0</span>,<span class="keyword">sizeof</span>(join));</span><br><span class="line">    cnt = <span class="number">0</span> ;</span><br><span class="line">    res.clear();</span><br><span class="line">    vis[<span class="number">1</span>] = <span class="number">1</span> ;</span><br><span class="line">    res.push_back(<span class="number">1</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>) ;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> a,b ;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        init();</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &amp;&amp; a &amp;&amp; b )&#123; </span><br><span class="line">            road[a][b] = <span class="number">1</span> ; road[b][a] = <span class="number">1</span> ; <span class="comment">//紀錄路徑</span></span><br><span class="line">        &#125;</span><br><span class="line">        reverse_dfs(n);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"CASE "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">":\n"</span> ;</span><br><span class="line">        dfs(<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"There are "</span> &lt;&lt; cnt &lt;&lt; <span class="string">" routes from the firestation to streetcorner "</span> &lt;&lt; n &lt;&lt; <span class="string">".\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>雙向搜尋</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa208 - Firetruck (雙向搜尋-Meet in the middle、位元運算)</title>
+    <url>/2020/12/15/UVa/UVa1326/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>考古學家們挖到恐龍化石，但恐龍化石太大沒有辦法被載送回來，於是考古學家就將化石切成零件，並做上標記，載回博物館；但遇到了一個麻煩，同時有另外一批化石也被送回博物館，同時也是將化石切稱 零件，運氣不好的是他們的零件標記與我們使用的符號相同，我們的目標就是找出我們的恐龍化石，並且透過我們的零件組回化石。</p>
+<p>有五點需要特別注意：</p>
+<ul>
+<li>零件組合必須是兩個相同的標籤組成</li>
+<li>每一個化石標籤，都必須都有相同的化石標籤且<strong>不一定是</strong>另外一個零件，也可以是自己的</li>
+<li>我們找回的化石必須要是零件配對數量最大的，也就是零件配對數量必須要最高</li>
+<li>一個零件中的所有標籤，每一個都必須被使用到</li>
+<li>零件最多不會超過 25</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="懶人包題目大意："><a href="#懶人包題目大意：" class="headerlink" title="懶人包題目大意："></a>懶人包題目大意：</h2><p>是不是覺得上面很煩不想看？因此我有特別寫一個簡單版的。</p>
+<p>利用題目測試資料的 x 行選出 y 行能夠將每一個字母的數字總合為偶數，且 y 必須是最大。<del>好懂了八</del></p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>由於必須輸出最大的行數且必須要輸出有哪些行，因此這裡 brute force 會是最好的選擇。</p>
+<p>這題 Udebug 沒有提供測資，好難過啊QwQ。</p>
+<h3 id="時間複雜度"><a href="#時間複雜度" class="headerlink" title="時間複雜度"></a>時間複雜度</h3><p>我們先來分析一下時間複雜度，如果使用 brute force 時複雜度會是 \(O(2^24)\)，選或不選並且有至少有 24 個英文字母，時間複雜度會太高，因此我們這邊使用<a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a>，將時間複雜度優化至\(O(2^12 * 12) \)，選或不選有 12 個英文字母，且每一個都可以在與另外 12 個英文字母考慮選或不選，</p>
+<ul>
+<li>時間複雜度 \(O(2^24)\)，運行時間為 1.110s<br>程式碼由<a href="https://blog.csdn.net/keshuai19940722/article/details/18995013" target="_blank" rel="noopener">JeraKrs 提供</a></li>
+<li>時間複雜度 \(O(2^12 * 12\)，運行時間為 0.3s</li>
+</ul>
+<h3 id="雙向搜尋-Meet-in-the-middle"><a href="#雙向搜尋-Meet-in-the-middle" class="headerlink" title="雙向搜尋-Meet in the middle"></a><a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a></h3><p>透過雙向搜尋-Meet in the middle，我們將 12 個字母分成一組，再將兩組合併，只要這兩組的字母合起來為偶數並偶數數量為最大值時則代表我們搜尋成功。</p>
+<h3 id="字母-Hash"><a href="#字母-Hash" class="headerlink" title="字母 Hash"></a>字母 Hash</h3><p>稍微複習一下，左移(<code>a &lt;&lt; b</code> )，為 \(a * b ^ 2\)、右移(<code>a &gt;&gt; b</code>)，為 \(a / b ^ 2\)</p>
+<p>在這題，我們將運用到全新的黑科技(神奇的寫法)，透過<strong>二進位</strong>來 hash 每一個字母，A 為 1、B 為 2、C 為 4、D 為 8，想必大家都看的出來了，沒錯，那就是透過二進位的位數來進行 hash，因此程式碼會這樣寫</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> &lt;&lt; (<span class="built_in">string</span>[j] - <span class="string">'A'</span>) <span class="comment">//找出該字母的 hash</span></span><br></pre></td></tr></table></figure>
+
+<p>再聰明一點的朋友肯定會更多想一步，那這樣我就可以透過加法來給出每一行字串的 hash 了，這時候要請大家再回去看<a href="https://theriseofdavid.github.io/2020/12/15/UVa/UVa1326/#題目大意：" target="_blank" rel="noopener">題目大意</a>需要注意的第二點，那些標籤也可以跟自己的字串組合，因此這裡我們不使用加法而是使用 <strong>xor</strong>，來解決此問題，透過 xor 在兩個字母的 hash 都一樣時會變回 0，就可以方便處理到加法會進位的問題。</p>
+<p>舉例： <code>3 xor 3 = 0</code></p>
+<p>因此我們的 hash 字母可以這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">memset</span>(mark,<span class="number">0</span>,<span class="keyword">sizeof</span>(mark)); <span class="comment">//mark 為每一行存的 hash 值</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; temp ;</span><br><span class="line">    x = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; temp.length() ; j++)</span><br><span class="line">        x ^= <span class="number">1</span> &lt;&lt; (temp[j] - <span class="string">'A'</span>); <span class="comment">//字母 hash 並檢查奇偶數</span></span><br><span class="line">    mark[i] = x ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="雙向搜尋-Meet-in-the-middle-實作"><a href="#雙向搜尋-Meet-in-the-middle-實作" class="headerlink" title="雙向搜尋-Meet in the middle 實作"></a>雙向搜尋-Meet in the middle 實作</h3><p>這裡也要用到 2 進位，2 進位真的好用。</p>
+<p>透過二進位的關係，可以寫出一種組合為<strong>全部的資料運用</strong>，我們用舉例的應該大家會比較好懂：</p>
+<h4 id="舉例：n-3，我們想要輸出-3-的全部組合"><a href="#舉例：n-3，我們想要輸出-3-的全部組合" class="headerlink" title="舉例：n = 3，我們想要輸出 3 的全部組合"></a>舉例：n = 3，我們想要輸出 3 的全部組合</h4><p>n = 3，於是我們找到二進位位數等於 3 的最大值 = 7，並透過 for(i &lt;= 8)，對 i 變數中位元為 1 的值紀錄可以發現以下有趣的事：</p>
+<table>
+<thead>
+<tr>
+<th>數字</th>
+<th>位元為 1 的值紀錄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0,1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0,2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1,2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0,1,2</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<p>透過紀錄每一個數字位元為 1 的值，竟然可以將每一行的組合都找到！太神了拉！</p>
+<p>其實是利用二進位的數字增加，透過此方式來找出全部的組合。</p>
+<h3 id="回歸焦點"><a href="#回歸焦點" class="headerlink" title="回歸焦點"></a>回歸焦點</h3><p>我們現在已經可以找出全部的組合了，再來就是要每個組合進行 xor，並且保存記錄下來，值得注意的地方則是假如有兩個的 hash 值為一樣時，題目要求的是組合行數最大，因此當兩個 hash 值相同時我們則要找出使用最多行的 hash 值作為標準(最多行的組合)，因此我們再透過<code>__builtin_popcount</code>函數可以幫助我們找出此數字內有多少個 1，來完成此判斷。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; m1 , m2 ; <span class="comment">//紀錄 m1 為拆開的前半圖、m2為拆開的後半圖</span></span><br><span class="line"><span class="keyword">int</span> div1 = n/<span class="number">2</span> , div2 = n - n/<span class="number">2</span> ; <span class="comment">//div1 為前半圖的寬度,div2 為後半圖的寬度</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; ( <span class="number">1</span> &lt;&lt;div1) ; i++ )&#123; <span class="comment">// 1 &lt;&lt; div1 找到最大位數</span></span><br><span class="line">    x = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div1 ; j++ )&#123; <span class="comment">//div1 檢查這三位數即可</span></span><br><span class="line">        <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j] ; <span class="comment">//紀錄有 1 的位數，並且讓他與那行進行 hash</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!m1.count(x) || __builtin_popcount(m1[x]) &lt; __builtin_popcount(i) ) </span><br><span class="line">    <span class="comment">//比較是否有更多行的組合</span></span><br><span class="line">        m1[x] = i ; <span class="comment">//紀錄用到的行數，之後可以用位元為 1 的值回推</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; (<span class="number">1</span> &lt;&lt; div2) ; i++)&#123; <span class="comment">// 1 &lt;&lt; div2 的最大位數</span></span><br><span class="line">    x = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div2 ; j++)&#123; <span class="comment">//div2 檢查這三位數即可</span></span><br><span class="line">        <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j + div1]; </span><br><span class="line">        <span class="comment">//紀錄有 1 的位數，並且讓他與那行進行 hash，並且 mark[j + div1]，</span></span><br><span class="line">        <span class="comment">//需要加 div1 是因為這是後半張的圖，且我們 index 從 0 開始，因此只需要加 dvi1，不須 +1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!m2.count(x) || __builtin_popcount(m2[x]) &lt; __builtin_popcount(i) )</span><br><span class="line">    <span class="comment">//比較是否有更多行的組合</span></span><br><span class="line">        m2[x] = i ; <span class="comment">//紀錄用到的行數，之後可以用位元為 1 的值回推</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="結合兩張圖，找出答案"><a href="#結合兩張圖，找出答案" class="headerlink" title="結合兩張圖，找出答案"></a>結合兩張圖，找出答案</h3><p>現在我們將兩張圖都執行完畢也得到結果了，那是時候進行合併了！要怎麼合併呢？我們只需要查詢 m1 的資料有沒有在 m2 裡面就可以了！</p>
+<p>為甚麼只需要這樣做呢？是因為我們 m1,m2 分別存了兩張圖的所有組合，我們只要找出這兩張圖組合起來最大的值即可，所以不需要檢查前半圖某一的組合裡面的某幾行是否有跟後半圖的某幾行形成偶數，因為這樣就會是前半圖的另外一個組合選項，故此不用。</p>
+<p>並且記錄最大配對數量與最多配對行的 hash 即可</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> resMask = <span class="number">0</span> , resCnt = <span class="number">0</span> ; <span class="comment">//resCnt 最大的配對數量</span></span><br><span class="line"><span class="comment">//resMask 紀錄我們用到的值，hash 狀態，方便我們之後透過位元為1的位數來回推用到的行數 </span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it : m1)&#123; <span class="comment">//不斷進行配對</span></span><br><span class="line">    <span class="keyword">if</span>(m2.count(it.first))&#123; <span class="comment">//找到適合的配對</span></span><br><span class="line">        x = (m2[it.first] &lt;&lt; div1) | it.second ; </span><br><span class="line">        <span class="comment">//(m2[it.first] &lt;&lt; div1) 我們先前存的資料行數是假設為這是一張獨立分開的圖，</span></span><br><span class="line">        <span class="comment">//因此現在我們進行合併，就要將資料行數返回題目原本正確的行數，因此幫她 &lt;&lt; div1 </span></span><br><span class="line">        <span class="keyword">if</span>(resCnt &lt; __builtin_popcount(x)) resCnt = __builtin_popcount(x) , resMask = x ;</span><br><span class="line">        <span class="comment">//如果有比當前配對最大數量還高時，我們就將 resCnt , resMask 換成現在的值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="hash-resMask"><a href="#hash-resMask" class="headerlink" title="hash resMask"></a>hash resMask</h3><p>這時候我們將記錄好的 resMask，解密成我們原本要的值，透過之前的表格可以得知，假如我們的 <code>resMask = 7</code>，則我們用到的行數則是 1,2,3，因此我們只需要將紀錄的 resMask 找出所有位數為 1 的值就能將值解密成功。</p>
+<p>需要注意的是，在輸出時，每行的最後一個都必須是數字，而不是空格。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> flag = <span class="number">1</span> ; <span class="comment">//紀錄第一個值是否已經被印出</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; resCnt &lt;&lt; <span class="string">'\n'</span> ; <span class="comment">//印出最大配對數量</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>((resMask &gt;&gt; i) &amp; <span class="number">1</span>)&#123; <span class="comment">//判斷 i 位數是否為 1</span></span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="built_in">cout</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">        flag = <span class="number">0</span> ; <span class="comment">//被輸出因此設成 0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><p>記住如果是要判斷字典是否有此值時請使用，<code>if(map.count(i))</code>，而不是<code>if(map[i])</code>，在現在的 UVa Judge 中，只有第一種可以被允許使用，第二種目前不行，因此請不要隨意亂使用</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講，難的不是雙向搜尋，而是位元運算阿…，特別是那個透過二進位加法來找出全部的組合真的是跟神一樣，這是我從來沒有想過的解決方案，讓我在這邊學到了，算是非常開心呢！雖然自學演算法真的是一件非常痛苦的事情，但學習成功的成就感以及能讓腦袋智力快速上升的感覺真的事非常痛快呢！</p>
+<p>也希望我可以在比賽中成功使用到我所學習到的演算法，或是在生活中用到，那是再好不過的了！</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/sinat_36215255/article/details/78266381?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control" target="_blank" rel="noopener">[UVA-1326] （暴力+位运算+中间相遇法）</a><br><a href="http://morris821028.github.io/2015/04/27/uva-1326/" target="_blank" rel="noopener">UVa 1326 - Jurassic Remains</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 30</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"><span class="keyword">int</span> n , mark[MAXN] , x ;</span><br><span class="line"><span class="built_in">string</span> temp ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(mark,<span class="number">0</span>,<span class="keyword">sizeof</span>(mark));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp ;</span><br><span class="line">            x = <span class="number">0</span> ;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; temp.length() ; j++)</span><br><span class="line">                x ^= <span class="number">1</span> &lt;&lt; (temp[j] - <span class="string">'A'</span>);</span><br><span class="line">            mark[i] = x ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; m1 , m2 ;</span><br><span class="line">        <span class="keyword">int</span> div1 = n/<span class="number">2</span> , div2 = n - n/<span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; ( <span class="number">1</span> &lt;&lt;div1) ; i++ )&#123;</span><br><span class="line">            x = <span class="number">0</span> ;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div1 ; j++ )&#123;</span><br><span class="line">                <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j] ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!m1.count(x) || __builtin_popcount(m1[x]) &lt; __builtin_popcount(i) )</span><br><span class="line">                m1[x] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; (<span class="number">1</span> &lt;&lt; div2) ; i++)&#123;</span><br><span class="line">            x = <span class="number">0</span> ;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div2 ; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j + div1];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!m2.count(x) || __builtin_popcount(m2[x]) &lt; __builtin_popcount(i) )</span><br><span class="line">                m2[x] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> resMask = <span class="number">0</span> , resCnt = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it : m1)&#123;</span><br><span class="line">            <span class="keyword">if</span>(m2.count(it.first))&#123;</span><br><span class="line">                x = (m2[it.first] &lt;&lt; div1) | it.second ;</span><br><span class="line">                <span class="keyword">if</span>(resCnt &lt; __builtin_popcount(x)) resCnt = __builtin_popcount(x) , resMask = x ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">1</span> ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; resCnt &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>((resMask &gt;&gt; i) &amp; <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(flag) <span class="built_in">cout</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">                flag = <span class="number">0</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>雙向搜尋</tag>
+        <tag>位元運算</tag>
       </tags>
   </entry>
 </search>

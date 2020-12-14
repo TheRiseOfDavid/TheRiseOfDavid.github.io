@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa208 - Firetruck (雙向搜尋-Meet in the middle、位元運算) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa1326" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa208 - Firetruck (雙向搜尋-Meet in the middle、位元運算)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/15/UVa/UVa1326/" class="article-date">
+  <time datetime="2020-12-14T18:28:36.000Z" itemprop="datePublished">2020-12-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">11分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>考古學家們挖到恐龍化石，但恐龍化石太大沒有辦法被載送回來，於是考古學家就將化石切成零件，並做上標記，載回博物館；但遇到了一個麻煩，同時有另外一批化石也被送回博物館，同時也是將化石切稱 零件，運氣不好的是他們的零件標記與我們使用的符號相同，我們的目標就是找出我們的恐龍化石，並且透過我們的零件組回化石。</p>
+<p>有五點需要特別注意：</p>
+<ul>
+<li>零件組合必須是兩個相同的標籤組成</li>
+<li>每一個化石標籤，都必須都有相同的化石標籤且<strong>不一定是</strong>另外一個零件，也可以是自己的</li>
+<li>我們找回的化石必須要是零件配對數量最大的，也就是零件配對數量必須要最高</li>
+<li>一個零件中的所有標籤，每一個都必須被使用到</li>
+<li>零件最多不會超過 25</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="懶人包題目大意："><a href="#懶人包題目大意：" class="headerlink" title="懶人包題目大意："></a>懶人包題目大意：</h2><p>是不是覺得上面很煩不想看？因此我有特別寫一個簡單版的。</p>
+<p>利用題目測試資料的 x 行選出 y 行能夠將每一個字母的數字總合為偶數，且 y 必須是最大。<del>好懂了八</del></p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>由於必須輸出最大的行數且必須要輸出有哪些行，因此這裡 brute force 會是最好的選擇。</p>
+<p>這題 Udebug 沒有提供測資，好難過啊QwQ。</p>
+<h3 id="時間複雜度"><a href="#時間複雜度" class="headerlink" title="時間複雜度"></a>時間複雜度</h3><p>我們先來分析一下時間複雜度，如果使用 brute force 時複雜度會是 \(O(2^24)\)，選或不選並且有至少有 24 個英文字母，時間複雜度會太高，因此我們這邊使用<a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a>，將時間複雜度優化至\(O(2^12 * 12) \)，選或不選有 12 個英文字母，且每一個都可以在與另外 12 個英文字母考慮選或不選，</p>
+<ul>
+<li>時間複雜度 \(O(2^24)\)，運行時間為 1.110s<br>程式碼由<a href="https://blog.csdn.net/keshuai19940722/article/details/18995013" target="_blank" rel="noopener">JeraKrs 提供</a></li>
+<li>時間複雜度 \(O(2^12 * 12\)，運行時間為 0.3s</li>
+</ul>
+<h3 id="雙向搜尋-Meet-in-the-middle"><a href="#雙向搜尋-Meet-in-the-middle" class="headerlink" title="雙向搜尋-Meet in the middle"></a><a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a></h3><p>透過雙向搜尋-Meet in the middle，我們將 12 個字母分成一組，再將兩組合併，只要這兩組的字母合起來為偶數並偶數數量為最大值時則代表我們搜尋成功。</p>
+<h3 id="字母-Hash"><a href="#字母-Hash" class="headerlink" title="字母 Hash"></a>字母 Hash</h3><p>稍微複習一下，左移(<code>a &lt;&lt; b</code> )，為 \(a * b ^ 2\)、右移(<code>a &gt;&gt; b</code>)，為 \(a / b ^ 2\)</p>
+<p>在這題，我們將運用到全新的黑科技(神奇的寫法)，透過<strong>二進位</strong>來 hash 每一個字母，A 為 1、B 為 2、C 為 4、D 為 8，想必大家都看的出來了，沒錯，那就是透過二進位的位數來進行 hash，因此程式碼會這樣寫</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> &lt;&lt; (<span class="built_in">string</span>[j] - <span class="string">'A'</span>) <span class="comment">//找出該字母的 hash</span></span><br></pre></td></tr></table></figure>
+
+<p>再聰明一點的朋友肯定會更多想一步，那這樣我就可以透過加法來給出每一行字串的 hash 了，這時候要請大家再回去看<a href="https://theriseofdavid.github.io/2020/12/15/UVa/UVa1326/#題目大意：" target="_blank" rel="noopener">題目大意</a>需要注意的第二點，那些標籤也可以跟自己的字串組合，因此這裡我們不使用加法而是使用 <strong>xor</strong>，來解決此問題，透過 xor 在兩個字母的 hash 都一樣時會變回 0，就可以方便處理到加法會進位的問題。</p>
+<p>舉例： <code>3 xor 3 = 0</code></p>
+<p>因此我們的 hash 字母可以這樣寫：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(mark,<span class="number">0</span>,<span class="keyword">sizeof</span>(mark)); <span class="comment">//mark 為每一行存的 hash 值</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; temp ;</span><br><span class="line">    x = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; temp.length() ; j++)</span><br><span class="line">        x ^= <span class="number">1</span> &lt;&lt; (temp[j] - <span class="string">'A'</span>); <span class="comment">//字母 hash 並檢查奇偶數</span></span><br><span class="line">    mark[i] = x ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="雙向搜尋-Meet-in-the-middle-實作"><a href="#雙向搜尋-Meet-in-the-middle-實作" class="headerlink" title="雙向搜尋-Meet in the middle 實作"></a>雙向搜尋-Meet in the middle 實作</h3><p>這裡也要用到 2 進位，2 進位真的好用。</p>
+<p>透過二進位的關係，可以寫出一種組合為<strong>全部的資料運用</strong>，我們用舉例的應該大家會比較好懂：</p>
+<h4 id="舉例：n-3，我們想要輸出-3-的全部組合"><a href="#舉例：n-3，我們想要輸出-3-的全部組合" class="headerlink" title="舉例：n = 3，我們想要輸出 3 的全部組合"></a>舉例：n = 3，我們想要輸出 3 的全部組合</h4><p>n = 3，於是我們找到二進位位數等於 3 的最大值 = 7，並透過 for(i &lt;= 8)，對 i 變數中位元為 1 的值紀錄可以發現以下有趣的事：</p>
+<table>
+<thead>
+<tr>
+<th>數字</th>
+<th>位元為 1 的值紀錄</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0,1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0,2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1,2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0,1,2</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<p>透過紀錄每一個數字位元為 1 的值，竟然可以將每一行的組合都找到！太神了拉！</p>
+<p>其實是利用二進位的數字增加，透過此方式來找出全部的組合。</p>
+<h3 id="回歸焦點"><a href="#回歸焦點" class="headerlink" title="回歸焦點"></a>回歸焦點</h3><p>我們現在已經可以找出全部的組合了，再來就是要每個組合進行 xor，並且保存記錄下來，值得注意的地方則是假如有兩個的 hash 值為一樣時，題目要求的是組合行數最大，因此當兩個 hash 值相同時我們則要找出使用最多行的 hash 值作為標準(最多行的組合)，因此我們再透過<code>__builtin_popcount</code>函數可以幫助我們找出此數字內有多少個 1，來完成此判斷。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; m1 , m2 ; <span class="comment">//紀錄 m1 為拆開的前半圖、m2為拆開的後半圖</span></span><br><span class="line"><span class="keyword">int</span> div1 = n/<span class="number">2</span> , div2 = n - n/<span class="number">2</span> ; <span class="comment">//div1 為前半圖的寬度,div2 為後半圖的寬度</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; ( <span class="number">1</span> &lt;&lt;div1) ; i++ )&#123; <span class="comment">// 1 &lt;&lt; div1 找到最大位數</span></span><br><span class="line">    x = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div1 ; j++ )&#123; <span class="comment">//div1 檢查這三位數即可</span></span><br><span class="line">        <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j] ; <span class="comment">//紀錄有 1 的位數，並且讓他與那行進行 hash</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!m1.count(x) || __builtin_popcount(m1[x]) &lt; __builtin_popcount(i) ) </span><br><span class="line">    <span class="comment">//比較是否有更多行的組合</span></span><br><span class="line">        m1[x] = i ; <span class="comment">//紀錄用到的行數，之後可以用位元為 1 的值回推</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; (<span class="number">1</span> &lt;&lt; div2) ; i++)&#123; <span class="comment">// 1 &lt;&lt; div2 的最大位數</span></span><br><span class="line">    x = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div2 ; j++)&#123; <span class="comment">//div2 檢查這三位數即可</span></span><br><span class="line">        <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j + div1]; </span><br><span class="line">        <span class="comment">//紀錄有 1 的位數，並且讓他與那行進行 hash，並且 mark[j + div1]，</span></span><br><span class="line">        <span class="comment">//需要加 div1 是因為這是後半張的圖，且我們 index 從 0 開始，因此只需要加 dvi1，不須 +1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!m2.count(x) || __builtin_popcount(m2[x]) &lt; __builtin_popcount(i) )</span><br><span class="line">    <span class="comment">//比較是否有更多行的組合</span></span><br><span class="line">        m2[x] = i ; <span class="comment">//紀錄用到的行數，之後可以用位元為 1 的值回推</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="結合兩張圖，找出答案"><a href="#結合兩張圖，找出答案" class="headerlink" title="結合兩張圖，找出答案"></a>結合兩張圖，找出答案</h3><p>現在我們將兩張圖都執行完畢也得到結果了，那是時候進行合併了！要怎麼合併呢？我們只需要查詢 m1 的資料有沒有在 m2 裡面就可以了！</p>
+<p>為甚麼只需要這樣做呢？是因為我們 m1,m2 分別存了兩張圖的所有組合，我們只要找出這兩張圖組合起來最大的值即可，所以不需要檢查前半圖某一的組合裡面的某幾行是否有跟後半圖的某幾行形成偶數，因為這樣就會是前半圖的另外一個組合選項，故此不用。</p>
+<p>並且記錄最大配對數量與最多配對行的 hash 即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> resMask = <span class="number">0</span> , resCnt = <span class="number">0</span> ; <span class="comment">//resCnt 最大的配對數量</span></span><br><span class="line"><span class="comment">//resMask 紀錄我們用到的值，hash 狀態，方便我們之後透過位元為1的位數來回推用到的行數 </span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it : m1)&#123; <span class="comment">//不斷進行配對</span></span><br><span class="line">    <span class="keyword">if</span>(m2.count(it.first))&#123; <span class="comment">//找到適合的配對</span></span><br><span class="line">        x = (m2[it.first] &lt;&lt; div1) | it.second ; </span><br><span class="line">        <span class="comment">//(m2[it.first] &lt;&lt; div1) 我們先前存的資料行數是假設為這是一張獨立分開的圖，</span></span><br><span class="line">        <span class="comment">//因此現在我們進行合併，就要將資料行數返回題目原本正確的行數，因此幫她 &lt;&lt; div1 </span></span><br><span class="line">        <span class="keyword">if</span>(resCnt &lt; __builtin_popcount(x)) resCnt = __builtin_popcount(x) , resMask = x ;</span><br><span class="line">        <span class="comment">//如果有比當前配對最大數量還高時，我們就將 resCnt , resMask 換成現在的值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="hash-resMask"><a href="#hash-resMask" class="headerlink" title="hash resMask"></a>hash resMask</h3><p>這時候我們將記錄好的 resMask，解密成我們原本要的值，透過之前的表格可以得知，假如我們的 <code>resMask = 7</code>，則我們用到的行數則是 1,2,3，因此我們只需要將紀錄的 resMask 找出所有位數為 1 的值就能將值解密成功。</p>
+<p>需要注意的是，在輸出時，每行的最後一個都必須是數字，而不是空格。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> flag = <span class="number">1</span> ; <span class="comment">//紀錄第一個值是否已經被印出</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; resCnt &lt;&lt; <span class="string">'\n'</span> ; <span class="comment">//印出最大配對數量</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>((resMask &gt;&gt; i) &amp; <span class="number">1</span>)&#123; <span class="comment">//判斷 i 位數是否為 1</span></span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="built_in">cout</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">        flag = <span class="number">0</span> ; <span class="comment">//被輸出因此設成 0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><p>記住如果是要判斷字典是否有此值時請使用，<code>if(map.count(i))</code>，而不是<code>if(map[i])</code>，在現在的 UVa Judge 中，只有第一種可以被允許使用，第二種目前不行，因此請不要隨意亂使用</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講，難的不是雙向搜尋，而是位元運算阿…，特別是那個透過二進位加法來找出全部的組合真的是跟神一樣，這是我從來沒有想過的解決方案，讓我在這邊學到了，算是非常開心呢！雖然自學演算法真的是一件非常痛苦的事情，但學習成功的成就感以及能讓腦袋智力快速上升的感覺真的事非常痛快呢！</p>
+<p>也希望我可以在比賽中成功使用到我所學習到的演算法，或是在生活中用到，那是再好不過的了！</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/sinat_36215255/article/details/78266381?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-1.control" target="_blank" rel="noopener">[UVA-1326] （暴力+位运算+中间相遇法）</a><br><a href="http://morris821028.github.io/2015/04/27/uva-1326/" target="_blank" rel="noopener">UVa 1326 - Jurassic Remains</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>其實就是沒有附上說明的程式碼，看得懂跟說得出來真的是兩回事，也許還有人覺得我說的很差，不過我已經盡力解釋。希望可以幫助到各位。</p>
+<p>也希望大家想要學習的知識都可以快速學習而成，不要因為自身的環境不足而學習不到。</p>
+<p>於是這裡就補述一些題目給的資料範圍限制與標頭檔了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 30</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span> ;</span><br><span class="line"><span class="keyword">int</span> n , mark[MAXN] , x ;</span><br><span class="line"><span class="built_in">string</span> temp ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(mark,<span class="number">0</span>,<span class="keyword">sizeof</span>(mark));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp ;</span><br><span class="line">            x = <span class="number">0</span> ;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; temp.length() ; j++)</span><br><span class="line">                x ^= <span class="number">1</span> &lt;&lt; (temp[j] - <span class="string">'A'</span>);</span><br><span class="line">            mark[i] = x ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; m1 , m2 ;</span><br><span class="line">        <span class="keyword">int</span> div1 = n/<span class="number">2</span> , div2 = n - n/<span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; ( <span class="number">1</span> &lt;&lt;div1) ; i++ )&#123;</span><br><span class="line">            x = <span class="number">0</span> ;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div1 ; j++ )&#123;</span><br><span class="line">                <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j] ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!m1.count(x) || __builtin_popcount(m1[x]) &lt; __builtin_popcount(i) )</span><br><span class="line">                m1[x] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; (<span class="number">1</span> &lt;&lt; div2) ; i++)&#123;</span><br><span class="line">            x = <span class="number">0</span> ;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; div2 ; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((i &gt;&gt; j ) &amp; <span class="number">1</span>) x ^= mark[j + div1];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!m2.count(x) || __builtin_popcount(m2[x]) &lt; __builtin_popcount(i) )</span><br><span class="line">                m2[x] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> resMask = <span class="number">0</span> , resCnt = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it : m1)&#123;</span><br><span class="line">            <span class="keyword">if</span>(m2.count(it.first))&#123;</span><br><span class="line">                x = (m2[it.first] &lt;&lt; div1) | it.second ;</span><br><span class="line">                <span class="keyword">if</span>(resCnt &lt; __builtin_popcount(x)) resCnt = __builtin_popcount(x) , resMask = x ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">1</span> ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; resCnt &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>((resMask &gt;&gt; i) &amp; <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(flag) <span class="built_in">cout</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; i+<span class="number">1</span> ;</span><br><span class="line">                flag = <span class="number">0</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BD%8D%E5%85%83%E9%81%8B%E7%AE%97/" rel="tag">位元運算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%99%E5%90%91%E6%90%9C%E5%B0%8B/" rel="tag">雙向搜尋</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/12/14/Explain_Algorithm/Two-way-search/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">演算法知識 - Two way search 雙向搜尋</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

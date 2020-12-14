@@ -162,8 +162,8 @@ ga('send', 'pageview');
 </ul>
 <h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><ul>
 <li>Classical Method<br>將所有的實驗結果機率<strong>平均</strong>分配，分配為 \(1 \ n \)</li>
-<li>Relative Frequency Method<br>根據<strong>實驗或歷史數據</strong>分配機率</li>
-<li>Subjective Method 主觀方法，通常是用百分比進行分配<br>透過<strong>主觀方式</strong>分配機率，爽，想怎麼分配就怎麼分配</li>
+<li>Relative Frequency Method<br>根據<strong>實驗或歷史數據</strong>分配機率，通常是用百分比進行分配</li>
+<li>Subjective Method 主觀方法<br>透過<strong>主觀方式</strong>分配機率，爽，想怎麼分配就怎麼分配</li>
 <li>通常會結合上面三種方法，來找到最正確的實驗結果機率</li>
 </ul>
 <h2 id="Events-and-Their-Probabilities-事件與他們的機率"><a href="#Events-and-Their-Probabilities-事件與他們的機率" class="headerlink" title="Events and Their Probabilities 事件與他們的機率"></a>Events and Their Probabilities 事件與他們的機率</h2><ul>
@@ -185,7 +185,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>Intersection 交集<ul>
-<li>Multiplication Law(乘法律)<br>\(P(A \cap B) = P(B)P(A|B) = P(A)P(B|A) )\)，其中 \(P(A|B)\)為<a href="#Conditional-Probability-條件機率">條件機率</a><blockquote>
+<li>Multiplication Law(乘法律)<br>\(P(A \cap B) = P(B)P(A|B) = P(A)P(B|A) \)，其中 \(P(A|B)\)為<a href="#Conditional-Probability-條件機率">條件機率</a><blockquote>
 <p><img src="/images/statistics-1081-mid/6.PNG" alt=""></p>
 </blockquote>
 </li>
@@ -219,7 +219,7 @@ ga('send', 'pageview');
 </ul>
 <h3 id="Mutual-Exclusiveness-and-Independence-互斥與獨立"><a href="#Mutual-Exclusiveness-and-Independence-互斥與獨立" class="headerlink" title="Mutual Exclusiveness and Independence 互斥與獨立"></a>Mutual Exclusiveness and Independence 互斥與獨立</h3><ul>
 <li>互斥事件與獨立事件<strong>不同</strong></li>
-<li>機率不等於 0 的兩個事件不可以互斥或獨立，即兩個事件只要機率 \(&gt; 0\)，就表示一定有關係</li>
+<li>機率大於 0 的兩個事件不會<strong>同時</strong>有互斥與獨立，即兩個事件只要機率 \(&gt; 0\)，就表示一定有關係</li>
 <li>如果知道事件 A , B 是互斥事件，當 A 發生時 B 不會發生，因此他們是有相關的，並不是<strong>獨立事件</strong>，因為會互相影響</li>
 <li>如果事件 A , B 不是互斥事件，那他們<strong>有可能是</strong>獨立事件</li>
 </ul>
@@ -240,7 +240,7 @@ ga('send', 'pageview');
 <blockquote>
 <p><img src="/images/statistics-1081-mid/10.PNG" alt=""></p>
 </blockquote>
-<p>根據我們規畫委員會的建議後，我們可以得出<br>\(P(A_1 |B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A^2)P(B|A_2)} \\ = \frac{(0.7)(0.2)}{(0.7)(0.2) + (0.3)(0.9)} = 0.34 \)</p>
+<p>根據我們規畫委員會的建議後，我們可以得出<br>\(P(A_1 |B) = \frac{P(A_1)P(B|A_1)}{P(A_1)P(B|A_1) + P(A_2)P(B|A_2)} \\ = \frac{(0.7)(0.2)}{(0.7)(0.2) + (0.3)(0.9)} = 0.34 \)</p>
 <p>其中 \(P(B) = P(A_1 \cap B) + P(A_2 \cap B) \)</p>
 <h4 id="conclusion-A-1"><a href="#conclusion-A-1" class="headerlink" title="conclusion A-1"></a>conclusion A-1</h4><p>這對不想要興建購物中心的人認為是一個好消息，因為從原本支持興建的機率 0.7 降至 0.34</p>
 <p>透過表來解讀則是</p>
@@ -279,11 +279,11 @@ ga('send', 'pageview');
 </tr>
 <tr>
 <td><a href="#binomial-二項">二項</a></td>
-<td>N次試驗中成功的次數</td>
+<td>求在 n 是實驗中 x 次成功才能達到期望結果的機率</td>
 </tr>
 <tr>
 <td><a href="#negative-binomial-負二項">負二項</a></td>
-<td>N次試驗中r次成功的機率</td>
+<td>需要x 次實驗才能夠達到期望結果的機率</td>
 </tr>
 <tr>
 <td><a href="#geometric-幾何">幾何</a></td>
