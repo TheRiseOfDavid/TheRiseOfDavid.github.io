@@ -7953,15 +7953,22 @@
 </ul>
 </li>
 </ul>
-<h2 id="Point-Estimation-點估計量"><a href="#Point-Estimation-點估計量" class="headerlink" title="Point Estimation 點估計量"></a>Point Estimation 點估計量</h2><p>推測母體參數中某個數值。</p>
+<h2 id="Point-Estimation-點估計量"><a href="#Point-Estimation-點估計量" class="headerlink" title="Point Estimation 點估計量"></a>Point Estimation 點估計量</h2><p>推測母體參數中某個數值</p>
 <ul>
-<li>\(\bar{x} \) 的點估計量就是平均值</li>
+<li>\( \bar{x} \) 的點估計量就是平均值</li>
 <li>s 點估計量為母體標準差</li>
-<li>\(\bar{p} \) 為母體比例 p 的點估計量</li>
+<li>\( \bar{p} \) 為母體比例 p 的點估計量</li>
 </ul>
-<h3 id="舉例："><a href="#舉例：" class="headerlink" title="舉例："></a>舉例：</h3><p>P.S. 這裡的資料是在影片前面有抽過，但我沒有截圖作為紀錄，這裡的數字看看就好</p>
+<h3 id="舉例-St-Andrew’s-College"><a href="#舉例-St-Andrew’s-College" class="headerlink" title="舉例 - St. Andrew’s College"></a>舉例 - St. Andrew’s College</h3><p>Recall that St. Andrew’s College received 900 applications from prospective students. The application form contains a variety of information including the individual’s Scholastic Aptitude Test (SAT) score and whether or not the individual desires on-campus housing.</p>
+<p>回想一下，聖安德魯學院收到了來自潛在學生的900份申請。 申請表包含各種信息，包括個人的學業能力測驗（SAT）分數以及個人是否希望在校內住宿。</p>
+<p>P.S. 這裡的資料是在影片前面的抽樣資料為虛擬且抽樣數為 30，因此數字看看就好</p>
+<ul>
+<li>20 為申請住宿的量</li>
+<li>50520 為分數總合</li>
+<li>210512 則是透過公式與原始資料得出</li>
+</ul>
 <blockquote>
-<p><img src="/images/statistics-ch7/1.PNG" alt=""><br><img src="/images/statistics-ch7/2.PNG" alt=""></p>
+<p><img src="/images/statistics-ch7/2.PNG" alt=""></p>
 </blockquote>
 <p>下面這張圖片則是透過<strong>完整原始資料</strong>來進行計算</p>
 <blockquote>
@@ -7970,6 +7977,99 @@
 <h4 id="比較："><a href="#比較：" class="headerlink" title="比較："></a>比較：</h4><blockquote>
 <p><img src="/images/statistics-ch7/4.PNG" alt=""></p>
 </blockquote>
+<h2 id="Introduction-to-Sampling-Distributions-抽樣分配"><a href="#Introduction-to-Sampling-Distributions-抽樣分配" class="headerlink" title="Introduction to Sampling Distributions 抽樣分配"></a>Introduction to Sampling Distributions 抽樣分配</h2><p><strong>每一次的抽樣計算出來的值都有可能不一樣</strong>，因為選擇的樣本不同。</p>
+<p>但透過抽樣分配的次數越多，根據抽樣分配的次數會發現圖形長得像常態分配，即越偏差母體標準差的抽樣分配機率越小，越靠近的越大。</p>
+<h3 id="舉例-關於公司管理職"><a href="#舉例-關於公司管理職" class="headerlink" title="舉例 - 關於公司管理職"></a>舉例 - 關於公司管理職</h3><p>公司總共有 2500 位管理職(母體)，我們想要知道下面以下問題：</p>
+<ul>
+<li>母體的平均年薪</li>
+<li>母體的年薪標準差</li>
+<li>母體中有完成教育訓練的值(母體參數)</li>
+</ul>
+<h4 id="答案-透過點估計量"><a href="#答案-透過點估計量" class="headerlink" title="答案 - 透過點估計量"></a>答案 - 透過點估計量</h4><ul>
+<li><p>抽樣資料如下，有 30 筆</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/5.PNG" alt=""></p>
+</blockquote>
+</li>
+<li><p>Point estimation</p>
+<ul>
+<li>\(\bar{x} = \frac{\Sigma X_i}{n} = \frac{1,554,420}{30} = 51,814 \)</li>
+<li>\(s = \sqrt{\frac{\Sigma (X_i - \bar{x})^2 }{n-1}} = \sqrt{\frac{325,009,260}{29}} = 3348 \)</li>
+<li>\(\bar{p} = \frac{x}{n} = \frac{19}{30} = 0.63 \)</li>
+</ul>
+</li>
+</ul>
+<h4 id="比對-原始資料"><a href="#比對-原始資料" class="headerlink" title="比對 - 原始資料"></a>比對 - 原始資料</h4><blockquote>
+<p><img src="/images/statistics-ch7/6.PNG" alt=""></p>
+</blockquote>
+<h2 id="Sampling-Distribution-of-bar-x"><a href="#Sampling-Distribution-of-bar-x" class="headerlink" title="Sampling Distribution of \(\bar{x} \)"></a>Sampling Distribution of \(\bar{x} \)</h2><p>就是要找出母體平均數。</p>
+<ul>
+<li>Expected Value of \(\bar{x} \)<br>公式為 \(E(\bar{x})=\mu \)，其中 \(\mu \) 為母體平均值</li>
+<li>Standard Deviation of \(\bar{x} \) <ul>
+<li>\(\sigma_{\bar{x}} \) 為<strong>樣本</strong>標準差，也稱為<strong>標準誤(standard error)</strong></li>
+<li>\(\sigma \) 為<strong>母體</strong>標準差</li>
+<li>\(n \) 為樣本大小</li>
+<li>\(N \) 為母體大小</li>
+<li>Finite Population 有限母體公式<ul>
+<li>\(\sigma_x = \sqrt{\frac{N-n}{N-1}}(\frac{\sigma}{\sqrt{n}})\)</li>
+<li>其中前項為校正因子(\(\sqrt{\frac{N-n}{N-1}}\))用來修正數值，但當 N 的數量趨近無限大時，校正因子幾乎會被視為零。</li>
+<li>當 \(n/N \leq 0.05 \) 時，就可以使用無限母體公式會更好計算，校正因子也幾乎變為零</li>
+<li>當 \(\frac{n}{N} &gt; 0.05 \) 時，\(\bar{x} \) 為常態分配</li>
+</ul>
+</li>
+<li>Infinite Population 無限母體公式<br>\(\sigma_x = \frac{\sigma}{\sqrt{n}}\) 且 \(\bar{x} \) 為常態分配</li>
+</ul>
+</li>
+<li>\(\bar{x} \) 服從常態分配有以下情況<ul>
+<li>樣本資料大於等於 30 筆資料時</li>
+<li>如果有高度偏態(skew)或是 outliers(離群值)太多時，只要樣本資料大於 50 筆也會是常態分配</li>
+</ul>
+</li>
+<li>透過機率來說明 \(\bar{x} \) 有多靠近母體平均值</li>
+</ul>
+<h2 id="Central-Limit-Theorem-中央極限定理"><a href="#Central-Limit-Theorem-中央極限定理" class="headerlink" title="Central Limit Theorem (中央極限定理)"></a>Central Limit Theorem (中央極限定理)</h2><p>中央極限定理提出越是大量的樣本抽取數量其圖形會逐漸變成常態分佈的形狀</p>
+<h3 id="透過圖形來證明"><a href="#透過圖形來證明" class="headerlink" title="透過圖形來證明"></a>透過圖形來證明</h3><ul>
+<li>Population 2 的圖形通常稱為兔耳型圖圖</li>
+</ul>
+<blockquote>
+<p><img src="/images/statistics-ch7/7.PNG" alt=""><br><img src="/images/statistics-ch7/8.PNG" alt=""></p>
+</blockquote>
+<p>我們透過上面的圖可以推出無論是什麼樣的圖都可以推出常態分布的樣本分配，只要樣本資料夠多</p>
+<h3 id="舉例-我們想找出離母體平均數加減-10-分有多少數量，也就是我們想要找-1687-1707-間的母體數量"><a href="#舉例-我們想找出離母體平均數加減-10-分有多少數量，也就是我們想要找-1687-1707-間的母體數量" class="headerlink" title="舉例 - 我們想找出離母體平均數加減 10 分有多少數量，也就是我們想要找 1687 ~ 1707 間的母體數量"></a>舉例 - 我們想找出離母體平均數加減 10 分有多少數量，也就是我們想要找 1687 ~ 1707 間的母體數量</h3><p>我們在先前的舉例中算出 \(\sigma_x = \frac{\sigma}{\sqrt{n}} = \frac{87.4}{\sqrt{30}} = 15.96 \)</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/9.PNG" alt=""></p>
+</blockquote>
+<p>現在我們先計算 z 值來轉換成標準常態機率分配，\(z = (1707 - 1697) / 15.96 = 0.63 \)，查表可以看到 z = 0.63 時機率為 0.7357，再來 \(z = (1687 - 1697) / 15.96 = -0.63 \)，查表可以得出 0.2643，兩個相減就等於 0.4714</p>
+<h3 id="舉例-根據上面的例子，我們現在抽樣-100-樣本，我們想要找-1687-1707-間的母體數量"><a href="#舉例-根據上面的例子，我們現在抽樣-100-樣本，我們想要找-1687-1707-間的母體數量" class="headerlink" title="舉例 - 根據上面的例子，我們現在抽樣 100 樣本，我們想要找 1687 ~ 1707 間的母體數量"></a>舉例 - 根據上面的例子，我們現在抽樣 100 樣本，我們想要找 1687 ~ 1707 間的母體數量</h3><p>這時候 \(E(x)\) 不變，母體平均值還是 1697。</p>
+<p>但因為我們的抽取樣本數量改變，因此標準差改變，透過標準差公式也就變成，\(\sigma_x = \sqrt{\frac{N-n}{N-1}}(\frac{\sigma}{\sqrt{n}}) = \frac{900-100}{900-1}(\frac{87.4}{\sqrt{100}} = 0.9433(8.74) = 8.2)\)</p>
+<p>跟上一個舉例進行比較，可以得證當樣本數量變大時，會符合中央極限定理</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/10.PNG" alt=""></p>
+</blockquote>
+<p>因為圖形不同，因此區間面積也不同需要再重新計算，當 n = 100 時，\(P(1687 \leq \bar{x} \leq 1707 ) = 0.7776\)</p>
+<h2 id="Sampling-Distribution-of-bar-p"><a href="#Sampling-Distribution-of-bar-p" class="headerlink" title="Sampling Distribution of \(\bar{p} \)"></a>Sampling Distribution of \(\bar{p} \)</h2><p>透過抽取 n 個元素的隨機樣本，計算\(\bar{p} \)之後再推論 \(p\)。</p>
+<ul>
+<li>Expected Value of \(\bar{p} \)<br>公式為 \(E(\bar{p}) = p \)</li>
+<li>Standard Deviation of \(\bar{p} \) <ul>
+<li>\(\sigma_{\bar{p}} \) 為<strong>樣本</strong>標準差，也稱為<strong>標準誤(standard error)</strong></li>
+<li>\(\sigma \) 為<strong>母體</strong>標準差</li>
+<li>\(n \) 為樣本大小</li>
+<li>\(N \) 為母體大小</li>
+<li>當 \(np &gt; 5 \) 時，\(n(1-p) \geq 5 \) 為常態分配</li>
+<li>Finite Population 有限母體公式<ul>
+<li>\(\sigma_p = \sqrt{\frac{N-n}{N-1}}(\sqrt{\frac{p(1-p)}{n}})\)</li>
+<li>其中前項為校正因子(\(\sqrt{\frac{N-n}{N-1}}\))用來修正數值，但當 N 的數量趨近無限大時，校正因子幾乎會被視為零。</li>
+<li>當 \(n/N \leq 0.05 \) 時，就可以使用無限母體公式會更好計算，校正因子也幾乎變為零</li>
+</ul>
+</li>
+<li>Infinite Population 無限母體公式<br>公式為 \(\sigma_p =(\sqrt{\frac{p(1-p)}{n}})\)</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例-有-72-的學生申請宿舍，我們抽樣-30-學生，想請問在此樣本中學生申請宿舍的在-72-加減-0-05-的機率是多少"><a href="#舉例-有-72-的學生申請宿舍，我們抽樣-30-學生，想請問在此樣本中學生申請宿舍的在-72-加減-0-05-的機率是多少" class="headerlink" title="舉例 - 有 72 % 的學生申請宿舍，我們抽樣 30 學生，想請問在此樣本中學生申請宿舍的在 72% 加減 0.05 的機率是多少"></a>舉例 - 有 72 % 的學生申請宿舍，我們抽樣 30 學生，想請問在此樣本中學生申請宿舍的在 72% 加減 0.05 的機率是多少</h3><p>我們先檢查是否有常態分配，n=30, p=0.72，因此 \(np = 30(0.72) = 21.6 \geq 5 \) and \(n(1-p) = 30(0.28) = 8.4 \geq 5 \)，都有大於 5，因此符合使用常態分配條件。</p>
+<p>由於這裡我們並不確定母體有多少學生，因此是 Infinite Population，計算就是 \(\sigma_{\bar{p}} = \sqrt{\frac{0.72(1-0.72)}{30}} = 0.082\)</p>
+<p>一樣先轉換成 z 值成為標準常態機率分配，\(z = (0.77-0.72)/0.082 =0.61\)，查表發現 \(0.61z = 0.7291 \)，再來查另外一個值 \(z = (0.67-0.72)/0.082 =-0.61\)，查表發現 \(-0.61z = 0.2709 \)，兩個相減就得出常態分配面積區間，答案為 0.4582。</p>
+<p>因此在這樣本中有 \((0.67 * 30) \) ~ \( (0.77 * 30)\) 機率的學生要申請宿舍的機率為 0.4582。</p>
 ]]></content>
       <categories>
         <category>北科上課筆記</category>
