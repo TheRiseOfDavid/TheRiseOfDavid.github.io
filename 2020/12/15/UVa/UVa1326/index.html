@@ -135,7 +135,7 @@ ga('send', 'pageview');
 <li>時間複雜度 \(O(2^12 * 12\)，運行時間為 0.3s</li>
 </ul>
 <h3 id="雙向搜尋-Meet-in-the-middle"><a href="#雙向搜尋-Meet-in-the-middle" class="headerlink" title="雙向搜尋-Meet in the middle"></a><a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a></h3><p>透過雙向搜尋-Meet in the middle，我們將 12 個字母分成一組，再將兩組合併，只要這兩組的字母合起來為偶數並偶數數量為最大值時則代表我們搜尋成功。</p>
-<h3 id="字母-Hash"><a href="#字母-Hash" class="headerlink" title="字母 Hash"></a>字母 Hash</h3><p>稍微複習一下，左移(<code>a &lt;&lt; b</code> )，為 \(a * b ^ 2\)、右移(<code>a &gt;&gt; b</code>)，為 \(a / b ^ 2\)</p>
+<h3 id="字母-Hash"><a href="#字母-Hash" class="headerlink" title="字母 Hash"></a>字母 Hash</h3><p>稍微複習一下，左移(<code>a &lt;&lt; b</code> )，為 \(a * 2 ^ b\)、右移(<code>a &gt;&gt; b</code>)，為 \(a / 2 ^ b\)</p>
 <p>在這題，我們將運用到全新的黑科技(神奇的寫法)，透過<strong>二進位</strong>來 hash 每一個字母，A 為 1、B 為 2、C 為 4、D 為 8，想必大家都看的出來了，沒錯，那就是透過二進位的位數來進行 hash，因此程式碼會這樣寫</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> &lt;&lt; (<span class="built_in">string</span>[j] - <span class="string">'A'</span>) <span class="comment">//找出該字母的 hash</span></span><br></pre></td></tr></table></figure>
 

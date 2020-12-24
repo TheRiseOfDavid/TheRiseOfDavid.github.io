@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa614 - Mapping the Route(DFS) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa614" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa614 - Mapping the Route(DFS)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/24/UVa/UVa614/" class="article-date">
+  <time datetime="2020-12-24T06:45:35.000Z" itemprop="datePublished">2020-12-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給予一張地圖，再給你起點與終點，我們想要你輸出透過<strong>題目規定的 DFS</strong>，畫出一張圖。<br>測試資料則會給予每一個節點來給定南邊或東邊的牆是否存在。</p>
+<p>題目規定的 DFS:必須依序 西、北、東、南的方式遍地</p>
+<p>輸出規定 </p>
+<ul>
+<li>如果是有經歷過的節點但卻不是從起點至終點的路徑時，輸出 “???”</li>
+<li>沒有經歷過的節點，也不是起點到終點的路徑，輸出 “   “</li>
+<li>如果是起點至終點的路徑就輸出從起點開始的第幾個節點</li>
+<li>左邊的牆輸出 ‘|’，右邊的牆輸出 “—“</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>輸出好難，他是在考你輸出八 = =。</p>
+<p>由於這題是使用<strong>邊</strong>來判定有沒有連結，而不是透過<strong>點至點</strong>，而讓整個程式難寫許多，透過兩個陣列 graph 地圖狀態、record 從起點到終點的路徑。</p>
+<p>幾個地方需要注意：如下</p>
+<ul>
+<li>我們透過回推的方式判斷，假如 x,y 西邊有牆，也就代表 x,y-1 的東邊有牆，透過此方次來回推西邊或北邊是否有牆即可，以及要注意邊界問題。</li>
+<li>我們都先假設我們的搜尋(record 陣列紀錄)是對的，所以當前的 record x,y = 上一個 record x,y+1，如果不對再改為 -1 </li>
+<li>要判斷邊界</li>
+<li>輸出也要注意，他是3位為一道牆，因此如果數值位數沒有大於 3，就需要在左邊補上空白，如果是用 cout 就需要補上 <code>set(3) &lt;&lt; right</code>。</li>
+<li>再來需要透過 flag 來判斷是否有成功抵達終點，如果沒有成功抵達終點則起點也會是 “???”，因為他不是從起點到終點的路徑。<br>function <code>row_wall()</code></li>
+<li>定義一個陣列 south_wall 來判斷 x,y 的南邊是否有牆，才可以在輸出時正確輸出。</li>
+<li>走過，但並不是路徑的則將 <code>record[x][y] = -1</code>，在輸出時才可以正確知道此處為 “???”<br>dfs 處每一個遞迴的下一行處，但需要先判斷 flag，來得知這路徑是否為起點到終點的路徑，不是才符合此條件</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題的輸出才是最難的問題吧…，UVA 是不是認為這種類型的題目都不難因此都特地出一些很難的輸出格式來考大家的反應能力壓QQ，而且我最近在挑戰寫程式的過程中不用紙筆，發現很難、而且下次看到程式碼的時候還需要很多時間去重新理解、思考。我原先以為如果不用紙筆輔助思考會讓腦袋的印相加深，但似乎是不對的QQ。</p>
+<p>然後英文還是需要加強，英文還是有點太爛了….。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 15</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> graph[MAXN][MAXN] ;</span><br><span class="line"><span class="keyword">int</span> record[MAXN][MAXN] ;</span><br><span class="line"><span class="keyword">int</span> direct[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">int</span> south_wall[MAXN] ;</span><br><span class="line"><span class="keyword">int</span> sx , sy , N , M , ex , ey ;</span><br><span class="line"><span class="keyword">int</span> a , kase = <span class="number">0</span> , flag = <span class="number">0</span> ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isboard</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y , <span class="keyword">int</span> i )</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(x + direct[i][<span class="number">0</span>] &gt; N || x + direct[i][<span class="number">0</span>] &lt; <span class="number">1</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">if</span>(y + direct[i][<span class="number">1</span>] &gt; M || y + direct[i][<span class="number">1</span>] &lt; <span class="number">1</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; x + direct[i][0] &lt;&lt; ' ' &lt;&lt; y + direct[i][1] &lt;&lt; ' ' &lt;&lt; N &lt;&lt; ' ' &lt;&lt; M  &lt;&lt; '\n' ;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ox , oy   ;</span><br><span class="line">    ox = x ;</span><br><span class="line">    oy = y ;</span><br><span class="line">    <span class="keyword">if</span> (x == ex &amp;&amp; y == ey) &#123;</span><br><span class="line">        flag = <span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(isboard(x,y,<span class="number">0</span>) )&#123; <span class="comment">//west</span></span><br><span class="line">        x = ox + direct[<span class="number">0</span>][<span class="number">0</span>] ;</span><br><span class="line">        y = oy + direct[<span class="number">0</span>][<span class="number">1</span>] ;</span><br><span class="line">        <span class="keyword">if</span>(record[x][y] == <span class="number">0</span> &amp;&amp; (graph[x][y] == <span class="number">2</span> || graph[x][y] == <span class="number">0</span>))&#123;</span><br><span class="line">            record[x][y] = record[ox][oy] + <span class="number">1</span> ;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; " west" &lt;&lt; '\n' ;</span></span><br><span class="line">            dfs(x,y);</span><br><span class="line">            <span class="keyword">if</span>(flag) <span class="keyword">return</span> ;</span><br><span class="line">            record[x][y] = <span class="number">-1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(isboard(x,y,<span class="number">1</span>))&#123; <span class="comment">//north</span></span><br><span class="line">        x = ox + direct[<span class="number">1</span>][<span class="number">0</span>] ;</span><br><span class="line">        y = oy + direct[<span class="number">1</span>][<span class="number">1</span>] ;</span><br><span class="line">        <span class="keyword">if</span>(record[x][y] == <span class="number">0</span> &amp;&amp; (graph[x][y] == <span class="number">1</span> || graph[x][y] == <span class="number">0</span>))&#123;</span><br><span class="line">            record[x][y] = record[ox][oy] + <span class="number">1</span> ;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; " north" &lt;&lt; '\n' ;</span></span><br><span class="line">            dfs(x,y);</span><br><span class="line">            <span class="keyword">if</span>(flag) <span class="keyword">return</span> ;</span><br><span class="line">            record[x][y] = <span class="number">-1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(isboard(ox,oy,<span class="number">2</span>) )&#123;<span class="comment">//east</span></span><br><span class="line">        x = ox + direct[<span class="number">2</span>][<span class="number">0</span>] ;</span><br><span class="line">        y = oy + direct[<span class="number">2</span>][<span class="number">1</span>] ;</span><br><span class="line">        <span class="keyword">if</span>(record[x][y] == <span class="number">0</span> &amp;&amp; (graph[ox][oy] == <span class="number">2</span> || graph[ox][oy] == <span class="number">0</span>))&#123;</span><br><span class="line">            record[x][y] = record[ox][oy] + <span class="number">1</span> ;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; " east" &lt;&lt; '\n' ;</span></span><br><span class="line">            dfs(x,y);</span><br><span class="line">            <span class="keyword">if</span>(flag) <span class="keyword">return</span> ;</span><br><span class="line">            record[x][y] = <span class="number">-1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(isboard(ox,oy,<span class="number">3</span>))&#123;<span class="comment">//south</span></span><br><span class="line">        x = ox + direct[<span class="number">3</span>][<span class="number">0</span>] ;</span><br><span class="line">        y = oy + direct[<span class="number">3</span>][<span class="number">1</span>] ;</span><br><span class="line">        <span class="keyword">if</span>(record[x][y] == <span class="number">0</span> &amp;&amp; (graph[ox][oy] == <span class="number">1</span> || graph[ox][oy] == <span class="number">0</span> ))&#123;</span><br><span class="line">            record[x][y] = record[ox][oy] + <span class="number">1</span> ;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; " south" &lt;&lt; '\n' ;</span></span><br><span class="line">            dfs(x,y);</span><br><span class="line">            <span class="keyword">if</span>(flag) <span class="keyword">return</span> ;</span><br><span class="line">            record[x][y] = <span class="number">-1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">row_wall</span><span class="params">( )</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= M ; i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"+"</span> ;</span><br><span class="line">        <span class="keyword">if</span>(south_wall[i])&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"---"</span> ;</span><br><span class="line">            south_wall[i] = <span class="number">0</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"   "</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"+\n"</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Maze "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">"\n\n"</span> ;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; flag &lt;&lt; '\n' ;</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= M ; i++) south_wall[i] = <span class="number">1</span> ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(flag == <span class="number">0</span> ) record[sx][sy] = <span class="number">-1</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= N ; i++)&#123;</span><br><span class="line">        row_wall();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'|'</span> ;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; M &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= M ; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(record[i][j] == <span class="number">-1</span>)</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"???"</span> ;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(record[i][j] &gt; <span class="number">0</span>)</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; setw(<span class="number">3</span>) &lt;&lt; right &lt;&lt; record[i][j] ;</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"   "</span> ;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(j == M || graph[i][j] == <span class="number">1</span> || graph[i][j] == <span class="number">3</span>)</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"|"</span> ;</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">            <span class="keyword">if</span>(graph[i][j] == <span class="number">2</span> || graph[i][j] == <span class="number">3</span>)</span><br><span class="line">                south_wall[j] = <span class="number">1</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= M ; i++) south_wall[i] = <span class="number">1</span> ;</span><br><span class="line">    row_wall();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n\n"</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M &gt;&gt; sx &gt;&gt; sy &gt;&gt; ex &gt;&gt; ey &amp;&amp; N)&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; N &lt;&lt; ' ' &lt;&lt; M &lt;&lt; ' ' &lt;&lt; sx &lt;&lt; ' ' &lt;&lt; sy &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= N ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= M ; j++)&#123;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; a ;</span><br><span class="line">                graph[i][j] = a ;</span><br><span class="line">                record[i][j] = <span class="number">0</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        flag = <span class="number">0</span> ;</span><br><span class="line">        record[sx][sy] = <span class="number">1</span> ;</span><br><span class="line">        dfs(sx,sy);</span><br><span class="line">        output();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Competitive-Programming3/" rel="tag">Competitive Programming3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/12/24/UVa/UVa824/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa824 - Coast Tracker(實作)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

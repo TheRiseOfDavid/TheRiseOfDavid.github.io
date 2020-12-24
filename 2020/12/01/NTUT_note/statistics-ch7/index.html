@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">2k</span>
+            <span class="post-count">2.8k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">7分鐘</span>
+            <span class="post-count">11分鐘</span>
         </span>
     </span>
 </div>
@@ -251,6 +251,88 @@ ga('send', 'pageview');
 <p>由於這裡我們並不確定母體有多少學生，因此是 Infinite Population，計算就是 \(\sigma_{\bar{p}} = \sqrt{\frac{0.72(1-0.72)}{30}} = 0.082\)</p>
 <p>一樣先轉換成 z 值成為標準常態機率分配，\(z = (0.77-0.72)/0.082 =0.61\)，查表發現 \(0.61z = 0.7291 \)，再來查另外一個值 \(z = (0.67-0.72)/0.082 =-0.61\)，查表發現 \(-0.61z = 0.2709 \)，兩個相減就得出常態分配面積區間，答案為 0.4582。</p>
 <p>因此在這樣本中有 \((0.67 * 30) \) ~ \( (0.77 * 30)\) 機率的學生要申請宿舍的機率為 0.4582。</p>
+<h3 id="舉例-主管的抽樣分配，題目如下，想詢問抽樣值為平均值-pm-500-的機率為多少"><a href="#舉例-主管的抽樣分配，題目如下，想詢問抽樣值為平均值-pm-500-的機率為多少" class="headerlink" title="舉例 - 主管的抽樣分配，題目如下，想詢問抽樣值為平均值 \(\pm 500\) 的機率為多少"></a>舉例 - 主管的抽樣分配，題目如下，想詢問抽樣值為平均值 \(\pm 500\) 的機率為多少</h3><blockquote>
+<p><img src="/images/statistics-ch7/11.PNG" alt=""></p>
+</blockquote>
+<p>也就是我們要找出 \(P(51300 \leq \bar{x} \leq 52300 \)，的機率是多少，如果用手算的話則需要用到 Z，\(z = \frac{51300-51800}{730.30} = -0.68 \)、\(z = \frac{52300-51800}{730.30} = 0.68 \)</p>
+<p>\(P(51300 \leq \bar{x} \leq 52300 \\<br>= P(-0.68 \leq z \leq 0.68 ) \\<br>= P(z \leq 0.68 ) - P(z \leq -0.68 )  \\<br>= 0.7517 - 0.2484 = 0.5034 \)</p>
+<h4 id="compare-between-n-30-and-n-100"><a href="#compare-between-n-30-and-n-100" class="headerlink" title="compare between n = 30 and n = 100"></a>compare between n = 30 and n = 100</h4><blockquote>
+<p><img src="/images/statistics-ch7/12.PNG" alt=""><br>作法與先前相同，就不贅述</p>
+</blockquote>
+<h3 id="舉例-承上題，當抽樣數為-100-n-100-，抽樣主管有成功完成教育訓練的標準誤"><a href="#舉例-承上題，當抽樣數為-100-n-100-，抽樣主管有成功完成教育訓練的標準誤" class="headerlink" title="舉例 - 承上題，當抽樣數為 100 (n = 100)，抽樣主管有成功完成教育訓練的標準誤"></a>舉例 - 承上題，當抽樣數為 100 (n = 100)，抽樣主管有成功完成教育訓練的<strong>標準誤</strong></h3><p>旁邊的公式為答案。</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/13.PNG" alt=""></p>
+</blockquote>
+<p>60 % 的人會完成員工訓練，因此期望值為 0.6，再來透過公式計算。<br>\(\sigma_{p} = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.6(1-0.6)}{30}} = 0.894 \)</p>
+<h3 id="舉例-承上題，抽樣主管有成功完成教育訓練的值在期望至-pm-0-05"><a href="#舉例-承上題，抽樣主管有成功完成教育訓練的值在期望至-pm-0-05" class="headerlink" title="舉例 - 承上題，抽樣主管有成功完成教育訓練的值在期望至 \(\pm 0.05 \)"></a>舉例 - 承上題，抽樣主管有成功完成教育訓練的值在期望至 \(\pm 0.05 \)</h3><p>先透過 Z 轉換，之後即可，題目大同小異，透過圖片附上答案。</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/14.PNG" alt=""></p>
+</blockquote>
+<h2 id="Propertires-of-Point-Estimators-點估計量的特性"><a href="#Propertires-of-Point-Estimators-點估計量的特性" class="headerlink" title="Propertires of Point Estimators 點估計量的特性"></a>Propertires of Point Estimators 點估計量的特性</h2><ul>
+<li>點估計量的符號為 \(\hat{\theta}\)</li>
+<li>Unbiased 不偏性<ul>
+<li>期望值等於要估計的母體參數  </li>
+<li>圖舉例，右邊是 Biased 有偏誤<blockquote>
+<p><img src="/images/statistics-ch7/15.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Efficiency 有效性<ul>
+<li>在有兩個抽樣分配的 \(\hat{\theta}\)，且兩個的\(\hat{\theta}\) 位置一樣時，則先取標準差(x 軸)比較少的值</li>
+<li>圖舉例 <blockquote>
+<p><img src="/images/statistics-ch7/16.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Consistency 一致性<ul>
+<li>當樣本數(n)變大時，標準差則會越來越小，當樣本數越大時則優先使用此點估計量</li>
+</ul>
+</li>
+</ul>
+<h2 id="Other-Sampling-Methods-其他抽樣方法"><a href="#Other-Sampling-Methods-其他抽樣方法" class="headerlink" title="Other Sampling Methods 其他抽樣方法"></a>Other Sampling Methods 其他抽樣方法</h2><ul>
+<li>機率抽樣<br>每一個母體元素都有一個特定的機率被選為抽樣樣本</li>
+<li>非機率抽樣<br>由於我們沒辦法預估每一個母體元素機率為多少，因此稱為<strong>非機率抽樣</strong>。</li>
+<li>找出最適合的抽樣方法<strong>最重要</strong>。<h3 id="機率抽樣-Stratified-Random-Sampling-分層隨機抽樣"><a href="#機率抽樣-Stratified-Random-Sampling-分層隨機抽樣" class="headerlink" title="機率抽樣 - Stratified Random Sampling 分層隨機抽樣"></a>機率抽樣 - Stratified Random Sampling 分層隨機抽樣</h3></li>
+<li>strata<br>將母體分成好幾組</li>
+<li>母體的每一個元素都必須被使用分組，且只能使用一次</li>
+<li>每一組的元素同質性越高越好<br>可以根據年齡、工作部門、產業來區分 </li>
+<li>有符合上述條件時，精準度會集高且抽樣資料不須太多</li>
+<li>圖表<blockquote>
+<p><img src="/images/statistics-ch7/17.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="機率抽樣-Cluster-Sampling-叢式-集群抽樣"><a href="#機率抽樣-Cluster-Sampling-叢式-集群抽樣" class="headerlink" title="機率抽樣 - Cluster Sampling 叢式/集群抽樣"></a>機率抽樣 - Cluster Sampling 叢式/集群抽樣</h3><ul>
+<li>clusters<br>將母體分組，每組<strong>同質性極低</strong>，小生態圈</li>
+<li>接下來抽出幾群，那些就是我們的抽樣資料</li>
+<li>Sampling<br>透過市區、學校來抽樣</li>
+<li>Advantage<br>節省成本</li>
+<li>Disadvantage<br>抽樣資料比分成抽樣的資料需要更大些，才符合真實性</li>
+<li>圖表<blockquote>
+<p><img src="/images/statistics-ch7/18.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="機率抽樣-Systematic-Sampling-系統抽樣"><a href="#機率抽樣-Systematic-Sampling-系統抽樣" class="headerlink" title="機率抽樣 - Systematic Sampling 系統抽樣"></a>機率抽樣 - Systematic Sampling 系統抽樣</h3><ul>
+<li>先將母體資料打亂後再進行編號</li>
+<li>從母體(N)抽出樣本(n)，那我們就是 \(y = N/n\) 為我們要抽出的元素量(y)</li>
+<li>再透過母體資料編號，<code>for(i = 0 ; i&lt;= y ; i++)</code>，找出我們的抽樣元素</li>
+<li>Advantage<br>簡單</li>
+</ul>
+<h3 id="非機率抽樣-Convenience-Sampling-便利抽樣"><a href="#非機率抽樣-Convenience-Sampling-便利抽樣" class="headerlink" title="非機率抽樣 - Convenience Sampling 便利抽樣"></a>非機率抽樣 - Convenience Sampling 便利抽樣</h3><ul>
+<li>透過非機率抽樣</li>
+<li>Sampling<br>如發傳單，因為沒辦法得知收到傳單與沒收到傳單的機率。</li>
+<li>Advantage<br>抽樣很方便</li>
+<li>Disadvantage<br>沒辦法很精準的代表母體</li>
+</ul>
+<h3 id="非機率抽樣-Judgment-Sampling-判斷抽樣"><a href="#非機率抽樣-Judgment-Sampling-判斷抽樣" class="headerlink" title="非機率抽樣 - Judgment Sampling 判斷抽樣"></a>非機率抽樣 - Judgment Sampling 判斷抽樣</h3><ul>
+<li>透過個人的知識去推斷出母體那些值可以被參考</li>
+<li>例如記者想詢問立委對環保的意見<br>記者可以找出對比較熟悉環保的立委進行尋問</li>
+<li>Advantage<br><del>可以造謠，</del>比較簡單。</li>
+<li>Disadvantage<br>很看記者素質</li>
+</ul>
 
       
       <!-- reward -->
