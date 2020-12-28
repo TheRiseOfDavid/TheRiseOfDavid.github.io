@@ -4051,8 +4051,13 @@
 <td>\theta</td>
 <td></td>
 </tr>
+<tr>
+<td>⇒</td>
+<td>複製就好</td>
+<td></td>
+</tr>
 </tbody></table>
-<h2 id="教學連結"><a href="#教學連結" class="headerlink" title="教學連結"></a>教學連結</h2><p><a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="noopener">透過手寫來找出適合的 mathjax </a><br><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a><br><a href="https://16sixteen.github.io/jekyll-study/mathjax" target="_blank" rel="noopener">常用的mathjax符号</a><br><a href="https://math.meta.stackexchange.com/questions/29609/how-to-type-sigma-and-other-symbols-in-mathjax" target="_blank" rel="noopener">How to type Sigma and other symbols in MathJax [duplicate]</a><br><a href="https://blog.csdn.net/xm_ovo/article/details/107536132" target="_blank" rel="noopener">解决mathjax公式不换行问题</a><br><a href="https://www.jianshu.com/p/ca46b67933ab" target="_blank" rel="noopener">Latex 字母上面加符号 波浪线 横线 角号</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="noopener">透過手寫來找出適合的 mathjax </a><br><a href="https://blog.csdn.net/mage_ee/article/details/75309174" target="_blank" rel="noopener">MathJax 基础 (1)：基础语法</a><br><a href="https://blog.csdn.net/yang_csdnForOBTS/article/details/81228365" target="_blank" rel="noopener">Latex：大于等于号和小于等于号</a><br><a href="https://math.meta.stackexchange.com/questions/22443/how-to-markup-expression-using-sigma-notation-for-sum-in-mathjax" target="_blank" rel="noopener">How to markup expression using sigma notation for sum in MathJax</a><br><a href="https://blog.csdn.net/bi_hu_man_wu/article/details/70207695" target="_blank" rel="noopener">Latex中点乘、叉乘、除以</a><br><a href="https://phabricator.wikimedia.org/T38855" target="_blank" rel="noopener">MathJax treats percent sign (%) as start of a comment</a><br><a href="https://blog.csdn.net/qq_17528659/article/details/82152530" target="_blank" rel="noopener">LaTeX 特殊符号、加帽子符号、横线和波浪线</a><br><a href="https://timmurphy.org/2010/05/22/union-and-intersection-symbols-in-latex/" target="_blank" rel="noopener">Union and Intersection symbols in LaTeX</a><br><a href="https://math.meta.stackexchange.com/questions/26403/how-to-write-plus-minus-sign-in-mathjax" target="_blank" rel="noopener">How to write plus-minus sign in MathJax? [duplicate]</a><br><a href="https://16sixteen.github.io/jekyll-study/mathjax" target="_blank" rel="noopener">常用的mathjax符号</a><br><a href="https://math.meta.stackexchange.com/questions/29609/how-to-type-sigma-and-other-symbols-in-mathjax" target="_blank" rel="noopener">How to type Sigma and other symbols in MathJax [duplicate]</a><br><a href="https://blog.csdn.net/xm_ovo/article/details/107536132" target="_blank" rel="noopener">解决mathjax公式不换行问题</a><br><a href="https://www.jianshu.com/p/ca46b67933ab" target="_blank" rel="noopener">Latex 字母上面加符号 波浪线 横线 角号</a><br>齊笎詳解</p>
 ]]></content>
       <categories>
         <category>blog</category>
@@ -9734,6 +9739,292 @@
         <tag>UVa</tag>
         <tag>程式解題</tag>
         <tag>Competitive Programming3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10055 - Hashmat the Brave Warrior (水題)</title>
+    <url>/2020/12/27/UVa/UVa10055/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>勇敢的戰士要作戰，他們知道對方的士兵數量以及我方的士兵數量，他們想要知道對方與我方的差額是多少。</p>
+<p>輸出不會大於 \(2^{32}\) </p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>水到不行，英文又簡單。真的香。</p>
+<p>就兩個數字減法即可。</p>
+<h2 id="重點觀念："><a href="#重點觀念：" class="headerlink" title="重點觀念："></a>重點觀念：</h2><ul>
+<li>題目只有說輸出不會大於 \(2^{32}\) ，沒有說資料不會超過，所以記得要開 long long<br>有個小偷懶步驟，可以把 long long define 成 int，接著再將 main 前面的 int 換成 int32_t，就可以無痛轉移 long long XD。</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>題目真水，英文又簡單。應該多出這點題目XD，這樣那些聰明人看起來就跟我一樣笨www。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> N , M ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">abs</span>(N-M) &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10077 - The Stern-Brocot Number System (二分搜尋)</title>
+    <url>/2020/12/27/UVa/UVa10077/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>The Stern-Brocot tree 能夠完美的建構出沒有任何一個負分數，且 n 與 m 絕對互質，也就表示產生的值絕對不會有重複。</p>
+<p>現在給你 The Stern-Brocot tree 其中一個值，我們想詢問透過 The Stern-Brocot tree 的方式，那它的位置在哪裡？透過 R and F 描述</p>
+<p>舉例： 找出 \(\frac{3}{1}\)，那就是 RR 。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題考的是腦筋急轉彎，問你會不會運用自身所學的知識。</p>
+<p>其實這題就是二分搜尋，只是他將規則稍微改變。<br>但如果你可以從中得出結論你可以發現，數字的左邊值一定比中間的數字小，反之，右邊則會比中間數字大。</p>
+<p>只要透過此規則進入左邊輸入 L、右邊輸入 R 就是答案了。</p>
+<p>圖示：</p>
+<blockquote>
+<p><img src="https://i.imgur.com/AaPrjHo.png" alt=""></p>
+</blockquote>
+<h2 id="重點觀念："><a href="#重點觀念：" class="headerlink" title="重點觀念："></a>重點觀念：</h2><ul>
+<li>在判斷的時候因為有分子與分母要判斷，必須兩個都同時等於才跳出迴圈，因此 <code>(b1 != d1 &amp;&amp; b1 != d2)</code> 這邏輯是錯誤的，錯誤舉例：b1 = 1 , b2 = 2 , d1 = 1 , d2 = 3。因此要改變下，變成 <code>!(b1 == d1 &amp;&amp; b2 == d2)</code> 即可。</li>
+<li>int 在相除時出來的數字還是 int，因此需要將兩個數字都先轉成 float 再進行除法才會得出小數。<br>舉例：<code>double r = (float)b1 / (float)b2</code></li>
+<li>不要強轉型態，會很花時間，向第二個重點的寫法，就會導致超時，因此要將這兩個額外拉出宣告兩個小數點變數。</li>
+</ul>
+<h2 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h2><ul>
+<li>int <ul>
+<li>a1 , a2<br>左邊的值</li>
+<li>b1 , b2<br>中間的值</li>
+<li>c1 , c2<br>右邊的值</li>
+<li>d1 , d2<br>題目需要找到的值</li>
+</ul>
+</li>
+<li>double<ul>
+<li>compute_b , compute_d<br>計算大小用</li>
+<li>d_b1 , d_b2 , d_d1 , d_d2<br>計算 b and d  的值，強轉型態會浪費時間因此拉出 double 宣告</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="http://programming-study-notes.blogspot.com/2014/01/uva-10077-stern-brocot-number-system.html" target="_blank" rel="noopener">Programming學習筆記 - UVa 10077 The Stern-Brocot Number System</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題目真的好棒啊，我被她考到我卻一點怨言都沒有，出這題目的人是天才八，把我玩弄得心服口服，可惡，我學起來了，下次不會再犯了。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a1=<span class="number">0</span> , a2=<span class="number">1</span> , b1=<span class="number">1</span> , b2=<span class="number">1</span> , c1=<span class="number">1</span> , c2=<span class="number">0</span> ;</span><br><span class="line"><span class="keyword">int</span> d1 , d2 , t1 , t2 ;</span><br><span class="line"><span class="keyword">double</span> compute_b , compute_d , d_b1 , d_b2 , d_d1 , d_d2 ;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bs</span><span class="params">()</span></span>&#123; <span class="comment">//binary search</span></span><br><span class="line">    a1 = <span class="number">0</span> ; a2 = <span class="number">1</span> ;</span><br><span class="line">    b1 = <span class="number">1</span> ; b2 = <span class="number">1</span> ;</span><br><span class="line">    c1 = <span class="number">1</span> ; c2 = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">while</span>(!(b1 == d1 &amp;&amp; b2 == d2))&#123;</span><br><span class="line">        d_b1 = b1 ; d_b2 = b2 ;</span><br><span class="line">        d_d1 = d1 ; d_d2 = d2 ;</span><br><span class="line">        compute_b = d_b1 / d_b2 ;</span><br><span class="line">        compute_d = d_d1 / d_d2 ;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; compute_b &lt;&lt; ' ' &lt;&lt; compute_d &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="keyword">if</span>(compute_d &gt; compute_b )&#123; <span class="comment">//great than</span></span><br><span class="line">            a1 = b1 ; a2 = b2 ;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"R"</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">//less than</span></span><br><span class="line">            c1 = b1 ; c2 = b2 ;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"L"</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        b1 = a1 + c1 ;</span><br><span class="line">        b2 = a2 + c2 ;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; "a is " &lt;&lt; a1 &lt;&lt; '/' &lt;&lt; a2 &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "b is " &lt;&lt; b1 &lt;&lt; '/' &lt;&lt; b2 &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "c is " &lt;&lt; c1 &lt;&lt; '/' &lt;&lt; c2 &lt;&lt; '\n' ;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; d1 &gt;&gt; d2 &amp;&amp; d1 + d2 != <span class="number">2</span> )&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; d1 &lt;&lt; ' ' &lt;&lt; d2 &lt;&lt; '\n' ;</span></span><br><span class="line">        bs();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Binary Search 二分搜尋</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10071 - Back to High School Physics (水題)</title>
+    <url>/2020/12/28/UVa/UVa10071/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個飛天粒子有初始速度與加速度，我們給你 t 秒的速度，想請問 2t 秒後的位置是多少</p>
+<p>P.S. 謝謝立委翻譯</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>水到不行，靠公式即可www。</p>
+<p>公式：\(距離 = 速度 * 時間 * 倍率\)，這裡的倍率是 2。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><ul>
+<li>立委翻譯支援</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題 cetain time(一定時間)，讓我納悶了很久，幸好有立委幫我翻譯我就解出來，這題不難，相信大家都會的！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> u , v  ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; u * v * <span class="number">2</span> &lt;&lt; <span class="string">'\n'</span>  ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10281 - Back to High School Physics (實作題)</title>
+    <url>/2020/12/28/UVa/UVa10281/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有台汽車的里程數壞掉了，於是我們手動拿上碼表 + 定速開車，想詢問每次我們標記的時間時已經行駛了多少公里。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>毒，到處都是毒。這題是大毒阿，快逃RRRR</p>
+<p>很簡單的操作題，先將所有的時間換成秒數，之後再乘以速度，但這裡的速度是 km/hr，因此要在除以 3600 就是答案。</p>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>這題如果要使用 cin，會非常難寫，建議使用 scanf<br>因為你沒辦法知道他到底這次有沒有要加速或是詢問你當前的距離</li>
+<li>如果習慣 <code>#define int long long</code> 記住使用 scanf 要搭配 <code>%lld</code></li>
+<li>windows 情況下，double 有機率無法被 scanf 用到，毒，這是毒阿。<br><a href="https://stackoverflow.com/questions/30950834/scanf-gcc-for-long-double" target="_blank" rel="noopener">scanf GCC for long double [duplicate]</a></li>
+<li>有可能他連續加速兩次，因此計算里程數時不可以等到要查詢碼表時間是在算，必須每次都要算，<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;舉例</span><br><span class="line">00:00:01 12</span><br><span class="line">00:00:03 24</span><br></pre></td></tr></table></figure></li>
+<li>任何一個計算公式都不可以有 int 與 float 運算出現，不然會高機率出錯。因此建議不用</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p>齊笎編寫的 hackmd 詳解 </p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題滿滿的都是坑阿…，我最不擅長寫關於小數點的題目了，希望以後遇到小數點的題目都可以安然度過。這次的 scanf 不能輸入 double 我花了 2 小時去想真的是太難過了…，不過齊笎介紹使用的 sscanf 到蠻好用的，值的紀錄。</p>
+<p>可以用 sscanf 加一個 string 格式化輸入資料，還可以知道有多少筆資料被成功輸入，真的好用、真的香，讚啦</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>  h , m , s , data  ;</span><br><span class="line"><span class="keyword">float</span> new_speed , speed=<span class="number">0</span>  , mile=<span class="number">0</span> ,s1=<span class="number">0</span> ,s2=<span class="number">0</span> ; <span class="comment">//s1 begin time , s2 end time</span></span><br><span class="line"><span class="keyword">char</span> strQ[<span class="number">128</span>] ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(gets(strQ))&#123;</span><br><span class="line">        <span class="comment">//printf("%s\n" , strQ);</span></span><br><span class="line">        data = <span class="built_in">sscanf</span>(strQ , <span class="string">"%lld:%lld:%lld %f"</span> , &amp;h , &amp;m , &amp;s , &amp;new_speed);</span><br><span class="line">        <span class="comment">//printf("%lld:%lld:%lld %f\n",h , m , s , new_speed);</span></span><br><span class="line">        s2 = s1 ;</span><br><span class="line">        s1 = h * <span class="number">3600</span> + m * <span class="number">60</span> + s ;</span><br><span class="line">        mile += <span class="built_in">abs</span>(s1-s2) * speed / <span class="number">3600</span> ;</span><br><span class="line">        <span class="keyword">if</span>(data == <span class="number">4</span>)&#123;</span><br><span class="line">            speed =new_speed ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(data == <span class="number">3</span>)&#123;</span><br><span class="line">            <span class="comment">//printf("speed is %f\n" , speed);</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%.2lld:%.2lld:%.2lld %.2f km\n"</span> , h , m ,s ,mile);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>實作題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10469 - To Carry or not to Carry (水題)</title>
+    <url>/2020/12/28/UVa/UVa10469/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個人的加法器寫爛了，他的加法器不會進位，你可以模擬她這個笨蛋寫法嗎？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>很水，很簡單。</p>
+<p>但這題其實可以再簡單一點，透過 xor 的特性，只有 0,1 or 1,0 才會輸出 1，0,0 or 1,1 都會輸出 0，所以只要用 xor 就好了，簡單吧！</p>
+<p>如果不願意用 xor 也可以暴力解拉XD</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><ul>
+<li>齊笎詳解</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題真的輕鬆，好開心。但不能每個題目都這樣啦，這樣會變笨www。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b ;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (a^b) &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10773 - Back to Intermediate Math (math)</title>
+    <url>/2020/12/28/UVa/UVa10773/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>給你河流寬度 d、河流速度 v、船速 u，想詢問一個小學生都可以回答的問題，船要渡河，我們想請問兩種方式相差的秒數為多少？</p>
+<p>如果算不出來或這兩條路徑相同請輸出 can’t determine</p>
+<ul>
+<li>最短路徑<br>也就是直線經過</li>
+<li>最快速度<br>順著河流速度經過</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題不是難題，但也不太像是水題，因為他需要用到三角函數與反三角函數。<del>我都沒學好於是去 wiki 查詢了一陣子QQQ</del>。</p>
+<p>算出最短路徑所花費的秒數再算出最快速度所花費的秒數之後相減即可。</p>
+<p>值得注意的是算最短路徑比較麻煩，且有一些例外案例。</p>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>兩個路徑的長度必須是 double </li>
+<li>秒數沒有正負，因此要加絕對值</li>
+<li>判斷是否輸出 can’t determine<ul>
+<li>船速等於 0，則永遠不會到終點</li>
+<li>河流流速等於 0，則兩條路徑相同，題目 output 有說明一定要這兩條路徑不同才可以輸出答案</li>
+<li>如果河流速度大於船的速度，則最短路徑則沒辦法抵達終點</li>
+</ul>
+</li>
+<li>不可以判斷 d = 0 則不可以輸出 can’t determine<br>題目的坑…，他有可能 d 是 0，那這兩條路徑則視為不相同，但我覺得理應相同，不過是題目 bug 就算了www。</li>
+<li>最短路徑與最快速度，先給出圖<blockquote>
+<p><img src="https://i.imgur.com/almrnLB.png" alt=""></p>
+</blockquote>
+<ul>
+<li>最快路徑公式(Shortest Time) \(d / u \)<ul>
+<li>因為是最快路徑，因此我們順著河流，藉此讓船速跟河流速度的抵抗將至 0。所以只要距離除以船速即可。</li>
+</ul>
+</li>
+<li>最短路徑公式(Shortest Path) \( cosθ = cos(arcsin(v / u))\)，前面是 v，後面是 u <ul>
+<li>根據上面的圖我們可以知道河流會影響到我們的行進速度，於是我們需要更多時間來保證我們行徑的是最短路徑，因此船速要去抵抗河流速度，因此當河流往右時則我們船方向就往左來走出最短路徑。</li>
+<li><blockquote>
+<p><img src="https://i.imgur.com/GqsCe0L.png" alt=""><br>根據上圖可以看到類似於最短路徑的三角形產生， v 就是 x 然後 u 就是 1，因此 \(v / u \)就是我們需要的 \(cos(arcsin(v / u))\)，但要注意的是還需要乘以 u，因為我們剛剛是透過三角形公式先轉換成符合套件的度量衡，現在再乘回來才會得到正確答案</p>
+</blockquote>
+</li>
+<li>之後與最快路徑公式相同，讓 \(d / (u * cos(arcsin(v / u))) \) 即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><ul>
+<li>齊笎詳解</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">反三角函數 - wiki</a></li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這個好難QQQ，竟然要用到三角函數，快把我給考倒了拉！！幸好有隊友的詳解來讓我快速學會，不然我在學習這題目的過程中一定會卡很久的關XD。</p>
+<p>如果比賽要用到三角函數，我可能要先投降了..。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> kase ;</span><br><span class="line"><span class="keyword">double</span> n , u , d , v ;</span><br><span class="line"><span class="keyword">double</span> fast ,shortest ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; d &gt;&gt; v &gt;&gt; u;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span> ;</span><br><span class="line">        <span class="keyword">if</span>(u == <span class="number">0</span> || v == <span class="number">0</span> || v &gt;= u )&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"can't determine"</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">            <span class="keyword">continue</span> ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fast = <span class="number">0</span> ; shortest = <span class="number">0</span> ;</span><br><span class="line">        fast = d / u ;</span><br><span class="line">        shortest = d / (u *<span class="built_in">cos</span>(<span class="built_in">asin</span>(v/u)));</span><br><span class="line">        <span class="comment">//cout &lt;&lt; fast &lt;&lt; ' ' &lt;&lt; shortest &lt;&lt; '\n' ;</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">3</span>) &lt;&lt; <span class="built_in">abs</span>(fast - shortest ) &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>math theorm</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11614 - Etruscan Warriors Never Play Chess (math)</title>
+    <url>/2020/12/28/UVa/UVa11614/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一組軍隊，他們的排隊方式向金字塔般，第一排一個、第二排兩個、第三排三個，以此類推，想請問你第 n 個人是第幾排？</p>
+<p>測試資料最大不會超過 \(10^{18{\)</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>不是難題，但也是有點腦筋急轉彎的感覺。</p>
+<p>我們可以看出他像是金字塔一樣，因此透過梯形面積公式 \((上底 + 下底) * 高  / 2 \)的方式得出人數，上底必定是 1，因為第一排有一個人。</p>
+<p>之後再透過配方法去解即可。</p>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>公式解(配方法)，以下進行推導，題目要求的 row 必為正數，因此負不合<br>\(\frac{(1+row) * row}{2} \geq n \\ ⇒ row^2 + row -2n = 0 \\ ⇒ row = \frac{-1 \pm \sqrt{ 1^2 - (4 * 1 * (-2n))}{2}} \\ ⇒ row = \frac{-1+ sqrt{1+8n}}{2}   \)</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><ul>
+<li>齊笎詳解</li>
+<li><a href="http://ptvs24.blogspot.com/2017/05/uva-q11614-etruscan-warriors-never-play.html" target="_blank" rel="noopener">UVA Q11614 - Etruscan Warriors Never Play Chess</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E9%85%8D%E6%96%B9%E6%B3%95" target="_blank" rel="noopener">配方法</a></li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題不難，運用了國中知識解出。相信大家有一定概念都會的XD</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n , a ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compute</span><span class="params">(<span class="keyword">int</span> a )</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((<span class="number">-1</span> + <span class="built_in">sqrt</span>(<span class="number">1</span>+<span class="number">8</span>*a)) / <span class="number">2</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; compute(a) &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="手寫紀錄"><a href="#手寫紀錄" class="headerlink" title="手寫紀錄"></a>手寫紀錄</h2><p>記錄我在解這題的紀錄，透過紙筆來思考會讓我聰明很多<br><img src="https://i.imgur.com/yjQScQd.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>math theorm</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11723 - Numbering Roads! (水題)</title>
+    <url>/2020/12/28/UVa/UVa11723/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個國家的道路命名方式是這樣的，透過數字 0-9 與字母 A-Z，數字配上一個字母(也可以不配)來當作一個道路的命名，<del>類似舊高雄市</del>XD。<br>給你需要命名的道路數量，可用數字為 3，告訴我們可不可以全部命名成功，且輸出可以用到最少的字母，也就是只需要用到第幾個字母就命名完全道路，如果不行請輸出 impossible。</p>
+<p>舉例，道路有 5 條，可用數字為 2<br>那道路就有 1,2,1a,2a,1b,2b ，因此就輸出 2，因為用到 b</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題很簡單XD，我們只要把不一定要配上字母的命名也當作是一種字母，也就表示總共有 27 個字母可以使用，之後再讓道路數量除以可命名數字在減一就會是答案了XD。</p>
+<h2 id="觀念重點"><a href="#觀念重點" class="headerlink" title="觀念重點"></a>觀念重點</h2><ul>
+<li>由於 C++ 的除法是無條件輸入法，但在這裡我們需要的是無條件進位法，因為我們只要用到字母輸出就需要 +1，因此我們的做法是讓 <code>(道路數量 + 可用命名數量 -1 ) / 可用命名數量</code>，就可以達到無條件進位了！ -1 是防止 <code>(2+2) / 2 = 2</code> 的產生，因為道路數量只有 2，因此才需要將可用命名數量 -1 </li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題也是簡單 KO，這題的腦筋急轉彎比較少，我就順利通關，太開心了YA，小有成就感www。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 27</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> r , n , kase , cnt ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">compute</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cnt = (r + n<span class="number">-1</span>) / n ;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">    <span class="keyword">if</span>(cnt &gt; <span class="number">27</span> )</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt;<span class="string">"impossible\n"</span> ;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; cnt<span class="number">-1</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; r &gt;&gt; n &amp;&amp; r+n != <span class="number">0</span> )&#123;</span><br><span class="line">        compute();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
       </tags>
   </entry>
 </search>
