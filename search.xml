@@ -4795,7 +4795,7 @@
 <ul>
 <li>\( \text{Relative Frequency} = \frac{\text{Frequency}}{\text{total Frequency}} \)</li>
 <li><strong>Relative Frequency 總和一定會是1。</strong></li>
-<li>\( \text{Percent Frequency} = \text{Rekative Frequency} * 100 \)</li>
+<li>\( \text{Percent Frequency} = \text{Relative Frequency} * 100 \)</li>
 </ul>
 <h4 id="Bar-Chart-長條圖"><a href="#Bar-Chart-長條圖" class="headerlink" title="Bar Chart 長條圖"></a>Bar Chart 長條圖</h4><p>他長這個樣子</p>
 <blockquote>
@@ -7961,7 +7961,10 @@
 <ul>
 <li>簡單隨機樣本<br>每一個元素被抽出的機率相同</li>
 <li>sampling with replacement 歸還抽樣<br>抽完放回去</li>
-<li>sampling without replacement 不歸還抽樣<br>抽完不放回去<h3 id="Sampling-from-a-Infinite-Population-無限母體"><a href="#Sampling-from-a-Infinite-Population-無限母體" class="headerlink" title="Sampling from a Infinite Population (無限母體)"></a>Sampling from a Infinite Population (無限母體)</h3>在無限母體中沒有 frame，因為 frame 會等於無限。<br>舉例：銀行產生的交易，因為會不斷產生因此不確定性很高。</li>
+<li>sampling without replacement 不歸還抽樣<br>抽完不放回去</li>
+</ul>
+<h3 id="Sampling-from-a-Infinite-Population-無限母體"><a href="#Sampling-from-a-Infinite-Population-無限母體" class="headerlink" title="Sampling from a Infinite Population (無限母體)"></a>Sampling from a Infinite Population (無限母體)</h3><p>在無限母體中沒有 frame，因為 frame 會等於無限。<br>舉例：銀行產生的交易，因為會不斷產生因此不確定性很高。</p>
+<ul>
 <li>random sample <ul>
 <li>每一個元素都是從相同母題抽出來</li>
 <li>每一個元素都是獨立，即抽完不放回</li>
@@ -8089,7 +8092,7 @@
 <p><img src="/images/statistics-ch7/11.PNG" alt=""></p>
 </blockquote>
 <p>也就是我們要找出 \(P(51300 \leq \bar{x} \leq 52300 \)，的機率是多少，如果用手算的話則需要用到 Z，\(z = \frac{51300-51800}{730.30} = -0.68 \)、\(z = \frac{52300-51800}{730.30} = 0.68 \)</p>
-<p>\(P(51300 \leq \bar{x} \leq 52300 \\<br>= P(-0.68 \leq z \leq 0.68 ) \\<br>= P(z \leq 0.68 ) - P(z \leq -0.68 )  \\<br>= 0.7517 - 0.2484 = 0.5034 \)</p>
+<p>\(P(51300 \leq \bar{x} \leq 52300) \\<br>= P(-0.68 \leq z \leq 0.68 ) \\<br>= P(z \leq 0.68 ) - P(z \leq -0.68 )  \\<br>= 0.7517 - 0.2484 = 0.5034 \)</p>
 <h4 id="compare-between-n-30-and-n-100"><a href="#compare-between-n-30-and-n-100" class="headerlink" title="compare between n = 30 and n = 100"></a>compare between n = 30 and n = 100</h4><blockquote>
 <p><img src="/images/statistics-ch7/12.PNG" alt=""><br>作法與先前相同，就不贅述</p>
 </blockquote>
@@ -8128,7 +8131,9 @@
 <h2 id="Other-Sampling-Methods-其他抽樣方法"><a href="#Other-Sampling-Methods-其他抽樣方法" class="headerlink" title="Other Sampling Methods 其他抽樣方法"></a>Other Sampling Methods 其他抽樣方法</h2><ul>
 <li>機率抽樣<br>每一個母體元素都有一個特定的機率被選為抽樣樣本</li>
 <li>非機率抽樣<br>由於我們沒辦法預估每一個母體元素機率為多少，因此稱為<strong>非機率抽樣</strong>。</li>
-<li>找出最適合的抽樣方法<strong>最重要</strong>。<h3 id="機率抽樣-Stratified-Random-Sampling-分層隨機抽樣"><a href="#機率抽樣-Stratified-Random-Sampling-分層隨機抽樣" class="headerlink" title="機率抽樣 - Stratified Random Sampling 分層隨機抽樣"></a>機率抽樣 - Stratified Random Sampling 分層隨機抽樣</h3></li>
+<li>找出最適合的抽樣方法<strong>最重要</strong>。</li>
+</ul>
+<h3 id="機率抽樣-Stratified-Random-Sampling-分層隨機抽樣"><a href="#機率抽樣-Stratified-Random-Sampling-分層隨機抽樣" class="headerlink" title="機率抽樣 - Stratified Random Sampling 分層隨機抽樣"></a>機率抽樣 - Stratified Random Sampling 分層隨機抽樣</h3><ul>
 <li>strata<br>將母體分成好幾組</li>
 <li>母體的每一個元素都必須被使用分組，且只能使用一次</li>
 <li>每一組的元素同質性越高越好<br>可以根據年齡、工作部門、產業來區分 </li>
@@ -8704,7 +8709,7 @@
 </ul>
 <h3 id="Variance-and-Standard-Deviation-變異數與標準差"><a href="#Variance-and-Standard-Deviation-變異數與標準差" class="headerlink" title="Variance and Standard Deviation 變異數與標準差"></a>Variance and Standard Deviation 變異數與標準差</h3><ul>
 <li>變異數公式為 \(Var(x) = \sigma^2 = \Sigma(x-\mu)^2 f(x) \)</li>
-<li>變異數是隨機變數機率減去平均值(期望值)次方的加權平均，權重則是隨機變數的機率</li>
+<li>變異數是隨機變數值減去平均值(期望值)次方在乘機率的加權平均，權重則是隨機變數的機率</li>
 <li>標準差 \(\sigma \)，是變異數開平方的值</li>
 </ul>
 <h2 id="discrete-uniform-離散均勻"><a href="#discrete-uniform-離散均勻" class="headerlink" title="discrete-uniform 離散均勻"></a>discrete-uniform 離散均勻</h2><ul>
@@ -8726,12 +8731,6 @@
 <p><img src="/images/statistics-1081-mid/14.PNG" alt=""><br><img src="/images/statistics-1081-mid/15.PNG" alt=""><br><img src="/images/statistics-1081-mid/16.PNG" alt=""><br><img src="/images/statistics-1081-mid/18.PNG" alt=""><br><img src="/images/statistics-1081-mid/19.PNG" alt=""></p>
 </blockquote>
 <h3 id="Covariance-共變異數"><a href="#Covariance-共變異數" class="headerlink" title="Covariance 共變異數"></a>Covariance 共變異數</h3><p>公式：\(\sigma_{xy} = [ Var(x+y) - Var(x) - Var(y)] /2 \) or \(\sigma_{xy} =  \Sigma_{i,j} [ x_i - E(x_i) ] [y_i - E(y_i) ] f(x_i,y_i)\)</p>
-<ul>
-<li>延續剛剛的舉例，如圖：<blockquote>
-<p><img src="/images/statistics-1081-mid/20.PNG" alt=""></p>
-</blockquote>
-</li>
-</ul>
 <h3 id="Correlation-Coefficient-相關係數"><a href="#Correlation-Coefficient-相關係數" class="headerlink" title="Correlation Coefficient 相關係數"></a>Correlation Coefficient 相關係數</h3><p>公式 \(\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}\)</p>
 <ul>
 <li>延續剛剛的舉例，如圖：<blockquote>
@@ -8763,7 +8762,7 @@
 </li>
 </ul>
 <h2 id="binomial-二項"><a href="#binomial-二項" class="headerlink" title="binomial 二項"></a>binomial 二項</h2><ul>
-<li>此公式可以實驗 y 次成功的次數，x 代表成功次數</li>
+<li>此公式可以找出在 y 次實驗中 x 次成功的機率分布</li>
 <li>透過 n 個相同實驗組成</li>
 <li>每一次的實驗都有兩個結果，成功或失敗</li>
 <li>平穩性假設 (stationarity assumption)<br>成功的機率(p)，在每一項實驗都是獨立，亦即不會受到其他實驗影響</li>
@@ -8792,7 +8791,7 @@
 <p><img src="/images/statistics-1081-mid/30.jpg" alt=""></p>
 </blockquote>
 <h2 id="negative-binomial-負二項"><a href="#negative-binomial-負二項" class="headerlink" title="negative binomial 負二項"></a>negative binomial 負二項</h2><ul>
-<li>此公式可以實驗 y 次成功的次數，x 代表成功次數、成功的機率為 p</li>
+<li>需要多少次的實驗才能達到我們的期望結果</li>
 <li>每一次的實驗都有兩個結果，成功或失敗</li>
 <li>透過 n 個相同實驗組成</li>
 <li>平穩性假設 (stationarity assumption)<br>成功的機率(p)，在每一項實驗都是獨立，亦即不會受到其他實驗影響</li>
@@ -8830,7 +8829,7 @@
 </blockquote>
 <h3 id="Expected-Value-and-Variance-1"><a href="#Expected-Value-and-Variance-1" class="headerlink" title="Expected Value and Variance"></a>Expected Value and Variance</h3><ul>
 <li>Expected Value<br>\(E(x) = \mu = \frac{1}{p} \)</li>
-<li>Variance<br>\(Var(x) = \sigma^2 = \frac{r(1-p)}{p^2}\)</li>
+<li>Variance<br>\(Var(x) = \sigma^2 = \frac{(1-p)}{p^2}\)</li>
 </ul>
 <h2 id="Poisson-卜瓦松"><a href="#Poisson-卜瓦松" class="headerlink" title="Poisson 卜瓦松"></a>Poisson 卜瓦松</h2><ul>
 <li>Poisson 通常用於一段區間或時間內發生的次數，為離散的隨機變數，可以是無限的序列，即 x 趨近於無限</li>
@@ -8877,7 +8876,7 @@
 <li>沒有滿足上面兩條件則機率必定是 0 </li>
 </ul>
 </li>
-<li><strong>當母體極大時，可以使用 bimomial 來近似</strong></li>
+<li><strong>當母體極大時，可以使用 binomial 來近似</strong></li>
 <li>hypergeometric 的其他變數，<strong>透過 binomial 來算出的變數</strong><ul>
 <li>\(p = \frac{M}{N}\) 為第一次發生實驗成功的機率</li>
 <li>如果母體值極大，也就表示 \((N-n) / (N-1) = 1 \)，極限的概念</li>
@@ -8887,10 +8886,10 @@
 </li>
 </ul>
 <h3 id="舉例-手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少"><a href="#舉例-手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少" class="headerlink" title="舉例 - 手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少"></a>舉例 - 手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少</h3><ul>
-<li>x = 2 我們希望選到兩顆好電池</li>
+<li>x = 2 我們想知道選到兩顆好電池的機率</li>
 <li>n = 2 我們隨機選擇兩顆電池</li>
 <li>N = 4 這四顆電池我們都有機會拿到，因此我們的實驗結果會有 4 個</li>
-<li>M = 2 我們想要知道拿到兩顆好電池的機率，如果想知道拿到一顆好電池的機率則 M = 1 </li>
+<li>M = 2 其中成功的機率最高為 2 次，因為好電池只有兩顆</li>
 <li>透過 Probability Distributions APP 可以得出 0.1667<blockquote>
 <p><img src="/images/statistics-1081-mid/34.jpg" alt=""></p>
 </blockquote>
@@ -10025,6 +10024,145 @@
         <tag>水題</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(一) 筆記 - 第八章 區間估計(Interval Estimation)</title>
+    <url>/2020/12/29/NTUT_note/statistics-ch8/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Margin-of-Error-and-the-Interval-Estimate-邊際誤差與區間估計"><a href="#Margin-of-Error-and-the-Interval-Estimate-邊際誤差與區間估計" class="headerlink" title="Margin of Error and the Interval Estimate 邊際誤差與區間估計"></a>Margin of Error and the Interval Estimate 邊際誤差與區間估計</h2><ul>
+<li>點估計值基本上不會完全相等母體參數，也就是母體的正確答案</li>
+<li>透過 Interval Estimate 區間估計可以幫助我們推出正確的點估計值<br>區間估計公式：\(\text{Point Estimate } \pm \text{Margin of Error }\)，其中點估計量通常會用 \(\bar{x}\) 代替</li>
+<li>區間估計可以告訴我們 Point Estimate 多靠近母體參數。</li>
+<li>母體參數<br>我們要詢問母體的某一件事，每一個人都必須適用，且通常都是判斷有或沒有，例如判斷所有的學生們有沒有統計都及格。</li>
+</ul>
+<h2 id="Interval-Estimate-of-a-Population-Mean-sigma-Known-母體標準差已知的點估計量"><a href="#Interval-Estimate-of-a-Population-Mean-sigma-Known-母體標準差已知的點估計量" class="headerlink" title="Interval Estimate of a Population Mean \(\sigma \) Known 母體標準差已知的點估計量"></a>Interval Estimate of a Population Mean \(\sigma \) Known 母體標準差<em>已知</em>的點估計量</h2><ul>
+<li>要符合下面條件<ul>
+<li>透過母體 \(\sigma \) 來計算</li>
+<li>通常沒有辦法很精確的來找出母體 \(\sigma \)，但可以透過歷史資料來得出，這時我們就稱之為已知。</li>
+<li>抽樣樣本 n 要大於 30</li>
+<li>如果母體與常態分布相似則 n 大於 15 即可。</li>
+<li>如果有高偏態或離群值很多時， n 至少要大於 50 </li>
+</ul>
+</li>
+<li>樣本平均值分布為常態分布</li>
+<li>點估計量 \(\mu \)<ul>
+<li>公式 \(\bar{x} \pm Z_{a/2} \frac{\sigma}{\sqrt{n}}\)</li>
+<li>\(\bar{x}\) 為樣本平均數</li>
+<li>\(1-a \) 信賴係數</li>
+<li>\(Z_{a/2} \) 為常態分布的信賴區間</li>
+<li>\(\sigma\) 母體標準差</li>
+<li>\(n\) 樣本大小</li>
+</ul>
+</li>
+<li>常用的信賴區間、與信賴水準，信賴水準就是常態分配的 \(平均值 \pm 標準差 \)<ul>
+<li>\( a / 2 \)，非信賴區間的面積</li>
+<li>查表時，是先看 \(a / 2 \) 的值後進行查表，透過右邊的標準差來找出 Z 值是多少<blockquote>
+<p><img src="/images/statistics-ch8/4.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>舉例 - 透過上面那張圖可以知道在 \(\bar{x} \pm 1.645 \sigma_{\bar{x}}\) 有 90 % 的機率會包含母體平均數。<ul>
+<li>因此 90 % 稱為信賴水準 (confidence level )</li>
+<li>0.9 也被稱為信賴係數(confidence coefficient)，信賴水準的小數表示就稱為信賴係數。</li>
+</ul>
+</li>
+</ul>
+<h4 id="舉例-百貨公司想知道消費者消費金額，抽出-100-份，並透過此知道點估計量"><a href="#舉例-百貨公司想知道消費者消費金額，抽出-100-份，並透過此知道點估計量" class="headerlink" title="舉例 - 百貨公司想知道消費者消費金額，抽出 100 份，並透過此知道點估計量"></a>舉例 - 百貨公司想知道消費者消費金額，抽出 100 份，並透過此知道點估計量</h4><p>由於母體 \(\sigma \) 已經給出 20，且母體極大才能夠這樣算。</p>
+<p><strong>這裡主要是要讓讀者知道點估計量也會是常態分配</strong> </p>
+<blockquote>
+<p><img src="/images/statistics-ch8/1.PNG" alt=""></p>
+</blockquote>
+<p>因此我們可以知道樣本標準差為 2。</p>
+<h3 id="Normal-Probability-Distribution"><a href="#Normal-Probability-Distribution" class="headerlink" title="Normal Probability Distribution"></a>Normal Probability Distribution</h3><ul>
+<li>複習一下常態分配中的經驗法則<ul>
+<li>\(平均值 \pm 一個標準差 = 68.26 \% \)</li>
+<li>\(平均值 \pm 兩個標準差 = 95.44 \% \)</li>
+<li>\(平均值 \pm 三個標準差 = 99.72 \% \)</li>
+</ul>
+</li>
+<li>在樣本平均值 \(\bar{x} \) 值中，我們推算出來的樣本標準差將會是信心區間，也就是每次的抽樣樣本平均值會落在樣本標準差裡面的機率會是多少。<ul>
+<li>舉例，樣本標準差為 2，那下次抽樣樣本的平均值會落差標準差 2 的機率是多少<br>根據上面講的經驗法則，\(平均值 \pm 兩個標準差 = 95.44 \% \)，因此機率則會是 95.44%</li>
+</ul>
+</li>
+<li>圖解<ul>
+<li>\(\bar{x_1 }\) and \(\bar{x_3 }\)<br>這兩次的抽樣樣本中數值則有落在母體平均值當中</li>
+<li>\(\bar{x_2 }\)<br>這次的抽樣樣本中數值則<strong>沒有</strong>落在母體平均值當中</li>
+<li>z 則是在手算時會使用到，<a href="https://theriseofdavid.github.io/2020/12/01/NTUT_note/statistics-ch7/" target="_blank" rel="noopener">第七章</a>常用到</li>
+<li>a (藍色區塊) 則是在抽樣樣本不會落在\(平均值 \pm 標準差 \) 的其他機率，除以 2 是因為左右一半都有面積</li>
+<li><blockquote>
+<p><img src="/images/statistics-ch8/3.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="舉例-承上題，我們想知道-mu-pm-3-92-的值差幾個標準差並有多少機率母體平均數會落在此區間"><a href="#舉例-承上題，我們想知道-mu-pm-3-92-的值差幾個標準差並有多少機率母體平均數會落在此區間" class="headerlink" title="舉例 - 承上題，我們想知道 \(\mu \pm 3.92 \) 的值差幾個標準差並有多少機率母體平均數會落在此區間"></a>舉例 - 承上題，我們想知道 \(\mu \pm 3.92 \) 的值差幾個標準差並有多少機率母體平均數會落在此區間</h4><p>我們剛剛已經算是樣本標準差為 2，因此是 95.44% ，因此只需要 \(3.92 \ 2 = 1.96 \)，因此落在 \(1.96 \sigma{\bar{x}}\)</p>
+<blockquote>
+<p><img src="/images/statistics-ch8/2.PNG" alt=""></p>
+</blockquote>
+<h4 id="舉例-Discounr-Sounds-在美國有-260-家的店，還想要開新的店，於是他先去調查新店-不是地名-地區的年收入，樣本-n-36，且年收入平均值為-41-100，母體沒有高偏態，標準差為-4-500-且信來區間為-0-95，算出一個範圍在隨機抽樣中有-95-的機會有包含母體平均數"><a href="#舉例-Discounr-Sounds-在美國有-260-家的店，還想要開新的店，於是他先去調查新店-不是地名-地區的年收入，樣本-n-36，且年收入平均值為-41-100，母體沒有高偏態，標準差為-4-500-且信來區間為-0-95，算出一個範圍在隨機抽樣中有-95-的機會有包含母體平均數" class="headerlink" title="舉例 - Discounr Sounds 在美國有 260 家的店，還想要開新的店，於是他先去調查新店(不是地名)地區的年收入，樣本 n = 36，且年收入平均值為 41,100，母體沒有高偏態，標準差為 4,500 且信來區間為 0.95，算出一個範圍在隨機抽樣中有 95 % 的機會有包含母體平均數"></a>舉例 - Discounr Sounds 在美國有 260 家的店，還想要開新的店，於是他先去調查新店(不是地名)地區的年收入，樣本 n = 36，且年收入平均值為 41,100，母體沒有高偏態，標準差為 4,500 且信來區間為 0.95，算出一個範圍在隨機抽樣中有 95 % 的機會有包含母體平均數</h4><p>因為抽樣會比起直接將整個母體查詢會更快一些，且母體沒有高偏態，因此可以進行常態分配。</p>
+<p>往上數第四張圖已經說明 95% 的信心水準是 \(\bar{x} \pm 1.96 \sigma_{\bar{x}}\) 區間會包含母體平均數。</p>
+<p>因此邊際誤差(margin of error) \(Z_{a/2} = \frac{\sigma}{\sqrt{n}} = 1.96(\frac{4500}{\sqrt{36}}) = 1,470\)，因此在 95% 的信賴水準下邊際誤差會是 1,470。</p>
+<p>再將母體平均值 \( 41,100 \pm 1,470 \) 也就是 \(39,630 to 42,570\)，就是我們的區間估計且有 95% 的信賴水準</p>
+<p>在其他信賴區間時的邊際誤差與區間估計</p>
+<blockquote>
+<p><img src="/images/statistics-ch8/5.PNG" alt=""></p>
+</blockquote>
+<h2 id="Interval-Estimate-of-a-Population-Mean-sigma-Unknown-母體標準差未知的點估計量"><a href="#Interval-Estimate-of-a-Population-Mean-sigma-Unknown-母體標準差未知的點估計量" class="headerlink" title="Interval Estimate of a Population Mean \(\sigma \) Unknown 母體標準差未知的點估計量"></a>Interval Estimate of a Population Mean \(\sigma \) Unknown 母體標準差<em>未知</em>的點估計量</h2><ul>
+<li>沒辦法透過過去歷史資料來推出 \(\sigma \) 時，透過隨機樣本來找出 \(\sigma \)，這個時候要使用 t 分配(Distribution)</li>
+</ul>
+<h3 id="t-Distribution"><a href="#t-Distribution" class="headerlink" title="t Distribution"></a>t Distribution</h3><ul>
+<li>由一群相似的機率分配組合</li>
+<li>依照參數來決定自由度 (degrees of freedom)</li>
+<li>Degrees of freedom<br>再算樣本標準差有多少獨立的個數，在減掉 \(\bar{x}\)，就是自由度</li>
+<li>自由度越大圖形越瘦長且會接近常態分配，如下圖<blockquote>
+<p><img src="/images/statistics-ch8/6.PNG" alt=""></p>
+</blockquote>
+</li>
+<li>t 值概念類似於標準常態機率分布的 z</li>
+<li>當自由度大於 100 時，t 與 z 值接近相同</li>
+<li>當 t 變成無限大時則與 z 相同 </li>
+<li>Adequate Sample Size 足夠樣本數量 <ul>
+<li>樣本數必須要大於 30 才可以使用</li>
+<li>在母體高度偏態或有很多離群值時，樣本數量要高於 50 才可以使用</li>
+<li>母體並不是常態分配，但有對稱性時則樣本數只需要 15 筆即可</li>
+<li>母體分配與常態分配相同，那樣本數低於 15 也可以</li>
+</ul>
+</li>
+<li></li>
+<li>區間估計公式<ul>
+<li>基本上類似於常態分配，但在一些非常態分布時也可以使用</li>
+<li>\(\bar{x} \pm t_{a/2} \frac{s}{sqrt{n}}\)</li>
+<li>\(1-a\) 信賴係數</li>
+<li>\(t_{a/2}\) 為 t 值的區域，為 \(n-1\) 的自由度， t 要查表</li>
+<li>\(s\) 樣本標準差</li>
+</ul>
+</li>
+</ul>
+<h4 id="舉例-記者想要知道學生花多少錢在校外住宿，在離學校半英里裡面隨機抽樣出-16-筆雅房租金資料，平均租金-750-元、標準差-55，想要建立百分之-95-的信賴區間，來求出母體的平均租金與標準差"><a href="#舉例-記者想要知道學生花多少錢在校外住宿，在離學校半英里裡面隨機抽樣出-16-筆雅房租金資料，平均租金-750-元、標準差-55，想要建立百分之-95-的信賴區間，來求出母體的平均租金與標準差" class="headerlink" title="舉例 - 記者想要知道學生花多少錢在校外住宿，在離學校半英里裡面隨機抽樣出 16 筆雅房租金資料，平均租金 750 元、標準差 55，想要建立百分之 95% 的信賴區間，來求出母體的平均租金與標準差"></a>舉例 - 記者想要知道學生花多少錢在校外住宿，在離學校半英里裡面隨機抽樣出 16 筆雅房租金資料，平均租金 750 元、標準差 55，想要建立百分之 95% 的信賴區間，來求出母體的平均租金與標準差</h4><p>在 95 % 的信心區間中， \(\alpha = 0.05 \) and \(\alpha / 2 = 0.025 \)，因此可以找出\(t_{0.025}\)與在自由度為 \(n-1 = 16 - 1 = 15\)的 t 值，因此我們可以說明 \(t_{0.025} =2.131 \)</p>
+<p>下方為查表</p>
+<blockquote>
+<p><img src="/images/statistics-ch8/7.PNG" alt=""></p>
+</blockquote>
+<p>根據區間估計公式 \(\bar{x} \pm t_{a/2} \frac{s}{sqrt{n}} = 750 \pm 2.131 \frac{55}{\sqrt{16}} = 750 \pm 29.30 \)，透過此公式我們可以肯定在 95% 的信賴區間，母體的平均值會介於 720.70 to 779.30 。</p>
+<h2 id="Summary-of-Interval-Estimate-Procedures-for-a-Population-Mean-區間估計的計算統整"><a href="#Summary-of-Interval-Estimate-Procedures-for-a-Population-Mean-區間估計的計算統整" class="headerlink" title="Summary of Interval Estimate Procedures for a Population Mean 區間估計的計算統整"></a>Summary of Interval Estimate Procedures for a Population Mean 區間估計的計算統整</h2><blockquote>
+<p><img src="/images/statistics-ch8/8.PNG" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二上統計學筆記</tag>
       </tags>
   </entry>
 </search>

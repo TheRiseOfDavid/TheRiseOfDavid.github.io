@@ -305,7 +305,7 @@ ga('send', 'pageview');
 </ul>
 <h3 id="Variance-and-Standard-Deviation-變異數與標準差"><a href="#Variance-and-Standard-Deviation-變異數與標準差" class="headerlink" title="Variance and Standard Deviation 變異數與標準差"></a>Variance and Standard Deviation 變異數與標準差</h3><ul>
 <li>變異數公式為 \(Var(x) = \sigma^2 = \Sigma(x-\mu)^2 f(x) \)</li>
-<li>變異數是隨機變數機率減去平均值(期望值)次方的加權平均，權重則是隨機變數的機率</li>
+<li>變異數是隨機變數值減去平均值(期望值)次方在乘機率的加權平均，權重則是隨機變數的機率</li>
 <li>標準差 \(\sigma \)，是變異數開平方的值</li>
 </ul>
 <h2 id="discrete-uniform-離散均勻"><a href="#discrete-uniform-離散均勻" class="headerlink" title="discrete-uniform 離散均勻"></a>discrete-uniform 離散均勻</h2><ul>
@@ -327,12 +327,6 @@ ga('send', 'pageview');
 <p><img src="/images/statistics-1081-mid/14.PNG" alt=""><br><img src="/images/statistics-1081-mid/15.PNG" alt=""><br><img src="/images/statistics-1081-mid/16.PNG" alt=""><br><img src="/images/statistics-1081-mid/18.PNG" alt=""><br><img src="/images/statistics-1081-mid/19.PNG" alt=""></p>
 </blockquote>
 <h3 id="Covariance-共變異數"><a href="#Covariance-共變異數" class="headerlink" title="Covariance 共變異數"></a>Covariance 共變異數</h3><p>公式：\(\sigma_{xy} = [ Var(x+y) - Var(x) - Var(y)] /2 \) or \(\sigma_{xy} =  \Sigma_{i,j} [ x_i - E(x_i) ] [y_i - E(y_i) ] f(x_i,y_i)\)</p>
-<ul>
-<li>延續剛剛的舉例，如圖：<blockquote>
-<p><img src="/images/statistics-1081-mid/20.PNG" alt=""></p>
-</blockquote>
-</li>
-</ul>
 <h3 id="Correlation-Coefficient-相關係數"><a href="#Correlation-Coefficient-相關係數" class="headerlink" title="Correlation Coefficient 相關係數"></a>Correlation Coefficient 相關係數</h3><p>公式 \(\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y}\)</p>
 <ul>
 <li>延續剛剛的舉例，如圖：<blockquote>
@@ -364,7 +358,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h2 id="binomial-二項"><a href="#binomial-二項" class="headerlink" title="binomial 二項"></a>binomial 二項</h2><ul>
-<li>此公式可以實驗 y 次成功的次數，x 代表成功次數</li>
+<li>此公式可以找出在 y 次實驗中 x 次成功的機率分布</li>
 <li>透過 n 個相同實驗組成</li>
 <li>每一次的實驗都有兩個結果，成功或失敗</li>
 <li>平穩性假設 (stationarity assumption)<br>成功的機率(p)，在每一項實驗都是獨立，亦即不會受到其他實驗影響</li>
@@ -393,7 +387,7 @@ ga('send', 'pageview');
 <p><img src="/images/statistics-1081-mid/30.jpg" alt=""></p>
 </blockquote>
 <h2 id="negative-binomial-負二項"><a href="#negative-binomial-負二項" class="headerlink" title="negative binomial 負二項"></a>negative binomial 負二項</h2><ul>
-<li>此公式可以實驗 y 次成功的次數，x 代表成功次數、成功的機率為 p</li>
+<li>需要多少次的實驗才能達到我們的期望結果</li>
 <li>每一次的實驗都有兩個結果，成功或失敗</li>
 <li>透過 n 個相同實驗組成</li>
 <li>平穩性假設 (stationarity assumption)<br>成功的機率(p)，在每一項實驗都是獨立，亦即不會受到其他實驗影響</li>
@@ -431,7 +425,7 @@ ga('send', 'pageview');
 </blockquote>
 <h3 id="Expected-Value-and-Variance-1"><a href="#Expected-Value-and-Variance-1" class="headerlink" title="Expected Value and Variance"></a>Expected Value and Variance</h3><ul>
 <li>Expected Value<br>\(E(x) = \mu = \frac{1}{p} \)</li>
-<li>Variance<br>\(Var(x) = \sigma^2 = \frac{r(1-p)}{p^2}\)</li>
+<li>Variance<br>\(Var(x) = \sigma^2 = \frac{(1-p)}{p^2}\)</li>
 </ul>
 <h2 id="Poisson-卜瓦松"><a href="#Poisson-卜瓦松" class="headerlink" title="Poisson 卜瓦松"></a>Poisson 卜瓦松</h2><ul>
 <li>Poisson 通常用於一段區間或時間內發生的次數，為離散的隨機變數，可以是無限的序列，即 x 趨近於無限</li>
@@ -478,7 +472,7 @@ ga('send', 'pageview');
 <li>沒有滿足上面兩條件則機率必定是 0 </li>
 </ul>
 </li>
-<li><strong>當母體極大時，可以使用 bimomial 來近似</strong></li>
+<li><strong>當母體極大時，可以使用 binomial 來近似</strong></li>
 <li>hypergeometric 的其他變數，<strong>透過 binomial 來算出的變數</strong><ul>
 <li>\(p = \frac{M}{N}\) 為第一次發生實驗成功的機率</li>
 <li>如果母體值極大，也就表示 \((N-n) / (N-1) = 1 \)，極限的概念</li>
@@ -488,10 +482,10 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h3 id="舉例-手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少"><a href="#舉例-手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少" class="headerlink" title="舉例 - 手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少"></a>舉例 - 手中有兩顆沒電的電池與全新電池，現在隨機選擇兩顆電池，能拿到全新的電池機率是多少</h3><ul>
-<li>x = 2 我們希望選到兩顆好電池</li>
+<li>x = 2 我們想知道選到兩顆好電池的機率</li>
 <li>n = 2 我們隨機選擇兩顆電池</li>
 <li>N = 4 這四顆電池我們都有機會拿到，因此我們的實驗結果會有 4 個</li>
-<li>M = 2 我們想要知道拿到兩顆好電池的機率，如果想知道拿到一顆好電池的機率則 M = 1 </li>
+<li>M = 2 其中成功的機率最高為 2 次，因為好電池只有兩顆</li>
 <li>透過 Probability Distributions APP 可以得出 0.1667<blockquote>
 <p><img src="/images/statistics-1081-mid/34.jpg" alt=""></p>
 </blockquote>
