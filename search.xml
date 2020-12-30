@@ -8695,11 +8695,19 @@
 </tr>
 <tr>
 <td><a href="#Poisson-卜瓦松">卜瓦松</a></td>
-<td>在特定的空間內發生的次數</td>
+<td>在特定的空間(或單點)內發生次數(離散)的機率</td>
 </tr>
 <tr>
 <td><a href="#hypergeometric-超幾何">超幾何</a></td>
 <td>N次試驗中成功的機率(但取後不放回)</td>
+</tr>
+<tr>
+<td><a href="#Exponential-Probability-Distribution-指數機率分配">指數機率</a></td>
+<td>詢問區間中的<strong>連續</strong>變數機率</td>
+</tr>
+<tr>
+<td><a href="#Normal-Probability-Distribution-常態機率分布">常態機率分布</a></td>
+<td>最常用的機率分布之一，通常題目會告訴要用此公式</td>
 </tr>
 </tbody></table>
 <h3 id="期望值-E-x"><a href="#期望值-E-x" class="headerlink" title="期望值 \(E(x) \)"></a>期望值 \(E(x) \)</h3><ul>
@@ -10135,10 +10143,9 @@
 <li>母體分配與常態分配相同，那樣本數低於 15 也可以</li>
 </ul>
 </li>
-<li></li>
 <li>區間估計公式<ul>
 <li>基本上類似於常態分配，但在一些非常態分布時也可以使用</li>
-<li>\(\bar{x} \pm t_{a/2} \frac{s}{sqrt{n}}\)</li>
+<li>\(\bar{x} \pm t_{a/2} \frac{s}{\sqrt{n}}\)</li>
 <li>\(1-a\) 信賴係數</li>
 <li>\(t_{a/2}\) 為 t 值的區域，為 \(n-1\) 的自由度， t 要查表</li>
 <li>\(s\) 樣本標準差</li>
@@ -10150,7 +10157,7 @@
 <blockquote>
 <p><img src="/images/statistics-ch8/7.PNG" alt=""></p>
 </blockquote>
-<p>根據區間估計公式 \(\bar{x} \pm t_{a/2} \frac{s}{sqrt{n}} = 750 \pm 2.131 \frac{55}{\sqrt{16}} = 750 \pm 29.30 \)，透過此公式我們可以肯定在 95% 的信賴區間，母體的平均值會介於 720.70 to 779.30 。</p>
+<p>根據區間估計公式 \(\bar{x} \pm t_{a/2} \frac{s}{\sqrt{n}} = 750 \pm 2.131 \frac{55}{\sqrt{16}} = 750 \pm 29.30 \)，透過此公式我們可以肯定在 95% 的信賴區間，母體的平均值會介於 720.70 to 779.30 。</p>
 <h2 id="Summary-of-Interval-Estimate-Procedures-for-a-Population-Mean-區間估計的計算統整"><a href="#Summary-of-Interval-Estimate-Procedures-for-a-Population-Mean-區間估計的計算統整" class="headerlink" title="Summary of Interval Estimate Procedures for a Population Mean 區間估計的計算統整"></a>Summary of Interval Estimate Procedures for a Population Mean 區間估計的計算統整</h2><blockquote>
 <p><img src="/images/statistics-ch8/8.PNG" alt=""></p>
 </blockquote>
@@ -10163,6 +10170,78 @@
         <tag>北科上課筆記</tag>
         <tag>統計學筆記</tag>
         <tag>北科大二上統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11805 - Bafana Bafana (水題)</title>
+    <url>/2020/12/30/UVa/UVa11805/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>一個足球隊要訓練傳球，球員圍成一個圓圈且球員的傳球方式是傳給左手邊的隊友，也就是 1 傳給 2 傳給 3 已此類推，教練一開始會把球傳給 k 球員，想詢問傳了 p 次後球會在那個隊員腳上？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>英文很難…XD，這很痛苦wwww。這句英文特難啊，就讓我放在這邊來讓未來的我緬懷現在英文不好的我www。</p>
+<h3 id="英文翻譯"><a href="#英文翻譯" class="headerlink" title="英文翻譯"></a>英文翻譯</h3><p>In each pass, a player will give the ball to his partner who is in his immediate right side.</p>
+<p>在每一次的傳球，一個球員將傳給他的夥伴並且他的夥伴是在<strong>右手邊</strong>收到球。</p>
+<p>看到了嘛！！！！！ 他的語句是被動型態，且是以收球者觀點為主，在華人社會很少會這樣講，直接習慣性以踢球者為主的角度去看，讓我以為她踢球是讓球員遞減，隊友 3 傳給隊友 2 傳給隊友 1，這種感覺..。</p>
+<p>基本上這題不難，只需要將 \((現在的球員號碼 + 傳 x 次) % 隊員數量\) 即可，注意是當餘數為 0 時要特別改成 n 即可。因為模數的特姓，在球員號碼等同於隊員數量時上面公式會輸出 0，因此特別拉出來寫案例即可。</p>
+<h2 id="觀念重點"><a href="#觀念重點" class="headerlink" title="觀念重點"></a>觀念重點</h2><ul>
+<li>\((現在的球員號碼 + 傳 x 次) % 隊員數量\)</li>
+<li>當上面的公式值為 0 時將改成輸出隊員數量</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><ul>
+<li>齊笎詳解</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題不難拉，只需要解決英文問題就好了，最近都在訓練數學題目順便增強英文閱讀能力，最近覺得英文閱讀能力有變好，算是一大感動嘛XD</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t , n , k , p ;</span><br><span class="line"><span class="keyword">int</span> kase ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compute</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = (k + p) % n ;</span><br><span class="line">    <span class="keyword">if</span>(temp == <span class="number">0</span> )</span><br><span class="line">        <span class="keyword">return</span> n ;</span><br><span class="line">    <span class="keyword">return</span>  temp ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k &gt;&gt; p ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span> &lt;&lt; compute() &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11875 - Brick Game (水題)</title>
+    <url>/2020/12/30/UVa/UVa11875/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>孟加拉國對於 Brick Game 非常熱衷，最近出現了電競的賽事，隊伍的隊員數量必定是奇數，且透過年齡進行排序，可能會給遞增或遞減。需要一個隊長且隊長年齡必須是隊伍的中間值，否則會出現代溝，請輸出隊長的最適合年齡。</p>
+<p>P.S. 隊友年齡都是獨一無二，不會有另外一個隊友與其他隊友年齡相同。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>水到不行www，前題是你英文夠好的話…。<del>我就理解錯了方向，還我寫了一個錯誤的版本</del></p>
+<p>由於題目的隊員數量必定是奇數因此不需要擔心偶數 / 2 的問題，再加上年齡一定是遞增或是遞減，在奇數情況時連排序都不需要www。</p>
+<h3 id="偶數的情況-題目沒有用到"><a href="#偶數的情況-題目沒有用到" class="headerlink" title="偶數的情況 - 題目沒有用到"></a>偶數的情況 - 題目沒有用到</h3><p>偶數比較麻煩，假如 1,2,3,4 我們要找出隊長就有可能是 2,3，但因為題目是奇數所以就不用擔心了XD。</p>
+<p>假如隊長改成偶數且年齡必須是<strong>等於或等於 + 1</strong> 的年齡這時候排序就會很重要，不然直接輸入至陣列時就會因為沒有排序，如果同筆測試資料只是順序遞增與遞減時輸出答案就會不一至。</p>
+<h4 id="舉例：-1-2-3-4-and-4-3-2-1-如果隊員是偶數時則選中位數-1-的隊友"><a href="#舉例：-1-2-3-4-and-4-3-2-1-如果隊員是偶數時則選中位數-1-的隊友" class="headerlink" title="舉例： 1,2,3,4 and 4,3,2,1 如果隊員是偶數時則選中位數 + 1 的隊友"></a>舉例： 1,2,3,4 and 4,3,2,1 如果隊員是偶數時則選中位數 + 1 的隊友</h4><p>同樣放在題目的這份程式碼，公式是 \(n/2+1\)，那在這兩種順序就會輸出 2 或者 3，答案不一致。</p>
+<h3 id="錯誤方向"><a href="#錯誤方向" class="headerlink" title="錯誤方向"></a>錯誤方向</h3><p>擷取題目的關鍵字，這是誤導我的方向</p>
+<p>Hence they select the captain of a team in such a way so that the number of player in the team who are younger than that captain is equal to the number of players who are older than that captain</p>
+<p>因此選擇一個隊長的方法是選擇一位隊員且此<strong>隊員年齡會是隊伍的中間值</strong>。<br>P.S. 中間值 = 中位數。</p>
+<p>我把它理解成了平均值…，於是我就用了加權平均數去計算，再找出最靠近加權平均數的年齡，後來才發現她要的是中位數..。</p>
+<h3 id="觀念重點"><a href="#觀念重點" class="headerlink" title="觀念重點"></a>觀念重點</h3><ul>
+<li>先將隊員年齡放入陣列中(index 0)，在 \(n/2\) 即可。</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><ul>
+<li>齊笎詳解</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題不難拉，只需要解決英文問題就好了，最近都在訓練數學題目順便增強英文閱讀能力，最近覺得英文閱讀能力有變好，算是一大感動嘛XD</p>
+<p>可是我已經連續兩題英文閱讀方向錯了…，可以給我翻譯蒟蒻嘛。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 15</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> oo 1e9</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[MAXN] ;</span><br><span class="line"><span class="keyword">int</span> t , n ;</span><br><span class="line"><span class="keyword">int</span>  kase  ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compute</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num[i] ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//sort(num,num+n);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> num[n/<span class="number">2</span>] ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line">    freopen(<span class="string">"out.txt"</span> , <span class="string">"w"</span> , <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t ;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span> &lt;&lt; compute() &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
       </tags>
   </entry>
 </search>
