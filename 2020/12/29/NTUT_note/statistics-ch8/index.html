@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">1.9k</span>
+            <span class="post-count">2.8k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">7分鐘</span>
+            <span class="post-count">10分鐘</span>
         </span>
     </span>
 </div>
@@ -122,7 +122,22 @@ ga('send', 'pageview');
 <li>區間估計可以告訴我們 Point Estimate 多靠近母體參數。</li>
 <li>母體參數<br>我們要詢問母體的某一件事，每一個人都必須適用，且通常都是判斷有或沒有，例如判斷所有的學生們有沒有統計都及格。</li>
 </ul>
-<h2 id="Interval-Estimate-of-a-Population-Mean-sigma-Known-母體標準差已知的點估計量"><a href="#Interval-Estimate-of-a-Population-Mean-sigma-Known-母體標準差已知的點估計量" class="headerlink" title="Interval Estimate of a Population Mean \(\sigma \) Known 母體標準差已知的點估計量"></a>Interval Estimate of a Population Mean \(\sigma \) Known 母體標準差<em>已知</em>的點估計量</h2><ul>
+<h3 id="Margin-error-邊際誤差"><a href="#Margin-error-邊際誤差" class="headerlink" title="Margin error 邊際誤差"></a>Margin error 邊際誤差</h3><ul>
+<li>通常設 \(E\) 來表示邊際誤差 </li>
+<li>邊際誤差公式為 \(E = z_{a/2} \frac{\sigma}{\sqrt{n}}\)<ul>
+<li>其中 n 為我們必要的樣本估計大小<br>將邊際誤差公式移項就可以得到 \(n = \frac{(z_{a/2}^2 \  \ \sigma^2)}{E^2}\)</li>
+</ul>
+</li>
+<li>標準差未知的情況<ul>
+<li>如果一開始不知道標準差就看<a href="https://theriseofdavid.github.io/2020/12/29/NTUT_note/statistics-ch8/#Interval-Estimate-of-a-Population-Mean-sigma-Unknown-%E6%AF%8D%E9%AB%94%E6%A8%99%E6%BA%96%E5%B7%AE%E6%9C%AA%E7%9F%A5%E7%9A%84%E9%BB%9E%E4%BC%B0%E8%A8%88%E9%87%8F" target="_blank" rel="noopener">母體標準差未知的點估計量</a></li>
+<li>再抽測之前，先進行前側，這樣就知道標準差。</li>
+<li><strong>預估</strong> <del>猜測</del></li>
+</ul>
+</li>
+<li>如果知道標準差的估計量就看<a href="https://theriseofdavid.github.io/2020/12/29/NTUT_note/statistics-ch8/#Interval-Estimate-of-a-Population-Mean-sigma-Known-%E6%AF%8D%E9%AB%94%E6%A8%99%E6%BA%96%E5%B7%AE%E5%B7%B2%E7%9F%A5%E7%9A%84%E9%BB%9E%E4%BC%B0%E8%A8%88%E9%87%8F" target="_blank" rel="noopener">母體標準差已知的點估計量</a></li>
+</ul>
+<h4 id="舉例-公司想要知道各戶在-outlet-消費的平均花費是多少，在信心水準有-95-的情況下邊際誤差是-500-或是更小，請問我們應該要蒐集多少樣本，公司認為標準差為-4500。"><a href="#舉例-公司想要知道各戶在-outlet-消費的平均花費是多少，在信心水準有-95-的情況下邊際誤差是-500-或是更小，請問我們應該要蒐集多少樣本，公司認為標準差為-4500。" class="headerlink" title="舉例 - 公司想要知道各戶在 outlet 消費的平均花費是多少，在信心水準有 95% 的情況下邊際誤差是 500 或是更小，請問我們應該要蒐集多少樣本，公司認為標準差為 4500。"></a>舉例 - 公司想要知道各戶在 outlet 消費的平均花費是多少，在信心水準有 95% 的情況下邊際誤差是 500 或是更小，請問我們應該要蒐集多少樣本，公司認為標準差為 4500。</h4><p>先透過公式進行推導，\(z_{a/2}\frac{\sigma }{\sqrt{n}} = 500 \)<br>接著進行查表，當 \(z_{0.025} = 1.96 \)，因此標準差為 4500，就可以推出公式 \(n = \frac{(1.96)^2(4500)^2}{(500)^2} = 311.17 = 312 \)<br>因此我們就可以推出至少要有 312 個樣本才可以符合題目的要求。</p>
+<h2 id="Interval-Estimate-of-a-Population-Mean-sigma-Known-母體標準差已知的點估計量"><a href="#Interval-Estimate-of-a-Population-Mean-sigma-Known-母體標準差已知的點估計量" class="headerlink" title="Interval Estimate of a Population Mean \(\sigma \) Known 母體標準差已知的點估計量"></a>Interval Estimate of a Population Mean \(\sigma \) Known 母體標準差<strong>已知</strong>的點估計量</h2><ul>
 <li>要符合下面條件<ul>
 <li>透過母體 \(\sigma \) 來計算</li>
 <li>通常沒有辦法很精確的來找出母體 \(\sigma \)，但可以透過歷史資料來得出，這時我們就稱之為已知。</li>
@@ -196,7 +211,7 @@ ga('send', 'pageview');
 <blockquote>
 <p><img src="/images/statistics-ch8/5.PNG" alt=""></p>
 </blockquote>
-<h2 id="Interval-Estimate-of-a-Population-Mean-sigma-Unknown-母體標準差未知的點估計量"><a href="#Interval-Estimate-of-a-Population-Mean-sigma-Unknown-母體標準差未知的點估計量" class="headerlink" title="Interval Estimate of a Population Mean \(\sigma \) Unknown 母體標準差未知的點估計量"></a>Interval Estimate of a Population Mean \(\sigma \) Unknown 母體標準差<em>未知</em>的點估計量</h2><ul>
+<h2 id="Interval-Estimate-of-a-Population-Mean-sigma-Unknown-母體標準差未知的點估計量"><a href="#Interval-Estimate-of-a-Population-Mean-sigma-Unknown-母體標準差未知的點估計量" class="headerlink" title="Interval Estimate of a Population Mean \(\sigma \) Unknown 母體標準差未知的點估計量"></a>Interval Estimate of a Population Mean \(\sigma \) Unknown 母體標準差<strong>未知</strong>的點估計量</h2><ul>
 <li>沒辦法透過過去歷史資料來推出 \(\sigma \) 時，透過隨機樣本來找出 \(\sigma \)，這個時候要使用 t 分配(Distribution)</li>
 </ul>
 <h3 id="t-Distribution"><a href="#t-Distribution" class="headerlink" title="t Distribution"></a>t Distribution</h3><ul>
@@ -235,6 +250,47 @@ ga('send', 'pageview');
 <h2 id="Summary-of-Interval-Estimate-Procedures-for-a-Population-Mean-區間估計的計算統整"><a href="#Summary-of-Interval-Estimate-Procedures-for-a-Population-Mean-區間估計的計算統整" class="headerlink" title="Summary of Interval Estimate Procedures for a Population Mean 區間估計的計算統整"></a>Summary of Interval Estimate Procedures for a Population Mean 區間估計的計算統整</h2><blockquote>
 <p><img src="/images/statistics-ch8/8.PNG" alt=""></p>
 </blockquote>
+<h2 id="Interval-Estimate-of-a-Population-Proportion-母體比例的區間估計"><a href="#Interval-Estimate-of-a-Population-Proportion-母體比例的區間估計" class="headerlink" title="Interval Estimate of a Population Proportion 母體比例的區間估計"></a>Interval Estimate of a Population Proportion 母體比例的區間估計</h2><ul>
+<li>公式為 \(\bar{p} \pm \text{Margin of Error}\)，將邊際誤差拆開就是<ul>
+<li>等同於 \(\bar{p} \pm z_{a/2} \sqrt{\frac{\bar{p} (1-\bar{p}) }{n}}\)</li>
+<li>\(1-a\) 為信心係數</li>
+<li>\(z_{a/2}\) 為常態分配中，非信心水準的區塊</li>
+<li>\(bar{p}\) 樣本母體</li>
+</ul>
+</li>
+<li>在計算區間估計時，\(\bar{p}\) 會決定區間估計的距離</li>
+<li>\(\bar{p} \) 要能夠使用常態分配時，必須要符合兩個條件<ul>
+<li>\(n(1-p) \geq 5 \)</li>
+<li>\(np \geq 5 \)</li>
+</ul>
+</li>
+<li>用圖表來看<blockquote>
+<p><img src="/images/statistics-ch8/9.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="舉例-民意公司想要調查投票者的薪資，因此進行調查，他調查-500-位選民有-220-位會投給-A，PSI-有-95-的信心水準，想要知道會支持-A-候選人的比例有多少。"><a href="#舉例-民意公司想要調查投票者的薪資，因此進行調查，他調查-500-位選民有-220-位會投給-A，PSI-有-95-的信心水準，想要知道會支持-A-候選人的比例有多少。" class="headerlink" title="舉例 - 民意公司想要調查投票者的薪資，因此進行調查，他調查 500 位選民有 220 位會投給 A，PSI 有 95% 的信心水準，想要知道會支持 A 候選人的比例有多少。"></a>舉例 - 民意公司想要調查投票者的薪資，因此進行調查，他調查 500 位選民有 220 位會投給 A，PSI 有 95% 的信心水準，想要知道會支持 A 候選人的比例有多少。</h4><p>因此透過公式 \(\bar{p} \pm z_{a/2} \sqrt{\frac{\bar{p} (1-\bar{p}) }{n}}\)，並將其值帶入</p>
+<ul>
+<li>\(n = 500 \)</li>
+<li>\(\bar{p} = 220 / 500 = 0.44 \)</li>
+<li>\(z_{a/2} = 1.96 \)</li>
+</ul>
+<p>帶入後則會得到 \(0.44 \pm 1.96 \sqrt{\frac{0.44-(1-0.44)}{500}} = 0.44 \pm 0.0435 \)</p>
+<p>因此民意公司在 95% 的信心水準之下，會投給 A 候選人的比例在於 0.3965 to 0.4835。</p>
+<h3 id="Sample-Size-for-an-Interval-Estimate-of-a-Population-Proportion-決定母體比例的區間估計的樣本大小"><a href="#Sample-Size-for-an-Interval-Estimate-of-a-Population-Proportion-決定母體比例的區間估計的樣本大小" class="headerlink" title="Sample Size for an Interval Estimate of a Population Proportion 決定母體比例的區間估計的樣本大小"></a>Sample Size for an Interval Estimate of a Population Proportion 決定母體比例的區間估計的樣本大小</h3><p>找出邊際誤差的公式為 \(E = z_{a/2} \sqrt{\frac{\bar{p} (1-\bar{p}) }{n}}\) ，<strong>其中，\(\bar{p}\)</strong>因為我們還沒抽樣還不知道，因此我們這邊用 \star{p} 表示還不知道樣本大小的 p</p>
+<p>因此公式就是 \(n = \frac{(z_{a/2} \ )^2 \ \star{p} (1-\star{p})}{E^2}\)</p>
+<ul>
+<li>\(\star{p}\) 怎麼得出<ul>
+<li>透過過去歷史資料得出</li>
+<li>前側，先簡單抽樣一次</li>
+<li>判斷，<del>猜測</del></li>
+<li>使用 0.5 當參考，但這是最後手段。 </li>
+</ul>
+</li>
+</ul>
+<h4 id="舉例-民意公司希望有-99-的機率樣本比例離平均數為正負-0-03-邊際誤差-，需要多少的樣本才能達到這個目標？根據過去資料通常樣本比例必須要是-0-44"><a href="#舉例-民意公司希望有-99-的機率樣本比例離平均數為正負-0-03-邊際誤差-，需要多少的樣本才能達到這個目標？根據過去資料通常樣本比例必須要是-0-44" class="headerlink" title="舉例 - 民意公司希望有 99% 的機率樣本比例離平均數為正負 0.03(邊際誤差)，需要多少的樣本才能達到這個目標？根據過去資料通常樣本比例必須要是 0.44"></a>舉例 - 民意公司希望有 99% 的機率樣本比例離平均數為正負 0.03(邊際誤差)，需要多少的樣本才能達到這個目標？根據過去資料通常樣本比例必須要是 0.44</h4><p>因此根據邊際誤差公式 \(z_{a/2} \sqrt{\frac{p(1-p)}{n}} = 0.03 \)<br>在 99% 的信心水準中，\(z_{0.005} = 2.576\)，\(\bar{p} = 0.44 \)<br>因此將公式寫出就是 \(n = \frac{(z_{a/2} \ )^2 \ p* (1-p*)}{E^2} = \frac{(2.576)^2(0.44)(0.56)}{(0.03)^2} \approx 1817  \)</p>
+<p>也就是樣本大小至少要大於 1817，才可以符合離平均數誤差為 0.03 之間且信心水準為 0.99。</p>
+<p>如果題目沒有給出樣本比例時，則就用 0.5 來計算。</p>
 
       
       <!-- reward -->
