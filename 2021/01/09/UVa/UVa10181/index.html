@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa10181 - 15-Puzzle Problem(A*搜尋 ) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa10181" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa10181 - 15-Puzzle Problem(A*搜尋 )
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/01/09/UVa/UVa10181/" class="article-date">
+  <time datetime="2021-01-09T07:36:44.000Z" itemprop="datePublished">2021-01-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">5.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">19分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>大家有玩過數字拼圖嗎？這題是數字拼圖，給你一個隨機生成的數字拼圖，透過上下左右的方式讓空白附近的方塊跟空白交換，操作方式如下：<br><img src="https://i.imgur.com/mAx9XXC.png" alt=""></p>
+<p>如果可以在 50 步以內玩到拼圖的所有數字從左到右、從上到下都按照數字順序，那稱之為完成。並輸出從初始拼圖至最終拼圖的操作，輸出字元只能是 U,D,L,R。<br>P.S. 完成必須要是此圖<br><img src="https://i.imgur.com/t8TEweY.png" alt=""></p>
+<p>如果不行，輸出 “This puzzle is not solvable.”</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題好噁心…，好想回去寫數學…，數學好懂很多，這個讓我痛苦了 3 天左右、近 70 次左右的 TLE，嗚嗚。</p>
+<p>這題可以用 IDA* or A* 去解決，比較推薦前者 IDA* 來解決，A* 有很多細節要進行處理，如果你是一位熱愛被題目折磨的好友就使用 A* 吧！</p>
+<p>注意：此題目為 NP 問題，還沒有被科學家所研究出相關公式，只有研究出是否可解。</p>
+<h3 id="分析棋面"><a href="#分析棋面" class="headerlink" title="分析棋面"></a>分析棋面</h3><p>首先，我們先來定義<strong>棋面</strong>的意思，此名詞為每一個拼圖狀態的樣子，只要有進行移動，即是兩個不同的棋面，相信大家看的出來這題是必須要輸出路徑至變成最終拼圖狀態，那這時最好的演算法就是 Dijkstra，但棋面的複雜度應該是 \(O(16! / 2) = 1.04e13\)，其中除 2 是左邊方塊與右邊方塊交換、右邊方塊與左邊方塊交換相同，則其道理上下也是</p>
+<p>時間複雜度為 \(O(E \log \ V ) = 1.25e13\)、\(E = 1.04e13 , V = 16 \)，有 16 個點要找出最短路徑最短路徑，有 \(1.04e13\) 個狀態(邊)，但問題是最優秀的最短路徑演算法也需要對於這題做一些小技巧，不可以透過單純的 piority_queue 去解決，必須再透過一些小技巧來優化。</p>
+<h4 id="儲存棋面"><a href="#儲存棋面" class="headerlink" title="儲存棋面"></a>儲存棋面</h4><p>我們粗略的判斷一下，每一個拼圖號碼都可以放在 16 個位置，總共有 16 個拼圖，並且拼圖順序不同也算是不同的棋面那總共會有 \(2e9\) 個棋面，\(E = 24 * 24 = 576 \)、\(V = 16 \)，如果透過簡單的 piority_queue，要對哪個棋面優先 top queue 環節。但由於每一次的狀態都會產生出 4 個狀態，因此有一個好的函示來判斷要先取出那個狀態做 dijkstra 是非常重要的，而這函式我們稱為<a href="https://theriseofdavid.github.io/2021/01/07/Explain_Algorithm/Astar/" target="_blank" rel="noopener">啟發式搜尋 heuristic search</a></p>
+<h3 id="啟發式搜尋-heuristic-search"><a href="#啟發式搜尋-heuristic-search" class="headerlink" title="啟發式搜尋 heuristic search"></a><a href="https://theriseofdavid.github.io/2021/01/07/Explain_Algorithm/Astar/" target="_blank" rel="noopener">啟發式搜尋 heuristic search</a></h3><h4 id="判斷每一個拼圖是否在每個正確的位置上，沒有就加-1"><a href="#判斷每一個拼圖是否在每個正確的位置上，沒有就加-1" class="headerlink" title="判斷每一個拼圖是否在每個正確的位置上，沒有就加 1"></a>判斷每一個拼圖是否在每個正確的位置上，沒有就加 1</h4><p>這樣勢必是不行的，那麼在每次判斷的時候都必須跑一次迴圈進行測試，效率太差。且如果再正確位置空白下放 1 拼圖、正確位置 1 放空白拼圖，那麼此方法沒有辦法去解決此拼圖；因為只要換了就會讓錯的數字更多。</p>
+<h4 id="曼哈頓距離"><a href="#曼哈頓距離" class="headerlink" title="曼哈頓距離"></a>曼哈頓距離</h4><p>曼哈頓距離，是幾何學中的用語，<del>幾何學的用語都很不淺顯易懂</del>，簡單來說的話就是，某一個拼圖要用最短步驟才可以到達正確拼圖的位置。</p>
+<p>例如下圖中的 3，移到正確位置是多少曼哈頓距離。</p>
+<blockquote>
+<p><img src="https://i.imgur.com/CsjmuLp.png" alt=""></p>
+</blockquote>
+<p>正確答案是 4，最短只需要透過 4 步就可以到達正確拼圖的位置。而這樣可以透過國中就學習過的公式來進行推導 \(|x_1 - x_2 | + |y_1 - y_2 |\)。</p>
+<h3 id="剛剛我們已經決定好要用曼哈頓距離，那-piority-queue-的判斷就是曼哈頓距離最小嗎？"><a href="#剛剛我們已經決定好要用曼哈頓距離，那-piority-queue-的判斷就是曼哈頓距離最小嗎？" class="headerlink" title="剛剛我們已經決定好要用曼哈頓距離，那 piority_queue 的判斷就是曼哈頓距離最小嗎？"></a>剛剛我們已經決定好要用曼哈頓距離，那 piority_queue 的判斷就是曼哈頓距離最小嗎？</h3><p>當然不是，嗚嗚。我在這裡也犯過錯QQQ。</p>
+<p>正確來說的公式應該是 \(已經行走的步驟 + 曼哈頓距離 * x = 優先權重\)，其中 x 為係數並且要大於等於 1，程式這裡為 10，且優先權重最<strong>小</strong>的先進行此次的 dijkstra。</p>
+<p>稍微解釋一下公式，為甚麼曼哈頓距離需要乘以 x，是因為曼哈頓距離是我們預估的權重數量，並不是我們真正已經走的步驟，曼哈頓距離是我們<strong>尚未走</strong>的步驟。</p>
+<p>如果沒有放大倍率那會造成已經走的步驟跟曼哈頓距離其實是一樣的概念，但其實並不是，已經走的步驟必定是<strong>當前</strong>最佳解且已經走過路徑，但曼哈頓路徑還不確定路徑需要去嘗試，因此最好的方法就是讓<br>必曼哈頓距離乘以 x 來讓他在權重中的影響力降低，在我們先將優先權重最小的點拿出的情況下。</p>
+<h4 id="struct-使用-priority-queue-重點提醒"><a href="#struct-使用-priority-queue-重點提醒" class="headerlink" title="struct 使用 priority_queue 重點提醒"></a>struct 使用 priority_queue 重點提醒</h4><p>由於本人我在寫 pioirity_queue 犯過一個錯誤，其實是作者自己記憶力不好一直忘記QQ，因此寫在這邊稍微複習一下。</p>
+<p>pioirity_queue 是 queue 的強化版，透過 heap sort 來強化<strong>權重</strong>的價值，預設情況下是遞減，因此如果我們特別自定一個 struct 時，C++ 並不清楚大小排序是如何？因此我們要自己寫一個 operator 來告知判斷大小的依據。</p>
+<p>當要自己寫一個 operator 時，由於 pioirity_queue 是遞減，因此我們可以用一種偷懶的寫法，只要右邊的 struct 變數 A 小於左邊的 sturct 變數 st 依據是 A 的 h + step 要大於 st.h + st.step，透過此模式就可以在 priority_queue 遞減的情況下 struct 輸出的資料則是遞增。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">state</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> graph[<span class="number">4</span>][<span class="number">4</span>] ;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="keyword">int</span> h=<span class="number">-1</span> , step=<span class="number">0</span> ;</span><br><span class="line">    <span class="built_in">string</span> path =<span class="string">""</span> ;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(state st) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> h + step &gt; st.h + st.step ; </span><br><span class="line">        <span class="comment">//因此在這邊 st 要大於 state 的依據就是， state 的 h + step 要大於 st，</span></span><br><span class="line">        <span class="comment">//如果有符合此條件，那 heap sort 就會往上一層去比較，以達到 heap 遞減。</span></span><br><span class="line">        <span class="comment">//如果 st 沒有大於 state，那 st 的 h + step 就比 state 大</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可閱讀此篇來進行更好的理解<a href="https://blog.csdn.net/luomingjun12315/article/details/47376359" target="_blank" rel="noopener">STL 之 优先队列(priority_queue) Enstein_Jun </a></p>
+<h3 id="這裡我們就不使用-map-or-set-紀錄棋面，而是用-priority-queue-去找優先權重最小，如果找到重複也沒關係"><a href="#這裡我們就不使用-map-or-set-紀錄棋面，而是用-priority-queue-去找優先權重最小，如果找到重複也沒關係" class="headerlink" title="這裡我們就不使用 map or set 紀錄棋面，而是用 priority_queue 去找優先權重最小，如果找到重複也沒關係"></a>這裡我們就不使用 map or set 紀錄棋面，而是用 priority_queue 去找優先權重最小，如果找到重複也沒關係</h3><p>為甚麼我們會這樣寫呢，根據上面的分析，棋面真的太多了，如果用 set or unorder_map 每次不斷去查詢是否有重複的棋面，那複雜度則會大幅上升。map 時間複雜度是 \(o(log \ n )\)，每次進行查詢與插入(新增棋面) 兩次的 \(o(log \ n )\)，會讓程式笨重許多。因此建議就是不進行記錄，我們透過 priority_queue 最小的取出的方式，直接取出最小值，只要我們能夠不斷取出最小值，小到 0 就會是答案。</p>
+<p>可能會有人想問 priority_queue 複雜度也是 \(o(log \ n )\)，為甚麼就可以用它呢？那是因為我們一定要用到他，不然 dijkstra 就寫不出來了XD。</p>
+<h3 id="但注意的是，我們還是要禁止他不斷的左右交換、上下交換"><a href="#但注意的是，我們還是要禁止他不斷的左右交換、上下交換" class="headerlink" title="但注意的是，我們還是要禁止他不斷的左右交換、上下交換"></a>但注意的是，我們還是要禁止他不斷的左右交換、上下交換</h3><p>由於我們缺少了紀錄棋面，因此在 Dijkstra 當下的棋面會不斷的嘗試進行上下左右交換，但假如剛剛我們才讓空白拼圖與某一數字交換，現在又在交換回來不就徒勞無功了嗎？因此我們要拒絕這種可能性，而解決此問題就是紀錄剛剛的 Path，如果剛剛從左來，那我們就禁止往右、剛剛從上來，就禁止往下.、剛剛從下來，就禁止往上、剛剛從右來，就禁止往左。</p>
+<h3 id="判斷拼圖有沒有解"><a href="#判斷拼圖有沒有解" class="headerlink" title="判斷拼圖有沒有解"></a>判斷拼圖有沒有解</h3><p>在數字拼圖中是有無解的情況發生，舉個例子， n = 2，透過 (1,1) = 1, (1,2) = 3 , (2,1) = 2，讀者嘗試看看是否能夠解出XD。</p>
+<p>一定沒有辦法解出。能解出還請私密我XD，你太強了www。在數字拼圖的論文中則有講到先將數字拼圖展開成一維陣列，之後透過下述規則判斷是否可解。</p>
+<ul>
+<li>N 為奇數，那<strong>遞減數對</strong>為偶數時可以被解出</li>
+<li>N 為偶數<ul>
+<li>如果空白拼圖是出現在由底部開始數的<strong>奇數</strong>時，則遞減數對在<strong>偶數</strong>時可解</li>
+<li>如果空白拼圖是出現在由底部開始數的<strong>偶數</strong>時，則遞減數對在<strong>奇數</strong>時可解</li>
+</ul>
+</li>
+<li>遞減數對是甚麼？<br>如上面的 n = 2 例子，展開成一維陣列即是 1,3,2，那 3,2 就是遞減數對，數對定義為只要兩個數字且前面數字大於後面數字就代表一組數對，但必須維持原本一維陣列的順序。</li>
+<li>更好的解釋請查看 <a href="https://www.geeksforgeeks.org/check-instance-15-puzzle-solvable/" target="_blank" rel="noopener">How to check if an instance of 15 puzzle is solvable? GeeksforGeeks</a></li>
+</ul>
+<h4 id="證明"><a href="#證明" class="headerlink" title="證明"></a>證明</h4><p>我們先將拼圖變成一維陣列後，可以知道在水平移動時一維陣列並不會被更動，空白拼圖不可以被當作數字，因此不會用 (數字,空白) 的遞減數對發生；但在垂直移動時一維陣列的值就會被改動，且影響的方式是將某一數字與另一數字位置交換，我們稱之為對調。</p>
+<p>由於數字拼圖的每一步可以想像成每一組數字的排列，我們只是將她重新排列成某一狀態，這時我們可以將題目理解成將 <code>1,2,3,4,5</code> 轉換成 <code>4,2,1,3,5</code>，只需要將 4 移動到 1 前面再來讓 1 移動到 3 前面即可得到答案。</p>
+<p>再來讓 4 移動到 1 前面總共移動了 3 步，讓 1 移動到 3 前面總共移動了 2 步，因此每次的移動就會是 \(n-1 \)，n 為中間有多少數字。</p>
+<h4 id="再來我們要怎麼用奇偶數來解決是否可以解出來呢？"><a href="#再來我們要怎麼用奇偶數來解決是否可以解出來呢？" class="headerlink" title="再來我們要怎麼用奇偶數來解決是否可以解出來呢？"></a>再來我們要怎麼用奇偶數來解決是否可以解出來呢？</h4><blockquote>
+<p><img src="https://i.imgur.com/1XXxwtr.png" alt=""></p>
+</blockquote>
+<p>如果我們假設綠色格子是奇數，紅色格子是偶數，那我們要能夠將空白拼圖從紅色格子移到綠色格子時，奇偶數一定會產生變化，根據上方遞減數對的交換的說明。</p>
+<p>因此我們就可以得知一個結論，透過舉例說明：</p>
+<ul>
+<li>一開始的狀態，紅色的格子(3,3)為空白區塊，且目前為奇數。</li>
+<li>最終狀態，綠色的格子(4,4)為空白區塊，且為偶數。<br>這樣一定可以達到，對八，因為只要進行一次交換那奇偶數就會交換。</li>
+<li>那我們把最終型態改變一下，綠色的格子(4,4)為空白區塊，且為奇數。<br>這樣就勢必沒有辦法達到，因為紅色格子在跟綠色格子交換時奇偶數就會被改變，因此我們永遠不可能達到此情況。</li>
+</ul>
+<p>題目要求我們的最終棋面的遞減數對為 0，因此空白最下方並且遞減數對為偶數。</p>
+<p>更好的解釋請看 <a href="https://www.youtube.com/watch?v=Jidu5yA99u0&ab_channel=%E6%96%B9%E5%A1%8A%E8%BD%89%E4%B8%8D%E5%BF%AB" target="_blank" rel="noopener">你解不開！數字華容道 (15 puzzle) 與奇偶性 - 方塊轉不快</a>，但要注意這裡有將空白拼圖當作 16 但此證明沒有，但他的動畫很棒，因此建議大家觀看。</p>
+<p>再來我們可以得知，如果是水平互換時，遞減數對不變，垂直互換時則遞減數對則增加或減少 \(N-1\)，在沒有 16 的情況下。</p>
+<ul>
+<li>如果 n 是偶數，那麼在此公式下  \(N-1\) 出來必定會是奇數，因此每次的遞減數對都會少了奇數<ul>
+<li>因此如果空白為底部開始數的第一行時，那麼遞減數對在偶數時可解</li>
+<li>因此如果空白為底部開始數的第二行時，那麼遞減數對在奇數時可解<br>因為每次的遞減數對都會增加或減少 \(N-1\)，N 為 puzzle 寬度</li>
+</ul>
+</li>
+<li>根據上面兩個重點就可以得知 N 為偶數且空白拼圖是出現在由底部開始數的<strong>奇數</strong>時，則遞減數對在<strong>偶數</strong>時可解</li>
+<li>如果空白拼圖是出現在由底部開始數的<strong>偶數</strong>時，則遞減數對在<strong>奇數</strong>時可解</li>
+<li>如果 n 是奇數，那麼垂直移動時遞減數對會減少 \(N-1\)，但由於 N 為奇數因此公式下來必定是偶數，但偶數減偶數還是偶數XD，好饒舌www，因此我們只需要判斷遞減數對為偶數即可。</li>
+</ul>
+<p>透過此結論就可以知道</p>
+<ul>
+<li>如果 N 為奇數，則能夠被解出的狀態只有遞減數對為偶數</li>
+<li>如果 N 為偶數<ul>
+<li>如果空白拼圖是出現在由底部開始數的<strong>奇數</strong>時，則遞減數對在<strong>偶數</strong>時可解</li>
+<li>如果空白拼圖是出現在由底部開始數的<strong>偶數</strong>時，則遞減數對在<strong>奇數</strong>時可解</li>
+</ul>
+</li>
+</ul>
+<h3 id="判斷-puzzle-是否可被解的小優化"><a href="#判斷-puzzle-是否可被解的小優化" class="headerlink" title="判斷 puzzle 是否可被解的小優化"></a>判斷 puzzle 是否可被解的小優化</h3><p>cnt = 遞減數對、x 為一般我們在計算時的方向位置，舉例：(3,2) = 空白，那 x 就等於 3。<br>如果 x 等於奇數時，就表示由底部開始算就會是偶數，因為 N = 4，當 n = 4 那從底部算就會是 1，因此剛好符合條件底部為偶數時，遞減數對在奇數是可解，所以我們就直接 \(+x\)，因為奇數加偶數還是等於奇數。</p>
+<p>反之，那 x 等於偶數時，底部就會是奇數，相加時狀態不會改變，如果 cnt = 奇數，那加上偶數還是奇數，如果 cnt = 偶數，那加上偶數還是偶數，因此只要 mod 2 == 0 就表示不可解。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((cnt+x)%<span class="number">2</span> ==<span class="number">0</span>) <span class="comment">//判斷是否可解，這裡用了小優化，可看上面文章理解</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span> ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="小優化-string"><a href="#小優化-string" class="headerlink" title="小優化 string"></a>小優化 string</h3><p>string 用平常的 +=，時間複雜度比較高，因此這裡我們使用 <code>string.push_back(char)</code>，會更好些，因為我們要不斷的做在字串尾巴中加入方向，如果一直不段使用 += 會拖累我們的效能，因此用<code>string.push_back(char)</code>會更為優秀些。</p>
+<h2 id="觀念重點"><a href="#觀念重點" class="headerlink" title="觀念重點"></a>觀念重點</h2><ul>
+<li>A* 用法使用得宜</li>
+<li>piority_queue struct 寫 operator</li>
+<li>puzzle 是否可以被解出<ul>
+<li>核心推理證明</li>
+<li>遞減數對與空白在哪個位置要判斷奇偶數的小優化</li>
+</ul>
+</li>
+<li>不可以使用 map or set 紀錄</li>
+<li>跑 dijkstra 拒絕回到上一步</li>
+<li>紀錄正確位置的寫法</li>
+<li>string 小優化</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><ul>
+<li><a href="https://oi-wiki.org/search/astar/" target="_blank" rel="noopener">A* oiwiki</a></li>
+<li><a href="https://blog.csdn.net/helloworld10086/article/details/41908903" target="_blank" rel="noopener">UVA - 10181 15-Puzzle Problem（15数码 A*） HelloWorld10086 </a></li>
+<li><a href="https://www.geeksforgeeks.org/check-instance-15-puzzle-solvable/" target="_blank" rel="noopener">How to check if an instance of 15 puzzle is solvable? GeeksforGeeks</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">戴克斯特拉演算法 - wiki </a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E7%BD%AE%E6%8F%9B#cite_note-combination-1" target="_blank" rel="noopener">排列 - wiki </a></li>
+<li><a href="https://blog.csdn.net/luomingjun12315/article/details/47376359" target="_blank" rel="noopener">STL 之 优先队列(priority_queue) Enstein_Jun </a></li>
+<li><a href="https://sites.google.com/site/zsgititit/home/jin-jiec-cheng-shi-she-ji/stl/priority" target="_blank" rel="noopener">priority queue 高中資訊科技概論教師黃建庭的教學網站 </a></li>
+<li><a href="https://www.youtube.com/watch?v=Jidu5yA99u0&ab_channel=%E6%96%B9%E5%A1%8A%E8%BD%89%E4%B8%8D%E5%BF%AB" target="_blank" rel="noopener">你解不開！數字華容道 (15 puzzle) 與奇偶性 - 方塊轉不快</a></li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題好難…，可能是我第一次學 A* 在寫這份題目中我獲得了許多痛苦的感覺XD，畢竟在還沒有辦法把題目解開之前人都不會是開心的八，歷經了 4 次程式版本，看了許多網路上大佬的程式碼仔細研究分析，終於找到適合我學習的程式碼好開心&gt;&lt;。題外話：我寫了 4 個版本，結果都 TLE 卡住</p>
+<p>就算通關後還是為了要能夠讓我完整了解此題的運作，我又花了很多時間不斷去理解、嘗試，最終理解至現在，不得不說學習到了很多觀念與事物，但在了解的過程中也獲得了很多絕望感XD，因為想不出來嘛，就很容懷疑自己到底為甚麼要走演算法，讓自己過的那麼不開心。但其實通關後的成就感以及讓我學習到的思維，我認為是不會愧對於前面的痛苦地。</p>
+<p>但每次想到要寫演算法，心還是會揪一下XD。</p>
+<p>不過這裡還是要謝謝齊芫，他在我學習這題的過程中不斷指出我的邏輯問題，也退回我的邏輯概念讓我有機會可以去重新學習此題，減少了我在未來中可能會因為這次的學習瑕疵而犯的漏洞，很謝謝他。</p>
+<p>要是沒有他每次給我一個邏輯壓制，我可能現在還覺得我很會寫演算法呢XD。</p>
+<p>也謝謝在網路上提供資料的大神們，沒有你們我連學習的機會都沒有…，然後農場文章真的不要那麼氾濫，Google 管一下拉。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="comment">//unordered_map&lt;string,int&gt; visit ;</span></span><br><span class="line"><span class="comment">//set&lt;string&gt; visit ; // no set will be AC</span></span><br><span class="line"><span class="keyword">int</span> direct[<span class="number">4</span>][<span class="number">4</span>] = &#123;&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;&#125;; <span class="comment">//方向</span></span><br><span class="line"><span class="keyword">int</span> place[<span class="number">18</span>][<span class="number">2</span>] ; <span class="comment">//紀錄最終棋面每一個數字的 x,y 座標</span></span><br><span class="line"><span class="keyword">char</span> dname[<span class="number">4</span>] = &#123;<span class="string">'R'</span> , <span class="string">'L'</span> , <span class="string">'D'</span> , <span class="string">'U'</span>&#125;; <span class="comment">// 方向</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">state</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> graph[<span class="number">4</span>][<span class="number">4</span>] ;</span><br><span class="line">    <span class="keyword">int</span> x,y;</span><br><span class="line">    <span class="keyword">int</span> h=<span class="number">-1</span> , step=<span class="number">0</span> ;</span><br><span class="line">    <span class="built_in">string</span> path =<span class="string">""</span> ;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(state st) <span class="keyword">const</span>&#123; <span class="comment">//priority_queue 使用</span></span><br><span class="line">        <span class="keyword">return</span> h + step &gt; st.h + st.step ; <span class="comment">//輸出最小</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123; <span class="comment">//debug 測試用</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">4</span> ; j++)</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; graph[i][j] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">h</span><span class="params">(<span class="keyword">int</span> graph[][<span class="number">4</span>])</span></span>&#123; <span class="comment">//曼哈頓距離</span></span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">4</span> ; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(graph[i][j] == <span class="number">0</span> || (i == place[graph[i][j]][<span class="number">0</span>] &amp;&amp; \</span><br><span class="line">                                      j == place[graph[i][j]][<span class="number">1</span>]  ))</span><br><span class="line">                <span class="keyword">continue</span> ;</span><br><span class="line">            cnt += <span class="built_in">abs</span>(place[graph[i][j]][<span class="number">0</span>] - i) + <span class="built_in">abs</span>(place[graph[i][j]][<span class="number">1</span>] - j ) ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt * <span class="number">10</span>  ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isboard</span><span class="params">(<span class="keyword">int</span> x , <span class="keyword">int</span> y )</span></span>&#123; <span class="comment">//判斷邊界</span></span><br><span class="line">    <span class="keyword">if</span>(x &gt;= <span class="number">0</span> &amp;&amp; x &lt; <span class="number">4</span> &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; <span class="number">4</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isback</span><span class="params">(<span class="built_in">string</span> path , <span class="keyword">char</span> nxtD )</span></span>&#123; <span class="comment">//拒絕回到上一步的棋面</span></span><br><span class="line">    <span class="keyword">if</span>(path.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span> ; </span><br><span class="line">    <span class="keyword">char</span> D = path[path.size()<span class="number">-1</span>] ;</span><br><span class="line">    <span class="keyword">if</span>(D == <span class="string">'L'</span> &amp;&amp; nxtD == <span class="string">'R'</span> ) <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    <span class="keyword">if</span>(D == <span class="string">'R'</span> &amp;&amp; nxtD == <span class="string">'L'</span> ) <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    <span class="keyword">if</span>(D == <span class="string">'U'</span> &amp;&amp; nxtD == <span class="string">'D'</span> ) <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    <span class="keyword">if</span>(D == <span class="string">'D'</span> &amp;&amp; nxtD == <span class="string">'U'</span> ) <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Astar</span><span class="params">(state input )</span></span>&#123; <span class="comment">// Astar 核心</span></span><br><span class="line">    priority_queue&lt;state&gt; q ;</span><br><span class="line">    <span class="comment">//visit.clear() ;</span></span><br><span class="line">    <span class="keyword">int</span> x , y;</span><br><span class="line">    state now , next ;</span><br><span class="line">    q.push(input);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        now = q.top() ; q.pop() ;</span><br><span class="line">        <span class="comment">//now.print();</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++)&#123; <span class="comment">//方向選擇</span></span><br><span class="line">            x = now.x + direct[i][<span class="number">0</span>] ;</span><br><span class="line">            y = now.y + direct[i][<span class="number">1</span>] ;</span><br><span class="line">            <span class="keyword">if</span>(!isboard(x,y)) <span class="keyword">continue</span> ; <span class="comment">//判斷邊界</span></span><br><span class="line">            <span class="keyword">if</span>(isback(now.path,dname[i])) <span class="keyword">continue</span> ; <span class="comment">//判斷是否回到上一步</span></span><br><span class="line">            next = now ; <span class="comment">//TLE key because this line go to 85 before.</span></span><br><span class="line">            next.step = now.step + <span class="number">1</span> ;</span><br><span class="line">            <span class="keyword">if</span>(next.step &gt; <span class="number">50</span> ) <span class="keyword">continue</span> ; <span class="comment">//判斷是否超過 50 步</span></span><br><span class="line">            swap(next.graph[x][y] , next.graph[now.x][now.y]);</span><br><span class="line">            <span class="comment">//now.print() ;</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; '\n' ;</span></span><br><span class="line">            <span class="comment">//next.print();</span></span><br><span class="line">            next.x = x ; next.y = y ;</span><br><span class="line">            next.h = h(next.graph) ;</span><br><span class="line">            next.path.push_back(dname[i]) ;</span><br><span class="line">            q.push(next);</span><br><span class="line">            <span class="keyword">if</span>(next.h == <span class="number">0</span> )&#123; <span class="comment">// 判斷是否已走到正確答案</span></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; next.path &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; next.path &lt;&lt; '\n' ;</span></span><br><span class="line">            <span class="comment">//next.print();</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">issolve</span><span class="params">(<span class="keyword">int</span> graph[][<span class="number">4</span>])</span></span>&#123; <span class="comment">//此拼圖是否可以被解出</span></span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span> , x , y  ;</span><br><span class="line">    <span class="keyword">int</span> num[<span class="number">16</span>] = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++)&#123; <span class="comment">//一維陣列化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">4</span> ; j++)&#123;</span><br><span class="line">            num[cnt++] = graph[i][j] ;</span><br><span class="line">            <span class="keyword">if</span>(graph[i][j]==<span class="number">0</span>) x = i , y = j ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cnt = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">16</span> ; i++)&#123; <span class="comment">//有多少遞減數對</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span> ; j &lt; <span class="number">16</span> ; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[j] &amp;&amp; num[j] &lt; num[i]) cnt++ ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((cnt+x)%<span class="number">2</span> ==<span class="number">0</span>) <span class="comment">//判斷是否可解，這裡用了小優化，可看上面文章理解</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span> , <span class="string">"r"</span> , <span class="built_in">stdin</span> );</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="comment">//ios::sync_with_stdio(0);</span></span><br><span class="line">    <span class="comment">//cin.tie(0);</span></span><br><span class="line">    <span class="comment">//cout.tie(0);</span></span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++)&#123; <span class="comment">//紀錄正確答案位置</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">4</span> ; j++)&#123;</span><br><span class="line">            place[cnt][<span class="number">0</span>] = i ;</span><br><span class="line">            place[cnt++][<span class="number">1</span>] = j ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n ;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123; <span class="comment">//測資開始</span></span><br><span class="line">        state input ;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">4</span> ; j++)&#123;</span><br><span class="line">                 <span class="built_in">cin</span> &gt;&gt; input.graph[i][j] ;</span><br><span class="line"></span><br><span class="line">                 <span class="keyword">if</span>(input.graph[i][j] == <span class="number">0</span>)</span><br><span class="line">                    input.x = i , input.y = j ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!issolve(input.graph) || !Astar(input))</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"This puzzle is not solvable.\n"</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="思考流程"><a href="#思考流程" class="headerlink" title="思考流程"></a>思考流程</h2><p>透過紙筆與黑板而思考而成的片段，放在網路上供我紀念XD</p>
+<p>錯誤的程式碼就不放上來讓大家見笑了QQQQ。</p>
+<blockquote>
+<p><img src="https://i.imgur.com/UMMzOGr.jpg" alt=""><br><img src="https://i.imgur.com/6X3AmHY.jpg" alt=""><br><img src="https://i.imgur.com/Cnilh1u.jpg" alt=""><br><img src="https://i.imgur.com/raKaHeL.jpg" alt=""></p>
+</blockquote>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/A-%E6%90%9C%E5%B0%8B/" rel="tag">A*搜尋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/01/07/Explain_Algorithm/Astar/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">演算法知識 - A* 搜尋</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['你必須很努力，才能看起來豪不費力', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
