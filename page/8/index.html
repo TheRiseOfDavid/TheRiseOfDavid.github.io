@@ -77,6 +77,175 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-UVa/UVa760" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/19/UVa/UVa760/"
+    >UVa760 - DNA Sequencing (最長共同前綴 Longest Common Prefix)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/19/UVa/UVa760/" class="article-date">
+  <time datetime="2020-10-18T16:53:07.000Z" itemprop="datePublished">2020-10-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你兩組字串，想請你找出裡面其中最長的共同子字串，如果有複數最長的子字串則透過字典序輸出。</p>
+<p>注意：這題的輸出格式有特別要求</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/10/19/UVa/UVa760/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Suffix-Array/" rel="tag">Suffix Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%89%8D%E7%B6%B4-Longest-Common-Prefix/" rel="tag">最長共同前綴 Longest Common Prefix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Explain_Algorithm/Suffix-Array" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/19/Explain_Algorithm/Suffix-Array/"
+    >演算法知識 - Suffix Array 後綴陣列</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/10/19/Explain_Algorithm/Suffix-Array/" class="article-date">
+  <time datetime="2020-10-18T16:37:07.000Z" itemprop="datePublished">2020-10-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Suffix-Array-介紹"><a href="#Suffix-Array-介紹" class="headerlink" title="Suffix Array 介紹"></a>Suffix Array 介紹</h2><blockquote>
+<p>對某一字串的所有後綴進行字典排序，常用於全文索引、數據壓縮算法與生物資訊學。<br>這裡介紹的演算法寫法時間複雜度為 \(O(n \log n)\)</p>
+</blockquote>
+<h2 id="Suffix-Array-原理"><a href="#Suffix-Array-原理" class="headerlink" title="Suffix Array 原理"></a>Suffix Array 原理</h2><p>Suffix Array 主要是用 \(sa\) and \(rk\) 這兩個陣列組合而成。<br>且滿足此性質 \(sa[rk[i]] = rk[sa[i]] = i \)</p>
+<p>Suffix Array 圖示說明：<br><img src="/images/Suffix-Array/1.png" alt=""></p>
+<h3 id="QUESTION-1-sa-suffix-array-用途是甚麼呢？"><a href="#QUESTION-1-sa-suffix-array-用途是甚麼呢？" class="headerlink" title="QUESTION 1: sa (suffix array) 用途是甚麼呢？"></a>QUESTION 1: sa (suffix array) 用途是甚麼呢？</h3><p>\(sa[i]\) 表示此字串所有後綴排序後第 i 大的 index。</p>
+<h3 id="QUESTION-2-rk-rank-array-用途是甚麼呢？"><a href="#QUESTION-2-rk-rank-array-用途是甚麼呢？" class="headerlink" title="QUESTION 2: rk (rank array) 用途是甚麼呢？"></a>QUESTION 2: rk (rank array) 用途是甚麼呢？</h3><p>\(rk[i]\) 表示此字串所有後綴排序後，字串中 index 後綴的排名。</p>
+<h3 id="QUESTION-3-甚麼是所有後綴？"><a href="#QUESTION-3-甚麼是所有後綴？" class="headerlink" title="QUESTION 3: 甚麼是所有後綴？"></a>QUESTION 3: 甚麼是所有後綴？</h3><blockquote>
+<p>從第 i 個字元開始到最後一個字元的字串，i 的範圍是 string[0] ~ string.length()<br>所有後綴舉例如下，舉例單字為 <strong>apple</strong>：</p>
+</blockquote>
+<ul>
+<li>apple</li>
+<li>pple </li>
+<li>ple</li>
+<li>le</li>
+<li>e</li>
+</ul>
+      
+      <a class="article-more-link" href="/2020/10/19/Explain_Algorithm/Suffix-Array/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Suffix-Array/" rel="tag">Suffix Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%89%8D%E7%B6%B4-Longest-Common-Prefix-Array/" rel="tag">最長共同前綴 Longest Common Prefix Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-NTUT_note/statistcs-ch3B" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -693,168 +862,13 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa11151" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/05/UVa/UVa11151/"
-    >UVa11151 - Longest Palindrome (LCS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/10/05/UVa/UVa11151/" class="article-date">
-  <time datetime="2020-10-05T12:09:12.000Z" itemprop="datePublished">2020-10-05</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>給你一個字串，詢問在這字串中能夠找到的最長迴文長度為多少。<br>迴文：從左邊讀與右邊讀相同</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/10/05/UVa/UVa11151/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83/" rel="tag">動態規劃</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E8%BF%B4%E6%96%87%E5%AD%90%E5%AD%97%E4%B8%B2-Longest-Palindromic-Substrings/" rel="tag">最長迴文子字串 Longest Palindromic Substrings</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa526" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/04/UVa/UVa526/"
-    >UVa526 - String Distance and Transform Process (Minimum Edit Distance 詳解)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/10/04/UVa/UVa526/" class="article-date">
-  <time datetime="2020-10-04T15:19:12.000Z" itemprop="datePublished">2020-10-04</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a> / <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>給你兩個字串分別是 A,B 你可以用插入、刪除、替換，來將 A 字串轉換成為 B 字串，輸出需要幾次的轉換，也要將步驟輸出。</p>
-<p>這題很毒瘤，A,B 都必須用 <code>getline</code> 實作，字串可以包括空白</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/10/04/UVa/UVa526/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83/" rel="tag">動態規劃</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E4%BF%AE%E6%94%B9%E8%B7%9D%E9%9B%A2-Minimum-Edit-Distance/" rel="tag">最短修改距離 Minimum Edit Distance</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/7/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/9/">下一頁</a>
+    <a class="extend prev" rel="prev" href="/page/7/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/">下一頁</a>
   </nav>
   
 </section>

@@ -8016,6 +8016,12 @@
 <li>\(\bar{p} = \frac{x}{n} = \frac{19}{30} = 0.63 \)</li>
 </ul>
 </li>
+<li><p>為甚麼樣本標準差分母是？ n-1 觀念說明</p>
+<ul>
+<li><a href="https://www.researchmfg.com/2016/07/sigma-n-1/" target="_blank" rel="noopener">為什麼統計的樣本標準差計算要除(n-1)而母體標準差則除n？ - 電子製造，工作狂人 </a></li>
+<li><a href="https://mathcenter.ck.tp.edu.tw/Resources/Ctrl/ePaper/eArticleDetail.aspx?id=c4181f30-955f-4063-87ea-576b0f318c73" target="_blank" rel="noopener">淺談自由度 (樣本標準差公式中的分母為什麼要採用 n-1 ) - 教育部高中數學學科電子報</a></li>
+</ul>
+</li>
 </ul>
 <h4 id="比對-原始資料"><a href="#比對-原始資料" class="headerlink" title="比對 - 原始資料"></a>比對 - 原始資料</h4><blockquote>
 <p><img src="/images/statistics-ch7/6.PNG" alt=""></p>
@@ -8059,7 +8065,7 @@
 </blockquote>
 <p>現在我們先計算 z 值來轉換成標準常態機率分配，\(z = (1707 - 1697) / 15.96 = 0.63 \)，查表可以看到 z = 0.63 時機率為 0.7357，再來 \(z = (1687 - 1697) / 15.96 = -0.63 \)，查表可以得出 0.2643，兩個相減就等於 0.4714</p>
 <h3 id="舉例-根據上面的例子，我們現在抽樣-100-樣本，我們想要找-1687-1707-間的母體數量"><a href="#舉例-根據上面的例子，我們現在抽樣-100-樣本，我們想要找-1687-1707-間的母體數量" class="headerlink" title="舉例 - 根據上面的例子，我們現在抽樣 100 樣本，我們想要找 1687 ~ 1707 間的母體數量"></a>舉例 - 根據上面的例子，我們現在抽樣 100 樣本，我們想要找 1687 ~ 1707 間的母體數量</h3><p>這時候 \(E(x)\) 不變，母體平均值還是 1697。</p>
-<p>但因為我們的抽取樣本數量改變，因此標準差改變，透過標準差公式也就變成，\(\sigma_x = \sqrt{\frac{N-n}{N-1}}(\frac{\sigma}{\sqrt{n}}) = \frac{900-100}{900-1}(\frac{87.4}{\sqrt{100}} = 0.9433(8.74) = 8.2)\)</p>
+<p>但因為我們的抽取樣本數量改變，因此標準差改變，透過標準差公式也就變成，\(\sigma_x = \sqrt{\frac{N-n}{N-1}}(\frac{\sigma}{\sqrt{n}}) = \frac{900-100}{900-1}(\frac{87.4}{\sqrt{100}}) = 0.9433(8.74) = 8.2\)</p>
 <p>跟上一個舉例進行比較，可以得證當樣本數量變大時，會符合中央極限定理</p>
 <blockquote>
 <p><img src="/images/statistics-ch7/10.PNG" alt=""></p>
@@ -8091,7 +8097,7 @@
 <h3 id="舉例-主管的抽樣分配，題目如下，想詢問抽樣值為平均值-pm-500-的機率為多少"><a href="#舉例-主管的抽樣分配，題目如下，想詢問抽樣值為平均值-pm-500-的機率為多少" class="headerlink" title="舉例 - 主管的抽樣分配，題目如下，想詢問抽樣值為平均值 \(\pm 500\) 的機率為多少"></a>舉例 - 主管的抽樣分配，題目如下，想詢問抽樣值為平均值 \(\pm 500\) 的機率為多少</h3><blockquote>
 <p><img src="/images/statistics-ch7/11.PNG" alt=""></p>
 </blockquote>
-<p>也就是我們要找出 \(P(51300 \leq \bar{x} \leq 52300 \)，的機率是多少，如果用手算的話則需要用到 Z，\(z = \frac{51300-51800}{730.30} = -0.68 \)、\(z = \frac{52300-51800}{730.30} = 0.68 \)</p>
+<p>也就是我們要找出 \(P(51300 \leq \bar{x} \leq 52300) \)，的機率是多少，如果用手算的話則需要用到 Z，\(z = \frac{51300-51800}{730.30} = -0.68 \)、\(z = \frac{52300-51800}{730.30} = 0.68 \)</p>
 <p>\(P(51300 \leq \bar{x} \leq 52300) \\<br>= P(-0.68 \leq z \leq 0.68 ) \\<br>= P(z \leq 0.68 ) - P(z \leq -0.68 )  \\<br>= 0.7517 - 0.2484 = 0.5034 \)</p>
 <h4 id="compare-between-n-30-and-n-100"><a href="#compare-between-n-30-and-n-100" class="headerlink" title="compare between n = 30 and n = 100"></a>compare between n = 30 and n = 100</h4><blockquote>
 <p><img src="/images/statistics-ch7/12.PNG" alt=""><br>作法與先前相同，就不贅述</p>
@@ -8386,7 +8392,7 @@
 </ul>
 <p>5 % 應該是無風險利率，但此題並沒有說無風險利率是幾 % </p>
 <blockquote>
-<p><img src="/images/investment_stock_asset_profolio_and_capital_asset_pricing_model/3.PNG" alt=""></p>
+<p><img src="https://imgur.com/I9BTJpD.jpg" alt=""></p>
 </blockquote>
 <h3 id="將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置"><a href="#將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置" class="headerlink" title="將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置"></a>將兩個風險資產合併成一個風險資產後，找出風險資產與無風險資產最適配置</h3><p>透過 Sharpe ratio 合併兩個風險資產後，將其視為一個風險資產，並找出風險資產與無風險資產最適配置，透過受限制條件下的預期效用函數極大化求值即可。</p>
 <p>公式如下： 基本上都是先前的知識結合應用就不贅述</p>
@@ -10130,14 +10136,14 @@
 </ul>
 </li>
 </ul>
-<h4 id="舉例-承上題，我們想知道-mu-pm-3-92-的值差幾個標準差並有多少機率母體平均數會落在此區間"><a href="#舉例-承上題，我們想知道-mu-pm-3-92-的值差幾個標準差並有多少機率母體平均數會落在此區間" class="headerlink" title="舉例 - 承上題，我們想知道 \(\mu \pm 3.92 \) 的值差幾個標準差並有多少機率母體平均數會落在此區間"></a>舉例 - 承上題，我們想知道 \(\mu \pm 3.92 \) 的值差幾個標準差並有多少機率母體平均數會落在此區間</h4><p>我們剛剛已經算是樣本標準差為 2，因此是 95.44% ，因此只需要 \(3.92 \ 2 = 1.96 \)，因此落在 \(1.96 \sigma{\bar{x}}\)</p>
+<h4 id="舉例-承上題，我們想知道-mu-pm-3-92-的值差幾個標準差並有多少機率母體平均數會落在此區間"><a href="#舉例-承上題，我們想知道-mu-pm-3-92-的值差幾個標準差並有多少機率母體平均數會落在此區間" class="headerlink" title="舉例 - 承上題，我們想知道 \(\mu \pm 3.92 \) 的值差幾個標準差並有多少機率母體平均數會落在此區間"></a>舉例 - 承上題，我們想知道 \(\mu \pm 3.92 \) 的值差幾個標準差並有多少機率母體平均數會落在此區間</h4><p>我們剛剛已經算是樣本標準差為 2，因此是 95.44% ，因此只需要 \(3.92 / 2 = 1.96 \)，因此落在 \(1.96 \sigma{\bar{x}}\)</p>
 <blockquote>
 <p><img src="/images/statistics-ch8/2.PNG" alt=""></p>
 </blockquote>
-<h4 id="舉例-Discounr-Sounds-在美國有-260-家的店，還想要開新的店，於是他先去調查新店-不是地名-地區的年收入，樣本-n-36，且年收入平均值為-41-100，母體沒有高偏態，標準差為-4-500-且信來區間為-0-95，算出一個範圍在隨機抽樣中有-95-的機會有包含母體平均數"><a href="#舉例-Discounr-Sounds-在美國有-260-家的店，還想要開新的店，於是他先去調查新店-不是地名-地區的年收入，樣本-n-36，且年收入平均值為-41-100，母體沒有高偏態，標準差為-4-500-且信來區間為-0-95，算出一個範圍在隨機抽樣中有-95-的機會有包含母體平均數" class="headerlink" title="舉例 - Discounr Sounds 在美國有 260 家的店，還想要開新的店，於是他先去調查新店(不是地名)地區的年收入，樣本 n = 36，且年收入平均值為 41,100，母體沒有高偏態，標準差為 4,500 且信來區間為 0.95，算出一個範圍在隨機抽樣中有 95 % 的機會有包含母體平均數"></a>舉例 - Discounr Sounds 在美國有 260 家的店，還想要開新的店，於是他先去調查新店(不是地名)地區的年收入，樣本 n = 36，且年收入平均值為 41,100，母體沒有高偏態，標準差為 4,500 且信來區間為 0.95，算出一個範圍在隨機抽樣中有 95 % 的機會有包含母體平均數</h4><p>因為抽樣會比起直接將整個母體查詢會更快一些，且母體沒有高偏態，因此可以進行常態分配。</p>
+<h4 id="舉例-Discounr-Sounds-在美國有-260-家的店，還想要開新的店，於是他先去調查新店-不是地名-地區的年收入，樣本-n-36，且年收入平均值為-41-100，母體沒有高偏態，標準差為-4-500-且信賴區間為-0-95，算出一個範圍在隨機抽樣中有-95-的機會有包含母體平均數"><a href="#舉例-Discounr-Sounds-在美國有-260-家的店，還想要開新的店，於是他先去調查新店-不是地名-地區的年收入，樣本-n-36，且年收入平均值為-41-100，母體沒有高偏態，標準差為-4-500-且信賴區間為-0-95，算出一個範圍在隨機抽樣中有-95-的機會有包含母體平均數" class="headerlink" title="舉例 - Discounr Sounds 在美國有 260 家的店，還想要開新的店，於是他先去調查新店(不是地名)地區的年收入，樣本 n = 36，且年收入平均值為 41,100，母體沒有高偏態，標準差為 4,500 且信賴區間為 0.95，算出一個範圍在隨機抽樣中有 95 % 的機會有包含母體平均數"></a>舉例 - Discounr Sounds 在美國有 260 家的店，還想要開新的店，於是他先去調查新店(不是地名)地區的年收入，樣本 n = 36，且年收入平均值為 41,100，母體沒有高偏態，標準差為 4,500 且信賴區間為 0.95，算出一個範圍在隨機抽樣中有 95 % 的機會有包含母體平均數</h4><p>因為抽樣會比起直接將整個母體查詢會更快一些，且母體沒有高偏態，因此可以進行常態分配。</p>
 <p>往上數第四張圖已經說明 95% 的信心水準是 \(\bar{x} \pm 1.96 \sigma_{\bar{x}}\) 區間會包含母體平均數。</p>
-<p>因此邊際誤差(margin of error) \(Z_{a/2} = \frac{\sigma}{\sqrt{n}} = 1.96(\frac{4500}{\sqrt{36}}) = 1,470\)，因此在 95% 的信賴水準下邊際誤差會是 1,470。</p>
-<p>再將母體平均值 \( 41,100 \pm 1,470 \) 也就是 \(39,630 to 42,570\)，就是我們的區間估計且有 95% 的信賴水準</p>
+<p>因此邊際誤差(margin of error) \(Z_{a/2} \frac{\sigma}{\sqrt{n}} = 1.96(\frac{4500}{\sqrt{36}}) = 1,470\)，因此在 95% 的信賴水準下邊際誤差會是 1,470。</p>
+<p>再將母體平均值 \( 41,100 \pm 1,470 \) 也就是 \(39,630 \ to \ 42,570\)，就是我們的區間估計且有 95% 的信賴水準</p>
 <p>在其他信賴區間時的邊際誤差與區間估計</p>
 <blockquote>
 <p><img src="/images/statistics-ch8/5.PNG" alt=""></p>
@@ -10636,6 +10642,497 @@
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
         <tag>A*</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>資料庫管理 筆記 - 第七章 Databases in Applications</title>
+    <url>/2021/01/13/NTUT_note/database7/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上資料庫管理重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Client-Server-Architecture-客戶端與伺服器架構"><a href="#Client-Server-Architecture-客戶端與伺服器架構" class="headerlink" title="Client/Server Architecture 客戶端與伺服器架構"></a>Client/Server Architecture 客戶端與伺服器架構</h2><ul>
+<li>網路計算模型 Networked computing model</li>
+<li>處理客戶端與伺服器行程(執行的程式) Processes distributed between clients and servers</li>
+<li>客戶端<br>使用服務的計算機</li>
+<li>伺服器<br>接受要求的計算機</li>
+<li>DBMS 只有資料庫的伺服器</li>
+<li>Internet 網路伺服器</li>
+<li>圖解架構 <ul>
+<li>上層 GUI 介面</li>
+<li>中層 program , function </li>
+<li>下層 DBMS activities(運作)</li>
+<li>圖解<blockquote>
+<p><img src="https://imgur.com/WcwVgZN.jpg" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="應用分區-APPLICATION-PARTITIONING"><a href="#應用分區-APPLICATION-PARTITIONING" class="headerlink" title="應用分區 APPLICATION PARTITIONING"></a>應用分區 APPLICATION PARTITIONING</h3><ul>
+<li>將每一分 code 放到適合的地方去運作，適合的地方有客戶端 / 伺服器</li>
+<li>優點<ul>
+<li>性能提升 Improved performance</li>
+<li><a href="https://zh.wikipedia.org/zh-tw/%E4%BA%92%E6%93%8D%E4%BD%9C%E6%80%A7" target="_blank" rel="noopener">互操作性改善</a> Improved interoperability</li>
+<li>平衡工作量 Balanced workloads</li>
+</ul>
+</li>
+</ul>
+<h3 id="Fat-and-Thin-Client"><a href="#Fat-and-Thin-Client" class="headerlink" title="Fat and Thin Client"></a>Fat and Thin Client</h3><ul>
+<li>Fat<br>對於客戶端的電腦計算需求較大，DBMS 在客戶端</li>
+<li>Thin<br>讓客戶端電腦只接受客戶需求，不在本地存取資料</li>
+<li>圖解<blockquote>
+<p><img src="https://i.imgur.com/A75n2jI.jpg" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="網路應用程式要素-WEB-APPLICATION-COMPONENTS"><a href="#網路應用程式要素-WEB-APPLICATION-COMPONENTS" class="headerlink" title="網路應用程式要素 WEB APPLICATION COMPONENTS"></a>網路應用程式要素 WEB APPLICATION COMPONENTS</h2><ul>
+<li>Database server<br>需要一個 database Server，例如：Oracle, SQL Server, Informix, MS Access, MySql</li>
+<li>Web server<br>接收與回應 http 要求，例如：apache</li>
+<li>Application server，例如：PHP<br>透過程式碼編寫的<strong>動態網頁</strong></li>
+<li>Web browser<br>客戶可以透過網頁來瀏覽，例如：chrome、IE</li>
+</ul>
+<h2 id="MIDDLEWARE-中介軟體-AND-APIS"><a href="#MIDDLEWARE-中介軟體-AND-APIS" class="headerlink" title="MIDDLEWARE(中介軟體) AND APIS"></a>MIDDLEWARE(中介軟體) AND APIS</h2><ul>
+<li>MIDDLEWARE<br>允許應用程式去操作，而不需要用戶取理解程式碼或編寫。</li>
+<li>Application Program Interface (API)<br>是一種應用程式，用來請求計算機執行程式或運算。</li>
+<li>Common database APIs –ODBC, ADO .NET, JDBC</li>
+</ul>
+<h2 id="透過中介軟體使用-API-的-6-部曲-STEPS-FOR-USING-DATABASES-VIA-MIDDLEWARE-APIS"><a href="#透過中介軟體使用-API-的-6-部曲-STEPS-FOR-USING-DATABASES-VIA-MIDDLEWARE-APIS" class="headerlink" title="透過中介軟體使用 API 的 6 部曲  STEPS FOR USING DATABASES VIA MIDDLEWARE APIS"></a>透過中介軟體使用 API 的 6 部曲  STEPS FOR USING DATABASES VIA MIDDLEWARE APIS</h2><ul>
+<li>建立或識別資料庫驅動程式</li>
+<li>打開並連接資料庫</li>
+<li>對資料庫執行查詢</li>
+<li>處理查詢結果</li>
+<li><strong>必要</strong>，反覆執行前兩點</li>
+<li>關閉資料庫連接</li>
+</ul>
+<h2 id="Python-應用資料庫管理"><a href="#Python-應用資料庫管理" class="headerlink" title="Python 應用資料庫管理"></a>Python 應用資料庫管理</h2><ul>
+<li>Model Class<br>創建數據、查詢數據</li>
+<li>Serialize Class<br>轉換資料格式，如：data</li>
+<li>View Class<br>讓使用者方便閱讀，如：browser</li>
+</ul>
+<h2 id="應用資料庫時的-3-個需要考慮因素"><a href="#應用資料庫時的-3-個需要考慮因素" class="headerlink" title="應用資料庫時的 3 個需要考慮因素"></a>應用資料庫時的 3 個需要考慮因素</h2><ul>
+<li>儲存<ul>
+<li>放在 DBMS 的程式碼</li>
+<li>改善效能</li>
+</ul>
+</li>
+<li>請求與呼叫資料庫 Transactions<ul>
+<li>涉及許多資料庫的更新</li>
+<li>有成功，才會執行成功，反之不執行</li>
+</ul>
+</li>
+<li>資料庫連接<ul>
+<li>開放連接並長期使用時會占用 database 大量資源</li>
+<li>使用<a href="https://zh.wikipedia.org/wiki/%E8%BF%9E%E6%8E%A5%E6%B1%A0" target="_blank" rel="noopener">連接池</a></li>
+</ul>
+</li>
+<li>考慮這些因素時的優點<ul>
+<li>編譯 SQL code 效能提升</li>
+<li>減少網路流量，而導致塞車的情況</li>
+<li>提高安全性</li>
+<li>加強資料完整性</li>
+<li>Thinner clients</li>
+<li>Scalability 可延伸性</li>
+<li>Long-term cost reduction 降低長期成本</li>
+<li>要求方與回應方更好進行配對 Better match of systems to business needs</li>
+<li>改善客戶伺服器</li>
+<li>擁有競爭優勢 Competitive advantage</li>
+</ul>
+</li>
+<li>缺點<ul>
+<li>寫程式要更多時間</li>
+<li>有些演算法不可移植，需要重寫</li>
+</ul>
+</li>
+</ul>
+<h3 id="請求與呼叫完整性：ACID-TRANSACTION-INTEGRITY-ACID-RULES"><a href="#請求與呼叫完整性：ACID-TRANSACTION-INTEGRITY-ACID-RULES" class="headerlink" title="請求與呼叫完整性：ACID  TRANSACTION INTEGRITY: ACID RULES"></a>請求與呼叫完整性：ACID  TRANSACTION INTEGRITY: ACID RULES</h3><ul>
+<li>Atomic<ul>
+<li>請求與呼叫不可分割</li>
+<li>Transaction cannot be subdivided</li>
+</ul>
+</li>
+<li>Consistent <ul>
+<li>請求前到請求後都沒有被改變</li>
+<li>Constraints don’t change from before transaction to after transaction</li>
+</ul>
+</li>
+<li>Isolated<ul>
+<li>請求完成後用戶才會接收到資料</li>
+<li>Database changes not revealed to users until after transaction has completed</li>
+</ul>
+</li>
+<li>Durable<ul>
+<li>資料庫的改動具有永久性</li>
+<li>Database changes are permanent</li>
+</ul>
+</li>
+</ul>
+<h3 id="要求合法訪問-CONTROLLING-CONCURRENT-ACCESS"><a href="#要求合法訪問-CONTROLLING-CONCURRENT-ACCESS" class="headerlink" title="要求合法訪問 CONTROLLING CONCURRENT ACCESS"></a>要求合法訪問 CONTROLLING CONCURRENT ACCESS</h3><ul>
+<li>問題<br>在多用戶不斷發送要求給伺服器時，同時訪問會造成資料庫資料不一致。(lost update problem)</li>
+<li>解決方法<ul>
+<li>保持資料完整性、並確保不會因為交互操作而導致資料庫資料不一致</li>
+<li>Serializability 可序列化<br>變成 queue，一次一筆操作。請排隊</li>
+<li>Locking Mechanisms 鎖定處理<ul>
+<li>可序列化常用方法<br>The most common way of achieving serialization</li>
+<li>在執行要求中，伺服器被鎖定<br>Data that is retrieved for the purpose of updating is locked for the updater</li>
+<li>解鎖之前，其他用戶不可使用<br>No other user can perform update until unlocked</li>
+<li>操作如下<blockquote>
+<p><img src="https://i.imgur.com/q5KaIxk.jpg" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>問題範例，同時操作資料庫但資料庫資料不一致<blockquote>
+<p><img src="https://i.imgur.com/haCtPzf.jpg" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="LOCK-LEVEL"><a href="#LOCK-LEVEL" class="headerlink" title="LOCK LEVEL"></a>LOCK LEVEL</h4><ul>
+<li>Database - used during database updates</li>
+<li>Table - used for bulk updates 區塊更新</li>
+<li>Block or page – very commonly used 非常常用</li>
+<li>Record - only requested row; fairly commonly used 經常會用</li>
+<li>Field –requires significant overhead; impractical<br>字段，需要大量效能，不切實際。</li>
+</ul>
+<h4 id="Types-of-locks"><a href="#Types-of-locks" class="headerlink" title="Types of locks"></a>Types of locks</h4><ul>
+<li>Shared lock<ul>
+<li>唯讀，只能在讀取資料時使用</li>
+<li>Read but no update permitted. Used when just reading to prevent another user from placing an exclusive lock on the record</li>
+</ul>
+</li>
+<li>Exclusive lock<ul>
+<li>不可以用來閱讀，只能在更新時使用</li>
+<li>No access permitted. Used when preparing to update</li>
+</ul>
+</li>
+<li>Dead Lock<ul>
+<li>兩個以上的請求佔住公用資源，並都在等待對方解鎖資源時就會發生</li>
+<li>An impasse that results when two or more transactions have locked common resources, and each waits for the other to unlock their resources</li>
+<li>圖解<blockquote>
+<p><img src="https://imgur.com/84roCgl.jpg" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="MANAGING-DEADLOCK"><a href="#MANAGING-DEADLOCK" class="headerlink" title="MANAGING DEADLOCK"></a>MANAGING DEADLOCK</h5><ul>
+<li>Deadlock prevention 預防死鎖<ul>
+<li>開始請求前，先將所有請求紀錄</li>
+<li>試圖更新（上傳）的資料的會被鎖住</li>
+<li>死鎖有成長期與收縮期</li>
+<li>可能沒辦法去判斷需要多少資源來解決死鎖</li>
+</ul>
+</li>
+<li>Deadlock Resolution 死鎖原因<ul>
+<li>一定是因為允許死鎖的發生，<del>廢話，幹。但 PPT 真的這樣說..</del></li>
+<li>打破了防止死鎖的機制</li>
+<li>資源使用矩陣</li>
+</ul>
+</li>
+</ul>
+<h2 id="VERSIONING-版本化"><a href="#VERSIONING-版本化" class="headerlink" title="VERSIONING 版本化"></a>VERSIONING 版本化</h2><ul>
+<li>替代鎖定</li>
+<li>假設不同版本不會同時更新<br>Assumption is that simultaneous updates will be infrequent</li>
+<li>每一筆請求都可以嘗試更新<br>Each transaction can attempt an update as it wishes</li>
+<li>系統會建立新版本，而不是不斷替換舊版本<br>The system will create a new version of a record instead of replacing the old one</li>
+<li>當請求衝突發生時，接收一個用戶的更新並通知另一用戶需要再次發送請求<br>When a conflict occurs, accept one user’s update and inform the other user that its update needs to be tried again</li>
+<li>發生請求衝突時，將造成請求衝突的請求回朔到發生請求之前<br>Use of rollback and commit for this</li>
+<li>圖解<br><a href="https://i.imgur.com/Wx9o930.jpg" target="_blank" rel="noopener">https://i.imgur.com/Wx9o930.jpg</a></li>
+</ul>
+<h2 id="DATA-SECURITY"><a href="#DATA-SECURITY" class="headerlink" title="DATA SECURITY"></a>DATA SECURITY</h2><ul>
+<li>保護資料不被破壞或丟失<br>Protection of the data against accidental or intentional loss, destruction, or misuse</li>
+<li>由於可以透過網路訪問而讓 DATA SECURITY 增加難度<br>Increased difficulty due to Internet access and client/server technologies</li>
+</ul>
+<h3 id="THREATS-TO-DATA-SECURITY-威脅資料安全"><a href="#THREATS-TO-DATA-SECURITY-威脅資料安全" class="headerlink" title="THREATS TO DATA SECURITY 威脅資料安全"></a>THREATS TO DATA SECURITY 威脅資料安全</h3><p>威脅來自許多來源，資訊系統中的多個位置都存在漏洞<br>Threats come from many sources and vulnerabilities exist in multiple places within an information system</p>
+<ul>
+<li>意外損失原因 Accidental losses attributable<ul>
+<li>人為錯誤</li>
+<li>軟體故障 Software failure</li>
+<li>硬體故障 Hardware failure</li>
+</ul>
+</li>
+<li>盜竊和詐欺 Theft and fraud</li>
+<li>失去隱密或機密性 Loss of privacy or confidentiality<ul>
+<li>Loss of privacy (personal data)</li>
+<li>Loss of confidentiality (corporate data)公司資料</li>
+</ul>
+</li>
+<li>失去資料完整性 Loss of data integrity </li>
+<li>無法使用資料 Loss of availability (e.g., through sabotage) 例如：破壞</li>
+</ul>
+<blockquote>
+<p><img src="https://imgur.com/CHuIq6N.jpg" alt=""></p>
+</blockquote>
+<h2 id="CLIENT–SERVER-APPLICATION-SECURITY"><a href="#CLIENT–SERVER-APPLICATION-SECURITY" class="headerlink" title="CLIENT–SERVER APPLICATION SECURITY"></a>CLIENT–SERVER APPLICATION SECURITY</h2><ul>
+<li>Static HTML files are easy to secure(安全)<ul>
+<li>Standard database access(訪問) controls</li>
+<li>Place(放置) Web files in protected directories(目錄) on server</li>
+</ul>
+</li>
+<li>Dynamic pages are harder<ul>
+<li>User authentication</li>
+<li>Session security</li>
+<li>SSL for encryption</li>
+<li>Restrict(限制) number of users and open ports</li>
+<li>Remove unnecessary programs</li>
+</ul>
+</li>
+</ul>
+<h2 id="DATA-PRIVACY-隱私"><a href="#DATA-PRIVACY-隱私" class="headerlink" title="DATA PRIVACY(隱私)"></a>DATA PRIVACY(隱私)</h2><ul>
+<li>W3C Web Privacy Standard<br>Platform for Privacy Protection (P3P)</li>
+<li>Addresses the following 需要解決的問題<ul>
+<li>Who collects data</li>
+<li>What data is collected and for what purpose</li>
+<li>Who is data shared with</li>
+<li>Can users control access to their data 使用者可以去訪問資料</li>
+<li>How are disputes resolved 如何解決紛爭</li>
+<li>Policies(政策) for retaining(保留) data</li>
+<li>Where are policies kept and how can they be accessed 哪裡可以查詢政策</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>資料庫管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>資料庫管理 筆記 - 第六章 Advanced SQL</title>
+    <url>/2021/01/13/NTUT_note/database6/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上資料庫管理重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="PROCESSING-MULTIPLE-TABLES-處理兩者以上的表"><a href="#PROCESSING-MULTIPLE-TABLES-處理兩者以上的表" class="headerlink" title="PROCESSING MULTIPLE TABLES 處理兩者以上的表"></a>PROCESSING MULTIPLE TABLES 處理兩者以上的表</h2><ul>
+<li>Join<br>a relational operation that causes(原因) two or more tables with a common domain to be combined into a single table or view</li>
+<li>Equi-join 類似於交集 - 有重複值<br>A join in which the joining condition(情況) is based on equality between values in the common columns; common columns appear redundantly(多餘) in the result table，也就是只要兩個表的某個值相同就會輸出，但那兩個同樣的值會被輸出兩次</li>
+<li>Natural (inner) join 類似於交集<br>An equi-join(上面那點) in which one of the duplicate columns is eliminated(消除) in the result table</li>
+<li>Outer join 類似於餘集<br>輸出表為值不相同的，A join in which rows that do not have matching values in common columns are nonetheless(儘管如此) included in the result table (as opposed(反對) to innerjoin, in which rows must have matching values in order to appear in the result table)</li>
+<li>Union join 類似於聯集<br>Includes all data from each table that was joined</li>
+<li>圖表<blockquote>
+<p><a href="https://i.imgur.com/1U7KjW0.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+<li>圖示 join 查詢<blockquote>
+<p><a href="https://imgur.com/XzERFKl.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="上述-join-的-example"><a href="#上述-join-的-example" class="headerlink" title="上述 join 的 example"></a>上述 join 的 example</h3><ul>
+<li>Equi-join<blockquote>
+<p><a href="https://imgur.com/x1dEZK9.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+<li>Inner Join <ul>
+<li>INNER JOIN clause(子句) is an alternative(可替代) to WHERE clause, and is used to match primary(主) and foreign(外來) keys.</li>
+<li>An INNER join will only return rows from each table that have matching rows in the other.</li>
+<li>This query produces the same results as the previous(先前) equi-join example</li>
+<li>程式碼 (圖)<blockquote>
+<p><a href="https://imgur.com/H3MlEGa.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Nature Join <blockquote>
+<p><a href="https://imgur.com/3j0Z2Iq.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+<li>Outer Join <ul>
+<li>LEFT OUTER JOIN clause causes(原因) rows from the first mentioned(提起) table (customer) to appear even if there is no corresponding order data.</li>
+<li>Unlike(不像) an INNER join, this will include customer rows with no matching order rows.</li>
+<li>程式碼 (圖)<blockquote>
+<p><a href="https://imgur.com/BFq96ka.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="透過命名變數讓輸出的名子改變"><a href="#透過命名變數讓輸出的名子改變" class="headerlink" title="透過命名變數讓輸出的名子改變"></a>透過命名變數讓輸出的名子改變</h2><p>What are the employee ID and name of each employee and the name of his or her supervisor(主管) (label the supervisor’s name Manager)?</p>
+<blockquote>
+<p><a href="https://imgur.com/C3p7gm8.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+<h2 id="SUBQUERIES-子查詢"><a href="#SUBQUERIES-子查詢" class="headerlink" title="SUBQUERIES 子查詢"></a>SUBQUERIES 子查詢</h2><p>placing an inner query(內部查詢) (SELECT statement) inside an outer query(外部查詢)</p>
+<ul>
+<li>Options <ul>
+<li>In a condition of the WHERE clause</li>
+<li>As a “table” of the FROM clause</li>
+<li>Returning a field(區塊) for the SELECT clause</li>
+<li>Within the HAVING clause 在 having 子句內</li>
+</ul>
+</li>
+<li>能夠做到的事<ul>
+<li>Noncorrelated(非相關性) <ul>
+<li>executed once for the entire outer query 執行一次整個外部查詢</li>
+<li>Do not depend on data from the outer query 指不需要再外面寫一個 select，內部就可以寫外部查詢了 </li>
+</ul>
+</li>
+<li>Correlated <ul>
+<li>executed once for each row returned by the outer query 對每一欄執行一次外部查詢</li>
+<li>Make use of data from the outer query 利用外部查詢的資料</li>
+<li>Can use the EXISTS and ALL operators 可以使用EXISTS和ALL運算 </li>
+<li>Example<blockquote>
+<p><a href="https://imgur.com/JKUC8EC.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Example<ul>
+<li><blockquote>
+<p><a href="https://imgur.com/CwUaZFZ.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+<li>另外一個方法可以解決上述問題<blockquote>
+<p><a href="https://imgur.com/XsbGxFo.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>查詢方法圖示<blockquote>
+<p><a href="https://imgur.com/phHXpiU.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ANOTHER-SUBQUERY-EXAMPLE-DERIVED-TABLE-另一種子查詢"><a href="#ANOTHER-SUBQUERY-EXAMPLE-DERIVED-TABLE-另一種子查詢" class="headerlink" title="ANOTHER SUBQUERY EXAMPLE /(DERIVED TABLE) 另一種子查詢"></a>ANOTHER SUBQUERY EXAMPLE /(DERIVED TABLE) 另一種子查詢</h3><p>將我們子查詢的值設成變數，在使他可以跟上面的查詢進行比較</p>
+<blockquote>
+<p><a href="https://imgur.com/ItsxXAo.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+<h2 id="COMBINING-QUERIES"><a href="#COMBINING-QUERIES" class="headerlink" title="COMBINING QUERIES"></a>COMBINING QUERIES</h2><h3 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h3><p>將多個查詢 union 在一起，但所有的資料欄位與屬性都必須相同</p>
+<p>Combine the output (union of multiple queries) together into a single result table<br>With UNION queries, the quantity and data types of the attributes in the SELECT clauses of both queries must be identical.</p>
+<blockquote>
+<p><a href="https://imgur.com/EYpaZ6w.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+<h3 id="If-寫法，CONDITIONAL-EXPRESSIONS-USING-CASE-KEYWORD-使用大小寫關鍵字的條件表達"><a href="#If-寫法，CONDITIONAL-EXPRESSIONS-USING-CASE-KEYWORD-使用大小寫關鍵字的條件表達" class="headerlink" title="If 寫法，CONDITIONAL EXPRESSIONS USING CASE KEYWORD 使用大小寫關鍵字的條件表達"></a>If 寫法，CONDITIONAL EXPRESSIONS USING CASE KEYWORD 使用大小寫關鍵字的條件表達</h3><p>Select Case 可以做到程式中的 if-then，只需要透過此方式即可。 </p>
+<p>CASE expression acts like an if-then statement. It allows you to choose what will appear in a column of the result set, depending on a condition.</p>
+<p>範例如下</p>
+<blockquote>
+<p><a href="https://imgur.com/m6EKI08.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+<h3 id="操作-View-關聯表-，MORE-COMPLICATED-SQL-QUERIES-更多複雜的-SQL-操作"><a href="#操作-View-關聯表-，MORE-COMPLICATED-SQL-QUERIES-更多複雜的-SQL-操作" class="headerlink" title="操作 View(關聯表)，MORE COMPLICATED SQL QUERIES 更多複雜的 SQL 操作"></a>操作 View(關聯表)，MORE COMPLICATED SQL QUERIES 更多複雜的 SQL 操作</h3><ul>
+<li>資料庫可能會有好幾千個 table，而且 table 有很多 column<br>Production databases contain hundreds or even thousands of tables, and tables could include hundreds of columns.</li>
+<li>因此查詢可能會變得非常複雜<br>So, sometimes query requirements can be very complex.</li>
+<li>有時可以透過 View 來合併查詢<br>sometimes it’s useful to combine queries, through the use of Views.</li>
+<li>如果使用 View(其中一個查詢)，也可以讓另外一個查詢使用 View，類似操作 table<br>If you use a view (which is a query), you could have another query that uses the view as if it were a table.</li>
+<li>簡單來說 View 就是虛擬的 table，結合現在的 table or View 產生</li>
+</ul>
+<p>View 的操作範例</p>
+<blockquote>
+<p><a href="https://imgur.com/VB38lat.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+<h3 id="TIPS-FOR-DEVELOPING-QUERIES"><a href="#TIPS-FOR-DEVELOPING-QUERIES" class="headerlink" title="TIPS FOR DEVELOPING QUERIES"></a>TIPS FOR DEVELOPING QUERIES</h3><ul>
+<li>熟悉資料模型，實體與關聯性<br>Be familiar with the data model (entities and relationships)</li>
+<li>了解想要的結果<br>Understand the desired(了解) results</li>
+<li>知道結果中鎖需要的屬性<br>Know the attributes desired in results</li>
+<li>辨識實體所包含的屬性<br>Identify the entities that contain desired attributes</li>
+<li>Review ERD</li>
+<li>對每一個 link 建構一個 where 相等性<br>Construct a WHERE equality for each link</li>
+<li>如果需要，使用 GROUP BY 和 HAVING 子句<br>Fine tune with GROUP BY and HAVING clauses if needed</li>
+<li>考慮異常資料對資料庫的影響<br>Consider the effect on unusual data</li>
+</ul>
+<h2 id="查詢效率的注意事項-QUERY-EFFICIENCY-CONSIDERATIONS"><a href="#查詢效率的注意事項-QUERY-EFFICIENCY-CONSIDERATIONS" class="headerlink" title="查詢效率的注意事項 QUERY EFFICIENCY CONSIDERATIONS"></a>查詢效率的注意事項 QUERY EFFICIENCY CONSIDERATIONS</h2><ul>
+<li>在 select 中標註屬性而不用 *<br>Instead of SELECT *, identify the specific attributes in the SELECT clause; this helps reduce network traffic of result set</li>
+<li>限制子查詢的數量，盡量在單查詢中查尋完畢<br>Limit the number of subqueries; try to make everything done in a single query if possible</li>
+<li>如果要多次使用同樣查詢，就建立成關聯表(View)<br>If data is to be used many times, make a separate query and store it as a view</li>
+</ul>
+<h2 id="查詢設計方法-GUIDELINES-FOR-BETTER-QUERY-DESIGN"><a href="#查詢設計方法-GUIDELINES-FOR-BETTER-QUERY-DESIGN" class="headerlink" title="查詢設計方法 GUIDELINES FOR BETTER QUERY DESIGN"></a>查詢設計方法 GUIDELINES FOR BETTER QUERY DESIGN</h2><ul>
+<li>了解再查詢資料中使用 index<br>Understand how indexes are used in query processing</li>
+<li>保持優化且為最新<br>Keep optimizer statistics up to date</li>
+<li>對於文字或字段兩種資料型態兼容<br>Use compatible data types for fields and literals(文字)</li>
+<li>Write simple queries</li>
+<li>把複雜查詢拆成簡單查詢<br>Break complex queries into multiple simple parts</li>
+<li>盡量不要把查詢內嵌在另一個查詢<br>Don’t nest one query inside another query</li>
+<li>自身查詢不跟自身連接<br>Don’t combine a query with itself (if possible avoid self-joins)</li>
+<li>創建暫存表在擁有非常多查詢時<br>Create temporary tables for groups of queries</li>
+<li>Combine update operations 合併更新操作</li>
+<li>僅檢索需要的數據<br>Retrieve only the data you need</li>
+<li>沒有 index 就沒辦法對 DBMS 排序<br>Don’t have the DBMS sort without an index</li>
+<li>Learn! (…)</li>
+<li>考慮某些特殊查詢在總查詢處理時間會不會過多<br>Consider the total query processing time for ad hoc queries</li>
+</ul>
+<h2 id="使用與定義關聯表-USING-AND-DEFINING-VIEWS"><a href="#使用與定義關聯表-USING-AND-DEFINING-VIEWS" class="headerlink" title="使用與定義關聯表 USING AND DEFINING VIEWS"></a>使用與定義關聯表 USING AND DEFINING VIEWS</h2><ul>
+<li>Dynamic View<ul>
+<li>對於用戶新增動態<strong>虛擬表</strong><br>A “virtual table” created dynamically upon request by a user</li>
+<li>沒有資料儲存在 View，而是將原始資料提供給用戶<br>No data actually stored; instead data from base table made available to user</li>
+<li>為 table or View 中的 SQL select 語法<br>Based on SQL SELECT statement on base tables or other views</li>
+<li>Advantage 優點<ul>
+<li>Simplify query commands</li>
+<li>Assist(協助) with data security</li>
+<li>Enhance(提高) programming productivity(生產率)</li>
+<li>Contain most current base table data</li>
+<li>Use little storage space</li>
+<li>Provide customized(專屬打造) view for user</li>
+<li>Establish(建立) physical(物理) data independence</li>
+<li>每次使用 View 都需要時間<br>Use processing time each time view is referenced(被引用)</li>
+<li>可能沒有辦法直接更新<br>May or may not be directly updateable</li>
+<li>謹慎使用 View<br>As with all SQL constructs, you should use views with discretion</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>實質關聯表 Materialized View<ul>
+<li>複製資料，實際儲存在 View<br>Copy or replication of data, data actually stored</li>
+<li>需要不斷更新才可以與原本查詢的 table 資料相符<br>Must be refreshed periodically to match corresponding base tables</li>
+</ul>
+</li>
+<li>Sample <ul>
+<li>View has a name</li>
+<li>View is based on a SELECT statement</li>
+<li>CHECK_OPTIO 只能用來可以被更新的關聯表，並禁止更新不包含在 View 裡的資料<br>CHECK_OPTION works only for updateable views and prevents updates that would create rows not included in the view</li>
+</ul>
+</li>
+</ul>
+<h2 id="例行程序-ROUTINES-AND-TRIGGERS"><a href="#例行程序-ROUTINES-AND-TRIGGERS" class="headerlink" title="例行程序 ROUTINES AND TRIGGERS"></a>例行程序 ROUTINES AND TRIGGERS</h2><ul>
+<li>Routines 需要執行的程式區塊</li>
+<li>Functions 給 Routines 參數並回傳值</li>
+<li>Procedures 給 Routines 參數並<strong>不傳</strong>值</li>
+<li>Triggers 當 Routines 啟動到特殊事件時觸發</li>
+<li>Procedures and functions are called explicitly(明確調用). Triggers are event-driven(事件觸發).</li>
+<li>圖示<blockquote>
+<p><a href="https://imgur.com/qtZevFX.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+<li>Triggers Sample 有兩張<blockquote>
+<p><a href="https://imgur.com/dnxZMF3.jpg" target="_blank" rel="noopener"></a><br><a href="https://imgur.com/6p5occl.jpg" target="_blank" rel="noopener"></a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="SQL-ENHANCEMENTS-增強"><a href="#SQL-ENHANCEMENTS-增強" class="headerlink" title="SQL ENHANCEMENTS(增強)"></a>SQL ENHANCEMENTS(增強)</h2><ul>
+<li>User-defined data types (UDT) 自定義資料型態</li>
+<li>可設定子類別為標準型態 or object<br>Subclasses of standard types or an object type</li>
+<li>Analytical functions (for OLAP)<ul>
+<li>CEILING, FLOOR, SQRT, RANK, DENSE_RANK, ROLLUP, CUBE, SAMPLE,</li>
+<li>WINDOW –improved numerical analysis capabilities</li>
+</ul>
+</li>
+<li>New Data Types<br>BIGINT, MULTISET (collection), XML</li>
+<li>CREATE TABLE LIKE<br>create a new table similar to an existing one</li>
+<li>MERGE</li>
+</ul>
+<h2 id="SQL-EXTENSIONS-擴展"><a href="#SQL-EXTENSIONS-擴展" class="headerlink" title="SQL EXTENSIONS(擴展)"></a>SQL EXTENSIONS(擴展)</h2><ul>
+<li>Persistent(永久的) Stored Modules (SQL/PSM)</li>
+<li>Capability(能力) to create and drop(刪除) code modules</li>
+<li>New statements: CASE, IF, LOOP, FOR, WHILE, etc.</li>
+<li>Makes SQL into a <a href="https://zh.wikipedia.org/wiki/%E8%BF%87%E7%A8%8B%E5%BC%8F%E7%BC%96%E7%A8%8B" target="_blank" rel="noopener">procedural language(可以變成函式相互呼叫)</a></li>
+<li>Oracle has propriety version(專有版本) called PL/SQL, and Microsoft SQL Server has Transact/SQL</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>資料庫管理</tag>
       </tags>
   </entry>
 </search>
