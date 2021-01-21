@@ -1425,7 +1425,7 @@
 <p>其中 port 可以忽略不打(則會隨機產生)，接下來用 curl 來試著呼叫</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl --data &quot;text&#x3D;hi_my_friend&quot; &quot;localhost:5762&#x2F;echo&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="如果要輸出-json-呢"><a href="#如果要輸出-json-呢" class="headerlink" title="如果要輸出 json 呢"></a>如果要輸出 json 呢</h3><p>這點 R 完全幫你做好，R 可以自動幫你轉成 json，但還是有少部分情況例外。<strong><font color="#dd0000">裡面完全不需要轉成 json，就放心地給他輸出吧！</font></strong></p>
+<h3 id="如果要輸出-json-呢"><a href="#如果要輸出-json-呢" class="headerlink" title="如果要輸出 json 呢"></a>如果要輸出 json 呢</h3><p>這點 R 完全幫你做好，R 可以自動幫你轉成 json，但還是有少部分情況例外。<strong><font color="#dd0000">裡面完全不需要轉成 json，就放心地給他輸出吧！</font></strong><br><strong>只限定傳送一個參數並且是 json 檔案</strong></p>
 <h3 id="我想要輸入-json，但我卻輸入不進去"><a href="#我想要輸入-json，但我卻輸入不進去" class="headerlink" title="我想要輸入 json，但我卻輸入不進去.."></a>我想要輸入 json，但我卻輸入不進去..</h3><p>這點就比較有趣了，看下面的程式碼就能了解箇中奧妙</p>
 <figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#* parse JSON</span></span><br><span class="line"><span class="comment">#* @param req  the request object</span></span><br><span class="line"><span class="comment">#* @get /json</span></span><br><span class="line"><span class="comment">#* @post /json</span></span><br><span class="line">echo_json &lt;- <span class="keyword">function</span>(req)&#123;</span><br><span class="line">  print(req$postBody)</span><br><span class="line">  <span class="keyword">return</span>(req$postBody)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1435,6 +1435,10 @@
 
 <h2 id="QUESTIONS-and-ERRORS-集合地"><a href="#QUESTIONS-and-ERRORS-集合地" class="headerlink" title="QUESTIONS and ERRORS 集合地"></a>QUESTIONS and ERRORS 集合地</h2><p>這裡有些作者已經經歷過的問題就放在這裡供大家參考怎麼解決或<del>放棄</del>。</p>
 <h3 id="QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？"><a href="#QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？" class="headerlink" title="QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？"></a>QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？</h3><p>改用 LINUX 平台是目前作者最好的解法。由於 Window 似乎在傳遞進來時編碼會遇到問題例如 <code>‘</code> 透過字串傳輸在 windows 上是亂碼，但在 Linux 不會，於是建議遇到此問題一律都使用 linux server 來解決。</p>
+<h2 id="寫一個-api-傳送許多參數"><a href="#寫一個-api-傳送許多參數" class="headerlink" title="寫一個 api 傳送許多參數"></a>寫一個 api 傳送許多參數</h2><p>有時候我們並不是只需要傳送一個參數，而是傳送多個參數時就必須這樣寫。</p>
+<p>如果參數後面的等於配上空字串表示預設為空，只有被傳回來有；那後面如果有值則代表如果 api 沒有傳此參數就已預設為主。<br><strong>注意，參數後面一律都必須搭配字串，api 傳送的都是字串格式</strong></p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">path_json &lt;- <span class="keyword">function</span>(data = <span class="string">""</span> , path_length = <span class="string">"20"</span> )&#123;</span><br><span class="line">  json_content &lt;- run_path(data , path_length )</span><br><span class="line">  <span class="keyword">return</span>(json_content)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實不得不說，要不是因為有上班的地方願意讓我磨練，不然我可能連 api 是甚麼都還需要等到未來 2,3 年後我才能夠熟悉並且知道這些事物，也很謝謝<strong>高鈺成學長</strong>在我有些遇到狀況時會給我些許提示，然後專案報告真的好趕阿QwQ，希望我能夠如期做完，那就是最完美的了！謝謝 <strong>Luft 學長</strong> 幫我很多忙，也謝謝 steam 基礎教育聯盟給我機會學習。</p>
 <h2 id="連結"><a href="#連結" class="headerlink" title="連結"></a>連結</h2><p>我在翻找資料的過程中，閱讀到一些對我非常有意義的資料。如下:</p>
 <p><a href="https://rviews.rstudio.com/2018/07/23/rest-apis-and-plumber/" target="_blank" rel="noopener">REST APIs and Plumber</a><br><a href="https://www.rplumber.io/articles/routing-and-input.html" target="_blank" rel="noopener">Routing &amp; Input</a><br><a href="https://stackoverflow.com/questions/51944328/sending-json-file-in-curl-and-receiving-it-in-r-using-plumber/51945300#51945300" target="_blank" rel="noopener">Sending json file in curl and receiving it in R using plumber</a><br><a href="https://stackoverflow.com/questions/7172784/how-do-i-post-json-data-with-curl" target="_blank" rel="noopener">How do I POST JSON data with cURL?</a></p>
@@ -9399,10 +9403,10 @@
 <p>利用題目測試資料的 x 行選出 y 行能夠將每一個字母的數字總合為偶數，且 y 必須是最大。<del>好懂了八</del></p>
 <h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>由於必須輸出最大的行數且必須要輸出有哪些行，因此這裡 brute force 會是最好的選擇。</p>
 <p>這題 Udebug 沒有提供測資，好難過啊QwQ。</p>
-<h3 id="時間複雜度"><a href="#時間複雜度" class="headerlink" title="時間複雜度"></a>時間複雜度</h3><p>我們先來分析一下時間複雜度，如果使用 brute force 時複雜度會是 \(O(2^24)\)，選或不選並且有至少有 24 個英文字母，時間複雜度會太高，因此我們這邊使用<a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a>，將時間複雜度優化至\(O(2^12 * 12) \)，選或不選有 12 個英文字母，且每一個都可以在與另外 12 個英文字母考慮選或不選，</p>
+<h3 id="時間複雜度"><a href="#時間複雜度" class="headerlink" title="時間複雜度"></a>時間複雜度</h3><p>我們先來分析一下時間複雜度，如果使用 brute force 時複雜度會是 \(O(2^24)\)，選或不選並且有至少有 24 個英文字母，時間複雜度會太高，因此我們這邊使用<a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a>，將時間複雜度優化至\(O(2^{12} * 12) \)，選或不選有 12 個英文字母，且每一個都可以在與另外 12 個英文字母考慮選或不選，</p>
 <ul>
-<li>時間複雜度 \(O(2^24)\)，運行時間為 1.110s<br>程式碼由<a href="https://blog.csdn.net/keshuai19940722/article/details/18995013" target="_blank" rel="noopener">JeraKrs 提供</a></li>
-<li>時間複雜度 \(O(2^12 * 12\)，運行時間為 0.3s</li>
+<li>時間複雜度 \(O(2^{24})\)，運行時間為 1.110s<br>程式碼由<a href="https://blog.csdn.net/keshuai19940722/article/details/18995013" target="_blank" rel="noopener">JeraKrs 提供</a></li>
+<li>時間複雜度 \(O(2^{12} * 12\)，運行時間為 0.3s</li>
 </ul>
 <h3 id="雙向搜尋-Meet-in-the-middle"><a href="#雙向搜尋-Meet-in-the-middle" class="headerlink" title="雙向搜尋-Meet in the middle"></a><a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a></h3><p>透過雙向搜尋-Meet in the middle，我們將 12 個字母分成一組，再將兩組合併，只要這兩組的字母合起來為偶數並偶數數量為最大值時則代表我們搜尋成功。</p>
 <h3 id="字母-Hash"><a href="#字母-Hash" class="headerlink" title="字母 Hash"></a>字母 Hash</h3><p>稍微複習一下，左移(<code>a &lt;&lt; b</code> )，為 \(a * 2 ^ b\)、右移(<code>a &gt;&gt; b</code>)，為 \(a / 2 ^ b\)</p>
@@ -10919,17 +10923,17 @@
 <li>Outer join 類似於餘集<br>輸出表為值不相同的，A join in which rows that do not have matching values in common columns are nonetheless(儘管如此) included in the result table (as opposed(反對) to innerjoin, in which rows must have matching values in order to appear in the result table)</li>
 <li>Union join 類似於聯集<br>Includes all data from each table that was joined</li>
 <li>圖表<blockquote>
-<p><a href="https://i.imgur.com/1U7KjW0.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://i.imgur.com/1U7KjW0.jpg" alt=""></p>
 </blockquote>
 </li>
 <li>圖示 join 查詢<blockquote>
-<p><a href="https://imgur.com/XzERFKl.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/XzERFKl.jpg" alt=""></p>
 </blockquote>
 </li>
 </ul>
 <h3 id="上述-join-的-example"><a href="#上述-join-的-example" class="headerlink" title="上述 join 的 example"></a>上述 join 的 example</h3><ul>
 <li>Equi-join<blockquote>
-<p><a href="https://imgur.com/x1dEZK9.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/x1dEZK9.jpg" alt=""></p>
 </blockquote>
 </li>
 <li>Inner Join <ul>
@@ -10937,20 +10941,20 @@
 <li>An INNER join will only return rows from each table that have matching rows in the other.</li>
 <li>This query produces the same results as the previous(先前) equi-join example</li>
 <li>程式碼 (圖)<blockquote>
-<p><a href="https://imgur.com/H3MlEGa.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/H3MlEGa.jpg" alt=""></p>
 </blockquote>
 </li>
 </ul>
 </li>
 <li>Nature Join <blockquote>
-<p><a href="https://imgur.com/3j0Z2Iq.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/3j0Z2Iq.jpg" alt=""></p>
 </blockquote>
 </li>
 <li>Outer Join <ul>
 <li>LEFT OUTER JOIN clause causes(原因) rows from the first mentioned(提起) table (customer) to appear even if there is no corresponding order data.</li>
 <li>Unlike(不像) an INNER join, this will include customer rows with no matching order rows.</li>
 <li>程式碼 (圖)<blockquote>
-<p><a href="https://imgur.com/BFq96ka.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/BFq96ka.jpg" alt=""></p>
 </blockquote>
 </li>
 </ul>
@@ -10958,7 +10962,7 @@
 </ul>
 <h2 id="透過命名變數讓輸出的名子改變"><a href="#透過命名變數讓輸出的名子改變" class="headerlink" title="透過命名變數讓輸出的名子改變"></a>透過命名變數讓輸出的名子改變</h2><p>What are the employee ID and name of each employee and the name of his or her supervisor(主管) (label the supervisor’s name Manager)?</p>
 <blockquote>
-<p><a href="https://imgur.com/C3p7gm8.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/C3p7gm8.jpg" alt=""></p>
 </blockquote>
 <h2 id="SUBQUERIES-子查詢"><a href="#SUBQUERIES-子查詢" class="headerlink" title="SUBQUERIES 子查詢"></a>SUBQUERIES 子查詢</h2><p>placing an inner query(內部查詢) (SELECT statement) inside an outer query(外部查詢)</p>
 <ul>
@@ -10980,7 +10984,7 @@
 <li>Make use of data from the outer query 利用外部查詢的資料</li>
 <li>Can use the EXISTS and ALL operators 可以使用EXISTS和ALL運算 </li>
 <li>Example<blockquote>
-<p><a href="https://imgur.com/JKUC8EC.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/JKUC8EC.jpg" alt=""></p>
 </blockquote>
 </li>
 </ul>
@@ -10989,34 +10993,34 @@
 </li>
 <li>Example<ul>
 <li><blockquote>
-<p><a href="https://imgur.com/CwUaZFZ.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/CwUaZFZ.jpg" alt=""></p>
 </blockquote>
 </li>
 <li>另外一個方法可以解決上述問題<blockquote>
-<p><a href="https://imgur.com/XsbGxFo.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/XsbGxFo.jpg" alt=""></p>
 </blockquote>
 </li>
 </ul>
 </li>
 <li>查詢方法圖示<blockquote>
-<p><a href="https://imgur.com/phHXpiU.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/phHXpiU.jpg" alt=""></p>
 </blockquote>
 </li>
 </ul>
 <h3 id="ANOTHER-SUBQUERY-EXAMPLE-DERIVED-TABLE-另一種子查詢"><a href="#ANOTHER-SUBQUERY-EXAMPLE-DERIVED-TABLE-另一種子查詢" class="headerlink" title="ANOTHER SUBQUERY EXAMPLE /(DERIVED TABLE) 另一種子查詢"></a>ANOTHER SUBQUERY EXAMPLE /(DERIVED TABLE) 另一種子查詢</h3><p>將我們子查詢的值設成變數，在使他可以跟上面的查詢進行比較</p>
 <blockquote>
-<p><a href="https://imgur.com/ItsxXAo.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/ItsxXAo.jpg" alt=""></p>
 </blockquote>
 <h2 id="COMBINING-QUERIES"><a href="#COMBINING-QUERIES" class="headerlink" title="COMBINING QUERIES"></a>COMBINING QUERIES</h2><h3 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h3><p>將多個查詢 union 在一起，但所有的資料欄位與屬性都必須相同</p>
 <p>Combine the output (union of multiple queries) together into a single result table<br>With UNION queries, the quantity and data types of the attributes in the SELECT clauses of both queries must be identical.</p>
 <blockquote>
-<p><a href="https://imgur.com/EYpaZ6w.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/EYpaZ6w.jpg" alt=""></p>
 </blockquote>
 <h3 id="If-寫法，CONDITIONAL-EXPRESSIONS-USING-CASE-KEYWORD-使用大小寫關鍵字的條件表達"><a href="#If-寫法，CONDITIONAL-EXPRESSIONS-USING-CASE-KEYWORD-使用大小寫關鍵字的條件表達" class="headerlink" title="If 寫法，CONDITIONAL EXPRESSIONS USING CASE KEYWORD 使用大小寫關鍵字的條件表達"></a>If 寫法，CONDITIONAL EXPRESSIONS USING CASE KEYWORD 使用大小寫關鍵字的條件表達</h3><p>Select Case 可以做到程式中的 if-then，只需要透過此方式即可。 </p>
 <p>CASE expression acts like an if-then statement. It allows you to choose what will appear in a column of the result set, depending on a condition.</p>
 <p>範例如下</p>
 <blockquote>
-<p><a href="https://imgur.com/m6EKI08.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/m6EKI08.jpg" alt=""></p>
 </blockquote>
 <h3 id="操作-View-關聯表-，MORE-COMPLICATED-SQL-QUERIES-更多複雜的-SQL-操作"><a href="#操作-View-關聯表-，MORE-COMPLICATED-SQL-QUERIES-更多複雜的-SQL-操作" class="headerlink" title="操作 View(關聯表)，MORE COMPLICATED SQL QUERIES 更多複雜的 SQL 操作"></a>操作 View(關聯表)，MORE COMPLICATED SQL QUERIES 更多複雜的 SQL 操作</h3><ul>
 <li>資料庫可能會有好幾千個 table，而且 table 有很多 column<br>Production databases contain hundreds or even thousands of tables, and tables could include hundreds of columns.</li>
@@ -11027,7 +11031,7 @@
 </ul>
 <p>View 的操作範例</p>
 <blockquote>
-<p><a href="https://imgur.com/VB38lat.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/VB38lat.jpg" alt=""></p>
 </blockquote>
 <h3 id="TIPS-FOR-DEVELOPING-QUERIES"><a href="#TIPS-FOR-DEVELOPING-QUERIES" class="headerlink" title="TIPS FOR DEVELOPING QUERIES"></a>TIPS FOR DEVELOPING QUERIES</h3><ul>
 <li>熟悉資料模型，實體與關聯性<br>Be familiar with the data model (entities and relationships)</li>
@@ -11098,11 +11102,11 @@
 <li>Triggers 當 Routines 啟動到特殊事件時觸發</li>
 <li>Procedures and functions are called explicitly(明確調用). Triggers are event-driven(事件觸發).</li>
 <li>圖示<blockquote>
-<p><a href="https://imgur.com/qtZevFX.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/qtZevFX.jpg" alt=""></p>
 </blockquote>
 </li>
 <li>Triggers Sample 有兩張<blockquote>
-<p><a href="https://imgur.com/dnxZMF3.jpg" target="_blank" rel="noopener"></a><br><a href="https://imgur.com/6p5occl.jpg" target="_blank" rel="noopener"></a></p>
+<p><img src="https://imgur.com/dnxZMF3.jpg" alt=""><br><img src="https://imgur.com/6p5occl.jpg" alt=""></p>
 </blockquote>
 </li>
 </ul>
@@ -11133,6 +11137,39 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>資料庫管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>b944- 好想上廁所(男廁篇)</title>
+    <url>/2022/02/21/zerojudge/b944/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>男生要上廁所，通常會相隔一個小便斗，如果沒有，就從數字最小的廁所開始找第一間空間上廁所，沒有辦法上廁所就輸出 “  Not enough” </p>
+<p>輸出<br><a href="https://zerojudge.tw/ShowProblem?problemid=b944" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="觀念重點"><a href="#觀念重點" class="headerlink" title="觀念重點"></a>觀念重點</h2><ul>
+<li>兩種規則<ul>
+<li>先嘗試能否在相隔的情況下上廁所</li>
+<li>從最小的廁所開始上，找到空格</li>
+</ul>
+</li>
+<li>有可能進去上廁所，但是時間是零秒，但在這次還是要照常輸出</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>簡單的操作題，根據題目進行分析輸出，在每一個程式碼中放入簡單註解，希望大家可以看懂XD。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">b944</span> &#123;</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">int</span> n , a , b ;</span><br><span class="line">		n = input.nextInt() ;</span><br><span class="line">		<span class="keyword">int</span> num[] = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">2</span>]; <span class="comment">//使用的編號 </span></span><br><span class="line">		<span class="keyword">int</span> time[] = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">2</span>]; <span class="comment">//剩下使用的時間</span></span><br><span class="line">		<span class="keyword">while</span>(input.hasNext()) &#123;</span><br><span class="line">			a = input.nextInt(); </span><br><span class="line">			b = input.nextInt();</span><br><span class="line">			<span class="keyword">int</span> flag = <span class="number">1</span> ; <span class="comment">//判斷這次有沒有成功找到廁所</span></span><br><span class="line">            <span class="comment">// 1 是還沒找到廁所， 0 是找到了</span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123; <span class="comment">//將上次的狀態進行更新</span></span><br><span class="line">				<span class="keyword">if</span>(num[i] != <span class="number">0</span>) &#123; <span class="comment">//表示有人正在使用</span></span><br><span class="line">					time[i] -=<span class="number">1</span> ; <span class="comment">//時間減一 </span></span><br><span class="line">					<span class="keyword">if</span>(time[i] &lt; <span class="number">0</span> ) time[i] = <span class="number">0</span> ; </span><br><span class="line">                    <span class="comment">//如果剛剛上廁所的人是零秒，在剛剛會被 -1 秒，因此現在歸零</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(time[i] &lt;= <span class="number">0</span> ) num[i] = <span class="number">0</span> ; <span class="comment">// 0 秒表示上完廁所，使用號碼歸零</span></span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123; <span class="comment">//第一個規則</span></span><br><span class="line">				<span class="keyword">if</span>(num[i]==<span class="number">0</span> &amp;&amp; num[i<span class="number">-1</span>]==<span class="number">0</span> &amp;&amp; num[i+<span class="number">1</span>]==<span class="number">0</span>) &#123; </span><br><span class="line">                    <span class="comment">//看當前間、左邊、右邊使否為空間</span></span><br><span class="line">					num[i] = a ; <span class="comment">//這間廁所被 a  使用  </span></span><br><span class="line">					time[i] = b ; <span class="comment">// 使用 b 秒</span></span><br><span class="line">					flag = <span class="number">0</span> ; <span class="comment">//成功找到廁所</span></span><br><span class="line">					<span class="keyword">break</span> ;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(flag==<span class="number">1</span>) &#123; <span class="comment">//還沒找到廁所，就用第二種規則</span></span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123;</span><br><span class="line">					<span class="keyword">if</span>(num[i] == <span class="number">0</span>) &#123; <span class="comment">//這間廁所沒有被使用，那就讓她使用</span></span><br><span class="line">						num[i] = a ; </span><br><span class="line">						time[i] = b ;</span><br><span class="line">						flag = <span class="number">0</span> ; <span class="comment">//成功找到廁所</span></span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span>(flag == <span class="number">1</span> ) <span class="comment">//表示還沒找到廁所，所以輸出 not enough </span></span><br><span class="line">				System.out.print(<span class="string">"  Not enough\n"</span>);</span><br><span class="line">			</span><br><span class="line">			System.out.print(<span class="string">"Number:"</span>); <span class="comment">//輸出廁所使用的編號</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123;</span><br><span class="line">				System.out.<span class="built_in">printf</span>(<span class="string">" %d"</span> , num[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">			</span><br><span class="line">			System.out.print(<span class="string">"Time:"</span>); <span class="comment">//輸出每個廁所的使用時間</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123;</span><br><span class="line">				System.out.<span class="built_in">printf</span>(<span class="string">" %d"</span> , time[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>久違的寫 zerojudge 程式題目，zerojudge 是刷簡單題的好區，可以快速累積新手經驗值，可以讓自己程式變優秀的好地方(◍•ᴗ•◍)❤️。</p>
+<p>題外話：UVa 好難喔..，一個啟發式搜尋要讓我使用 range tree，我真的會哭喔 ಥ⌣ಥ。</p>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>實作題</tag>
+        <tag>zerojudge</tag>
+        <tag>java</tag>
       </tags>
   </entry>
 </search>

@@ -129,10 +129,10 @@ ga('send', 'pageview');
 <p>利用題目測試資料的 x 行選出 y 行能夠將每一個字母的數字總合為偶數，且 y 必須是最大。<del>好懂了八</del></p>
 <h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>由於必須輸出最大的行數且必須要輸出有哪些行，因此這裡 brute force 會是最好的選擇。</p>
 <p>這題 Udebug 沒有提供測資，好難過啊QwQ。</p>
-<h3 id="時間複雜度"><a href="#時間複雜度" class="headerlink" title="時間複雜度"></a>時間複雜度</h3><p>我們先來分析一下時間複雜度，如果使用 brute force 時複雜度會是 \(O(2^24)\)，選或不選並且有至少有 24 個英文字母，時間複雜度會太高，因此我們這邊使用<a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a>，將時間複雜度優化至\(O(2^12 * 12) \)，選或不選有 12 個英文字母，且每一個都可以在與另外 12 個英文字母考慮選或不選，</p>
+<h3 id="時間複雜度"><a href="#時間複雜度" class="headerlink" title="時間複雜度"></a>時間複雜度</h3><p>我們先來分析一下時間複雜度，如果使用 brute force 時複雜度會是 \(O(2^24)\)，選或不選並且有至少有 24 個英文字母，時間複雜度會太高，因此我們這邊使用<a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a>，將時間複雜度優化至\(O(2^{12} * 12) \)，選或不選有 12 個英文字母，且每一個都可以在與另外 12 個英文字母考慮選或不選，</p>
 <ul>
-<li>時間複雜度 \(O(2^24)\)，運行時間為 1.110s<br>程式碼由<a href="https://blog.csdn.net/keshuai19940722/article/details/18995013" target="_blank" rel="noopener">JeraKrs 提供</a></li>
-<li>時間複雜度 \(O(2^12 * 12\)，運行時間為 0.3s</li>
+<li>時間複雜度 \(O(2^{24})\)，運行時間為 1.110s<br>程式碼由<a href="https://blog.csdn.net/keshuai19940722/article/details/18995013" target="_blank" rel="noopener">JeraKrs 提供</a></li>
+<li>時間複雜度 \(O(2^{12} * 12\)，運行時間為 0.3s</li>
 </ul>
 <h3 id="雙向搜尋-Meet-in-the-middle"><a href="#雙向搜尋-Meet-in-the-middle" class="headerlink" title="雙向搜尋-Meet in the middle"></a><a href="https://theriseofdavid.github.io/2020/12/14/Explain_Algorithm/Two-way-search/" target="_blank" rel="noopener">雙向搜尋-Meet in the middle</a></h3><p>透過雙向搜尋-Meet in the middle，我們將 12 個字母分成一組，再將兩組合併，只要這兩組的字母合起來為偶數並偶數數量為最大值時則代表我們搜尋成功。</p>
 <h3 id="字母-Hash"><a href="#字母-Hash" class="headerlink" title="字母 Hash"></a>字母 Hash</h3><p>稍微複習一下，左移(<code>a &lt;&lt; b</code> )，為 \(a * 2 ^ b\)、右移(<code>a &gt;&gt; b</code>)，為 \(a / 2 ^ b\)</p>

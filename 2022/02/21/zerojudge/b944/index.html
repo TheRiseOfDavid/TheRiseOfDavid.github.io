@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    透過 plumber 完成 RESTAPI 在 R 上的應用 |  大衞的筆記
+    b944- 好想上廁所(男廁篇) |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-R/R-api" class="article article-type-post" itemscope
+  <article id="post-zerojudge/b944" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  透過 plumber 完成 RESTAPI 在 R 上的應用
+  b944- 好想上廁所(男廁篇)
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/07/23/R/R-api/" class="article-date">
-  <time datetime="2020-07-23T07:33:11.000Z" itemprop="datePublished">2020-07-23</time>
+      <a href="/2022/02/21/zerojudge/b944/" class="article-date">
+  <time datetime="2022-02-21T06:44:35.000Z" itemprop="datePublished">2022-02-21</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/R%E8%AA%9E%E8%A8%80/">R語言</a>
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">872</span>
+            <span class="post-count">659</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">3分鐘</span>
+            <span class="post-count">2分鐘</span>
         </span>
     </span>
 </div>
@@ -111,38 +111,25 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
-<p>RESTAPI 有點類似於打包程式碼成為 class 的概念，一開始再碰 RESTAPI 會較難懂。<del>我第一次學 API 就是現在，我花了快兩三個小時才懂RRR</del><br>plumber 可以應用在 RESTAPI<br>以下紀錄 plumber 在 R 上的應用與<strong><font color="#dd0000">需要注意的地方</font></strong></p>
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>男生要上廁所，通常會相隔一個小便斗，如果沒有，就從數字最小的廁所開始找第一間空間上廁所，沒有辦法上廁所就輸出 “  Not enough” </p>
+<p>輸出<br><a href="https://zerojudge.tw/ShowProblem?problemid=b944" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="安裝-plumber"><a href="#安裝-plumber" class="headerlink" title="安裝 plumber"></a>安裝 plumber</h2><p>首先需要 plumber</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages(<span class="string">"plumber"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="觀念重點"><a href="#觀念重點" class="headerlink" title="觀念重點"></a>觀念重點</h2><ul>
+<li>兩種規則<ul>
+<li>先嘗試能否在相隔的情況下上廁所</li>
+<li>從最小的廁所開始上，找到空格</li>
+</ul>
+</li>
+<li>有可能進去上廁所，但是時間是零秒，但在這次還是要照常輸出</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>簡單的操作題，根據題目進行分析輸出，在每一個程式碼中放入簡單註解，希望大家可以看懂XD。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">b944</span> &#123;</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">int</span> n , a , b ;</span><br><span class="line">		n = input.nextInt() ;</span><br><span class="line">		<span class="keyword">int</span> num[] = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">2</span>]; <span class="comment">//使用的編號 </span></span><br><span class="line">		<span class="keyword">int</span> time[] = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">2</span>]; <span class="comment">//剩下使用的時間</span></span><br><span class="line">		<span class="keyword">while</span>(input.hasNext()) &#123;</span><br><span class="line">			a = input.nextInt(); </span><br><span class="line">			b = input.nextInt();</span><br><span class="line">			<span class="keyword">int</span> flag = <span class="number">1</span> ; <span class="comment">//判斷這次有沒有成功找到廁所</span></span><br><span class="line">            <span class="comment">// 1 是還沒找到廁所， 0 是找到了</span></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123; <span class="comment">//將上次的狀態進行更新</span></span><br><span class="line">				<span class="keyword">if</span>(num[i] != <span class="number">0</span>) &#123; <span class="comment">//表示有人正在使用</span></span><br><span class="line">					time[i] -=<span class="number">1</span> ; <span class="comment">//時間減一 </span></span><br><span class="line">					<span class="keyword">if</span>(time[i] &lt; <span class="number">0</span> ) time[i] = <span class="number">0</span> ; </span><br><span class="line">                    <span class="comment">//如果剛剛上廁所的人是零秒，在剛剛會被 -1 秒，因此現在歸零</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(time[i] &lt;= <span class="number">0</span> ) num[i] = <span class="number">0</span> ; <span class="comment">// 0 秒表示上完廁所，使用號碼歸零</span></span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123; <span class="comment">//第一個規則</span></span><br><span class="line">				<span class="keyword">if</span>(num[i]==<span class="number">0</span> &amp;&amp; num[i<span class="number">-1</span>]==<span class="number">0</span> &amp;&amp; num[i+<span class="number">1</span>]==<span class="number">0</span>) &#123; </span><br><span class="line">                    <span class="comment">//看當前間、左邊、右邊使否為空間</span></span><br><span class="line">					num[i] = a ; <span class="comment">//這間廁所被 a  使用  </span></span><br><span class="line">					time[i] = b ; <span class="comment">// 使用 b 秒</span></span><br><span class="line">					flag = <span class="number">0</span> ; <span class="comment">//成功找到廁所</span></span><br><span class="line">					<span class="keyword">break</span> ;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(flag==<span class="number">1</span>) &#123; <span class="comment">//還沒找到廁所，就用第二種規則</span></span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123;</span><br><span class="line">					<span class="keyword">if</span>(num[i] == <span class="number">0</span>) &#123; <span class="comment">//這間廁所沒有被使用，那就讓她使用</span></span><br><span class="line">						num[i] = a ; </span><br><span class="line">						time[i] = b ;</span><br><span class="line">						flag = <span class="number">0</span> ; <span class="comment">//成功找到廁所</span></span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span>(flag == <span class="number">1</span> ) <span class="comment">//表示還沒找到廁所，所以輸出 not enough </span></span><br><span class="line">				System.out.print(<span class="string">"  Not enough\n"</span>);</span><br><span class="line">			</span><br><span class="line">			System.out.print(<span class="string">"Number:"</span>); <span class="comment">//輸出廁所使用的編號</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123;</span><br><span class="line">				System.out.<span class="built_in">printf</span>(<span class="string">" %d"</span> , num[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">			</span><br><span class="line">			System.out.print(<span class="string">"Time:"</span>); <span class="comment">//輸出每個廁所的使用時間</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++) &#123;</span><br><span class="line">				System.out.<span class="built_in">printf</span>(<span class="string">" %d"</span> , time[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="教學範例"><a href="#教學範例" class="headerlink" title="教學範例"></a>教學範例</h2><h3 id="使用-R-plumber-可以檢的使用-R-創建-RESTFUL-API，plumber-識別-，以下提供簡單範例"><a href="#使用-R-plumber-可以檢的使用-R-創建-RESTFUL-API，plumber-識別-，以下提供簡單範例" class="headerlink" title="使用 R plumber 可以檢的使用 R 創建 RESTFUL API，plumber 識別 #*，以下提供簡單範例"></a>使用 R <code>plumber</code> 可以檢的使用 R 創建 RESTFUL API，plumber 識別 <code>#*</code>，以下提供簡單範例</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(plumber)</span><br><span class="line"></span><br><span class="line"><span class="comment">#* @method /url</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#* Echo provided text</span></span><br><span class="line"><span class="comment">#* @param text The text to be echoed in the response</span></span><br><span class="line"><span class="comment">#* @get /echo</span></span><br><span class="line"><span class="keyword">function</span>(text = <span class="string">""</span>) &#123;</span><br><span class="line">  list(</span><br><span class="line">    message_echo = paste(<span class="string">"The text is:"</span>, text)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="在-R-上面啟動-api-指令"><a href="#在-R-上面啟動-api-指令" class="headerlink" title="在 R 上面啟動 api 指令"></a>在 R 上面啟動 api 指令</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plumber::plumb(file=<span class="string">'./plumber.R'</span>)$run(port = <span class="number">5762</span>)</span><br></pre></td></tr></table></figure>
-
-<p>其中 port 可以忽略不打(則會隨機產生)，接下來用 curl 來試著呼叫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --data &quot;text&#x3D;hi_my_friend&quot; &quot;localhost:5762&#x2F;echo&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="如果要輸出-json-呢"><a href="#如果要輸出-json-呢" class="headerlink" title="如果要輸出 json 呢"></a>如果要輸出 json 呢</h3><p>這點 R 完全幫你做好，R 可以自動幫你轉成 json，但還是有少部分情況例外。<strong><font color="#dd0000">裡面完全不需要轉成 json，就放心地給他輸出吧！</font></strong><br><strong>只限定傳送一個參數並且是 json 檔案</strong></p>
-<h3 id="我想要輸入-json，但我卻輸入不進去"><a href="#我想要輸入-json，但我卻輸入不進去" class="headerlink" title="我想要輸入 json，但我卻輸入不進去.."></a>我想要輸入 json，但我卻輸入不進去..</h3><p>這點就比較有趣了，看下面的程式碼就能了解箇中奧妙</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#* parse JSON</span></span><br><span class="line"><span class="comment">#* @param req  the request object</span></span><br><span class="line"><span class="comment">#* @get /json</span></span><br><span class="line"><span class="comment">#* @post /json</span></span><br><span class="line">echo_json &lt;- <span class="keyword">function</span>(req)&#123;</span><br><span class="line">  print(req$postBody)</span><br><span class="line">  <span class="keyword">return</span>(req$postBody)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看到了嘛!? 我們必須在物件後使用 <code>$postBody</code>，就可以成功輸入 json</p>
-<h3 id="我遇到了一個問題，我不懂要怎麼把-json-post-給-api"><a href="#我遇到了一個問題，我不懂要怎麼把-json-post-給-api" class="headerlink" title="我遇到了一個問題，我不懂要怎麼把 json post 給 api"></a>我遇到了一個問題，我不懂要怎麼把 json post 給 api</h3><p>小問題，我已經試過了，早就狀況排除了~ <del>血與淚的過程</del></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &quot;localhost:8551&#x2F;url&quot; --header &quot;Content-type:application&#x2F;json&quot; -X POST -d @path&#x2F;file</span><br></pre></td></tr></table></figure>
-
-<h2 id="QUESTIONS-and-ERRORS-集合地"><a href="#QUESTIONS-and-ERRORS-集合地" class="headerlink" title="QUESTIONS and ERRORS 集合地"></a>QUESTIONS and ERRORS 集合地</h2><p>這裡有些作者已經經歷過的問題就放在這裡供大家參考怎麼解決或<del>放棄</del>。</p>
-<h3 id="QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？"><a href="#QUESTION-windows上傳遞參數的時候出現亂碼怎麼辦？" class="headerlink" title="QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？"></a>QUESTION: windows上傳遞參數的時候出現亂碼怎麼辦？</h3><p>改用 LINUX 平台是目前作者最好的解法。由於 Window 似乎在傳遞進來時編碼會遇到問題例如 <code>‘</code> 透過字串傳輸在 windows 上是亂碼，但在 Linux 不會，於是建議遇到此問題一律都使用 linux server 來解決。</p>
-<h2 id="寫一個-api-傳送許多參數"><a href="#寫一個-api-傳送許多參數" class="headerlink" title="寫一個 api 傳送許多參數"></a>寫一個 api 傳送許多參數</h2><p>有時候我們並不是只需要傳送一個參數，而是傳送多個參數時就必須這樣寫。</p>
-<p>如果參數後面的等於配上空字串表示預設為空，只有被傳回來有；那後面如果有值則代表如果 api 沒有傳此參數就已預設為主。<br><strong>注意，參數後面一律都必須搭配字串，api 傳送的都是字串格式</strong></p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">path_json &lt;- <span class="keyword">function</span>(data = <span class="string">""</span> , path_length = <span class="string">"20"</span> )&#123;</span><br><span class="line">  json_content &lt;- run_path(data , path_length )</span><br><span class="line">  <span class="keyword">return</span>(json_content)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實不得不說，要不是因為有上班的地方願意讓我磨練，不然我可能連 api 是甚麼都還需要等到未來 2,3 年後我才能夠熟悉並且知道這些事物，也很謝謝<strong>高鈺成學長</strong>在我有些遇到狀況時會給我些許提示，然後專案報告真的好趕阿QwQ，希望我能夠如期做完，那就是最完美的了！謝謝 <strong>Luft 學長</strong> 幫我很多忙，也謝謝 steam 基礎教育聯盟給我機會學習。</p>
-<h2 id="連結"><a href="#連結" class="headerlink" title="連結"></a>連結</h2><p>我在翻找資料的過程中，閱讀到一些對我非常有意義的資料。如下:</p>
-<p><a href="https://rviews.rstudio.com/2018/07/23/rest-apis-and-plumber/" target="_blank" rel="noopener">REST APIs and Plumber</a><br><a href="https://www.rplumber.io/articles/routing-and-input.html" target="_blank" rel="noopener">Routing &amp; Input</a><br><a href="https://stackoverflow.com/questions/51944328/sending-json-file-in-curl-and-receiving-it-in-r-using-plumber/51945300#51945300" target="_blank" rel="noopener">Sending json file in curl and receiving it in R using plumber</a><br><a href="https://stackoverflow.com/questions/7172784/how-do-i-post-json-data-with-curl" target="_blank" rel="noopener">How do I POST JSON data with cURL?</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>久違的寫 zerojudge 程式題目，zerojudge 是刷簡單題的好區，可以快速累積新手經驗值，可以讓自己程式變優秀的好地方(◍•ᴗ•◍)❤️。</p>
+<p>題外話：UVa 好難喔..，一個啟發式搜尋要讓我使用 range tree，我真的會哭喔 ಥ⌣ಥ。</p>
 
       
       <!-- reward -->
@@ -166,7 +153,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RESTAPI/" rel="tag">RESTAPI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zerojudge/" rel="tag">zerojudge</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%A6%E4%BD%9C%E9%A1%8C/" rel="tag">實作題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -177,19 +164,10 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/07/23/API/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            甚麼是 RESTAPI ?
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/07/20/blog/Emoticons/" class="article-nav-link">
+      <a href="/2021/01/13/NTUT_note/database7/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">大衞愛用的表情符號</div>
+        <div class="article-nav-title">資料庫管理 筆記 - 第七章 Databases in Applications</div>
       </a>
     
   </nav>
