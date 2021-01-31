@@ -11258,7 +11258,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1474C - Array Destruction (設計解題)</title>
+    <title>Codeforces 1474C - Array Destruction (設計解題、數學推理)</title>
     <url>/2021/01/28/Codeforces/Codeforces%201474C/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>有一個陣列，裡面只有正整數，要進行以下操作：</p>
@@ -11303,8 +11303,65 @@
         <category>Codeforces</category>
       </categories>
       <tags>
+        <tag>設計解題</tag>
         <tag>程式解題</tag>
         <tag>Codeforces</tag>
+        <tag>數學推理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1474D - Array Destruction (設計解題、數學推理)</title>
+    <url>/2021/01/31/Codeforces/Codeforces%201474D/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個遊戲規則，遊戲規則如下：<br>有 x 堆的石頭，每堆石頭都可以跟鄰近的石頭進行移除，移除方式為雙方各移除 y 顆石頭，移除數量必須小於石頭數量，最終要求為要讓所有堆的石頭全部數量歸零。</p>
+<p>特殊規則：可以有一次將兩堆石頭進行交換。</p>
+<p><a href="https://codeforces.com/contest/1474/problem/D" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>對於數字的邏輯推理</li>
+<li>快速找出題目的重點與其作答方向</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們可以先根據題目找出一些邏輯觀念：</p>
+<ul>
+<li>定義石頭堆為 \(a_i\)</li>
+<li>沒有移動石頭堆的情況下<ul>
+<li>如果 \( a_1 &gt; a_2 \)，那麼 \(a_1 \) 這堆石頭永遠不會歸零，因此就永遠無法完成題目的 “Yes”</li>
+<li>即使 \( a_1 &gt; a_2 \)，那也要移除到最後一堆石頭時剛好全部移除完畢，因此需要開一個陣列紀錄 \(a_{i-1} - a_{i-2} \) 的剩下數量，再跟我們的 \(a_i\) 進行移除比較；這裡我們透過一個陣列來維護他，陣列就稱為 <code>pre</code>。</li>
+<li>因此可以得出一個規則， 石頭堆中的每一個 \(pre[i-1] &lt; pre[i] \)，否則無法完成題目的 “Yes”，定義為<strong>向後消除規則</strong>；因為此規則紀錄的陣列就與前綴和近乎相同，只有在前綴和為 -1 時，後面全部都設為 -1，表示無法被成功移除，只要到最後一堆石頭完成時前綴和為 0 就會是 “Yes”</li>
+<li>可以再延伸出一個規則，題目沒有說移除的方向，因此可以從左邊移除也可以從右邊移除石頭</li>
+<li>即使 \( a_1 &lt; a_2 \)，那也要移除到最後一堆石頭時剛好全部移除完畢，因此需要開一個陣列紀錄 \(a_{i+1} - a_{i+2} \) 的剩下數量，再跟我們的 \(a_i\) 進行移除比較；這裡我們透過一個陣列來維護他，陣列就稱為 <code>suf</code>。</li>
+<li>因此可以得出一個規則， 石頭堆中的每一個 \(suf[i] &gt; suf[i+1] \)，否則無法完成題目的 “Yes”，定義為<strong>向前消除規則</strong>，陣列就稱為 <code>suf</code>；因為此規則紀錄的陣列就與後綴和近乎相同，只有在後綴和為 -1 時，前面全部都設為 -1，表示無法被成功移除，只要到第一堆石頭完成時後綴和為 0 就會是 “Yes”</li>
+<li><strong>向後消除規則</strong>或<strong>向前消除規則</strong>滿足其中一個條件即可，</li>
+</ul>
+</li>
+<li>有交換石頭堆的情況下<ul>
+<li>由於可以進行交換石頭，因此前面兩個規則就不適用，但可以透過他們擴展出一套新的規則，如果只是將某兩堆的石頭進行交換，可以發現一定會影響到 \(pre[i]\) and \(suf[i+1]\)</li>
+<li>再來我們可以發現在一個可以被全解的石頭堆測試範例中可以發現 \(pre[i] = suf[i+1]\)，那是因為<strong>移除</strong>本身沒有方向性，因此如果以 i 為分水嶺，i 前面的都用<strong>向後消除規則</strong>，i 後面的都用<strong>向前消除規則</strong>，會發現則最後一個移除無論是向後消除規則或向前消除規則都是相同的。</li>
+<li>因此 \(pre[i] = suf[i+1]\) 表示這裡是最後一次的移除，並且可以完全移除成功，如果不等於就表示把這裡當作最後一次的移除時，並沒有辦法完全移除成功。</li>
+<li>根據上面的規則，因為只有 \(pre[i]\) and \(suf[i+1]\) 會被更動到，因此我們先假設讓 \(a[i] \) 與 \(a[i+1]\) 交換，算出交換後的 \(pre[i]\) and \(suf[i+1]\)，再判斷他們是否相等即可。</li>
+<li>只要 \(pre[i-1]\) 為 -1 表示已經打破了<strong>向後消除規則</strong>，在 \(a_i\) 前面就已經有石頭堆不可以被消除 or \(suf[i+2]\) 為 -1 表示已經打破了<strong>向前消除規則</strong> 在 \(a_i\) 後面就已經有石頭堆不可以被消除；因此 \(pre[i] = -1\) or \(suf[i+1] = -1 \) 就表示在這邊交換也沒辦法完成題目規定的 “Yes”。</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://codeforces.com/blog/entry/86933" target="_blank" rel="noopener">Codeforces Round #696 Editorial - IgorI’s blog</a><br><a href="https://tomjobs.blog.csdn.net/article/details/112889868?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-2.control" target="_blank" rel="noopener">Codeforces-1474 D. Cleaning（前缀和） - tomjobs  </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題好難QQQ，我花了將近 3 天的時間才能理解懂，很懊惱自己的腦袋為甚麼不夠聰明沒辦法把這些思緒都想懂阿，希望我每周這樣不斷地對自己進行訓練能夠讓自己在生活日常中不斷地運用到，讓我在寫程式的過程中不斷地運用到，那我就沒有白費我現在每天這麼努力的練習自己的腦袋了。</p>
+<p>希望自己未來的腦袋能變好，這種設計解題都能夠順利解開</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 200020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f * 10 <span class="comment">//為解說中說明的 -1</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, num[MAXN];</span><br><span class="line"><span class="keyword">int</span> pre[MAXN], suf[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span></span>&#123; <span class="comment">//判斷是否可以解出</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(suf[i+<span class="number">1</span>] == pre[i]) <span class="comment">//表示不須交換就可以消除，把這裡的 i 讓他做後一次消除可以輸出 yes</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//成功輸出 yes</span></span><br><span class="line">        <span class="keyword">int</span> x = num[i+<span class="number">1</span>] - pre[i<span class="number">-1</span>], y = num[i] - suf[i+<span class="number">2</span>] ; </span><br><span class="line">        <span class="comment">// x = pre[i] y = suf[i+1]，讓 x,y 視為交換後的調整</span></span><br><span class="line">        <span class="keyword">if</span>(x &gt;= <span class="number">0</span> &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; x == y) </span><br><span class="line">        <span class="comment">// x,y 都要大於 0，表示假設這裡進行最後一次移除，可以嘗試判斷能否全部移除成功</span></span><br><span class="line">        <span class="comment">//如果 x,y 其中一個為負數表示被 INF 減去，</span></span><br><span class="line">        <span class="comment">//也表示這裡就算進行最後一次移除也沒辦法全部移除成功，</span></span><br><span class="line">        <span class="comment">//如果 pre 或 suf 為 INF 表示前面或後面已經有石頭沒辦法被消除，分析有對此進行詳細說明</span></span><br><span class="line">        <span class="comment">// x==y 表示答案相同，代表這裡為最後一次移除可以完全移除成功，因此可以輸出 "YES"</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//表示沒有辦法被完全移除成功，符合題目要求，因此輸出 "NO"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">        suf[n+<span class="number">1</span>] = <span class="number">0</span>; <span class="comment">//先將 suf[n+1] 為 0，才可以讓找後綴和不會抓到前筆資料</span></span><br><span class="line">        pre[<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//pre[0] 為 0，才不會讓前綴和抓到前筆資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//向前消除規則</span></span><br><span class="line">            <span class="keyword">if</span>(num[i] - pre[i<span class="number">-1</span>] &lt; <span class="number">0</span>) </span><br><span class="line">            <span class="comment">//為了防止 pre[i-1] = -1 時，num[i] - (-1) 會等於正數時的冏境，因此將 pre[i] 設為 INF</span></span><br><span class="line">                pre[i] = INF; <span class="comment">//為分析中所說的 -1，由於在等等程式撰寫方便，因此使用 INT</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                pre[i] = num[i] - pre[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt; <span class="number">0</span>; i--)&#123; <span class="comment">//向後消除規則</span></span><br><span class="line">            <span class="keyword">if</span>(num[i] - suf[i+<span class="number">1</span>] &lt; <span class="number">0</span>)</span><br><span class="line">                suf[i] = INF + MAXN; <span class="comment">//為分析中所說的 -1，由於在等等程式撰寫方便，因此使用 INT + MAXN</span></span><br><span class="line">                <span class="comment">//為了要讓 suf[i+1] == pre[i] 成立，且不讓 suf[i+1] == pre[i] == INF 時也成立，</span></span><br><span class="line">                <span class="comment">//因此讓 suf 在 INF 的時候再加 MAXN 來使在 INF 時 suf[i+1] != pre[i] </span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                suf[i] = num[i] - suf[i+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(solve())</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"YES\n"</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"NO\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>Codeforces</tag>
+        <tag>數學推理</tag>
       </tags>
   </entry>
 </search>
