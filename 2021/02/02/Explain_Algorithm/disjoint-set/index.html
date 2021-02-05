@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">886</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">3分鐘</span>
+            <span class="post-count">4分鐘</span>
         </span>
     </span>
 </div>
@@ -122,20 +122,27 @@ ga('send', 'pageview');
 <a id="more"></a>
 
 <h2 id="Disjoint-Set-原理"><a href="#Disjoint-Set-原理" class="headerlink" title="Disjoint Set 原理"></a>Disjoint Set 原理</h2><h3 id="建立初始-Disjoint-Set"><a href="#建立初始-Disjoint-Set" class="headerlink" title="建立初始 Disjoint Set"></a>建立初始 Disjoint Set</h3><p>由於一開始每個元素都是獨立的集合且也是自己集合中的<strong>代表元素</strong>，因此先寫一個迴圈讓每個元素都是集合中的<strong>代表元素</strong>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2000</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123;</span><br><span class="line">        tree[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2000</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123;</span><br><span class="line">        tree[i] = i;</span><br><span class="line">        cnt[i] = <span class="number">1</span>; <span class="comment">//cnt 為數量，也就是每一個集合的數量，一開始都是 1，因為只有自己。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="查詢"><a href="#查詢" class="headerlink" title="查詢"></a>查詢</h3><p>查詢是要查詢某個元素是在哪個集合中，因此我們只需要寫這樣即可。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tree[i] != i) <span class="comment">//如果 tree[i] 本身並不是集合中的代表元素，</span></span><br><span class="line">    <span class="comment">//表示這個集合中有其他元素，並且其他元素才是代表元素</span></span><br><span class="line">        <span class="keyword">return</span> tree[i] = find_root(tree[i]); <span class="comment">//遞迴，將 tree[i] 的元素在進行查詢，</span></span><br><span class="line">        <span class="comment">//並將代表元素設為現在的 tree[i]</span></span><br><span class="line">    <span class="keyword">return</span> tree[i]; <span class="comment">//回傳代表元素</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="合併"><a href="#合併" class="headerlink" title="合併"></a>合併</h3><p>合併較為簡單，只需要先<strong>查詢</strong> <code>tree[a],tree[b]</code> 這兩個的代表元素是否為一樣，如果不一樣就表示兩個為不同集合，讓 <code>tree[b]</code>代表元素與<code>tree[a]</code>相同即可，這樣之後在查詢中代表元素就會相同。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    rx = find_root(tree[a]); <span class="comment">//找出 find_root(tree[a]) 的代表元素</span></span><br><span class="line">    ry = find_root(tree[b]); <span class="comment">//找出 find_root(tree[b]) 的代表元素</span></span><br><span class="line">    <span class="keyword">if</span>(rx != ry) <span class="comment">//如果不一樣就合併</span></span><br><span class="line">        tree[ry] = rx; <span class="comment">//要合併的是代表元素，不是 tree[b]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>計算數量的陣列也要進行改變，因為這兩個集合被合併了，因此數量要進行更新，讓 <code>cnt[b]</code> 的值加給 <code>cnt[a]</code>， <code>cnt[b]</code> 之後再將他歸 0。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    rx = find_root(tree[a]); <span class="comment">//找出 find_root(tree[a]) 的代表元素</span></span><br><span class="line">    ry = find_root(tree[b]); <span class="comment">//找出 find_root(tree[b]) 的代表元素</span></span><br><span class="line">    <span class="keyword">if</span>(rx != ry) <span class="comment">//如果不一樣就合併</span></span><br><span class="line">        tree[ry] = rx; <span class="comment">//要合併的是代表元素，不是 tree[b]</span></span><br><span class="line">        cnt[rx] += cnt[ry]; <span class="comment">//將原本另一集合的數量加到這集合，因為他們合併了</span></span><br><span class="line">        cnt[ry] = <span class="number">0</span>;  <span class="comment">//由於合併，因此將原本獨立的集合數量歸 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="QUESTION-可能有些人會想問這樣真的就可以合併成功嗎？"><a href="#QUESTION-可能有些人會想問這樣真的就可以合併成功嗎？" class="headerlink" title="QUESTION: 可能有些人會想問這樣真的就可以合併成功嗎？"></a>QUESTION: 可能有些人會想問這樣真的就可以合併成功嗎？</h4><p>我知道大家好奇的原因，因為我也好奇過XD。</p>
 <p>可是我們稍微思考一下，由於我們是將 <code>tree[ry]</code> 的代表元素更換為 <code>tree[rx]</code> 的代表元素，因此在<strong>查詢到</strong> <code>tree[ry]</code>，就會發現 <code>tree[ry]</code>已經不是代表元素了，因此會再進行一次遞迴，就會查詢到 <code>tree[rx]</code>，發現他是代表元素，就開始不斷的進行 return。</p>
 <h4 id="QUESTION-可能還會有些人好奇那原本-tree-ry-的集合中其他元素不還是指向-tree-ry-嗎-沒關係嗎"><a href="#QUESTION-可能還會有些人好奇那原本-tree-ry-的集合中其他元素不還是指向-tree-ry-嗎-沒關係嗎" class="headerlink" title="QUESTION: 可能還會有些人好奇那原本 tree[ry] 的集合中其他元素不還是指向 tree[ry] 嗎?沒關係嗎?"></a>QUESTION: 可能還會有些人好奇那原本 <code>tree[ry]</code> 的集合中其他元素不還是指向 <code>tree[ry]</code> 嗎?沒關係嗎?</h4><p>沒關係的，在查詢中一樣會先查詢到 <code>tree[ry]</code> 但它並不是代表元素，因此會在遞迴查詢，就會查到 <code>tree[rx]</code>，之後再遞迴回傳時在讓當前的 <code>tree[i]</code>直接指向代表元素即可，加快效率。</p>
+<h3 id="count-計算數量"><a href="#count-計算數量" class="headerlink" title="count 計算數量"></a>count 計算數量</h3><p>disjoint set 常常會需要計算數量，這時我們前面使用的 cnt 陣列就派上用場了，用法很簡單，因為前面在合併的過程中都幫助我們處理好了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; cnt[find_root(x)] ; <span class="comment">// x 為要查詢的集合</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="QUESTION-這樣真的就會計算數量成功嗎-我們只有將兩個集合加入，但還會有點沒有被算到吧？"><a href="#QUESTION-這樣真的就會計算數量成功嗎-我們只有將兩個集合加入，但還會有點沒有被算到吧？" class="headerlink" title="QUESTION: 這樣真的就會計算數量成功嗎? 我們只有將兩個集合加入，但還會有點沒有被算到吧？"></a>QUESTION: 這樣真的就會計算數量成功嗎? 我們只有將兩個集合加入，但還會有點沒有被算到吧？</h4><p>會的，因為每一次的合併都會將別人的元素加入，最一開始的合併一定是 1+1，也就是兩個點的合併，只要一開始是正確的，後面就都會正確。</p>
+<p>不然就不叫程式了XD。</p>
 <h2 id="Disjoint-Set-應用"><a href="#Disjoint-Set-應用" class="headerlink" title="Disjoint Set 應用"></a>Disjoint Set 應用</h2><ul>
 <li><a href="https://theriseofdavid.github.io/2020/03/23/UVa/Uva11987/" target="_blank" rel="noopener">Uva11987 - Almost Union-Find (Disjoint Set)</a></li>
 <li><a href="https://theriseofdavid.github.io/2021/02/02/UVa/UVa599/" target="_blank" rel="noopener">UVa599 - The Forrest for the Trees(Disjoint Set)</a></li>
+<li><a href="https://theriseofdavid.github.io/2021/02/06/UVa/UVa11503/" target="_blank" rel="noopener">UVa11503 - Virtual Friends(Disjoint Set)</a></li>
 </ul>
 <h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://zh.wikipedia.org/wiki/%E5%B9%B6%E6%9F%A5%E9%9B%86" target="_blank" rel="noopener">併查集</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這是我在高中時期就學會的演算法之一，在高職的時候我是自己學的，在新北市政府的幫助之下讓我去版中上課，接觸到了許多優秀的人才以及優秀的老師(蝸牛老師)，老師在教演算法這塊特別優秀，教導的十分好懂，是我的演算法啟蒙老師之一，很謝謝老師的講解！讓我在快要忘記之餘強制複習，才讓他完全記錄在我的腦海之中。</p>
@@ -173,11 +180,11 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2021/02/02/UVa/UVa599/" class="article-nav-link">
+      <a href="/2021/02/02/UVa/UVa11991/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            UVa599 - The Forrest for the Trees(Disjoint Set)
+            UVa11991 - Easy Problem from Rujia Liu?(水題)
           
         </div>
       </a>
@@ -373,7 +380,7 @@ ga('send', 'pageview');
 <script>
   try {
     var typed = new Typed("#subtitle", {
-      strings: ['你必須很努力，才能看起來豪不費力', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
+      strings: ['現在的我，是樂觀的，我要不害怕每個挑戰，我不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的', '想要的都擁有，得不到的都釋懷'],
       startDelay: 0,
       typeSpeed: 200,
       loop: true,

@@ -9551,7 +9551,7 @@
 <p>只要我們一起努力，即使大衛沒有成為優秀的人，我們也會笑著說<strong>我們很棒吧</strong>，一同完成了這麼偉大的一件事情。</p>
 ]]></content>
       <categories>
-        <category>UVa</category>
+        <category>人生旅途</category>
       </categories>
       <tags>
         <tag>大學Life</tag>
@@ -11381,20 +11381,27 @@
 <a id="more"></a>
 
 <h2 id="Disjoint-Set-原理"><a href="#Disjoint-Set-原理" class="headerlink" title="Disjoint Set 原理"></a>Disjoint Set 原理</h2><h3 id="建立初始-Disjoint-Set"><a href="#建立初始-Disjoint-Set" class="headerlink" title="建立初始 Disjoint Set"></a>建立初始 Disjoint Set</h3><p>由於一開始每個元素都是獨立的集合且也是自己集合中的<strong>代表元素</strong>，因此先寫一個迴圈讓每個元素都是集合中的<strong>代表元素</strong>。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2000</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123;</span><br><span class="line">        tree[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2000</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123;</span><br><span class="line">        tree[i] = i;</span><br><span class="line">        cnt[i] = <span class="number">1</span>; <span class="comment">//cnt 為數量，也就是每一個集合的數量，一開始都是 1，因為只有自己。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="查詢"><a href="#查詢" class="headerlink" title="查詢"></a>查詢</h3><p>查詢是要查詢某個元素是在哪個集合中，因此我們只需要寫這樣即可。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tree[i] != i) <span class="comment">//如果 tree[i] 本身並不是集合中的代表元素，</span></span><br><span class="line">    <span class="comment">//表示這個集合中有其他元素，並且其他元素才是代表元素</span></span><br><span class="line">        <span class="keyword">return</span> tree[i] = find_root(tree[i]); <span class="comment">//遞迴，將 tree[i] 的元素在進行查詢，</span></span><br><span class="line">        <span class="comment">//並將代表元素設為現在的 tree[i]</span></span><br><span class="line">    <span class="keyword">return</span> tree[i]; <span class="comment">//回傳代表元素</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="合併"><a href="#合併" class="headerlink" title="合併"></a>合併</h3><p>合併較為簡單，只需要先<strong>查詢</strong> <code>tree[a],tree[b]</code> 這兩個的代表元素是否為一樣，如果不一樣就表示兩個為不同集合，讓 <code>tree[b]</code>代表元素與<code>tree[a]</code>相同即可，這樣之後在查詢中代表元素就會相同。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    rx = find_root(tree[a]); <span class="comment">//找出 find_root(tree[a]) 的代表元素</span></span><br><span class="line">    ry = find_root(tree[b]); <span class="comment">//找出 find_root(tree[b]) 的代表元素</span></span><br><span class="line">    <span class="keyword">if</span>(rx != ry) <span class="comment">//如果不一樣就合併</span></span><br><span class="line">        tree[ry] = rx; <span class="comment">//要合併的是代表元素，不是 tree[b]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>計算數量的陣列也要進行改變，因為這兩個集合被合併了，因此數量要進行更新，讓 <code>cnt[b]</code> 的值加給 <code>cnt[a]</code>， <code>cnt[b]</code> 之後再將他歸 0。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    rx = find_root(tree[a]); <span class="comment">//找出 find_root(tree[a]) 的代表元素</span></span><br><span class="line">    ry = find_root(tree[b]); <span class="comment">//找出 find_root(tree[b]) 的代表元素</span></span><br><span class="line">    <span class="keyword">if</span>(rx != ry) <span class="comment">//如果不一樣就合併</span></span><br><span class="line">        tree[ry] = rx; <span class="comment">//要合併的是代表元素，不是 tree[b]</span></span><br><span class="line">        cnt[rx] += cnt[ry]; <span class="comment">//將原本另一集合的數量加到這集合，因為他們合併了</span></span><br><span class="line">        cnt[ry] = <span class="number">0</span>;  <span class="comment">//由於合併，因此將原本獨立的集合數量歸 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="QUESTION-可能有些人會想問這樣真的就可以合併成功嗎？"><a href="#QUESTION-可能有些人會想問這樣真的就可以合併成功嗎？" class="headerlink" title="QUESTION: 可能有些人會想問這樣真的就可以合併成功嗎？"></a>QUESTION: 可能有些人會想問這樣真的就可以合併成功嗎？</h4><p>我知道大家好奇的原因，因為我也好奇過XD。</p>
 <p>可是我們稍微思考一下，由於我們是將 <code>tree[ry]</code> 的代表元素更換為 <code>tree[rx]</code> 的代表元素，因此在<strong>查詢到</strong> <code>tree[ry]</code>，就會發現 <code>tree[ry]</code>已經不是代表元素了，因此會再進行一次遞迴，就會查詢到 <code>tree[rx]</code>，發現他是代表元素，就開始不斷的進行 return。</p>
 <h4 id="QUESTION-可能還會有些人好奇那原本-tree-ry-的集合中其他元素不還是指向-tree-ry-嗎-沒關係嗎"><a href="#QUESTION-可能還會有些人好奇那原本-tree-ry-的集合中其他元素不還是指向-tree-ry-嗎-沒關係嗎" class="headerlink" title="QUESTION: 可能還會有些人好奇那原本 tree[ry] 的集合中其他元素不還是指向 tree[ry] 嗎?沒關係嗎?"></a>QUESTION: 可能還會有些人好奇那原本 <code>tree[ry]</code> 的集合中其他元素不還是指向 <code>tree[ry]</code> 嗎?沒關係嗎?</h4><p>沒關係的，在查詢中一樣會先查詢到 <code>tree[ry]</code> 但它並不是代表元素，因此會在遞迴查詢，就會查到 <code>tree[rx]</code>，之後再遞迴回傳時在讓當前的 <code>tree[i]</code>直接指向代表元素即可，加快效率。</p>
+<h3 id="count-計算數量"><a href="#count-計算數量" class="headerlink" title="count 計算數量"></a>count 計算數量</h3><p>disjoint set 常常會需要計算數量，這時我們前面使用的 cnt 陣列就派上用場了，用法很簡單，因為前面在合併的過程中都幫助我們處理好了。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; cnt[find_root(x)] ; <span class="comment">// x 為要查詢的集合</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="QUESTION-這樣真的就會計算數量成功嗎-我們只有將兩個集合加入，但還會有點沒有被算到吧？"><a href="#QUESTION-這樣真的就會計算數量成功嗎-我們只有將兩個集合加入，但還會有點沒有被算到吧？" class="headerlink" title="QUESTION: 這樣真的就會計算數量成功嗎? 我們只有將兩個集合加入，但還會有點沒有被算到吧？"></a>QUESTION: 這樣真的就會計算數量成功嗎? 我們只有將兩個集合加入，但還會有點沒有被算到吧？</h4><p>會的，因為每一次的合併都會將別人的元素加入，最一開始的合併一定是 1+1，也就是兩個點的合併，只要一開始是正確的，後面就都會正確。</p>
+<p>不然就不叫程式了XD。</p>
 <h2 id="Disjoint-Set-應用"><a href="#Disjoint-Set-應用" class="headerlink" title="Disjoint Set 應用"></a>Disjoint Set 應用</h2><ul>
 <li><a href="https://theriseofdavid.github.io/2020/03/23/UVa/Uva11987/" target="_blank" rel="noopener">Uva11987 - Almost Union-Find (Disjoint Set)</a></li>
 <li><a href="https://theriseofdavid.github.io/2021/02/02/UVa/UVa599/" target="_blank" rel="noopener">UVa599 - The Forrest for the Trees(Disjoint Set)</a></li>
+<li><a href="https://theriseofdavid.github.io/2021/02/06/UVa/UVa11503/" target="_blank" rel="noopener">UVa11503 - Virtual Friends(Disjoint Set)</a></li>
 </ul>
 <h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://zh.wikipedia.org/wiki/%E5%B9%B6%E6%9F%A5%E9%9B%86" target="_blank" rel="noopener">併查集</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這是我在高中時期就學會的演算法之一，在高職的時候我是自己學的，在新北市政府的幫助之下讓我去版中上課，接觸到了許多優秀的人才以及優秀的老師(蝸牛老師)，老師在教演算法這塊特別優秀，教導的十分好懂，是我的演算法啟蒙老師之一，很謝謝老師的講解！讓我在快要忘記之餘強制複習，才讓他完全記錄在我的腦海之中。</p>
@@ -11478,6 +11485,155 @@
         <tag>水題</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10507 - Waking up brain(BFS)</title>
+    <url>/2021/02/02/UVa/UVa10507/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>近代的研究指出如果要喚醒腦袋的區域時，必須要附近三塊的腦袋都是清醒的狀況才有辦法喚醒此區域，我們會給你已經清醒的區域，還有哪些區域是有連結的，想請問多久後才可以將腦袋中所有區域喚醒成功？</p>
+<p>P.S. 喚醒需要一年的時間，請輸出多久可以喚醒，如果沒辦法喚醒輸出 “THIS BRAIN NEVER WAKES UP”，可以就輸出 “WAKE UP IN, n, YEARS”, where n is the number of the years all the brain has taken to wake up</p>
+<p><a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1448" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>必須要看懂英文，這題對我來說英文有點難QQQ</li>
+<li>觀察出此題類似於 BFS，但都只跑一層</li>
+<li>哪些節點可以被喚醒再跑一次<strong>第二點</strong>。</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題與 BFS 比較不同的地方就是加入節點的要求是需要有鄰近 3 個區域被喚醒才可以被加入節點，為了要解決這個問題，我們開一個陣列叫做 area，每次讓喚醒的區域連結到還在睡著的區域，就讓被睡著的區域加一，如果加到 3 就加入節點，做下一次的 BFS。</p>
+<h3 id="QUESTION-那要怎麼找出是需要幾年可以把全部區域喚醒呢"><a href="#QUESTION-那要怎麼找出是需要幾年可以把全部區域喚醒呢" class="headerlink" title="QUESTION: 那要怎麼找出是需要幾年可以把全部區域喚醒呢"></a>QUESTION: 那要怎麼找出是需要幾年可以把全部區域喚醒呢</h3><p>這時候就需要遞迴來幫助我們了，我們 BFS 的 vector (定義 vA)是當前有被喚醒的區域，裡面的節點都成功去 link 每個未喚醒的節點後就 pop，那如果有節點在此時被喚醒我們則把她加入到新的 vector 中(定義 vB)，當 vA 全部完成後，如果 vB 有節點我們就進行下一次的 BFS，使用遞迴則是可以方便知道我們總共喚醒幾次。</p>
+<p>只需要將每一次的遞迴視為明年會被激活的區域即可。特別注意的是，一開始的區域不可以被 +1，因為那是已經醒來的區域，因此在進入遞迴時先將值設為 -1，這樣進入第一層遞迴時就會歸零。</p>
+<h3 id="QUESTION-但上面那個問題沒有解決怎麼知道全部的區域都被喚醒呢？"><a href="#QUESTION-但上面那個問題沒有解決怎麼知道全部的區域都被喚醒呢？" class="headerlink" title="QUESTION: 但上面那個問題沒有解決怎麼知道全部的區域都被喚醒呢？"></a>QUESTION: 但上面那個問題沒有解決怎麼知道全部的區域都被喚醒呢？</h3><p>我們一開始不是有一個陣列(area) 可以知道此區域有幾個喚醒的區域連結嗎？我們只需要寫一個迴圈查詢所有的節點是不是都有 3 個或 3 個以上的區域連結就可以檢查了！</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題其實不難，但蠻酷的，有一些很簡單的腦筋急轉彎需要去思考，遞迴裡面塞入一個 BFS，似乎有點類似於 IDDFS，但年代久遠我有點忘記了QQ，還需要在去複習一下，寫演算法很容易會忘記QQ，希望我的腦袋可以把這些思維都記錄下來並應用在生活上，這樣我就會是一個很不賴的人了！</p>
+<p>希望自己的大腦要能夠一直都醒來拉，不醒來會對周遭的人很麻煩，會麻煩到他們的。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<p>裡面為了讓程式碼更好寫，有做一些小手腳，在這邊會加上一些定義，供大家在閱讀時更好閱讀</p>
+<ul>
+<li><code>-INF</code> 已經有被掃描過的區域</li>
+<li><code>flag</code> 判斷有多少節點是喚醒的</li>
+<li><code>ca, cb</code> 輸入題目中的邊時要用到的字元</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 30</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f <span class="comment">//-INF 表示此節點已經被掃描過</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, cnt, flag;</span><br><span class="line"><span class="keyword">int</span> area[MAXN];</span><br><span class="line"><span class="built_in">string</span> temp;</span><br><span class="line"><span class="keyword">char</span> ca, cb;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN]; <span class="comment">//每一個邊，第一個維度是分類為 edge[i] 可以連接到哪些邊</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123; <span class="comment">//將所有的陣列清空，不被上次的測資干擾</span></span><br><span class="line">    <span class="built_in">memset</span>(area,<span class="number">0</span>,<span class="keyword">sizeof</span>(area)); <span class="comment">//清空所有的 area</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++) edge[i].clear(); <span class="comment">//清空所有的邊</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wake</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; record)</span></span>&#123; <span class="comment">// BFS遞迴，查詢喚醒次數跟讓上次被喚醒的區域再跟其他區域連結 </span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp2; <span class="comment">//這次經過連結後會被喚醒的區域先暫存的 vector</span></span><br><span class="line">    cnt++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: record)&#123; <span class="comment">//將上次被喚醒的區域去跟其他節點連結</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; (char)(it+'A') &lt;&lt; ' ';</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[it].size(); i++)&#123; <span class="comment">//每一個邊連結的其他邊</span></span><br><span class="line">            area[edge[it][i]]++; <span class="comment">//被連結的其他區域 +1，表示鄰近被喚醒的區域 +1</span></span><br><span class="line">            <span class="keyword">if</span>(area[edge[it][i]] &gt;= <span class="number">3</span>)&#123; <span class="comment">//如果大於 3，表示下次這個區域可以被喚醒</span></span><br><span class="line">                temp2.push_back(edge[it][i]); <span class="comment">//先放入暫存 vector</span></span><br><span class="line">                area[edge[it][i]] = -INF; <span class="comment">//此節點被放入 vector 了，因此設為 -INF</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">    <span class="keyword">if</span>(temp2.empty()) <span class="keyword">return</span> ; <span class="comment">//如果是空的就表示已經沒有區域被喚醒，沒辦法在跟其他區域連結</span></span><br><span class="line">    <span class="keyword">return</span> wake(temp2); <span class="comment">//還有區域被喚醒，因此進入下次的遞迴在跟其他區域連結</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; record; <span class="comment">//紀錄有被喚醒的區域</span></span><br><span class="line">        init(); <span class="comment">//初始化，清空</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; temp; <span class="comment">//輸入字串，為一開始有被喚醒的區域</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; temp.length(); i++)&#123; </span><br><span class="line">            record.push_back(temp[i] - <span class="string">'A'</span>); <span class="comment">//將被喚醒的區域加入 vector，等等 BFS</span></span><br><span class="line">            area[temp[i] - <span class="string">'A'</span>] = -INF; <span class="comment">//點被加入 vector，因此值設為 -INF</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m ; i++)&#123; <span class="comment">//輸入連結的邊</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; ca &gt;&gt; cb;</span><br><span class="line">            edge[ca - <span class="string">'A'</span>].push_back(cb - <span class="string">'A'</span>); <span class="comment">//hash 透過 ascii，A = 0, B = 1,...</span></span><br><span class="line">            edge[cb - <span class="string">'A'</span>].push_back(ca - <span class="string">'A'</span>); <span class="comment">//雙向連結，題目有說明是雙向邊</span></span><br><span class="line">        &#125;</span><br><span class="line">        cnt = <span class="number">-1</span>; flag = <span class="number">0</span>; <span class="comment">//cnt = -1，第一次的區域是已經醒來，所以不需要等待</span></span><br><span class="line">        <span class="comment">//flag 是要查詢哪些區域有被喚醒且已經被掃描過，如果有被喚醒就一定會被掃瞄，BFS 會做好這件事</span></span><br><span class="line">        wake(record);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123; <span class="comment">//查詢所有區域是否有被喚醒且已經被掃描過</span></span><br><span class="line">            <span class="keyword">if</span>(area[i] &lt; <span class="number">0</span>) flag++; <span class="comment">//有就 flag++</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; area[i] &lt;&lt; '\n';</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag == n) <span class="built_in">cout</span> &lt;&lt; <span class="string">"WAKE UP IN, "</span> &lt;&lt; cnt &lt;&lt; <span class="string">", YEARS\n"</span>;</span><br><span class="line">        <span class="comment">//表示有被喚醒且已經被掃描過區域等同題目給的所有區域也就是所有區域都被喚醒，因此可以輸出 cnt，代表只需要 cnt 年就可以將腦袋全部區域喚醒</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"THIS BRAIN NEVER WAKES UP\n"</span>; </span><br><span class="line">        <span class="comment">//表示所有區域並沒有都被喚醒且已經被掃描過，有些區域沒有被喚醒，因此輸入永遠沒辦法讓大腦醒來 QQ。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>Disjoint Set 並查集</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11503 - Virtual Friends(Disjoint Set)</title>
+    <url>/2021/02/06/UVa/UVa11503/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>大家都喜歡線上交友，線上交友成為了一種大家的習慣或嗜好，我們每行會給你兩個名子，那兩個人是朋友關係，因為線上交友的關係，因此那兩人的朋友們也都會互相成為朋友。</p>
+<p>每次新增朋友關係後，請試者輸出那群朋友的數量</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=2498" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解 Disjoint Set</li>
+<li><a href="https://theriseofdavid.github.io/2021/02/02/Explain_Algorithm/disjoint-set/" target="_blank" rel="noopener">演算法知識 - Disjoint Set 並查集</a></li>
+</ul>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>很明顯的並查集，我們只需要寫好並查集的模板，接著將字串進行 hash，就可以得到答案。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>最近這幾天心情很煩燥，很多事情都安不下心，我還是一個小孩，還不願成長為一個大人，好多事情我都想逃避，但是世界不會讓我逃避、都市不會讓我逃避。</p>
+<p>希望最近能讓我好點。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<p>裡面為了讓程式碼更好寫，有做一些小手腳，在這邊會加上一些定義，供大家在閱讀時更好閱讀</p>
+<ul>
+<li><code>num</code> 為 disjoint set 判斷 <code>num[index]</code> 在哪個集合內</li>
+<li><code>cnt</code> 為 disjoint set 判斷 <code>cnt[index]</code> 此代表元素的集合內有多少元素有多少元素</li>
+<li><code>hs</code> 用來 hash 值，來讓字串進行加密壓縮</li>
+<li><code>record</code> 字典，用來紀錄字串 hash 成 int 的值</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, f, hs;</span><br><span class="line"><span class="keyword">int</span> num[MAXN], cnt[MAXN]; </span><br><span class="line"><span class="built_in">string</span> n1, n2;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; record;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123; <span class="comment">//disjoint set 查詢</span></span><br><span class="line">    <span class="keyword">if</span>(num[i] != i) <span class="keyword">return</span> num[i] = find_root(num[i]);</span><br><span class="line">    <span class="keyword">return</span> num[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123; <span class="comment">//最一開始先幫所有陣列初始化</span></span><br><span class="line">        num[i] = i; <span class="comment">//重設 disjoint set</span></span><br><span class="line">        cnt[i] = <span class="number">1</span>; <span class="comment">//重設 disjoint set</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; f;</span><br><span class="line">        hs = <span class="number">0</span>; record.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; f; i++)&#123; <span class="comment">//讓上次測資不干擾這次測資</span></span><br><span class="line">            num[i] = i;  <span class="comment">//重設 disjoint set</span></span><br><span class="line">            cnt[i] = <span class="number">1</span>;  <span class="comment">//重設 disjoint set</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; f; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; n1 &gt;&gt; n2;</span><br><span class="line">            <span class="comment">//壓縮字串為 int，如果字典沒有這個字串那就給他從未用過的 hash 值</span></span><br><span class="line">            <span class="keyword">if</span>(!record.count(n1)) record[n1] = hs++; </span><br><span class="line">            <span class="keyword">if</span>(!record.count(n2)) record[n2] = hs++;</span><br><span class="line">            <span class="keyword">int</span> rx, ry;</span><br><span class="line">            <span class="comment">//為 disjoint set 的合併，開始</span></span><br><span class="line">            rx = find_root(num[record[n1]]); </span><br><span class="line">            ry = find_root(num[record[n2]]); </span><br><span class="line">            <span class="keyword">if</span>(rx != ry)&#123; </span><br><span class="line">                num[ry] = num[rx];</span><br><span class="line">                cnt[rx] += cnt[ry];</span><br><span class="line">                cnt[ry] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//為 disjoint set 的合併，結束</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; cnt[rx] &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出集合內的元素數量</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>Disjoint Set 並查集</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11991 - Easy Problem from Rujia Liu?(水題)</title>
+    <url>/2021/02/02/UVa/UVa11991/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>Rujia Liu(華人大神出了許多演算法競賽的書，被稱之為聖經) 出了一份題目希望讓大家可以一起來為了演算法競賽而努力，題目內容如下：</p>
+<p>給你一組陣列，進行查詢，查詢的模式是在 v 此數字出現第 k 次的位置是在陣列中的哪個 index</p>
+<p><a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3142" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="觀念重點"><a href="#觀念重點" class="headerlink" title="觀念重點"></a>觀念重點</h2><ul>
+<li>能夠快速把此題寫完</li>
+<li>清空陣列，讓每筆測資不受干擾</li>
+</ul>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>明顯可以看出此題是水體，鼓勵各位新手來進入這個演算法競賽中(<del>地獄</del>)www，這題主要可以用 vector 去解，可以將 vector 開到題目測試資料極限最大值，再將每個數字的 index 不斷存入屬於那個數字的 vector，如果要查詢的 size 比當前的 vector size 大就表示一定沒辦法查詢，輸出 “0”，不然就輸出 <code>num[v][k-1]</code>，vector 的 index 是從 0 開始。</p>
+<p>上面講的是基本作法，但有一個地方需要注意</p>
+<p>需要特別注意的是我們的數字最大可以來到 \(10^9\)，因此不可以直接用 <code>vector[(10^9)]</code>，如果使用的話會導致 TLE，需要在一個 unordered_map 來進行 hash，由於數字陣列最大只會來到 \(10^5\)，因此讓先讀到的數字先放入 unordered_map，假如沒有被記錄在 unordered_map 表示這個數字還沒有被 hash，現在給他 hash，之後如果查詢此值就給他 hash 過的數值，以此為標準來找出 <code>num[v][k-1]</code> 的值，注意這裡的 <code>num[v][k-1]</code> 是 <code>num[unordered_map[v]][k-1]</code></p>
+<p>map 在數量大於 300 時，速度會開始變慢，如果已知需要紀錄的數量大於 300 時使用 unordered_map。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>原本我一開始這題還想要開一個二維陣列去寫，第一個維度是這個數字(定義 x)，第二個維度是出現地次數(定義為 y)，值為題目陣列的 index，但發現這樣很難寫，而且很麻煩XDD，所以後來就改使用 vector 去寫，非常方便又好用阿XD。</p>
+<p>題外話：現在在寫 UVA 時 judge 壞掉了，好難過QQQQ。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, k, v, temp; </span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; num[MAXN]; <span class="comment">//我們用來分類的陣列，第一個維度是每一個數字的分類</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; record; <span class="comment">//用來記錄 hash，陣列的 int 值會 hash 變成低於 MAXN 的值，才可以讓 num vector 成功存入</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= MAXN; i++) num[i].clear();</span><br><span class="line">        <span class="comment">//一定要把之前的全部查詢都清除，不然會讓上筆測資跟這次的干擾；</span></span><br><span class="line">        <span class="comment">//一定要是 MAXN，題目的數字是 0 &lt; x &lt; MAX</span></span><br><span class="line">        cnt = <span class="number">0</span>; record.clear(); <span class="comment">//cnt 是 hash 的值，如果 record 沒有紀錄此數字就讓 cnt 表示這值，</span></span><br><span class="line">        <span class="comment">//進行 hash 後就不會有浪費 num vector 的問題。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp;</span><br><span class="line">            <span class="keyword">if</span>(!record.count(temp)) record[temp] = cnt++; <span class="comment">//如果 record 沒有 hash 過現在這個數值，現在進行 hash，然後讓 cnt 的值再加一。</span></span><br><span class="line">            num[record[temp]].push_back(i); <span class="comment">//將要查詢的數字先轉成 hash 過的值，在用其 hash 值的 num 找出 index。</span></span><br><span class="line">            <span class="comment">//並且透過第二個維度來表示第幾個出現，一開始第一個出現的會是零</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; <span class="comment">//查詢 query</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; k &gt;&gt; v;</span><br><span class="line">            <span class="keyword">if</span>(num[record[v]].size() &lt; k ) <span class="built_in">cout</span> &lt;&lt; <span class="string">"0\n"</span>; <span class="comment">//如果 k 比 num[record[v]](hash 值) size 小，表示查詢不到輸出 0</span></span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; num[record[v]][k<span class="number">-1</span>] &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出 index</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>Disjoint Set 並查集</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人生心得 2021年02月06日</title>
+    <url>/2021/02/06/life_experence/experence20210206/</url>
+    <content><![CDATA[<h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><blockquote>
+<p>覺得最近得自己又開始不安穩了，不安感又開始隱隱作亂，我好怕失敗，我都在努力，能不能。</p>
+<p>能不能讓我一定會成功，讓我安心。<br>我不是壞人，我沒有錯，我不應該受到這種折磨。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="演算法的挫敗"><a href="#演算法的挫敗" class="headerlink" title="演算法的挫敗"></a>演算法的挫敗</h2><p>因為我高中是寫演算法的，但是我演算法沒有寫得比台大頂尖好，但演算法路很小，通常非頂尖就不會有工作。</p>
+<p>但是我喜歡演算法，所以我現在還繼續努力，只是遇到太多的挫折就會很受傷，有時候是覺得自己的腦袋不聰明、有時候是別人常會看不起你，認為自己高中沒能力就不要再繼續往這條路走；我很頑固，我不願意承認，到現在都還是不認輸，導致我現在沒人看好，自己也看不好我自己，但我卻還是往這方向走。</p>
+<p>希望自己組隊的演算法可以在今年九月打到銀獎，讓現在的我與高中的我可以不愧對自己，能夠告訴自己，自己是做得到的，我才沒有那麼沒用。<br>即使那時候的我嚎啕大哭，我也不覺得丟臉。</p>
+<h2 id="自動投資"><a href="#自動投資" class="headerlink" title="自動投資"></a>自動投資</h2><p>雞蛋不應該都放在同個籃子哩，所以我不讓自己的人生輸在演算法上，接了兩個案子，一個是自動投資，但現在也沒有到很棒的起步，由於現在還在摸索中，還沒有辦法穩上腳步。</p>
+<p>很怕自己沒有辦法寫成功，怕賠了教授的錢，更怕的是毫無起步，浪費了時間。</p>
+<p>嘴巴說我是大學生，我不怕失敗，那是騙人的，我很害怕失敗，我超怕我自己做錯了一切，我沒有人帶，一切都憑著自信與厚臉皮來讓自己表現出我的能力，但其實每一次的我都在緊張，我都在畏懼。</p>
+<p>希望自己這次能夠做好這件事，但目前看起來也還有很多要學習，希望學習不會使我茫然。</p>
+<h2 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h2><p>有一個加州大學柏克萊分校的教授很欣賞我，台灣人。</p>
+<p>他找我進入他的公司，我加入了，但問題又來了，雖然我有滿腔的熱血，但是公司認為我是菜鳥，因此我負責的東西比較不是公司主要的，每次我報告都沒有認真聽，久而久之開始累了，對工作也趕到疲憊。</p>
+<p>由於我也不太確定自己的薪水，不清楚自己在公司的價值是如何，我常認為自己就像免洗筷一樣，用不到就丟了吧！</p>
+<p>希望自己可以找到滿意的薪水，找到工作的安全感，接著努力工作，等待獎賞。</p>
+<h2 id="大學"><a href="#大學" class="headerlink" title="大學"></a>大學</h2><p>由於上述的各種原因，大二就有種庸庸碌碌、汲汲營營的感覺，沒有明確的目標再行動，沒有系統化的成<br>長，成績也沒有變高，甚至還掉落，讓人的信心越來越低。</p>
+<p>加上自己沒有一個女朋友可以聽自己得內心，我也不擅長將自己的內心打開，只能打在網路上，無論有誰看到我都不在意，因為他們不認識我，不會在背後嘲笑我。</p>
+<p>我可能需要一個女朋友來讓我安心，讓她告訴我，我永遠是對的，你的失敗我都會包容，你不會失敗，因為你有我這個女朋友。<br>太夢想了對吧，不過我就是個理想主義者，每次都帶著期待又害怕的心情去面對每件事情，然後開心或者失望的歸來。</p>
+<h2 id="內心"><a href="#內心" class="headerlink" title="內心"></a>內心</h2><p>我覺得自己最近成長了很多，可能是青少年(還沒有滿 20 歲)或小大人的轉折點吧，原本的我很悲觀，因為高中時期的我面對的問題都是可以憑者<strong>我的努力</strong>去完成，去改變它；但現在的我發現，我想要解決的問題都不是只要我<strong>努力</strong>，就可以解決的。</p>
+<p>於是我拚了命的想要讓自己不斷成功，但換來的是痛苦和難過，在這麼多的情況下，漸漸的我也調適了自己，強制了自己演化。</p>
+<p>在跟揮霖老師講到自動投資的專案時，老師有說樂觀是很重要的一件事在；ICPC 2020 比賽時，陳風平學長也說樂觀很重要，這是有研究證明的，當時的我不懂此道理，一心的想要反駁，認為悲觀會使我努力，我努力就能解決問題。</p>
+<p>現在的我知道這是錯的，很多問題都不是靠著努力就能解決，有時候能夠成功的點並不是努力，而是機運，經歷過多次失敗後，我終於知道自己需要的是堅強與樂觀，樂於接受事實，並在對問題進行改進，讓下次更好或是認賠殺出，我從來沒有認賠殺出過，我也很討厭這個選項，希望我這輩子都不需要使用這個選項。<br>我想要最完美的過程，最完美的結局，我知道不可能達成，早就失敗了，就像急診室醫生一般，明知道這位患者一定不能被救活，但還是會想要拚了命的救活。醫生想要的不是奇蹟，而是不願意在眼前目送著生命的逝去。</p>
+<p>現在的我，是樂觀的，我要不害怕每個挑戰，我不需要面子，我需要的是貨真價值的能力。<br>希望我能夠做得到。</p>
+]]></content>
+      <categories>
+        <category>人生旅途</category>
+      </categories>
+      <tags>
+        <tag>大學Life</tag>
+        <tag>人生旅途</tag>
       </tags>
   </entry>
 </search>
