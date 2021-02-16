@@ -6905,7 +6905,7 @@
 <p>d[2] 則記錄當前最長的 LIS 此數值的前一個值，表示 d[2] 如果要往前回朔就是找此值。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">t[<span class="number">2</span>] = <span class="number">2</span> ; </span><br><span class="line">d[<span class="number">2</span>] = t[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
-<h3 id="Step-3-i-3-放入-20"><a href="#Step-3-i-3-放入-20" class="headerlink" title="Step 3 : i = 3 , 放入 20"></a>Step 3 : i = 3 , 放入 20</h3><p>由於 20 沒有比 30 大，於是我們必須要使用<strong>二分搜尋</strong>法，找出 2 在 t 這個陣列中適合放入哪個位置，由於二分搜尋的時間複雜度是 \(O(\log n)\)，因此再根據此陣列的長度 \(* n \)，就會符合此演算法的時間複雜度 \(O(n \log \n)\)。</p>
+<h3 id="Step-3-i-3-放入-20"><a href="#Step-3-i-3-放入-20" class="headerlink" title="Step 3 : i = 3 , 放入 20"></a>Step 3 : i = 3 , 放入 20</h3><p>由於 20 沒有比 30 大，於是我們必須要使用<strong>二分搜尋</strong>法，找出 2 在 t 這個陣列中適合放入哪個位置，由於二分搜尋的時間複雜度是 \(O(\log n)\)，因此再根據此陣列的長度 \(* n \)，就會符合此演算法的時間複雜度 \(O(n \log \ n)\)。</p>
 <p>我們找到 t[2] = 3，所以我們把 t[2] 的值改成 2，為甚麼要這樣做呢？很簡單，因為如果 t[] 的數值越小代表之後可以放進去的數值會<strong>有可能</strong>比現在的數值還更多機會擴增 LIS，假如下一個是 25，那如果這邊沒有先將數值改成 20，25 就沒辦法擴增 LIS 了，因此才要做改值。</p>
 <p>這裡為甚麼 <code>d[3] = t[1]</code> 呢？因為我們將 t[2] 放入當前的值，因此在現在的 t[1] 則是我們現在 d[3] 要記錄的前一個 LIS 數值，之後從 d[3] 不斷回推時可以發現只要回推 2 次就會回到 d[0]。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">t[<span class="number">2</span>] = <span class="number">3</span> ;</span><br><span class="line">d[<span class="number">3</span>] = t[<span class="number">1</span>] ;</span><br></pre></td></tr></table></figure>
@@ -6951,8 +6951,11 @@
 </tbody></table>
 <p>OK，沒錯，LIS 正確無誤。</p>
 <h3 id="OK-現在問題被我們解決成是-Binary-Search-了，那我們就來做吧！"><a href="#OK-現在問題被我們解決成是-Binary-Search-了，那我們就來做吧！" class="headerlink" title="OK, 現在問題被我們解決成是 Binary Search 了，那我們就來做吧！"></a>OK, 現在問題被我們解決成是 Binary Search 了，那我們就來做吧！</h3><p>關於 <a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">Binary Search 的部分就先去看大衞的筆記</a>即可。</p>
-<h2 id="LIS-實作與說明"><a href="#LIS-實作與說明" class="headerlink" title="LIS 實作與說明"></a>LIS 實作與說明</h2><p>在程式碼進行說明，相信會比較好理解些。</p>
+<h2 id="LIS-實作與說明"><a href="#LIS-實作與說明" class="headerlink" title="LIS 實作與說明"></a>LIS 實作與說明</h2><h3 id="版本一-學習版"><a href="#版本一-學習版" class="headerlink" title="版本一 學習版"></a>版本一 學習版</h3><p>在程式碼進行說明，相信會比較好理解些。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> b[N] , t[N] , d[N] , n ; </span><br><span class="line"><span class="comment">// b 是原本的數列</span></span><br><span class="line"><span class="comment">// t 則是當前 LIS 的數列</span></span><br><span class="line"><span class="comment">// d 則是在 LIS 中此數值的前一個數值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123; <span class="comment">//二分搜尋法</span></span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span> , cur ; <span class="comment">//LIS 最小長度為 1，因此 len = 1</span></span><br><span class="line">    <span class="comment">//cur 則是二分搜尋中找到的位置</span></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ; <span class="comment">//初始化 LIS 需要用到的兩個陣列</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123; <span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[t[len]] )&#123; <span class="comment">//如果此數值比 LIS 中最長的數值還大時就直接增長</span></span><br><span class="line">            d[i] = t[len] ; <span class="comment">//d[i] 就則是在 LIS 中此數值的前一個數值</span></span><br><span class="line">            t[++len] = i ; <span class="comment">//增長 t 的長度</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// 表示目前的數值可以替換此 LIS 中某個數值</span></span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);  <span class="comment">// 二分搜尋找出此位置</span></span><br><span class="line">            t[cur] = i ; <span class="comment">//將原本 LIS 的 cur 值替換成 i </span></span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>] ; <span class="comment">// 由於我們將 i 放入 t[cur]，所以我們的 d 就是找 t[cur-1]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ; <span class="comment">//回傳最長 LIS</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="版本二-實踐版"><a href="#版本二-實踐版" class="headerlink" title="版本二 實踐版"></a>版本二 實踐版</h3><p>此版比較好實踐，但並沒有辦法了解深刻意思，建議大家先學習舊版的再看新版的。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 5020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="keyword">int</span> T, n, len = <span class="number">0</span>, cur;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; b; <span class="comment">//用來產生 LIS 長度</span></span><br><span class="line">    b.push_back(a[<span class="number">0</span>]); <span class="comment">//先放入一個數值，以避免 b.back() 找不到值</span></span><br><span class="line">    <span class="keyword">int</span> temp; <span class="comment">//紀錄二分搜尋後找到的位置</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &gt; b.back())&#123; <span class="comment">//如果現在這個數字大於此數列中最大的數字</span></span><br><span class="line">            b.push_back(a[i]); <span class="comment">//LIS push back</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            temp = upper_bound(b.begin(), b.end(), a[i]) - b.begin(); </span><br><span class="line">            <span class="comment">//二分搜尋，找到他適合的位置，前面數字比她小或相等，後面數字大</span></span><br><span class="line">            b.insert(b.begin()+temp , a[i]); <span class="comment">//插入數值在此位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> b.size(); <span class="comment">//輸出最長 LIS 長度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="LCS-應用"><a href="#LCS-應用" class="headerlink" title="LCS 應用"></a>LCS 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
 <ul>
@@ -11637,7 +11640,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1477A - Nezzar and Board (設計解題、數學推理)</title>
+    <title>Codeforces 1477A - Nezzar and Board (設計解題、數學推理、math theorm)</title>
     <url>/2021/02/10/Codeforces/Codeforces%201477A/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一個黑板上有許多數字，你可以透過 \(z = 2x-y\)，其中 x,y 為黑板上的數字且可以相同，你可以將 z 在寫到黑板上，並且 x,y 不移除，試問能否用黑板的數字求出 k？</p>
@@ -11703,6 +11706,7 @@
         <category>Codeforces</category>
       </categories>
       <tags>
+        <tag>math theorm</tag>
         <tag>設計解題</tag>
         <tag>程式解題</tag>
         <tag>Codeforces</tag>
@@ -12134,6 +12138,135 @@
         <tag>人生旅途</tag>
         <tag>電影心得</tag>
         <tag>戰鬥類電影心得</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1480D2 - Painting the Array II (設計解題、數學推理)</title>
+    <url>/2021/02/16/Codeforces/Codeforces%201480D2/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給出一個陣列，我們可以把它放到另外兩個陣列 (A,B)，A,B 這兩個陣列計算元素是這樣計算的：</p>
+<ul>
+<li>陣列中如果周遭都是相同的數值就可以表示為一個元素，如 \((3,3,3) \) 就算一個、\((1,2,3)\) 就算是三個。</li>
+<li>順序不可以交換，必須是一開始陣列的順序，透過給予 A or B 來讓 A and B 這兩個陣列元素最小，求這兩個 A,B 全部元素的數量</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>跳脫思考，不將重心思考放在如何把數字給這兩個陣列</li>
+<li>思考放在如何讓重複的數字做到最大合併</li>
+</ul>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>CF 的設計解題都是好題阿，往往都能啟發出我的好想法，或是透過他人的好想法來進行學習，真的有趣，需要多練習。</p>
+<p>首先我們先將題目一開始的陣列進行壓縮，相同的重複數值合併成一個，定義此陣列 \(num\)</p>
+<p>這題最好的方式就是將重心放在如何將所有相同的數字都放在一起，為了方便說明，我們一樣假設我們有兩個陣列 (A,B)，而他們陣列中最後的元素為 \(x,y\)，我們可以進行假設</p>
+<ul>
+<li>如果 \(num = x \ or \ num = y\)，這種情況當下不會多產生一個新元素</li>
+<li>如果 \(num != x \ or \ num != y\)，那勢必會增加一個陣列新元素嗎？ <ul>
+<li>如果這個數字在上次合併前沒有出現過，那一定會增加新元素</li>
+<li>如果有出現過，則不會</li>
+</ul>
+</li>
+</ul>
+<p>合併是甚麼意思，看下面舉例。</p>
+<h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h3><p>我們假設題目陣列為 \(1,2,3,1,2,2\)，壓縮後的 num 陣列為 \(1,2,3,1,2\)</p>
+<p>我們一開始定義 A,B 兩個陣列，會依照順序給值，因此在 num 陣列給 \(1,2,3\) 應該要是這樣</p>
+<ul>
+<li>\(A = 1,3\)</li>
+<li>\(B = 2\)</li>
+</ul>
+<p>接下來下一個 num 值是 1，這個時候問題來了。<br>我們其實可以做點操作，假如我們把 A 陣列的 3，給到 B 是不是就可以讓 num 的 1 放入 A 達到不產生元素的效果？對，沒問題，因此 A,B 陣列變了</p>
+<ul>
+<li>\(A = 1\)</li>
+<li>\(B = 2,3\)</li>
+</ul>
+<p>此時 num 陣列中的素質為 2，我們還可以合併嗎？不行<br>為甚麼不能合併呢，因為我們前面已經進行了一次合併，num \(1,2,3,1\) 這邊我們已經進行了合併，我們不可以破壞上次的合併，否則會破壞題目陣列的順序姓，因此這邊勢必要加一元素。</p>
+<p>但我們可以保留 A 的 1 與 B 的 3，這兩個可以被合併，因為他們是陣列最尾端，與他們合併並不會破壞其陣列順序姓。</p>
+<ul>
+<li>一個是因為進行合併而使得 A 陣列中的元素還是 1</li>
+<li>另一個則是題目陣列中當前倒數第一個的數值</li>
+</ul>
+<p>透過此方式就能解出此題，用 map 紀錄哪些數字未合併但已被加入 A,B 陣列，如果下個數字是有在未合併中的數字時那就進行合併，如果還是一個未合併數字就讓答案加一。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://blog.csdn.net/qq_46047971/article/details/113756394" target="_blank" rel="noopener">D2. Painting the Array II -  准准准准准菜鸡</a><br><a href="https://codeforces.com/blog/liouzhou_101" target="_blank" rel="noopener">Editorial of Codeforces Round #700 - liouzhou_101’s blog </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題要是沒有<strong>准准准准准菜鸡</strong>的大力解說，我一定沒有辦法那麼快就想出這題，透過他在網路上的詳細解說讓我快速地學會此題，我要非常謝謝他！</p>
+<p>希望我自己在解設計解題時都可以想到這些想法，那我在現實生活中一定會比這些不會寫 cf 的人更聰明、更加優秀。</p>
+<p>希望大家都能夠快速理解，那是我的榮幸。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, temp;</span><br><span class="line"><span class="keyword">int</span> a[MAXN]; <span class="comment">//原本題目陣列</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; num; <span class="comment">//壓縮的題目陣列</span></span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; mp; <span class="comment">//紀錄這些還沒合併的數字</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; a[i]; <span class="comment">//輸入資料</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123; <span class="comment">//壓縮陣列</span></span><br><span class="line">        <span class="keyword">if</span>(a[i] == a[i<span class="number">-1</span>]) temp = a[i]; <span class="comment">//如果等於上次的，那就表示這邊可以再進行壓縮</span></span><br><span class="line">        <span class="keyword">else</span> num.push_back(a[i<span class="number">-1</span>]); <span class="comment">//不同了，所以放值</span></span><br><span class="line">    &#125;</span><br><span class="line">    num.push_back(a[n<span class="number">-1</span>]); <span class="comment">//最後的值一定要被加入，因為 for 沒有提到</span></span><br><span class="line">    <span class="comment">//for(int i = 0; i &lt; num.size(); i++) cout &lt;&lt; num[i] &lt;&lt; ' ';</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.size() ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(mp[num[i]] == <span class="number">0</span>)&#123; <span class="comment">//又一個數字加入未合併數字中</span></span><br><span class="line">            mp[num[i]] = <span class="number">1</span>; <span class="comment">//標示被加入</span></span><br><span class="line">            ans++; <span class="comment">//答案 +1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            mp.clear(); <span class="comment">//合併了，因此要記錄新的合併</span></span><br><span class="line">            mp[num[i]] = <span class="number">1</span>; <span class="comment">//合併的數字</span></span><br><span class="line">            mp[num[i<span class="number">-1</span>]] = <span class="number">1</span>; <span class="comment">//原本當前題目壓縮陣列中最後一個元素</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>Codeforces</tag>
+        <tag>數學推理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11242 - Tour de France(水題)</title>
+    <url>/2021/02/16/UVa/UVa11242/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>一個競速腳踏車由兩個齒輪與一條鏈子組成，鏈子則透過許多鏈輪組成，給你一些齒輪，並告訴妳這些齒輪的輪齒有多少，請幫忙選出兩個齒輪 (n/m)，n 是後輪、m 是前輪，定義為速率 \(d\)，要你找出兩個最大速率相除最大的數字。</p>
+<p>最大速率有一些特別規定，如果有三種速度分別為 \(d_1, d_2 , d_3\)，排序為 \(d_1 &lt; d_2 &lt; d_3\)，那我們就不能拿 \(d_1 , d_2\) 來算最大速率，只能拿 \(d_1 \ and \ d_2 \) or \(d_2 \ and \ d_3 \) 進行相除。</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=2183" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>學會理解英文會話題目</li>
+<li>能看出此題如何運作</li>
+</ul>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>其實這題不難，我們只要將全部的組合都嘗試一遍進行排序，找出相鄰的速率相除後的數字最大輸出即可。</p>
+<p>需要注意的是 c++ <code>sort</code> 是由小到大，這點要特別注意。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://gsourcecode.wordpress.com/2012/01/31/uva-11242/" target="_blank" rel="noopener">11242 – Tour de France - GSOURCECODE </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>…，這題我寫了兩小時，完全思考錯 debug 方向，還以為是 cin 小數點的問題，一直在往這邊嘗試，直到找到了參考來源，互相比較後發現原來是我的 sort 排序完後，我自己會漏掉<strong>最後的一個數字</strong>去比較速率，現在改回來後，就好了很多，一次就 AC 啦！</p>
+<p>題外話，往正確的 debug 方向走真的好難…，錯了都不知道。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">//#include &lt;algorithm&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 20000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> F,R;</span><br><span class="line"><span class="keyword">double</span> f[MAXN], r[MAXN], num[MAXN]; <span class="comment">// f 前輪 r 後輪 num 速率</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; F &gt;&gt; R &amp;&amp; F)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; F; i++) <span class="built_in">cin</span> &gt;&gt; f[i]; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; R; i++) <span class="built_in">cin</span> &gt;&gt; r[i]; <span class="comment">//輸入資料</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>; <span class="comment">//速率的最大長度</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; R; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; F; j++)&#123;</span><br><span class="line">                num[cnt++] = r[i] / f[j]; <span class="comment">//不斷交疊產生速率</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(num, num + cnt); <span class="comment">//排序</span></span><br><span class="line">        <span class="comment">//for(int i = 0; i &lt; cnt; i++ ) cout &lt;&lt; num[i] &lt;&lt; ' ';</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">        <span class="keyword">double</span> d, dmax = <span class="number">1</span>; <span class="comment">//dmax 是 1 是因為兩個數字一樣相比較最小會是 1，不會低於 1。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++)&#123; <span class="comment">//開始進行比較，找出兩個速率相差最大</span></span><br><span class="line">            <span class="keyword">if</span>(num[i] / num[i<span class="number">-1</span>] &gt;= dmax)&#123; <span class="comment">//如果 dmax 比較小</span></span><br><span class="line">                dmax = num[i] / num[i<span class="number">-1</span>]; <span class="comment">//替換成這兩個速率相差</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; "num is " &lt;&lt; num[i] &lt;&lt; ' ' &lt;&lt; num[i+1] &lt;&lt; '\n';</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; dmax &lt;&lt; <span class="string">'\n'</span>; </span><br><span class="line">        <span class="comment">//輸出，題目要求小數點兩位，因此c++要這樣寫</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa1260 - Sales(LIS)</title>
+    <url>/2021/02/16/UVa/UVa1260/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>有一家公司希望可以看今天的銷售金額比哪幾天高、等於，輸出哪幾天高的總和，如果前幾天是 \(20,30,40\)，那 30 那天的銷售金額就比前一天高，輸出 1；如果是 40 那天的銷售金額就輸出 2，大於前兩天的銷售金額，請輸出總和所有的銷售金額比哪些天高的天數並減一。</p>
+<p><a href="https://onlinejudge.org/external/12/1260.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解並學會 LIS</li>
+<li>實踐 LIS</li>
+<li><a href="https://theriseofdavid.github.io/2020/11/13/Explain_Algorithm/LIS/" target="_blank" rel="noopener">演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn))</a></li>
+</ul>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題就是簡單的 LIS，相信大家在看 uva 的題目時就能馬上知道這是 LIS，只需要學會 LIS 就能解出此題，但需要注意的是這題在相等時也要算入總和內，因此不可以使用 <code>lower_bound</code> 改使用 <code>upper_bound</code> 會更好！</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://theriseofdavid.github.io/2020/11/13/Explain_Algorithm/LIS/" target="_blank" rel="noopener">演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn))</a><br><a href="http://web.ntnu.edu.tw/~algo/Subsequence.html" target="_blank" rel="noopener">演算法筆記 - Longest Increasing Subsequence</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>原本都是用比較麻煩的方式來寫，在師大的演算法筆記中發現了更棒的寫法，因此現在改用這種寫法認為會比之前更好寫!</p>
+<p>也謝謝師大演算法可以讓我寫得更輕鬆如意，透過網路上教會我，是我網路上的老師！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 5020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="keyword">int</span> T, n, len = <span class="number">0</span>, cur;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; b; <span class="comment">//用來產生 LIS 長度</span></span><br><span class="line">    b.push_back(a[<span class="number">0</span>]); <span class="comment">///先放入一個數值，以避免 b.back() 找不到值</span></span><br><span class="line">    <span class="keyword">int</span> sz = <span class="number">0</span>, temp; <span class="comment">//sz 為每個營收高於其它天的總和</span></span><br><span class="line">    <span class="comment">//temp 紀錄二分搜尋後找到的位置</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &gt; b.back())&#123; <span class="comment">//如果現在這個數字大於此數列中最大的數字</span></span><br><span class="line">            sz += b.size(); <span class="comment">//表示今天大於其他天全部營收，直接加入 sz</span></span><br><span class="line">            b.push_back(a[i]); <span class="comment">//LIS push back</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            temp = upper_bound(b.begin(), b.end(), a[i]) - b.begin(); </span><br><span class="line">            <span class="comment">//二分搜尋，找到他適合的位置，前面數字比她小或相等，後面數字大</span></span><br><span class="line">            b.insert(b.begin()+temp , a[i]); <span class="comment">//插入她</span></span><br><span class="line">            sz += temp; <span class="comment">//sz 加上前面比她小的那些天數，注意，不需要 -1，因為 queue index 從 0 開始</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">//debug</span></span><br><span class="line">            <span class="comment">//for(auto it: b) cout &lt;&lt; it &lt;&lt; ' ';</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; "sz i is " &lt;&lt; sz &lt;&lt; '\n';</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sz;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; a[i]; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; lis() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>最長遞增子序列 Longest Increasing Subsequence</tag>
       </tags>
   </entry>
 </search>
