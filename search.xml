@@ -12587,4 +12587,340 @@
         <tag>人生旅途</tag>
       </tags>
   </entry>
+  <entry>
+    <title>演算法知識 - Topological Ordering 拓樸排序(時間複雜度 O(V+E))</title>
+    <url>/2021/02/26/Explain_Algorithm/Topological_Ordering/</url>
+    <content><![CDATA[<h2 id="Topological-Ordering-拓樸排序-介紹"><a href="#Topological-Ordering-拓樸排序-介紹" class="headerlink" title="Topological Ordering 拓樸排序 介紹"></a>Topological Ordering 拓樸排序 介紹</h2><blockquote>
+<p>在有些程式問題，可能會有以下這些需求</p>
+<ul>
+<li>我們需要做完 n 個任務，但有些任務有依賴需求，需要某個任務完成才可以做這個任務，請給出一份符合要求的任務清單</li>
+<li>要幫學員排隊，但有些人必須排在某些人的後面，請給出一份符合要求的排隊順序</li>
+</ul>
+<p>也就是對於一個序列，其中的某兩點具有先後關係，即是拓樸排序</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Topological-Ordering-限制"><a href="#Topological-Ordering-限制" class="headerlink" title="Topological Ordering 限制"></a>Topological Ordering 限制</h2><p>Topological Ordering 有些要求，如下</p>
+<ul>
+<li>必須是有向圖<br>如果是無向圖，不會有順序的概念。</li>
+<li>不可以有環(cycle)<br>如果有環，無法確定先後的關係，例如順時鐘或逆時鐘，則 1 這個數字的位置就不同。</li>
+</ul>
+<h2 id="Topological-Ordering-實作與說明"><a href="#Topological-Ordering-實作與說明" class="headerlink" title="Topological Ordering 實作與說明"></a>Topological Ordering 實作與說明</h2><p>在程式碼進行說明，相信會比較好理解些。</p>
+<p>基本上此演算法類似於 BFS，如果有學過 BFS 一定會相當好懂。</p>
+<h3 id="定義名詞"><a href="#定義名詞" class="headerlink" title="定義名詞"></a>定義名詞</h3><ul>
+<li>紀錄關係<br>a,b ，則 a 必須在 b 前面、c,d，則 c 必須在 d 前面，此時我們會稱 a,c 為前面節點、b,d 是後面節點。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, a, b;</span><br><span class="line"><span class="keyword">int</span> cnt[MAXN]; <span class="comment">//記錄關係，以此節點為後面，而有多少節點在其前面</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; root[MAXN], ans; </span><br><span class="line"><span class="comment">//root 記錄關係，以此節點為前面，而另一節點就在後面 (vector.push_back)</span></span><br><span class="line"><span class="comment">//ans 答案序列，拓樸排序的序列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">topo</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; <span class="comment">//不斷輸入 </span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b; <span class="comment">//輸入記錄關係，a 是前者 b 是後者</span></span><br><span class="line">        root[a].push_back(b);  <span class="comment">//記錄關係，記錄 a 有多少後面節點，並且記錄。</span></span><br><span class="line">        cnt[b]++; <span class="comment">//記錄有幾個前面節點，如果 b 是後面關係時。</span></span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q; <span class="comment">//用來判斷有哪些節點現在已經可以直接被放到答案序列</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cnt[i] == <span class="number">0</span>) q.push_back(i); </span><br><span class="line">        <span class="comment">//在記錄關係中，如果以此節點為後面，沒有節點在前面就加入 q</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> now; <span class="comment">//暫存 bfs(q) 當前的節點</span></span><br><span class="line">    ans.clear(); <span class="comment">//答案序列清空</span></span><br><span class="line">    <span class="keyword">while</span>(ans.size() != n)&#123; <span class="comment">//如果答案序列的長度跟題目給的長度一樣就跳出</span></span><br><span class="line">        <span class="keyword">if</span>(q.empty()) <span class="keyword">break</span>; <span class="comment">//如果沒有節點可以直接被放入答案序列就跳出</span></span><br><span class="line">        now = q.front(); q.pop_front(); <span class="comment">//把當前節點給 now</span></span><br><span class="line">        ans.push_back(now); <span class="comment">//將 now 放入答案序列</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: root[now])&#123; <span class="comment">//由於 now 節點被放入答案陣列，</span></span><br><span class="line">        <span class="comment">//之前的記錄關係就不須記錄，因為放到答案陣列就剩下的後面節點就必定在後面</span></span><br><span class="line"></span><br><span class="line">            cnt[it]--; <span class="comment">//將所有原本在記錄關係中後面的節點 -1，減少了一個記錄關係</span></span><br><span class="line">            <span class="keyword">if</span>(cnt[it] == <span class="number">0</span>) q.push_back(it); <span class="comment">//如果都沒有記錄關係就可以放到 q</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ans.size() == n)&#123; <span class="comment">//如果答案序列跟 n 一樣，表示可以成功排出拓樸排序，就輸出答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; ans[i];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Topological-Ordering-應用"><a href="#Topological-Ordering-應用" class="headerlink" title="Topological Ordering 應用"></a>Topological Ordering 應用</h2><p>點擊 tag Topological Ordering 就可以看到所有我寫過的應用題目</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html#2" target="_blank" rel="noopener">師大演算法 - Topological Ordering </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>想註解真的是一件很難的事情！我腦袋滿滿的想法就是講不出來…，是我的高職國文沒有學好嗎，感覺自己的詞彙量沒有很大，還需要再好好進步，讓自己對於國文的表達能力在更好些。</p>
+<h2 id="Topological-Ordering-無註解程式碼"><a href="#Topological-Ordering-無註解程式碼" class="headerlink" title="Topological Ordering 無註解程式碼"></a>Topological Ordering 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> n, m, a, b;</span><br><span class="line"><span class="keyword">int</span> cnt[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; root[MAXN], ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">topo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cnt[i] == <span class="number">0</span>) q.push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> now;</span><br><span class="line">    ans.clear();</span><br><span class="line">    <span class="keyword">while</span>(ans.size() != n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(q.empty()) <span class="keyword">break</span>;</span><br><span class="line">        now = q.front(); q.pop_front();</span><br><span class="line">        ans.push_back(now);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: root[now])&#123;</span><br><span class="line">            cnt[it]--;</span><br><span class="line">            <span class="keyword">if</span>(cnt[it] == <span class="number">0</span>) q.push_back(it);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ans.size() == n)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; ans.size(); i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; ans[i];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>Topological Ordering 拓樸排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10305 - Ordering Tasks(拓樸排序)</title>
+    <url>/2021/02/27/UVa/UVa10305/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>John 有很多任務要做，但有些任務息息相關，希望你可以幫他寫出一份任務清單讓他來做任務</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1246" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">拓樸排序</a>的應用</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>簡單的拓樸排序，如果不太懂拓樸排序就看 <a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">演算法知識 - Topological Ordering 拓樸排序(時間複雜度 O(V+E))</a>，有對於一些拓樸排序有些基礎的教學，希望大家都可以看懂。</p>
+<p>標準模板題，但要注意必需 n and m 都要是 <strong>0</strong> 才可以把程式終止喔，這題會有 n or m 一個零的情況。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://web.ntnu.edu.tw/~algo/DirectedAcyclicGraph.html#2" target="_blank" rel="noopener">師大演算法 - Topological Ordering </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題真的是師大演算法給我大助攻阿！發現開學後我的腦袋變得沒有原本寒假時候清晰了，太多雜事要忙要做了，都沒有辦法用心做這件事，以前還記得的演算法現在都忘記了，現在趕快補這些知識回來。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<p>下面 <code>topo function</code> 的程式碼 <a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">演算法知識 - Topological Ordering 拓樸排序(時間複雜度 O(V+E))</a> 相同，就不寫講解，如果不太懂直接看此網頁就好。</p>
+<ul>
+<li>紀錄關係<br>a,b ，則 a 必須在 b 前面、c,d，則 c 必須在 d 前面，此時我們會稱 a,c 為前面節點、b,d 是後面節點。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, a, b;</span><br><span class="line"><span class="keyword">int</span> cnt[MAXN]; </span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; root[MAXN], ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">topo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cnt[i] == <span class="number">0</span>) q.push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> now;</span><br><span class="line">    ans.clear();</span><br><span class="line">    <span class="keyword">while</span>(ans.size() != n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(q.empty()) <span class="keyword">break</span>;</span><br><span class="line">        now = q.front(); q.pop_front();</span><br><span class="line">        ans.push_back(now);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: root[now])&#123;</span><br><span class="line">            cnt[it]--;</span><br><span class="line">            <span class="keyword">if</span>(cnt[it] == <span class="number">0</span>) q.push_back(it);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(ans.size() == n)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; ans.size(); i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; ans[i];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &amp;&amp; n + m != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) root[i].clear(); <span class="comment">//將資料清空，以免這次測資被上次測資干擾</span></span><br><span class="line">        <span class="built_in">memset</span>(cnt, <span class="number">0</span>, <span class="keyword">sizeof</span>(cnt)); </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            root[a].push_back(b); <span class="comment">//記錄關係，記錄 a 有多少後面節點，並且記錄。</span></span><br><span class="line">            <span class="comment">//這裡的後面節點須看 [大衛的筆記 拓樸排序] 意思。</span></span><br><span class="line">            cnt[b]++; <span class="comment">//記錄有幾個前面節點</span></span><br><span class="line">        &#125;</span><br><span class="line">        topo(); <span class="comment">//拓樸排序開始</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Topological Ordering 拓樸排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1485C - Floor and Mod (設計解題、數學推理)</title>
+    <url>/2021/02/22/Codeforces/Codeforecs%201485C/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一種特殊的 pair(A,B)，定義這種 pair 必須符合 \([ \frac{a}{b} ] = a \ mod \ b\)</p>
+<p>給你一個數字 x,y，其中特殊的 pair 數值必須是 \(1 \leq x \leq a \)、\(1 \leq y \leq  b\)，告訴我在這個範圍內有多少這種 pair 的數量。</p>
+<p><a href="https://codeforces.com/contest/1485/problem/C" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>數學邏輯推理</li>
+<li>時間複雜度推測</li>
+</ul>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題有難度XD，我被考倒了QQ。稍微看了下題目發現這是移項問題，只要移項移好腦袋清楚就可以把它成功解出了！</p>
+<p>這題的 x,y 都是 \(10^9\)，有點刺激阿，由於 \(O(N) = 10^8\)，因此似乎這題時間複雜度要比 \(O(n)\) 還小。</p>
+<p>codeforec 有很多人教學，在看了多遍後，能將這些話給講出來。</p>
+<h3 id="StepA-推出-K-的範圍"><a href="#StepA-推出-K-的範圍" class="headerlink" title="StepA 推出 K 的範圍:"></a>StepA 推出 K 的範圍:</h3><p>我們可以定義 \( a \ mod \ b \) 出來的值為 k，因此 \([ \frac{a}{b} ] = a \ mod \ b = k\)</p>
+<p>稍微進行移項，\( a = bk + k\)，其中 \(b &gt; k\)，否則不符合 \( [ \frac{a}{b} ]  = k \)</p>
+<p>再來我們稍微進行粗略分析，\(bk+k &gt; k^2\)，我們前面有提到 \(b &gt; k\)，我們把所有的數學推導都拉出來寫寫看。</p>
+<p>\(x \geq a = bk + k \geq k^2 \)，再來我們進行約分，收斂下後就可以得到 \(k \leq \sqrt{x}\)</p>
+<h3 id="StepB-找出-b-的範圍"><a href="#StepB-找出-b-的範圍" class="headerlink" title="StepB 找出 b 的範圍:"></a>StepB 找出 b 的範圍:</h3><p>現在我們可以知道有特殊的 pair，範圍只在 \(1 \leq k \leq \sqrt{x}\) 、\(b &gt; k\)、 \(1 \leq kb+k \leq x\)，\(kb+k\) 是 \([\frac{a}{b}] = k\) 的移項。</p>
+<p>再來我們進行推導，就可以將 \(1 \leq kb+k \leq x\) 推成 \(1 \leq b \leq x\k-1\)，同除 k，但 1 不變動，因為題目要求最小值是 1。</p>
+<h3 id="StepC-找出公式"><a href="#StepC-找出公式" class="headerlink" title="StepC 找出公式"></a>StepC 找出公式</h3><p>再來我們可以推出一個算式，\(min(y,x/k-1) - k\)，我們這邊是在找有哪些 b 可以用，而不是再找有哪些方式 k 會符合，透過找有幾個 b 可以用來算出答案。</p>
+<p>StepB 有說到 \(1 \leq b \leq x\k-1\)，但 y 不一定會小於 \(x\k-1\) 也不一定大於，因此特別用個 min 來找出最小值，找出最小的值。這裡是公式最重要最需要注意的地方。</p>
+<p>減 k 則是 Step1 有說到，b 必須要大於 k，否則不滿足。</p>
+<h3 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h3><p><a href="https://codeforces.com/blog/entry/87470" target="_blank" rel="noopener">Editorial of Codeforces Round #701 (Div. 2) - Codeforces By TheScrasse </a><br><a href="https://blog.csdn.net/qq_44791484/article/details/113832913?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-2&spm=1001.2101.3001.4242" target="_blank" rel="noopener">codeforces 1485 C Floor and Mod (枚举+推导) - CSDB by (xsj) </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題真的很讚。</p>
+<p>有好多的邏輯推導是我沒有被訓練過的，一時都沒有辦法學起來。老實講我沒有把握我現在就把這些都吸收完成，但我相信只要我多練習幾次，一定可以把這些問題都解開。</p>
+<p>我希望我能夠成為一位優秀的解題大師，可以解出所有的問題。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1e10 <span class="comment">//題目最大值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long <span class="comment">//用 long long 才不會 i*i 無法被 int 記下</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x, y, n, ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y; <span class="comment">//輸入資料</span></span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i*i &lt; x; i++) ans += max(<span class="number">0l</span>l, min(x/i<span class="number">-1</span>, y) - i);</span><br><span class="line">        <span class="comment">//k 要小於 sqrt x，這裡的 k 是 i，再配合公式就可以得出答案</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>Codeforces</tag>
+        <tag>數學推理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)</title>
+    <url>/2021/02/27/NTUT_note/statistics-ch9/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="假說檢定-hypothesis-testing-介紹"><a href="#假說檢定-hypothesis-testing-介紹" class="headerlink" title="假說檢定(hypothesis testing) 介紹"></a>假說檢定(hypothesis testing) 介紹</h2><p>決定一個數值透過母體參數產生的是否可以信任。</p>
+<p>信任就是對立假設，反之虛無假設。</p>
+<ul>
+<li>虛無假設 null hypothesis<br>表示這個人是亂猜的，就是虛無假設，透過 \(H_0\) 表示。</li>
+<li><strong>拒絕</strong>虛無假設 reject null hypothesis<br>通常拒絕虛無假設以機率來進行計算，常見的有 \(1 \%\)、\(5 \%\)、\(10 \%\)，也就是當虛無假設機率低於一定值時就是對立假設。</li>
+<li>對立假設 alternative hypothesis<br>透過 boolean 來想虛無假設是 false，對立假設就是 true，透過 \(H_1 \) or \(H_A \) 表示。</li>
+</ul>
+<h3 id="如何決定虛無假設與對立假設"><a href="#如何決定虛無假設與對立假設" class="headerlink" title="如何決定虛無假設與對立假設"></a>如何決定虛無假設與對立假設</h3><ul>
+<li>對立假設就是我們研究論點<br>也就是決定好甚麼是 TRUE 甚麼是 FALSE，通常對立假設就是我們研究論點，透過對立假設來證明我們的論點是對的，先設定 \(H_1\) 在設定 \(H_0 \)。<ul>
+<li>舉例：九點上課會不會讓學生有精神？<ul>
+<li>\(H_1 \) 九點上課比較好</li>
+<li>\(H_0\)  九點上課並不會讓學生比較好。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用假設檢定挑戰別人的論點<br>此時我們的目標是讓別人的論點 false，以否定別人論點為目標，因此先設定 \(H_0\) 在設定 \(H_1 \)<ul>
+<li>舉例：當前政策內車道禁行機車會比較好嗎?<ul>
+<li>\(H_0 \) 不會比較好</li>
+<li>\(H_1\)  是好的沒錯</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>統整，使用方法<ul>
+<li>利用樣本統計量驗證的假設 \(H_1\)</li>
+<li>他人主張 \(H_0\)</li>
+<li>會造成負面結果的 \(H_0\)，正面放 \(H_1\)</li>
+<li>反面主張 \(H_0\)，</li>
+<li>通常正面放 \(H_1\)，反面 \(H_0\)</li>
+</ul>
+</li>
+</ul>
+<h2 id="母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean"><a href="#母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean" class="headerlink" title="母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean"></a>母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean</h2><p>使用此檢定時，有一定義<strong>如果母體平均數相等時，則永遠都表示虛無假設</strong>，因為如果驗證一樣時，那就並不是我們研究的論點所支持，還是他人的論點相同，無法推翻。</p>
+<p>在此檢定中用來判斷假設的標準通常是者幾種</p>
+<ul>
+<li>Lower-tail 左尾<ul>
+<li>\(H_0 = \mu \geq u_0 \) </li>
+<li>\(H_1 = \mu &lt; u_0 \) </li>
+</ul>
+</li>
+<li>Upper-tail 右尾<ul>
+<li>\(H_0 = \mu \leq u_0 \) </li>
+<li>\(H_1 = \mu &lt; u_0 \) </li>
+</ul>
+</li>
+<li>Two-tailed 兩尾<ul>
+<li>\(H_0 = \mu = u_0 \) </li>
+<li>\(H_1 = \mu != u_0 \) </li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設。"><a href="#舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設。" class="headerlink" title="舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設。"></a>舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設。</h3><p>虛無假設就是 \(H_0 = \mu \leq 12 \)<br>對立假設就是 \(H_1 = \mu &gt; 12 \) </p>
+<p><strong>要特別注意我們的檢定資料是使用母體還是抽測樣本</strong></p>
+<h2 id="型一錯誤-Type1-Error-or-顯著性檢定-significance-tests"><a href="#型一錯誤-Type1-Error-or-顯著性檢定-significance-tests" class="headerlink" title="型一錯誤 Type1 Error or 顯著性檢定 significance tests"></a>型一錯誤 Type1 Error or 顯著性檢定 significance tests</h2><p>我們認為 \(H_0\) 是錯誤的，但其實是對的。</p>
+<p>透過樣本資料推出的假設檢定是對的，但是樣本資料明顯與母體資料偏差。</p>
+<p>型一錯誤 Type1 Error 也稱為 顯著性檢定 significance tests </p>
+<h2 id="型二錯誤-Type2-Error"><a href="#型二錯誤-Type2-Error" class="headerlink" title="型二錯誤 Type2 Error"></a>型二錯誤 Type2 Error</h2><p>我們認為 \(H_0\) 是對的，但其實並不是正確的。</p>
+<p>由於這種錯誤通常沒有辦法發現，需要等到再次驗證時才有機率發現(類似於 bug)，因此為了避免一開始說錯的風險，所以會用比較保守的說法，我們<strong>不反對 \(H_0\)</strong>，而不是我們<strong>相信 \(H_0\)</strong>。</p>
+<p>通常在沒有足夠信心時使用。</p>
+<blockquote>
+<p>統整<br><img src="https://drive.google.com/u/2/uc?id=1c6CvvbRpAqi86sUR5N9NyXmAWnK761bQ&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11060 - Beverages(拓樸排序)</title>
+    <url>/2021/02/27/UVa/UVa11060/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Dilbert 是一位學生，他喜歡喝酒的時候先喝低濃度酒精飲料，之後慢慢變濃，不會再回去喝比較低的酒精飲料，給你他要喝的飲料，在給你一些酒精的先後關係，請給他一種飲料排序是可以符合他的喝酒規則。</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=2001" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">拓樸排序</a>的應用</li>
+<li>將酒精飲料 hash 成數值</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>簡單的拓樸排序，如果不太懂拓樸排序就看 <a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">演算法知識 - Topological Ordering 拓樸排序(時間複雜度 O(V+E))</a>，有對於一些拓樸排序有些基礎的教學，希望大家都可以看懂。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>最近不斷在複習演算法，但是內心卻因為感情的事情不斷在擔憂，真的好煩。</p>
+<p>好希望自己能夠安靜下心來，順利做完每個任務，好想讓自己可以變成一個溫暖、開心的人。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<p>關於 function <code>topo</code> 的程式碼說明請大家點<a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">拓樸排序</a>，有更完整的解釋，會讓讀者更好吸收。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 220</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> cnt[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; root[MAXN];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; mp; <span class="comment">//飲料 hash 成數字</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt; mp2; <span class="comment">//還原 hash</span></span><br><span class="line"><span class="keyword">int</span> n, m, kase; <span class="comment">//題目資訊</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">topo</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cnt[i] == <span class="number">0</span>) q.push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">int</span> now;</span><br><span class="line">    <span class="keyword">while</span>(ans.size() != n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(q.empty()) <span class="keyword">break</span>;</span><br><span class="line">        sort(q.begin(), q.end());</span><br><span class="line">        now = q.front(); q.pop_front();</span><br><span class="line">        ans.push_back(now);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: root[now])&#123;</span><br><span class="line">            <span class="keyword">if</span>(--cnt[it] == <span class="number">0</span>) q.push_back(it);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(n == ans.size())&#123; <span class="comment">//輸出資料</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": Dilbert should drink beverages in this order:"</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: ans) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; mp2[it];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">".\n\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">string</span> temp, temp2; <span class="comment">//輸入題目資料</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            root[i].clear(); <span class="comment">//先清空之前資料 </span></span><br><span class="line">            cnt[i] = <span class="number">0</span>; <span class="comment">//清除之前的記錄關係</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp;</span><br><span class="line">            mp[temp] = i; <span class="comment">//hash，由於 i 值相對應每一個資料，不會碰撞所以就用 i hash</span></span><br><span class="line">            mp2[i] = temp; <span class="comment">//記錄還原</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; m; <span class="comment">//輸入記錄關係</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; <span class="comment">//不斷輸入 </span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp &gt;&gt; temp2;</span><br><span class="line">            root[mp[temp]].push_back(mp[temp2]); </span><br><span class="line">            <span class="comment">//記錄關係，記錄 a 有多少後面節點，並且記錄。</span></span><br><span class="line">            cnt[mp[temp2]]++; <span class="comment">//記錄有幾個前面節點，如果 b 是後面關係時。</span></span><br><span class="line">        &#125;</span><br><span class="line">        topo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Topological Ordering 拓樸排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa872 - Ordering(拓樸排序)</title>
+    <url>/2021/02/27/UVa/UVa872/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一種排序是，給你一些英文字母，再告訴你某個英文字母必須要在另個英文字母前面(定義為記錄關係)。</p>
+<p>請輸出一種排序可以符合題目的所有記錄關係。</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=813" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">拓樸排序</a>的應用</li>
+<li>如何輸入</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這邊我用另種方式來寫拓樸排序，想說透過 DFS 的方式看能否寫出拓樸排序，但我認為我寫得不太好，這是我的自創方式，建議還是不要多看這個。</p>
+<p>但如果想要了解我的思考，還是建議看看。</p>
+<p>這題比較不好輸入，要用上 <code>stringstream</code> 這是類似於 <code>cin</code>，透過這個可以方便輸入題目資料，再來記錄所有的<strong>記錄關係</strong>，每次進行 DFS 時，確認之前的 DFS 的資料都有符合記錄關係才繼續，如果沒有就退回上層 DFS。</p>
+<p>缺點是每層 DFS 都要做一次確認，時間複雜度會爆炸多，建議在比賽中還是不要使用。</p>
+<p>DFS 只要能夠成功就一定會是拓樸排序，因為每層都會確認關係，因此只要走到 DFS 深度與原本序列一樣長就可以。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/morris821028/UVa/blob/master/volume008/872%20-%20Ordering.cpp" target="_blank" rel="noopener">UVa872 - morris821028</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實我一開始已經忘記<strong>拓樸排序</strong>了，那是高中學的，上了大學後都忘記了…，然後在根據 Competitive Programming3，複習的過程中在寫這題 UVA，翻著有沒有其他人寫詳解，結果發現 morris821028 沒有寫詳解QQ，但是有 github，就看著他的程式碼來解，但後來發現師大演算法的 BFS 版本更好，後面就改用師大演算法的了。</p>
+<p>很感謝師大演算法與 morris821028 大大，願意讓學習資源在網路上才有辦法讓我學習到，很感謝他們。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<ul>
+<li>紀錄關係<br>a,b ，則 a 必須在 b 前面、c,d，則 c 必須在 d 前面，此時我們會稱 a,c 為前面節點、b,d 是後面節點。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 40</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">stringstream</span> ss;</span><br><span class="line"><span class="keyword">int</span> graph[MAXN], visit[MAXN]; <span class="comment">//graph 由於題目給的是字串，所以我們把它 hash 成 int</span></span><br><span class="line"><span class="comment">//visit 判斷這個點有沒有被 DFS 經歷過</span></span><br><span class="line"><span class="keyword">int</span> order[MAXN][MAXN]; <span class="comment">//order 記錄關係</span></span><br><span class="line"><span class="keyword">int</span> n, lg, flag2, flag3; <span class="comment">//n 測資長度, lg 每一個陣列長度</span></span><br><span class="line"><span class="comment">//flag2 判斷有沒有辦法拓樸排序, flag3 控制每個測資的斷行</span></span><br><span class="line"><span class="keyword">char</span> ch; <span class="comment">//用來讀字元</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans; <span class="comment">//記錄拓樸排序的陣列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    visit[x] = <span class="number">1</span>; <span class="comment">//這個點被經歷過</span></span><br><span class="line">    ans.push_back(x); <span class="comment">//放入 ans</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//for(auto it: ans) cout &lt;&lt; (char) (it + 'A') &lt;&lt; ' ';</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ans.size() == lg)&#123; <span class="comment">//如果答案陣列跟原本陣列長度一樣</span></span><br><span class="line">        flag2 = <span class="number">0</span>; <span class="comment">//有找到拓圖排序</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) (ans[<span class="number">0</span>] + <span class="string">'A'</span>); <span class="comment">//輸出第一個字元，這裡是嚴格輸出</span></span><br><span class="line">        <span class="comment">//輸出資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; ans.size(); i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; (<span class="keyword">char</span>) (ans[i] + <span class="string">'A'</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">//退回</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> flag; <span class="comment">//判斷當前答案陣列能不能在擴展</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123; <span class="comment">//遍地搜尋</span></span><br><span class="line">        flag = <span class="number">1</span>; </span><br><span class="line">        <span class="keyword">if</span>(graph[i] != <span class="number">1</span> || visit[i] == <span class="number">1</span>) <span class="keyword">continue</span>; </span><br><span class="line">        <span class="comment">//有被經歷過了或沒有這個節點(graph[i] != 1)</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: ans)&#123; <span class="comment">//遍地搜尋 ans 有沒有都符合記錄關係</span></span><br><span class="line">            <span class="keyword">if</span>(order[it][i])&#123; <span class="comment">//等於 1 表示沒有符合</span></span><br><span class="line">                flag = <span class="number">0</span>; <span class="comment">//退出 for，不能擴展繼續嘗試其他的節點</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag == <span class="number">1</span>)&#123; <span class="comment">//表示此節點可以被擴展</span></span><br><span class="line">            dfs(i);　<span class="comment">//進入 DFS</span></span><br><span class="line">            visit[i] = <span class="number">0</span>; <span class="comment">//由於退回了，此節點要還原成原本狀態</span></span><br><span class="line">            ans.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n; <span class="comment">//輸入資料</span></span><br><span class="line">    <span class="built_in">cin</span>.ignore(); <span class="comment">//為了後面的 getline，現在要讓指標先到下一行</span></span><br><span class="line">    flag3 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">string</span> temp;</span><br><span class="line">        getline(<span class="built_in">cin</span>, temp); <span class="comment">//replace blank line 把空白行消除掉</span></span><br><span class="line">        getline(<span class="built_in">cin</span>, temp); <span class="comment">//輸入題目陣列</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "temp is " &lt;&lt; temp &lt;&lt; '\n';</span></span><br><span class="line">        ss.clear(); ss.str(<span class="string">""</span>); ss &lt;&lt; temp; <span class="comment">//給 stringstream 方便等等輸入資料</span></span><br><span class="line">        <span class="built_in">memset</span>(graph, <span class="number">0</span>, <span class="keyword">sizeof</span>(graph)); <span class="comment">//重新整理資料，避免干擾</span></span><br><span class="line">        <span class="built_in">memset</span>(order, <span class="number">0</span>, <span class="keyword">sizeof</span>(order));</span><br><span class="line">        lg = <span class="number">0</span>; <span class="comment">//用來記錄題目陣列長度</span></span><br><span class="line">        <span class="keyword">while</span>(ss &gt;&gt; ch)&#123; </span><br><span class="line">            graph[ch - <span class="string">'A'</span>] = <span class="number">1</span>; <span class="comment">//把每個值 hash 成 字元 - 'A'，1 就是有這節點</span></span><br><span class="line">            lg++; <span class="comment">//長度增加</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        getline(<span class="built_in">cin</span>, temp); <span class="comment">//輸入記錄關係</span></span><br><span class="line">        ss.clear(); ss.str(<span class="string">""</span>); ss &lt;&lt; temp; <span class="comment">//給 stringstream 方便等等輸入資料</span></span><br><span class="line">        <span class="keyword">while</span>(ss &gt;&gt; temp) order[temp[<span class="number">2</span>] - <span class="string">'A'</span>][temp[<span class="number">0</span>] - <span class="string">'A'</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//由於記錄關係是用字串表達，且只會有一個字母，所以就用這樣記錄</span></span><br><span class="line">        <span class="comment">//需要提醒的是，我是記錄違法記錄關係的，也就是會把後面關係放在前面 index，前面關係放在後面</span></span><br><span class="line">        <span class="comment">//這樣只要 DFS 有掃到就可以表示不符合關係。</span></span><br><span class="line">        <span class="comment">//也有其他種寫法，可以自己嘗試</span></span><br><span class="line"></span><br><span class="line">        flag2 = <span class="number">1</span>; <span class="comment">//判斷有沒有拓樸排序</span></span><br><span class="line">        <span class="keyword">if</span>(flag3 == <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//嚴格比較，每筆測資的斷航</span></span><br><span class="line">        <span class="keyword">if</span>(flag3) flag3 = <span class="number">0</span>; <span class="comment">//第一筆沒有斷行，因此第二筆開始都是 0。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123; <span class="comment">//遍地搜尋 </span></span><br><span class="line">            <span class="keyword">if</span>(graph[i] == <span class="number">1</span>)&#123; <span class="comment">//有此節點就繼續</span></span><br><span class="line">                dfs(i); <span class="comment">//擴展 DFS</span></span><br><span class="line">                ans.pop_back(); <span class="comment">//還原狀態</span></span><br><span class="line">                visit[i] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag2) <span class="built_in">cout</span> &lt;&lt; <span class="string">"NO\n"</span>; <span class="comment">//如果沒有找到，就輸出 no</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Topological Ordering 拓樸排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown 放入 google drive 圖片</title>
+    <url>/2021/02/28/blog/hackmd_view_googledricePIC/</url>
+    <content><![CDATA[<h2 id="主要內容"><a href="#主要內容" class="headerlink" title="主要內容"></a>主要內容</h2><blockquote>
+<p>主要介紹如何將 google drive 的圖片放到 markdown 上，並且會自動顯示。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="如何在-Markdown-放入-google-drive-圖片呢？"><a href="#如何在-Markdown-放入-google-drive-圖片呢？" class="headerlink" title="如何在 Markdown 放入 google drive 圖片呢？"></a>如何在 Markdown 放入 google drive 圖片呢？</h2><p>就快速講結果，不講過程了。如果對過程有興趣就看參考連結，參考連結講的超棒我就不贅述了。</p>
+<h3 id="Step1-先共享自己要放入-markdown-的圖片，然後找出網址"><a href="#Step1-先共享自己要放入-markdown-的圖片，然後找出網址" class="headerlink" title="Step1 先共享自己要放入 markdown 的圖片，然後找出網址"></a>Step1 先共享自己要放入 markdown 的圖片，然後找出網址</h3><p>通常網址會是如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;drive.google.com&#x2F;file&#x2F;d&#x2F;XXXXXX&#x2F;view?usp&#x3D;sharing</span><br></pre></td></tr></table></figure>
+
+<p>其中 XXXX 就是這張圖片的 ID。</p>
+<h3 id="Stpe2-將網址替換，並且將-ID-換上"><a href="#Stpe2-將網址替換，並且將-ID-換上" class="headerlink" title="Stpe2 將網址替換，並且將 ID 換上"></a>Stpe2 將網址替換，並且將 ID 換上</h3><p>換成如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;drive.google.com&#x2F;u&#x2F;2&#x2F;uc?id&#x3D;XXXXX&amp;export&#x3D;download</span><br></pre></td></tr></table></figure>
+
+<p>然後嘗試</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![](https://drive.google.com/u/2/uc?id=XXXXX&amp;export=download)</span><br></pre></td></tr></table></figure>
+
+<p>這樣就可以了！</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@cnsrl/H1gHwCyGw" target="_blank" rel="noopener">於 HackMD 使用 Google 雲端硬碟中的圖片 - cnsrl</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>很感謝 cnsrl 大大願意教學，原本看 google drive 是提供 iframe 的方法，但是我對這方法不滿意，在網路上翻查後發現有這更好的方式。實在是太棒了！</p>
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QUESTION! C++11 upperbound and lowerbound 用法</title>
+    <url>/2021/02/28/C++/C++_binarysearch/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>語法常常讓人忘記，尤其是相似的語法更為容易，這裡告訴讀者這兩個用法差別，讓讀者在忘記時可以用到。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-C-11-upperbound-and-lowerbound-用法"><a href="#QUESTION-C-11-upperbound-and-lowerbound-用法" class="headerlink" title="QUESTION! C++11 upperbound and lowerbound 用法"></a>QUESTION! C++11 upperbound and lowerbound 用法</h2><p>這兩個用法使用的是 <a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">binary serach 演算法</a>，這裡有詳細的解釋可以看看。</p>
+<h3 id="upperbound-上限，傳回-index"><a href="#upperbound-上限，傳回-index" class="headerlink" title="upperbound 上限，傳回 index"></a>upperbound 上限，傳回 index</h3><p>傳回一個 index 為，選定的 \(value \geq element\)，其中 value 是我們想找的數值，element 則是陣列中的元素數值。</p>
+<p>另一種講法則是，uppderbound 表示對於有序的陣列能夠最<strong>後</strong>大於的數值。</p>
+<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼</h4><p>此時會傳回 5，表示 index，那元素數值則是 4。</p>
+<p>寫法如下</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::upper_bound (struct.begin(), struct.end(), value) - <span class="class"><span class="keyword">struct</span>.<span class="title">begin</span>();</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="lowerbound-上限，傳回-index"><a href="#lowerbound-上限，傳回-index" class="headerlink" title="lowerbound 上限，傳回 index"></a>lowerbound 上限，傳回 index</h3><p>傳回一個 index 為，選定的 \(value &lt; element\)，其中 value 是我們想找的數值，element 則是陣列中的元素數值。</p>
+<p>另一種講法則是，lowerbound 表示對於有序的陣列能夠最<strong>先</strong>大於的數值。</p>
+<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼</h4><p>此時會傳回 1，表示 index，那元素數值則是 2，因為 3(要找的數值) 沒有大於 3(陣列元素數值)。</p>
+<p>寫法如下</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::lower_bound (struct.begin(), struct.end(), value) - <span class="class"><span class="keyword">struct</span>.<span class="title">begin</span>();</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://www.cplusplus.com/reference/algorithm/lower_bound/" target="_blank" rel="noopener">lower_bound - cplusplus</a><br><a href="https://blog.csdn.net/tjpuacm/article/details/26389441" target="_blank" rel="noopener">C++ STL lower_bound upper_bound的用法以及cmp函数 - AcmMissile</a><br><a href="https://blog.csdn.net/hpu_zyh/article/details/11497527" target="_blank" rel="noopener">C++ STL中的 lower_bound() 和 upper_bound() - Hanks-zyh</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有時候語言寫多常常會讓自己搞混很多語法，透過自己的 blog 紀錄才不會忘記的時候查到不是自己需要的資料，自己寫的比較能夠知道自己不會甚麼！</p>
+]]></content>
+      <categories>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Cpp</tag>
+      </tags>
+  </entry>
 </search>

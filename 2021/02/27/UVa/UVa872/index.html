@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa872 - Ordering(拓樸排序) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa872" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa872 - Ordering(拓樸排序)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/27/UVa/UVa872/" class="article-date">
+  <time datetime="2021-02-27T12:36:44.000Z" itemprop="datePublished">2021-02-27</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">5分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一種排序是，給你一些英文字母，再告訴你某個英文字母必須要在另個英文字母前面(定義為記錄關係)。</p>
+<p>請輸出一種排序可以符合題目的所有記錄關係。</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=813" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/02/26/Explain_Algorithm/Topological_Ordering/" target="_blank" rel="noopener">拓樸排序</a>的應用</li>
+<li>如何輸入</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這邊我用另種方式來寫拓樸排序，想說透過 DFS 的方式看能否寫出拓樸排序，但我認為我寫得不太好，這是我的自創方式，建議還是不要多看這個。</p>
+<p>但如果想要了解我的思考，還是建議看看。</p>
+<p>這題比較不好輸入，要用上 <code>stringstream</code> 這是類似於 <code>cin</code>，透過這個可以方便輸入題目資料，再來記錄所有的<strong>記錄關係</strong>，每次進行 DFS 時，確認之前的 DFS 的資料都有符合記錄關係才繼續，如果沒有就退回上層 DFS。</p>
+<p>缺點是每層 DFS 都要做一次確認，時間複雜度會爆炸多，建議在比賽中還是不要使用。</p>
+<p>DFS 只要能夠成功就一定會是拓樸排序，因為每層都會確認關係，因此只要走到 DFS 深度與原本序列一樣長就可以。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/morris821028/UVa/blob/master/volume008/872%20-%20Ordering.cpp" target="_blank" rel="noopener">UVa872 - morris821028</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實我一開始已經忘記<strong>拓樸排序</strong>了，那是高中學的，上了大學後都忘記了…，然後在根據 Competitive Programming3，複習的過程中在寫這題 UVA，翻著有沒有其他人寫詳解，結果發現 morris821028 沒有寫詳解QQ，但是有 github，就看著他的程式碼來解，但後來發現師大演算法的 BFS 版本更好，後面就改用師大演算法的了。</p>
+<p>很感謝師大演算法與 morris821028 大大，願意讓學習資源在網路上才有辦法讓我學習到，很感謝他們。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<ul>
+<li>紀錄關係<br>a,b ，則 a 必須在 b 前面、c,d，則 c 必須在 d 前面，此時我們會稱 a,c 為前面節點、b,d 是後面節點。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 40</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">stringstream</span> ss;</span><br><span class="line"><span class="keyword">int</span> graph[MAXN], visit[MAXN]; <span class="comment">//graph 由於題目給的是字串，所以我們把它 hash 成 int</span></span><br><span class="line"><span class="comment">//visit 判斷這個點有沒有被 DFS 經歷過</span></span><br><span class="line"><span class="keyword">int</span> order[MAXN][MAXN]; <span class="comment">//order 記錄關係</span></span><br><span class="line"><span class="keyword">int</span> n, lg, flag2, flag3; <span class="comment">//n 測資長度, lg 每一個陣列長度</span></span><br><span class="line"><span class="comment">//flag2 判斷有沒有辦法拓樸排序, flag3 控制每個測資的斷行</span></span><br><span class="line"><span class="keyword">char</span> ch; <span class="comment">//用來讀字元</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans; <span class="comment">//記錄拓樸排序的陣列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    visit[x] = <span class="number">1</span>; <span class="comment">//這個點被經歷過</span></span><br><span class="line">    ans.push_back(x); <span class="comment">//放入 ans</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//for(auto it: ans) cout &lt;&lt; (char) (it + 'A') &lt;&lt; ' ';</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ans.size() == lg)&#123; <span class="comment">//如果答案陣列跟原本陣列長度一樣</span></span><br><span class="line">        flag2 = <span class="number">0</span>; <span class="comment">//有找到拓圖排序</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) (ans[<span class="number">0</span>] + <span class="string">'A'</span>); <span class="comment">//輸出第一個字元，這裡是嚴格輸出</span></span><br><span class="line">        <span class="comment">//輸出資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; ans.size(); i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; (<span class="keyword">char</span>) (ans[i] + <span class="string">'A'</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">//退回</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> flag; <span class="comment">//判斷當前答案陣列能不能在擴展</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123; <span class="comment">//遍地搜尋</span></span><br><span class="line">        flag = <span class="number">1</span>; </span><br><span class="line">        <span class="keyword">if</span>(graph[i] != <span class="number">1</span> || visit[i] == <span class="number">1</span>) <span class="keyword">continue</span>; </span><br><span class="line">        <span class="comment">//有被經歷過了或沒有這個節點(graph[i] != 1)</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: ans)&#123; <span class="comment">//遍地搜尋 ans 有沒有都符合記錄關係</span></span><br><span class="line">            <span class="keyword">if</span>(order[it][i])&#123; <span class="comment">//等於 1 表示沒有符合</span></span><br><span class="line">                flag = <span class="number">0</span>; <span class="comment">//退出 for，不能擴展繼續嘗試其他的節點</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag == <span class="number">1</span>)&#123; <span class="comment">//表示此節點可以被擴展</span></span><br><span class="line">            dfs(i);　<span class="comment">//進入 DFS</span></span><br><span class="line">            visit[i] = <span class="number">0</span>; <span class="comment">//由於退回了，此節點要還原成原本狀態</span></span><br><span class="line">            ans.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n; <span class="comment">//輸入資料</span></span><br><span class="line">    <span class="built_in">cin</span>.ignore(); <span class="comment">//為了後面的 getline，現在要讓指標先到下一行</span></span><br><span class="line">    flag3 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">string</span> temp;</span><br><span class="line">        getline(<span class="built_in">cin</span>, temp); <span class="comment">//replace blank line 把空白行消除掉</span></span><br><span class="line">        getline(<span class="built_in">cin</span>, temp); <span class="comment">//輸入題目陣列</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "temp is " &lt;&lt; temp &lt;&lt; '\n';</span></span><br><span class="line">        ss.clear(); ss.str(<span class="string">""</span>); ss &lt;&lt; temp; <span class="comment">//給 stringstream 方便等等輸入資料</span></span><br><span class="line">        <span class="built_in">memset</span>(graph, <span class="number">0</span>, <span class="keyword">sizeof</span>(graph)); <span class="comment">//重新整理資料，避免干擾</span></span><br><span class="line">        <span class="built_in">memset</span>(order, <span class="number">0</span>, <span class="keyword">sizeof</span>(order));</span><br><span class="line">        lg = <span class="number">0</span>; <span class="comment">//用來記錄題目陣列長度</span></span><br><span class="line">        <span class="keyword">while</span>(ss &gt;&gt; ch)&#123; </span><br><span class="line">            graph[ch - <span class="string">'A'</span>] = <span class="number">1</span>; <span class="comment">//把每個值 hash 成 字元 - 'A'，1 就是有這節點</span></span><br><span class="line">            lg++; <span class="comment">//長度增加</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        getline(<span class="built_in">cin</span>, temp); <span class="comment">//輸入記錄關係</span></span><br><span class="line">        ss.clear(); ss.str(<span class="string">""</span>); ss &lt;&lt; temp; <span class="comment">//給 stringstream 方便等等輸入資料</span></span><br><span class="line">        <span class="keyword">while</span>(ss &gt;&gt; temp) order[temp[<span class="number">2</span>] - <span class="string">'A'</span>][temp[<span class="number">0</span>] - <span class="string">'A'</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//由於記錄關係是用字串表達，且只會有一個字母，所以就用這樣記錄</span></span><br><span class="line">        <span class="comment">//需要提醒的是，我是記錄違法記錄關係的，也就是會把後面關係放在前面 index，前面關係放在後面</span></span><br><span class="line">        <span class="comment">//這樣只要 DFS 有掃到就可以表示不符合關係。</span></span><br><span class="line">        <span class="comment">//也有其他種寫法，可以自己嘗試</span></span><br><span class="line"></span><br><span class="line">        flag2 = <span class="number">1</span>; <span class="comment">//判斷有沒有拓樸排序</span></span><br><span class="line">        <span class="keyword">if</span>(flag3 == <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//嚴格比較，每筆測資的斷航</span></span><br><span class="line">        <span class="keyword">if</span>(flag3) flag3 = <span class="number">0</span>; <span class="comment">//第一筆沒有斷行，因此第二筆開始都是 0。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123; <span class="comment">//遍地搜尋 </span></span><br><span class="line">            <span class="keyword">if</span>(graph[i] == <span class="number">1</span>)&#123; <span class="comment">//有此節點就繼續</span></span><br><span class="line">                dfs(i); <span class="comment">//擴展 DFS</span></span><br><span class="line">                ans.pop_back(); <span class="comment">//還原狀態</span></span><br><span class="line">                visit[i] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag2) <span class="built_in">cout</span> &lt;&lt; <span class="string">"NO\n"</span>; <span class="comment">//如果沒有找到，就輸出 no</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Topological-Ordering-%E6%8B%93%E6%A8%B8%E6%8E%92%E5%BA%8F/" rel="tag">Topological Ordering 拓樸排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/02/27/UVa/UVa11060/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa11060 - Beverages(拓樸排序)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/02/26/Explain_Algorithm/Topological_Ordering/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">演算法知識 - Topological Ordering 拓樸排序(時間複雜度 O(V+E))</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
