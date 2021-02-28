@@ -12923,4 +12923,57 @@
         <tag>Cpp</tag>
       </tags>
   </entry>
+  <entry>
+    <title>正規表達式表達 windows 檔案命名規則</title>
+    <url>/2021/03/01/Regular%20Expression/Regular-Expression-win-file-manager/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>如果在寫程式的過程中需要輸出檔案到 windows OS 上時，<code>/  \   *  ?   :    &quot;   &lt;   &gt;  |</code> 都不可以用是檔名，此時正規表達式來幫助我們解決這問題是最好的了！</p>
+<p>　如何寫出正規表達式表達 windows 檔案命名規則呢，就是我們的主題。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="何寫出正規表達式表達-windows-檔案命名規則？"><a href="#何寫出正規表達式表達-windows-檔案命名規則？" class="headerlink" title="何寫出正規表達式表達 windows 檔案命名規則？"></a>何寫出正規表達式表達 windows 檔案命名規則？</h2><p>廢話不多說，這是我自己的版本提供大家使用 <code>/|\\*|\\?|:|\&quot;|&gt;|&lt;|\\|</code>，希望大家都能使用成功，有問題也能跟我說。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://sites.google.com/site/zigongdaolun/zuo-ye-xi-tong-jie-shao/fen-lei/windows-dang-an-ming-cheng" target="_blank" rel="noopener">windows檔案命名規則 - 資工導論</a></p>
+]]></content>
+      <categories>
+        <category>正規表示式 Regular Expression</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>正規表示式 Regular Expression</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正規表達式 Regular Expression 基本方法</title>
+    <url>/2021/03/01/Regular%20Expression/Regular-Expression/</url>
+    <content><![CDATA[<h2 id="正規表達式-Regular-Expression-介紹"><a href="#正規表達式-Regular-Expression-介紹" class="headerlink" title="正規表達式 Regular Expression 介紹"></a>正規表達式 Regular Expression 介紹</h2><blockquote>
+<p>在電腦科學中用來判斷一個字串是否符合我們所規定的特定模式，在文字編輯器中用來檢索、替換那些符合某個規則的文字。。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="基本語法"><a href="#基本語法" class="headerlink" title="基本語法"></a>基本語法</h2><p>以下提供一些基本語法介紹</p>
+<ul>
+<li>or <code>|</code><br><code>a|b</code></li>
+<li><code>+</code> 代表前面的字元必須至少出現一次<br><code>da+vid</code>，<code>da</code> 一定要出現一次</li>
+<li><code>?</code> 代表前面的字元最多只可以出現一次，零次也可以<br><code>da?vid</code>，只要 <code>d or a</code> 出現或沒出現都可以。</li>
+<li><code>*</code> 代表前面的字元出現或不出現都可以，也可以出現很多次。<br><code>d*avid</code>，<code>d</code> 想出現、重複、不出現都可以。</li>
+<li><code>()</code> 優先順序，表示最優先<br>跟程式一樣</li>
+<li><code>^</code> 必須在字首</li>
+<li><code>$</code> 必須在字尾</li>
+<li><code>[string]</code>，表示裡面其中一個字元有符合到都可以。</li>
+<li><code>[a-z]</code>，只要 a 到 z 任意一個字元有就算符合。</li>
+</ul>
+<h2 id="一些題目或範例"><a href="#一些題目或範例" class="headerlink" title="一些題目或範例"></a>一些題目或範例</h2><p>都在 categories 分類中，<a href="https://theriseofdavid.github.io/categories/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-Regular-Expression/" target="_blank" rel="noopener">點這裡就可以看到很多範例</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" target="_blank" rel="noopener">正規表示式 - wiki</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>雖然很早以前就知道正規表達式 Regular Expression，但是一直都沒有把他打成 blog，現在剛好用到就來打打，方便搜尋知識。</p>
+<p>希望自己未來可以成為一個有用，成功的人！</p>
+]]></content>
+      <categories>
+        <category>正規表示式 Regular Expression</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>正規表示式 Regular Expression</tag>
+      </tags>
+  </entry>
 </search>
