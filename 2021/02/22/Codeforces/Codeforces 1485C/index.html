@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    QUESTION! C++11 upperbound and lowerbound 用法 |  大衞的筆記
+    Codeforces 1485C - Floor and Mod (設計解題、數學推理) |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-C++/C++_binarysearch" class="article article-type-post" itemscope
+  <article id="post-Codeforces/Codeforces 1485C" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  QUESTION! C++11 upperbound and lowerbound 用法
+  Codeforces 1485C - Floor and Mod (設計解題、數學推理)
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/02/28/C++/C++_binarysearch/" class="article-date">
-  <time datetime="2021-02-28T11:46:07.000Z" itemprop="datePublished">2021-02-28</time>
+      <a href="/2021/02/22/Codeforces/Codeforces%201485C/" class="article-date">
+  <time datetime="2021-02-22T15:48:44.000Z" itemprop="datePublished">2021-02-22</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Cpp/">Cpp</a>
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">442</span>
+            <span class="post-count">863</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">1分鐘</span>
+            <span class="post-count">3分鐘</span>
         </span>
     </span>
 </div>
@@ -111,26 +111,35 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
-<p>語法常常讓人忘記，尤其是相似的語法更為容易，這裡告訴讀者這兩個用法差別，讓讀者在忘記時可以用到。</p>
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一種特殊的 pair(A,B)，定義這種 pair 必須符合 \([ \frac{a}{b} ] = a \ mod \ b\)</p>
+<p>給你一個數字 x,y，其中特殊的 pair 數值必須是 \(1 \leq x \leq a \)、\(1 \leq y \leq  b\)，告訴我在這個範圍內有多少這種 pair 的數量。</p>
+<p><a href="https://codeforces.com/contest/1485/problem/C" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="QUESTION-C-11-upperbound-and-lowerbound-用法"><a href="#QUESTION-C-11-upperbound-and-lowerbound-用法" class="headerlink" title="QUESTION! C++11 upperbound and lowerbound 用法"></a>QUESTION! C++11 upperbound and lowerbound 用法</h2><p>這兩個用法使用的是 <a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">binary serach 演算法</a>，這裡有詳細的解釋可以看看。</p>
-<h3 id="upperbound-上限，傳回-index"><a href="#upperbound-上限，傳回-index" class="headerlink" title="upperbound 上限，傳回 index"></a>upperbound 上限，傳回 index</h3><p>傳回一個 index 為，選定的 \(value &lt; element\) 並傳回第一個元素，其中 value 是我們想找的數值，element 則是陣列中的元素數值。</p>
-<p>另一種講法則是，uppderbound 表示對於有序的陣列能夠最<strong>後</strong>大於的數值。</p>
-<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼</h4><p>此時會傳回 5，表示 index，那元素數值則是 4。</p>
-<p>寫法如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::upper_bound (struct.begin(), struct.end(), value) - <span class="class"><span class="keyword">struct</span>.<span class="title">begin</span>();</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="lowerbound-下限，傳回-index"><a href="#lowerbound-下限，傳回-index" class="headerlink" title="lowerbound 下限，傳回 index"></a>lowerbound 下限，傳回 index</h3><p>傳回一個 index 為，選定的 \(value \leq element\) 並傳回第一個元素，其中 value 是我們想找的數值，element 則是陣列中的元素數值。</p>
-<p>另一種講法則是，lowerbound 表示對於有序的陣列能夠最<strong>先</strong>大於的數值。</p>
-<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼</h4><p>此時會傳回 2，表示 index，那元素數值則是 3，因為 3(要找的數值) 等於 3(陣列元素數值)。</p>
-<p>寫法如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::lower_bound (struct.begin(), struct.end(), value) - <span class="class"><span class="keyword">struct</span>.<span class="title">begin</span>();</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://www.cplusplus.com/reference/algorithm/lower_bound/" target="_blank" rel="noopener">lower_bound - cplusplus</a><br><a href="https://blog.csdn.net/tjpuacm/article/details/26389441" target="_blank" rel="noopener">C++ STL lower_bound upper_bound的用法以及cmp函数 - AcmMissile</a><br><a href="https://blog.csdn.net/hpu_zyh/article/details/11497527" target="_blank" rel="noopener">C++ STL中的 lower_bound() 和 upper_bound() - Hanks-zyh</a></p>
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有時候語言寫多常常會讓自己搞混很多語法，透過自己的 blog 紀錄才不會忘記的時候查到不是自己需要的資料，自己寫的比較能夠知道自己不會甚麼！</p>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>數學邏輯推理</li>
+<li>時間複雜度推測</li>
+</ul>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>這題有難度XD，我被考倒了QQ。稍微看了下題目發現這是移項問題，只要移項移好腦袋清楚就可以把它成功解出了！</p>
+<p>這題的 x,y 都是 \(10^9\)，有點刺激阿，由於 \(O(N) = 10^8\)，因此似乎這題時間複雜度要比 \(O(n)\) 還小。</p>
+<p>codeforec 有很多人教學，在看了多遍後，能將這些話給講出來。</p>
+<h3 id="StepA-推出-K-的範圍"><a href="#StepA-推出-K-的範圍" class="headerlink" title="StepA 推出 K 的範圍:"></a>StepA 推出 K 的範圍:</h3><p>我們可以定義 \( a \ mod \ b \) 出來的值為 k，因此 \([ \frac{a}{b} ] = a \ mod \ b = k\)</p>
+<p>稍微進行移項，\( a = bk + k\)，其中 \(b &gt; k\)，否則不符合 \( [ \frac{a}{b} ]  = k \)</p>
+<p>再來我們稍微進行粗略分析，\(bk+k &gt; k^2\)，我們前面有提到 \(b &gt; k\)，我們把所有的數學推導都拉出來寫寫看。</p>
+<p>\(x \geq a = bk + k \geq k^2 \)，再來我們進行約分，收斂下後就可以得到 \(k \leq \sqrt{x}\)</p>
+<h3 id="StepB-找出-b-的範圍"><a href="#StepB-找出-b-的範圍" class="headerlink" title="StepB 找出 b 的範圍:"></a>StepB 找出 b 的範圍:</h3><p>現在我們可以知道有特殊的 pair，範圍只在 \(1 \leq k \leq \sqrt{x}\) 、\(b &gt; k\)、 \(1 \leq kb+k \leq x\)，\(kb+k\) 是 \([\frac{a}{b}] = k\) 的移項。</p>
+<p>再來我們進行推導，就可以將 \(1 \leq kb+k \leq x\) 推成 \(1 \leq b \leq x\k-1\)，同除 k，但 1 不變動，因為題目要求最小值是 1。</p>
+<h3 id="StepC-找出公式"><a href="#StepC-找出公式" class="headerlink" title="StepC 找出公式"></a>StepC 找出公式</h3><p>再來我們可以推出一個算式，\(min(y,x/k-1) - k\)，我們這邊是在找有哪些 b 可以用，而不是再找有哪些方式 k 會符合，透過找有幾個 b 可以用來算出答案。</p>
+<p>StepB 有說到 \(1 \leq b \leq x\k-1\)，但 y 不一定會小於 \(x\k-1\) 也不一定大於，因此特別用個 min 來找出最小值，找出最小的值。這裡是公式最重要最需要注意的地方。</p>
+<p>減 k 則是 Step1 有說到，b 必須要大於 k，否則不滿足。</p>
+<h3 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h3><p><a href="https://codeforces.com/blog/entry/87470" target="_blank" rel="noopener">Editorial of Codeforces Round #701 (Div. 2) - Codeforces By TheScrasse </a><br><a href="https://blog.csdn.net/qq_44791484/article/details/113832913?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-2&spm=1001.2101.3001.4242" target="_blank" rel="noopener">codeforces 1485 C Floor and Mod (枚举+推导) - CSDB by (xsj) </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題真的很讚。</p>
+<p>有好多的邏輯推導是我沒有被訓練過的，一時都沒有辦法學起來。老實講我沒有把握我現在就把這些都吸收完成，但我相信只要我多練習幾次，一定可以把這些問題都解開。</p>
+<p>我希望我能夠成為一位優秀的解題大師，可以解出所有的問題。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1e10 <span class="comment">//題目最大值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long <span class="comment">//用 long long 才不會 i*i 無法被 int 記下</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x, y, n, ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y; <span class="comment">//輸入資料</span></span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i*i &lt; x; i++) ans += max(<span class="number">0l</span>l, min(x/i<span class="number">-1</span>, y) - i);</span><br><span class="line">        <span class="comment">//k 要小於 sqrt x，這裡的 k 是 i，再配合公式就可以得出答案</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
       <!-- reward -->
@@ -154,7 +163,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp/" rel="tag">Cpp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codeforces/" rel="tag">Codeforces</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E5%AD%B8%E6%8E%A8%E7%90%86/" rel="tag">數學推理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
 
 
     </footer>
@@ -165,19 +174,19 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2021/03/01/Regular%20Expression/Regular-Expression/" class="article-nav-link">
+      <a href="/2021/02/26/Explain_Algorithm/Topological_Ordering/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            正規表達式 Regular Expression 基本方法
+            演算法知識 - Topological Ordering 拓樸排序(時間複雜度 O(V+E))
           
         </div>
       </a>
     
     
-      <a href="/2021/02/28/blog/hackmd_view_googledricePIC/" class="article-nav-link">
+      <a href="/2021/02/22/life_experence/north_coast_trip_with_college_friends/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Markdown 放入 google drive 圖片</div>
+        <div class="article-nav-title">2021/01/29 北科大學生夜衝北海岸</div>
       </a>
     
   </nav>
