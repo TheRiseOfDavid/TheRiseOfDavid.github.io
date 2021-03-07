@@ -2125,8 +2125,8 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>線段樹</tag>
         <tag>程式解題</tag>
+        <tag>線段樹 Segment Tree</tag>
       </tags>
   </entry>
   <entry>
@@ -12719,7 +12719,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設。"><a href="#舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設。" class="headerlink" title="舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設。"></a>舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設。</h3><p>虛無假設就是 \(H_0 = \mu \leq 12 \)<br>對立假設就是 \(H_1 = \mu &gt; 12 \) </p>
+<h3 id="舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到-12-分鐘就要進行改善。"><a href="#舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到-12-分鐘就要進行改善。" class="headerlink" title="舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到 12 分鐘就要進行改善。"></a>舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到 12 分鐘就要進行改善。</h3><p>這邊我們要判斷是否達到目標，沒有則要進行改善，因此這邊我們認為是需要改善所以對立假設就會是 \(H_1 = \mu &gt; 12 \)<br>虛無假設就是 \(H_0 = \mu \leq 12 \)<br>對立假設就是 \(H_1 = \mu &gt; 12 \)</p>
 <p><strong>要特別注意我們的檢定資料是使用母體還是抽測樣本</strong></p>
 <h2 id="型一錯誤-Type1-Error-or-顯著性檢定-significance-tests"><a href="#型一錯誤-Type1-Error-or-顯著性檢定-significance-tests" class="headerlink" title="型一錯誤 Type1 Error or 顯著性檢定 significance tests"></a>型一錯誤 Type1 Error or 顯著性檢定 significance tests</h2><p>我們認為 \(H_0\) 是錯誤的，但其實是對的。</p>
 <p>透過樣本資料推出的假設檢定是對的，但是樣本資料明顯與母體資料偏差。</p>
@@ -12730,6 +12730,144 @@
 <blockquote>
 <p>統整<br><img src="https://drive.google.com/u/2/uc?id=1c6CvvbRpAqi86sUR5N9NyXmAWnK761bQ&export=download" alt=""></p>
 </blockquote>
+<h2 id="p-Value-Approach-to-One-Tailed-Hypothesis-Testing-p-值法單尾假設檢定"><a href="#p-Value-Approach-to-One-Tailed-Hypothesis-Testing-p-值法單尾假設檢定" class="headerlink" title="p-Value Approach to One-Tailed Hypothesis Testing p 值法單尾假設檢定"></a>p-Value Approach to One-Tailed Hypothesis Testing p 值法單尾假設檢定</h2><p>p 本身的意思是 probability 也就是要找機率(可能性)，根據樣本結果可以支持虛無假設的機率是多少？</p>
+<p>如果 p-value 越小且小於顯著姓測試 \(\alpha \)，我們就可以拒絕虛無假設。</p>
+<p>因此公式就是：拒絕 \(H_0 \) if the \(p-value \leq \alpha \)</p>
+<p>透過標準差 z，我們去設定顯著性測試的 \(z_a\)，與結果的 z 來判斷是否支持虛無假設</p>
+<h3 id="Lower-Tailed-Test-About-a-Population-Mean-左尾-p-value-檢定法"><a href="#Lower-Tailed-Test-About-a-Population-Mean-左尾-p-value-檢定法" class="headerlink" title="Lower-Tailed Test About a Population Mean 左尾 p-value 檢定法"></a>Lower-Tailed Test About a Population Mean 左尾 p-value 檢定法</h3><p>透過常態分配的方法，只要我們的 z 值小於顯著性測試的 \(z_a\) 值時我們就可以拒絕此虛無假設</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1LvvtPA1gAe1rcFKeKQHMAFEvBaur1zqb&export=download" alt=""></p>
+</blockquote>
+<h3 id="Upper-Tailed-Test-About-a-Population-Mean-右尾-p-value-檢定法"><a href="#Upper-Tailed-Test-About-a-Population-Mean-右尾-p-value-檢定法" class="headerlink" title="Upper-Tailed Test About a Population Mean 右尾 p-value 檢定法"></a>Upper-Tailed Test About a Population Mean 右尾 p-value 檢定法</h3><p>與上方類似，只要我們的 z 值<strong>大於</strong>顯著性測試的 \(z_a\) 值時我們就可以拒絕此虛無假設</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1DAOfWZqgz2C3kZv2M8p9vCVSDCB111RM&export=download" alt=""></p>
+</blockquote>
+<h2 id="Critical-Value-Approach-to-One-Tailed-Hypothesis-Testing-臨界值檢定法"><a href="#Critical-Value-Approach-to-One-Tailed-Hypothesis-Testing-臨界值檢定法" class="headerlink" title="Critical Value Approach to One-Tailed Hypothesis Testing 臨界值檢定法"></a>Critical Value Approach to One-Tailed Hypothesis Testing 臨界值檢定法</h2><p>一樣透過標準常態機率分配的 \(z_a\) 值來判斷，設定一個面積，只要我們的檢測值落在 \(z_a\) 面積上就可以拒絕此假設</p>
+<ul>
+<li>Lower tail: Reject \(H_0\) if \(z \leq - z_a\)</li>
+<li>Upper tail: Reject \(H_0\) if \(z \geq - z_a\)</li>
+</ul>
+<h3 id="Lower-Tailed-Test-About-a-Population-Mean-左尾臨界值檢定法"><a href="#Lower-Tailed-Test-About-a-Population-Mean-左尾臨界值檢定法" class="headerlink" title="Lower-Tailed Test About a Population Mean 左尾臨界值檢定法"></a>Lower-Tailed Test About a Population Mean 左尾臨界值檢定法</h3><p>設定 \(z_a\) 的值，以下圖來看如果檢測結果 z 值落在<strong>藍色面積</strong>，就拒絕，沒有就不拒絕</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1RJeKWXMcuanfhh9cb42JgEiYNJZXVcyP&export=download" alt=""></p>
+</blockquote>
+<h3 id="Upper-Tailed-Test-About-a-Population-Mean-右尾臨界值檢定法"><a href="#Upper-Tailed-Test-About-a-Population-Mean-右尾臨界值檢定法" class="headerlink" title="Upper-Tailed Test About a Population Mean 右尾臨界值檢定法"></a>Upper-Tailed Test About a Population Mean 右尾臨界值檢定法</h3><p>設定 \(z_a\) 的值，以下圖來看如果檢測結果 z 值落在<strong>藍色面積</strong>，就拒絕，沒有就不拒絕</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1cUqgMdoQJl0sQCdCqx711Fm1auBfc5ND&export=download" alt=""></p>
+</blockquote>
+<h2 id="Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數已知的情況"><a href="#Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數已知的情況" class="headerlink" title="Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數已知的情況"></a>Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數已知的情況</h2><ul>
+<li>建立虛無假設與對立假設</li>
+<li>設定顯著性測試</li>
+<li>收集樣本資料，計算 z</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value</li>
+<li>根據 p-value 判斷是否拒絕虛無假設</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>透過這兩種方法檢測答案都必須相同</li>
+</ul>
+<h3 id="舉例-抽取-40-筆樣本資料，平均回應緊急時間為-13-25-min，母體標準差為-3-2，做一假設檢定，0-05-的顯著性測試，能不能在-12-分鐘以內回應緊急事件，不行則進行改善"><a href="#舉例-抽取-40-筆樣本資料，平均回應緊急時間為-13-25-min，母體標準差為-3-2，做一假設檢定，0-05-的顯著性測試，能不能在-12-分鐘以內回應緊急事件，不行則進行改善" class="headerlink" title="舉例 - 抽取 40 筆樣本資料，平均回應緊急時間為 13.25 min，母體標準差為 3.2，做一假設檢定，0.05 的顯著性測試，能不能在 12 分鐘以內回應緊急事件，不行則進行改善"></a>舉例 - 抽取 40 筆樣本資料，平均回應緊急時間為 13.25 min，母體標準差為 3.2，做一假設檢定，0.05 的顯著性測試，能不能在 12 分鐘以內回應緊急事件，不行則進行改善</h3><ul>
+<li>建立虛無假設與對立假設<ul>
+<li>\(H_0: \mu \leq 12 \)</li>
+<li>\(H_1: \mu &gt; 12\)，由於我們的觀點是想要進行改善，因此設定 \(H_1: \mu &gt; 12\)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.5</li>
+<li>收集樣本，計算 z<br>\(z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{13.25 - 12}{3.2 / \sqrt{40}} = 2.47\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value<br>\(z = 2.47\)，算出 0.9932，\(p-value = 1 - 0.9932 = 0.0068\)</li>
+<li>根據 p-value 判斷是否拒絕虛無假設<br>\(\alpha = 0.05 \geq 0.0068 = p-value\)，因此拒絕 \(H_0\)。因此我們沒有辦法在 12 分鐘內緊急回應</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間<br>\(\alpha = 0.05, z_{0.05} = 1.645\)，因此拒絕 \(H_0 \geq 1.645\)</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間<br>\(z = 2.47 &gt; 1.645 \)落在拒絕區間，因此拒絕 \(H_0\)。因此我們沒有辦法在 12 分鐘內緊急回應</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Two-Tailed-Hypothesis-雙尾假設檢定"><a href="#Two-Tailed-Hypothesis-雙尾假設檢定" class="headerlink" title="Two-Tailed Hypothesis 雙尾假設檢定"></a>Two-Tailed Hypothesis 雙尾假設檢定</h2><h3 id="p-Value-Approach-to-Two-Tailed-Hypothesis-Testing-p-值法雙尾假設檢定"><a href="#p-Value-Approach-to-Two-Tailed-Hypothesis-Testing-p-值法雙尾假設檢定" class="headerlink" title="p-Value Approach to Two-Tailed Hypothesis Testing p 值法雙尾假設檢定"></a>p-Value Approach to Two-Tailed Hypothesis Testing p 值法雙尾假設檢定</h3><ul>
+<li>計算標準常態分配的 z 值</li>
+<li>計算 z 的機率</li>
+<li>將機率<strong>乘二</strong></li>
+<li>Reject \(H_0\) if the \(p-value \leq \alpha\)</li>
+</ul>
+<h3 id="Critival-Value-Approach-to-Two-Tailed-Hypothesis-Testing-臨界值法雙尾假設檢定"><a href="#Critival-Value-Approach-to-Two-Tailed-Hypothesis-Testing-臨界值法雙尾假設檢定" class="headerlink" title="Critival Value Approach to Two-Tailed Hypothesis Testing 臨界值法雙尾假設檢定"></a>Critival Value Approach to Two-Tailed Hypothesis Testing 臨界值法雙尾假設檢定</h3><p>透過標準常態機率分配找出 \(z_{a/2}\) 的面積</p>
+<p>因此 Reject \(H_0\) if the \(z \leq -z_{a/2}\) or \(z \geq z_{a/2}\)</p>
+<h3 id="舉例-牙膏平均重量是-6oz，進行假設檢定，如果大於或小於-6oz-就改善，抽-30-隻牙膏為樣本資料，樣本平均值是-6-1oz，標準差是-0-2oz，顯著性測試為-0-03"><a href="#舉例-牙膏平均重量是-6oz，進行假設檢定，如果大於或小於-6oz-就改善，抽-30-隻牙膏為樣本資料，樣本平均值是-6-1oz，標準差是-0-2oz，顯著性測試為-0-03" class="headerlink" title="舉例: 牙膏平均重量是 6oz，進行假設檢定，如果大於或小於 6oz 就改善，抽 30 隻牙膏為樣本資料，樣本平均值是 6.1oz，標準差是 0.2oz，顯著性測試為 0.03"></a>舉例: 牙膏平均重量是 6oz，進行假設檢定，如果大於或小於 6oz 就改善，抽 30 隻牙膏為樣本資料，樣本平均值是 6.1oz，標準差是 0.2oz，顯著性測試為 0.03</h3><ul>
+<li>建立虛無假設與對立假設<ul>
+<li>\(H_0: \mu = 6\)</li>
+<li>\(H_1: \mu &lt;&gt; 6 \)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.03</li>
+<li>收集樣本，計算 z<br>\(z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{6.1 - 6}{0.2 / \sqrt{30}} = 2.74\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value<br>\(z = 2.74\)，算出 0.9969，\(p-value = 2(1 - 0.9932) = 0.0062\)</li>
+<li>根據 p-value 判斷是否拒絕虛無假設<br>\(\alpha = 0.03 \geq 0.0062 = p-value\)，因此拒絕 \(H_0\)。因此需要進行改善</li>
+<li>用圖進行解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1T22SDb3Q8g6nCS9H1-_3hUb1b1uRQ7lJ&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間<br>\(\alpha / 2 = 0.03 / 2 = 0.015 , z_{0.015} = 2.17\)，因此拒絕 \(H_0 \geq 2.17\)</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間<br>\(z = 2.47 &gt; 2.17 \)落在拒絕區間，因此拒絕 \(H_0\)。因此我們沒有辦法在 12 分鐘內緊急回應</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Confidence-Interval-Approach-to-Two-Tailed-Hypothesis-Testing-信賴區間法雙尾假設檢定"><a href="#Confidence-Interval-Approach-to-Two-Tailed-Hypothesis-Testing-信賴區間法雙尾假設檢定" class="headerlink" title="Confidence Interval Approach to Two-Tailed Hypothesis Testing 信賴區間法雙尾假設檢定"></a>Confidence Interval Approach to Two-Tailed Hypothesis Testing 信賴區間法雙尾假設檢定</h3><p>計算信賴區間的公式為 \(\bar{x} \pm z_{a/2} \frac{\sigma}{\sqrt{n}}\)，如果假設檢定的值在信賴區間內時我們就<strong>不拒絕零 (to reject)</strong>，但如果在<strong>等於的情況時必須拒絕</strong>。</p>
+<h4 id="透過剛剛舉例算信賴區間法雙尾假設檢定法"><a href="#透過剛剛舉例算信賴區間法雙尾假設檢定法" class="headerlink" title="透過剛剛舉例算信賴區間法雙尾假設檢定法"></a>透過剛剛舉例算信賴區間法雙尾假設檢定法</h4><p>顯著性測試為 0.03，因此有百分之 97 的信賴區間，因此 \(\mu \) 要是 \(\bar{x} \pm z_{a/2} \frac{\sigma}{\sqrt{n}} = 6.1 \pm 2.17(0.2 / \sqrt{30}) = 6.1 \pm 0.07924\)，也就是 6.02076 to 6.17924，因此 \( \mu_0 = 6 \) 不再此區間，因此拒絕 \(H_0\)。</p>
+<h2 id="Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數未知的情況"><a href="#Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數未知的情況" class="headerlink" title="Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數未知的情況"></a>Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數未知的情況</h2><p>這時候就需要用到 t 了XD，公式為 \(t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}\)，其中 \(n - 1\) 就是自由度</p>
+<ul>
+<li>p-Value Approach<br>Reject \(H_0\) if \(\alpha \geq p-value\)</li>
+<li>Critical Value Approach<ul>
+<li>\(H_0: \mu \geq \mu_0 \) Reject \(H_0\) if \(t \leq -t_{a}\)</li>
+<li>\(H_0: \mu \leq \mu_0 \) Reject \(H_0\) if \(t \geq t_{a}\)</li>
+<li>\(H_0: \mu = \mu_0\) Reject \(H_0\) if \(t \leq -t_{a/2} \ or t \geq t_{a/2} \ \)</li>
+</ul>
+</li>
+<li>p-Value and the t Distribution<br>如果用統計書的附錄算 t 值，大多不太精準，因此盡量使用軟體上的來計算。</li>
+</ul>
+<h3 id="舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為-65，進行假設檢定，在-64-筆的樣本資料，平均速度是-66-2，標準差-4-2，顯著性測試為-0-05"><a href="#舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為-65，進行假設檢定，在-64-筆的樣本資料，平均速度是-66-2，標準差-4-2，顯著性測試為-0-05" class="headerlink" title="舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為 65，進行假設檢定，在 64 筆的樣本資料，平均速度是 66.2，標準差 4.2，顯著性測試為 0.05"></a>舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為 65，進行假設檢定，在 64 筆的樣本資料，平均速度是 66.2，標準差 4.2，顯著性測試為 0.05</h3><ul>
+<li>建立虛無假設與對立假設<ul>
+<li>\(H_0: \mu \leq 65 \)</li>
+<li>\(H_1: \mu &gt; 65 \)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>收集樣本，計算 z<br>\(z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{66.2 - 65}{4.2 / \sqrt{64}} = 2.286\)<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value<br>\(t = 2.286\)，算出 0.01281</li>
+<li>根據 p-value 判斷是否拒絕虛無假設<br>\(\alpha = 0.05 \geq 0.01281 = p-value\)，因此拒絕 \(H_0\)。因此大部分這邊人都會超速，可以設測速照相</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間<br>\(\alpha  = 0.05 , d.f. = 64 - 1 = 63, t_{0.005} = 1.669\)，因此 reject \(h_0\) if \(t \geq 1.669\)</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間<br>\(t = 2.286 &gt; 1.669 \)落在拒絕區間，因此拒絕 \(H_0\)。因此大部分這邊人都會超速，可以設測速照相</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>圖片解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1lbc1gj5E5u0ZGL90IrvbfTe7TELQkAc0&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>北科上課筆記</category>
@@ -13010,6 +13148,138 @@
         <tag>程式解題</tag>
         <tag>Binary Search 二分搜尋</tag>
         <tag>Codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - Segment Tree 線段樹</title>
+    <url>/2021/03/06/Explain_Algorithm/segment-tree/</url>
+    <content><![CDATA[<h2 id="Segment-Tree-線段樹-介紹"><a href="#Segment-Tree-線段樹-介紹" class="headerlink" title="Segment Tree 線段樹 介紹"></a>Segment Tree 線段樹 介紹</h2><blockquote>
+<p>線段樹是一種二元樹型態的資料結構，通常用於需要大量查詢區間的問題，空間複雜度是 \(O(n)\)，查詢的時間複雜度則是 \(O(log \ n + k\)，k 為符合條件的區間數量</p>
+<p>這種資料結構也能夠擴展到高維度</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%AE%B5%E6%A8%B9" target="_blank" rel="noopener">線段樹 - wiki</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Segment-Tree-線段樹-原理"><a href="#Segment-Tree-線段樹-原理" class="headerlink" title="Segment Tree 線段樹 原理"></a>Segment Tree 線段樹 原理</h2><blockquote>
+<p>先透過一張圖進行解釋，這就是線段樹的原貌<br><img src="https://i.imgur.com/sC6SBjn.png" alt=""><br><a href="https://hackmd.io/@wiwiho/CPN-segment-tree" target="_blank" rel="noopener">師大附中校隊 hackmd 提供，如不願讓我使用請通知我</a></p>
+</blockquote>
+<p>為了方便好寫，通常我會將線段樹的區間設定為 \([1, n]\)，而非從零開始，但其實從零開始也可以實作成功。</p>
+<p>線段樹一開始都會先到 root，之後根據我們所要查詢的區間往那方向進行查詢。</p>
+<h4 id="舉例，查詢-3-5"><a href="#舉例，查詢-3-5" class="headerlink" title="舉例，查詢 \([3, 5]\)"></a>舉例，查詢 \([3, 5]\)</h4><ul>
+<li>先查詢 \([0, 8]\)，向下找 \([0, 4]\)、\([5, 8]\)<ul>
+<li>\([0, 4]\)，找  \([3, 4]\)，另外一邊則不再我們的查詢區間<ul>
+<li>\([3, 4]\) 是在我們查詢的區間，不再往下查詢，直接回傳此答案</li>
+</ul>
+</li>
+<li>\([5, 8]\)，查找 \([5, 6]\)，另外一邊則不再我們的查詢區間<ul>
+<li>\([5, 6]\) 查詢 \([5, 5]\)，另外一邊則不再我們的查詢區間<ul>
+<li>\([5, 5]\) 是在我們查詢的區間，不再往下查詢，直接回傳此答案</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>將前面兩個回傳的查詢，進行比較，取出最大 or 最小值，然後輸出。</li>
+</ul>
+</li>
+</ul>
+<p>主要就是線段樹的查詢過程</p>
+<h3 id="結構型態"><a href="#結構型態" class="headerlink" title="結構型態"></a>結構型態</h3><p>線段樹的每個節點必須要有三個值，左邊邊界、右邊邊界、儲存的值。</p>
+<p>需要值得注意的是，由於線段樹的底層是一顆二元樹，因此大小<strong>絕對不能只開一樣大</strong>，必須要開到 \(4 * n\)，至於為甚麼要開 \(4 * n\)，以下進行證明。</p>
+<ul>
+<li>一顆二元樹的葉節點假如是 \(2_i\)，\(i\) 為負整數</li>
+<li>因此這棵樹所有節點不會大於 \(2^{i+1}\)，此證明如下<ul>
+<li>第一層的節點是 1</li>
+<li>第二層節點是第二層的兩倍，之後以此類推</li>
+<li>得出公式 \(\sum_{i = 0}^{h-1} 2^i = 2^h-1\)，其中 h 為最大的深度，h-1 就表示非葉節點的最大深度</li>
+<li>一個最簡單的證明就是 2 進位的 \(111_{(2)}\) 不會大於 \(1000_{(2)}\)，且\(1000_{(2)} - 1 = 111_{(2)}\) </li>
+</ul>
+</li>
+<li>因此二元樹總節點會是 \(2^{h}-1 + 2^h\)，化簡後就是 \(2^{h+1} -1\)</li>
+</ul>
+<h4 id="證明參考"><a href="#證明參考" class="headerlink" title="證明參考"></a>證明參考</h4><blockquote>
+<p><a href="http://wayne.cif.takming.edu.tw/datastru/tree.pdf" target="_blank" rel="noopener">資料結構的樹與二元樹（Trees and Binary Trees） -     林偉川老師 </a><br><a href="https://hackmd.io/@wiwiho/CPN-segment-tree" target="_blank" rel="noopener">師大附中校隊 hackmd </a></p>
+</blockquote>
+<blockquote>
+<p>紹宇的證明提供，我在證明這裡時突然卡關，我好笨RRRR<br><img src="https://drive.google.com/u/2/uc?id=1DqmC6gLOn-nJJ7S8OOeiNNzaW2fzAUN3&export=download" alt=""></p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> left; <span class="comment">// 左邊邊界</span></span><br><span class="line">    <span class="keyword">int</span> right; <span class="comment">//右邊邊界</span></span><br><span class="line">    <span class="keyword">int</span> value; <span class="comment">//儲存的值</span></span><br><span class="line">&#125;node[<span class="number">4</span> * N ];</span><br></pre></td></tr></table></figure>
+<h2 id="透過實作來說明-Segment-Tree-線段樹"><a href="#透過實作來說明-Segment-Tree-線段樹" class="headerlink" title="透過實作來說明 Segment Tree 線段樹"></a>透過實作來說明 Segment Tree 線段樹</h2><p>這邊的問題則是給你一段數列，想請你告訴我們查詢的區間中最小值為何，下面的 <code>question()</code> 則是產生題目的數列。</p>
+<h3 id="建立線段樹"><a href="#建立線段樹" class="headerlink" title="建立線段樹"></a>建立線段樹</h3><p>剛剛我們已經知道了節點數量的最大的大小，現在來進行建立的步驟。</p>
+<p>我們要建立跟此網頁上第一張圖一樣的概念，直接透過程式碼說明，這邊我們要查詢的以最小值(min)為例。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) (x &lt;&lt; 1) <span class="comment">//左子樹</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) ((x &lt;&lt; 1) +1) <span class="comment">//右子樹</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">question</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) num[i] = i * <span class="number">123</span> % <span class="number">5</span>; </span><br><span class="line">    <span class="comment">// num 為題目產生的一段數列</span></span><br><span class="line">    <span class="comment">// hash 函數，讓 num 的 i 被隨機打亂</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123; </span><br><span class="line">    <span class="comment">// left 為題目最大左邊界，right 為題目最大右邊界，圖片最上面的 root 為第一個節點</span></span><br><span class="line">    node[x].left = left ; <span class="comment">//給 x 節點左右邊界</span></span><br><span class="line">    node[x].right = right ;</span><br><span class="line">    <span class="keyword">if</span>(left == right)&#123; <span class="comment">//如果左右邊界節點相同，表示這裡是葉節點</span></span><br><span class="line">        node[x].value = num[left] ;  <span class="comment">//把 num 值給 node[x]</span></span><br><span class="line">        <span class="comment">//這裡的 num 值表示，我們要在 value 要放的值</span></span><br><span class="line">        <span class="keyword">return</span> ; <span class="comment">//向前返回</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right ) / <span class="number">2</span> ; <span class="comment">//切半，產生二元樹</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; mid &lt;&lt; '\n' ;</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; node[x].left &lt;&lt; ' ' &lt;&lt; node[x].right &lt;&lt; ' ' &lt;&lt; '\n' ;</span></span><br><span class="line"></span><br><span class="line">    build(left , mid , Lson(x)) ; <span class="comment">//將區間改為 [left, mid] 然後帶給左子樹</span></span><br><span class="line">    build(mid + <span class="number">1</span> , right , Rson(x)) ; <span class="comment">//將區間改為 [mid+1, right] 然後帶給右子樹</span></span><br><span class="line">    node[x].value = min(node[Lson(x)].value  , node[Rson(x)].value ) ;</span><br><span class="line">    <span class="comment">//查詢左右子樹哪個數值最小，並讓左右子樹最小值表示此區間最小數值。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="單點修改"><a href="#單點修改" class="headerlink" title="單點修改"></a>單點修改</h3><p>畢竟是線段樹，題目不可能數值都一成不變，有時候會進行變動，這裡我們將說明程式碼如何幫助線段樹進行單點修改。</p>
+<p>基本上與建立相似，只是我們是先找到葉節點後，在向上比較，如果我們的值比較小就修改，沒有就保持原狀</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> position , <span class="keyword">int</span> value , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123; <span class="comment">//修改數字</span></span><br><span class="line">    <span class="keyword">if</span>(node[x].left == position &amp;&amp; node[x].right == position )&#123; <span class="comment">//找到葉節點</span></span><br><span class="line">       node[x].Min_Value = value ; <span class="comment">//修改</span></span><br><span class="line">       <span class="keyword">return</span> ; <span class="comment">//傳回</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; <span class="comment">//切半，向下修改</span></span><br><span class="line">    <span class="keyword">if</span>(position &lt;= mid ) <span class="comment">//如果要修改的點在左邊，就往左下角追蹤</span></span><br><span class="line">        modify(position , value , Lson(x) );</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; position ) <span class="comment">//如果要修改的點在右邊，就往右下角追蹤</span></span><br><span class="line">        modify(position , value , Rson(x)) ;</span><br><span class="line">    node[x].Value = min(node[Lson(x)].Value , node[Rson(x)].Value );</span><br><span class="line">    <span class="comment">//比較左右子樹哪個值比較小，較小值為此節點的 value</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="區間查詢"><a href="#區間查詢" class="headerlink" title="區間查詢"></a>區間查詢</h3><p>線段樹重要的部分，所有的線段樹一定會進行這個動作，但查詢的方式其實與二元樹相同，畢竟是透過二元樹建立的嘛XD。</p>
+<p>我們將說明程式碼如何幫助線段樹進行區間查詢。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">0</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left &gt;= left &amp;&amp; node[x].right &lt;= right) </span><br><span class="line">        <span class="keyword">return</span> node[x].Min_Value ;</span><br><span class="line">    <span class="comment">//如果我們要查詢的區間比當前節點的區間大，那我們不需再向下查詢直接輸出此答案就好。</span></span><br><span class="line">    <span class="comment">// 例如我們要查詢 [2, 8]，我們只需要查詢 [3, 4]，不須查詢 [3, 3]、[4, 4]，</span></span><br><span class="line">    <span class="comment">// [3, 4] 已經做到最小值查詢</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; <span class="comment">//切半，向下修改</span></span><br><span class="line">    <span class="keyword">int</span> ans = INF ; <span class="comment">//一開始先假設答案為最大值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( left &lt;= mid ) <span class="comment">//如果切半後，我們要查詢的區間有在左子樹就向下查詢</span></span><br><span class="line">        ans = min(ans , query(left , right , Lson(x))) ; <span class="comment">//更新答案，比較誰比較小</span></span><br><span class="line">    <span class="keyword">if</span>(mid &lt; right ) <span class="comment">//如果切半後，我們要查詢的區間有在右子樹就向下查詢</span></span><br><span class="line">        ans = min(ans , query(left , right , Rson(x))) ; <span class="comment">//更新答案，比較誰比較小</span></span><br><span class="line">    <span class="keyword">return</span> ans ; <span class="comment">//回傳答案</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="不可離散化的-Segment-Tree-線段樹"><a href="#不可離散化的-Segment-Tree-線段樹" class="headerlink" title="不可離散化的 Segment Tree 線段樹"></a>不可離散化的 Segment Tree 線段樹</h3><p>有時候會遇到一些題目的 n 可能大於 \(10^9\)，在 C++ 沒有辦法承擔那麼大的陣列大小時，我們可以用指標來解決這個問題，或是改使用 linklist 的方式，減少因為離散化而大量設定陣列值的問題。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><blockquote>
+<p><a href="http://wayne.cif.takming.edu.tw/datastru/tree.pdf" target="_blank" rel="noopener">資料結構的樹與二元樹（Trees and Binary Trees） -     林偉川老師 </a><br><a href="https://hackmd.io/@wiwiho/CPN-segment-tree" target="_blank" rel="noopener">師大附中校隊 hackmd </a></p>
+</blockquote>
+<blockquote>
+<p>紹宇的證明提供，我在證明這裡時突然卡關，我好笨RRRR<br><img src="https://drive.google.com/u/2/uc?id=1DqmC6gLOn-nJJ7S8OOeiNNzaW2fzAUN3&export=download" alt=""></p>
+</blockquote>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好久沒有複習線段樹了，透過這此的編寫讓我把線段樹也重新複習了一遍，老實講我常常會覺得自己寫這些東西似乎沒用，畢竟我走資財，寫這些東西可能只能夠在純資的環境上使用，但我是資財的學生，我不知道自己到底用不用的到。</p>
+<p>老實講，自己在高中學到的東西，非常快樂，非常充實。但在大學時感覺不到有一群跟我一樣愛好的人一起努力奮鬥，大家都有自己的目標要奮鬥，大家的目標不再只有那麼單一，都很多樣，有時候會讓我迷失方向，會讓我覺得我做這些事情有意義嗎。</p>
+<h2 id="Segment-Tree-線段樹-無註解程式碼"><a href="#Segment-Tree-線段樹-無註解程式碼" class="headerlink" title="Segment Tree 線段樹 無註解程式碼"></a>Segment Tree 線段樹 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) (x &lt;&lt; 1) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) ((x &lt;&lt; 1) +1)</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> left;</span><br><span class="line">    <span class="keyword">int</span> right; </span><br><span class="line">    <span class="keyword">int</span> value; </span><br><span class="line">&#125;node[<span class="number">4</span> * N ]; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">question</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) num[i] = i * <span class="number">123</span> % <span class="number">5</span>; </span><br><span class="line">    <span class="comment">// num 為題目產生的一段數列</span></span><br><span class="line">    <span class="comment">// hash 函數，讓 num 的 i 被隨機打亂</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123; </span><br><span class="line">    node[x].left = left ;</span><br><span class="line">    node[x].right = right ;</span><br><span class="line">    <span class="keyword">if</span>(left == right)&#123; </span><br><span class="line">        node[x].value = num[left] ; </span><br><span class="line">        <span class="keyword">return</span> ; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right ) / <span class="number">2</span> ; </span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; mid &lt;&lt; '\n' ;</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; node[x].left &lt;&lt; ' ' &lt;&lt; node[x].right &lt;&lt; ' ' &lt;&lt; '\n' ;</span></span><br><span class="line"></span><br><span class="line">    build(left , mid , Lson(x)) ; </span><br><span class="line">    build(mid + <span class="number">1</span> , right , Rson(x)) ;</span><br><span class="line">    node[x].value = min(node[Lson(x)].value  , node[Rson(x)].value ) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> position , <span class="keyword">int</span> value , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left == position &amp;&amp; node[x].right == position )&#123;</span><br><span class="line">       node[x].Min_Value = value ;</span><br><span class="line">       <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; </span><br><span class="line">    <span class="keyword">if</span>(position &lt;= mid ) </span><br><span class="line">        modify(position , value , Lson(x) );</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; position )</span><br><span class="line">        modify(position , value , Rson(x)) ;</span><br><span class="line">    node[x].Value = min(node[Lson(x)].Value , node[Rson(x)].Value );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">0</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left &gt;= left &amp;&amp; node[x].right &lt;= right) </span><br><span class="line">        <span class="keyword">return</span> node[x].Min_Value ;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; </span><br><span class="line">    <span class="keyword">int</span> ans = INF ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( left &lt;= mid ) </span><br><span class="line">        ans = min(ans , query(left , right , Lson(x))) ; </span><br><span class="line">    <span class="keyword">if</span>(mid &lt; right ) </span><br><span class="line">        ans = min(ans , query(left , right , Rson(x))) ; </span><br><span class="line">    <span class="keyword">return</span> ans ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>線段樹 Segment Tree</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11235 - Frequent values(線段樹)</title>
+    <url>/2021/03/04/UVa/UVa11235/</url>
+    <content><![CDATA[<h1 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h1><blockquote>
+<p>有一個非遞增的數列，雖然非遞增，但前一個數值必會小於等於這個數值，我們要查詢一個區間，想詢問這個區間中最常出現的數字次數是多少？</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2176" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>線段樹的學習與應用<br>如果需要學習演算法，請參考 <a href="https://theriseofdavid.github.io/2021/03/06/Explain_Algorithm/segment-tree/" target="_blank" rel="noopener">大衞的筆記 - Segment Tree 線段樹</a></li>
+<li>對於題目的仔細閱讀</li>
+<li>我們線段樹應該要保存甚麼數值，才能解決此題</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>只要遇到需要查詢區間的問題一律就要想到線段樹，線段樹的時間複雜度可以來到 \(O(n \ log \ n\)，能夠打遍百分之 90 的題目，但這邊有些小技巧要解決。</p>
+<p>這題要在線段樹裡面存的就是題目所需要的出現次數，但可能會有一種疑問<br>Q: 1,2,3,3,3,3,4，如果我要找區間 \([4,5]\) 要怎麼辦呢，這裡 index 從 1 開始。</p>
+<p>這個時候題目給了我們一個很大的提示，題目有說<strong>前一個數值必會小於等於這個數值</strong>，因此我們可以視為相同的數字只會出現在同個區段且不會再有其他區段重複。</p>
+<p>區段： 1,1,1,1，這種連續數字在一塊地，定義為區塊</p>
+<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>我們透過舉例來說明這種解決方式，用題目測資來說明</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">index:  1   2  3  4  5  6  7   8   9  10</span><br><span class="line">value: -1  -1  1  1  1  1  3  10  10  10</span><br><span class="line">fre:    2   2  4  4  4  4  1   3   3   3</span><br><span class="line"></span><br><span class="line">left:   1   1  2  2  2  2  7   8   8   8    </span><br><span class="line">right:  2   2  6  6  6  6  6  10  10  10</span><br></pre></td></tr></table></figure>
+
+<p>如果我們要查詢的區間是 \([4,9]\)，此時如果按照存區塊最大值時答案會是 4，但這裡的區間不應該有 4，答案要是 3，遇到這種問題就很棘手XD。</p>
+<p>但還是有辦法的，我們紀錄每個區塊的右邊界與左邊界，如果我們查詢的<strong>區間</strong>比起<strong>區塊</strong>還要小的時候就可以讓<strong>區塊的右邊界</strong>減去<strong>區間的左邊界</strong>，或<strong>區間的右邊界</strong>減去<strong>區塊的左邊界</strong>，這樣就可以避免掉區間查詢查到 4 的情況。</p>
+<p>而且我們只要在一開始的去判斷這種區間切到區塊的問題，之後就不需要，我們可以將要查詢的範圍減掉左右兩區間所切到的區塊，依照範例就是變為 \([7,7]\)，\([4,6]) 則是被切掉的左區間、\([8,9]]\) 則是被切掉的右區間，那麼縮小範圍後的<strong>區間</strong>裡面必包含完整區塊。畢竟裡面的區塊我們都沒有動到，所以都是完整的，也不存在不完整的情況發生。<br>不完整的區間只有在一開始的查詢區間有可能出現。</p>
+<p>這時我們再進行線段樹查詢找出最大出現數字次數，就能夠成功找到答案！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<p>至於 <a href="https://theriseofdavid.github.io/2021/03/06/Explain_Algorithm/segment-tree/" target="_blank" rel="noopener">大衞的筆記 - Segment Tree 線段樹</a> 有做說明的部分，這邊就不在進行說明。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) x &lt;&lt; 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) (x &lt;&lt; 1) + 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, q, ta, tb;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tree</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, v; <span class="comment">//將 left right value 進行簡化為 l r v</span></span><br><span class="line">    tree()&#123;&#125;</span><br><span class="line">    tree(<span class="keyword">int</span> _l, <span class="keyword">int</span> _r, <span class="keyword">int</span> _v): l(_l), r(_r), v(_v) &#123;&#125;</span><br><span class="line">&#125;node[<span class="number">4</span> * MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NUM</span>&#123;</span> <span class="comment">//用來儲存區塊</span></span><br><span class="line">    <span class="keyword">int</span> l, r, f, v; </span><br><span class="line">    <span class="comment">// l 區塊的左邊界</span></span><br><span class="line">    <span class="comment">// r 區塊的右邊界</span></span><br><span class="line">    <span class="comment">// f 區塊有多長</span></span><br><span class="line">    <span class="comment">// v 區塊的數值</span></span><br><span class="line">&#125;num[MAXN];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123;</span><br><span class="line">    node[x].l = left;</span><br><span class="line">    node[x].r = right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(left == right)&#123;</span><br><span class="line">        node[x].v = num[left].f; <span class="comment">//區塊有多長，題目詢問的重點</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">    build(left, mid, Lson(x));</span><br><span class="line">    build(mid + <span class="number">1</span>, right, Rson(x));</span><br><span class="line">    node[x].v = max(node[Lson(x)].v, node[Rson(x)].v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num[left].v == num[right].v) <span class="keyword">return</span> right - left + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//題目所查詢的區間，剛好在同個區塊上，num[left].v == num[right].v 表示數值相同也就代表區塊相同</span></span><br><span class="line">    <span class="comment">// 因此只需要拿左區間邊界減去右區間邊界加一就可以得到答案</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(left &gt; num[left].l)&#123; <span class="comment">//查詢的左區間邊界切到區塊，且此區間有數個區塊</span></span><br><span class="line">        ans = num[left].r - left + <span class="number">1</span>; <span class="comment">//計算切到的區間大小</span></span><br><span class="line">        <span class="comment">//方法是查詢被切到的區塊右邊界減去左區間邊界加一</span></span><br><span class="line">        left = num[left].r + <span class="number">1</span>; <span class="comment">//將左區間邊界移至被切區塊的右邊界加一，就不會切到區塊</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(right &lt; num[right].r)&#123; <span class="comment">//查詢的右區間邊界切到區塊，且此區間有數個區塊</span></span><br><span class="line">        ans = max(right - num[right].l + <span class="number">1</span>, ans); <span class="comment">//計算切到的區間大小，並找出最大</span></span><br><span class="line">        <span class="comment">//方法是查詢的右邊界減掉區塊左邊界加一</span></span><br><span class="line">        right = num[right].l - <span class="number">1</span>; <span class="comment">//將右區間邊界移至被切區塊的左邊界減一，就不會切到區塊</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "left right ans " &lt;&lt; left &lt;&lt; ' ' &lt;&lt; right &lt;&lt; ' ' &lt;&lt; ans &lt;&lt; '\n';</span></span><br><span class="line">    <span class="keyword">if</span>(left &gt; right ) <span class="keyword">return</span> ans; <span class="comment">//如果左邊界大於右邊界，表示不需要再進行查詢直接回傳答案</span></span><br><span class="line">    <span class="comment">//由於上面的 +1、-1，因此有機會出現左邊界大於右邊界的情形。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(node[x].l &gt;= left &amp;&amp; node[x].r &lt;= right ) <span class="keyword">return</span> node[x].v; </span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].l + node[x].r) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(left &lt;= mid) ans = max(ans, query(left, right, Lson(x)));</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; right) ans = max(ans, query(left, right, Rson(x)));</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug_num</span><span class="params">()</span></span>&#123; <span class="comment">//debug 用 無意義</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].l &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].r &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].v &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].f &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug_build</span><span class="params">()</span></span>&#123; <span class="comment">//debug 用 無意義</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span> &lt;&lt; node[i].l &lt;&lt; <span class="string">' '</span> &lt;&lt; node[i].r &lt;&lt; <span class="string">' '</span> &lt;&lt; node[i].v &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">1</span>, e; <span class="comment">//長度的 start ，長度的 end</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; q &amp;&amp; n + q != <span class="number">0</span>)&#123; <span class="comment">//輸入資料，並且注意查詢可以為 0，因此 n + q 必須 != 0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//書資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; ta;</span><br><span class="line">            num[i].v = ta; <span class="comment">//值設定 ta</span></span><br><span class="line">            <span class="keyword">if</span>(num[i].v != num[i<span class="number">-1</span>].v)&#123; <span class="comment">//如果現在的值與前面的值不同，表示不同區塊</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = s; j &lt; i; j++)&#123; <span class="comment">//將前面的區塊的左邊界、右邊界、長度進行設定。</span></span><br><span class="line">                    num[j].l = s; <span class="comment">//設定左邊界</span></span><br><span class="line">                    num[j].r = i<span class="number">-1</span>; <span class="comment">//設定右邊界，i-1 是因為 i 已經是不同區塊 </span></span><br><span class="line">                    num[j].f = i - s; <span class="comment">//設定長度</span></span><br><span class="line">                &#125;</span><br><span class="line">                s = i; <span class="comment">//更新下個區塊的左邊界</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = s; j &lt;= n; j++)&#123; <span class="comment">//最後一個區塊必須拉出來寫，因為後面沒有數值來進行分裂</span></span><br><span class="line">            num[j].l = s;</span><br><span class="line">            num[j].r = n;</span><br><span class="line">            num[j].f = n - s + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//debug_num();</span></span><br><span class="line">        build(<span class="number">1</span>, n);</span><br><span class="line">        <span class="comment">//debug_build();</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123; <span class="comment">//輸出結果</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; ta &gt;&gt; tb;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; query(ta, tb) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://naivered.github.io/2018/05/20/Problem_Solving/UVa/UVa-11235-Frequent-values/" target="_blank" rel="noopener">UVa 11235 - Frequent values - naivered</a><br><a href="https://algorithmist.com/wiki/Main_Page" target="_blank" rel="noopener">algorithmist wiki</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題複習了我很久沒有練習的線段樹，演算法太久沒有碰真的會忘記，今天在複習線段樹的時後一直卡卡的，腦袋還沒有喚醒記憶，透過今天的複習把記憶在喚醒！</p>
+<p>這題的小巧思好棒，雖然我沒有在很短的時間想到怎麼解，但我透過學習 naivered 大大的想法，得知還有這種解法，希望我學習了這種解法能夠讓我在未來的路上用上！</p>
+<p>題外話：人生一定要學習有意義的事情嗎？ 怎樣的事情算有意義。</p>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>線段樹 Segment Tree</tag>
       </tags>
   </entry>
 </search>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    演算法知識 - Segment Tree 線段樹 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Explain_Algorithm/segment-tree" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  演算法知識 - Segment Tree 線段樹
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/06/Explain_Algorithm/segment-tree/" class="article-date">
+  <time datetime="2021-03-06T04:38:07.000Z" itemprop="datePublished">2021-03-06</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">9分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Segment-Tree-線段樹-介紹"><a href="#Segment-Tree-線段樹-介紹" class="headerlink" title="Segment Tree 線段樹 介紹"></a>Segment Tree 線段樹 介紹</h2><blockquote>
+<p>線段樹是一種二元樹型態的資料結構，通常用於需要大量查詢區間的問題，空間複雜度是 \(O(n)\)，查詢的時間複雜度則是 \(O(log \ n + k\)，k 為符合條件的區間數量</p>
+<p>這種資料結構也能夠擴展到高維度</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%AE%B5%E6%A8%B9" target="_blank" rel="noopener">線段樹 - wiki</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Segment-Tree-線段樹-原理"><a href="#Segment-Tree-線段樹-原理" class="headerlink" title="Segment Tree 線段樹 原理"></a>Segment Tree 線段樹 原理</h2><blockquote>
+<p>先透過一張圖進行解釋，這就是線段樹的原貌<br><img src="https://i.imgur.com/sC6SBjn.png" alt=""><br><a href="https://hackmd.io/@wiwiho/CPN-segment-tree" target="_blank" rel="noopener">師大附中校隊 hackmd 提供，如不願讓我使用請通知我</a></p>
+</blockquote>
+<p>為了方便好寫，通常我會將線段樹的區間設定為 \([1, n]\)，而非從零開始，但其實從零開始也可以實作成功。</p>
+<p>線段樹一開始都會先到 root，之後根據我們所要查詢的區間往那方向進行查詢。</p>
+<h4 id="舉例，查詢-3-5"><a href="#舉例，查詢-3-5" class="headerlink" title="舉例，查詢 \([3, 5]\)"></a>舉例，查詢 \([3, 5]\)</h4><ul>
+<li>先查詢 \([0, 8]\)，向下找 \([0, 4]\)、\([5, 8]\)<ul>
+<li>\([0, 4]\)，找  \([3, 4]\)，另外一邊則不再我們的查詢區間<ul>
+<li>\([3, 4]\) 是在我們查詢的區間，不再往下查詢，直接回傳此答案</li>
+</ul>
+</li>
+<li>\([5, 8]\)，查找 \([5, 6]\)，另外一邊則不再我們的查詢區間<ul>
+<li>\([5, 6]\) 查詢 \([5, 5]\)，另外一邊則不再我們的查詢區間<ul>
+<li>\([5, 5]\) 是在我們查詢的區間，不再往下查詢，直接回傳此答案</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>將前面兩個回傳的查詢，進行比較，取出最大 or 最小值，然後輸出。</li>
+</ul>
+</li>
+</ul>
+<p>主要就是線段樹的查詢過程</p>
+<h3 id="結構型態"><a href="#結構型態" class="headerlink" title="結構型態"></a>結構型態</h3><p>線段樹的每個節點必須要有三個值，左邊邊界、右邊邊界、儲存的值。</p>
+<p>需要值得注意的是，由於線段樹的底層是一顆二元樹，因此大小<strong>絕對不能只開一樣大</strong>，必須要開到 \(4 * n\)，至於為甚麼要開 \(4 * n\)，以下進行證明。</p>
+<ul>
+<li>一顆二元樹的葉節點假如是 \(2_i\)，\(i\) 為負整數</li>
+<li>因此這棵樹所有節點不會大於 \(2^{i+1}\)，此證明如下<ul>
+<li>第一層的節點是 1</li>
+<li>第二層節點是第二層的兩倍，之後以此類推</li>
+<li>得出公式 \(\sum_{i = 0}^{h-1} 2^i = 2^h-1\)，其中 h 為最大的深度，h-1 就表示非葉節點的最大深度</li>
+<li>一個最簡單的證明就是 2 進位的 \(111_{(2)}\) 不會大於 \(1000_{(2)}\)，且\(1000_{(2)} - 1 = 111_{(2)}\) </li>
+</ul>
+</li>
+<li>因此二元樹總節點會是 \(2^{h}-1 + 2^h\)，化簡後就是 \(2^{h+1} -1\)</li>
+</ul>
+<h4 id="證明參考"><a href="#證明參考" class="headerlink" title="證明參考"></a>證明參考</h4><blockquote>
+<p><a href="http://wayne.cif.takming.edu.tw/datastru/tree.pdf" target="_blank" rel="noopener">資料結構的樹與二元樹（Trees and Binary Trees） -     林偉川老師 </a><br><a href="https://hackmd.io/@wiwiho/CPN-segment-tree" target="_blank" rel="noopener">師大附中校隊 hackmd </a></p>
+</blockquote>
+<blockquote>
+<p>紹宇的證明提供，我在證明這裡時突然卡關，我好笨RRRR<br><img src="https://drive.google.com/u/2/uc?id=1DqmC6gLOn-nJJ7S8OOeiNNzaW2fzAUN3&export=download" alt=""></p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> left; <span class="comment">// 左邊邊界</span></span><br><span class="line">    <span class="keyword">int</span> right; <span class="comment">//右邊邊界</span></span><br><span class="line">    <span class="keyword">int</span> value; <span class="comment">//儲存的值</span></span><br><span class="line">&#125;node[<span class="number">4</span> * N ];</span><br></pre></td></tr></table></figure>
+<h2 id="透過實作來說明-Segment-Tree-線段樹"><a href="#透過實作來說明-Segment-Tree-線段樹" class="headerlink" title="透過實作來說明 Segment Tree 線段樹"></a>透過實作來說明 Segment Tree 線段樹</h2><p>這邊的問題則是給你一段數列，想請你告訴我們查詢的區間中最小值為何，下面的 <code>question()</code> 則是產生題目的數列。</p>
+<h3 id="建立線段樹"><a href="#建立線段樹" class="headerlink" title="建立線段樹"></a>建立線段樹</h3><p>剛剛我們已經知道了節點數量的最大的大小，現在來進行建立的步驟。</p>
+<p>我們要建立跟此網頁上第一張圖一樣的概念，直接透過程式碼說明，這邊我們要查詢的以最小值(min)為例。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) (x &lt;&lt; 1) <span class="comment">//左子樹</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) ((x &lt;&lt; 1) +1) <span class="comment">//右子樹</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">question</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) num[i] = i * <span class="number">123</span> % <span class="number">5</span>; </span><br><span class="line">    <span class="comment">// num 為題目產生的一段數列</span></span><br><span class="line">    <span class="comment">// hash 函數，讓 num 的 i 被隨機打亂</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123; </span><br><span class="line">    <span class="comment">// left 為題目最大左邊界，right 為題目最大右邊界，圖片最上面的 root 為第一個節點</span></span><br><span class="line">    node[x].left = left ; <span class="comment">//給 x 節點左右邊界</span></span><br><span class="line">    node[x].right = right ;</span><br><span class="line">    <span class="keyword">if</span>(left == right)&#123; <span class="comment">//如果左右邊界節點相同，表示這裡是葉節點</span></span><br><span class="line">        node[x].value = num[left] ;  <span class="comment">//把 num 值給 node[x]</span></span><br><span class="line">        <span class="comment">//這裡的 num 值表示，我們要在 value 要放的值</span></span><br><span class="line">        <span class="keyword">return</span> ; <span class="comment">//向前返回</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right ) / <span class="number">2</span> ; <span class="comment">//切半，產生二元樹</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; mid &lt;&lt; '\n' ;</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; node[x].left &lt;&lt; ' ' &lt;&lt; node[x].right &lt;&lt; ' ' &lt;&lt; '\n' ;</span></span><br><span class="line"></span><br><span class="line">    build(left , mid , Lson(x)) ; <span class="comment">//將區間改為 [left, mid] 然後帶給左子樹</span></span><br><span class="line">    build(mid + <span class="number">1</span> , right , Rson(x)) ; <span class="comment">//將區間改為 [mid+1, right] 然後帶給右子樹</span></span><br><span class="line">    node[x].value = min(node[Lson(x)].value  , node[Rson(x)].value ) ;</span><br><span class="line">    <span class="comment">//查詢左右子樹哪個數值最小，並讓左右子樹最小值表示此區間最小數值。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="單點修改"><a href="#單點修改" class="headerlink" title="單點修改"></a>單點修改</h3><p>畢竟是線段樹，題目不可能數值都一成不變，有時候會進行變動，這裡我們將說明程式碼如何幫助線段樹進行單點修改。</p>
+<p>基本上與建立相似，只是我們是先找到葉節點後，在向上比較，如果我們的值比較小就修改，沒有就保持原狀</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> position , <span class="keyword">int</span> value , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123; <span class="comment">//修改數字</span></span><br><span class="line">    <span class="keyword">if</span>(node[x].left == position &amp;&amp; node[x].right == position )&#123; <span class="comment">//找到葉節點</span></span><br><span class="line">       node[x].Min_Value = value ; <span class="comment">//修改</span></span><br><span class="line">       <span class="keyword">return</span> ; <span class="comment">//傳回</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; <span class="comment">//切半，向下修改</span></span><br><span class="line">    <span class="keyword">if</span>(position &lt;= mid ) <span class="comment">//如果要修改的點在左邊，就往左下角追蹤</span></span><br><span class="line">        modify(position , value , Lson(x) );</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; position ) <span class="comment">//如果要修改的點在右邊，就往右下角追蹤</span></span><br><span class="line">        modify(position , value , Rson(x)) ;</span><br><span class="line">    node[x].Value = min(node[Lson(x)].Value , node[Rson(x)].Value );</span><br><span class="line">    <span class="comment">//比較左右子樹哪個值比較小，較小值為此節點的 value</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="區間查詢"><a href="#區間查詢" class="headerlink" title="區間查詢"></a>區間查詢</h3><p>線段樹重要的部分，所有的線段樹一定會進行這個動作，但查詢的方式其實與二元樹相同，畢竟是透過二元樹建立的嘛XD。</p>
+<p>我們將說明程式碼如何幫助線段樹進行區間查詢。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">0</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left &gt;= left &amp;&amp; node[x].right &lt;= right) </span><br><span class="line">        <span class="keyword">return</span> node[x].Min_Value ;</span><br><span class="line">    <span class="comment">//如果我們要查詢的區間比當前節點的區間大，那我們不需再向下查詢直接輸出此答案就好。</span></span><br><span class="line">    <span class="comment">// 例如我們要查詢 [2, 8]，我們只需要查詢 [3, 4]，不須查詢 [3, 3]、[4, 4]，</span></span><br><span class="line">    <span class="comment">// [3, 4] 已經做到最小值查詢</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; <span class="comment">//切半，向下修改</span></span><br><span class="line">    <span class="keyword">int</span> ans = INF ; <span class="comment">//一開始先假設答案為最大值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( left &lt;= mid ) <span class="comment">//如果切半後，我們要查詢的區間有在左子樹就向下查詢</span></span><br><span class="line">        ans = min(ans , query(left , right , Lson(x))) ; <span class="comment">//更新答案，比較誰比較小</span></span><br><span class="line">    <span class="keyword">if</span>(mid &lt; right ) <span class="comment">//如果切半後，我們要查詢的區間有在右子樹就向下查詢</span></span><br><span class="line">        ans = min(ans , query(left , right , Rson(x))) ; <span class="comment">//更新答案，比較誰比較小</span></span><br><span class="line">    <span class="keyword">return</span> ans ; <span class="comment">//回傳答案</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="不可離散化的-Segment-Tree-線段樹"><a href="#不可離散化的-Segment-Tree-線段樹" class="headerlink" title="不可離散化的 Segment Tree 線段樹"></a>不可離散化的 Segment Tree 線段樹</h3><p>有時候會遇到一些題目的 n 可能大於 \(10^9\)，在 C++ 沒有辦法承擔那麼大的陣列大小時，我們可以用指標來解決這個問題，或是改使用 linklist 的方式，減少因為離散化而大量設定陣列值的問題。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><blockquote>
+<p><a href="http://wayne.cif.takming.edu.tw/datastru/tree.pdf" target="_blank" rel="noopener">資料結構的樹與二元樹（Trees and Binary Trees） -     林偉川老師 </a><br><a href="https://hackmd.io/@wiwiho/CPN-segment-tree" target="_blank" rel="noopener">師大附中校隊 hackmd </a></p>
+</blockquote>
+<blockquote>
+<p>紹宇的證明提供，我在證明這裡時突然卡關，我好笨RRRR<br><img src="https://drive.google.com/u/2/uc?id=1DqmC6gLOn-nJJ7S8OOeiNNzaW2fzAUN3&export=download" alt=""></p>
+</blockquote>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好久沒有複習線段樹了，透過這此的編寫讓我把線段樹也重新複習了一遍，老實講我常常會覺得自己寫這些東西似乎沒用，畢竟我走資財，寫這些東西可能只能夠在純資的環境上使用，但我是資財的學生，我不知道自己到底用不用的到。</p>
+<p>老實講，自己在高中學到的東西，非常快樂，非常充實。但在大學時感覺不到有一群跟我一樣愛好的人一起努力奮鬥，大家都有自己的目標要奮鬥，大家的目標不再只有那麼單一，都很多樣，有時候會讓我迷失方向，會讓我覺得我做這些事情有意義嗎。</p>
+<h2 id="Segment-Tree-線段樹-無註解程式碼"><a href="#Segment-Tree-線段樹-無註解程式碼" class="headerlink" title="Segment Tree 線段樹 無註解程式碼"></a>Segment Tree 線段樹 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) (x &lt;&lt; 1) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) ((x &lt;&lt; 1) +1)</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> left;</span><br><span class="line">    <span class="keyword">int</span> right; </span><br><span class="line">    <span class="keyword">int</span> value; </span><br><span class="line">&#125;node[<span class="number">4</span> * N ]; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">question</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) num[i] = i * <span class="number">123</span> % <span class="number">5</span>; </span><br><span class="line">    <span class="comment">// num 為題目產生的一段數列</span></span><br><span class="line">    <span class="comment">// hash 函數，讓 num 的 i 被隨機打亂</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123; </span><br><span class="line">    node[x].left = left ;</span><br><span class="line">    node[x].right = right ;</span><br><span class="line">    <span class="keyword">if</span>(left == right)&#123; </span><br><span class="line">        node[x].value = num[left] ; </span><br><span class="line">        <span class="keyword">return</span> ; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right ) / <span class="number">2</span> ; </span><br><span class="line"></span><br><span class="line">    <span class="comment">//debug</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; mid &lt;&lt; '\n' ;</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; node[x].left &lt;&lt; ' ' &lt;&lt; node[x].right &lt;&lt; ' ' &lt;&lt; '\n' ;</span></span><br><span class="line"></span><br><span class="line">    build(left , mid , Lson(x)) ; </span><br><span class="line">    build(mid + <span class="number">1</span> , right , Rson(x)) ;</span><br><span class="line">    node[x].value = min(node[Lson(x)].value  , node[Rson(x)].value ) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> position , <span class="keyword">int</span> value , <span class="keyword">int</span> x = <span class="number">1</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left == position &amp;&amp; node[x].right == position )&#123;</span><br><span class="line">       node[x].Min_Value = value ;</span><br><span class="line">       <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; </span><br><span class="line">    <span class="keyword">if</span>(position &lt;= mid ) </span><br><span class="line">        modify(position , value , Lson(x) );</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; position )</span><br><span class="line">        modify(position , value , Rson(x)) ;</span><br><span class="line">    node[x].Value = min(node[Lson(x)].Value , node[Rson(x)].Value );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left , <span class="keyword">int</span> right , <span class="keyword">int</span> x = <span class="number">0</span> )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node[x].left &gt;= left &amp;&amp; node[x].right &lt;= right) </span><br><span class="line">        <span class="keyword">return</span> node[x].Min_Value ;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].left + node[x].right ) / <span class="number">2</span> ; </span><br><span class="line">    <span class="keyword">int</span> ans = INF ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( left &lt;= mid ) </span><br><span class="line">        ans = min(ans , query(left , right , Lson(x))) ; </span><br><span class="line">    <span class="keyword">if</span>(mid &lt; right ) </span><br><span class="line">        ans = min(ans , query(left , right , Rson(x))) ; </span><br><span class="line">    <span class="keyword">return</span> ans ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B7%9A%E6%AE%B5%E6%A8%B9-Segment-Tree/" rel="tag">線段樹 Segment Tree</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/03/04/UVa/UVa11235/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa11235 - Frequent values(線段樹)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

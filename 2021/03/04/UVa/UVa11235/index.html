@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa11235 - Frequent values(線段樹) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa11235" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa11235 - Frequent values(線段樹)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/04/UVa/UVa11235/" class="article-date">
+  <time datetime="2021-03-04T12:36:44.000Z" itemprop="datePublished">2021-03-04</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">8分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h1><blockquote>
+<p>有一個非遞增的數列，雖然非遞增，但前一個數值必會小於等於這個數值，我們要查詢一個區間，想詢問這個區間中最常出現的數字次數是多少？</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2176" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>線段樹的學習與應用<br>如果需要學習演算法，請參考 <a href="https://theriseofdavid.github.io/2021/03/06/Explain_Algorithm/segment-tree/" target="_blank" rel="noopener">大衞的筆記 - Segment Tree 線段樹</a></li>
+<li>對於題目的仔細閱讀</li>
+<li>我們線段樹應該要保存甚麼數值，才能解決此題</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>只要遇到需要查詢區間的問題一律就要想到線段樹，線段樹的時間複雜度可以來到 \(O(n \ log \ n\)，能夠打遍百分之 90 的題目，但這邊有些小技巧要解決。</p>
+<p>這題要在線段樹裡面存的就是題目所需要的出現次數，但可能會有一種疑問<br>Q: 1,2,3,3,3,3,4，如果我要找區間 \([4,5]\) 要怎麼辦呢，這裡 index 從 1 開始。</p>
+<p>這個時候題目給了我們一個很大的提示，題目有說<strong>前一個數值必會小於等於這個數值</strong>，因此我們可以視為相同的數字只會出現在同個區段且不會再有其他區段重複。</p>
+<p>區段： 1,1,1,1，這種連續數字在一塊地，定義為區塊</p>
+<h3 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h3><p>我們透過舉例來說明這種解決方式，用題目測資來說明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">index:  1   2  3  4  5  6  7   8   9  10</span><br><span class="line">value: -1  -1  1  1  1  1  3  10  10  10</span><br><span class="line">fre:    2   2  4  4  4  4  1   3   3   3</span><br><span class="line"></span><br><span class="line">left:   1   1  2  2  2  2  7   8   8   8    </span><br><span class="line">right:  2   2  6  6  6  6  6  10  10  10</span><br></pre></td></tr></table></figure>
+
+<p>如果我們要查詢的區間是 \([4,9]\)，此時如果按照存區塊最大值時答案會是 4，但這裡的區間不應該有 4，答案要是 3，遇到這種問題就很棘手XD。</p>
+<p>但還是有辦法的，我們紀錄每個區塊的右邊界與左邊界，如果我們查詢的<strong>區間</strong>比起<strong>區塊</strong>還要小的時候就可以讓<strong>區塊的右邊界</strong>減去<strong>區間的左邊界</strong>，或<strong>區間的右邊界</strong>減去<strong>區塊的左邊界</strong>，這樣就可以避免掉區間查詢查到 4 的情況。</p>
+<p>而且我們只要在一開始的去判斷這種區間切到區塊的問題，之後就不需要，我們可以將要查詢的範圍減掉左右兩區間所切到的區塊，依照範例就是變為 \([7,7]\)，\([4,6]) 則是被切掉的左區間、\([8,9]]\) 則是被切掉的右區間，那麼縮小範圍後的<strong>區間</strong>裡面必包含完整區塊。畢竟裡面的區塊我們都沒有動到，所以都是完整的，也不存在不完整的情況發生。<br>不完整的區間只有在一開始的查詢區間有可能出現。</p>
+<p>這時我們再進行線段樹查詢找出最大出現數字次數，就能夠成功找到答案！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<p>至於 <a href="https://theriseofdavid.github.io/2021/03/06/Explain_Algorithm/segment-tree/" target="_blank" rel="noopener">大衞的筆記 - Segment Tree 線段樹</a> 有做說明的部分，這邊就不在進行說明。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) x &lt;&lt; 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) (x &lt;&lt; 1) + 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, q, ta, tb;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tree</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, v; <span class="comment">//將 left right value 進行簡化為 l r v</span></span><br><span class="line">    tree()&#123;&#125;</span><br><span class="line">    tree(<span class="keyword">int</span> _l, <span class="keyword">int</span> _r, <span class="keyword">int</span> _v): l(_l), r(_r), v(_v) &#123;&#125;</span><br><span class="line">&#125;node[<span class="number">4</span> * MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">NUM</span>&#123;</span> <span class="comment">//用來儲存區塊</span></span><br><span class="line">    <span class="keyword">int</span> l, r, f, v; </span><br><span class="line">    <span class="comment">// l 區塊的左邊界</span></span><br><span class="line">    <span class="comment">// r 區塊的右邊界</span></span><br><span class="line">    <span class="comment">// f 區塊有多長</span></span><br><span class="line">    <span class="comment">// v 區塊的數值</span></span><br><span class="line">&#125;num[MAXN];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123;</span><br><span class="line">    node[x].l = left;</span><br><span class="line">    node[x].r = right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(left == right)&#123;</span><br><span class="line">        node[x].v = num[left].f; <span class="comment">//區塊有多長，題目詢問的重點</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">    build(left, mid, Lson(x));</span><br><span class="line">    build(mid + <span class="number">1</span>, right, Rson(x));</span><br><span class="line">    node[x].v = max(node[Lson(x)].v, node[Rson(x)].v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num[left].v == num[right].v) <span class="keyword">return</span> right - left + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//題目所查詢的區間，剛好在同個區塊上，num[left].v == num[right].v 表示數值相同也就代表區塊相同</span></span><br><span class="line">    <span class="comment">// 因此只需要拿左區間邊界減去右區間邊界加一就可以得到答案</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(left &gt; num[left].l)&#123; <span class="comment">//查詢的左區間邊界切到區塊，且此區間有數個區塊</span></span><br><span class="line">        ans = num[left].r - left + <span class="number">1</span>; <span class="comment">//計算切到的區間大小</span></span><br><span class="line">        <span class="comment">//方法是查詢被切到的區塊右邊界減去左區間邊界加一</span></span><br><span class="line">        left = num[left].r + <span class="number">1</span>; <span class="comment">//將左區間邊界移至被切區塊的右邊界加一，就不會切到區塊</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(right &lt; num[right].r)&#123; <span class="comment">//查詢的右區間邊界切到區塊，且此區間有數個區塊</span></span><br><span class="line">        ans = max(right - num[right].l + <span class="number">1</span>, ans); <span class="comment">//計算切到的區間大小，並找出最大</span></span><br><span class="line">        <span class="comment">//方法是查詢的右邊界減掉區塊左邊界加一</span></span><br><span class="line">        right = num[right].l - <span class="number">1</span>; <span class="comment">//將右區間邊界移至被切區塊的左邊界減一，就不會切到區塊</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "left right ans " &lt;&lt; left &lt;&lt; ' ' &lt;&lt; right &lt;&lt; ' ' &lt;&lt; ans &lt;&lt; '\n';</span></span><br><span class="line">    <span class="keyword">if</span>(left &gt; right ) <span class="keyword">return</span> ans; <span class="comment">//如果左邊界大於右邊界，表示不需要再進行查詢直接回傳答案</span></span><br><span class="line">    <span class="comment">//由於上面的 +1、-1，因此有機會出現左邊界大於右邊界的情形。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(node[x].l &gt;= left &amp;&amp; node[x].r &lt;= right ) <span class="keyword">return</span> node[x].v; </span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].l + node[x].r) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(left &lt;= mid) ans = max(ans, query(left, right, Lson(x)));</span><br><span class="line">    <span class="keyword">if</span>(mid &lt; right) ans = max(ans, query(left, right, Rson(x)));</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug_num</span><span class="params">()</span></span>&#123; <span class="comment">//debug 用 無意義</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].l &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].r &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].v &lt;&lt; <span class="string">' '</span> &lt;&lt; num[i].f &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug_build</span><span class="params">()</span></span>&#123; <span class="comment">//debug 用 無意義</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span> &lt;&lt; node[i].l &lt;&lt; <span class="string">' '</span> &lt;&lt; node[i].r &lt;&lt; <span class="string">' '</span> &lt;&lt; node[i].v &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">1</span>, e; <span class="comment">//長度的 start ，長度的 end</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; q &amp;&amp; n + q != <span class="number">0</span>)&#123; <span class="comment">//輸入資料，並且注意查詢可以為 0，因此 n + q 必須 != 0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//書資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; ta;</span><br><span class="line">            num[i].v = ta; <span class="comment">//值設定 ta</span></span><br><span class="line">            <span class="keyword">if</span>(num[i].v != num[i<span class="number">-1</span>].v)&#123; <span class="comment">//如果現在的值與前面的值不同，表示不同區塊</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = s; j &lt; i; j++)&#123; <span class="comment">//將前面的區塊的左邊界、右邊界、長度進行設定。</span></span><br><span class="line">                    num[j].l = s; <span class="comment">//設定左邊界</span></span><br><span class="line">                    num[j].r = i<span class="number">-1</span>; <span class="comment">//設定右邊界，i-1 是因為 i 已經是不同區塊 </span></span><br><span class="line">                    num[j].f = i - s; <span class="comment">//設定長度</span></span><br><span class="line">                &#125;</span><br><span class="line">                s = i; <span class="comment">//更新下個區塊的左邊界</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = s; j &lt;= n; j++)&#123; <span class="comment">//最後一個區塊必須拉出來寫，因為後面沒有數值來進行分裂</span></span><br><span class="line">            num[j].l = s;</span><br><span class="line">            num[j].r = n;</span><br><span class="line">            num[j].f = n - s + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//debug_num();</span></span><br><span class="line">        build(<span class="number">1</span>, n);</span><br><span class="line">        <span class="comment">//debug_build();</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123; <span class="comment">//輸出結果</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; ta &gt;&gt; tb;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; query(ta, tb) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://naivered.github.io/2018/05/20/Problem_Solving/UVa/UVa-11235-Frequent-values/" target="_blank" rel="noopener">UVa 11235 - Frequent values - naivered</a><br><a href="https://algorithmist.com/wiki/Main_Page" target="_blank" rel="noopener">algorithmist wiki</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題複習了我很久沒有練習的線段樹，演算法太久沒有碰真的會忘記，今天在複習線段樹的時後一直卡卡的，腦袋還沒有喚醒記憶，透過今天的複習把記憶在喚醒！</p>
+<p>這題的小巧思好棒，雖然我沒有在很短的時間想到怎麼解，但我透過學習 naivered 大大的想法，得知還有這種解法，希望我學習了這種解法能夠讓我在未來的路上用上！</p>
+<p>題外話：人生一定要學習有意義的事情嗎？ 怎樣的事情算有意義。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B7%9A%E6%AE%B5%E6%A8%B9-Segment-Tree/" rel="tag">線段樹 Segment Tree</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/03/06/Explain_Algorithm/segment-tree/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            演算法知識 - Segment Tree 線段樹
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/03/02/Codeforces/Codeforces%201492C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Codeforces 1492C - Maximum width (二元搜尋)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
