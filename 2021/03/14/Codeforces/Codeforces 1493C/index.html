@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Codeforces 1493C - K-beautiful Strings (設計解題、實作題) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Codeforces/Codeforces 1493C" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Codeforces 1493C - K-beautiful Strings (設計解題、實作題)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/14/Codeforces/Codeforces%201493C/" class="article-date">
+  <time datetime="2021-03-14T15:48:44.000Z" itemprop="datePublished">2021-03-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>將給你一個字串 s，以及 k，請你找出一個字串比 s 下一個小的字串並且裡面的同個字母數量都能 mod k == 0 還有產生的字串長度必須等於 s</p>
+<p><a href="https://codeforces.com/contest/1493/problem/C" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>抓到題目重點</li>
+<li>想到一個好寫的程式碼流程</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>對不起，我覺得我的重點觀念很像在講幹話…，但設計解題就是這樣嘛RRRR。<br>相信大家都能夠推出重點來，只是大家不知道要怎麼寫這題目，有抓到重點但是寫不出來的那種感覺。</p>
+<p>以下是我進行整理的點，由<a href="https://blog.csdn.net/Aajbelieve/article/details/114500305" target="_blank" rel="noopener">�我在</a>大大中領會出來的。</p>
+<ul>
+<li>\(題目字串長度 \% k = 0 \)，如果不成立就可以輸出 -1<br>因為如果不等於的話，勢必會有一個英文字母沒有辦法 mod k</li>
+<li>再來我們判斷需不需要修改字串中的字元，如果不用就直接輸出原本的字串<br>這點很重要，如果我們有先處理這步驟，那後面的程式會好寫很多，<del>我就是沒想到這步才卡住</del></li>
+<li>需要修改時，那我們就要進行以下處理<ul>
+<li>從題目的字串尾巴開始判斷是否要修改字元<br>由於題目只能找比 s 下一個小的字串，因此我們先修改字串尾巴的字元，能夠更快找到比 s 下一個小的字串</li>
+<li>如果在某 index 下修改字元，判斷要填塞哪個字母才能符合<strong>同個字母數量都能 mod k == 0</strong><br>這時，我們要計算出在<strong>某 index</strong>前面的字串們，還要再塞入<strong>一個字元幾次，例如 ‘a’ 個字元兩次</strong>才能符合<strong>同個字母數量都能 mod k == 0</strong></li>
+<li>推敲出公式 <code>(k- 現在某個字元在某 index 前面字串裡的數量 %k)%k</code> 此公式為還要在幾個相同字元的數量才能符合<strong>同個字母數量都能 mod k == 0</strong><br>假如一個字串 <code>aabb</code>，k = 3，那我們勢必要在給各一個 a, b 才能符合<strong>同個字母數量都能 mod k == 0</strong>此條件，可能會有人不太懂為甚麼前面要 <code>(k -</code> and <code>%k</code>，是為了假如<strong>現在某個字元在某 index 前面字串裡的數量 = 0</strong>時，才不會出現需要 k 個字元的情況發生。</li>
+</ul>
+</li>
+</ul>
+<p>現在我們獲得這些重點後，我們就可以來寫程式了！一些重點與小技巧在程式碼那邊進行說明。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><a href="https://blog.csdn.net/Aajbelieve/article/details/114500305" target="_blank" rel="noopener">Codeforces Round #705 (Div. 2) 1493题解A. Anti-knapsack/B. Planet Lapituletti/C. K-beautiful Strings - by �我在</a></li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>RRRRR，其實我應該寫得出這題的，只是我抓出了這些重點後還是沒有寫程式的想法，透過 �我在大大的程式碼後，我才發現有一個 <code>sum</code>(題目程式碼的陣列，用於記錄在每個字串前綴長度時，每個字母的數量值) 是多麼重要的一件事情！我那時要是有想到他，我就會解出來了！</p>
+<p>總之希望自己在學演算法是有意義的，我覺得我正在變聰明，我也從演算法中獲取了很多知識，似乎每天努力的學習就是寫演算法的義務吧！</p>
+<p>嘛，我也不知道為甚麼我會走到這條路，總之我繼續加油吧！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> T, k, n;</span><br><span class="line"><span class="keyword">int</span> cnt[<span class="number">30</span>], sum[MAXN][<span class="number">30</span>], now;</span><br><span class="line"><span class="comment">//cnt 如果在這 index 後的字串後綴都替換後，需要給予的字元數量，index 是 a,b,c 這種感覺</span></span><br><span class="line"><span class="comment">//sum[字串當前長度][字母 (a,b, c)] = 數量，也就是字串當前長度的某個字元的數量</span></span><br><span class="line"><span class="built_in">string</span> s; <span class="comment">//輸入題目資料用</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123; <span class="comment">//判斷在此 index 下能否表達出題目所要的答案字元</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = s[x]-<span class="string">'a'</span>+<span class="number">1</span>; i &lt; <span class="number">26</span>; i++)&#123; <span class="comment">//從修改的 index 字元的下一個開始，到 z 結束</span></span><br><span class="line">        <span class="built_in">memset</span>(cnt, <span class="number">0</span>, <span class="keyword">sizeof</span>(cnt)); <span class="comment">//將 cnt 歸為零，cnt 每次都要 clear</span></span><br><span class="line">        <span class="comment">//cnt 用來表示，我們的 cnt[字母 (a,b,c)] = 數量，也就是每個字母需要幾個數量才能符合，</span></span><br><span class="line">        <span class="comment">//同個字母數量都能 mod k == 0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> remain = n-x<span class="number">-1</span>; <span class="comment">//如果從此 index 開始修改，那後面的字元我們可以任意變動</span></span><br><span class="line">        <span class="comment">//但也只有這個數量可以變動，注意要 -1，因為 x 這個 index 的字元是固定的，</span></span><br><span class="line">        <span class="comment">//必須要是 i，才有符合當前字源比 s[i] 小</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">26</span>; j++)&#123; <span class="comment">//每個字元還需要多少字元才能符合，</span></span><br><span class="line">        <span class="comment">//同個字母數量都能 mod k == 0</span></span><br><span class="line">            now = sum[x][j]; <span class="comment">//當前長度的 j + 'a' 字元有多少數量</span></span><br><span class="line">            <span class="keyword">if</span>(j == s[x]-<span class="string">'a'</span>) now--; <span class="comment">//由於我們是紀錄當前長度，但是我們要替換現在此 index，</span></span><br><span class="line">            <span class="comment">//因此要將 now-1，因為 s[i] 這個字元我們不會使用，如果使用就不是修改此 index</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(i == j) now++; <span class="comment">//因為在這邊我們會用 i+'a' 此字元，所以將 now +1，</span></span><br><span class="line">            <span class="comment">//表示之後可以少一個 i+'a' 字元，來補我們這邊用過的</span></span><br><span class="line"></span><br><span class="line">            remain -= (k-now%k)%k; <span class="comment">//減掉我們可以用的長度字元</span></span><br><span class="line">            cnt[j] += (k-now%k)%k; <span class="comment">//此字元至少需要多少長度才符合 同個字母數量都能 mod k == 0</span></span><br><span class="line">            <span class="keyword">if</span>(remain &lt; <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">//如果 &lt; 0，表示要比題目原本字串的長度更長才能符合，因此退出</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(remain &lt; <span class="number">0</span>) <span class="keyword">continue</span>; <span class="comment">//判斷下一個字元替換此 s[i]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果還有剩下的長度可以被使用，那我們就全加給 'a' 就好，不需要擔心 a 字母會不會 % k != 0，</span></span><br><span class="line">        <span class="comment">//因為剩下的長度必定會 %k == 0，否則我們整理的第一點就不會符合。</span></span><br><span class="line">        <span class="comment">//證明: 每個字母的長度必須都 %k == 0，因此如果有剩下的長度 &gt; 1，就表示題目的長度 %k != 0</span></span><br><span class="line">        cnt[<span class="number">0</span>] += remain;</span><br><span class="line">        <span class="keyword">return</span> i; <span class="comment">//表示此 i+'a' 此字串替換給 s[i] 是好選擇，所以回傳</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length() % k != <span class="number">0</span>) <span class="keyword">return</span> <span class="string">"-1"</span>; <span class="comment">//我們整理的第一個重點</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) sum[<span class="number">0</span>][i] = <span class="number">0</span>; <span class="comment">//歸零，不要用 memset，我這樣更省時間</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//開始計算在每個長度時，每個字元的數量</span></span><br><span class="line">        sum[i][s[i] - <span class="string">'a'</span>] += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">26</span>; j++) sum[i+<span class="number">1</span>][j] = sum[i][j]; <span class="comment">//狀態更新給下一個長度</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">1</span>; <span class="comment">//判斷是否不需要修改</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(sum[n<span class="number">-1</span>][i] % k != <span class="number">0</span>)&#123; <span class="comment">//需要修改</span></span><br><span class="line">            flag = <span class="number">0</span>; </span><br><span class="line">            <span class="keyword">break</span>; <span class="comment">//退出</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(flag == <span class="number">1</span>) <span class="keyword">return</span> s; <span class="comment">//如果是 1 表示不需要修改，就是我們整理的第二個重點</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> ans = <span class="string">""</span>; <span class="comment">//答案</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123; <span class="comment">//從字串最尾巴開始進行修改</span></span><br><span class="line">        flag = check(i); <span class="comment">//判斷這邊修改為哪個字元更好，0 表示都不好</span></span><br><span class="line">        <span class="keyword">if</span>(flag)&#123; <span class="comment">//如果 &gt; 0，表示有可以修改的字元</span></span><br><span class="line">            ans = s.substr(<span class="number">0</span>, i) + (<span class="keyword">char</span>) (flag+<span class="string">'a'</span>); </span><br><span class="line">            <span class="comment">//原本的字串長度從 0 到 i-1 加上修改的字元，</span></span><br><span class="line">            <span class="comment">//注意 C++ 的 substr(position, len) 函式與其他語言語法不同</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//透過字典序依序將每個字母需要的數量補入 string，這裡的 string(次數, 字元)</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++) ans += <span class="built_in">string</span>(cnt[i], i+<span class="string">'a'</span>);</span><br><span class="line">            <span class="keyword">return</span> ans; <span class="comment">//回傳答案</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123; <span class="comment">//輸入題目資料</span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k &gt;&gt; s;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; solve() &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//給 sovle 回傳答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codeforces/" rel="tag">Codeforces</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%A6%E4%BD%9C%E9%A1%8C/" rel="tag">實作題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/03/14/UVa/UVa12532/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa12532 - Interval Product(線段樹)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

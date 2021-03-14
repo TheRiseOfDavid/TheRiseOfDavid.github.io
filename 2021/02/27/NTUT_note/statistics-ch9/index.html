@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">2.7k</span>
+            <span class="post-count">4.4k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">11分鐘</span>
+            <span class="post-count">18分鐘</span>
         </span>
     </span>
 </div>
@@ -123,6 +123,27 @@ ga('send', 'pageview');
 <li><strong>拒絕</strong>虛無假設 reject null hypothesis<br>通常拒絕虛無假設以機率來進行計算，常見的有 \(1 \%\)、\(5 \%\)、\(10 \%\)，也就是當虛無假設機率低於一定值時就是對立假設。</li>
 <li>對立假設 alternative hypothesis<br>透過 boolean 來想虛無假設是 false，對立假設就是 true，透過 \(H_1 \) or \(H_A \) 表示。</li>
 </ul>
+<h2 id="在-Probability-Distribution-APP-上計算-z-值的方法"><a href="#在-Probability-Distribution-APP-上計算-z-值的方法" class="headerlink" title="在 Probability Distribution APP 上計算 z 值的方法"></a>在 Probability Distribution APP 上計算 z 值的方法</h2><ul>
+<li>在母體平均值已知的情況下打開 APP，點 <code>normal</code><ul>
+<li>算出 z 後，將 z 的值放入 x</li>
+<li>決定左尾、右尾、雙尾，在紅色格子的 \(P(X&gt;x)\) 這邊可以選擇，第一個是右尾、第二左尾、第三雙尾</li>
+<li>圖片說明<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1mfPzfLCmLPsrfex4bcFUsSf-8g0tQpnj&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>在母體平均值已知的情況下打開 APP，點 <code>t</code><ul>
+<li>算出 z 後，將 z 的值放入 x</li>
+<li>t 為樣本數量 -1</li>
+<li>決定左尾、右尾、雙尾，在紅色格子的 \(P(X&gt;x)\) 這邊可以選擇，第一個是右尾、第二左尾、第三雙尾</li>
+<li>圖片說明<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1VkQccUO68-RR_LnC2FDKlUZVEbMnUKTu&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="如何決定虛無假設與對立假設"><a href="#如何決定虛無假設與對立假設" class="headerlink" title="如何決定虛無假設與對立假設"></a>如何決定虛無假設與對立假設</h3><ul>
 <li>對立假設就是我們研究論點<br>也就是決定好甚麼是 TRUE 甚麼是 FALSE，通常對立假設就是我們研究論點，透過對立假設來證明我們的論點是對的，先設定 \(H_1\) 在設定 \(H_0 \)。<ul>
 <li>舉例：九點上課會不會讓學生有精神？<ul>
@@ -149,7 +170,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h2 id="母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean"><a href="#母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean" class="headerlink" title="母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean"></a>母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean</h2><p>使用此檢定時，有一定義<strong>如果母體平均數相等時，則永遠都表示虛無假設</strong>，因為如果驗證一樣時，那就並不是我們研究的論點所支持，還是他人的論點相同，無法推翻。</p>
+<h1 id="母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean"><a href="#母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean" class="headerlink" title="母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean"></a>母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean</h1><p>使用此檢定時，有一定義<strong>如果母體平均數相等時，則永遠都表示虛無假設</strong>，因為如果驗證一樣時，那就並不是我們研究的論點所支持，還是他人的論點相同，無法推翻。</p>
 <p>在此檢定中用來判斷假設的標準通常是者幾種</p>
 <ul>
 <li>Lower-tail 左尾<ul>
@@ -317,6 +338,183 @@ ga('send', 'pageview');
 </blockquote>
 </li>
 </ul>
+<h1 id="A-Summary-of-Forms-for-Null-and-Alternaitve-Hypotheses-About-a-Population-Proportion-母體參數假設檢定"><a href="#A-Summary-of-Forms-for-Null-and-Alternaitve-Hypotheses-About-a-Population-Proportion-母體參數假設檢定" class="headerlink" title="A Summary of Forms for Null and Alternaitve Hypotheses About a Population Proportion 母體參數假設檢定"></a>A Summary of Forms for Null and Alternaitve Hypotheses About a Population Proportion 母體參數假設檢定</h1><ul>
+<li>等號永遠都在 \(H_0\)</li>
+<li>以 p 表示母體比例</li>
+<li>\(p_0\) 就是虛無假設</li>
+<li>Lower-tail 左尾<ul>
+<li>\(H_0 = p \geq p_0 \) </li>
+<li>\(H_1 = p &lt; p_0 \) </li>
+</ul>
+</li>
+<li>Upper-tail 右尾<ul>
+<li>\(H_0 = p \leq p_0 \) </li>
+<li>\(H_1 = p &lt; p_0 \) </li>
+</ul>
+</li>
+<li>Two-tailed 兩尾<ul>
+<li>\(H_0 = p = p_0 \) </li>
+<li>\(H_1 = p != p_0 \) </li>
+</ul>
+</li>
+</ul>
+<h2 id="計算會用到的數值"><a href="#計算會用到的數值" class="headerlink" title="計算會用到的數值"></a>計算會用到的數值</h2><ul>
+<li>z 的公式為 \(z = \frac{\bar{p} - p_0}{\sigma_\bar{p}}\)，用到的 p 為假設檢定所設定 \(H_0\)的 p 值</li>
+<li>\(\sigma_\bar{p}\) 為 \(\sigma_\bar{p} = \sqrt{p_0(1-p_0)}{n}\)</li>
+<li>其中在使用 z 公式時，\(np \geq 5\) and \(n(1-p) \geq 5\)</li>
+</ul>
+<h2 id="P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則"><a href="#P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則" class="headerlink" title="P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則"></a>P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則</h2><ul>
+<li>p-value<br>Reject \( H_0\) if \(p-value \leq \alpha\)</li>
+<li>Critical Value<ul>
+<li>\(H:0 p \leq p_0\) Reject \(H_0 \) if \(z \leq z_a\)</li>
+<li>\(H:0 p \geq p_0\) Reject \(H_0 \) if \(z \geq z_a\)</li>
+<li>\(H:0 p = p_0\) Reject \(H_0 \) if \(z \leq -z_{a/2} \ or \ z \geq z_{a/2}\)</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例-在新年期間中，國道車禍有-500-人死亡，其中有-50-是酒駕造成，樣本資料中-120-筆有-67-筆是酒駕，使用假設檢定，並且顯著性測試為-0-05，我們想要推翻其推論"><a href="#舉例-在新年期間中，國道車禍有-500-人死亡，其中有-50-是酒駕造成，樣本資料中-120-筆有-67-筆是酒駕，使用假設檢定，並且顯著性測試為-0-05，我們想要推翻其推論" class="headerlink" title="舉例: 在新年期間中，國道車禍有 500 人死亡，其中有 50 % 是酒駕造成，樣本資料中 120 筆有 67 筆是酒駕，使用假設檢定，並且顯著性測試為 0.05，我們想要推翻其推論"></a>舉例: 在新年期間中，國道車禍有 500 人死亡，其中有 50 % 是酒駕造成，樣本資料中 120 筆有 67 筆是酒駕，使用假設檢定，並且顯著性測試為 0.05，我們想要推翻其推論</h3><ul>
+<li>設定假設<ul>
+<li>\(H_0: p = 0.5 \)</li>
+<li>\(H_1: p != 0.5 \)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>收集樣本，計算 z and \(\sigma_\bar{p}\)，<strong>其中下面的 \(p_0\) 就是 \(H_0: p\)，也就是 0.5</strong><ul>
+<li>\(\sigma_{\bar{p}} = \(\frac{p_0 (1-p_0)}{n} = \frac{0.5(1-0.5)}{120} = 0.045644\)</li>
+<li>\(z = \frac{\bar{p} - p_0 }{\sigma_\bar{p}} = \frac{(67/120)-0.05}{0.45644} = 1.28\)</li>
+</ul>
+</li>
+<li>兩方法計算<ul>
+<li>p-Value Approach<ul>
+<li>\(z = 1.28, p = 0.8997\)，\(1-p-value = 2(1 - 0.8997) = 0.2006\)</li>
+<li>因為 \(p-value = 0.2006 &gt; \alpha = 0.05\)，因此我們不能拒絕 \(H_0\)</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a / 2 = 0.05/2 = 0.025， z_{0.025} = 1.96\)，因此 Reject \(H_0\) if \(z \leq -1.96 \ or \ z \geq 1.96 \)</li>
+<li>1.278 介於 -1.96 與 1.96 之間，因此我們不能拒絕 \(H_0\)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Hypothesis-Testing-and-Decision-Making-假設檢定的決策"><a href="#Hypothesis-Testing-and-Decision-Making-假設檢定的決策" class="headerlink" title="Hypothesis Testing and Decision Making 假設檢定的決策"></a>Hypothesis Testing and Decision Making 假設檢定的決策</h1><ul>
+<li>如果答案是拒絕 \(H_0\)，就必須修改決策</li>
+<li>如果答案是不拒絕 \(H_0\)，就不用修改決策</li>
+</ul>
+<h1 id="Calculating-the-Probability-of-a-Type-2-Error-in-Hypothesis-Tests-About-a-Population-Mean-母體平均值計算-Type-2-Error"><a href="#Calculating-the-Probability-of-a-Type-2-Error-in-Hypothesis-Tests-About-a-Population-Mean-母體平均值計算-Type-2-Error" class="headerlink" title="Calculating the Probability of a Type 2 Error in Hypothesis Tests About a Population Mean 母體平均值計算 Type 2 Error"></a>Calculating the Probability of a Type 2 Error in Hypothesis Tests About a Population Mean 母體平均值計算 Type 2 Error</h1><ul>
+<li>列出 \(H_0\) and \(H_1\)</li>
+<li>使用 Critical Value Approach 與顯著型測試，確認是否符合拒絕法則(Reject \(H_0\))</li>
+<li>找出 z 在甚麼情況會接受 \(H_0\)，我們將此定義為 \(\bar{x}\)</li>
+<li>給定 \(\mu \) 是大於顯著型測試的範圍，</li>
+</ul>
+<h2 id="舉例-EMS-隨機抽取-40-筆資料，平均數-13-25-分鐘，母體標準差是-3-2-分鐘，顯著性測試為-0-05，我們想知道緊急服務抵達會不會小於-12-分鐘，不會就改善。"><a href="#舉例-EMS-隨機抽取-40-筆資料，平均數-13-25-分鐘，母體標準差是-3-2-分鐘，顯著性測試為-0-05，我們想知道緊急服務抵達會不會小於-12-分鐘，不會就改善。" class="headerlink" title="舉例: EMS 隨機抽取 40 筆資料，平均數 13.25 分鐘，母體標準差是 3.2 分鐘，顯著性測試為 0.05，我們想知道緊急服務抵達會不會小於 12 分鐘，不會就改善。"></a>舉例: EMS 隨機抽取 40 筆資料，平均數 13.25 分鐘，母體標準差是 3.2 分鐘，顯著性測試為 0.05，我們想知道緊急服務抵達會不會小於 12 分鐘，不會就改善。</h2><ul>
+<li>設定假設<ul>
+<li>\(H_0: mu \leq  12 \)</li>
+<li>\(H_1: \mu &gt; 12 \)</li>
+</ul>
+</li>
+<li>Reject rule is: Reject \(H_0\) if \(z \geq 1.645\)</li>
+<li>計算樣本平均值拒絕的區域<ul>
+<li>\(z = \frac{\bar{x}-12}{3.2 / \sqrt{40}} \geq 1.645\)</li>
+<li>\(\bar{x} \geq 12 + 1.645 (\frac{3.2}{\sqrt{40}}) = 12.8323\)</li>
+</ul>
+</li>
+<li>因此我們接受 \(H_0\) 必須在 \(\bar{x} &lt; 12.8323\)</li>
+<li>計算 Type2 Error  <ul>
+<li>我們先假設一個值，此值要是符合 \(H_1\)，這裡假設為 14，因此 \(\mu = 14\)</li>
+<li>計算樣本標準差 \(\sigma_\bar{x} = \frac{3.2}{\sqrt{40}} = 0.5060 \)</li>
+<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / sqrt{n}} = \frac{12.8323 - 14}{3.2 / \sqrt{40}} = -2.31 \) </li>
+<li>再來我們找出 \(z = -2.31 \) 的機率為 0.0104，就是 \(\beta \)</li>
+<li>圖片解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qhP93dQujI_jGQcsgiCWLs32KJ7-VZZS&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>算出每個 value of mu 的 beta 係數，其中的 \(1-\beta\) 的值就是正確率，如果離 \(H_0\) 越近有很高機率會做出錯誤判斷<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1TUD1SA4j3AjLAsmtuM2GnlHBQytttqp3&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Power-of-the-Test-假設檢定正確率"><a href="#Power-of-the-Test-假設檢定正確率" class="headerlink" title="Power of the Test 假設檢定正確率"></a>Power of the Test 假設檢定正確率</h2><p>就是剛剛舉例中的 \(1-\beta\)，越大表示我們的正確率越高。</p>
+<p>透過剛剛的例子畫成圖表表示 </p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-keA5OCOB_h-O_IAWFYsVuXbIWlw-k2i&export=download" alt=""></p>
+</blockquote>
+<h2 id="在一個單尾-左尾-舉例"><a href="#在一個單尾-左尾-舉例" class="headerlink" title="在一個單尾(左尾)舉例"></a>在一個單尾(左尾)舉例</h2><ul>
+<li>題目一些資訊，\( \sigma = 12, n = 36, \mu = 120\)</li>
+<li>設定假設<ul>
+<li>\(H_0: mu \geq  120 \)</li>
+<li>\(H_1: \mu &lt; 120 \)</li>
+</ul>
+</li>
+<li>Reject rule is: Reject \(H_0\) if \(z \leq -1.645\)</li>
+<li>計算樣本平均值拒絕的區域<ul>
+<li>\(z = \frac{\bar{x}-120}{12 / \sqrt{36}} \leq -1.645\)</li>
+<li>\(\bar{x} \leq  - 1.645 (\frac{12}{\sqrt{36}} ) = 116.71\)</li>
+</ul>
+</li>
+<li>因此我們接受 \(H_0\) 必須在 \(\bar{x} &gt; 116.71\)</li>
+<li>計算 Type2 Error  <ul>
+<li>我們先假設一個值，此值要是符合 \(H_1\)，這裡假設為 112，因此 \(\mu = 112\)</li>
+<li>計算樣本標準差 \(\sigma_\bar{x} = \frac{12}{\sqrt{36}} = 2 \)</li>
+<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / sqrt{n}} = \frac{116.71 - 112}{12 / \sqrt{36}} = 2.36 \) </li>
+<li>再來我們找出 \(z = 2.36 \) 的機率為 0.0091，就是 \(\beta \)</li>
+<li>圖片解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19fmdAfQql-zh8nnhPE6A5gk7xoMO6x9h&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>算出每個 value of mu 的 beta 係數，其中的 \(1-\beta\) 的值就是正確率，如果離 \(H_0\) 越近有很高機率會做出錯誤判斷<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Jb0c1osleRhpEvtxNWV7MnzOIhKFdTdY&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>畫成圖表則是<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1cWn1hDljGIflcVOT1gyuB9YZZ1P06TV0&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Determining-the-Sample-Suze-for-a-Hypothesis-Test-About-a-Population-Mean-確認樣本大小來進行母體平均值假設測試"><a href="#Determining-the-Sample-Suze-for-a-Hypothesis-Test-About-a-Population-Mean-確認樣本大小來進行母體平均值假設測試" class="headerlink" title="Determining the Sample Suze for a Hypothesis Test About a Population Mean 確認樣本大小來進行母體平均值假設測試"></a>Determining the Sample Suze for a Hypothesis Test About a Population Mean 確認樣本大小來進行母體平均值假設測試</h1><p>我們先設定好型一誤差與型二誤差後，找出適合的樣本大小數量來進行假設測試 </p>
+<p>用圖來進行說明，我們說些重點</p>
+<ul>
+<li>在這張圖中，是右尾檢定，因為 \(\mu &gt; \mu_0\)</li>
+<li>左邊是 Type1 Error，右邊是 Type2 Error，c 是臨界值，兩張圖藍色的部分就是誤差區</li>
+<li>因此我們可以知道兩張圖的 C 是相同</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bYpgRmwnGNVaCt01WjQ5v0ezdXn9XzL8&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>再來我們將公式進行合併，公式計算如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1diujZTQvgqNnDdYUBB1yAE3IsRfkAATv&export=download" alt=""></p>
+</blockquote>
+<p>因此我們可以知道當我們要設定 n 的大小時的公式為 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2}\)</p>
+<ul>
+<li>\(z_a\) 是 z value 提供 \(\alpha\) 的面積</li>
+<li>\(z_ㄖ\) 是 z value 提供 \(\beta\) 的面積</li>
+<li>\(\sigma\) 是母體標準差</li>
+<li>\(\mu_0\) 是\(H_0\)母體平均值</li>
+<li>\(\mu_a\) 是母體平均值，再用於檢測 Type2 Error 的值</li>
+<li>在雙尾時，\(z_a/2 \) 而不是使用 \(z_a \)</li>
+</ul>
+<h2 id="舉例-平均回應緊急時間為-13-25-min，母體標準差為-3-2，期望能在-12-分鐘內回應，那-Type1-Error-0-05，如果超過-0-75-分鐘的機率不可以大於-0-1，也就是-Type2-Error-0-1，求樣本大小"><a href="#舉例-平均回應緊急時間為-13-25-min，母體標準差為-3-2，期望能在-12-分鐘內回應，那-Type1-Error-0-05，如果超過-0-75-分鐘的機率不可以大於-0-1，也就是-Type2-Error-0-1，求樣本大小" class="headerlink" title="舉例: 平均回應緊急時間為 13.25 min，母體標準差為 3.2，期望能在 12 分鐘內回應，那 Type1 Error = 0.05，如果超過 0.75 分鐘的機率不可以大於 0.1，也就是 Type2 Error = 0.1，求樣本大小"></a>舉例: 平均回應緊急時間為 13.25 min，母體標準差為 3.2，期望能在 12 分鐘內回應，那 Type1 Error = 0.05，如果超過 0.75 分鐘的機率不可以大於 0.1，也就是 Type2 Error = 0.1，求樣本大小</h2><p>因此我們這邊可以先統整資訊</p>
+<ul>
+<li>\(\alpha = 0.05 \)</li>
+<li>\(\beta = 0.1\)</li>
+<li>\(z_a = 1.645\)，\(a = 0.05\)</li>
+<li>\(z_b = 1.28\)，\(b = 0.1\)</li>
+<li>\(\mu_0 = 12, \mu_1 = 12.75)</li>
+<li>\(\sigma = 3.2\)</li>
+</ul>
+<p>計算 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2} = \frac{(1.645+1.28)^2 (3.2)^2}{(12-12.75)^2} = 155.75 \)，約等於 156</p>
+<p>一旦我們有了 \(\alpha, \beta, n\)，其中兩項，我們就可以算出另一項，透過公式我們可以提出一些重點。</p>
+<ul>
+<li>當 n 固定時，\(\alpha\) 變小，則 \(\beta\)變大，反之亦同。</li>
+</ul>
+<p><strong>謝謝大家的努力拉</strong></p>
 
       
       <!-- reward -->

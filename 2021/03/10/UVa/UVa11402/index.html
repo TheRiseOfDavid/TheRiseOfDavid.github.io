@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa11402 - Ahoy, Pirates!(線段樹) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa11402" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa11402 - Ahoy, Pirates!(線段樹)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/10/UVa/UVa11402/" class="article-date">
+  <time datetime="2021-03-10T12:36:44.000Z" itemprop="datePublished">2021-03-10</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">10分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>在一個海盜島上有許多的海盜，它們都有被編號(從 0 至 n)，且它們都有一個陣營，此海盜島上只有兩個陣營 Buccaneer、Barbary。</p>
+<p>現在來了一個大魔法師，他可以將從 0 ~ n 的人變成 Buccaneer or Barbary 陣營的人或是把某區間的人陣營對調，原本是 Buccaneer 變為 Barbary，Barbary 變為 Buccaneer</p>
+<p>神知道有這件事情後，非常生氣，他會問大魔法師一個區間內有幾個 Buccaneer 海盜，沒有就殺了他，所以請幫忙解決此問題吧！</p>
+<p><a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2397" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>線段樹的學習與應用<br>如果需要學習演算法，請參考 <a href="https://theriseofdavid.github.io/2021/03/06/Explain_Algorithm/segment-tree/" target="_blank" rel="noopener">大衞的筆記 - Segment Tree 線段樹</a></li>
+<li>對於題目的仔細閱讀</li>
+<li>這題需要用到線段樹的高深操作，<strong>區間修改</strong>、<strong>懶人標記</strong></li>
+<li>題目的指令在線段樹的懶人標記時，要如何判斷誰先誰後 (<strong>非常重要</strong>，它讓我花了 12hr 思考)</li>
+<li>題目的指令優化 (<strong>非常重要</strong>，它讓我花了 12hr 思考)</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>好題，好題…，它讓我學到了一堆知識，雖然也讓我一堆時間飛走了QQQ。</p>
+<p>這題比較麻煩的是要判斷 segment tree 懶人標記時，要如何判斷其先後順序，如果先將 0<del>n 的人全部變成 Buccaneer 在對調，與先對調在將 0</del>n 的人全部變成 Buccaneer，是不一樣的結果，因此我們在 <code>push_down</code> 跟 <code>mod2</code> 都需要比較多的處理，來判斷假如現在懶人標記是怎樣的情況時，我們現在又有這個指令時會對下面的子樹造成的影響是甚麼。</p>
+<ul>
+<li>定義 <code>1</code> 為把區間的人變成 Buccaneer</li>
+<li>定義 <code>0</code> 為把區間的人變成 Barbary</li>
+<li>定義 <code>2</code> 為區間的人對調</li>
+</ul>
+<h3 id="可以找出順序"><a href="#可以找出順序" class="headerlink" title="可以找出順序"></a>可以找出順序</h3><ul>
+<li>如果先進行 <code>2</code> 再進行 <code>0</code>，那就不需要進行 <code>2</code>，只需要進行 <code>0</code></li>
+<li>如果先進行 <code>2</code> 再進行 <code>1</code>，那就不需要進行 <code>2</code>，只需要進行 <code>1</code></li>
+<li>如果先進行 <code>2</code> 再進行 <code>2</code>，那完全不需要改動下面子樹</li>
+<li>如果先進行 <code>1</code> 再進行 <code>2</code>，那就只需要進行 <code>0</code></li>
+<li>如果先進行 <code>0</code> 再進行 <code>2</code>，那就只需要進行 <code>1</code></li>
+<li>如果先進行 <code>1</code> 再進行 <code>0</code>，那就只需要進行 <code>0</code></li>
+<li>如果先進行 <code>0</code> 再進行 <code>1</code>，那就只需要進行 <code>1</code></li>
+</ul>
+<p>OK，現在知道進行區間修改時如果有兩個指令卡在同個節點時，我們就可以用這些規則來告訴下面子樹要進行甚麼規則。</p>
+<p>那這樣就能夠透過 <code>query</code> 找到正確答案了！動手寫程式碼八</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.csie.ntu.edu.tw/~sprout/algo2018/ppt_pdf/segment_tree_2.pdf" target="_blank" rel="noopener">Segment/Interval Tree - 2 by 林品諺</a><br><a href="https://yuihuang.com/uva-11402/" target="_blank" rel="noopener">【題解】UVA 11402 Ahoy, Pirates! by YUI HUANG</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題真的是很棒的好題，像這樣的順序，我直接大卡關….，我花了將近 4hr 在想這些順序問題，後來真的受不了了看 YUI HUANG 的題解，發現是我自作多情，我把她想太難了！不一定要每個步驟都做，可以把它們合併再讓子樹進行一個動作就好…，原先還想要對此線段樹紀錄 queue，來記錄順序然後進行區間查詢，結果記憶體爆了…。</p>
+<p>後面把 queue 改成 string 則是超時，非常建議大家不要亂魔改資料結構阿QQQ，設計出來不是做此用途就不要亂用QQQ，就算用成功了也不一定可以成功，可能會有超時的問題…。</p>
+<p>不過你是大發明家就不要記住我的話拉，我是笨蛋，只能靠努力的那種。</p>
+<p>總之希望自己的未來可以一片光明，每天在不安感度過的感覺真的好可怕，希望自己學習的演算法與資料結構未來可以幫助我在人生的路上！</p>
+<p>不然學習了這麼多的演算法，結果都沒用上，會不會有可能太不值了呢？</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<p>至於 <a href="https://theriseofdavid.github.io/2021/03/06/Explain_Algorithm/segment-tree/" target="_blank" rel="noopener">大衞的筆記 - Segment Tree 線段樹</a> 有做說明的部分，這邊就不在進行說明。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1024200</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson(x) x&lt;&lt;1 /</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson(x) (x&lt;&lt;1)+1</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, m, a, b, Qcnt, q, kase, len;</span><br><span class="line"><span class="comment">//題目資料， qcnt 是每次測試資料的 q 的查詢次數</span></span><br><span class="line"><span class="comment">//len //題目的海盜數值長度，也是計算當前 num 最大的長度</span></span><br><span class="line"><span class="keyword">int</span> num[MAXN]; <span class="comment">//用來記錄海盜的陣營</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tree</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, v, z; <span class="comment">//其中 z 為懶人標記，z 的 0,1,2 為操作的意思，-1 表示沒有需要操作</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123; <span class="comment">//無意義，debug 用</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"l = "</span> &lt;&lt; l &lt;&lt; <span class="string">" r = "</span> &lt;&lt; r &lt;&lt; <span class="string">" v = "</span> &lt;&lt; v &lt;&lt; <span class="string">" z = "</span> &lt;&lt; z &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;node[MAXN*<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123; <span class="comment">//線段樹的 function build</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; " l = " &lt;&lt; l &lt;&lt; " r = " &lt;&lt; r &lt;&lt; '\n';</span></span><br><span class="line">    node[x].l = l;</span><br><span class="line">    node[x].r = r;</span><br><span class="line">    node[x].z = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        node[x].v = num[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = (l+r)/<span class="number">2</span>;</span><br><span class="line">    build(l, mid, Lson(x));</span><br><span class="line">    build(mid+<span class="number">1</span>, r, Rson(x));</span><br><span class="line">    node[x].v = node[Lson(x)].v + node[Rson(x)].v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mod1</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> cmd)</span></span>&#123; <span class="comment">//方法 1，也就是定義操作的 0 and 1，線段樹的 function update</span></span><br><span class="line">    <span class="keyword">int</span> lson = Lson(x), rson = Rson(x); <span class="comment">//定義左子樹與右子樹位置</span></span><br><span class="line">    node[lson].z = cmd; <span class="comment">//更改懶人標記，規則上面有提到，直接更改不需要判斷先後順序</span></span><br><span class="line">    node[rson].z = cmd;</span><br><span class="line"></span><br><span class="line">    node[lson].v = (node[lson].r-node[lson].l+<span class="number">1</span>) * cmd; <span class="comment">//計算數值，一個小技巧，題目的 1 剛好就是要查詢的數量，</span></span><br><span class="line">    node[rson].v = (node[rson].r-node[rson].l+<span class="number">1</span>) * cmd; <span class="comment">//因此我們直接用 * 1 or * 0，就可以算值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mod2</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> cmd)</span></span>&#123; <span class="comment">//方法 2，也就是定義操作的 2，線段樹的 function update</span></span><br><span class="line">    <span class="keyword">int</span> lson = Lson(x), rson = Rson(x);  <span class="comment">//定義左子樹與右子樹位置</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//更改懶人標記，規則上面有提到，直接更改不需要判斷先後順序</span></span><br><span class="line">    <span class="keyword">if</span>(node[lson].z == <span class="number">2</span>) node[lson].z = <span class="number">-1</span>; </span><br><span class="line">    <span class="comment">//上述有說到的規則，如果先進行 ``2`` 再進行 ``2``，那完全不需要改動下面子樹</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(node[lson].z != <span class="number">-1</span>) node[lson].z ^= <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//如果先進行 ``0`` 再進行 ``2``，那就只需要進行 ``1``</span></span><br><span class="line">    <span class="comment">//如果先進行 ``1`` 再進行 ``2``，那就只需要進行 ``0``</span></span><br><span class="line">    <span class="keyword">else</span> node[lson].z = cmd;</span><br><span class="line">    <span class="comment">//不需要合併操作，所以就直接寫</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(node[rson].z == <span class="number">2</span>) node[rson].z = <span class="number">-1</span>; <span class="comment">//與上面相同，只是子樹換另外一邊</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(node[rson].z != <span class="number">-1</span>) node[rson].z ^= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> node[rson].z = cmd;</span><br><span class="line"></span><br><span class="line">    node[lson].v = (node[lson].r-node[lson].l+<span class="number">1</span>) - node[lson].v;  </span><br><span class="line">    <span class="comment">//對調，於是先算出區間最大數量減掉當前數量就是對調的數值</span></span><br><span class="line">    node[rson].v = (node[rson].r-node[rson].l+<span class="number">1</span>) - node[rson].v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_down</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123; <span class="comment">//線段樹的 push_down function build</span></span><br><span class="line">    <span class="keyword">if</span>(node[x].z == <span class="number">0</span>) mod1(x, <span class="number">0</span>); <span class="comment">//z = 0 就去 mod1，其中 z 的值表示操作 x</span></span><br><span class="line">    <span class="keyword">if</span>(node[x].z == <span class="number">1</span>) mod1(x, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(node[x].z == <span class="number">2</span>) mod2(x, <span class="number">2</span>);</span><br><span class="line">    node[x].z = <span class="number">-1</span>; <span class="comment">//向下延伸完畢，現在改為 -1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_mod1</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> cmd, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123; <span class="comment">//線段樹的 push_down function update</span></span><br><span class="line"><span class="comment">//詳細請看大衛的演算法，這邊是把方法拉出來寫</span></span><br><span class="line">    <span class="keyword">if</span>(a &lt;= node[x].l &amp;&amp; b &gt;= node[x].r)&#123;</span><br><span class="line">        node[x].v = (node[x].r-node[x].l+<span class="number">1</span>) * cmd;</span><br><span class="line">        node[x].z = cmd;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    push_down(x);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].l+node[x].r) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &lt;= mid) push_mod1(a, b, cmd, Lson(x));</span><br><span class="line">    <span class="keyword">if</span>(b &gt; mid) push_mod1(a, b, cmd, Rson(x));</span><br><span class="line">    node[x].v = node[Lson(x)].v + node[Rson(x)].v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push_mod2</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> cmd, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123; <span class="comment">//線段樹的 push_down function update</span></span><br><span class="line"><span class="comment">//詳細請看大衛的演算法，這邊是把方法拉出來寫</span></span><br><span class="line">    <span class="keyword">if</span>(a &lt;= node[x].l &amp;&amp; b &gt;= node[x].r)&#123;</span><br><span class="line">        node[x].v = (node[x].r-node[x].l+<span class="number">1</span>) - node[x].v;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node[x].z == <span class="number">2</span>) node[x].z = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (node[x].z != <span class="number">-1</span>) node[x].z ^= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> node[x].z = cmd;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    push_down(x);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].l+node[x].r) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &lt;= mid) push_mod2(a, b, cmd, Lson(x));</span><br><span class="line">    <span class="keyword">if</span>(b &gt; mid) push_mod2(a, b, cmd, Rson(x));</span><br><span class="line">    node[x].v = node[Lson(x)].v + node[Rson(x)].v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x = <span class="number">1</span>)</span></span>&#123; <span class="comment">//線段樹的 query function </span></span><br><span class="line">    <span class="keyword">if</span>(node[x].l &gt;= l &amp;&amp; node[x].r &lt;= r) <span class="keyword">return</span> node[x].v;</span><br><span class="line">    push_down(x);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = (node[x].l+node[x].r) / <span class="number">2</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) ans += query(l, r, Lson(x));</span><br><span class="line">    <span class="keyword">if</span>(r &gt; mid) ans += query(l, r, Rson(x));</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "q x = " &lt;&lt; x &lt;&lt; " ans = " &lt;&lt; ans &lt;&lt; '\n';</span></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">string</span> temp;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123; </span><br><span class="line">        Qcnt = <span class="number">1</span>; <span class="comment">//先定義題目的查詢數量</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">":\n"</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        len = <span class="number">1</span>; <span class="comment">//題目的海盜數值長度</span></span><br><span class="line">        <span class="keyword">while</span>(n--)&#123; <span class="comment">//輸入題目特別的格式，字串重複 n 次，用 0,1 表示海盜的陣營</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; m &gt;&gt; temp;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; <span class="comment">//重複 n 次此字串</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; temp.length(); j++) num[len++] = temp[j] - <span class="string">'0'</span>;</span><br><span class="line">                <span class="comment">//把字串的值給 num</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        build(<span class="number">1</span>, len);</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; q; <span class="comment">//題目資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123; <span class="comment">//題目的指令</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp &gt;&gt; a &gt;&gt; b; <span class="comment">//輸入資料</span></span><br><span class="line">            a++; b++; <span class="comment">//index start from 1，由於題目 index 從 0 開始，我們線段樹從 1 開始</span></span><br><span class="line">            <span class="keyword">if</span>(temp == <span class="string">"F"</span>) push_mod1(a, b, <span class="number">1</span>); <span class="comment">//F 是操作 1</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(temp == <span class="string">"E"</span>) push_mod1(a, b, <span class="number">0</span>); <span class="comment">//E 是操作 0</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(temp == <span class="string">"I"</span>) push_mod2(a, b, <span class="number">2</span>); <span class="comment">//I 是操作 2</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(temp == <span class="string">"S"</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Q"</span> &lt;&lt; Qcnt++ &lt;&lt; <span class="string">": "</span> &lt;&lt; query(a, b) &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//查詢指令</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="用紙筆去-Debug"><a href="#用紙筆去-Debug" class="headerlink" title="用紙筆去 Debug"></a>用紙筆去 Debug</h2><p>因為只是自己在思考過程中隨手做的筆記，覺得不是對讀者這麼有幫助，因此放在文章最下面。</p>
+<p>有時候用想或用看的可能不太能夠懂這演算法，那就用寫的吧！這是大衛我自己學習的手稿，紀錄者我的學習過程。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=16ysSTFIwr3Er3VprcxFJkijrgifBahbW&export=download" alt=""></p>
+</blockquote>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B7%9A%E6%AE%B5%E6%A8%B9-Segment-Tree/" rel="tag">線段樹 Segment Tree</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/03/14/UVa/UVa12532/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa12532 - Interval Product(線段樹)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/03/06/Explain_Algorithm/segment-tree/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">演算法知識 - Segment Tree 線段樹</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
