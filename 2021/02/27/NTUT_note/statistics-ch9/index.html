@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">4.4k</span>
+            <span class="post-count">4.5k</span>
         </span>
     </span>
 
@@ -445,7 +445,7 @@ ga('send', 'pageview');
 <h2 id="在一個單尾-左尾-舉例"><a href="#在一個單尾-左尾-舉例" class="headerlink" title="在一個單尾(左尾)舉例"></a>在一個單尾(左尾)舉例</h2><ul>
 <li>題目一些資訊，\( \sigma = 12, n = 36, \mu = 120\)</li>
 <li>設定假設<ul>
-<li>\(H_0: mu \geq  120 \)</li>
+<li>\(H_0: \mu \geq  120 \)</li>
 <li>\(H_1: \mu &lt; 120 \)</li>
 </ul>
 </li>
@@ -459,7 +459,7 @@ ga('send', 'pageview');
 <li>計算 Type2 Error  <ul>
 <li>我們先假設一個值，此值要是符合 \(H_1\)，這裡假設為 112，因此 \(\mu = 112\)</li>
 <li>計算樣本標準差 \(\sigma_\bar{x} = \frac{12}{\sqrt{36}} = 2 \)</li>
-<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / sqrt{n}} = \frac{116.71 - 112}{12 / \sqrt{36}} = 2.36 \) </li>
+<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} = \frac{116.71 - 112}{12 / \sqrt{36}} = 2.36 \) </li>
 <li>再來我們找出 \(z = 2.36 \) 的機率為 0.0091，就是 \(\beta \)</li>
 <li>圖片解釋<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=19fmdAfQql-zh8nnhPE6A5gk7xoMO6x9h&export=download" alt=""></p>
@@ -494,7 +494,7 @@ ga('send', 'pageview');
 <p>因此我們可以知道當我們要設定 n 的大小時的公式為 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2}\)</p>
 <ul>
 <li>\(z_a\) 是 z value 提供 \(\alpha\) 的面積</li>
-<li>\(z_ㄖ\) 是 z value 提供 \(\beta\) 的面積</li>
+<li>\(z_b\) 是 z value 提供 \(\beta\) 的面積</li>
 <li>\(\sigma\) 是母體標準差</li>
 <li>\(\mu_0\) 是\(H_0\)母體平均值</li>
 <li>\(\mu_a\) 是母體平均值，再用於檢測 Type2 Error 的值</li>
@@ -506,10 +506,10 @@ ga('send', 'pageview');
 <li>\(\beta = 0.1\)</li>
 <li>\(z_a = 1.645\)，\(a = 0.05\)</li>
 <li>\(z_b = 1.28\)，\(b = 0.1\)</li>
-<li>\(\mu_0 = 12, \mu_1 = 12.75)</li>
+<li>\(\mu_0 = 12, \mu_1 = 12.75\)</li>
 <li>\(\sigma = 3.2\)</li>
 </ul>
-<p>計算 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2} = \frac{(1.645+1.28)^2 (3.2)^2}{(12-12.75)^2} = 155.75 \)，約等於 156</p>
+<p>計算 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2} = \frac{(1.645+1.28)^2 (3.2)^2}{(12-12.75)^2} = 155.75 \)，約等於 156。<strong>如果數字有小數點時必須 +1，樣本沒辦法分割所以就直接加一</strong></p>
 <p>一旦我們有了 \(\alpha, \beta, n\)，其中兩項，我們就可以算出另一項，透過公式我們可以提出一些重點。</p>
 <ul>
 <li>當 n 固定時，\(\alpha\) 變小，則 \(\beta\)變大，反之亦同。</li>

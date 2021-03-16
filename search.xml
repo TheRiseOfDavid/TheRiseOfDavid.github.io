@@ -710,9 +710,9 @@
       <tags>
         <tag>ICPC_2019-2020_North-Western_Russia_Regional_Contest</tag>
         <tag>Floyd-Warshall algorithm</tag>
-        <tag>動態規劃</tag>
         <tag>ICPC</tag>
         <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -1719,8 +1719,8 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>動態規劃</tag>
         <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -1762,10 +1762,10 @@
       <tags>
         <tag>圖論</tag>
         <tag>UVa</tag>
-        <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>String Processing Problems</tag>
         <tag>Competitive Programming3</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -2069,9 +2069,9 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>最長共同子序列 Longest Common Subsequence</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -5068,10 +5068,10 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>最短修改距離 Minimum Edit Distance</tag>
         <tag>演算法知識</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -5111,10 +5111,10 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>最長共同子序列 Longest Common Subsequence</tag>
         <tag>最長迴文子字串 Longest Palindromic Substrings</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -5527,8 +5527,8 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>動態規劃</tag>
         <tag>背包問題 Knapsack Problem</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -6621,11 +6621,11 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>字串處理</tag>
         <tag>最長共同子序列 Longest Common Subsequence</tag>
         <tag>演算法知識</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -6773,11 +6773,11 @@
         <category>演算法知識</category>
       </categories>
       <tags>
-        <tag>動態規劃</tag>
         <tag>程式解題</tag>
         <tag>字串處理</tag>
         <tag>最長共同子序列 Longest Common Subsequence</tag>
         <tag>演算法知識</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
   <entry>
@@ -12996,7 +12996,7 @@
 <h2 id="在一個單尾-左尾-舉例"><a href="#在一個單尾-左尾-舉例" class="headerlink" title="在一個單尾(左尾)舉例"></a>在一個單尾(左尾)舉例</h2><ul>
 <li>題目一些資訊，\( \sigma = 12, n = 36, \mu = 120\)</li>
 <li>設定假設<ul>
-<li>\(H_0: mu \geq  120 \)</li>
+<li>\(H_0: \mu \geq  120 \)</li>
 <li>\(H_1: \mu &lt; 120 \)</li>
 </ul>
 </li>
@@ -13010,7 +13010,7 @@
 <li>計算 Type2 Error  <ul>
 <li>我們先假設一個值，此值要是符合 \(H_1\)，這裡假設為 112，因此 \(\mu = 112\)</li>
 <li>計算樣本標準差 \(\sigma_\bar{x} = \frac{12}{\sqrt{36}} = 2 \)</li>
-<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / sqrt{n}} = \frac{116.71 - 112}{12 / \sqrt{36}} = 2.36 \) </li>
+<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} = \frac{116.71 - 112}{12 / \sqrt{36}} = 2.36 \) </li>
 <li>再來我們找出 \(z = 2.36 \) 的機率為 0.0091，就是 \(\beta \)</li>
 <li>圖片解釋<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=19fmdAfQql-zh8nnhPE6A5gk7xoMO6x9h&export=download" alt=""></p>
@@ -13045,7 +13045,7 @@
 <p>因此我們可以知道當我們要設定 n 的大小時的公式為 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2}\)</p>
 <ul>
 <li>\(z_a\) 是 z value 提供 \(\alpha\) 的面積</li>
-<li>\(z_ㄖ\) 是 z value 提供 \(\beta\) 的面積</li>
+<li>\(z_b\) 是 z value 提供 \(\beta\) 的面積</li>
 <li>\(\sigma\) 是母體標準差</li>
 <li>\(\mu_0\) 是\(H_0\)母體平均值</li>
 <li>\(\mu_a\) 是母體平均值，再用於檢測 Type2 Error 的值</li>
@@ -13057,10 +13057,10 @@
 <li>\(\beta = 0.1\)</li>
 <li>\(z_a = 1.645\)，\(a = 0.05\)</li>
 <li>\(z_b = 1.28\)，\(b = 0.1\)</li>
-<li>\(\mu_0 = 12, \mu_1 = 12.75)</li>
+<li>\(\mu_0 = 12, \mu_1 = 12.75\)</li>
 <li>\(\sigma = 3.2\)</li>
 </ul>
-<p>計算 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2} = \frac{(1.645+1.28)^2 (3.2)^2}{(12-12.75)^2} = 155.75 \)，約等於 156</p>
+<p>計算 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2} = \frac{(1.645+1.28)^2 (3.2)^2}{(12-12.75)^2} = 155.75 \)，約等於 156。<strong>如果數字有小數點時必須 +1，樣本沒辦法分割所以就直接加一</strong></p>
 <p>一旦我們有了 \(\alpha, \beta, n\)，其中兩項，我們就可以算出另一項，透過公式我們可以提出一些重點。</p>
 <ul>
 <li>當 n 固定時，\(\alpha\) 變小，則 \(\beta\)變大，反之亦同。</li>
@@ -13645,6 +13645,53 @@
         <tag>UVa</tag>
         <tag>程式解題</tag>
         <tag>線段樹 Segment Tree</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1459D - Glass Half Spilled (設計解題、動態規劃、背包問題)</title>
+    <url>/2021/03/14/Codeforces/Codeforces%201459D/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>這裡有 n 個水杯，每個水杯都有其最大容量與當前裝的水量，你可以透過將 A 杯的水<strong>全倒</strong>給 B 杯的方式來讓 A 杯水量增加，但過程中水會有 1/2 的輛被灑在地上，也就是說 A 杯只會增加 B 杯一半的水量，而 B 量則會變為零。</p>
+<p>我們想知道如果我們只拿 n 杯且可以做倒水的動作時，那這 n 杯的總水量為多少。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>意識到是動態規劃</li>
+<li>化簡為背包問題</li>
+<li>將三維的 DP 轉換為二維</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>明明覺得好難，但程式碼難度卻非常簡單QQ。</p>
+<p>看了 _Hayasaka 大大與 qscqesze 大大的教學後，慢慢搞懂了些。</p>
+<p>由於這題是詢問拿 1 ~ n 杯的總最大水量並且分開輸出，沒有要求我們要輸出步驟，此時我們應該想到兩種解法。</p>
+<ul>
+<li>Greedy</li>
+<li>DP</li>
+</ul>
+<p>但這裡 Greedy 是行不通的，稍微仔細想想，有 100 個水杯，我們腦袋沒辦法一次 Greedy 那麼多東西啊，因此這裡就選擇使用 DP。</p>
+<p>再仔細想想，這跟背包問題似乎有點相像，一樣都是要找出最大值，並且只有選此杯子與不選的概念，但多加了一個轉移公式。</p>
+<p>因此我們這裡大概可以想出一個概念， i 個杯子、選 j 個、最大容量 k，我們就推出了最基本的動態規劃。</p>
+<h3 id="但是這樣陣列數量會不夠阿，而且很耗時，有更好的方法嗎？"><a href="#但是這樣陣列數量會不夠阿，而且很耗時，有更好的方法嗎？" class="headerlink" title="但是這樣陣列數量會不夠阿，而且很耗時，有更好的方法嗎？"></a>但是這樣陣列數量會不夠阿，而且很耗時，有更好的方法嗎？</h3><p>稍微想了一下後，發現 i 個杯子不需要放在動態規劃中，狀態永遠是按照前一個的，我們可以用一個想法是<strong>依序加入</strong>，也就是說我們可以假設題目一開始只有一個杯子，後來慢慢加入的。</p>
+<p>透過這種想法，我們就可以減少一個維度，變成二維陣列了！</p>
+<h3 id="動態規劃轉移式"><a href="#動態規劃轉移式" class="headerlink" title="動態規劃轉移式"></a>動態規劃轉移式</h3><p>再來我們遇到了一個問題，轉移要如何轉移，動態規劃不會知道我們選哪個杯子比較好，那我們就沒辦法將沒有選到的杯子水量轉移到選到的杯子上呀。</p>
+<p>此時我們可以想出一個想法，先定義一些名詞</p>
+<ul>
+<li><code>all</code> 全部的水杯總容量</li>
+<li><code>sum</code> 全部水杯的總水量</li>
+<li><code>f[j][k]</code> 當前 j 個杯子最大 k 容量時的水量</li>
+<li><code>remain</code> 沒有選到的杯子總水量</li>
+</ul>
+<p>OK 現在這樣有了點想法了，題目是將<code>remain</code> // 2，</p>
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>背包問題 Knapsack Problem</tag>
+        <tag>Codeforces</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
 </search>
