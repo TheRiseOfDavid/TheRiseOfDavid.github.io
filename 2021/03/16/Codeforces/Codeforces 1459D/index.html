@@ -60,8 +60,8 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/03/14/Codeforces/Codeforces%201459D/" class="article-date">
-  <time datetime="2021-03-14T15:48:44.000Z" itemprop="datePublished">2021-03-14</time>
+      <a href="/2021/03/16/Codeforces/Codeforces%201459D/" class="article-date">
+  <time datetime="2021-03-16T15:48:44.000Z" itemprop="datePublished">2021-03-16</time>
 </a>
       
   <div class="article-category">
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">662</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">2分鐘</span>
+            <span class="post-count">5分鐘</span>
         </span>
     </span>
 </div>
@@ -142,7 +142,15 @@ ga('send', 'pageview');
 <li><code>f[j][k]</code> 當前 j 個杯子最大 k 容量時的水量</li>
 <li><code>remain</code> 沒有選到的杯子總水量</li>
 </ul>
-<p>OK 現在這樣有了點想法了，題目是將<code>remain</code> // 2，</p>
+<p>OK 現在這樣有了點想法了，題目是將<code>remain</code> // 2，而 <code>remain</code> 是透過 <code>sum</code> - <code>f[j][k]</code> 來的，我們所算出的最大水量則是 \((remain / 2) + f[j][k]\)，稍微將公式簡單化一下，把 remain 拆成 <code>sum</code> - <code>f[j][k]</code>，就變成了 \((sum - f[j][k]) / 2) + f[j][k] \)，再來乘二後 \((sum - f[j][k]) ) + 2(f[j][k]) \)，之後再同除二就變成了 \((sum + f[j][k]) ) / 2 \)，因此現在我們只要在最後計算這個公式就可以知道答案了！</p>
+<p>可能會有些人好奇那 DP 的公式是甚麼呢？很簡單， \(f[j][k]) = max(f[j][k]), f[j-1][k-a[i]] + b[i]))\)，其中 <code>a[i]</code> 是第 i 杯的水量、<code>b[i]</code> 是第 i 杯的容量，與背包問題概念相同。</p>
+<p>最後稍微注意一個重點，我們透過 \((sum + f[j][k]) ) / 2 \) 算出的答案不可以超過 k(最大容量)，如果超過就以最大容量為準。</p>
+<p>需要特別注意的是，不可以像一般的背包問題一樣，直接將前個狀態轉移，因為每個<strong>最大容量 k</strong> 不一樣，如果有轉移那我們最後的公式就求不出來。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/aezakmias/article/details/111495324" target="_blank" rel="noopener">Codeforces 1459D - Glass Half Spilled（背包DP） by _Hayasaka</a><br><a href="https://www.bilibili.com/video/av843179498/" target="_blank" rel="noopener">【DP】CF1459D Glass Half Spilled</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題好難，其實很多東西我都沒有想出來，動態規劃、壓縮動態規劃維度、轉移公式，這些東西我都沒有辦法獨自想出來，我需要再多學習，再把這些東西都轉出來。</p>
+<p>現在學習的這些，希望可以幫助我啟發自己。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN*MAXN]; </span><br><span class="line"><span class="keyword">int</span> a[MAXN], b[MAXN]; <span class="comment">//是第 i 杯的水量</span></span><br><span class="line"><span class="keyword">int</span> all, sum, n; <span class="comment">//是第 i 杯的容量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; b[i] &gt;&gt; a[i]; <span class="comment">//注意: 我這裡有寫反，因為題目跟我的腦袋思考方向不一樣。</span></span><br><span class="line">        sum += a[i]; <span class="comment">//累加最大水量</span></span><br><span class="line">        all += b[i]; <span class="comment">//累加最大容量</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123; <span class="comment">//DP 設定為 -INF，否則狀態會被轉移</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; MAXN*MAXN; j++) dp[i][j] = -MAXN * MAXN;</span><br><span class="line">    &#125;</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//從這點開始 DP，因此設為零</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//第 i 個杯子加入 dp</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &gt;= <span class="number">1</span>; j--)&#123; <span class="comment">//選用 j 個杯子</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = all; k &gt;= b[i]; k--) dp[j][k] = max(dp[j][k], dp[j<span class="number">-1</span>][k-b[i]]+a[i]); <span class="comment">//如果選用 j-1 個杯子且最大容量是 k-b[i] 時有沒有比原先大</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//輸出答案</span></span><br><span class="line">        <span class="keyword">double</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= all; j++)&#123; <span class="comment">//對每個最大容量進行判斷</span></span><br><span class="line">            ans = max(ans, min( (sum+dp[i][j]) / <span class="number">2.0</span>, <span class="number">1.0</span> * j));</span><br><span class="line">            <span class="comment">//             min(    轉移公式           最大容量)</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; dp[i][j] &lt;&lt; ' ';</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">10</span>) &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出答案，小數要求 10 位數</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
       <!-- reward -->
@@ -177,19 +185,10 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
+    
       <a href="/2021/03/14/Codeforces/Codeforces%201493C/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Codeforces 1493C - K-beautiful Strings (設計解題、實作題)
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2021/03/14/UVa/UVa12532/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">UVa12532 - Interval Product(線段樹)</div>
+        <div class="article-nav-title">Codeforces 1493C - K-beautiful Strings (設計解題、實作題)</div>
       </a>
     
   </nav>
