@@ -13681,7 +13681,7 @@
 <li><code>f[j][k]</code> 當前 j 個杯子最大 k 容量時的水量</li>
 <li><code>remain</code> 沒有選到的杯子總水量</li>
 </ul>
-<p>OK 現在這樣有了點想法了，題目是將<code>remain</code> // 2，而 <code>remain</code> 是透過 <code>sum</code> - <code>f[j][k]</code> 來的，我們所算出的最大水量則是 \((remain / 2) + f[j][k]\)，稍微將公式簡單化一下，把 remain 拆成 <code>sum</code> - <code>f[j][k]</code>，就變成了 \((sum - f[j][k]) / 2) + f[j][k] \)，再來乘二後 \((sum - f[j][k]) ) + 2(f[j][k]) \)，之後再同除二就變成了 \((sum + f[j][k]) ) / 2 \)，因此現在我們只要在最後計算這個公式就可以知道答案了！</p>
+<p>OK 現在這樣有了點想法了，題目是將<code>remain</code> / 2，而 <code>remain</code> 是透過 <code>sum</code> - <code>f[j][k]</code> 來的，我們所算出的最大水量則是 \((remain / 2) + f[j][k]\)，稍微將公式簡單化一下，把 remain 拆成 <code>sum</code> - <code>f[j][k]</code>，就變成了 \((sum - f[j][k]) / 2) + f[j][k] \)，再來乘二後 \((sum - f[j][k]) ) + 2(f[j][k]) \)，之後再同除二就變成了 \((sum + f[j][k]) ) / 2 \)，因此現在我們只要在最後計算這個公式就可以知道答案了！</p>
 <p>可能會有些人好奇那 DP 的公式是甚麼呢？很簡單， \(f[j][k]) = max(f[j][k]), f[j-1][k-a[i]] + b[i]))\)，其中 <code>a[i]</code> 是第 i 杯的水量、<code>b[i]</code> 是第 i 杯的容量，與背包問題概念相同。</p>
 <p>最後稍微注意一個重點，我們透過 \((sum + f[j][k]) ) / 2 \) 算出的答案不可以超過 k(最大容量)，如果超過就以最大容量為準。</p>
 <p>需要特別注意的是，不可以像一般的背包問題一樣，直接將前個狀態轉移，因為每個<strong>最大容量 k</strong> 不一樣，如果有轉移那我們最後的公式就求不出來。</p>
@@ -13700,6 +13700,263 @@
         <tag>背包問題 Knapsack Problem</tag>
         <tag>Codeforces</tag>
         <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(二) 筆記 - 第十章 推論兩個平均數或是母體參數(Inference About Means and Proportions with Two Population)</title>
+    <url>/2021/03/20/NTUT_note/statistics-ch10/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="此章有四個重點，分別為"><a href="#此章有四個重點，分別為" class="headerlink" title="此章有四個重點，分別為"></a>此章有四個重點，分別為</h2><ul>
+<li>推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)</li>
+<li>推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)</li>
+<li>推論兩個不一樣的已知母體平均數樣本 (Inference About the Difference Between Two Population Means: Matched Sample)</li>
+<li>推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)</li>
+<li>可點擊右邊的 menu 選擇要看的重點</li>
+</ul>
+<h1 id="推論兩個不一樣的已知母體平均數-Inference-About-the-Difference-Between-Two-Population-Known-Means"><a href="#推論兩個不一樣的已知母體平均數-Inference-About-the-Difference-Between-Two-Population-Known-Means" class="headerlink" title="推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)"></a>推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)</h1><h2 id="估計兩個不一樣的已知母體平均數-Estimating-the-Difference-Between-Two-Population-Means"><a href="#估計兩個不一樣的已知母體平均數-Estimating-the-Difference-Between-Two-Population-Means" class="headerlink" title="估計兩個不一樣的已知母體平均數 (Estimating the Difference Between Two Population Means)"></a>估計兩個不一樣的已知母體平均數 (Estimating the Difference Between Two Population Means)</h2><p>直接透過重點進行說明</p>
+<ul>
+<li>兩個不同母體的平均數分別為 \(\mu_1, \mu_2\)</li>
+<li>兩個平均數的差異就是 \(\mu_1 - \mu_2\)</li>
+<li>估計 \(\mu_1 - \mu_2\)，我們先選擇隨機樣本 \(n_1\) 從母體 1，在選擇隨機樣本 \(n_2\) 從母體 2</li>
+<li>定義 \(\bar{x_1}\) 等於 sample1 mean，\(\bar{x_2}\) 等於 sample2 mean</li>
+<li>母體平均數的點估計差值就是 \(\bar{x_1} - \bar{x_2}\)，此公式的計算方式將在下點介紹，名稱為 Sample Distritubion。</li>
+<li>不懂區間估計可看<a href="https://theriseofdavid.github.io/2020/12/29/NTUT_note/statistics-ch8/" target="_blank" rel="noopener">統計學(一) 筆記 - 第八章 區間估計(Interval Estimation)</a></li>
+</ul>
+<h3 id="抽樣分配公式-Sample-Distritubion"><a href="#抽樣分配公式-Sample-Distritubion" class="headerlink" title="抽樣分配公式 (Sample Distritubion)"></a>抽樣分配公式 (Sample Distritubion)</h3><ul>
+<li>期望值 \(E(\bar{x_1} - \bar{x_2}) = \mu_1 - \mu_2\)</li>
+<li>標準差 \(\sigma_{\bar{x_1} - \bar{x_2}} = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)<ul>
+<li>\(\sigma_1, sigma_2\) 分別是母體 1,2 的標準差</li>
+<li>\(n_1, n_2\) 分別是母體  1,2 的抽樣大小</li>
+</ul>
+</li>
+<li>區間估計 \(\bar{x_1} - \bar{x_2} \pm z_{a/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)<ul>
+<li>\(1-a\) 則是信心水準</li>
+</ul>
+</li>
+</ul>
+<h4 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少" class="headerlink" title="舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少"></a>舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少</h4><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司，我們透過抽取樣本的方式(用點估計)來算出 \(\mu_1 - \mu_2\)，但因為是樣本所以會有誤差的問題。</li>
+<li>因此先算出點估計量 \(\mu_1 - \mu_2 = \bar{x_1} - \bar{x_2} = 275-258 = 17\)</li>
+<li>再來我們帶抽樣分配公式，\(\bar{x_1} - \bar{x_2} \pm z_{a/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = 17 \pm 1.96 \sqrt{\frac{(15)^2}{120} + \frac{(20)^2}{80}} = 17 \pm 5.14\)，也就是平均擊球差異會落在 11.86yards to 22.14yards. </li>
+</ul>
+<h2 id="假設檢定兩個不一樣的已知母體平均數-Hypothesis-Tests-About-mu-1-mu-2"><a href="#假設檢定兩個不一樣的已知母體平均數-Hypothesis-Tests-About-mu-1-mu-2" class="headerlink" title="假設檢定兩個不一樣的已知母體平均數 Hypothesis Tests About \(\mu_1 - \mu_2\)"></a>假設檢定兩個不一樣的已知母體平均數 Hypothesis Tests About \(\mu_1 - \mu_2\)</h2><p>先定義下左、右、雙尾的假設檢定，下方的 \(D_0\) 為數值</p>
+<ul>
+<li>左尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \geq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt; D_0\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; D_0\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 = D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt;&gt; D_0\)</li>
+</ul>
+</li>
+<li>而公式為 \(z = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)，注意已知的檢定量要用 z，未知的才有 t。</li>
+<li>不懂假設統計可看<a href="https://theriseofdavid.github.io/2021/02/27/NTUT_note/statistics-ch9/" target="_blank" rel="noopener">統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)</a></li>
+</ul>
+<h3 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。" class="headerlink" title="舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。"></a>舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。</h3><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司</li>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq 0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; 0\)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.01</li>
+<li>收集樣本，計算 z<br>\(z = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = (235-218)-0 / \sqrt{\frac{(15^2)}{120} + \frac{(20)^2}{80}} = \frac{17}{2.62} = 6.49\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>\(z = 6.49, p = 0.000007\)，\(1-p-value = 1 - 0.000007) = 0.999993\)</li>
+<li>因為 \(p-value = 0.000007 &lt; \alpha = 0.01\)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之一的顯著性測試下，A 公司的球桿擊球距離大於 B</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a  = 0.01， z_{0.01} = 2.33\)，因此 Reject \(H_0\) if \(z \geq 2.33 \)</li>
+<li>\(z = 6.49 \geq 2.33\)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之一的顯著性測試下，A 公司的球桿擊球距離大於 B</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means"><a href="#推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means" class="headerlink" title="推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)"></a>推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)</h1><h2 id="區間估計來推估兩個不一樣的未知母體平均數"><a href="#區間估計來推估兩個不一樣的未知母體平均數" class="headerlink" title="區間估計來推估兩個不一樣的未知母體平均數"></a>區間估計來推估兩個不一樣的未知母體平均數</h2><ul>
+<li>區間估計的公式為<br>\(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，s 為樣本標準差，其中 t 為自由度，但遇到兩個母體樣本因此公式變得比較麻煩，其中 \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / \frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2  \)</li>
+</ul>
+<h3 id="舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。"><a href="#舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。" class="headerlink" title="舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。"></a>舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。</h3><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司</li>
+<li>因此先算出點估計量 \(\mu_1 - \mu_2 = \bar{x_1} - \bar{x_2} = 29.8-27.3 = 2.5\)</li>
+<li>設定顯著性測試 0.1，\(a/2=0.5\)</li>
+<li>計算 t \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)，帶入數字後就是 \((\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28})^2 / (\frac{1}{24-1}(\frac{(2.56^2)}{24}^2) + \frac{1}{28-1} (\frac{(1.81)^2}{28})^2) = 40.585 \)，大約等於 40，這裡通常會判斷 40 與 41 的 t 哪個比較大，為了符合百分之 90 的信賴區間，因此選擇偏差較大的 40，如果這裡選 41 那有可能會小於百分之 90 的信賴區間，保險起見用 40，\(t_{a/2} = 1.684\)</li>
+<li>帶入區間估計公式 \(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} = 29.8-27.3 \pm 1.684 \sqrt{\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28}} = 2.5 \pm 1.052\)，因此在百分之 90% 的信心水準之下，兩家平均油耗差異大約會在 1.448 to 3.552 mpg。</li>
+</ul>
+<h2 id="假設檢定來推估兩個不一樣的未知母體平均數"><a href="#假設檢定來推估兩個不一樣的未知母體平均數" class="headerlink" title="假設檢定來推估兩個不一樣的未知母體平均數"></a>假設檢定來推估兩個不一樣的未知母體平均數</h2><p>先定義下左、右、雙尾的假設檢定，下方的 \(D_0\) 為數值</p>
+<ul>
+<li>左尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \geq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt; D_0\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; D_0\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 = D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt;&gt; D_0\)</li>
+</ul>
+</li>
+<li>而公式為 \(t = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，注意已知的檢定量要用 z，未知的才有 t。</li>
+</ul>
+<h3 id="舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在-5-的顯著性測試中，我們想知道-A-公司是不是平均油耗比-B-公司好，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。"><a href="#舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在-5-的顯著性測試中，我們想知道-A-公司是不是平均油耗比-B-公司好，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。" class="headerlink" title="舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在 5% 的顯著性測試中，我們想知道 A 公司是不是平均油耗比 B 公司好，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。"></a>舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在 5% 的顯著性測試中，我們想知道 A 公司是不是平均油耗比 B 公司好，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。</h3><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司</li>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq 0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; 0\)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>收集樣本，計算 t<br>\(t = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} =  \frac{(29.8-27.3) -0}{\sqrt{\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28}}} = 4.003\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>先計算自由度<br>計算 t \(t_{a} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)，帶入數字後就是 \((\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28})^2 / (\frac{1}{24-1}(\frac{(2.56^2)}{24}^2) + \frac{1}{28-1} (\frac{(1.81)^2}{28})^2) = 40.585 \)，大約等於 40，這裡通常會判斷 40 與 41 的 t 哪個比較大，為了符合百分之 90 的信賴區間，因此選擇偏差較大的 40，如果這裡選 41 那有可能會小於百分之 90 的信賴區間，保險起見用 40，\(t_{a} = 1.684\)</li>
+<li>\(t=4.003, p = 0.00013\)，\(1-p-value = 1 - 0.00013 = 0.99987\)</li>
+<li>\(p-value = 0.00013 &lt; 0.05 = \alpha \)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之五的顯著性測試下，A 公司車款的平均油耗比 B 公司車款好</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a  = 0.05， t_{0.05} = 1.684\)，因此 Reject \(H_0\) if \(t \geq 1.684 \)</li>
+<li>\(z = 4.003 \geq 1.684\)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之五的顯著性測試下，A 公司車款的平均油耗比 B 公司車款好</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="推論兩個不一樣的已知母體平均數樣本，配對樣本情況-Inference-About-the-Difference-Between-Two-Population-Means-Matched-Sample"><a href="#推論兩個不一樣的已知母體平均數樣本，配對樣本情況-Inference-About-the-Difference-Between-Two-Population-Means-Matched-Sample" class="headerlink" title="推論兩個不一樣的已知母體平均數樣本，配對樣本情況 (Inference About the Difference Between Two Population Means: Matched Sample)"></a>推論兩個不一樣的已知母體平均數樣本，配對樣本情況 (Inference About the Difference Between Two Population Means: Matched Sample)</h1><p>定義配對樣本情況，相同的樣本但在兩次的測試中有不一樣的結果，通常是實驗前跟實驗後的對照。</p>
+<p>由於這種樣本會比其前兩種方式的樣本差來的更小很多，因為並不是獨立關係，而是<strong>改變</strong>了甚麼。</p>
+<p>這邊直接透過舉例來進行說明。</p>
+<!-- 通常不會用區間估計，而是用假設檢定，因為實驗的問題用區間估計比較沒有意義。 -->
+
+<h2 id="舉例-A-公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之-95-的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？"><a href="#舉例-A-公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之-95-的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？" class="headerlink" title="舉例:A 公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之 95 的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？"></a>舉例:A 公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之 95 的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？</h2><p>樣本資料如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ncHoj7CIjFrd3QtKflbcrLDdZ_KDaudz&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>定義 UPX 為 A 公司，INTEX 為 B 公司</li>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \mu_d = 0\)</li>
+<li>\(H_1: \mu_d &lt;&gt; 0\)</li>
+<li>\(\mu_d\) 為兩家公司的送的時間差別</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>計算假設檢定的所有值，標準差、平均數、t <ul>
+<li>\(\bar{d} = \frac{\sum d_i}{n} = \frac{(7+6+…+5)}{10} = 2.7\)</li>
+<li>\(s_d = \frac{\sum (d_i - \bar{d})^2}{n-1} = \sqrt{\frac{76.1}{9}} = 2.9\)</li>
+<li>\(t = \frac{\bar{d} - \mu_d}{s_d / \sqrt{n}} = \frac{2.7-0}{2.9 / \sqrt{10}} = 2.94 \)，\(\mu_d\) 則是 \(H_0\) 的狀態(通常是等於)。</li>
+</ul>
+</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>先計算自由度<br>\(t=2.94, df =9\)，df = 自由度，雙尾的機率則是落在 0.01649</li>
+<li>\(p = 0.01649\)，\(1-p-value = 1 - 0.01649 = 0.98351\)</li>
+<li>\(p-value = 0.01649 &lt; 0.05 = \alpha \)，因此我們拒絕 \(H_0\)</li>
+<li>在百分之 95% 的信心水準中，我們可以知道這兩家送文件到子公司時有時間差。</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a  = 0.05， t_{0.025} = 2.262\)，因此 Reject \(H_0\) if \(t \geq 2.262 \)</li>
+<li>\(t=2.94 \geq 2.262\)，因此 Reject \(H_0\) </li>
+<li>在百分之 95% 的信心水準中，我們可以知道這兩家送文件到子公司時有時間差。<h1 id="推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions"><a href="#推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions" class="headerlink" title="推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)"></a>推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1496D - Let&#39;s Go Hiking(設計解題)</title>
+    <url>/2021/03/22/Codeforces/Codeforces%201496D/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有 Q 先生與 D 先生兩個人在玩遊戲，給你一組數列，Q 先生只能走遞減(可以向左或向右)、D 先生則是遞增(可以向左或向右)，Q 先走，D 後走，如果 Q 可以贏的話，輸出它有幾種贏法，第一個 x 的 index 算一種。<br>沒有就輸出零</p>
+<p><a href="https://codeforces.com/contest/1496/problem/D" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解贏有哪幾種情況</li>
+<li>了解輸有哪幾種情況</li>
+<li>贏的話可以有幾種贏法?</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>好題，但我智商不高一直解不出來，還有些地方一直用常理去判斷QQQ，商科的爛題目大部分都還需要常理輔佐，但演算法的題目就不用，但我常常搞混:)。</p>
+<p>簡單來說，我們可以將數列進行分析，分成遞增與遞減。<br>再來我們可以知道 Q、D 先生他們只要你能夠走遞增與遞減，所以理念上是他們只要有符合某種順序即可。(也就是 Q 先生不需要在意遞增或遞減，只要讓他走這兩種隨便一種即可，D 先生亦同)。</p>
+<p>我們來簡單分析一下</p>
+<ul>
+<li>D 先生不能在走下一步，Q 先生贏</li>
+<li>但 D 先生是後手可以控制 Q 先生的走法<br>例如 <code>1 2 3</code>，Q 先生選 1，那 D 先生選 2，Q 先生就輸了</li>
+<li>於是 Q 先生要到某個 x，讓他往左往右都行的通，此點我們稱為<strong>轉折點</strong><br>例如 <code>1 3 2</code>，那 Q 選 3 往 1 or 2 都行的通。</li>
+<li>如果轉折點的左邊比較短，那 D 先生一定選右邊，這樣才能折磨死 Q 先生，反之亦同。長度:以轉折點為中心，向左或向右可延伸的最大數量。<br>例如 <code>1 4 3 2</code>，那 Q 先生選 4，D 先生只要選右邊(3,2)，就比左邊的邊長更長，更多步可走</li>
+<li>因此我們能夠知道，要找出一種轉折點是左邊的長度與右邊的長度相同。<br>例如 <code>1 3 2</code>，這時 D 先生就不好選左邊還是右邊。</li>
+<li>但題目有說，Q 先生、D 先生不能走下一步的規則是<ul>
+<li>沒辦法繼續走遞增或遞減的數列</li>
+<li>下一步會撞到另外一位先生</li>
+</ul>
+</li>
+<li>也就是說，可以走曾經別人走過的路！那某些題目 D 先生又有想法可以解了<br>例如 <code>1 3 2</code>，Q 先生選 3，D 先生選 1，Q 先生選 2，D 先生選 3，D 先生贏了！</li>
+<li>發現一個問題，如果左邊邊長跟右邊邊長相同且邊長數量都是偶數時，D 先生會贏</li>
+<li>因此 Q 先生贏的規則如下(必須都符合)<ul>
+<li>轉折點的左邊長與右邊長相同</li>
+<li>兩邊的邊長必須是奇數</li>
+</ul>
+</li>
+</ul>
+<p>最後是題目的小陷阱，考驗思考完整能力</p>
+<ul>
+<li>如果剛好也有一個轉折點的某個邊長與，我們 Q 先生勝利規則中的轉折點長度一樣時呢?<br>很不幸的，那還是 D 先生贏，因為 D 先生可以走另外一個消耗 Q 先生的步數。舉例: <code>1 3 2 4</code>，Q 先生選 3，D 先生選 2，Q 先生選 1，D 先生選 4，D 先生贏了！</li>
+<li>因此我們在歸納一下</li>
+<li>因此 Q 先生贏的規則如下(必須都符合)<ul>
+<li>轉折點的左邊長與右邊長相同</li>
+<li>兩邊的邊長必須是奇數</li>
+<li>此轉折點的邊長必須是所有轉折點的邊長中長度最大的</li>
+<li>此轉折點的邊長不可以跟其他轉折點任一邊長長度相同</li>
+<li>由於我們只能找邊長最長的轉折點，因此答案只能有一個</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/weixin_43911947/article/details/114673797" target="_blank" rel="noopener">D. Let‘s Go Hiking by <del>KIKI</del></a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>題目有點考倒我了QQ，好多東西都不太懂，我研究這題研究了 3hr…，雖然大部分時間是自己耍笨一直忘記 D 先生也可以走 Q 先生走過的。</p>
+<p>總之，希望我學習的演算法，會讓我變聰明八XD，能應用上生活中。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> in[MAXN], de[MAXN]; <span class="comment">//遞增長度與遞減長度的陣列，</span></span><br><span class="line"><span class="keyword">int</span> n, num[MAXN], maxn = <span class="number">0</span>; <span class="comment">//num 是題目數列資料 maxn 是最大邊長 n 是數列 size</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; record[MAXN]; <span class="comment">//紀錄在 record[index] 中，在 i 點的邊長是 index</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">        in[i] = num[i] &gt; num[i<span class="number">-1</span>] ? in[i<span class="number">-1</span>]+<span class="number">1</span> : <span class="number">1</span>; <span class="comment">//判斷是否遞增</span></span><br><span class="line">        <span class="keyword">if</span>(maxn &lt;= in[i])&#123; <span class="comment">//判斷是否是最大邊長</span></span><br><span class="line">            maxn = in[i]; <span class="comment">//更新</span></span><br><span class="line">            record[in[i]].push_back(i); <span class="comment">//將此點加入 record[index]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    de[n] = <span class="number">1</span>; <span class="comment">//最後的數列值，直接設 1 否則出錯</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">1</span>; i--)&#123;</span><br><span class="line">        de[i] = num[i] &gt; num[i+<span class="number">1</span>] ? de[i+<span class="number">1</span>]+<span class="number">1</span> : <span class="number">1</span>; <span class="comment">//判斷是否遞減</span></span><br><span class="line">        <span class="keyword">if</span>(maxn &lt;= de[i]) record[de[i]].push_back(i); <span class="comment">//如果有比最大邊長大，我們再放入 record</span></span><br><span class="line">        <span class="comment">//前面是因為還不了解最大邊長是多少，才會只要大於就加入</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>; <span class="comment">//判斷 x 的可能性</span></span><br><span class="line">    <span class="keyword">if</span>(record[maxn].size() &lt;= <span class="number">2</span> &amp;&amp; maxn % <span class="number">2</span> != <span class="number">0</span>)&#123; <span class="comment">//如果最大的邊長只有兩個，並且最大邊長長度為奇數時</span></span><br><span class="line">    <span class="comment">//否則都是不成立勝利的規則</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: record[maxn])&#123; <span class="comment">//iterator，確認那兩個最大邊長都是在同個轉折點上</span></span><br><span class="line">            <span class="keyword">if</span>(de[it] == in[it]) ans = <span class="number">1</span>; <span class="comment">//是就輸出 1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    cout &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">    for(int i = 1; i &lt;= n; i++) cout &lt;&lt; in[i] &lt;&lt; ' ';</span></span><br><span class="line"><span class="comment">        cout &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">    for(int i = 1; i &lt;= n; i++) cout &lt;&lt; de[i] &lt;&lt; ' ';</span></span><br><span class="line"><span class="comment">        cout &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">    cout &lt;&lt; "maxn = " &lt;&lt; maxn &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">    /*/</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>Codeforces</tag>
       </tags>
   </entry>
 </search>

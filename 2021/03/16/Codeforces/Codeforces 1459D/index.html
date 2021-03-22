@@ -142,7 +142,7 @@ ga('send', 'pageview');
 <li><code>f[j][k]</code> 當前 j 個杯子最大 k 容量時的水量</li>
 <li><code>remain</code> 沒有選到的杯子總水量</li>
 </ul>
-<p>OK 現在這樣有了點想法了，題目是將<code>remain</code> // 2，而 <code>remain</code> 是透過 <code>sum</code> - <code>f[j][k]</code> 來的，我們所算出的最大水量則是 \((remain / 2) + f[j][k]\)，稍微將公式簡單化一下，把 remain 拆成 <code>sum</code> - <code>f[j][k]</code>，就變成了 \((sum - f[j][k]) / 2) + f[j][k] \)，再來乘二後 \((sum - f[j][k]) ) + 2(f[j][k]) \)，之後再同除二就變成了 \((sum + f[j][k]) ) / 2 \)，因此現在我們只要在最後計算這個公式就可以知道答案了！</p>
+<p>OK 現在這樣有了點想法了，題目是將<code>remain</code> / 2，而 <code>remain</code> 是透過 <code>sum</code> - <code>f[j][k]</code> 來的，我們所算出的最大水量則是 \((remain / 2) + f[j][k]\)，稍微將公式簡單化一下，把 remain 拆成 <code>sum</code> - <code>f[j][k]</code>，就變成了 \((sum - f[j][k]) / 2) + f[j][k] \)，再來乘二後 \((sum - f[j][k]) ) + 2(f[j][k]) \)，之後再同除二就變成了 \((sum + f[j][k]) ) / 2 \)，因此現在我們只要在最後計算這個公式就可以知道答案了！</p>
 <p>可能會有些人好奇那 DP 的公式是甚麼呢？很簡單， \(f[j][k]) = max(f[j][k]), f[j-1][k-a[i]] + b[i]))\)，其中 <code>a[i]</code> 是第 i 杯的水量、<code>b[i]</code> 是第 i 杯的容量，與背包問題概念相同。</p>
 <p>最後稍微注意一個重點，我們透過 \((sum + f[j][k]) ) / 2 \) 算出的答案不可以超過 k(最大容量)，如果超過就以最大容量為準。</p>
 <p>需要特別注意的是，不可以像一般的背包問題一樣，直接將前個狀態轉移，因為每個<strong>最大容量 k</strong> 不一樣，如果有轉移那我們最後的公式就求不出來。</p>
@@ -184,6 +184,15 @@ ga('send', 'pageview');
   
   
   <nav class="article-nav">
+    
+      <a href="/2021/03/20/NTUT_note/statistics-ch10/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            統計學(二) 筆記 - 第十章 推論兩個平均數或是母體參數(Inference About Means and Proportions with Two Population)
+          
+        </div>
+      </a>
     
     
       <a href="/2021/03/14/Codeforces/Codeforces%201493C/" class="article-nav-link">

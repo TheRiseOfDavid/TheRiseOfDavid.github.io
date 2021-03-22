@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    統計學(二) 筆記 - 第十章 推論兩個平均數或是母體參數(Inference About Means and Proportions with Two Population) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-NTUT_note/statistics-ch10" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  統計學(二) 筆記 - 第十章 推論兩個平均數或是母體參數(Inference About Means and Proportions with Two Population)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/20/NTUT_note/statistics-ch10/" class="article-date">
+  <time datetime="2021-03-20T09:59:50.000Z" itemprop="datePublished">2021-03-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">12分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="此章有四個重點，分別為"><a href="#此章有四個重點，分別為" class="headerlink" title="此章有四個重點，分別為"></a>此章有四個重點，分別為</h2><ul>
+<li>推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)</li>
+<li>推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)</li>
+<li>推論兩個不一樣的已知母體平均數樣本 (Inference About the Difference Between Two Population Means: Matched Sample)</li>
+<li>推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)</li>
+<li>可點擊右邊的 menu 選擇要看的重點</li>
+</ul>
+<h1 id="推論兩個不一樣的已知母體平均數-Inference-About-the-Difference-Between-Two-Population-Known-Means"><a href="#推論兩個不一樣的已知母體平均數-Inference-About-the-Difference-Between-Two-Population-Known-Means" class="headerlink" title="推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)"></a>推論兩個不一樣的已知母體平均數 (Inference About the Difference Between Two Population Known Means)</h1><h2 id="估計兩個不一樣的已知母體平均數-Estimating-the-Difference-Between-Two-Population-Means"><a href="#估計兩個不一樣的已知母體平均數-Estimating-the-Difference-Between-Two-Population-Means" class="headerlink" title="估計兩個不一樣的已知母體平均數 (Estimating the Difference Between Two Population Means)"></a>估計兩個不一樣的已知母體平均數 (Estimating the Difference Between Two Population Means)</h2><p>直接透過重點進行說明</p>
+<ul>
+<li>兩個不同母體的平均數分別為 \(\mu_1, \mu_2\)</li>
+<li>兩個平均數的差異就是 \(\mu_1 - \mu_2\)</li>
+<li>估計 \(\mu_1 - \mu_2\)，我們先選擇隨機樣本 \(n_1\) 從母體 1，在選擇隨機樣本 \(n_2\) 從母體 2</li>
+<li>定義 \(\bar{x_1}\) 等於 sample1 mean，\(\bar{x_2}\) 等於 sample2 mean</li>
+<li>母體平均數的點估計差值就是 \(\bar{x_1} - \bar{x_2}\)，此公式的計算方式將在下點介紹，名稱為 Sample Distritubion。</li>
+<li>不懂區間估計可看<a href="https://theriseofdavid.github.io/2020/12/29/NTUT_note/statistics-ch8/" target="_blank" rel="noopener">統計學(一) 筆記 - 第八章 區間估計(Interval Estimation)</a></li>
+</ul>
+<h3 id="抽樣分配公式-Sample-Distritubion"><a href="#抽樣分配公式-Sample-Distritubion" class="headerlink" title="抽樣分配公式 (Sample Distritubion)"></a>抽樣分配公式 (Sample Distritubion)</h3><ul>
+<li>期望值 \(E(\bar{x_1} - \bar{x_2}) = \mu_1 - \mu_2\)</li>
+<li>標準差 \(\sigma_{\bar{x_1} - \bar{x_2}} = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)<ul>
+<li>\(\sigma_1, sigma_2\) 分別是母體 1,2 的標準差</li>
+<li>\(n_1, n_2\) 分別是母體  1,2 的抽樣大小</li>
+</ul>
+</li>
+<li>區間估計 \(\bar{x_1} - \bar{x_2} \pm z_{a/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)<ul>
+<li>\(1-a\) 則是信心水準</li>
+</ul>
+</li>
+</ul>
+<h4 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少" class="headerlink" title="舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少"></a>舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少</h4><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司，我們透過抽取樣本的方式(用點估計)來算出 \(\mu_1 - \mu_2\)，但因為是樣本所以會有誤差的問題。</li>
+<li>因此先算出點估計量 \(\mu_1 - \mu_2 = \bar{x_1} - \bar{x_2} = 275-258 = 17\)</li>
+<li>再來我們帶抽樣分配公式，\(\bar{x_1} - \bar{x_2} \pm z_{a/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = 17 \pm 1.96 \sqrt{\frac{(15)^2}{120} + \frac{(20)^2}{80}} = 17 \pm 5.14\)，也就是平均擊球差異會落在 11.86yards to 22.14yards. </li>
+</ul>
+<h2 id="假設檢定兩個不一樣的已知母體平均數-Hypothesis-Tests-About-mu-1-mu-2"><a href="#假設檢定兩個不一樣的已知母體平均數-Hypothesis-Tests-About-mu-1-mu-2" class="headerlink" title="假設檢定兩個不一樣的已知母體平均數 Hypothesis Tests About \(\mu_1 - \mu_2\)"></a>假設檢定兩個不一樣的已知母體平均數 Hypothesis Tests About \(\mu_1 - \mu_2\)</h2><p>先定義下左、右、雙尾的假設檢定，下方的 \(D_0\) 為數值</p>
+<ul>
+<li>左尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \geq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt; D_0\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; D_0\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 = D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt;&gt; D_0\)</li>
+</ul>
+</li>
+<li>而公式為 \(z = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)，注意已知的檢定量要用 z，未知的才有 t。</li>
+<li>不懂假設統計可看<a href="https://theriseofdavid.github.io/2021/02/27/NTUT_note/statistics-ch9/" target="_blank" rel="noopener">統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)</a></li>
+</ul>
+<h3 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。" class="headerlink" title="舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。"></a>舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。</h3><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司</li>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq 0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; 0\)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.01</li>
+<li>收集樣本，計算 z<br>\(z = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = (235-218)-0 / \sqrt{\frac{(15^2)}{120} + \frac{(20)^2}{80}} = \frac{17}{2.62} = 6.49\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>\(z = 6.49, p = 0.000007\)，\(1-p-value = 1 - 0.000007) = 0.999993\)</li>
+<li>因為 \(p-value = 0.000007 &lt; \alpha = 0.01\)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之一的顯著性測試下，A 公司的球桿擊球距離大於 B</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a  = 0.01， z_{0.01} = 2.33\)，因此 Reject \(H_0\) if \(z \geq 2.33 \)</li>
+<li>\(z = 6.49 \geq 2.33\)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之一的顯著性測試下，A 公司的球桿擊球距離大於 B</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means"><a href="#推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means" class="headerlink" title="推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)"></a>推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)</h1><h2 id="區間估計來推估兩個不一樣的未知母體平均數"><a href="#區間估計來推估兩個不一樣的未知母體平均數" class="headerlink" title="區間估計來推估兩個不一樣的未知母體平均數"></a>區間估計來推估兩個不一樣的未知母體平均數</h2><ul>
+<li>區間估計的公式為<br>\(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，s 為樣本標準差，其中 t 為自由度，但遇到兩個母體樣本因此公式變得比較麻煩，其中 \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / \frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2  \)</li>
+</ul>
+<h3 id="舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。"><a href="#舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。" class="headerlink" title="舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。"></a>舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。</h3><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司</li>
+<li>因此先算出點估計量 \(\mu_1 - \mu_2 = \bar{x_1} - \bar{x_2} = 29.8-27.3 = 2.5\)</li>
+<li>設定顯著性測試 0.1，\(a/2=0.5\)</li>
+<li>計算 t \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)，帶入數字後就是 \((\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28})^2 / (\frac{1}{24-1}(\frac{(2.56^2)}{24}^2) + \frac{1}{28-1} (\frac{(1.81)^2}{28})^2) = 40.585 \)，大約等於 40，這裡通常會判斷 40 與 41 的 t 哪個比較大，為了符合百分之 90 的信賴區間，因此選擇偏差較大的 40，如果這裡選 41 那有可能會小於百分之 90 的信賴區間，保險起見用 40，\(t_{a/2} = 1.684\)</li>
+<li>帶入區間估計公式 \(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} = 29.8-27.3 \pm 1.684 \sqrt{\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28}} = 2.5 \pm 1.052\)，因此在百分之 90% 的信心水準之下，兩家平均油耗差異大約會在 1.448 to 3.552 mpg。</li>
+</ul>
+<h2 id="假設檢定來推估兩個不一樣的未知母體平均數"><a href="#假設檢定來推估兩個不一樣的未知母體平均數" class="headerlink" title="假設檢定來推估兩個不一樣的未知母體平均數"></a>假設檢定來推估兩個不一樣的未知母體平均數</h2><p>先定義下左、右、雙尾的假設檢定，下方的 \(D_0\) 為數值</p>
+<ul>
+<li>左尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \geq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt; D_0\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; D_0\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>\(H_0: \mu_1 - \mu_2 = D_0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &lt;&gt; D_0\)</li>
+</ul>
+</li>
+<li>而公式為 \(t = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，注意已知的檢定量要用 z，未知的才有 t。</li>
+</ul>
+<h3 id="舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在-5-的顯著性測試中，我們想知道-A-公司是不是平均油耗比-B-公司好，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。"><a href="#舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在-5-的顯著性測試中，我們想知道-A-公司是不是平均油耗比-B-公司好，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。" class="headerlink" title="舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在 5% 的顯著性測試中，我們想知道 A 公司是不是平均油耗比 B 公司好，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。"></a>舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在 5% 的顯著性測試中，我們想知道 A 公司是不是平均油耗比 B 公司好，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。</h3><ul>
+<li>定義 population1 為 A 公司，population2 為 B 公司</li>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \mu_1 - \mu_2 \leq 0\)</li>
+<li>\(H_1: \mu_1 - \mu_2 &gt; 0\)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>收集樣本，計算 t<br>\(t = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} =  \frac{(29.8-27.3) -0}{\sqrt{\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28}}} = 4.003\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>先計算自由度<br>計算 t \(t_{a} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)，帶入數字後就是 \((\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28})^2 / (\frac{1}{24-1}(\frac{(2.56^2)}{24}^2) + \frac{1}{28-1} (\frac{(1.81)^2}{28})^2) = 40.585 \)，大約等於 40，這裡通常會判斷 40 與 41 的 t 哪個比較大，為了符合百分之 90 的信賴區間，因此選擇偏差較大的 40，如果這裡選 41 那有可能會小於百分之 90 的信賴區間，保險起見用 40，\(t_{a} = 1.684\)</li>
+<li>\(t=4.003, p = 0.00013\)，\(1-p-value = 1 - 0.00013 = 0.99987\)</li>
+<li>\(p-value = 0.00013 &lt; 0.05 = \alpha \)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之五的顯著性測試下，A 公司車款的平均油耗比 B 公司車款好</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a  = 0.05， t_{0.05} = 1.684\)，因此 Reject \(H_0\) if \(t \geq 1.684 \)</li>
+<li>\(z = 4.003 \geq 1.684\)，因此我們拒絕 \(H_0\)</li>
+<li>因此在百分之五的顯著性測試下，A 公司車款的平均油耗比 B 公司車款好</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="推論兩個不一樣的已知母體平均數樣本，配對樣本情況-Inference-About-the-Difference-Between-Two-Population-Means-Matched-Sample"><a href="#推論兩個不一樣的已知母體平均數樣本，配對樣本情況-Inference-About-the-Difference-Between-Two-Population-Means-Matched-Sample" class="headerlink" title="推論兩個不一樣的已知母體平均數樣本，配對樣本情況 (Inference About the Difference Between Two Population Means: Matched Sample)"></a>推論兩個不一樣的已知母體平均數樣本，配對樣本情況 (Inference About the Difference Between Two Population Means: Matched Sample)</h1><p>定義配對樣本情況，相同的樣本但在兩次的測試中有不一樣的結果，通常是實驗前跟實驗後的對照。</p>
+<p>由於這種樣本會比其前兩種方式的樣本差來的更小很多，因為並不是獨立關係，而是<strong>改變</strong>了甚麼。</p>
+<p>這邊直接透過舉例來進行說明。</p>
+<!-- 通常不會用區間估計，而是用假設檢定，因為實驗的問題用區間估計比較沒有意義。 -->
+
+<h2 id="舉例-A-公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之-95-的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？"><a href="#舉例-A-公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之-95-的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？" class="headerlink" title="舉例:A 公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之 95 的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？"></a>舉例:A 公司要將文件送至各地的子公司，她們有兩家快遞公司可以選擇，在百分之 95 的信心水準中，他們想知道這兩家快遞公司送到子公司的時間是不是不一樣？</h2><p>樣本資料如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ncHoj7CIjFrd3QtKflbcrLDdZ_KDaudz&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>定義 UPX 為 A 公司，INTEX 為 B 公司</li>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \mu_d = 0\)</li>
+<li>\(H_1: \mu_d &lt;&gt; 0\)</li>
+<li>\(\mu_d\) 為兩家公司的送的時間差別</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>計算假設檢定的所有值，標準差、平均數、t <ul>
+<li>\(\bar{d} = \frac{\sum d_i}{n} = \frac{(7+6+…+5)}{10} = 2.7\)</li>
+<li>\(s_d = \frac{\sum (d_i - \bar{d})^2}{n-1} = \sqrt{\frac{76.1}{9}} = 2.9\)</li>
+<li>\(t = \frac{\bar{d} - \mu_d}{s_d / \sqrt{n}} = \frac{2.7-0}{2.9 / \sqrt{10}} = 2.94 \)，\(\mu_d\) 則是 \(H_0\) 的狀態(通常是等於)。</li>
+</ul>
+</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>先計算自由度<br>\(t=2.94, df =9\)，df = 自由度，雙尾的機率則是落在 0.01649</li>
+<li>\(p = 0.01649\)，\(1-p-value = 1 - 0.01649 = 0.98351\)</li>
+<li>\(p-value = 0.01649 &lt; 0.05 = \alpha \)，因此我們拒絕 \(H_0\)</li>
+<li>在百分之 95% 的信心水準中，我們可以知道這兩家送文件到子公司時有時間差。</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a  = 0.05， t_{0.025} = 2.262\)，因此 Reject \(H_0\) if \(t \geq 2.262 \)</li>
+<li>\(t=2.94 \geq 2.262\)，因此 Reject \(H_0\) </li>
+<li>在百分之 95% 的信心水準中，我們可以知道這兩家送文件到子公司時有時間差。<h1 id="推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions"><a href="#推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions" class="headerlink" title="推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)"></a>推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/03/22/Codeforces/Codeforces%201496D/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Codeforces 1496D - Let&#39;s Go Hiking(設計解題)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/03/16/Codeforces/Codeforces%201459D/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Codeforces 1459D - Glass Half Spilled (設計解題、動態規劃、背包問題)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
