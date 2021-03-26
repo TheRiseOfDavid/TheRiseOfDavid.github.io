@@ -12911,15 +12911,15 @@
 </ul>
 <h2 id="計算會用到的數值"><a href="#計算會用到的數值" class="headerlink" title="計算會用到的數值"></a>計算會用到的數值</h2><ul>
 <li>z 的公式為 \(z = \frac{\bar{p} - p_0}{\sigma_\bar{p}}\)，用到的 p 為假設檢定所設定 \(H_0\)的 p 值</li>
-<li>\(\sigma_\bar{p}\) 為 \(\sigma_\bar{p} = \sqrt{p_0(1-p_0)}{n}\)</li>
+<li>\(\sigma_\bar{p}\) 為 \(\sigma_\bar{p} = \frac{\sqrt{p_0(1-p_0)}}{n}\)</li>
 <li>其中在使用 z 公式時，\(np \geq 5\) and \(n(1-p) \geq 5\)</li>
 </ul>
 <h2 id="P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則"><a href="#P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則" class="headerlink" title="P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則"></a>P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則</h2><ul>
 <li>p-value<br>Reject \( H_0\) if \(p-value \leq \alpha\)</li>
 <li>Critical Value<ul>
-<li>\(H:0 p \leq p_0\) Reject \(H_0 \) if \(z \leq z_a\)</li>
-<li>\(H:0 p \geq p_0\) Reject \(H_0 \) if \(z \geq z_a\)</li>
-<li>\(H:0 p = p_0\) Reject \(H_0 \) if \(z \leq -z_{a/2} \ or \ z \geq z_{a/2}\)</li>
+<li>\(H_0: p \leq p_0\) Reject \(H_0 \) if \(z \leq z_a\)</li>
+<li>\(H_0: p \geq p_0\) Reject \(H_0 \) if \(z \geq z_a\)</li>
+<li>\(H_0: p = p_0\) Reject \(H_0 \) if \(z \leq -z_{a/2} \ or \ z \geq z_{a/2}\)</li>
 </ul>
 </li>
 </ul>
@@ -12931,8 +12931,8 @@
 </li>
 <li>設定顯著性測試 0.05</li>
 <li>收集樣本，計算 z and \(\sigma_\bar{p}\)，<strong>其中下面的 \(p_0\) 就是 \(H_0: p\)，也就是 0.5</strong><ul>
-<li>\(\sigma_{\bar{p}} = \(\frac{p_0 (1-p_0)}{n} = \frac{0.5(1-0.5)}{120} = 0.045644\)</li>
-<li>\(z = \frac{\bar{p} - p_0 }{\sigma_\bar{p}} = \frac{(67/120)-0.05}{0.45644} = 1.28\)</li>
+<li>\(\sigma_{\bar{p}} = \sqrt{\frac{p_0 (1-p_0)}{n}} = \frac{0.5(1-0.5)}{120} = 0.045644\)，注意是要用 \(H_0\) 的值</li>
+<li>\(z = \frac{\bar{p} - p_0 }{\sigma_\bar{p}} = \frac{(67/120)-0.5}{0.045644} = 1.28\)</li>
 </ul>
 </li>
 <li>兩方法計算<ul>
@@ -13771,7 +13771,7 @@
 </ul>
 </li>
 <li>設定顯著性測試 0.01</li>
-<li>收集樣本，計算 z<br>\(z = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = (235-218)-0 / \sqrt{\frac{(15^2)}{120} + \frac{(20)^2}{80}} = \frac{17}{2.62} = 6.49\)</li>
+<li>收集樣本，計算 z<br>\(z = ((\bar{x_1} - \bar{x_2})-D_0) / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = ((235-218)-0) / \sqrt{\frac{(15^2)}{120} + \frac{(20)^2}{80}} = \frac{17}{2.62} = 6.49\)</li>
 <li>使用方法<ul>
 <li>p-Value Approach<ul>
 <li>\(z = 6.49, p = 0.000007\)，\(1-p-value = 1 - 0.000007) = 0.999993\)</li>
@@ -13789,7 +13789,7 @@
 </li>
 </ul>
 <h1 id="推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means"><a href="#推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means" class="headerlink" title="推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)"></a>推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)</h1><h2 id="區間估計來推估兩個不一樣的未知母體平均數"><a href="#區間估計來推估兩個不一樣的未知母體平均數" class="headerlink" title="區間估計來推估兩個不一樣的未知母體平均數"></a>區間估計來推估兩個不一樣的未知母體平均數</h2><ul>
-<li>區間估計的公式為<br>\(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，s 為樣本標準差，其中 t 為自由度，但遇到兩個母體樣本因此公式變得比較麻煩，其中 \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / \frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2  \)</li>
+<li>區間估計的公式為<br>\(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，s 為樣本標準差，其中 t 為自由度，但遇到兩個母體樣本因此公式變得比較麻煩，其中 \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)</li>
 </ul>
 <h3 id="舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。"><a href="#舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。" class="headerlink" title="舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。"></a>舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。</h3><ul>
 <li>定義 population1 為 A 公司，population2 為 B 公司</li>
@@ -14052,6 +14052,274 @@
       <tags>
         <tag>大學Life</tag>
         <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第三周作業-利用霍夫線分辨出磁磚邊緣</title>
+    <url>/2021/03/26/NTUT_note/NTUTcs_MediaHW03-2/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目如下，用圖片"><a href="#題目如下，用圖片" class="headerlink" title="題目如下，用圖片"></a>題目如下，用圖片</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BEt75y-ClQaLMbyNiR8GJgRgBWDDiJaq&export=download" alt=""></p>
+</blockquote>
+<h2 id="此題作法"><a href="#此題作法" class="headerlink" title="此題作法"></a>此題作法</h2><p>考倒我了，嗚嗚。<br>我對於圖學的知識過少，還需要增加自己對於多媒體的思考能力R。</p>
+<p>由於此題已經有告訴你需要用的步驟與規則如下</p>
+<ul>
+<li>二值化 ````cv2.threshold```<br>給予一數值 x，圖片中大於 x 的點都變成白色，小於的則變成黑色</li>
+<li>膨脹 <code>cv2.dilate</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>白色</strong>，要搭配二值化此用</li>
+<li>侵蝕 <code>cv2.erode</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>黑色</strong>，要搭配二值化此用</li>
+<li>模糊 <code>cv2.medianBlur</code><br>由於有大量的反光，加上磁磚並不是完整統一顏色，難免會在縮小後造成雜訊過多，此時我們用濾波讓雜訊模糊，進而讓我們的邊緣清晰。</li>
+<li>霍夫線 <code>cv2.HoughLines</code><br>他不需要一個完整的線，它可以將零碎的片段組成一條線。由於圖片擁有大量的反光，會使得磁磚邊緣不清晰，使用他就可以避免此問題，此函式有四個參數，建議一開始可以將極座標先預設為初始值<ul>
+<li>image 影像</li>
+<li>rho 極座標的線長度</li>
+<li>theta 極座標的角度</li>
+<li>threshold 超過此長度的線，才會視為是一條線，通常建議從 100 開始慢慢調整</li>
+</ul>
+</li>
+<li>對磁磚邊緣劃線 ````cv2.line``` 進行</li>
+</ul>
+<p>現在我們有了這些資訊，就比較好寫程式了。</p>
+<p>將資料統整後，可以得出一個結論</p>
+<ul>
+<li>圖片大小不可以超過 1000 像素，所以我們先 <code>cv2.resize</code></li>
+<li>再來進行二值化，因為如果沒有二值化後面所有東西都不能做<br>至於要在那個點做 x 化就要不斷嘗試</li>
+<li>查看圖片，發現還是有很多<strong>白點</strong>散布在硬幣的旁邊，因此先侵蝕<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>侵蝕完畢後，發現硬幣的邊界有點變形，在做膨脹<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>再來劃出霍夫線，這裡的輸出的直線座標系統是用極座標。</li>
+<li>由於是極座標，因此我們要在轉換成直角座標</li>
+<li>轉換完成後，使用 ````cv2.line```  劃線</li>
+<li>輸出答案</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/imgtrans/hough_lines/hough_lines.html" target="_blank" rel="noopener">霍夫线变换 openCV</a><br><a href="https://stackoverflow.com/questions/51796526/how-to-draw-a-desired-line-from-houghlines-function-output-in-opencv-c" target="_blank" rel="noopener">How to draw a desired line from HoughLines function output in OpenCV C++? by stackoverflow</a><br><a href="https://blog.csdn.net/sunny2038/article/details/9253823" target="_blank" rel="noopener">OpenCV-Python教程（9、使用霍夫变换检测直线） by Daetalus</a><br><a href="https://blog.csdn.net/dcrmg/article/details/78880046" target="_blank" rel="noopener">OpenCV-Python 霍夫直线检测-HoughLinesP函数参数 by -牧野-</a><br><a href="https://www.kancloud.cn/aollo/aolloopencv/269599" target="_blank" rel="noopener">图像平滑 by OpenCV-Python 中文教程</a><br><a href="https://zh.wikipedia.org/wiki/%E6%9E%81%E5%9D%90%E6%A0%87%E7%B3%BB#%E6%9E%81%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%8E%E5%B9%B3%E9%9D%A2%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E8%AE%8A%E6%8D%A2" target="_blank" rel="noopener">極座標系 by wiki</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>原本在上課老師給的學習時間中不斷嘗試卻一直失敗，果然再不太熟的情況下想要做出一份專案是不可能的壓XD，要先透過別人的資料進行學習，從中得知能做好事的關鍵，然後我們再進行模仿，成功後再進行改良、創新。</p>
+<p>謝謝郭梓琳、林紀緯的程式碼，讓我從中學習到這麼多的知識。</p>
+<p>放在網路上供我知道，也讓有困難的朋友也能學習到。</p>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../pic/floor.jpg"</span>) <span class="comment">#輸入資料</span></span><br><span class="line">h, w, ch = img.shape <span class="comment">#圖片高、寬、通道</span></span><br><span class="line">w //= <span class="number">5</span> <span class="comment">#這樣就小於 1000</span></span><br><span class="line">h //= <span class="number">5</span></span><br><span class="line">print(h)</span><br><span class="line"></span><br><span class="line">img = cv2.resize(img, (w,h), interpolation = cv2.INTER_NEAREST)</span><br><span class="line"><span class="comment">#縮小圖片，記住這邊的 interpolation 選擇很重要，如果不確定建議可以都試試找最棒的</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">gray = cv2.medianBlur(gray,<span class="number">1</span>) <span class="comment">#透過慮波來讓縮小的圖片雜訊被模糊掉，進而讓邊緣線清楚</span></span><br><span class="line">ret, gray = cv2.threshold(gray, <span class="number">110</span>, <span class="number">255</span>, cv2.THRESH_BINARY_INV) <span class="comment">#二值化，110 是慢慢設定的</span></span><br><span class="line"><span class="comment">#需要特別注意，由於 HoughLines 是判斷**白色**得線，但我們的磁磚邊緣線是黑色，</span></span><br><span class="line"><span class="comment">#因此我們這邊的參數要用 cv2.THRESH_BINARY_INV，這樣原本判定黑色的地方就會變白色</span></span><br><span class="line"></span><br><span class="line">gray = cv2.erode(gray, np.ones((<span class="number">2</span>,<span class="number">2</span>)), iterations=<span class="number">1</span>) <span class="comment">#侵蝕，裡面矩陣與 iterations 細調</span></span><br><span class="line">gray = cv2.dilate(gray, np.ones((<span class="number">2</span>,<span class="number">2</span>)), iterations=<span class="number">1</span>) <span class="comment">##膨脹，裡面矩陣與 iterations 細調</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#cv2.imshow("img", img)</span></span><br><span class="line">cv2.imshow(<span class="string">"gray"</span>, gray) <span class="comment">#檢查一下，有雜訊是正常的，只要不影響到霍夫線劃線都沒問題</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">rho = <span class="number">1.0</span> <span class="comment">#極座標系統長度</span></span><br><span class="line">theta = np.pi / <span class="number">2</span> <span class="comment">#極座標系統角度</span></span><br><span class="line">line = cv2.HoughLines(gray, rho, theta, <span class="number">200</span>) <span class="comment">#霍夫線</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> it <span class="keyword">in</span> line: <span class="comment">#將每條線</span></span><br><span class="line">  <span class="keyword">for</span> rho, theta <span class="keyword">in</span> it: <span class="comment">#拿出每條線裡面的極座標系統</span></span><br><span class="line">    a = np.cos(theta) <span class="comment">#下面轉換成為直角坐標</span></span><br><span class="line">    b = np.sin(theta)</span><br><span class="line">    x0 = a*rho</span><br><span class="line">    y0 = b*rho</span><br><span class="line">    x1 = int(x0 + h*(-b)) <span class="comment">#由於我們要畫的線基本上是從圖片的末端開始畫，因此我們直接將畫線</span></span><br><span class="line">    y1 = int(y0 + h*(a))  <span class="comment">#長度設定為，我們圖片中最長的長度即可(通常是高)。</span></span><br><span class="line">    x2 = int(x0 - h*(-b)) <span class="comment">#這樣我們就會從圖片的末端畫到另一末端</span></span><br><span class="line">    y2 = int(y0 - h*(a))</span><br><span class="line">    cv2.line(img, (x1,y1), (x2,y2), (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), <span class="number">2</span>)  <span class="comment">#畫線</span></span><br><span class="line">  </span><br><span class="line">cv2.imshow(<span class="string">"result"</span>, img) </span><br><span class="line">cv2.imwrite(<span class="string">"result.jpg"</span>, img) <span class="comment">#輸出圖片#輸出圖片</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="題目資料"><a href="#題目資料" class="headerlink" title="題目資料"></a>題目資料</h2><blockquote>
+<p>原始磁磚圖片<br><img src="https://drive.google.com/u/2/uc?id=1-TxaJxnexwSKXkVaYH7o6IgP7JEirC_q&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>灰階、濾波、二值化、膨脹、侵蝕後的圖片<br><img src="https://drive.google.com/u/2/uc?id=1Tu_KEjTqWMuwSw7AgX5dkc-1-AHozRLF&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>答案<br><img src="https://drive.google.com/u/2/uc?id=1X-DH61BFUjDlNghM81X6NpP1ENiaIyNe&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第三周作業-辨識硬幣種類</title>
+    <url>/2021/03/26/NTUT_note/NTUTcs_MediaHW03-1/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目如下，用圖片"><a href="#題目如下，用圖片" class="headerlink" title="題目如下，用圖片"></a>題目如下，用圖片</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1lEe2RtCYO2evvuoq9UGdWbQrVn5u5Lvc&export=download" alt=""></p>
+</blockquote>
+<h2 id="此題作法"><a href="#此題作法" class="headerlink" title="此題作法"></a>此題作法</h2><p>此題與<a href="https://theriseofdavid.github.io/2021/03/26/NTUT_note/NTUTcs_MediaHW03-3/" target="_blank" rel="noopener">北科資工二多媒體技術與應用 第三周作業-辨識硬幣與鈔票種類</a>大部分相同。<br>不一樣的部分是此題判斷硬幣是用<strong>長度</strong>來判斷，因為硬幣長寬都會相同。</p>
+<p>考倒我了，嗚嗚。<br>我對於圖學的知識過少，還需要增加自己對於多媒體的思考能力R。</p>
+<p>由於此題已經有告訴你需要用的步驟與規則如下</p>
+<ul>
+<li>二值化 ````cv2.threshold```<br>給予一數值 x，圖片中大於 x 的點都變成白色，小於的則變成黑色</li>
+<li>膨脹 <code>cv2.dilate</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>白色</strong>，要搭配二值化此用</li>
+<li>侵蝕 <code>cv2.erode</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>黑色</strong>，要搭配二值化此用</li>
+<li>連通物件 <code>cv2.connectedComponentsWithStats</code>，<code>connectivity=4</code> 時表示判斷區塊的方式是上下左右，<code>connectivity=4</code> 時是上下左右加上左上、左下、右下、右上。<br>幫你找出圖片中的所有白色區塊，會給出四個回傳值。<ul>
+<li>num_labels 有多少區塊</li>
+<li>labels 透過矩陣表示區塊</li>
+<li>stats 是一個陣列，依序是 x座標、y座標、長、寬、面積，面積以像素為單位</li>
+<li>centroids 區塊的中心點</li>
+</ul>
+</li>
+<li>圖片大小不可以超過 1000 像素，透過 <code>cv2.resize</code> 進行</li>
+<li>對硬幣畫線，透過 ````cv2.rectangle``` 進行</li>
+</ul>
+<p>現在我們有了這些資訊，就比較好畫圖了。</p>
+<p>將資料統整後，可以得出一個結論</p>
+<ul>
+<li>圖片大小不可以超過 1000 像素，所以我們先 <code>cv2.resize</code></li>
+<li>再來進行二值化，因為如果沒有二值化後面所有東西都不能做<br>至於要在那個點做 x 化就要不斷嘗試</li>
+<li>查看圖片，發現還是有很多<strong>白點</strong>散布在硬幣的旁邊，因此先侵蝕<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>侵蝕完畢後，發現硬幣的邊界有點變形，在做膨脹<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>再來連通物件，<code>print(stat)</code><br>發現有很多圓形，我們先對全部的區塊畫線，檢查有沒有硬幣沒有被畫到，或太偏差，有就在回前幾步重新嘗試</li>
+<li>確認沒有後，將每種硬幣畫線<br>不斷找出每種硬幣的寬度是多少，以此為依據畫線。</li>
+<li>輸出答案</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>提供我所用到的連結<br><a href="https://www.kancloud.cn/aollo/aolloopencv/260982" target="_blank" rel="noopener">OpenCV中的绘图函数 by OpenCV-Python 中文教程</a><br><a href="https://answers.opencv.org/question/115770/error-could-not-find-a-writer/" target="_blank" rel="noopener">Error could not find a writer by OpenCV</a><br><a href="https://blog.csdn.net/JNingWei/article/details/78218837" target="_blank" rel="noopener">opencv: 图像缩放(cv2.resize) by JNingWei</a><br><a href="https://stackoverflow.com/questions/35854197/how-to-use-opencvs-connected-components-with-stats-in-python" target="_blank" rel="noopener">How to use openCV’s connected components with stats in python? by stackoverflow</a><br><a href="https://shengyu7697.github.io/blog/2020/04/04/Python-OpenCV-rectangle/" target="_blank" rel="noopener">[Python+OpenCV] 畫矩形 rectangle by ShengYu Talk</a><br><a href="https://www.rapidtables.com/web/color/orange-color.html" target="_blank" rel="noopener">Orange Color Code by RapidTables</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>原本在上課老師給的學習時間中不斷嘗試卻一直失敗，果然再不太熟的情況下想要做出一份專案是不可能的壓XD，要先透過別人的資料進行學習，從中得知能做好事的關鍵，然後我們再進行模仿，成功後再進行改良、創新。</p>
+<p>謝謝郭梓琳、林紀緯的程式碼，讓我從中學習到這麼多的知識。</p>
+<p>放在網路上供我知道，也讓有困難的朋友也能學習到。</p>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../pic/coin.jpg"</span>) <span class="comment">#輸入資料</span></span><br><span class="line">h, w, ch = img.shape <span class="comment">#圖片高、寬、通道</span></span><br><span class="line"></span><br><span class="line">img = cv2.resize(img, (w//<span class="number">5</span>, h//<span class="number">5</span>), interpolation=cv2.INTER_NEAREST) <span class="comment">#important</span></span><br><span class="line"><span class="comment">#縮小圖片，記住這邊的 interpolation 選擇很重要，如果不確定建議可以都試試找最棒的</span></span><br><span class="line"></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) <span class="comment">#灰階化，方便閱讀</span></span><br><span class="line">ret, gray = cv2.threshold(gray, <span class="number">90</span>, <span class="number">255</span>, cv2.THRESH_BINARY) <span class="comment">#二值化，90 是慢慢設定的</span></span><br><span class="line"></span><br><span class="line">gray = cv2.erode(gray, np.ones((<span class="number">2</span>,<span class="number">2</span>)), iterations=<span class="number">2</span>) <span class="comment">#侵蝕，裡面矩陣與 iterations 細調</span></span><br><span class="line">gray = cv2.dilate(gray, np.ones((<span class="number">2</span>,<span class="number">2</span>)), iterations=<span class="number">1</span>) <span class="comment">#膨脹，裡面矩陣與 iterations 細調</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#連通物件，設八通道這樣才嚴謹</span></span><br><span class="line">num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(gray, connectivity=<span class="number">8</span>)</span><br><span class="line">print(stats)  <span class="comment">#檢查所有區塊</span></span><br><span class="line"></span><br><span class="line">ans = <span class="number">0</span> <span class="comment">#輸出多少錢</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> it <span class="keyword">in</span> stats:</span><br><span class="line">  itX = it[<span class="number">0</span>]+it[<span class="number">2</span>] <span class="comment">#寬度</span></span><br><span class="line">  itY = it[<span class="number">1</span>]+it[<span class="number">3</span>] <span class="comment">#高度</span></span><br><span class="line">  <span class="comment">#cv2.rectangle(img, (it[0], it[1]), (itX, itY), (200, 31, 31), 2)</span></span><br><span class="line">  <span class="comment">#一開始可以使用，這樣她會畫出所有的區塊來讓你判斷有沒有區塊沒畫到或連在一起</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#下面的長度是我自己去慢慢調整出來得</span></span><br><span class="line">  <span class="keyword">if</span>(it[<span class="number">2</span>] &gt;= <span class="number">60</span> <span class="keyword">and</span> it[<span class="number">2</span>] &lt; <span class="number">75</span>): <span class="comment">#1 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>) <span class="comment">#BGR </span></span><br><span class="line">    ans += <span class="number">1</span></span><br><span class="line">  <span class="keyword">if</span>(it[<span class="number">2</span>] &gt;= <span class="number">75</span> <span class="keyword">and</span> it[<span class="number">2</span>] &lt; <span class="number">90</span>): <span class="comment">#5 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">165</span>, <span class="number">255</span>), <span class="number">2</span>) <span class="comment">#BGR</span></span><br><span class="line">    ans += <span class="number">5</span></span><br><span class="line">  <span class="keyword">if</span>(it[<span class="number">2</span>] &gt;= <span class="number">90</span> <span class="keyword">and</span> it[<span class="number">2</span>] &lt; <span class="number">100</span>): <span class="comment">#10 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>) <span class="comment">#BGR </span></span><br><span class="line">    ans += <span class="number">10</span></span><br><span class="line">  <span class="keyword">if</span>(it[<span class="number">2</span>] &gt;= <span class="number">100</span> <span class="keyword">and</span> it[<span class="number">2</span>] &lt; <span class="number">115</span>): <span class="comment">#50 dallars  </span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">128</span>, <span class="number">0</span>), <span class="number">2</span>) <span class="comment">#BGR</span></span><br><span class="line">    ans += <span class="number">50</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#cv2.imshow("gray", gray) </span></span><br><span class="line">print(<span class="string">"圖上共有 "</span>,ans ,<span class="string">"元"</span>) <span class="comment">#輸出答案 </span></span><br><span class="line">cv2.imshow(<span class="string">"img"</span>, img)</span><br><span class="line">cv2.imwrite(<span class="string">'ans.jpg'</span>, img)</span><br><span class="line">cv2.imwrite(<span class="string">'gray.jpg'</span>, gray)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="題目資料"><a href="#題目資料" class="headerlink" title="題目資料"></a>題目資料</h2><blockquote>
+<p>硬幣圖片<br><img src="https://drive.google.com/u/2/uc?id=10EYpWRfu1TKoubjH7bA8B_aOIHdp98Ya&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>灰階、二值化、膨脹、侵蝕後的圖片<br><img src="https://drive.google.com/u/2/uc?id=1VbVqubPimrhY6L-oMpluUlIMLsRJTQi3&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>答案<br><img src="https://drive.google.com/u/2/uc?id=1-rSxkBPoqHoPPJjz0rv6UVLU6_Eyl3yv&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第三周作業-辨識硬幣與鈔票種類</title>
+    <url>/2021/03/26/NTUT_note/NTUTcs_MediaHW03-3/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目如下，用圖片"><a href="#題目如下，用圖片" class="headerlink" title="題目如下，用圖片"></a>題目如下，用圖片</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1nWyLdcpQvoDLLxjXmacD9n4ivtXB2Y9T&export=download" alt=""></p>
+</blockquote>
+<p>由於題目沒有說 1000元要用甚麼顏色，我就用白色</p>
+<h2 id="此題作法"><a href="#此題作法" class="headerlink" title="此題作法"></a>此題作法</h2><p>此題與<a href="https://theriseofdavid.github.io/2021/03/26/NTUT_note/NTUTcs_MediaHW03-1/" target="_blank" rel="noopener">北科資工二多媒體技術與應用 第三周作業-辨識硬幣種類</a>大部分相同。<br>不一樣的部分是此題判斷硬幣與紙鈔是用<strong>面積</strong>來判斷，因為題目紙鈔有橫者放、直者放，所以要用面積。</p>
+<p>考倒我了，嗚嗚。<br>我對於圖學的知識過少，還需要增加自己對於多媒體的思考能力R。</p>
+<p>由於此題已經有告訴你需要用的步驟與規則如下</p>
+<ul>
+<li>二值化 ````cv2.threshold```<br>給予一數值 x，圖片中大於 x 的點都變成白色，小於的則變成黑色</li>
+<li>膨脹 <code>cv2.dilate</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>白色</strong>，要搭配二值化此用</li>
+<li>侵蝕 <code>cv2.erode</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>黑色</strong>，要搭配二值化此用</li>
+<li>連通物件 <code>cv2.connectedComponentsWithStats</code>，<code>connectivity=4</code> 時表示判斷區塊的方式是上下左右，<code>connectivity=4</code> 時是上下左右加上左上、左下、右下、右上。<br>幫你找出圖片中的所有白色區塊，會給出四個回傳值。<ul>
+<li>num_labels 有多少區塊</li>
+<li>labels 透過矩陣表示區塊</li>
+<li>stats 是一個陣列，依序是 x座標、y座標、長、寬、面積，面積以像素為單位</li>
+<li>centroids 區塊的中心點</li>
+</ul>
+</li>
+<li>圖片大小不可以超過 1000 像素，透過 <code>cv2.resize</code> 進行</li>
+<li>對硬幣與鈔票畫線，透過 ````cv2.rectangle``` 進行</li>
+</ul>
+<p>現在我們有了這些資訊，就比較好畫圖了。</p>
+<p>將資料統整後，可以得出一個結論</p>
+<ul>
+<li>圖片大小不可以超過 1000 像素，所以我們先 <code>cv2.resize</code></li>
+<li>再來進行二值化，因為如果沒有二值化後面所有東西都不能做<br>至於要在那個點做 x 化就要不斷嘗試</li>
+<li>查看圖片，發現還是有很多<strong>白點</strong>散布在硬幣與鈔票的旁邊，因此先侵蝕<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>侵蝕完畢後，發現硬幣與鈔票的邊界有點變形，在做膨脹<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>再來連通物件，<code>print(stat)</code><br>發現有很多圓形，我們先對全部的區塊畫線，檢查有沒有硬幣與鈔票沒有被畫到，或太偏差，有就在回前幾步重新嘗試</li>
+<li>確認沒有後，將每種硬幣與鈔票畫線<br>不斷找出每種硬幣與鈔票的寬度是多少，以此為依據畫線。</li>
+<li>輸出答案</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>提供我所用到的連結<br><a href="https://www.kancloud.cn/aollo/aolloopencv/260982" target="_blank" rel="noopener">OpenCV中的绘图函数 by OpenCV-Python 中文教程</a><br><a href="https://answers.opencv.org/question/115770/error-could-not-find-a-writer/" target="_blank" rel="noopener">Error could not find a writer by OpenCV</a><br><a href="https://blog.csdn.net/JNingWei/article/details/78218837" target="_blank" rel="noopener">opencv: 图像缩放(cv2.resize) by JNingWei</a><br><a href="https://stackoverflow.com/questions/35854197/how-to-use-opencvs-connected-components-with-stats-in-python" target="_blank" rel="noopener">How to use openCV’s connected components with stats in python? by stackoverflow</a><br><a href="https://shengyu7697.github.io/blog/2020/04/04/Python-OpenCV-rectangle/" target="_blank" rel="noopener">[Python+OpenCV] 畫矩形 rectangle by ShengYu Talk</a><br><a href="https://www.rapidtables.com/web/color/orange-color.html" target="_blank" rel="noopener">Orange Color Code by RapidTables</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>原本在上課老師給的學習時間中不斷嘗試卻一直失敗，果然再不太熟的情況下想要做出一份專案是不可能的壓XD，要先透過別人的資料進行學習，從中得知能做好事的關鍵，然後我們再進行模仿，成功後再進行改良、創新。</p>
+<p>謝謝郭梓琳、林紀緯的程式碼，讓我從中學習到這麼多的知識。</p>
+<p>放在網路上供我知道，也讓有困難的朋友也能學習到。</p>
+<p>題外話，這題的 500 元紙鈔是比 100 元的紙鈔還大的喔，我有用 PS 檢查過</p>
+<ul>
+<li>500 元紙鈔長 29.7、高 55.5，單位 cm，面積為 1768.635</li>
+<li>100 元紙鈔長 60.82、高 28.58，單位 cm，面積為 1738.2356</li>
+</ul>
+<p>不要在寫程式的過程中誤以為 100 元的紙鈔比較大喔XD。</p>
+<p>寫了好多 IF，好髒阿QQQ。</p>
+<p>重新調整適合的參數位置，二值化、侵蝕、膨脹也是花了我好多時間QQ，圖像也是個大學問。</p>
+<p>還有判斷是哪個硬幣也花我很多時間！一開始我是先用寬度來進行判斷，發現紙鈔有一張跟其他擺法不同，後來改用 <code>stat[4]</code> 來解，結果發現跟一般邏輯不同，100 元比 500 元大，1000 元最小，後來才意識到紙鈔的區塊可不一定裡面都沒有區塊阿，也就是可能 100 元的區塊裡面還有一些雜訊，因此 <code>stat[4]</code> 的面積可能就會因此縮小，就因為這樣，才會導致100 元比 500 元大，1000 元最小的問題。<br>因此要自己用長寬相乘的面積就可以忽略掉雜訊的問題，因此要自己相乘</p>
+<blockquote>
+<p>例如 100 元的區塊中，裡面有雜訊(黑色區塊)此時區塊的面積就會剪掉他。<br><img src="https://drive.google.com/u/2/uc?id=1gOMVelQZr7REcu1KWw0e9FlSKTzezYD6&export=download" alt=""></p>
+</blockquote>
+<p>總之，這讓我學了很多，算開心八XD。</p>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../pic/coin2.jpg"</span>) <span class="comment">#輸入資料</span></span><br><span class="line">h, w, ch = img.shape  <span class="comment">#圖片高、寬、通道</span></span><br><span class="line"></span><br><span class="line">img = cv2.resize(img, (w//<span class="number">5</span>, h//<span class="number">5</span>), interpolation=cv2.INTER_NEAREST) <span class="comment">#important</span></span><br><span class="line"><span class="comment">#縮小圖片，記住這邊的 interpolation 選擇很重要，如果不確定建議可以都試試找最棒的</span></span><br><span class="line"></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  <span class="comment">#灰階化，方便閱讀</span></span><br><span class="line">ret, gray = cv2.threshold(gray, <span class="number">45</span>, <span class="number">255</span>, cv2.THRESH_BINARY) <span class="comment">#二值化，45 是慢慢設定的</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">gray = cv2.erode(gray, np.ones((<span class="number">3</span>,<span class="number">3</span>)), iterations=<span class="number">3</span>) <span class="comment">#侵蝕，裡面矩陣與 iterations 細調</span></span><br><span class="line">gray = cv2.dilate(gray, np.ones((<span class="number">3</span>,<span class="number">3</span>)), iterations=<span class="number">2</span>) <span class="comment">#膨脹，裡面矩陣與 iterations 細調</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#連通物件，設八通道這樣才嚴謹</span></span><br><span class="line">num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(gray, connectivity=<span class="number">8</span>)</span><br><span class="line">print(stats) <span class="comment">#檢查所有區塊</span></span><br><span class="line"></span><br><span class="line">ans = <span class="number">0</span> <span class="comment">#輸出多少錢</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> it <span class="keyword">in</span> stats:</span><br><span class="line">  itX = it[<span class="number">0</span>]+it[<span class="number">2</span>] <span class="comment">#寬度</span></span><br><span class="line">  itY = it[<span class="number">1</span>]+it[<span class="number">3</span>] <span class="comment">#高度</span></span><br><span class="line">  itArea = it[<span class="number">2</span>]*it[<span class="number">3</span>] <span class="comment">#面積，忽略掉區塊內雜訊</span></span><br><span class="line">  print(itArea)  <span class="comment">#可以第一次執行時先印出面積，比較容易在下面 if 的參數做微調</span></span><br><span class="line"><span class="comment">#  cv2.rectangle(img, (it[0], it[1]), (itX, itY), (200, 31, 31), 2)</span></span><br><span class="line"><span class="comment">#一開始可以使用，這樣她會畫出所有的區塊來讓你判斷有沒有區塊沒畫到或連在一起</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(itArea &gt;= <span class="number">1600</span> <span class="keyword">and</span> itArea &lt; <span class="number">2000</span>): <span class="comment">#1 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>) <span class="comment">#BGR </span></span><br><span class="line">    ans += <span class="number">1</span></span><br><span class="line">  <span class="keyword">if</span>(itArea &gt;= <span class="number">2000</span> <span class="keyword">and</span> itArea &lt; <span class="number">2400</span>): <span class="comment">#5 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">165</span>, <span class="number">255</span>), <span class="number">2</span>) <span class="comment">#BGR</span></span><br><span class="line">    ans += <span class="number">5</span></span><br><span class="line">  <span class="keyword">if</span>(itArea &gt;= <span class="number">3000</span> <span class="keyword">and</span> itArea &lt; <span class="number">3400</span>): <span class="comment">#10 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>) <span class="comment">#BGR </span></span><br><span class="line">    ans += <span class="number">10</span></span><br><span class="line">  <span class="keyword">if</span>(itArea &gt;= <span class="number">3600</span> <span class="keyword">and</span> itArea &lt; <span class="number">4100</span>): <span class="comment">#50 dallars  </span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">0</span>, <span class="number">128</span>, <span class="number">0</span>), <span class="number">2</span>) <span class="comment">#BGR</span></span><br><span class="line">    ans += <span class="number">50</span></span><br><span class="line">  <span class="keyword">if</span>(itArea &gt;= <span class="number">55000</span> <span class="keyword">and</span> itArea &lt; <span class="number">57000</span>): <span class="comment">#100 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">200</span>, <span class="number">31</span>, <span class="number">31</span>), <span class="number">2</span>)</span><br><span class="line">    ans += <span class="number">100</span></span><br><span class="line">  <span class="keyword">if</span>(itArea &gt;= <span class="number">53000</span> <span class="keyword">and</span> itArea &lt; <span class="number">55000</span>): <span class="comment">#500 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">128</span>, <span class="number">0</span>, <span class="number">128</span>), <span class="number">2</span>)</span><br><span class="line">    ans += <span class="number">500</span></span><br><span class="line">  <span class="keyword">if</span>(itArea &gt;= <span class="number">57000</span> <span class="keyword">and</span> itArea &lt; <span class="number">59000</span>): <span class="comment">#1000 dallars</span></span><br><span class="line">    cv2.rectangle(img, (it[<span class="number">0</span>], it[<span class="number">1</span>]), (itX, itY), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">    ans += <span class="number">1000</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"圖上共有 "</span>,ans ,<span class="string">"元"</span>)</span><br><span class="line">cv2.imshow(<span class="string">"gray"</span>, gray)  </span><br><span class="line">cv2.imshow(<span class="string">"img"</span>, img)</span><br><span class="line"></span><br><span class="line">cv2.imwrite(<span class="string">'ans3-3.jpg'</span>, img)</span><br><span class="line">cv2.imwrite(<span class="string">'gray3-3.jpg'</span>, gray)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="題目資料"><a href="#題目資料" class="headerlink" title="題目資料"></a>題目資料</h2><blockquote>
+<p>硬幣圖片<br><img src="https://drive.google.com/u/2/uc?id=15ihSlBXOj1UWsNgM-TPeEIaz3uCGLFU6&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>灰階、二值化、膨脹、侵蝕後的圖片<br><img src="https://drive.google.com/u/2/uc?id=1VaSFxZGCx8INaK4mpKlhi74IwelDR64C&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>答案<br><img src="https://drive.google.com/u/2/uc?id=1gw8bCt_F1GhTp4QS_QRki0JQ8Dg8JztR&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第三周作業-影像金字塔混和圖片</title>
+    <url>/2021/03/25/NTUT_note/NTUTcs_MediaHW03-4/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目如下，用圖片"><a href="#題目如下，用圖片" class="headerlink" title="題目如下，用圖片"></a>題目如下，用圖片</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1y5bEeELIz9zY-7gTMm36t5jzdDvNBsuX&export=download" alt=""></p>
+</blockquote>
+<h2 id="此題做法"><a href="#此題做法" class="headerlink" title="此題做法"></a>此題做法</h2><p>這是一題很酷的題目，你會學到<strong>影像金字塔</strong>。</p>
+<h3 id="甚麼是影像金字塔"><a href="#甚麼是影像金字塔" class="headerlink" title="甚麼是影像金字塔"></a>甚麼是影像金字塔</h3><p>影像金字塔透過將圖片放大縮小，而越將圖片放大就是越底層的金字塔，縮小就是越下層的金字塔，跟金字塔的切面面積有關。</p>
+<h4 id="高斯金字塔"><a href="#高斯金字塔" class="headerlink" title="高斯金字塔"></a>高斯金字塔</h4><p>透過<a href="https://zknie.com/knowledge_base/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06-%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94/2020/11/02/" target="_blank" rel="noopener">公式</a>得出，不斷地使用此公式進行放大或縮小，結果如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bGdBBCPh5LHf_YtGeq0s9IjAf-YaHODg&export=download" alt=""><br><a href="https://zknie.com/knowledge_base/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06-%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94/2020/11/02/" target="_blank" rel="noopener">蒙面西红柿取得，如果有需要移除請跟我說</a></p>
+</blockquote>
+<p>但有個特別重要的重點，<strong>沒有辦法用縮小後的圖片完整還原放大的圖片</strong>，很多點被壓縮，要還原也不知道要怎麼還原，因此是縮小的圖片不斷放大就會越來越模糊</p>
+<h4 id="拉普拉斯金字塔"><a href="#拉普拉斯金字塔" class="headerlink" title="拉普拉斯金字塔"></a>拉普拉斯金字塔</h4><p>必須先建立高斯金字塔才能建立拉普拉斯金字塔。</p>
+<p>此方法主要是對同樣大小的高斯金字塔，進行操作，其操作方式如下</p>
+<ul>
+<li>將原始圖片設為最底層的金字塔</li>
+<li>設定要縮小的次數</li>
+<li>記錄每層高斯金字塔的縮小</li>
+<li>將上一層的高斯金字塔放大後與當前圖層進行圖片減法，從最上層開始，也就是圖片 size 最小的地方</li>
+</ul>
+<p>透過此方式將高斯金字塔上一次的縮小進行放大後在跟當前的圖層進行圖片減法，所遺失的點就是拉普拉斯金字塔</p>
+<blockquote>
+<p>圖片說明<br><img src="https://drive.google.com/u/2/uc?id=1RwskzYpTpXW23cKn1U4OAbb9xBgZUkAV&export=download" alt=""><br><a href="https://zknie.com/knowledge_base/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06-%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94/2020/11/02/" target="_blank" rel="noopener">蒙面西红柿取得，如果有需要移除請跟我說</a></p>
+</blockquote>
+<h3 id="回歸解法"><a href="#回歸解法" class="headerlink" title="回歸解法"></a>回歸解法</h3><p>說了這麼多，該來了解這題怎麼做了。</p>
+<p>拉普拉斯金字塔是高斯金字塔放大所遺失的點，這時我們可以透過拉普拉斯金字塔來補足這些遺失的點，理論上可以回到離圖片一樣的狀態。</p>
+<p>但是在高斯金字塔再放大時，可不知道拉普拉斯金字塔會補足哪些點，所以會一視同仁地把點放大。此時再加上拉普拉斯金字塔的點後(進行圖片相減)，此時那些地方就會被中和成高斯金字塔的放大點與拉普拉斯金字塔地點，達到平滑的效果，就可以讓圖片切割的地方看起來更加圓滑。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/weixin_45668655/article/details/103889235" target="_blank" rel="noopener">opencv-图像融合（高斯金字塔，拉普拉斯金字塔） by Bonjour_Amy</a><br><a href="https://blog.csdn.net/u012609509/article/details/70319293" target="_blank" rel="noopener">np.vstack, np.hstack by cltdevelop</a><br><a href="https://zknie.com/knowledge_base/opencv%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06-%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94/2020/11/02/" target="_blank" rel="noopener">OpenCV学习笔记(6)——图像金字塔 by 蒙面西红柿</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>學習到了圖像金字塔是本題的最大收穫，要謝謝郭梓琳給我一個網頁裡面有教我怎麼做QQQ，不然我應該還要花很多時間才能把這題給解開、搞懂。</p>
+<p>總之，很開心有他這個隊友，讚啦。<br>希望他可以容忍這麼不成材我的XD，愛睡覺又很拖拉。</p>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><p>我們這邊製作六成的圖像金字塔，就能做出與題目答案類似的金字塔。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Mar 25 11:28:28 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">#讀圖片檔案，下面會放題目所需要的圖片</span></span><br><span class="line">a = cv2.imread(<span class="string">"./pic/apple.jpg"</span>)</span><br><span class="line">b = cv2.imread(<span class="string">"./pic/orange.jpg"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#目標是圖片合併，因此我們先建兩個高斯金字塔</span></span><br><span class="line">gaussA = [a.copy()]</span><br><span class="line">gaussB = [b.copy()]</span><br><span class="line">copyA = a.copy()</span><br><span class="line">copyB = b.copy()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>): <span class="comment"># more small</span></span><br><span class="line">  copyA = cv2.pyrDown(copyA) <span class="comment">#縮小，建立金字塔上層</span></span><br><span class="line">  copyB = cv2.pyrDown(copyB)</span><br><span class="line">  </span><br><span class="line">  gaussA.append(copyA)</span><br><span class="line">  gaussB.append(copyB)</span><br><span class="line"></span><br><span class="line">copyA = gaussA[<span class="number">5</span>] <span class="comment">#稍微注意，拉普拉斯金字塔由於編寫方便，我們的陣列值越大時圖層越小，金字塔相反</span></span><br><span class="line">laplacianA = [copyA] <span class="comment">#建立拉普拉斯金字塔</span></span><br><span class="line">copyB = gaussB[<span class="number">5</span>]</span><br><span class="line">laplacianB = [copyB]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>, <span class="number">0</span>, <span class="number">-1</span>): <span class="comment">#建立拉普拉斯金字塔</span></span><br><span class="line">  tempA = cv2.pyrUp(gaussA[i]) <span class="comment">#將當前高斯金字塔放大</span></span><br><span class="line">  tempB = cv2.pyrUp(gaussB[i])</span><br><span class="line"></span><br><span class="line">  subA = cv2.subtract(gaussA[i<span class="number">-1</span>], tempA) <span class="comment">#放大後，在跟下一層的高斯金字塔做減法得出拉普拉斯金字塔</span></span><br><span class="line">  subB = cv2.subtract(gaussB[i<span class="number">-1</span>], tempB)</span><br><span class="line">  laplacianA.append(subA) <span class="comment">#記錄起來</span></span><br><span class="line">  laplacianB.append(subB)</span><br><span class="line">  <span class="comment">#cv2.imshow("subA", subA)</span></span><br><span class="line">  <span class="comment">#cv2.waitKey(0)</span></span><br><span class="line"></span><br><span class="line">stack = [] <span class="comment">#要被疊加的圖層放置處</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> itA, itB <span class="keyword">in</span> zip(laplacianA, laplacianB): <span class="comment">#合併兩個拉普拉斯金字塔</span></span><br><span class="line">  h, w, ch = itA.shape <span class="comment">#圖片長、寬、通道</span></span><br><span class="line">  merge = np.hstack((itA[<span class="number">0</span>:h, <span class="number">0</span>:(w // <span class="number">2</span>)], itB[<span class="number">0</span>:h, (w // <span class="number">2</span>):w])) <span class="comment">#將圖片進行合併</span></span><br><span class="line">  <span class="comment">#注意，第二張圖片是要右半邊</span></span><br><span class="line">  stack.append(merge) <span class="comment">#紀錄</span></span><br><span class="line">  </span><br><span class="line">result = stack[<span class="number">0</span>] <span class="comment">#一開使放入最頂端金字塔的圖層，特別注意第 0 層是沒有被減法過的圖層</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">6</span>): </span><br><span class="line">  result = cv2.pyrUp(result) <span class="comment">#放大圖層</span></span><br><span class="line">  result = cv2.add(result, stack[i]) <span class="comment">#疊加我們的拉普拉斯金字塔</span></span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">"a"</span>, a)</span><br><span class="line">cv2.imshow(<span class="string">"result"</span>, result) <span class="comment">#輸出完整圖片</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv.imwrite(<span class="string">'result.jpg'</span>,result)</span><br></pre></td></tr></table></figure>
+
+<h2 id="題目資料"><a href="#題目資料" class="headerlink" title="題目資料"></a>題目資料</h2><blockquote>
+<p>apple<br><img src="https://drive.google.com/u/2/uc?id=1vJakdmCZuyCBbX7A3FHsIDi7K6Co5vRE&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>orange<br><img src="https://drive.google.com/u/2/uc?id=1rXZ3YuzHhbMx1IfdEHkQ3ug2pvzRhWA4&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>result<br><img src="https://drive.google.com/u/2/uc?id=1CtDnQ-YeOa1gd7oHSh1iIM9MZW-COc97&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
       </tags>
   </entry>
 </search>

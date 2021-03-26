@@ -177,7 +177,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>設定顯著性測試 0.01</li>
-<li>收集樣本，計算 z<br>\(z = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = (235-218)-0 / \sqrt{\frac{(15^2)}{120} + \frac{(20)^2}{80}} = \frac{17}{2.62} = 6.49\)</li>
+<li>收集樣本，計算 z<br>\(z = ((\bar{x_1} - \bar{x_2})-D_0) / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = ((235-218)-0) / \sqrt{\frac{(15^2)}{120} + \frac{(20)^2}{80}} = \frac{17}{2.62} = 6.49\)</li>
 <li>使用方法<ul>
 <li>p-Value Approach<ul>
 <li>\(z = 6.49, p = 0.000007\)，\(1-p-value = 1 - 0.000007) = 0.999993\)</li>
@@ -195,7 +195,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h1 id="推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means"><a href="#推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means" class="headerlink" title="推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)"></a>推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)</h1><h2 id="區間估計來推估兩個不一樣的未知母體平均數"><a href="#區間估計來推估兩個不一樣的未知母體平均數" class="headerlink" title="區間估計來推估兩個不一樣的未知母體平均數"></a>區間估計來推估兩個不一樣的未知母體平均數</h2><ul>
-<li>區間估計的公式為<br>\(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，s 為樣本標準差，其中 t 為自由度，但遇到兩個母體樣本因此公式變得比較麻煩，其中 \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / \frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2  \)</li>
+<li>區間估計的公式為<br>\(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，s 為樣本標準差，其中 t 為自由度，但遇到兩個母體樣本因此公式變得比較麻煩，其中 \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)</li>
 </ul>
 <h3 id="舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。"><a href="#舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。" class="headerlink" title="舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。"></a>舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。</h3><ul>
 <li>定義 population1 為 A 公司，population2 為 B 公司</li>

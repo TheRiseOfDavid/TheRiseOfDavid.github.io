@@ -360,15 +360,15 @@ ga('send', 'pageview');
 </ul>
 <h2 id="計算會用到的數值"><a href="#計算會用到的數值" class="headerlink" title="計算會用到的數值"></a>計算會用到的數值</h2><ul>
 <li>z 的公式為 \(z = \frac{\bar{p} - p_0}{\sigma_\bar{p}}\)，用到的 p 為假設檢定所設定 \(H_0\)的 p 值</li>
-<li>\(\sigma_\bar{p}\) 為 \(\sigma_\bar{p} = \sqrt{p_0(1-p_0)}{n}\)</li>
+<li>\(\sigma_\bar{p}\) 為 \(\sigma_\bar{p} = \frac{\sqrt{p_0(1-p_0)}}{n}\)</li>
 <li>其中在使用 z 公式時，\(np \geq 5\) and \(n(1-p) \geq 5\)</li>
 </ul>
 <h2 id="P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則"><a href="#P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則" class="headerlink" title="P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則"></a>P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則</h2><ul>
 <li>p-value<br>Reject \( H_0\) if \(p-value \leq \alpha\)</li>
 <li>Critical Value<ul>
-<li>\(H:0 p \leq p_0\) Reject \(H_0 \) if \(z \leq z_a\)</li>
-<li>\(H:0 p \geq p_0\) Reject \(H_0 \) if \(z \geq z_a\)</li>
-<li>\(H:0 p = p_0\) Reject \(H_0 \) if \(z \leq -z_{a/2} \ or \ z \geq z_{a/2}\)</li>
+<li>\(H_0: p \leq p_0\) Reject \(H_0 \) if \(z \leq z_a\)</li>
+<li>\(H_0: p \geq p_0\) Reject \(H_0 \) if \(z \geq z_a\)</li>
+<li>\(H_0: p = p_0\) Reject \(H_0 \) if \(z \leq -z_{a/2} \ or \ z \geq z_{a/2}\)</li>
 </ul>
 </li>
 </ul>
@@ -380,8 +380,8 @@ ga('send', 'pageview');
 </li>
 <li>設定顯著性測試 0.05</li>
 <li>收集樣本，計算 z and \(\sigma_\bar{p}\)，<strong>其中下面的 \(p_0\) 就是 \(H_0: p\)，也就是 0.5</strong><ul>
-<li>\(\sigma_{\bar{p}} = \(\frac{p_0 (1-p_0)}{n} = \frac{0.5(1-0.5)}{120} = 0.045644\)</li>
-<li>\(z = \frac{\bar{p} - p_0 }{\sigma_\bar{p}} = \frac{(67/120)-0.05}{0.45644} = 1.28\)</li>
+<li>\(\sigma_{\bar{p}} = \sqrt{\frac{p_0 (1-p_0)}{n}} = \frac{0.5(1-0.5)}{120} = 0.045644\)，注意是要用 \(H_0\) 的值</li>
+<li>\(z = \frac{\bar{p} - p_0 }{\sigma_\bar{p}} = \frac{(67/120)-0.5}{0.045644} = 1.28\)</li>
 </ul>
 </li>
 <li>兩方法計算<ul>
