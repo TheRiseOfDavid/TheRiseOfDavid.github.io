@@ -13828,7 +13828,7 @@
 <li>收集樣本，計算 t<br>\(t = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} =  \frac{(29.8-27.3) -0}{\sqrt{\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28}}} = 4.003\)</li>
 <li>使用方法<ul>
 <li>p-Value Approach<ul>
-<li>先計算自由度<br>計算 t \(t_{a} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)，帶入數字後就是 \((\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28})^2 / (\frac{1}{24-1}(\frac{(2.56^2)}{24}^2) + \frac{1}{28-1} (\frac{(1.81)^2}{28})^2) = 40.585 \)，大約等於 40，這裡通常會判斷 40 與 41 的 t 哪個比較大，為了符合百分之 90 的信賴區間，因此選擇偏差較大的 40，如果這裡選 41 那有可能會小於百分之 90 的信賴區間，保險起見用 40，\(t_{a} = 1.684\)</li>
+<li>先計算自由度<br>計算 \(t_{a} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)，帶入數字後就是 \((\frac{(2.56)^2}{24} + \frac{(1.81)^2}{28})^2 / (\frac{1}{24-1}(\frac{(2.56^2)}{24}^2) + \frac{1}{28-1} (\frac{(1.81)^2}{28})^2) = 40.585 \)，大約等於 40，這裡通常會判斷 40 與 41 的 t 哪個比較大，為了符合百分之 90 的信賴區間，因此選擇偏差較大的 40，如果這裡選 41 那有可能會小於百分之 90 的信賴區間，保險起見用 40，\(t_{a} = 1.684\)</li>
 <li>\(t=4.003, p = 0.00013\)，\(1-p-value = 1 - 0.00013 = 0.99987\)</li>
 <li>\(p-value = 0.00013 &lt; 0.05 = \alpha \)，因此我們拒絕 \(H_0\)</li>
 <li>因此在百分之五的顯著性測試下，A 公司車款的平均油耗比 B 公司車款好</li>
@@ -13878,7 +13878,100 @@
 <li>Critical Value Approach<ul>
 <li>\(a  = 0.05， t_{0.025} = 2.262\)，因此 Reject \(H_0\) if \(t \geq 2.262 \)</li>
 <li>\(t=2.94 \geq 2.262\)，因此 Reject \(H_0\) </li>
-<li>在百分之 95% 的信心水準中，我們可以知道這兩家送文件到子公司時有時間差。<h1 id="推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions"><a href="#推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions" class="headerlink" title="推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)"></a>推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)</h1></li>
+<li>在百分之 95% 的信心水準中，我們可以知道這兩家送文件到子公司時有時間差。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions"><a href="#推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions" class="headerlink" title="推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)"></a>推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)</h1><p>先來定義一些必要資訊</p>
+<ul>
+<li>區間估計  \(p_1 - p_2\)</li>
+<li>假設檢定則是  \(p_1 - p_2\)</li>
+<li>Expected Value<br>\(E(\bar{p_1} - \bar{p_2}) = p_1 - p_2\)</li>
+<li>Standard Deviation(Standard Error)<br>\(\sigma_{p_1 - p_2} = \sqrt{\frac{p_1 ( 1- p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}\)<ul>
+<li>\(n_1\) 母體 A 的樣本大小</li>
+<li>\(n_2\) 母體 B 的樣本大小</li>
+</ul>
+</li>
+<li>必須要符合此四條件，才能夠用常態分配推論兩個不一樣的母體參數<ul>
+<li>\(n_1 p_1 \geq 5\) and \(n_1(1-p_1) \geq 5\)</li>
+<li>\(n_2 p_2 \geq 5\) and \(n_2(1-p_2) \geq 5\)</li>
+</ul>
+</li>
+</ul>
+<p>用圖片來表示的畫如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bUJTFi7ScFqqXI9sRMDTIj0OyuYaoMVg&export=download" alt=""></p>
+</blockquote>
+<p>因此我們就可以推出區間估計公式為 \(\bar{p_1} - \bar{p_2} \pm z_{a/2} \sqrt{\frac{\bar{p_1} ( 1- \bar{p_1)}}{n_1}+\frac{\bar{p_2}(1-\bar{p_2})}{n_2}} \)</p>
+<h2 id="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，我們想知道這些資料能否證明此行銷活動前後有多少人知道的差異"><a href="#舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，我們想知道這些資料能否證明此行銷活動前後有多少人知道的差異" class="headerlink" title="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，我們想知道這些資料能否證明此行銷活動前後有多少人知道的差異"></a>舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，我們想知道這些資料能否證明此行銷活動前後有多少人知道的差異</h2><ul>
+<li>先來定義參數<ul>
+<li>\(p_1\) 為後測後，知道商品的數量</li>
+<li>\(p_2\) 為前測後，知道商品的數量</li>
+<li>\(\bar{p_1}\) 為後測的樣本參數</li>
+<li>\(\bar{p_2}\) 為前測的樣本參數</li>
+</ul>
+</li>
+<li>所以 \(p_1 - p_2 = \frac{120}{250} - \frac{60}{150} = 0.48-0.40=0.08\)</li>
+<li>區間估計<ul>
+<li>顯著性測試 0.05</li>
+<li>因此 \(z_{0.025} = 1.96\)</li>
+<li>\(0.48 - 0.40 \pm 1.96 \sqrt{\frac{0.48(0.52)}{250} + \frac{0.40(0.60)}{150}} = 0.08 \pm 1.96(0.510) = 0.08 \pm 0.10\)</li>
+<li>因此在百分之 95% 的信心，在宣傳前與宣傳後的差異會落在 0 to 0.18</li>
+</ul>
+</li>
+</ul>
+<h2 id="假設檢定-Hypothesis-Tests-about-p-1-p-2"><a href="#假設檢定-Hypothesis-Tests-about-p-1-p-2" class="headerlink" title="假設檢定 Hypothesis Tests about \(p_1 - p_2\)"></a>假設檢定 Hypothesis Tests about \(p_1 - p_2\)</h2><p>先定義下左、右、雙尾的假設檢定</p>
+<ul>
+<li>左尾<ul>
+<li>\(H_0: p_1 - p_2 \geq D_0\)</li>
+<li>\(H_1: p_1 - p_2 &lt; D_0\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>\(H_0: p_1 - p_2 \leq D_0\)</li>
+<li>\(H_1: p_1 - p_2 &gt; D_0\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>\(H_0: p_1 - p_2 = D_0\)</li>
+<li>\(H_1: p_1 - p_2 &lt;&gt; D_0\)</li>
+</ul>
+</li>
+</ul>
+<p>再來定義假設檢定中需要的標準差、點估計、z 值</p>
+<ul>
+<li>標準差 \(\bar{p_1} - \bar{p_2}\) 當 \(p_1 = p_2 = p\)<br>公式為 \(\sigma_{\bar{p_1} - \bar{p_2}} = \sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})}\)</li>
+<li>混和估計量 pooled Estimator 當 \(p_1 = p_2 = p\)，為兩個樣本混合的點估計量<br>公式為 \(\bar{p} = \frac{n_1 \bar{p_1} + n_2 \bar{p_2}}{n_1 + n_2}\)</li>
+<li>假設檢定中的 z 值則是 \(z=\frac{(\bar{p_1} - \bar{p_2})}{\sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})}}\)</li>
+</ul>
+<h3 id="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，再百分之-95-的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度"><a href="#舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，再百分之-95-的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度" class="headerlink" title="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，再百分之 95 的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度"></a>舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，再百分之 95 的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度</h3><ul>
+<li>定義 \(p_1\) 是後測，定義 \(p_2\) 是前測</li>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: p_1 - p_2 \leq 0\)</li>
+<li>\(H_1: p_1 - p_2 &gt; 0\)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>計算 z 檢定<ul>
+<li>\(\bar{p} = \frac{250(0.48) + 150(0.40)}{250+150} = \frac{180}{400} = 0.45\)</li>
+<li>\(\sigma_{\bar{p_1} - \bar{p_2}} = \sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})} = \sqrt{0.45(0.55)(\frac{1}{250}+\frac{1}{150})} - 0.514\)</li>
+<li>\(z=\frac{(\bar{p_1} - \bar{p_2})}{\sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})}} = \frac{(0.48-0.40)-0}{0.0514} = \frac{0.08}{0.0514} = 1.56\)，其中的 \(\frac{(0.48-0.40)-0}{0.0514}\)，為甚麼要減零是指前面 \(H_0: p_1 - p_2 \leq 0\) 的意思</li>
+<li>要特別注意，母體參數不需要用 t 檢定，前面有提到必須符合四條件(其中兩個是\(n_1 p_1 \geq 5\) and \(n_1(1-p_1) \geq 5\))就可以用常態分配</li>
+</ul>
+</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>\(z=1.56, p-value=0.0594\)</li>
+<li>\(p-value &gt; a = 0.05\)，因此我們不拒絕 \(H_0\)</li>
+<li>因此我們不能肯定在此行銷活動後，我們的商品知名度會提高</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a=0.05, z_{0.05} = 1.645\)，因此 Reject \(H_0\) if \(t \geq 1.645\)</li>
+<li>\(1.56 &lt; 1.645\)，因此我們不拒絕 \(H_0\)</li>
+<li>因此我們不能肯定在此行銷活動後，我們的商品知名度會提高</li>
 </ul>
 </li>
 </ul>
@@ -14320,6 +14413,213 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(二) 筆記 - 第十一章 推論母體變異數(Inference About Population Variances)</title>
+    <url>/2021/03/27/NTUT_note/statistics-ch11/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="推論一組母體變異數-Inference-About-a-Population-Variances"><a href="#推論一組母體變異數-Inference-About-a-Population-Variances" class="headerlink" title="推論一組母體變異數(Inference About a Population Variances)"></a>推論一組母體變異數(Inference About a Population Variances)</h1><p>前一章我們對母體參數與平均數進行推論，但還需要判斷變異數是否有過大的問題，如果變異數最大有可能表示其實分布很廣，在某些情況下不太可能夠接受變異數過大的問題，例如大量製造的螺絲釘寬度假如時太大、太小，但平均數出來的值卻是剛剛好，但實際上這樣是不可行的。</p>
+<p>因此要用變異數來判斷資料分布是否會過廣。</p>
+<h2 id="卡方分配-Chi-Square-Distribution"><a href="#卡方分配-Chi-Square-Distribution" class="headerlink" title="卡方分配 Chi-Square Distribution"></a>卡方分配 Chi-Square Distribution</h2><p>是標準常態隨機變數次方的總和值。</p>
+<p>我們可以用簡單抽樣的方式來找出變異數，變異數公式如右 \((n-1) s^2 /  \sigma^2\)，其中 \((n-1)\) 就是自由度。<br>之後我們再利用變異數(卡方分配得出)跟區間估計來做假設檢定。</p>
+<ul>
+<li>不懂假設統計可看<a href="https://theriseofdavid.github.io/2021/02/27/NTUT_note/statistics-ch9/" target="_blank" rel="noopener">統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)</a></li>
+</ul>
+<blockquote>
+<p>自由度的卡方分配，越左越小<br><img src="https://drive.google.com/u/2/uc?id=1xHzXpmjrJLw8IspGsf6qzOV1fjHFFsdS&export=download" alt=""></p>
+</blockquote>
+<h2 id="Interval-Estimation-of-sigma-2"><a href="#Interval-Estimation-of-sigma-2" class="headerlink" title="Interval Estimation of \(\sigma^2 \)"></a>Interval Estimation of \(\sigma^2 \)</h2><blockquote>
+<p>區間估計的示意圖<br><img src="https://drive.google.com/u/2/uc?id=16gKYJqMMApIvAQ3QGoYIE-yiB3DeT6Ue&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>下面所有的 \(X^2\) 指的都是方分配的變異數</li>
+<li>因此我們會有 \(1-a\) 的機率 \(X^2\) 的值會落在 \(X^2_{1-a/2} \leq X^2 \leq X^2_{a/2}\)</li>
+<li>再來我們把變異數公式 \((n-1) s^2 /  \sigma^2\) 帶入 \(X^2\) 就變成 \(X^2_{1-a/2} \leq \frac{(n-1) s^2}{\sigma^2} \leq  X^2_{a/2}\)</li>
+<li>稍微移項(倒數)後就變成 \(\frac{(n-1) s^2}{X^2_{a/2}} \leq \sigma^2 \leq \frac{(n-1) s^2}{X^2_{1-a/2}} \)</li>
+<li>因此母體變異數區間估計就是 \(\frac{(n-1) s^2}{X^2_{a/2}} \leq \sigma^2 \leq \frac{(n-1) s^2}{X^2_{1-a/2}} \)，其中\(n-1\)就是自由度</li>
+</ul>
+<p>那如果我們要找出母體標準差的區間估計呢？<br>就將剛剛的最後的式子開根號即可 \(\sqrt{\frac{(n-1) s^2}{X^2_{a/2}}} \leq \sigma \leq \sqrt{\frac{(n-1) s^2}{X^2_{1-a/2}}} \)</p>
+<h3 id="舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-95-的信心水準中母體變異數的區間估計是多少？"><a href="#舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-95-的信心水準中母體變異數的區間估計是多少？" class="headerlink" title="舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 95% 的信心水準中母體變異數的區間估計是多少？"></a>舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 95% 的信心水準中母體變異數的區間估計是多少？</h3><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1kZeoMsm26Zd8zxvZIwEmFX_81I_wuDEc&export=download" alt=""></p>
+</blockquote>
+<p>因此我們的自由度是 \(n-1=10-1=9, a = 0.05\)</p>
+<ul>
+<li>查表如下，注意是從右尾開始算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1euYFYmMeZNZiZKdailEkQt2s68Mux6uB&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>用手機 Probability Distribution App 查找如下，注意是從右尾開始算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1XLaH6uCL1juNtBevPBgQONToJ4GdUx-O&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此我們可以得出 \(X^0.975\) 值是 2.700，再來我們要找 \(X^0.025\) 的值，下面用圖表示<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1VRXVCsQHQ6a2SZCgVAceaM2XFcPlZbKl&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>跟上面用的方法一樣，用手機 Probability Distribution App 查找\(X^0.025\) 的值是 19.023</li>
+<li>用圖表來所示<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1OylgZXuphkNJq1GESeKZcHom2eeKmVT4&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>再來我們算樣本標準差平方 \(s^2=\frac{\sum (x_i - \bar{x})^2}{n-1} = \frac{6.3}{9} = 0.70\)</li>
+<li>接著我們把算好的卡方值拿出來用，因此在 95% 的信賴區間中 \(\frac{(10-1) 0.70}{19.023} \leq \sigma^2 \leq \frac{(10-1) 0.70}{2.700}\)，也就是 \(0.33 \leq \sigma^2 \leq 2.33\)</li>
+</ul>
+<h2 id="Hypothesis-Testing"><a href="#Hypothesis-Testing" class="headerlink" title="Hypothesis Testing"></a>Hypothesis Testing</h2><ul>
+<li>定義對立假設與虛無假設<ul>
+<li>左尾<ul>
+<li>\(H_0: \sigma^2 \geq \sigma_0^2\)</li>
+<li>\(H_1: \sigma^2 &lt; \sigma_0^2\)</li>
+<li>其中 \(\sigma_0^2\) 是我們假設檢定中假設的母體變異數</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>\(H_0: \sigma^2 \leq \sigma_0^2\)</li>
+<li>\(H_1: \sigma^2 &gt; \sigma_0^2\)</li>
+<li>其中 \(\sigma_0^2\) 是我們假設檢定中假設的母體變異數</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>\(H_0: \sigma^2 = \sigma_0^2\)</li>
+<li>\(H_1: \sigma^2 != \sigma_0^2\)</li>
+<li>其中 \(\sigma_0^2\) 是我們假設檢定中假設的母體變異數</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>T 檢定的公式為 \(X^2 = \frac{(n-1)s^2}{\sigma_0^2}\)</li>
+<li>拒絕法則 Rejection Rule<ul>
+<li>左尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(X^2 \leq X_{1-a}^2\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(X^2 \leq X_{a}^2\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(X^2 \leq X_{1-a/2}^2\) or \(X^2 \geq X_{a}^2\)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-90-的信心水準中母體變異數要小於等於-0-5-題目設定，但沒有在圖片說"><a href="#舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-90-的信心水準中母體變異數要小於等於-0-5-題目設定，但沒有在圖片說" class="headerlink" title="舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 90% 的信心水準中母體變異數要小於等於 0.5(題目設定，但沒有在圖片說)"></a>舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 90% 的信心水準中母體變異數要小於等於 0.5(題目設定，但沒有在圖片說)</h3><p>圖片所示</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19LkXBKWQNeLCPkTMspXs3D6uVrQZvZ2w&export=download" alt=""></p>
+</blockquote>
+<p>其中 Buyer’s Digest 為 A 廠商</p>
+<ul>
+<li><p>因此定義對立假設與虛無假設</p>
+<ul>
+<li>\(H_0: \sigma^2 \leq 0.5\)</li>
+<li>\(H_1: \sigma^2 &gt; 0.5\)</li>
+</ul>
+</li>
+<li><p>左尾檢定，透過 Probability Distribution App 查找，\(v=9, P(X&gt;x) =0.1 \) 時，\(X_{1-a}^2 = 14.864\)，因此值要大於 \(X^2 \geq 14.864\)，才能證明 \(H_1\) 是對的。</p>
+</li>
+<li><p>用圖表來表示</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=169KEeNO4n37q1KlT5lyvnQhUvspZakMa&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><p>p-Value Approach<br>卡方值的 12.6 機率為 0.18156，比我們的顯著性水準 0.1 還高，因此沒有證據顯示他們的恆溫器有變異數過大的問題。</p>
+</li>
+<li><p>Critical Value Approach<br>根據前一個舉例我們有計算過的樣本變異數 \(s^2 =0.7\)，\(X^2=\frac{9(0.7)}{5} = 12.6\)<br>\(12.6 \leq 14.864\)，因此我們拒絕 \(H_0\)，因此我們沒有證據顯示他們的恆溫器有變異數過大的問題。</p>
+</li>
+</ul>
+<h1 id="推論兩組母體變異數-Inference-About-Two-Population-Variances"><a href="#推論兩組母體變異數-Inference-About-Two-Population-Variances" class="headerlink" title="推論兩組母體變異數(Inference About Two Population Variances)"></a>推論兩組母體變異數(Inference About Two Population Variances)</h1><p>蒐集兩個獨立母體的樣本，透過這兩個母體樣本就可以對這兩個母體進行推論。</p>
+<ul>
+<li>左尾的假設檢定<ul>
+<li>\(H_0: \sigma_1^2 \geq \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 &lt; \sigma_2^2\)</li>
+<li>通常會將比較大的樣本變異數設定為 population1</li>
+</ul>
+</li>
+<li>右尾的假設檢定<ul>
+<li>\(H_0: \sigma_1^2 \leq \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 &gt; \sigma_2^2\)</li>
+<li>通常會將比較大的樣本變異數設定為 population1</li>
+</ul>
+</li>
+<li>雙尾的假設檢定<ul>
+<li>\(H_0: \sigma_1^2 = \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 != \sigma_2^2\)</li>
+<li>通常會將比較大的樣本變異數設定為 population1</li>
+</ul>
+</li>
+<li>t 檢定公式為 \(F = \frac{s_1^2}{s_2^2}\)<br>此公式會有兩個自由度，因為有兩個母體。第一個母體為分子\(s_1\)、第二個母體為分母\(s_2\)。</li>
+<li>拒絕法則 Rejection Rule<ul>
+<li>左尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(F \geq F_a\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(F \geq F_a\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(F \geq F_{a/2}\)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="舉例：我們想要購買恆溫器，有-A、B-公司兩家，在顯著性水準為-0-1-時，我們想要知道他們的變異數是不是一樣，資料在下方"><a href="#舉例：我們想要購買恆溫器，有-A、B-公司兩家，在顯著性水準為-0-1-時，我們想要知道他們的變異數是不是一樣，資料在下方" class="headerlink" title="舉例：我們想要購買恆溫器，有 A、B 公司兩家，在顯著性水準為 0.1 時，我們想要知道他們的變異數是不是一樣，資料在下方"></a>舉例：我們想要購買恆溫器，有 A、B 公司兩家，在顯著性水準為 0.1 時，我們想要知道他們的變異數是不是一樣，資料在下方</h2><p>圖片所示</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1aWlaP0afdYMF4mviGq5sWaOfVo39rv3W&export=download" alt=""></p>
+</blockquote>
+<p>其中 thermoRite 為 B 公司、TempKing 為 A 公司，因為 B 公司的樣本變異數比較大(1.768)，A 公司約 0.7</p>
+<ul>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \sigma_1^2 = \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 != \sigma_2^2\)</li>
+</ul>
+</li>
+<li>拒絕法則 Rejection Rule<ul>
+<li>由於是雙尾，因此 顯著性水準為 \(0.1 / 2 = 0.05\)，兩個都是 9 自由度。</li>
+<li>用 Probability Distribution App 計算如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1t9KilhfMGm59ekfVPpRUZTSHnLJKXB5i&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>用查表的方式<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18BdfbAATxmWCpjw3xDMCNaV_MhH8OLyi&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>第一個是 A 公司的自由度，第二是 B 公司的自由度，p 的機率是 0.05，我們可以得出\(F_{0.05} = 3.18\)，因此如果要 reject \(H_0\) if \(F \geq 3.18 \)</li>
+</ul>
+</li>
+<li>t 檢定公式為 \(F = \frac{s_1^2}{s_2^2}\)，其中 A 公司的數值為 1.768，B 公司的數值為 0.7，因此 \(F = 1.768 / 0.7 = 2.53\)</li>
+<li>p-value Approach<ul>
+<li>透過  Probability Distribution App 計算 \(F=2.53 \) 時機率為 0.9，但因為是雙尾，因此我們要將機率乘二變為 0.18，\(a = 0.05 &lt; p-value = 0.18\)，因此我們不拒絕 \(H_0\)</li>
+<li>因此我們沒有辦法證明兩家公司恆溫器的變異數是不同的。</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>因此我們不可以拒絕 \(H_0\)，因為 \(F=2.53 &lt; F_{0.05} = 3.18\)</li>
+<li>因此我們沒有辦法證明兩家公司恆溫器的變異數是不同的。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二下統計學筆記</tag>
       </tags>
   </entry>
 </search>

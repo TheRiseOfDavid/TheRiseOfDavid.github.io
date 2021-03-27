@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    統計學(二) 筆記 - 第十一章 推論母體變異數(Inference About Population Variances) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-NTUT_note/statistics-ch11" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  統計學(二) 筆記 - 第十一章 推論母體變異數(Inference About Population Variances)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/27/NTUT_note/statistics-ch11/" class="article-date">
+  <time datetime="2021-03-27T09:59:50.000Z" itemprop="datePublished">2021-03-27</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">8分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="推論一組母體變異數-Inference-About-a-Population-Variances"><a href="#推論一組母體變異數-Inference-About-a-Population-Variances" class="headerlink" title="推論一組母體變異數(Inference About a Population Variances)"></a>推論一組母體變異數(Inference About a Population Variances)</h1><p>前一章我們對母體參數與平均數進行推論，但還需要判斷變異數是否有過大的問題，如果變異數最大有可能表示其實分布很廣，在某些情況下不太可能夠接受變異數過大的問題，例如大量製造的螺絲釘寬度假如時太大、太小，但平均數出來的值卻是剛剛好，但實際上這樣是不可行的。</p>
+<p>因此要用變異數來判斷資料分布是否會過廣。</p>
+<h2 id="卡方分配-Chi-Square-Distribution"><a href="#卡方分配-Chi-Square-Distribution" class="headerlink" title="卡方分配 Chi-Square Distribution"></a>卡方分配 Chi-Square Distribution</h2><p>是標準常態隨機變數次方的總和值。</p>
+<p>我們可以用簡單抽樣的方式來找出變異數，變異數公式如右 \((n-1) s^2 /  \sigma^2\)，其中 \((n-1)\) 就是自由度。<br>之後我們再利用變異數(卡方分配得出)跟區間估計來做假設檢定。</p>
+<ul>
+<li>不懂假設統計可看<a href="https://theriseofdavid.github.io/2021/02/27/NTUT_note/statistics-ch9/" target="_blank" rel="noopener">統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)</a></li>
+</ul>
+<blockquote>
+<p>自由度的卡方分配，越左越小<br><img src="https://drive.google.com/u/2/uc?id=1xHzXpmjrJLw8IspGsf6qzOV1fjHFFsdS&export=download" alt=""></p>
+</blockquote>
+<h2 id="Interval-Estimation-of-sigma-2"><a href="#Interval-Estimation-of-sigma-2" class="headerlink" title="Interval Estimation of \(\sigma^2 \)"></a>Interval Estimation of \(\sigma^2 \)</h2><blockquote>
+<p>區間估計的示意圖<br><img src="https://drive.google.com/u/2/uc?id=16gKYJqMMApIvAQ3QGoYIE-yiB3DeT6Ue&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>下面所有的 \(X^2\) 指的都是方分配的變異數</li>
+<li>因此我們會有 \(1-a\) 的機率 \(X^2\) 的值會落在 \(X^2_{1-a/2} \leq X^2 \leq X^2_{a/2}\)</li>
+<li>再來我們把變異數公式 \((n-1) s^2 /  \sigma^2\) 帶入 \(X^2\) 就變成 \(X^2_{1-a/2} \leq \frac{(n-1) s^2}{\sigma^2} \leq  X^2_{a/2}\)</li>
+<li>稍微移項(倒數)後就變成 \(\frac{(n-1) s^2}{X^2_{a/2}} \leq \sigma^2 \leq \frac{(n-1) s^2}{X^2_{1-a/2}} \)</li>
+<li>因此母體變異數區間估計就是 \(\frac{(n-1) s^2}{X^2_{a/2}} \leq \sigma^2 \leq \frac{(n-1) s^2}{X^2_{1-a/2}} \)，其中\(n-1\)就是自由度</li>
+</ul>
+<p>那如果我們要找出母體標準差的區間估計呢？<br>就將剛剛的最後的式子開根號即可 \(\sqrt{\frac{(n-1) s^2}{X^2_{a/2}}} \leq \sigma \leq \sqrt{\frac{(n-1) s^2}{X^2_{1-a/2}}} \)</p>
+<h3 id="舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-95-的信心水準中母體變異數的區間估計是多少？"><a href="#舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-95-的信心水準中母體變異數的區間估計是多少？" class="headerlink" title="舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 95% 的信心水準中母體變異數的區間估計是多少？"></a>舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 95% 的信心水準中母體變異數的區間估計是多少？</h3><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1kZeoMsm26Zd8zxvZIwEmFX_81I_wuDEc&export=download" alt=""></p>
+</blockquote>
+<p>因此我們的自由度是 \(n-1=10-1=9, a = 0.05\)</p>
+<ul>
+<li>查表如下，注意是從右尾開始算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1euYFYmMeZNZiZKdailEkQt2s68Mux6uB&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>用手機 Probability Distribution App 查找如下，注意是從右尾開始算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1XLaH6uCL1juNtBevPBgQONToJ4GdUx-O&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此我們可以得出 \(X^0.975\) 值是 2.700，再來我們要找 \(X^0.025\) 的值，下面用圖表示<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1VRXVCsQHQ6a2SZCgVAceaM2XFcPlZbKl&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>跟上面用的方法一樣，用手機 Probability Distribution App 查找\(X^0.025\) 的值是 19.023</li>
+<li>用圖表來所示<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1OylgZXuphkNJq1GESeKZcHom2eeKmVT4&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>再來我們算樣本標準差平方 \(s^2=\frac{\sum (x_i - \bar{x})^2}{n-1} = \frac{6.3}{9} = 0.70\)</li>
+<li>接著我們把算好的卡方值拿出來用，因此在 95% 的信賴區間中 \(\frac{(10-1) 0.70}{19.023} \leq \sigma^2 \leq \frac{(10-1) 0.70}{2.700}\)，也就是 \(0.33 \leq \sigma^2 \leq 2.33\)</li>
+</ul>
+<h2 id="Hypothesis-Testing"><a href="#Hypothesis-Testing" class="headerlink" title="Hypothesis Testing"></a>Hypothesis Testing</h2><ul>
+<li>定義對立假設與虛無假設<ul>
+<li>左尾<ul>
+<li>\(H_0: \sigma^2 \geq \sigma_0^2\)</li>
+<li>\(H_1: \sigma^2 &lt; \sigma_0^2\)</li>
+<li>其中 \(\sigma_0^2\) 是我們假設檢定中假設的母體變異數</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>\(H_0: \sigma^2 \leq \sigma_0^2\)</li>
+<li>\(H_1: \sigma^2 &gt; \sigma_0^2\)</li>
+<li>其中 \(\sigma_0^2\) 是我們假設檢定中假設的母體變異數</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>\(H_0: \sigma^2 = \sigma_0^2\)</li>
+<li>\(H_1: \sigma^2 != \sigma_0^2\)</li>
+<li>其中 \(\sigma_0^2\) 是我們假設檢定中假設的母體變異數</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>T 檢定的公式為 \(X^2 = \frac{(n-1)s^2}{\sigma_0^2}\)</li>
+<li>拒絕法則 Rejection Rule<ul>
+<li>左尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(X^2 \leq X_{1-a}^2\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(X^2 \leq X_{a}^2\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(X^2 \leq X_{1-a/2}^2\) or \(X^2 \geq X_{a}^2\)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-90-的信心水準中母體變異數要小於等於-0-5-題目設定，但沒有在圖片說"><a href="#舉例：我們想要購買-A-廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定-68度F-時，10-個恆溫器的實際數值如下，我們想要知道在百分之-90-的信心水準中母體變異數要小於等於-0-5-題目設定，但沒有在圖片說" class="headerlink" title="舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 90% 的信心水準中母體變異數要小於等於 0.5(題目設定，但沒有在圖片說)"></a>舉例：我們想要購買 A 廠商的恆溫器，我們在一個調查中得知，當在一個房間裡面設定 68度F 時，10 個恆溫器的實際數值如下，我們想要知道在百分之 90% 的信心水準中母體變異數要小於等於 0.5(題目設定，但沒有在圖片說)</h3><p>圖片所示</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19LkXBKWQNeLCPkTMspXs3D6uVrQZvZ2w&export=download" alt=""></p>
+</blockquote>
+<p>其中 Buyer’s Digest 為 A 廠商</p>
+<ul>
+<li><p>因此定義對立假設與虛無假設</p>
+<ul>
+<li>\(H_0: \sigma^2 \leq 0.5\)</li>
+<li>\(H_1: \sigma^2 &gt; 0.5\)</li>
+</ul>
+</li>
+<li><p>左尾檢定，透過 Probability Distribution App 查找，\(v=9, P(X&gt;x) =0.1 \) 時，\(X_{1-a}^2 = 14.864\)，因此值要大於 \(X^2 \geq 14.864\)，才能證明 \(H_1\) 是對的。</p>
+</li>
+<li><p>用圖表來表示</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=169KEeNO4n37q1KlT5lyvnQhUvspZakMa&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><p>p-Value Approach<br>卡方值的 12.6 機率為 0.18156，比我們的顯著性水準 0.1 還高，因此沒有證據顯示他們的恆溫器有變異數過大的問題。</p>
+</li>
+<li><p>Critical Value Approach<br>根據前一個舉例我們有計算過的樣本變異數 \(s^2 =0.7\)，\(X^2=\frac{9(0.7)}{5} = 12.6\)<br>\(12.6 \leq 14.864\)，因此我們拒絕 \(H_0\)，因此我們沒有證據顯示他們的恆溫器有變異數過大的問題。</p>
+</li>
+</ul>
+<h1 id="推論兩組母體變異數-Inference-About-Two-Population-Variances"><a href="#推論兩組母體變異數-Inference-About-Two-Population-Variances" class="headerlink" title="推論兩組母體變異數(Inference About Two Population Variances)"></a>推論兩組母體變異數(Inference About Two Population Variances)</h1><p>蒐集兩個獨立母體的樣本，透過這兩個母體樣本就可以對這兩個母體進行推論。</p>
+<ul>
+<li>左尾的假設檢定<ul>
+<li>\(H_0: \sigma_1^2 \geq \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 &lt; \sigma_2^2\)</li>
+<li>通常會將比較大的樣本變異數設定為 population1</li>
+</ul>
+</li>
+<li>右尾的假設檢定<ul>
+<li>\(H_0: \sigma_1^2 \leq \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 &gt; \sigma_2^2\)</li>
+<li>通常會將比較大的樣本變異數設定為 population1</li>
+</ul>
+</li>
+<li>雙尾的假設檢定<ul>
+<li>\(H_0: \sigma_1^2 = \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 != \sigma_2^2\)</li>
+<li>通常會將比較大的樣本變異數設定為 population1</li>
+</ul>
+</li>
+<li>t 檢定公式為 \(F = \frac{s_1^2}{s_2^2}\)<br>此公式會有兩個自由度，因為有兩個母體。第一個母體為分子\(s_1\)、第二個母體為分母\(s_2\)。</li>
+<li>拒絕法則 Rejection Rule<ul>
+<li>左尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(F \geq F_a\)</li>
+</ul>
+</li>
+<li>右尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(F \geq F_a\)</li>
+</ul>
+</li>
+<li>雙尾<ul>
+<li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
+<li>Critical Value approach<br>Reject \(H_0\) if \(F \geq F_{a/2}\)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="舉例：我們想要購買恆溫器，有-A、B-公司兩家，在顯著性水準為-0-1-時，我們想要知道他們的變異數是不是一樣，資料在下方"><a href="#舉例：我們想要購買恆溫器，有-A、B-公司兩家，在顯著性水準為-0-1-時，我們想要知道他們的變異數是不是一樣，資料在下方" class="headerlink" title="舉例：我們想要購買恆溫器，有 A、B 公司兩家，在顯著性水準為 0.1 時，我們想要知道他們的變異數是不是一樣，資料在下方"></a>舉例：我們想要購買恆溫器，有 A、B 公司兩家，在顯著性水準為 0.1 時，我們想要知道他們的變異數是不是一樣，資料在下方</h2><p>圖片所示</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1aWlaP0afdYMF4mviGq5sWaOfVo39rv3W&export=download" alt=""></p>
+</blockquote>
+<p>其中 thermoRite 為 B 公司、TempKing 為 A 公司，因為 B 公司的樣本變異數比較大(1.768)，A 公司約 0.7</p>
+<ul>
+<li>因此定義對立假設與虛無假設<ul>
+<li>\(H_0: \sigma_1^2 = \sigma_2^2\)</li>
+<li>\(H_1: \sigma_1^2 != \sigma_2^2\)</li>
+</ul>
+</li>
+<li>拒絕法則 Rejection Rule<ul>
+<li>由於是雙尾，因此 顯著性水準為 \(0.1 / 2 = 0.05\)，兩個都是 9 自由度。</li>
+<li>用 Probability Distribution App 計算如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1t9KilhfMGm59ekfVPpRUZTSHnLJKXB5i&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>用查表的方式<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18BdfbAATxmWCpjw3xDMCNaV_MhH8OLyi&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>第一個是 A 公司的自由度，第二是 B 公司的自由度，p 的機率是 0.05，我們可以得出\(F_{0.05} = 3.18\)，因此如果要 reject \(H_0\) if \(F \geq 3.18 \)</li>
+</ul>
+</li>
+<li>t 檢定公式為 \(F = \frac{s_1^2}{s_2^2}\)，其中 A 公司的數值為 1.768，B 公司的數值為 0.7，因此 \(F = 1.768 / 0.7 = 2.53\)</li>
+<li>p-value Approach<ul>
+<li>透過  Probability Distribution App 計算 \(F=2.53 \) 時機率為 0.9，但因為是雙尾，因此我們要將機率乘二變為 0.18，\(a = 0.05 &lt; p-value = 0.18\)，因此我們不拒絕 \(H_0\)</li>
+<li>因此我們沒有辦法證明兩家公司恆溫器的變異數是不同的。</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>因此我們不可以拒絕 \(H_0\)，因為 \(F=2.53 &lt; F_{0.05} = 3.18\)</li>
+<li>因此我們沒有辦法證明兩家公司恆溫器的變異數是不同的。</li>
+</ul>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/03/26/NTUT_note/NTUTcs_MediaHW03-2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">北科資工二多媒體技術與應用 第三周作業-利用霍夫線分辨出磁磚邊緣</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
