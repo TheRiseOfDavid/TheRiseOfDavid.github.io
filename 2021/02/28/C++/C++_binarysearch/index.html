@@ -125,7 +125,7 @@ ga('send', 'pageview');
 
 <h3 id="lowerbound-下限，傳回-index"><a href="#lowerbound-下限，傳回-index" class="headerlink" title="lowerbound 下限，傳回 index"></a>lowerbound 下限，傳回 index</h3><p>傳回一個 index 為，選定的 \(value \leq element\) 並傳回第一個元素，其中 value 是我們想找的數值，element 則是陣列中的元素數值。</p>
 <p>另一種講法則是，lowerbound 表示對於有序的陣列能夠最<strong>先</strong>大於的數值。</p>
-<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼</h4><p>此時會傳回 2，表示 index，那元素數值則是 3，因為 3(要找的數值) 等於 3(陣列元素數值)。</p>
+<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-lowerbound-會傳回甚麼"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-lowerbound-會傳回甚麼" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 lowerbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 lowerbound 會傳回甚麼</h4><p>此時會傳回 2(表示 index)，那元素數值則是 3，因為 3(要找的數值) 等於 3(陣列元素數值)。</p>
 <p>寫法如下</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::lower_bound (struct.begin(), struct.end(), value) - <span class="class"><span class="keyword">struct</span>.<span class="title">begin</span>();</span></span><br></pre></td></tr></table></figure>
 

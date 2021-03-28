@@ -13201,7 +13201,7 @@
 
 <h3 id="lowerbound-下限，傳回-index"><a href="#lowerbound-下限，傳回-index" class="headerlink" title="lowerbound 下限，傳回 index"></a>lowerbound 下限，傳回 index</h3><p>傳回一個 index 為，選定的 \(value \leq element\) 並傳回第一個元素，其中 value 是我們想找的數值，element 則是陣列中的元素數值。</p>
 <p>另一種講法則是，lowerbound 表示對於有序的陣列能夠最<strong>先</strong>大於的數值。</p>
-<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-uppderbound-會傳回甚麼-1" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 uppderbound 會傳回甚麼</h4><p>此時會傳回 2，表示 index，那元素數值則是 3，因為 3(要找的數值) 等於 3(陣列元素數值)。</p>
+<h4 id="舉例-1-2-3-3-3-4-5，如果我們要找-3-那-lowerbound-會傳回甚麼"><a href="#舉例-1-2-3-3-3-4-5，如果我們要找-3-那-lowerbound-會傳回甚麼" class="headerlink" title="舉例 1,2,3,3,3,4,5，如果我們要找 3 那 lowerbound 會傳回甚麼"></a>舉例 1,2,3,3,3,4,5，如果我們要找 3 那 lowerbound 會傳回甚麼</h4><p>此時會傳回 2(表示 index)，那元素數值則是 3，因為 3(要找的數值) 等於 3(陣列元素數值)。</p>
 <p>寫法如下</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::lower_bound (struct.begin(), struct.end(), value) - <span class="class"><span class="keyword">struct</span>.<span class="title">begin</span>();</span></span><br></pre></td></tr></table></figure>
 
@@ -14620,6 +14620,127 @@
         <tag>北科上課筆記</tag>
         <tag>統計學筆記</tag>
         <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1496E1 - Square-free division (easy version) (math theorm)</title>
+    <url>/2021/03/22/Codeforces/Codeforces%201497E1/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>請你將題目給你的數列進行切斷，每一個切斷的數列裡不可以有某兩值相乘是完全平方數，求最小切斷的長度</p>
+<p><a href="https://codeforces.com/contest/1497/problem/E1" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解完全平方數的特性</li>
+<li>進行優化，不可簡單思考就開始寫入</li>
+</ul>
+<p>##　分析<br>這題很有趣，學了一課。</p>
+<p>我們可以知道完全平方數的特性是，每一個質因數的次方都是偶數才有辦法組成完全平方數，那現在只剩下一個問題了，我們怎樣知道哪些數字相乘會等於完全平方數呢？</p>
+<p>此時我們可以透過完全平方數反推，只要有一個質因數的次方不是偶數就不會是完全平方數，那麼只要有另外一個數字相乘可以讓所有的質因數次方都變成偶數。</p>
+<p>舉例： 18 = 2 * 3 * 3，此時我們的 2 的次方是奇數，那我們只要再補給他 2 就會等於 36 是個完全平方數了！<br>在進一步想，如果讓 18 * 8 = 144，也是完全平方數， 8 = 2 * 2 * 2，2^3 也是奇數，因此我們只要讓兩個數字相乘後每一個質因數 都是偶數，遇到這樣的情況時就可以切斷。</p>
+<p>而我們知道奇數 + 奇數 就是偶數，因此我們只要知道當前片段有幾個質因數是奇數在紀錄就好。</p>
+<p>現在還有一個問題要稍微避險下，18 = 2 * 3 * 3, 6 = 2 * 3，這樣是沒有滿足所有的質因數的次方都是偶數，會變成 108 = 2 * 2 * 3 * 3 * 3，因此這樣不算。</p>
+<p>如果要讓 6 乘以另一個數字相乘必須是滿足所有的質因數的次方都是偶數，因次需要另外一個 6 來補足就變成了 36 = 2 * 2 * 3 * 3。<br>這裡我們得知一件事，我們除了計算哪些質因數次方是奇數外，還要讓這些奇數質因數次方相乘。</p>
+<p>得出結論</p>
+<ul>
+<li>把所有數字拆解質因數</li>
+<li>當數字的所有質因數為奇數次方時，相乘這些奇數次方的質因數(定義 p)</li>
+<li>保存 p，只要後面的數字也有另外一個 p 時就切斷數列</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/asbbv/article/details/114990845" target="_blank" rel="noopener">E1. Square-free division (easy version) (数论、思维) by tom_bbv</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>題目考到我了QQ，不過我認為我學習了蠻多思維，希望這些思維我都能學會並且派上用場。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 200020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, k, num[MAXN]; <span class="comment">//num 輸入題目數列用</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; mp; <span class="comment">//紀錄每個 p，前面定義過的</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">divid</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">1</span>; <span class="comment">//紀錄此數字所有奇數次方的質因數相乘</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i*i &lt;= x; i++)&#123; <span class="comment">//質因數分解</span></span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(x % i == <span class="number">0</span>)&#123; </span><br><span class="line">            cnt++; <span class="comment">//紀錄總共有幾次的次方</span></span><br><span class="line">            x /= i; <span class="comment">//約分，加速迴圈效率</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt % <span class="number">2</span> != <span class="number">0</span>) p *= i; <span class="comment">//奇數次方的質因數相乘</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p*x; <span class="comment">//這邊還要再乘以 x，因為前面有約分，所以 x 會是最後一個沒有被加入迴圈的質因數，回傳 p</span></span><br><span class="line">    <span class="comment">//x 也可以等於 1，因為 1 是質因數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>; <span class="comment">//紀錄要切幾個線段</span></span><br><span class="line">        mp.clear(); <span class="comment">//先將前面紀錄有哪些 p 先清除，避免干擾</span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入題目數列</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">            <span class="keyword">int</span> p = divid(num[i]); <span class="comment">//質因數分解，回傳此數字所有奇數次方的質因數相乘</span></span><br><span class="line">            <span class="keyword">if</span>(mp.count(p))&#123; <span class="comment">//如果 p 有被記錄表示，這裡會被組成完全平方數</span></span><br><span class="line">                ans++; <span class="comment">//這邊切線段，然後清除之前紀錄的 p</span></span><br><span class="line">                mp.clear();</span><br><span class="line">            &#125;</span><br><span class="line">            mp[p] = <span class="number">1</span>; <span class="comment">//這次的 p 要被記錄，因為是在另一個線段</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans+<span class="number">1</span> &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//最後的線段不會再被我們切到，因此這邊要 +1，加入最後一個線段</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>math theorm</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>Codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10487 - Closest Sums (二分搜尋 Binary Search)</title>
+    <url>/2020/03/28/UVa/UVa10487/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>給你一個數列，再給你一個數字，請你告訴這個數字最靠近這個數列某兩個值相加之總和(不可使用同個位置的數字)</p>
+<p><a href="https://onlinejudge.org/external/104/10487.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>思考要怎麼樣迅速查詢到最靠近的值</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>基本上是水題，再透過二分搜尋的方式將答案找出。</p>
+<p>先將數列中所有數字都先兩兩相加後，再用二分搜尋找出最靠近的數字。</p>
+<p>注意：這裡要用 <code>upper_bound</code> 會比較好寫，他勢必會找到比題目要查詢的數字更大，因此我們<code>upper_bound</code> 找到的數值(定義num[x])，再往前一個 index，num[x-1]，一定會比查詢的數字還要小，接下來再拿這兩個數字去比較即可，輸出離查詢數字更近的。</p>
+<p>注意一開始的邊界問題，因此一開始先設無限大即可。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>簡單的一道題，希望自己考場都寫會瞜</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, idx, ans, temp, kase=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> num[MAXN]; <span class="comment">//放題目數列用</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sum; <span class="comment">//放兩兩相加後的陣列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &amp;&amp; n)&#123;</span><br><span class="line">        sum.clear(); <span class="comment">//清除上次的狀態，否則會干擾此次題目</span></span><br><span class="line">        sum.push_back(<span class="number">-0x3f3f3f</span>); <span class="comment">//先放第一筆資料進去，並且是無限大才不會導致</span></span><br><span class="line">        <span class="comment">//upper_bound 找到 (index)0 時跟 (index)-1 比較的問題</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; num[i]; </span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i<span class="number">-1</span>; j &gt;= <span class="number">0</span>; j--) sum.push_back(num[i]+num[j]); </span><br><span class="line">            <span class="comment">//類似於 bubble sort 的將值輸入進去，這樣就不會重複輸入兩個值以上</span></span><br><span class="line">        &#125;</span><br><span class="line">        sort(sum.begin(), sum.end()); <span class="comment">//排序，方便二分搜尋</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; kase++ &lt;&lt; <span class="string">":\n"</span>; </span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; m; <span class="comment">//輸入題目資訊</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp; </span><br><span class="line">            idx = upper_bound(sum.begin(), sum.end(), temp) - sum.begin(); </span><br><span class="line">            <span class="comment">//找到離查詢的數值更大的數值，(定義t)</span></span><br><span class="line">            <span class="keyword">int</span> gap1 = <span class="built_in">abs</span>(sum[idx] - temp); <span class="comment">//差距 1，找查詢數與 t 的距離</span></span><br><span class="line">            <span class="keyword">int</span> gap2 = <span class="built_in">abs</span>(sum[idx<span class="number">-1</span>] - temp); <span class="comment">//差距 1，找查詢數與 t 的上一個數值的距離</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; sum[index] &lt;&lt; ' ' &lt;&lt; sum[index-1] &lt;&lt; '\n';</span></span><br><span class="line">            <span class="keyword">if</span>(gap2 &lt; gap1) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Closest sum to "</span> &lt;&lt; temp &lt;&lt; <span class="string">" is "</span> &lt;&lt; sum [idx<span class="number">-1</span>] &lt;&lt; <span class="string">".\n"</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"Closest sum to "</span> &lt;&lt; temp &lt;&lt; <span class="string">" is "</span> &lt;&lt; sum[idx] &lt;&lt; <span class="string">".\n"</span>;</span><br><span class="line">            <span class="comment">//誰的差距大，就用另外一個差距的 sum[idx] or sum[idx-1] 來輸出答案。</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Binary Search 二分搜尋</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>個案報告 - 協易機械 ERP顧問的評選</title>
+    <url>/2021/03/28/NTUT_note/MIS-Case2/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理資訊系統的個案報告心得回饋<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="個人心得"><a href="#個人心得" class="headerlink" title="個人心得"></a>個人心得</h2><p><img src="https://drive.google.com/file/d/1KH1V5aP3CAChwKOD_udb9hS7LPH27VOF/view?usp=sharing" alt="協易機械 ERP顧問的評選，大衛心得"></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>管理資訊系統</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>個案報告 1 - 怪獸公司 資訊系統促使之企業流程變革</title>
+    <url>/2021/03/28/NTUT_note/MIS-Case1/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理資訊系統的個案報告心得回饋<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="個人心得"><a href="#個人心得" class="headerlink" title="個人心得"></a>個人心得</h2><p><img src="https://drive.google.com/file/d/1dHZEzJFJeI9wevWhSlMKa5D7I_LHn1L5/view?usp=sharing" alt="怪獸公司 資訊系統促使之企業流程變革，大衛心得"></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>管理資訊系統</tag>
       </tags>
   </entry>
 </search>
