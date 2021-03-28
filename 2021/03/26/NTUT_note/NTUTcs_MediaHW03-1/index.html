@@ -124,7 +124,7 @@ ga('send', 'pageview');
 <p>考倒我了，嗚嗚。<br>我對於圖學的知識過少，還需要增加自己對於多媒體的思考能力R。</p>
 <p>由於此題已經有告訴你需要用的步驟與規則如下</p>
 <ul>
-<li>二值化 ````cv2.threshold```<br>給予一數值 x，圖片中大於 x 的點都變成白色，小於的則變成黑色</li>
+<li>二值化 <code>cv2.threshold</code><br>給予一數值 x，圖片中大於 x 的點都變成白色，小於的則變成黑色</li>
 <li>膨脹 <code>cv2.dilate</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>白色</strong>，要搭配二值化此用</li>
 <li>侵蝕 <code>cv2.erode</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>黑色</strong>，要搭配二值化此用</li>
 <li>連通物件 <code>cv2.connectedComponentsWithStats</code>，<code>connectivity=4</code> 時表示判斷區塊的方式是上下左右，<code>connectivity=4</code> 時是上下左右加上左上、左下、右下、右上。<br>幫你找出圖片中的所有白色區塊，會給出四個回傳值。<ul>
