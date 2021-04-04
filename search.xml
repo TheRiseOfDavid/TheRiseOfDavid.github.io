@@ -14767,7 +14767,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10487 - Grocery store (數論 Math theorm、暴力搜尋 Brute force)</title>
+    <title>UVa11236 - Grocery store (數論 Math theorm、暴力搜尋 Brute force)</title>
     <url>/2020/04/05/UVa/UVa%2011236/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>雜貨店的收銀員不太懂加號跟乘號這兩個意思，為了要讓他更容易理解，因此在你買雜貨店的商品時，你想要讓你買的四項商品總和價格等同於你買的四項商品價格乘積，四項商品都是相同的商品。</p>
