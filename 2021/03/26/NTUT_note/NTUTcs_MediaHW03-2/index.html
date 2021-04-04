@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">1.4k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -124,6 +124,7 @@ ga('send', 'pageview');
 <p>由於此題已經有告訴你需要用的步驟與規則如下</p>
 <ul>
 <li>二值化 <code>cv2.threshold</code><br>給予一數值 x，圖片中大於 x 的點都變成白色，小於的則變成黑色</li>
+<li>濾波 <code>cv2.medianBlur</code><br>先進行濾波，讓縮小的圖片雜訊被模糊掉，進而讓邊緣線更清楚</li>
 <li>膨脹 <code>cv2.dilate</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>白色</strong>，要搭配二值化此用</li>
 <li>侵蝕 <code>cv2.erode</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>黑色</strong>，要搭配二值化此用</li>
 <li>模糊 <code>cv2.medianBlur</code><br>由於有大量的反光，加上磁磚並不是完整統一顏色，難免會在縮小後造成雜訊過多，此時我們用濾波讓雜訊模糊，進而讓我們的邊緣清晰。</li>
@@ -140,9 +141,11 @@ ga('send', 'pageview');
 <p>將資料統整後，可以得出一個結論</p>
 <ul>
 <li>圖片大小不可以超過 1000 像素，所以我們先 <code>cv2.resize</code></li>
+<li>先進行濾波，讓縮小的圖片雜訊被模糊掉，進而讓邊緣線更清楚</li>
 <li>再來進行二值化，因為如果沒有二值化後面所有東西都不能做<br>至於要在那個點做 x 化就要不斷嘗試</li>
-<li>查看圖片，發現還是有很多<strong>白點</strong>散布在硬幣的旁邊，因此先侵蝕<br>至於要在矩陣多大就要不斷嘗試</li>
-<li>侵蝕完畢後，發現硬幣的邊界有點變形，在做膨脹<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>查看圖片，發現還是有一些雜訊，因此先侵蝕<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>侵蝕完畢後，發現磁磚縫細有點變形，在做膨脹<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>中間有雜訊是正常的，只要不影響霍夫線即可。</li>
 <li>再來劃出霍夫線，這裡的輸出的直線座標系統是用極座標。</li>
 <li>由於是極座標，因此我們要在轉換成直角座標</li>
 <li>轉換完成後，使用 ````cv2.line```  劃線</li>

@@ -182,8 +182,15 @@
 </blockquote>
 <a id="more"></a>
 
-<h2 id="安裝教學"><a href="#安裝教學" class="headerlink" title="安裝教學"></a>安裝教學</h2><p>先去官網 <a href="https://ngrok.com/download" target="_blank" rel="noopener">下載ngrok</a>，安裝完成後將 exe，拉出來並執行。<br>接下來去官網登入，沒有就註冊八~</p>
-<h2 id="使用教學"><a href="#使用教學" class="headerlink" title="使用教學"></a>使用教學</h2><p>這官網都教你且教導的一定比我還好，就交給官網拉~<br>不過如果記住如果你的端口 設置為 y，就要改端口</p>
+<h2 id="安裝教學"><a href="#安裝教學" class="headerlink" title="安裝教學"></a>安裝教學</h2><p>先去官網 <a href="https://ngrok.com/download" target="_blank" rel="noopener">下載ngrok</a>，安裝完成後將 exe，拉出來並執行。<br>接下來去官網登入，沒有就註冊。</p>
+<p>註冊後有此詳細教學，跟隨教學即可。</p>
+<p>在這邊提供我的頁面，方便使用者確認並且沒有走錯</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19O15rqQ0fGcl-zDrfW9GWb6dTLMTzweK&export=download" alt=""></p>
+</blockquote>
+<p>記住 authtoken 一定要正確喔。</p>
+<h2 id="使用教學"><a href="#使用教學" class="headerlink" title="使用教學"></a>使用教學</h2><p>這官網都教你且教導的一定比我還好，就交給官網。</p>
+<p>之後打 terminal 先找到 ngrok，然後呼叫他並且在後面打上<code>協定+端口</code>，就可以成為伺服器了！</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;ngrok http y</span><br></pre></td></tr></table></figure>
 
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>真的要謝謝各位科技前輩讓我學會這些事物，也要謝謝基礎教育聯盟讓我有機會學習新事物，真的很謝謝陪我的各位！</p>
@@ -198,7 +205,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemK Assigning Frequencies (Brute force)</title>
+    <title>ProblemK Assigning Frequencies (暴力搜尋 Brute force)</title>
     <url>/2020/08/18/ICPC/2017-ICPC-Asia-Taipei-Hualien-Regional-Pk/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一張圖，這圖不會超過 25 個 Node，試問能不能用 3 個顏色塗滿所有點但相鄰的點不能有相同顏色。<br>題目提示: 測資不會超過 85 筆。</p>
@@ -231,7 +238,7 @@
         <tag>ICPC</tag>
         <tag>程式解題</tag>
         <tag>2017-ICPC-Asia-Taipei-Hualien-Regional</tag>
-        <tag>Brute force</tag>
+        <tag>暴力搜尋 Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -335,7 +342,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemD Defining Labels (Math)</title>
+    <title>ProblemD Defining Labels (數論 Math theorm)</title>
     <url>/2020/07/03/ICPC/2019-2020-ICPC-Asia-Hong-Kong-Regional-Contest-Pd/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你 x 進制 y 值且他是試算表模式，如:A,B,..,Z,AA,AB..，請嘗試將他轉回 10 進制</p>
@@ -360,9 +367,9 @@
         <category>ICPC</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>2019_2020_ICPC_Asia_Hong_Kong_Regional_Contest</tag>
         <tag>ICPC</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -464,7 +471,7 @@
       </tags>
   </entry>
   <entry>
-    <title>ProblemE The League of Sequence Designers</title>
+    <title>ProblemE The League of Sequence Designers(數論 Math theorm)</title>
     <url>/2020/07/18/ICPC/2019-ICPC-Asia-Taipei-Hsinchu-Regional-Pe/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一公式\( \max(r - l + 1 ) \cdot  \sum_{l \leq i \leq n } a_{i} , 其中 1 \leq l \leq r \leq n \)<br>題目給予一貪心演算法，但此演算法並不正確。演算法如下:<br><img src="/images/2019-ICPC-Asia-Taipei-Hsinchu-Regional-Pe/1.png" alt=""></p>
@@ -523,15 +530,15 @@
         <category>ICPC</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>ICPC</tag>
         <tag>2019_ICPC_Asia_Taipei-Hsinchu_Regional_Contest</tag>
         <tag>設計解題</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
-    <title>ProblemB Bad Treap (Math)</title>
+    <title>ProblemB Bad Treap (數論 Math theorm)</title>
     <url>/2020/06/16/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pb/</url>
     <content><![CDATA[<head>
   <script type="text/javascript"
@@ -562,14 +569,14 @@
       </categories>
       <tags>
         <tag>ICPC_2019-2020_North-Western_Russia_Regional_Contest</tag>
-        <tag>math theorm</tag>
         <tag>ICPC</tag>
         <tag>設計解題</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
-    <title>ProblemA Accurate Movement (Math)</title>
+    <title>ProblemA Accurate Movement (數論 Math theorm)</title>
     <url>/2020/05/18/ICPC/ICPC-2019-2020-North-Western-Russia-Regional-Contest-Pa/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有兩個 Box ，這兩個 Box 不可以互相拋棄對方，必須要相互連在一起</p>
@@ -593,9 +600,9 @@
       </categories>
       <tags>
         <tag>ICPC_2019-2020_North-Western_Russia_Regional_Contest</tag>
-        <tag>math theorm</tag>
         <tag>ICPC</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -1769,7 +1776,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10221 - Satellites (math)</title>
+    <title>UVa10221 - Satellites (數論 Math theorm)</title>
     <url>/2020/03/17/UVa/UVa10221/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>如圖，給你圓上兩點夾角，和點圓心的距離<br>求出兩點的弧長與弦長。</p>
@@ -1787,10 +1794,10 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>水題</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -2222,7 +2229,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa1583 - Digit Generator(Brute force )</title>
+    <title>UVa1583 - Digit Generator(暴力搜尋 Brute force )</title>
     <url>/2020/03/13/UVa/UVa1583/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你一個數字，求出此數的原本 + 每個位數的 sum(總和)，假如有同時兩個數字符合需求時輸出最小值。<br>example: 216<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = (198 + 1 + 9 + 8 )<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = (207 + 2 + 0 + 7 )</p>
@@ -2242,11 +2249,11 @@
         <tag>水題</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
-        <tag>Brute force</tag>
+        <tag>暴力搜尋 Brute force</tag>
       </tags>
   </entry>
   <entry>
-    <title>UVa1594 - Ducci Sequence (Brute force)</title>
+    <title>UVa1594 - Ducci Sequence (暴力搜尋 Brute force)</title>
     <url>/2020/03/16/UVa/UVa1594/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意:"></a>題目大意:</h2><blockquote>
 <p>給你一個隊列，每一次計算後生成新的隊列，隊列規則如下:</p>
@@ -2271,7 +2278,7 @@
         <tag>水題</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
-        <tag>Brute force</tag>
+        <tag>暴力搜尋 Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -2297,7 +2304,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa294 - Divisors (math)</title>
+    <title>UVa294 - Divisors (數論 Math theorm)</title>
     <url>/2020/04/09/UVa/UVa294/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一段數字，求出範圍數字內可以被最多數字整除於 0。(如果有一樣，輸出最小)<br><strong>並透過格式輸出</strong></p>
@@ -2314,9 +2321,9 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -2343,7 +2350,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa846 - Steps (math)</title>
+    <title>UVa846 - Steps (數論 Math theorm)</title>
     <url>/2020/03/11/UVa/UVa846/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你兩個數字，每次走的步伐必須為上一步的 +1 , -1 , 0 步伐，試問最短的步伐為?</p>
@@ -2373,9 +2380,9 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -3200,7 +3207,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1397D - Stoned Game(Brute force)</title>
+    <title>Codeforces 1397D - Stoned Game(暴力搜尋 Brute force)</title>
     <url>/2020/08/31/Codeforces/Codeforces%201397D/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>T、HL 在玩遊戲。遊戲規則如下，有 x 堆石頭，每堆石頭數量不定，每次都是 T 先從其中一堆拿石頭，H 再拿一顆石頭，每位玩家則不可以拿上位玩家拿石頭的石頭堆。<br><del>這到底是甚麼原始人遊戲 XD，好像舊石器時代的人會玩的遊戲</del></p>
@@ -3228,7 +3235,7 @@
       <tags>
         <tag>程式解題</tag>
         <tag>Codeforces Round .#666 (Div. 2)</tag>
-        <tag>Brute force</tag>
+        <tag>暴力搜尋 Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -4336,7 +4343,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1406B - Maximum Product (Brute force)</title>
+    <title>Codeforces 1406B - Maximum Product (暴力搜尋 Brute force)</title>
     <url>/2020/09/14/Codeforces/Codeforces%201406B/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>給你一組數列裡面含有正、負整數，試問從中找出 5 個數字乘起來數字最大</p>
@@ -4364,7 +4371,7 @@
         <tag>水題</tag>
         <tag>程式解題</tag>
         <tag>Codeforces Round .#670 (Div. 2)</tag>
-        <tag>Brute force</tag>
+        <tag>暴力搜尋 Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -5875,9 +5882,9 @@
         <category>演算法知識</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -9928,7 +9935,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa10773 - Back to Intermediate Math (math)</title>
+    <title>UVa10773 - Back to Intermediate Math (數論 Math theorm)</title>
     <url>/2020/12/28/UVa/UVa10773/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>給你河流寬度 d、河流速度 v、船速 u，想詢問一個小學生都可以回答的問題，船要渡河，我們想請問兩種方式相差的秒數為多少？</p>
@@ -9987,13 +9994,13 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
-    <title>UVa11614 - Etruscan Warriors Never Play Chess (math)</title>
+    <title>UVa11614 - Etruscan Warriors Never Play Chess (數論 Math theorm)</title>
     <url>/2020/12/28/UVa/UVa11614/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>有一組軍隊，他們的排隊方式向金字塔般，第一排一個、第二排兩個、第三排三個，以此類推，想請問你第 n 個人是第幾排？</p>
@@ -10021,9 +10028,9 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -10319,7 +10326,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa12149 - Feynman( math theorm )</title>
+    <title>UVa12149 - Feynman( 數論 Math theorm )</title>
     <url>/2021/01/02/UVa/UVa12149/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>費曼在筆記中夾著餐巾紙，上面寫到在一個 n * n 的正方形中，裡面可以有多少種不同的正方形。<br>舉例：在 2 * 2 的正方形中，總共會有 5 種不同的正方形<br><img src="https://i.imgur.com/qpMeoD0.png" alt=""></p>
@@ -10418,13 +10425,13 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
-    <title>UVa12502 - Three Families(math theorm )</title>
+    <title>UVa12502 - Three Families(數論 Math theorm )</title>
     <url>/2020/12/31/UVa/UVa12502/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>A,B,C 這 3 個家庭共同管理一個花園，其中有一周 C 家庭出去玩，讓 A 與 B 共同去整理花園，當 C 回來時給予一筆錢來感謝 A 與 B 一起整理花園，題目詢問 A 應該要拿到多少錢比較好？ </p>
@@ -10493,9 +10500,9 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -11640,7 +11647,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1477A - Nezzar and Board (設計解題、數學推理、math theorm)</title>
+    <title>Codeforces 1477A - Nezzar and Board (設計解題、暴力搜尋 Brute force)</title>
     <url>/2021/02/10/Codeforces/Codeforces%201477A/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一個黑板上有許多數字，你可以透過 \(z = 2x-y\)，其中 x,y 為黑板上的數字且可以相同，你可以將 z 在寫到黑板上，並且 x,y 不移除，試問能否用黑板的數字求出 k？</p>
@@ -11706,11 +11713,10 @@
         <category>Codeforces</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>設計解題</tag>
         <tag>程式解題</tag>
         <tag>Codeforces</tag>
-        <tag>數學推理</tag>
+        <tag>暴力搜尋 Brute force</tag>
       </tags>
   </entry>
   <entry>
@@ -11745,7 +11751,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa927 - Integer Sequences from Addition of Terms(math theorm)</title>
+    <title>UVa927 - Integer Sequences from Addition of Terms(數論 Math theorm)</title>
     <url>/2021/02/10/UVa/UVa927/</url>
     <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
 <p>有一個數列，有三種模式，分成 a,b,c，index 從 0 開始，且有一個數字 d，a 為主要的數列，b 數列的方式是重複 \(a_i\) 的數列 \(i * d\) 次，而 c 則是一個 hash 的數列，公式如下<br>\(a_n = c_0 + c_1 n + c_2 n^2 + … + c_i n*i\)，注意，這裡的 n 是第 n 項，而非 sigma 的意思。</p>
@@ -11777,9 +11783,9 @@
         <category>UVa</category>
       </categories>
       <tags>
-        <tag>math theorm</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
   <entry>
@@ -13729,7 +13735,7 @@
 <h3 id="抽樣分配公式-Sample-Distritubion"><a href="#抽樣分配公式-Sample-Distritubion" class="headerlink" title="抽樣分配公式 (Sample Distritubion)"></a>抽樣分配公式 (Sample Distritubion)</h3><ul>
 <li>期望值 \(E(\bar{x_1} - \bar{x_2}) = \mu_1 - \mu_2\)</li>
 <li>標準差 \(\sigma_{\bar{x_1} - \bar{x_2}} = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)<ul>
-<li>\(\sigma_1, sigma_2\) 分別是母體 1,2 的標準差</li>
+<li>\(\sigma_1, \sigma_2\) 分別是母體 1,2 的標準差</li>
 <li>\(n_1, n_2\) 分別是母體  1,2 的抽樣大小</li>
 </ul>
 </li>
@@ -13788,7 +13794,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means"><a href="#推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means" class="headerlink" title="推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)"></a>推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)</h1><h2 id="區間估計來推估兩個不一樣的未知母體平均數"><a href="#區間估計來推估兩個不一樣的未知母體平均數" class="headerlink" title="區間估計來推估兩個不一樣的未知母體平均數"></a>區間估計來推估兩個不一樣的未知母體平均數</h2><ul>
+<h1 id="推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means"><a href="#推論兩個不一樣的未知母體平均數-Inference-About-the-Difference-Between-Two-Population-unKnown-Means" class="headerlink" title="推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)"></a>推論兩個不一樣的未知母體平均數 (Inference About the Difference Between Two Population unKnown Means)</h1><h1 id="區間估計來推估兩個不一樣的未知母體平均數"><a href="#區間估計來推估兩個不一樣的未知母體平均數" class="headerlink" title="區間估計來推估兩個不一樣的未知母體平均數"></a>區間估計來推估兩個不一樣的未知母體平均數</h1><ul>
 <li>區間估計的公式為<br>\(\bar{x_1} - \bar{x_2} \pm t_{a/2} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)，s 為樣本標準差，其中 t 為自由度，但遇到兩個母體樣本因此公式變得比較麻煩，其中 \(t_{a/2} = (\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2 / (\frac{1}{n_1-1}(\frac{s_1^2}{n_1})^2 + \frac{1}{n_2-1}(\frac{s_2^2}{n_2})^2)  \)</li>
 </ul>
 <h3 id="舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。"><a href="#舉例-A-公司生產出一種新車款想與-B-公司的最新車款就比較，在百分之-90-的信賴區間想要知道兩家平均油耗差異，其中-A-公司-sample-size-24cars-sample-mean-29-8mpg-sample-stdandard-2-56mpg-B-公司為-sample-size-28cars-sample-mean-27-3mpg-sample-stdandard-1-81mpg。" class="headerlink" title="舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。"></a>舉例: A 公司生產出一種新車款想與 B 公司的最新車款就比較，在百分之 90 的信賴區間想要知道兩家平均油耗差異，其中 A 公司 sample size 24cars, sample mean 29.8mpg, sample stdandard 2.56mpg, B 公司為 sample size 28cars, sample mean 27.3mpg, sample stdandard 1.81mpg。</h3><ul>
@@ -13884,6 +13890,10 @@
 </ul>
 </li>
 </ul>
+<h1 id="當兩個母體平均數的變異數相同時"><a href="#當兩個母體平均數的變異數相同時" class="headerlink" title="當兩個母體平均數的變異數相同時"></a>當兩個母體平均數的變異數相同時</h1><ul>
+<li>此時我們的 t 檢定可以優化成 \(t = (\bar{x_1} - \bar{x_2}) / (s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}} ) \)</li>
+<li>而其中的 \(s_p\) 可以優化為 \(s_p = \sqrt{\frac{(n_1-1) s_1^2 + (n_2-1) s_2^2}{n_1 + n_2 -2}}\)</li>
+</ul>
 <h1 id="推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions"><a href="#推論兩個不一樣的母體參數-Inference-About-the-Difference-Between-Two-Population-Proportions" class="headerlink" title="推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)"></a>推論兩個不一樣的母體參數 (Inference About the Difference Between Two Population Proportions)</h1><p>先來定義一些必要資訊</p>
 <ul>
 <li>區間估計  \(p_1 - p_2\)</li>
@@ -13899,6 +13909,7 @@
 <li>\(n_2 p_2 \geq 5\) and \(n_2(1-p_2) \geq 5\)</li>
 </ul>
 </li>
+<li>\(z = \frac{\bar{p_1} - \bar{p_2}}{\sigma_{\bar{p_1} - \bar{p_2}}}\)</li>
 </ul>
 <p>用圖片來表示的畫如下</p>
 <blockquote>
@@ -13943,10 +13954,11 @@
 <p>再來定義假設檢定中需要的標準差、點估計、z 值</p>
 <ul>
 <li>標準差 \(\bar{p_1} - \bar{p_2}\) 當 \(p_1 = p_2 = p\)<br>公式為 \(\sigma_{\bar{p_1} - \bar{p_2}} = \sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})}\)</li>
-<li>混和估計量 pooled Estimator 當 \(p_1 = p_2 = p\)，為兩個樣本混合的點估計量<br>公式為 \(\bar{p} = \frac{n_1 \bar{p_1} + n_2 \bar{p_2}}{n_1 + n_2}\)</li>
+<li>混和估計量 pooled Estimator 當 \(p_1 = p_2 = p\)，為兩個樣本混合的點估計量，能夠更方便的計算<br>公式為 \(\bar{p} = \frac{n_1 \bar{p_1} + n_2 \bar{p_2}}{n_1 + n_2}\)</li>
 <li>假設檢定中的 z 值則是 \(z=\frac{(\bar{p_1} - \bar{p_2})}{\sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})}}\)</li>
 </ul>
-<h3 id="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，再百分之-95-的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度"><a href="#舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，再百分之-95-的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度" class="headerlink" title="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，再百分之 95 的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度"></a>舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，再百分之 95 的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度</h3><ul>
+<h3 id="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，再百分之-95-的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度"><a href="#舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在-150-人中有-60-位知道此商品，後測則是-250-人中有-120-人知道此商品，再百分之-95-的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度" class="headerlink" title="舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，再百分之 95 的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度"></a>舉例：行銷協會想要評估這次的行銷活動有沒有效，先進行市話調查，想知道有多少人知道這個商品，分為前測與後測，前測是在還沒開始此行銷活動，後測則是開始；前測得知在 150 人中有 60 位知道此商品，後測則是 250 人中有 120 人知道此商品，再百分之 95 的信心水準中，我們想知道這些資料能否證明此行銷活動可以提高商品知名度</h3><p><strong>此舉例是將 \(p_1\) and \(p_2\) 混和</strong></p>
+<ul>
 <li>定義 \(p_1\) 是後測，定義 \(p_2\) 是前測</li>
 <li>因此定義對立假設與虛無假設<ul>
 <li>\(H_0: p_1 - p_2 \leq 0\)</li>
@@ -13956,7 +13968,7 @@
 <li>設定顯著性測試 0.05</li>
 <li>計算 z 檢定<ul>
 <li>\(\bar{p} = \frac{250(0.48) + 150(0.40)}{250+150} = \frac{180}{400} = 0.45\)</li>
-<li>\(\sigma_{\bar{p_1} - \bar{p_2}} = \sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})} = \sqrt{0.45(0.55)(\frac{1}{250}+\frac{1}{150})} - 0.514\)</li>
+<li>\(\sigma_{\bar{p_1} - \bar{p_2}} = \sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})} = \sqrt{0.45(0.55)(\frac{1}{250}+\frac{1}{150})} = 0.514\)</li>
 <li>\(z=\frac{(\bar{p_1} - \bar{p_2})}{\sqrt{p(1-p) (\frac{1}{n_1}+\frac{1}{n_2})}} = \frac{(0.48-0.40)-0}{0.0514} = \frac{0.08}{0.0514} = 1.56\)，其中的 \(\frac{(0.48-0.40)-0}{0.0514}\)，為甚麼要減零是指前面 \(H_0: p_1 - p_2 \leq 0\) 的意思</li>
 <li>要特別注意，母體參數不需要用 t 檢定，前面有提到必須符合四條件(其中兩個是\(n_1 p_1 \geq 5\) and \(n_1(1-p_1) \geq 5\))就可以用常態分配</li>
 </ul>
@@ -13976,6 +13988,10 @@
 </li>
 </ul>
 </li>
+</ul>
+<h1 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h1><ul>
+<li>北科大丁秀儀老師教學</li>
+<li><a href="https://libguides.library.kent.edu/spss/independentttest" target="_blank" rel="noopener">SPSS TUTORIALS: INDEPENDENT SAMPLES T TEST</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -14163,6 +14179,7 @@
 <p>由於此題已經有告訴你需要用的步驟與規則如下</p>
 <ul>
 <li>二值化 <code>cv2.threshold</code><br>給予一數值 x，圖片中大於 x 的點都變成白色，小於的則變成黑色</li>
+<li>濾波 <code>cv2.medianBlur</code><br>先進行濾波，讓縮小的圖片雜訊被模糊掉，進而讓邊緣線更清楚</li>
 <li>膨脹 <code>cv2.dilate</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>白色</strong>，要搭配二值化此用</li>
 <li>侵蝕 <code>cv2.erode</code><br>先給予一個矩陣，如果此矩陣裡有白色的點，那所有點都變為<strong>黑色</strong>，要搭配二值化此用</li>
 <li>模糊 <code>cv2.medianBlur</code><br>由於有大量的反光，加上磁磚並不是完整統一顏色，難免會在縮小後造成雜訊過多，此時我們用濾波讓雜訊模糊，進而讓我們的邊緣清晰。</li>
@@ -14179,9 +14196,11 @@
 <p>將資料統整後，可以得出一個結論</p>
 <ul>
 <li>圖片大小不可以超過 1000 像素，所以我們先 <code>cv2.resize</code></li>
+<li>先進行濾波，讓縮小的圖片雜訊被模糊掉，進而讓邊緣線更清楚</li>
 <li>再來進行二值化，因為如果沒有二值化後面所有東西都不能做<br>至於要在那個點做 x 化就要不斷嘗試</li>
-<li>查看圖片，發現還是有很多<strong>白點</strong>散布在硬幣的旁邊，因此先侵蝕<br>至於要在矩陣多大就要不斷嘗試</li>
-<li>侵蝕完畢後，發現硬幣的邊界有點變形，在做膨脹<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>查看圖片，發現還是有一些雜訊，因此先侵蝕<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>侵蝕完畢後，發現磁磚縫細有點變形，在做膨脹<br>至於要在矩陣多大就要不斷嘗試</li>
+<li>中間有雜訊是正常的，只要不影響霍夫線即可。</li>
 <li>再來劃出霍夫線，這裡的輸出的直線座標系統是用極座標。</li>
 <li>由於是極座標，因此我們要在轉換成直角座標</li>
 <li>轉換完成後，使用 ````cv2.line```  劃線</li>
@@ -14457,11 +14476,11 @@
 <p><img src="https://drive.google.com/u/2/uc?id=1XLaH6uCL1juNtBevPBgQONToJ4GdUx-O&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>因此我們可以得出 \(X^0.975\) 值是 2.700，再來我們要找 \(X^0.025\) 的值，下面用圖表示<blockquote>
+<li>因此我們可以得出 \(X^{0.975}\) 值是 2.700，再來我們要找 \(X^{0.025}\) 的值，下面用圖表示<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1VRXVCsQHQ6a2SZCgVAceaM2XFcPlZbKl&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>跟上面用的方法一樣，用手機 Probability Distribution App 查找\(X^0.025\) 的值是 19.023</li>
+<li>跟上面用的方法一樣，用手機 Probability Distribution App 查找\(X^{0.025}\) 的值是 19.023</li>
 <li>用圖表來所示<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1OylgZXuphkNJq1GESeKZcHom2eeKmVT4&export=download" alt=""></p>
 </blockquote>
@@ -14523,7 +14542,9 @@
 <li>\(H_1: \sigma^2 &gt; 0.5\)</li>
 </ul>
 </li>
-<li><p>左尾檢定，透過 Probability Distribution App 查找，\(v=9, P(X&gt;x) =0.1 \) 時，\(X_{1-a}^2 = 14.864\)，因此值要大於 \(X^2 \geq 14.864\)，才能證明 \(H_1\) 是對的。</p>
+<li><p>右尾檢定，透過 Probability Distribution App 查找，\(v=9, P(X&gt;x) =0.1 \) 時，\(X_{1-a}^2 = 14.864\)，因此值要大於 \(X^2 \geq 14.864\)，才能證明 \(H_1\) 是對的。</p>
+</li>
+<li><p>計算 t 檢定的公式 \(X^2 = \frac{(n-1)s^2}{\sigma_0^2} =\frac{9(0.7)}{5} = 12.6\)</p>
 </li>
 <li><p>用圖表來表示</p>
 <blockquote>
@@ -14623,7 +14644,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Codeforces 1496E1 - Square-free division (easy version) (math theorm)</title>
+    <title>Codeforces 1497E1 - Square-free division (easy version) (math theorm)</title>
     <url>/2021/03/22/Codeforces/Codeforces%201497E1/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>請你將題目給你的數列進行切斷，每一個切斷的數列裡不可以有某兩值相乘是完全平方數，求最小切斷的長度</p>
@@ -14673,6 +14694,8 @@
 <p>給你一個數列，再給你一個數字，請你告訴這個數字最靠近這個數列某兩個值相加之總和(不可使用同個位置的數字)</p>
 <p><a href="https://onlinejudge.org/external/104/10487.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
+<a id="more"></a>
+
 <h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
 <li>思考要怎麼樣迅速查詢到最靠近的值</li>
 </ul>
@@ -14741,6 +14764,309 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>管理資訊系統</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10487 - Grocery store (數論 Math theorm、暴力搜尋 Brute force)</title>
+    <url>/2020/04/05/UVa/UVa%2011236/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>雜貨店的收銀員不太懂加號跟乘號這兩個意思，為了要讓他更容易理解，因此在你買雜貨店的商品時，你想要讓你買的四項商品總和價格等同於你買的四項商品價格乘積，四項商品都是相同的商品。</p>
+<p>總共不可以大於 20 元，雜貨店的商品價格範圍在 0.00 ~ 20.00 範圍內，小數點前兩位都是合理的價位。<br>輸出時，四個商品價格必須是遞增</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解小數點不夠精確，因此必須化為整數運算</li>
+<li>對於暴力搜尋進行優化<ul>
+<li>反推最後一項商品價錢</li>
+<li>暴力搜尋的範圍優化</li>
+<li>解決小數會越乘越小的問題</li>
+</ul>
+</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>好題，好題，沒想到 UVa 裡面也有類似於 Codeforces 的題目呢。</p>
+<p>我們來進行一些分析，首先由於我們知道電腦對於小數運算並不精確，假如小數數字連續乘四，有非常高的機率會使浮點數運算有誤差，導致無法 AC，因此我們的第一件事情就是要用整數來解決此題。</p>
+<h3 id="擴分公式"><a href="#擴分公式" class="headerlink" title="擴分公式"></a>擴分公式</h3><p>根據題目的方程式，我們現在定義 \(p_1,p_2,p_3,p_4\)，是我們 4 個商品的價錢，因此公式要如下<br>\(p_1p_2p_3p_4 = p_1 + p_2 + p_3 p_4\)</p>
+<p>接下來我們要進行擴分，這樣我們才可以用整數進行運算，我們定義括分 100 倍的價錢為 \(a_1 , a_2 , a_3 , a_4\)</p>
+<ul>
+<li>\(\frac{a_1}{100} \frac{a_2}{100} \frac{a_3}{100} \frac{a_4}{100} = \frac{a_1}{100}+ \frac{a_2}{100} + \frac{a_3}{100} \frac{a_4}{100}\)</li>
+<li>稍微化簡下，成為 \(\frac{a_1 a_2 a_3 a_4}{10^8} = \frac{a_1+a_2+a_3+a_4}{100} \)</li>
+<li>移項，\(\frac{a_1 a_2 a_3 a_4}{10^6} = a_1+a_2+a_3+a_4\)</li>
+<li>分母移項 \((a_1+a_2+a_3+a_4) 10^6 = a_1 a_2 a_3 a_4 \)</li>
+<li>透過此方程式，就可以用整數來寫出題目所需要的答案</li>
+</ul>
+<h3 id="優化迴圈"><a href="#優化迴圈" class="headerlink" title="優化迴圈"></a>優化迴圈</h3><p>由於我們還知道一件事情是，總共不能大於 20 元，且商品價格要遞增，因此大家比較容易想到的是迴圈不斷的遞增，但其實我們也可以減少迴圈的上限，來更加優化，如下</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> a1 = <span class="number">1</span>; a1 &lt;= <span class="number">2000</span>; a1++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> a2 = a1; a2 &lt;= <span class="number">2000</span>-a1; a2++ )&#123; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> a3 = a2; a3 &lt;= <span class="number">2000</span>-a1-a2; a3++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> a4 = a3; a4 &lt;= <span class="number">2000</span>-a1-a2-a3; a4++)&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中可以注意到，a2,a3,a4 他們的迴圈上限都有被縮小，是因為題目除了要數值遞增，並且還不能超過 2000，那麼 a1 用掉的錢勢必也在 20 元以內，才可以透過這樣進行優化。</p>
+<p>而遞增，減少下限就是大家比較熟悉的，不多做解釋。</p>
+<h3 id="設定檢查點"><a href="#設定檢查點" class="headerlink" title="設定檢查點"></a>設定檢查點</h3><p>其中我們可以知道公式是 \((a_1+a_2+a_3+a_4) 10^6 = a_1 a_2 a_3 a_4 \)，但這裡有一個大問題，原先的題目數值是小數，如果是 \(0.1(0.2)\) 的情況下是越乘越小的，但整數的情況並不是，0因此才會有一個 \(10^6\) 的情況出現，所以反之，也就是說如果 \(a_1 a_2 a_3 a_4 &lt;= 10^6\) 的情況下表示四個數值都是 \(&gt; 1\)，乘積只會越來越小，必定不符合題目需求。</p>
+<p>\(10^6\) 是因為我們先擴分 100 倍，才會有的限制器。</p>
+<h3 id="減少迴圈數量"><a href="#減少迴圈數量" class="headerlink" title="減少迴圈數量"></a>減少迴圈數量</h3><p>先提一個概念，\(x+y=10\)，如果我們知道 x 的情況，那 y 是不是可以移項得出。<br>所以 \(a_1 + a_2 + a_3 + a_4 = A\)，如果前三項與 A 都知道那 \(a_4\) 也可以被得知。</p>
+<p>因此我們來進行移項與定義</p>
+<ul>
+<li>定義 \(a_1+a_2+a_3\) 為 sum</li>
+<li>定義 \(a_1 a_2 a_3\) 為 product</li>
+<li>定義 \(10^6\) 為 c</li>
+<li>因此 \((a_1+a_2+a_3+a_4) 10^6 = a_1 a_2 a_3 a_4 = c(sum + p_4) = product (p_4)\)</li>
+<li>左項乘開 \(c(sum + p_4) = product (p_4)\) </li>
+<li>再來移項 \(c(sum) + c(p_4) = product (p_4) \)</li>
+<li>移項 \(c(sum) = product(p_4) - c(p_4)\)</li>
+<li>結合 \(c(sum) = p_4(product - c)\)</li>
+<li>移項 \(p_4 = \frac{c(sum)}{(product - c)}\)</li>
+</ul>
+<h3 id="擴分後的限制"><a href="#擴分後的限制" class="headerlink" title="擴分後的限制"></a>擴分後的限制</h3><p>再來我們知道了這公式後，我們還有幾個題目的限制要注意</p>
+<ul>
+<li>\(c(sum) % (product - c) == 0\) 因為我們進行擴分，因此如果沒有剛好 mod 等同於 0 時，表示其實此數值在縮小 100 倍後則不會剛好符合題目要求。表示 \(a_4\) 可能需要小數後 x 位才能符合題目要求，其中 x 必須大於 2。</li>
+<li>\(p_3 &lt; p_4\)，題目要求</li>
+<li>\(sum + p_4 \leq 2000\)，因為我們將 20 放大 100 倍</li>
+<li>\(product(p_4) \leq 2(10^9)\)，由於 \(\frac{a_1 a_2 a_3 a_4}{10^8}\)，縮小 100 倍後不可以超過 20 元。注意，這裡的縮小 100 倍是每個 \(a\) 都縮小 100 倍，全部則是縮小 \(10^8\)</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.redgreencode.com/equation-solving-is-the-key-to-uva-11236/" target="_blank" rel="noopener">EQUATION SOLVING IS THE KEY TO UVA 11236 by Red-Green-Code</a><br><a href="https://geniustanley.github.io/2017/02/15/UVa-11236-Grocery-store/" target="_blank" rel="noopener">UVa 11236 - Grocery store by geniustanley</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題很有趣RRR，完全不用輸入測資卻可以讓人有著這麼多的腦力激盪，其實很有趣R。</p>
+<p>總之學到了很多，但我也是看著詳解一步一步慢慢地去學習，或許我的腦袋其實沒有很聰明，但我會透過學習來讓自己也能夠跟上一般人的腳步。</p>
+<p>希望大家可以包容這樣的我，不夠聰明的我。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2*1e9 <span class="comment">// 四項商品乘積放大 100 倍的值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long <span class="comment">//避免溢位</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> c = <span class="number">1e6</span>; <span class="comment">//將他進行第溢</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//add more fast than product</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> a1 = <span class="number">1</span>; a1 &lt;= <span class="number">2000</span>; a1++)&#123;</span><br><span class="line">        <span class="comment">//if(pow(a1,4) &gt;= MAXN) break; //注意，加法運算比乘法快。</span></span><br><span class="line">        <span class="keyword">if</span>(a1+a1+a1+a1 &gt; <span class="number">2000</span>) <span class="keyword">break</span>; <span class="comment">//如果這邊就超過 2000，後面沒辦法遞增部符合題目要求</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> a2 = a1; a2 &lt;= <span class="number">2000</span>-a1; a2++ )&#123; </span><br><span class="line">            <span class="comment">//if(a1+pow(a2,3) &gt;= MAXN) break;</span></span><br><span class="line">            <span class="keyword">if</span>(a1+a2+a2+a2 &gt; <span class="number">2000</span>) <span class="keyword">break</span>; <span class="comment">//如果這邊就超過 2000，後面沒辦法遞增部符合題目要求</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> a3 = a2; a3 &lt;= <span class="number">2000</span>-a1-a2; a3++)&#123;</span><br><span class="line">                <span class="comment">//if(a1+a2+pow(a3,2) &gt;= MAXN) break;</span></span><br><span class="line">                <span class="keyword">if</span>(a1+a2+a3+a3 &gt; <span class="number">2000</span>) <span class="keyword">break</span>; <span class="comment">//如果這邊就超過 2000，後面沒辦法遞增部符合題目要求</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> sum = a1 + a2 + a3;</span><br><span class="line">                <span class="keyword">int</span> product = a1 * a2 * a3;</span><br><span class="line">                <span class="keyword">if</span>(product &lt;= c) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>((sum*c) % (product-c) != <span class="number">0</span>) <span class="keyword">continue</span>; <span class="comment">//mod != 0 </span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//上方擴分後的限制有提到</span></span><br><span class="line">                <span class="keyword">int</span> a4 = (sum*c) / (product-c);</span><br><span class="line">                <span class="keyword">if</span>(a3 &gt; a4) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(sum + a4 &gt; <span class="number">2000</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(product * a4 &gt; MAXN) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a1/<span class="number">100.0</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; \</span><br><span class="line">                    fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a2/<span class="number">100.0</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; \</span><br><span class="line">                    fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a3/<span class="number">100.0</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; \</span><br><span class="line">                    fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a4/<span class="number">100.0</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">                <span class="comment">//小數運算</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    solve();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
+        <tag>暴力搜尋 Brute force</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10660 - Citizen attention offices (暴力搜尋 Brute force)</title>
+    <url>/2020/03/28/UVa/UVa10660/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個正方形的城市，被分隔成 25 個區域，size 是 5 * 5，每個區域都有住著許多人，政府要在裡面設 5 個行政據點，其目標是可以幫助此城市所有人都可以透過直走與橫走的方式走到行政據點(其中一個就可以)，且讓都市中的所有人總和走起來距離最短。</p>
+<p><a href="https://onlinejudge.org/external/106/10660.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>寫出時間複雜度</li>
+<li>進行思考，是否有非暴力搜尋的方式可以解出此題</li>
+<li>能夠閱讀題目</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題是一個很麻煩的題目…，通常我看到這種題目我都會認為一定有一種規律可行、可解。</p>
+<p>結果這題我想了很久後，還是想不太出來，查了查詳解後才知道這題應該直接用暴力破解的方式將她解出，由於 DFS 的時間複雜度是 \(O(n^m)\)，n 是邊數、m 是深度，而這裡的最大時間複雜度應該是 \(25^5 = 9765625\)，在時間複雜度低於 2000 萬以內，基本上一個良好的 OJ 都能夠順利解開，因此我們就直接使用 DFS。</p>
+<p>怎麼做呢?</p>
+<p>作法很簡單，不斷進行 DFS，必且深度搜尋，當深度抵達 5 時，判斷城市中所有 area 到行政據點的最短距離乘上人口數量，找出最小值，就是我們要的答案。</p>
+<p>需要注意的是，那個區域只需要<strong>找到一個行政據點</strong>距離最小就好，我這邊還卡了一下..。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/mobius_strip/article/details/86564658" target="_blank" rel="noopener">UVa 10660 - Citizen attention offices by 小白菜又菜</a><br><a href="https://zh.wikipedia.org/wiki/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2" target="_blank" rel="noopener">深度優先搜尋 by Wiki</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>習慣性看到這種題目就是要找規律，然後找到可以優化的點進行優化，就能輕鬆解出。雖然大部分時間都找不出來優化點….QQ。我不夠聰明RRR。</p>
+<p>經過了這題後，稍微沒有那麼思考僵化了，其實有的時候一直過度寫同樣題目容易造成自己的思考模式都往同個部分思考，現在有寫過這題後對於思考方式又更發散了一些。雖然說太發散找不到方向，但是不發散絕對找不到正確答案。</p>
+<p>總之，希望自己 ICPC 可以得到銀獎，拜託了。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 30 <span class="comment">//題目最大區域量，保險起見開更大</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[MAXN], ans[MAXN], result[MAXN];</span><br><span class="line"><span class="comment">//num 題目的區域，ans 我們要輸出的答案，result 當前 DFS 中每個區域到行政據點最短距離的總和</span></span><br><span class="line"><span class="comment">//ans, result 只會用到前 5 個陣列值</span></span><br><span class="line"><span class="keyword">int</span> t, n, a, b, c; <span class="comment">//輸入資料用</span></span><br><span class="line"><span class="keyword">int</span> d = MAXN*MAXN*<span class="number">1000</span>; <span class="comment">//理論上每個區域到行政據點最大距離不超過此值，因為人口最多只有 1000</span></span><br><span class="line"><span class="comment">//因此 25個區域*最大距離25(不可能達到)*人口數量，可以當作此題的最大值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> office)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(office &gt;= <span class="number">5</span>)&#123; <span class="comment">//如果建立了 5 個辦公室，就開始找每個區域到行政據點最短距離的總和</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>; <span class="comment">//當前 DFS 每個區域到行政據點最短距離的總和</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "result " &lt;&lt; result[i] &lt;&lt; '\n';</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">25</span>; j++)&#123; <span class="comment">//遍地每個區域</span></span><br><span class="line">            <span class="keyword">int</span> compute = MAXN*MAXN*<span class="number">1000</span>, temp; </span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123; <span class="comment">//判斷哪個行政據點離當前區域最短</span></span><br><span class="line">                temp = num[j] * (<span class="built_in">abs</span>(result[i]/<span class="number">5</span> - j/<span class="number">5</span>) + <span class="built_in">abs</span>(result[i]%<span class="number">5</span> - j%<span class="number">5</span>));</span><br><span class="line">                compute = min(temp, compute); <span class="comment">//取最小的</span></span><br><span class="line">            &#125;</span><br><span class="line">            sum += compute; <span class="comment">//加到 sum</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//定義: A = 每個區域到行政據點最短距離的總和</span></span><br><span class="line">        <span class="keyword">if</span>(sum &lt; d)&#123; <span class="comment">//如果當前的 A 比過去中最小的 A，還小就取代</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; "test:" &lt;&lt; sum &lt;&lt; ' ';</span></span><br><span class="line">            d = sum; <span class="comment">//將答案值替換</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123; <span class="comment">//將答案值替換</span></span><br><span class="line">                ans[i] = result[i];</span><br><span class="line">                <span class="comment">//cout &lt;&lt; result[i] &lt;&lt; ' ';</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = p+<span class="number">1</span>; i &lt; <span class="number">25</span>; i++)&#123; <span class="comment">//不斷進行 DFS，做所有的排列組合</span></span><br><span class="line">        result[office] = i; <span class="comment">//當前的第 office 的辦公室為 i 區域 </span></span><br><span class="line">        dfs(i, office+<span class="number">1</span>); <span class="comment">//往下一層邁進，題目有說明輸出要遞增，因此 i 必須是 p+1，否則會重覆到</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug</span><span class="params">()</span></span>&#123; <span class="comment">//debug 用</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; j++)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; num[i*<span class="number">5</span>+j] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="built_in">memset</span>(num, <span class="number">0</span>, <span class="keyword">sizeof</span>(num)); <span class="comment">//清空，以免干擾這次資料</span></span><br><span class="line">        <span class="keyword">while</span>(n--)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">            num[a*<span class="number">5</span>+b] = c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//debug();</span></span><br><span class="line">        d = MAXN*MAXN*<span class="number">1000</span>;</span><br><span class="line">        dfs(<span class="number">-1</span>, <span class="number">0</span>); <span class="comment">//一開始是 -1 是因為，我們的 DFS 排列組合迴圈是 p+1</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; ans[i]; <span class="comment">//輸出答案</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>暴力搜尋 Brute force</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021/04/03 跟蘇子權一起看哥吉拉大戰金剛</title>
+    <url>/2021/04/05/life_experence/Godzilla-vs.-Kong-by-subarya/</url>
+    <content><![CDATA[<h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><blockquote>
+<p>之前在新北市奧林匹亞資訊認識的好朋友，後來考上台灣師大，問她要不要陪我去看哥吉拉大戰金剛</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="相約"><a href="#相約" class="headerlink" title="相約"></a>相約</h2><p>我其實很想要去看<a href="https://theriseofdavid.github.io/2021/04/05/movie/Godzilla-vs.-Kong/" target="_blank" rel="noopener">哥吉拉大戰金剛</a>，我就在想要找誰一起去，就在 fb 看到子權的貼文，我就想要問她要不要陪我去看XD。</p>
+<p>我原本跟她約 04/02，結果他不行QQ，後來我們就改約 04/03。</p>
+<h2 id="見面"><a href="#見面" class="headerlink" title="見面"></a>見面</h2><p>我們原本是約下午 4 點，但我後來我晚上 7 點有要弄資產配置競賽要開會阿，然後我保險的那 Part 還沒有做QQQ，所以我就在 3 號晚上 12 點趕快問子權能不能改時間，子權也馬上就說可以啦！</p>
+<p>然後隔天見面，恩..我遲到了，讓子權等了我 30min 實在非常抱歉，我下次會改進的QQ。</p>
+<h2 id="看電影"><a href="#看電影" class="headerlink" title="看電影"></a>看電影</h2><p>稍微聊了天後就去看電影，沒想到哥吉拉的電影場次人這麼多，多到爆炸RRRR，都快比公車班次還多了！</p>
+<p>進去電影院後，我們買了爆米花跟可樂來搭配，結果子權說他可以在電影還沒播放前就把爆米花吃完，太強了阿阿阿，講了一些趣事後，電影就開始了。</p>
+<h2 id="吃飯"><a href="#吃飯" class="headerlink" title="吃飯"></a>吃飯</h2><p>看完電影後我們稍微吃下兩餐，兩餐不能預約只能夠排隊叫號，於是我們就當場去然後排隊等號碼，原本服務生是跟我們說 54 號，但我有點忘記了我就問子權說 52 號嗎？他就說，對啊！然後看到顯示牌說 52 號可以入場，我們就進去，結果服務員在跟我們確認的時候才說我們是 54 號！害我們尷尬了一下XDD。</p>
+<p>而且子權的專題很酷，中天新聞留言分析，感覺超級酷的。我自己覺得這是個很好的專題點子，可惜我沒想到阿，我的想像力變差了QQ。<br>不過聽說師大的虛擬機有點爛，有點小難過:(，雖然北科的比較好一點拉，就一點。</p>
+<p>吃飯的過程中，我們聊天，聊了很多師大的八卦，離散數學、邏輯課…，離散數學我也是上的超級認真，就可以跟他有來有往，我還怕我老人腦袋裡的知識都輸給年輕人呢QQQ。</p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>跟他聊天，其實真的很快樂，而且又能獲得很多新知識，是我的好朋友，希望我可以都跟他保持聯絡我們的感情不會淡掉，那他就不可以忘記我呢！所以我要多在他快忘記我的時候出現XD。</p>
+<p>總之，我覺得他是我生命中很信賴的人拉，失去的信賴的人總是會難過的，所以不可以難過的方法就是不失去XD。</p>
+]]></content>
+      <categories>
+        <category>人生旅途</category>
+      </categories>
+      <tags>
+        <tag>大學Life</tag>
+        <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>快速建立屬於你的 online judge</title>
+    <url>/2021/03/29/linux/linux-build-online-judge/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在北科大二下時我擔任了資財-資料結構的助教，負責設計考卷，看了先前的考古題後發現老師都是讓大家手寫程式，我認為這樣沒有辦法讓大家學到資料結構的知識，因此這邊做一個小創新，讓大家都學習如何使用 online judge</p>
+<p>透過大家使用 online judge 就可以讓大家在有限的時間內寫出程式，感受壓力，並也在感受壓力的過程中將資料結構成功記住！</p>
+<p>就因為這樣，我稍微去學習如何快速建立 online judge，透過中國青島大學開源的 online judge，在這邊很感謝中國青島大學，讓我可以快速的建立起 online judge QQ。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QDUOJ"><a href="#QDUOJ" class="headerlink" title="QDUOJ"></a>QDUOJ</h2><p>中國青島大學開源的 online judge，建立容易，且有很直觀的後台管理、使用者使用環境，在這三大優點下，使用此開源 online judge。</p>
+<p><a href="https://github.com/QingdaoU/OnlineJudgeDeploy/tree/2.0" target="_blank" rel="noopener">QDUOJ 佈署</a>連結，如果看不太懂我的寫法，建議直接去看 QDUOJ 的XD。</p>
+<p>建議不要使用 windows 安裝，只使用 linux，windows 有太多地雷了…，沒有的話可以在 windows 裡面開虛擬機。<br><del>我在 windows 環境下用虛擬機再用 docker，虛擬在虛擬，這難道是幻覺嗎RRRRRR</del></p>
+<h2 id="環境設定"><a href="#環境設定" class="headerlink" title="環境設定"></a>環境設定</h2><p>在 docker 中建立 online judge，docker 將作業系統虛擬化，可以讓 online judge 更快速的被執行與建立，因為只有服務 online judge 嘛。<br>還有一個好處是如果 online judge 爛掉，不至於會讓整個作業系統爛掉，只會讓 docker 爛掉而已XD。</p>
+<p>建議先輸入這三行，檢查是否所有需要的環境設定是否有安裝</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y vim python3-pip curl git</span><br><span class="line">pip3 install --upgrade pip</span><br><span class="line">pip install docker-compose</span><br><span class="line">sudo curl -sSL get.docker.com | sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="開始安裝"><a href="#開始安裝" class="headerlink" title="開始安裝"></a>開始安裝</h2><p>不多說，repo 拉下來就對了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone -b 2.0 https:&#x2F;&#x2F;github.com&#x2F;QingdaoU&#x2F;OnlineJudgeDeploy.git &amp;&amp; cd OnlineJudgeDeploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立-docker-服務"><a href="#建立-docker-服務" class="headerlink" title="建立 docker 服務"></a>建立 docker 服務</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>這裡要等一段時間，大約半小時左右就會建立成功。</p>
+<h2 id="享受-docker-服務"><a href="#享受-docker-服務" class="headerlink" title="享受 docker 服務"></a>享受 docker 服務</h2><p>輸入 <code>sudo docker ps -a</code>，如果正確則應該會出現類似此畫面</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Q9jNBzboAqaDPZQ070xDa1HBj5-4sBPx&export=download" alt=""></p>
+</blockquote>
+<h2 id="來整理我們的-online-judge-八！"><a href="#來整理我們的-online-judge-八！" class="headerlink" title="來整理我們的 online judge 八！"></a>來整理我們的 online judge 八！</h2><p>如果對於我的講解認為不夠好的，可以查看<a href="https://docs.onlinejudge.me/" target="_blank" rel="noopener">QDUOJ 教學說明</a></p>
+<p>到 browser 打 <code>localhost:80</code>，應該能夠順利出現網頁，畫面如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18-pHEQoLwUZUACZx5kEu1Rg183tRwHxL&export=download" alt=""></p>
+</blockquote>
+<h3 id="進入後台"><a href="#進入後台" class="headerlink" title="進入後台"></a>進入後台</h3><p>我們先進入管理者的權限，查看後台配置</p>
+<ul>
+<li>管理者帳號 <code>root</code></li>
+<li>管理者密碼 <code>rootroot</code></li>
+</ul>
+<p>如果怕其他人也知道管理者的密碼時，建議大家將 root 密碼改掉XD。</p>
+<p>再來點選 root -&gt; management，進入管理頁面</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Ec8StoEFVBt9BV4wI1S_lOUzQWJxLvnd&export=download" alt=""></p>
+</blockquote>
+<p>讓我們來看看有那些功能，我們先看有關於使用者的功能，點擊 General</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1tPzXULZP-urt3z7KUpE6VtT1biXDOsmT&export=download" alt=""></p>
+</blockquote>
+<p>依序功能如下：</p>
+<ul>
+<li>user 所有使用者的資訊，帳號密碼</li>
+<li>announcement 可以發布公告，有就是在 home 的畫面在那邊會有新的留言公告</li>
+<li>後面三個我們不會用到，因此先忽略</li>
+</ul>
+<h3 id="註冊-user"><a href="#註冊-user" class="headerlink" title="註冊 user"></a>註冊 user</h3><p>進入 user 頁面後，會發現只有 root 這個用戶QQ，</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18pg7_6c82ZQ4h27tl9Prodji_5-x1nNP&export=download" alt=""></p>
+</blockquote>
+<p>進來這個頁面後，<code>import user</code> 提供 csv 輸入會員資料，格式如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">memberA,passwordA,email</span><br><span class="line">memberB,passwordB,email</span><br></pre></td></tr></table></figure>
+
+<p>下方的 Generate User 可以快速的生成 user，參數如下</p>
+<ul>
+<li><code>prefix</code> 帳號的前綴字元</li>
+<li><code>suffix</code> 帳號的後綴字元</li>
+<li><code>start number</code> 帳號中間要塞入的數字起點</li>
+<li>````end number``` 帳號中間要塞入的數字終點</li>
+<li><code>password length</code> 密碼長度，會是高強度密碼(簡稱亂碼)</li>
+</ul>
+<p>因此假如 prefix = a, suffix = v, start number=2, end number = 4, password length = 4，就會產生以下的會員</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a2v,xxxx,xx@gmail.com</span><br><span class="line">a3v,xxxx,xx@gmail.com</span><br><span class="line">a4v,xxxx,xx@gmail.com</span><br></pre></td></tr></table></figure>
+
+<p>如此的概念，其中 xxxx 是高強度密碼(亂碼)</p>
+<h2 id="發布公告"><a href="#發布公告" class="headerlink" title="發布公告"></a>發布公告</h2><p>點入 general 在點擊 announcement，就可發布公告</p>
+<h2 id="加入題目"><a href="#加入題目" class="headerlink" title="加入題目"></a>加入題目</h2><p>這是最重要的部分，如果沒有的話怎麼讓大家寫題目嘛</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1hBp92mbyy9Kr3jwtSASxm8E3pXFmFEKK&export=download" alt=""></p>
+</blockquote>
+<p>點擊 problem 後可以點 problem list 看到現在所有的題目，而其中的 <code>create problem</code> 則可以建立題目，點擊他</p>
+<p>相信上面大家都會使用，需要注意的是 sampleX，X 為數字，則是顯示在題目上的範例測資中，實際的官方測資則是要從這裡加入</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xzGD6wEYtk-0h9IlEQAIgGv3Ve6k_Fae&export=download" alt=""></p>
+</blockquote>
+<p>圖中的 Choose File 中加入，特別需要值得一提的是</p>
+<ul>
+<li><code>filename.in</code> 是程式輸入的題目資料</li>
+<li><code>filename.out</code> 則是程式輸出的正確資料</li>
+</ul>
+<p>而旁邊的 type 有</p>
+<ul>
+<li>ACM 全對才給分</li>
+<li>OI 對測資就給分，有部分給分。</li>
+</ul>
+<h2 id="建立競賽"><a href="#建立競賽" class="headerlink" title="建立競賽"></a>建立競賽</h2><p>點擊左邊的資訊欄中的 contest，再點擊 creat contest，過程相信大家都懂不需要我在說，create contest 完畢後，在點擊資訊欄中的 contest list，</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1UqxZCUNfNnGeHUXbJvHkFY80GYACAtaW&export=download" alt=""></p>
+</blockquote>
+<p>點擊此按鈕就可以加入題目，開始放入題目八！不管是公開的題目還是私有的題目都可以，而加入題目的方式就跟我們前面說的<strong>加入題目</strong>一樣啦。</p>
+<h2 id="現在來到最後一個問題，如何讓外網連到我的-judge-呢"><a href="#現在來到最後一個問題，如何讓外網連到我的-judge-呢" class="headerlink" title="現在來到最後一個問題，如何讓外網連到我的 judge 呢?"></a>現在來到最後一個問題，如何讓外網連到我的 judge 呢?</h2><p>這裡我們使用 ngrok 來幫我們代理伺服器，提供我們網址。</p>
+<p>教學如下 <a href="https://theriseofdavid.github.io/2020/07/24/ngrok-experience/" target="_blank" rel="noopener">透過 ngrok 來讓自己的電腦成為 server by 大衛的筆記</a></p>
+<p>port 可以隨意設定，之後產生的網址我們就可以對外發布，讓他人連線了！</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/QingdaoU/OnlineJudgeDeploy/tree/2.0" target="_blank" rel="noopener">QDUOJ 佈署 by 中國青島大學</a><br><a href="https://docs.onlinejudge.me/" target="_blank" rel="noopener">QDUOJ 教學說明 by 中國青島大學</a><br><a href="https://blog.techbridge.cc/2020/03/20/build-your-own-online-judge/" target="_blank" rel="noopener">自己架一個 Online Judge 系統 by TechBrige</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>QDUOJ 真的是很方便，讓我可以在短短幾個小時內學會並且運用此軟體，真的是太感動了QQ，希望我以後也有一天可以將自己所學到的技術分享給他人。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>linux</tag>
+        <tag>online judge</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>電影觀後感 - 哥吉拉大戰金剛 (4/5)</title>
+    <url>/2021/04/05/movie/Godzilla-vs.-Kong/</url>
+    <content><![CDATA[<h2 id="前情概要"><a href="#前情概要" class="headerlink" title="前情概要"></a>前情概要</h2><blockquote>
+<p>1973年骷髏島探勘事件過後的50多年，骷髏島的氣候巨變使島上的原住民伊維族幾乎全數罹難，只留下小孤女吉雅。與此同時，根據挖掘所發現的史前壁畫及後續研究，君主組織得知了哥吉拉與金剛的世仇，故此君主在骷髏島建立了基地以保護金剛。吉雅的養母，艾琳·安德魯博士多年來一直試圖與金剛進行溝通但不果。自五年前的泰坦混戰後，哥吉拉與人類一直和平共處，但此刻卻多次襲擊高科技公司「頂極神經機械企業」（Apex）的工廠，一名潛入頂極臥底的播客柏尼·海斯不僅目睹了過程，更意外地發現頂極似乎在秘密研製不明裝置。</p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/s1DUC_wBUvY" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%90%89%E6%8B%89%E5%A4%A7%E6%88%B0%E9%87%91%E5%89%9B" target="_blank" rel="noopener">資料來源</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>整體對於這部片得打鬥感，算是蠻不賴得，就是中間的劇情零散了些。</p>
+<p>我全部的記憶點只圍繞者打鬥XD。</p>
+<h3 id="金剛與哥吉拉在海上的打鬥"><a href="#金剛與哥吉拉在海上的打鬥" class="headerlink" title="金剛與哥吉拉在海上的打鬥"></a>金剛與哥吉拉在海上的打鬥</h3><p>打得好爽，可是我真的覺得哥吉拉有夠強欸，哥吉拉整個腳色就是強於金剛阿，金剛似乎有種被馴服的感覺，願意與人類和平共處，而哥吉拉是海上的霸主比較內向不太喜歡與人們互動，但一直很喜歡跟金剛打鬥，金剛在這次的戰鬥中輸了。</p>
+<p>原因主要是因為哥吉拉在海中可以像魚一般游泳，而金剛不可以，加上哥吉拉有那強大的破壞死光，遠程傷害來說根本 MAX 八XDDDD。</p>
+<p>還有金剛的毛被海弄濕的畫面感很讚，只是有點太多毛好噁心QQQQ。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ZkjAVPLWIO-AaxVLWfx1RxEydnjUyd1f&export=download" alt=""></p>
+</blockquote>
+<h3 id="金剛回到地心中的地球"><a href="#金剛回到地心中的地球" class="headerlink" title="金剛回到地心中的地球"></a>金剛回到地心中的地球</h3><p>回到地心地球時有遇到泰坦翌守龍</p>
+<p>金剛回到地心中的地球時，拿到了他的武器，而尖端科技也取得了他們所需要的能源，把能源送回地球表面給尖端科技使用。</p>
+<p>這邊有很多盲點QQQ，到底為甚麼尖端科技採集到的石頭可以直接傳回地球表面拉XDDD，那邊又沒有網路而且理論上衛星也沒有辦法可以接受到阿。</p>
+<p>但後來這邊壞主角的女兒死掉真的是大快人心，不得不說，要是他這邊有平安回到地球我真的會氣得牙癢癢的，他們這邊刻畫得很讚。</p>
+<h3 id="金剛與哥吉拉在香港大戰"><a href="#金剛與哥吉拉在香港大戰" class="headerlink" title="金剛與哥吉拉在香港大戰"></a>金剛與哥吉拉在香港大戰</h3><p>香港，辛苦你了。最近怎麼大家都喜歡摧殘你們QQQQ。</p>
+<p>感覺哥吉拉跟金剛踩死了一堆人類阿QQQ，在地心地球時金剛有用他的斧頭進行充能，對抗哥吉拉的破壞死光時，則用斧頭擋住。<br>最後金剛則打輸，被哥吉拉在胸前用爪子留下爪痕來表示戰勝的痕跡。</p>
+<p>後來女博士跟男博士透過能通往地心地球的飛機，透過那飛機大量傳輸電力來讓金剛復活，有種 AED 的概念XDDD。</p>
+<p>男博士那邊特別好笑，女博士跟小女孩那時候一起欺騙男博士，讓男博士認為膽小鬼的手語是勇敢的意思，這個真的有好笑到</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xCvd5E2hs25H08QrCRW13KpZhOm3uRLi&export=download" alt=""></p>
+</blockquote>
+<h3 id="兩隻泰坦與機械哥吉拉的戰鬥"><a href="#兩隻泰坦與機械哥吉拉的戰鬥" class="headerlink" title="兩隻泰坦與機械哥吉拉的戰鬥"></a>兩隻泰坦與機械哥吉拉的戰鬥</h3><p>老實講，這裡超讚的，我原本其實超級害怕機械哥吉拉會把哥吉拉給擊敗成為世界的王，那樣我會覺得哥吉拉很可憐，尖端科技超壞。<br>幸好不是像我預料的那樣，而是尖端科技的哥吉拉成為了一個新巨獸，後來小女孩跟金剛溝通表示敵人是機械哥吉拉，金剛與哥吉拉一起聯手打敗他。</p>
+<p>其中最後一擊哥吉拉將她的死亡白光充能給金剛的斧頭，真的不是我想說XDDD，金剛的斧頭如果可以充能的話，那前面的戰鬥金剛幹嘛都只拿斧頭擋攻擊阿，順便充能RRRR，這樣不就贏了嗎XD。</p>
+<p>機械哥吉拉有夠強，他加速度有引擎可以衝刺，近距離的爪子則改為鑽頭，連揮爪子都不用，只須要往前一刺，可能沒有一個泰坦扛得住QQQ。</p>
+<p>然後特別好笑的是，這裡面的泰坦死法是，一定要將它們的頭給抓下來才表示死亡，不然大家都有復活的機會欸XDDD，某種類型來說也蠻像僵屍的XD。</p>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>其中另外一個有黑人的支線這次很奇怪扮演著一個關鍵的角色，但感覺卻被輕描淡寫，黑人與尖端科技總理的小女孩都保持著大膽的作法，而在最後機械哥吉拉站起來時卻是胖胖的男生拯救，理論上胖胖男生應該可以得個甚麼和平獎八XD。</p>
+<p>胖胖男生感覺就很聰明，而且又很喜歡尖端科技總理的小女孩，會不會在一起R，可是感覺尖端科技總理的小女孩就會喜歡上那些一樣大膽的男孩，可能不會喜歡喝自來水的小胖男孩QQQ。</p>
+<p>支線劇情讓我覺得似乎沒有很重要，但又不可以缺乏他，否則最後的片段我們會不知道在演甚麼XD。</p>
+<p>我是哥吉拉派的，我覺得哥吉拉也是很聰明而且他從一開始就知道自己最需要解決的對手是誰，才會進行戰鬥，後面也都沒有將金剛直接做一個擊殺，雖然殺掉那打機械哥吉拉那可能就是一場災難了QQ。</p>
+<p>金剛只是剛好被人馴服，才會顯得它忠厚老實八(?，否則我認為哥吉拉她其實也是用著他的方法在保全他的周遭，不能很確定他有沒有想要保全人類的心，但可以知道只少牠對人類沒有敵意，不然破壞死光一下去似乎大家都沒轍八XD。<br>所以人們才需要金剛，不然也會害怕沒有對手可以將哥吉拉牽制或打敗。</p>
+<p>而原住民小孩則當起了訓獸師，讓人類與金剛有著可以溝通的橋樑。</p>
+<p>難得這次的電影反派不是中國人，可是好像也沒有中國人出場，怎麼講，感覺偶爾少了個帶入感XD。沒有那種阿華人又被當成反派，我又要被別人打輸的感覺了XD。</p>
+<p>而且這次的反派我覺得演得剛剛好，有他的理想，他也願意努力去實現，只是手段比較激進，但我認為也沒有錯，只是作風不同。<br>但確實在現實世界或是電影中，大膽追求革新的人們總是不容易獲得幸福與理想實現化的可能，總是需要一步一步的改革，不可以讓太多的保守派因為反感他們而採取行動，而是像溫水煮青蛙那樣讓保守派的人們認為這件事情不會很<strong>可怕</strong>。</p>
+<p>改革與保守都有其相對應的好處，在團隊下保守、在個人下改革，我認為應該是目前比較不會造成大量爭議性的方法(?，不過我才大二，其實也還不太懂甚麼是團隊，畢竟也沒有真的在一個超過 1000 人的大團隊下工作過，可能會被很多人認為是菜鳥八XD。</p>
+]]></content>
+      <categories>
+        <category>電影心得</category>
+      </categories>
+      <tags>
+        <tag>人生旅途</tag>
+        <tag>電影心得</tag>
+        <tag>戰鬥類電影心得</tag>
       </tags>
   </entry>
 </search>

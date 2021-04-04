@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    快速建立屬於你的 online judge |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-linux/linux-build-online-judge" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  快速建立屬於你的 online judge
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/29/linux/linux-build-online-judge/" class="article-date">
+  <time datetime="2021-03-29T12:48:32.000Z" itemprop="datePublished">2021-03-29</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">5分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在北科大二下時我擔任了資財-資料結構的助教，負責設計考卷，看了先前的考古題後發現老師都是讓大家手寫程式，我認為這樣沒有辦法讓大家學到資料結構的知識，因此這邊做一個小創新，讓大家都學習如何使用 online judge</p>
+<p>透過大家使用 online judge 就可以讓大家在有限的時間內寫出程式，感受壓力，並也在感受壓力的過程中將資料結構成功記住！</p>
+<p>就因為這樣，我稍微去學習如何快速建立 online judge，透過中國青島大學開源的 online judge，在這邊很感謝中國青島大學，讓我可以快速的建立起 online judge QQ。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QDUOJ"><a href="#QDUOJ" class="headerlink" title="QDUOJ"></a>QDUOJ</h2><p>中國青島大學開源的 online judge，建立容易，且有很直觀的後台管理、使用者使用環境，在這三大優點下，使用此開源 online judge。</p>
+<p><a href="https://github.com/QingdaoU/OnlineJudgeDeploy/tree/2.0" target="_blank" rel="noopener">QDUOJ 佈署</a>連結，如果看不太懂我的寫法，建議直接去看 QDUOJ 的XD。</p>
+<p>建議不要使用 windows 安裝，只使用 linux，windows 有太多地雷了…，沒有的話可以在 windows 裡面開虛擬機。<br><del>我在 windows 環境下用虛擬機再用 docker，虛擬在虛擬，這難道是幻覺嗎RRRRRR</del></p>
+<h2 id="環境設定"><a href="#環境設定" class="headerlink" title="環境設定"></a>環境設定</h2><p>在 docker 中建立 online judge，docker 將作業系統虛擬化，可以讓 online judge 更快速的被執行與建立，因為只有服務 online judge 嘛。<br>還有一個好處是如果 online judge 爛掉，不至於會讓整個作業系統爛掉，只會讓 docker 爛掉而已XD。</p>
+<p>建議先輸入這三行，檢查是否所有需要的環境設定是否有安裝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y vim python3-pip curl git</span><br><span class="line">pip3 install --upgrade pip</span><br><span class="line">pip install docker-compose</span><br><span class="line">sudo curl -sSL get.docker.com | sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="開始安裝"><a href="#開始安裝" class="headerlink" title="開始安裝"></a>開始安裝</h2><p>不多說，repo 拉下來就對了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b 2.0 https:&#x2F;&#x2F;github.com&#x2F;QingdaoU&#x2F;OnlineJudgeDeploy.git &amp;&amp; cd OnlineJudgeDeploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立-docker-服務"><a href="#建立-docker-服務" class="headerlink" title="建立 docker 服務"></a>建立 docker 服務</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>這裡要等一段時間，大約半小時左右就會建立成功。</p>
+<h2 id="享受-docker-服務"><a href="#享受-docker-服務" class="headerlink" title="享受 docker 服務"></a>享受 docker 服務</h2><p>輸入 <code>sudo docker ps -a</code>，如果正確則應該會出現類似此畫面</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Q9jNBzboAqaDPZQ070xDa1HBj5-4sBPx&export=download" alt=""></p>
+</blockquote>
+<h2 id="來整理我們的-online-judge-八！"><a href="#來整理我們的-online-judge-八！" class="headerlink" title="來整理我們的 online judge 八！"></a>來整理我們的 online judge 八！</h2><p>如果對於我的講解認為不夠好的，可以查看<a href="https://docs.onlinejudge.me/" target="_blank" rel="noopener">QDUOJ 教學說明</a></p>
+<p>到 browser 打 <code>localhost:80</code>，應該能夠順利出現網頁，畫面如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18-pHEQoLwUZUACZx5kEu1Rg183tRwHxL&export=download" alt=""></p>
+</blockquote>
+<h3 id="進入後台"><a href="#進入後台" class="headerlink" title="進入後台"></a>進入後台</h3><p>我們先進入管理者的權限，查看後台配置</p>
+<ul>
+<li>管理者帳號 <code>root</code></li>
+<li>管理者密碼 <code>rootroot</code></li>
+</ul>
+<p>如果怕其他人也知道管理者的密碼時，建議大家將 root 密碼改掉XD。</p>
+<p>再來點選 root -&gt; management，進入管理頁面</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Ec8StoEFVBt9BV4wI1S_lOUzQWJxLvnd&export=download" alt=""></p>
+</blockquote>
+<p>讓我們來看看有那些功能，我們先看有關於使用者的功能，點擊 General</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1tPzXULZP-urt3z7KUpE6VtT1biXDOsmT&export=download" alt=""></p>
+</blockquote>
+<p>依序功能如下：</p>
+<ul>
+<li>user 所有使用者的資訊，帳號密碼</li>
+<li>announcement 可以發布公告，有就是在 home 的畫面在那邊會有新的留言公告</li>
+<li>後面三個我們不會用到，因此先忽略</li>
+</ul>
+<h3 id="註冊-user"><a href="#註冊-user" class="headerlink" title="註冊 user"></a>註冊 user</h3><p>進入 user 頁面後，會發現只有 root 這個用戶QQ，</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18pg7_6c82ZQ4h27tl9Prodji_5-x1nNP&export=download" alt=""></p>
+</blockquote>
+<p>進來這個頁面後，<code>import user</code> 提供 csv 輸入會員資料，格式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">memberA,passwordA,email</span><br><span class="line">memberB,passwordB,email</span><br></pre></td></tr></table></figure>
+
+<p>下方的 Generate User 可以快速的生成 user，參數如下</p>
+<ul>
+<li><code>prefix</code> 帳號的前綴字元</li>
+<li><code>suffix</code> 帳號的後綴字元</li>
+<li><code>start number</code> 帳號中間要塞入的數字起點</li>
+<li>````end number``` 帳號中間要塞入的數字終點</li>
+<li><code>password length</code> 密碼長度，會是高強度密碼(簡稱亂碼)</li>
+</ul>
+<p>因此假如 prefix = a, suffix = v, start number=2, end number = 4, password length = 4，就會產生以下的會員</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a2v,xxxx,xx@gmail.com</span><br><span class="line">a3v,xxxx,xx@gmail.com</span><br><span class="line">a4v,xxxx,xx@gmail.com</span><br></pre></td></tr></table></figure>
+
+<p>如此的概念，其中 xxxx 是高強度密碼(亂碼)</p>
+<h2 id="發布公告"><a href="#發布公告" class="headerlink" title="發布公告"></a>發布公告</h2><p>點入 general 在點擊 announcement，就可發布公告</p>
+<h2 id="加入題目"><a href="#加入題目" class="headerlink" title="加入題目"></a>加入題目</h2><p>這是最重要的部分，如果沒有的話怎麼讓大家寫題目嘛</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1hBp92mbyy9Kr3jwtSASxm8E3pXFmFEKK&export=download" alt=""></p>
+</blockquote>
+<p>點擊 problem 後可以點 problem list 看到現在所有的題目，而其中的 <code>create problem</code> 則可以建立題目，點擊他</p>
+<p>相信上面大家都會使用，需要注意的是 sampleX，X 為數字，則是顯示在題目上的範例測資中，實際的官方測資則是要從這裡加入</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xzGD6wEYtk-0h9IlEQAIgGv3Ve6k_Fae&export=download" alt=""></p>
+</blockquote>
+<p>圖中的 Choose File 中加入，特別需要值得一提的是</p>
+<ul>
+<li><code>filename.in</code> 是程式輸入的題目資料</li>
+<li><code>filename.out</code> 則是程式輸出的正確資料</li>
+</ul>
+<p>而旁邊的 type 有</p>
+<ul>
+<li>ACM 全對才給分</li>
+<li>OI 對測資就給分，有部分給分。</li>
+</ul>
+<h2 id="建立競賽"><a href="#建立競賽" class="headerlink" title="建立競賽"></a>建立競賽</h2><p>點擊左邊的資訊欄中的 contest，再點擊 creat contest，過程相信大家都懂不需要我在說，create contest 完畢後，在點擊資訊欄中的 contest list，</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1UqxZCUNfNnGeHUXbJvHkFY80GYACAtaW&export=download" alt=""></p>
+</blockquote>
+<p>點擊此按鈕就可以加入題目，開始放入題目八！不管是公開的題目還是私有的題目都可以，而加入題目的方式就跟我們前面說的<strong>加入題目</strong>一樣啦。</p>
+<h2 id="現在來到最後一個問題，如何讓外網連到我的-judge-呢"><a href="#現在來到最後一個問題，如何讓外網連到我的-judge-呢" class="headerlink" title="現在來到最後一個問題，如何讓外網連到我的 judge 呢?"></a>現在來到最後一個問題，如何讓外網連到我的 judge 呢?</h2><p>這裡我們使用 ngrok 來幫我們代理伺服器，提供我們網址。</p>
+<p>教學如下 <a href="https://theriseofdavid.github.io/2020/07/24/ngrok-experience/" target="_blank" rel="noopener">透過 ngrok 來讓自己的電腦成為 server by 大衛的筆記</a></p>
+<p>port 可以隨意設定，之後產生的網址我們就可以對外發布，讓他人連線了！</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/QingdaoU/OnlineJudgeDeploy/tree/2.0" target="_blank" rel="noopener">QDUOJ 佈署 by 中國青島大學</a><br><a href="https://docs.onlinejudge.me/" target="_blank" rel="noopener">QDUOJ 教學說明 by 中國青島大學</a><br><a href="https://blog.techbridge.cc/2020/03/20/build-your-own-online-judge/" target="_blank" rel="noopener">自己架一個 Online Judge 系統 by TechBrige</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>QDUOJ 真的是很方便，讓我可以在短短幾個小時內學會並且運用此軟體，真的是太感動了QQ，希望我以後也有一天可以將自己所學到的技術分享給他人。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/online-judge/" rel="tag">online judge</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/05/life_experence/Godzilla-vs.-Kong-by-subarya/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            2021/04/03 跟蘇子權一起看哥吉拉大戰金剛
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/03/28/NTUT_note/MIS-Case2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">個案報告 - 協易機械 ERP顧問的評選</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

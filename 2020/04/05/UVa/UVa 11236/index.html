@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa10487 - Grocery store (數論 Math theorm、暴力搜尋 Brute force) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa 11236" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa10487 - Grocery store (數論 Math theorm、暴力搜尋 Brute force)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/05/UVa/UVa%2011236/" class="article-date">
+  <time datetime="2020-04-05T05:51:59.000Z" itemprop="datePublished">2020-04-05</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>雜貨店的收銀員不太懂加號跟乘號這兩個意思，為了要讓他更容易理解，因此在你買雜貨店的商品時，你想要讓你買的四項商品總和價格等同於你買的四項商品價格乘積，四項商品都是相同的商品。</p>
+<p>總共不可以大於 20 元，雜貨店的商品價格範圍在 0.00 ~ 20.00 範圍內，小數點前兩位都是合理的價位。<br>輸出時，四個商品價格必須是遞增</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解小數點不夠精確，因此必須化為整數運算</li>
+<li>對於暴力搜尋進行優化<ul>
+<li>反推最後一項商品價錢</li>
+<li>暴力搜尋的範圍優化</li>
+<li>解決小數會越乘越小的問題</li>
+</ul>
+</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>好題，好題，沒想到 UVa 裡面也有類似於 Codeforces 的題目呢。</p>
+<p>我們來進行一些分析，首先由於我們知道電腦對於小數運算並不精確，假如小數數字連續乘四，有非常高的機率會使浮點數運算有誤差，導致無法 AC，因此我們的第一件事情就是要用整數來解決此題。</p>
+<h3 id="擴分公式"><a href="#擴分公式" class="headerlink" title="擴分公式"></a>擴分公式</h3><p>根據題目的方程式，我們現在定義 \(p_1,p_2,p_3,p_4\)，是我們 4 個商品的價錢，因此公式要如下<br>\(p_1p_2p_3p_4 = p_1 + p_2 + p_3 p_4\)</p>
+<p>接下來我們要進行擴分，這樣我們才可以用整數進行運算，我們定義括分 100 倍的價錢為 \(a_1 , a_2 , a_3 , a_4\)</p>
+<ul>
+<li>\(\frac{a_1}{100} \frac{a_2}{100} \frac{a_3}{100} \frac{a_4}{100} = \frac{a_1}{100}+ \frac{a_2}{100} + \frac{a_3}{100} \frac{a_4}{100}\)</li>
+<li>稍微化簡下，成為 \(\frac{a_1 a_2 a_3 a_4}{10^8} = \frac{a_1+a_2+a_3+a_4}{100} \)</li>
+<li>移項，\(\frac{a_1 a_2 a_3 a_4}{10^6} = a_1+a_2+a_3+a_4\)</li>
+<li>分母移項 \((a_1+a_2+a_3+a_4) 10^6 = a_1 a_2 a_3 a_4 \)</li>
+<li>透過此方程式，就可以用整數來寫出題目所需要的答案</li>
+</ul>
+<h3 id="優化迴圈"><a href="#優化迴圈" class="headerlink" title="優化迴圈"></a>優化迴圈</h3><p>由於我們還知道一件事情是，總共不能大於 20 元，且商品價格要遞增，因此大家比較容易想到的是迴圈不斷的遞增，但其實我們也可以減少迴圈的上限，來更加優化，如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> a1 = <span class="number">1</span>; a1 &lt;= <span class="number">2000</span>; a1++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> a2 = a1; a2 &lt;= <span class="number">2000</span>-a1; a2++ )&#123; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> a3 = a2; a3 &lt;= <span class="number">2000</span>-a1-a2; a3++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> a4 = a3; a4 &lt;= <span class="number">2000</span>-a1-a2-a3; a4++)&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中可以注意到，a2,a3,a4 他們的迴圈上限都有被縮小，是因為題目除了要數值遞增，並且還不能超過 2000，那麼 a1 用掉的錢勢必也在 20 元以內，才可以透過這樣進行優化。</p>
+<p>而遞增，減少下限就是大家比較熟悉的，不多做解釋。</p>
+<h3 id="設定檢查點"><a href="#設定檢查點" class="headerlink" title="設定檢查點"></a>設定檢查點</h3><p>其中我們可以知道公式是 \((a_1+a_2+a_3+a_4) 10^6 = a_1 a_2 a_3 a_4 \)，但這裡有一個大問題，原先的題目數值是小數，如果是 \(0.1(0.2)\) 的情況下是越乘越小的，但整數的情況並不是，0因此才會有一個 \(10^6\) 的情況出現，所以反之，也就是說如果 \(a_1 a_2 a_3 a_4 &lt;= 10^6\) 的情況下表示四個數值都是 \(&gt; 1\)，乘積只會越來越小，必定不符合題目需求。</p>
+<p>\(10^6\) 是因為我們先擴分 100 倍，才會有的限制器。</p>
+<h3 id="減少迴圈數量"><a href="#減少迴圈數量" class="headerlink" title="減少迴圈數量"></a>減少迴圈數量</h3><p>先提一個概念，\(x+y=10\)，如果我們知道 x 的情況，那 y 是不是可以移項得出。<br>所以 \(a_1 + a_2 + a_3 + a_4 = A\)，如果前三項與 A 都知道那 \(a_4\) 也可以被得知。</p>
+<p>因此我們來進行移項與定義</p>
+<ul>
+<li>定義 \(a_1+a_2+a_3\) 為 sum</li>
+<li>定義 \(a_1 a_2 a_3\) 為 product</li>
+<li>定義 \(10^6\) 為 c</li>
+<li>因此 \((a_1+a_2+a_3+a_4) 10^6 = a_1 a_2 a_3 a_4 = c(sum + p_4) = product (p_4)\)</li>
+<li>左項乘開 \(c(sum + p_4) = product (p_4)\) </li>
+<li>再來移項 \(c(sum) + c(p_4) = product (p_4) \)</li>
+<li>移項 \(c(sum) = product(p_4) - c(p_4)\)</li>
+<li>結合 \(c(sum) = p_4(product - c)\)</li>
+<li>移項 \(p_4 = \frac{c(sum)}{(product - c)}\)</li>
+</ul>
+<h3 id="擴分後的限制"><a href="#擴分後的限制" class="headerlink" title="擴分後的限制"></a>擴分後的限制</h3><p>再來我們知道了這公式後，我們還有幾個題目的限制要注意</p>
+<ul>
+<li>\(c(sum) % (product - c) == 0\) 因為我們進行擴分，因此如果沒有剛好 mod 等同於 0 時，表示其實此數值在縮小 100 倍後則不會剛好符合題目要求。表示 \(a_4\) 可能需要小數後 x 位才能符合題目要求，其中 x 必須大於 2。</li>
+<li>\(p_3 &lt; p_4\)，題目要求</li>
+<li>\(sum + p_4 \leq 2000\)，因為我們將 20 放大 100 倍</li>
+<li>\(product(p_4) \leq 2(10^9)\)，由於 \(\frac{a_1 a_2 a_3 a_4}{10^8}\)，縮小 100 倍後不可以超過 20 元。注意，這裡的縮小 100 倍是每個 \(a\) 都縮小 100 倍，全部則是縮小 \(10^8\)</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.redgreencode.com/equation-solving-is-the-key-to-uva-11236/" target="_blank" rel="noopener">EQUATION SOLVING IS THE KEY TO UVA 11236 by Red-Green-Code</a><br><a href="https://geniustanley.github.io/2017/02/15/UVa-11236-Grocery-store/" target="_blank" rel="noopener">UVa 11236 - Grocery store by geniustanley</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題很有趣RRR，完全不用輸入測資卻可以讓人有著這麼多的腦力激盪，其實很有趣R。</p>
+<p>總之學到了很多，但我也是看著詳解一步一步慢慢地去學習，或許我的腦袋其實沒有很聰明，但我會透過學習來讓自己也能夠跟上一般人的腳步。</p>
+<p>希望大家可以包容這樣的我，不夠聰明的我。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2*1e9 <span class="comment">// 四項商品乘積放大 100 倍的值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long <span class="comment">//避免溢位</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> c = <span class="number">1e6</span>; <span class="comment">//將他進行第溢</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//add more fast than product</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> a1 = <span class="number">1</span>; a1 &lt;= <span class="number">2000</span>; a1++)&#123;</span><br><span class="line">        <span class="comment">//if(pow(a1,4) &gt;= MAXN) break; //注意，加法運算比乘法快。</span></span><br><span class="line">        <span class="keyword">if</span>(a1+a1+a1+a1 &gt; <span class="number">2000</span>) <span class="keyword">break</span>; <span class="comment">//如果這邊就超過 2000，後面沒辦法遞增部符合題目要求</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> a2 = a1; a2 &lt;= <span class="number">2000</span>-a1; a2++ )&#123; </span><br><span class="line">            <span class="comment">//if(a1+pow(a2,3) &gt;= MAXN) break;</span></span><br><span class="line">            <span class="keyword">if</span>(a1+a2+a2+a2 &gt; <span class="number">2000</span>) <span class="keyword">break</span>; <span class="comment">//如果這邊就超過 2000，後面沒辦法遞增部符合題目要求</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> a3 = a2; a3 &lt;= <span class="number">2000</span>-a1-a2; a3++)&#123;</span><br><span class="line">                <span class="comment">//if(a1+a2+pow(a3,2) &gt;= MAXN) break;</span></span><br><span class="line">                <span class="keyword">if</span>(a1+a2+a3+a3 &gt; <span class="number">2000</span>) <span class="keyword">break</span>; <span class="comment">//如果這邊就超過 2000，後面沒辦法遞增部符合題目要求</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> sum = a1 + a2 + a3;</span><br><span class="line">                <span class="keyword">int</span> product = a1 * a2 * a3;</span><br><span class="line">                <span class="keyword">if</span>(product &lt;= c) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>((sum*c) % (product-c) != <span class="number">0</span>) <span class="keyword">continue</span>; <span class="comment">//mod != 0 </span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//上方擴分後的限制有提到</span></span><br><span class="line">                <span class="keyword">int</span> a4 = (sum*c) / (product-c);</span><br><span class="line">                <span class="keyword">if</span>(a3 &gt; a4) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(sum + a4 &gt; <span class="number">2000</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(product * a4 &gt; MAXN) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a1/<span class="number">100.0</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; \</span><br><span class="line">                    fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a2/<span class="number">100.0</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; \</span><br><span class="line">                    fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a3/<span class="number">100.0</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; \</span><br><span class="line">                    fixed &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; a4/<span class="number">100.0</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">                <span class="comment">//小數運算</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    solve();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E6%90%9C%E5%B0%8B-Brute-force/" rel="tag">暴力搜尋 Brute force</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/04/09/UVa/UVa294/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa294 - Divisors (數論 Math theorm)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/30/UVa/UVa10050/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa10050 - Combination Lock (水題)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
