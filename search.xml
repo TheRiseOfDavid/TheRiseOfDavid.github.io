@@ -15069,4 +15069,39 @@
         <tag>戰鬥類電影心得</tag>
       </tags>
   </entry>
+  <entry>
+    <title>R 推薦的 json 套件</title>
+    <url>/2021/04/06/R/Rjson/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>R 有著很多不穩定的套件，我在 R 使用有關於 json 的套件時，發現讀 json 有著許多問題，特地在這邊留下紀錄</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="讀網路上的-json-資料"><a href="#讀網路上的-json-資料" class="headerlink" title="讀網路上的 json 資料"></a>讀網路上的 json 資料</h2><p>當初很認真的去解決此問題，但沒有留下紀錄，很感謝那些讓我可以學習到知識的人。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">library</span>(jsonlite)</span><br><span class="line">domino_api &lt;- GET(<span class="string">"https://youtube.com"</span> , timeout(<span class="number">40</span>) , encode = <span class="string">"multipart"</span>,  accept_json())</span><br><span class="line">domino_json &lt;- fromJSON(content(domino_api,type=<span class="string">"text"</span>,encoding = <span class="string">"UTF8"</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="讀本地上的-json"><a href="#讀本地上的-json" class="headerlink" title="讀本地上的 json"></a>讀本地上的 json</h2><p>這邊十分推薦 rjson 此套件包，他在讀本地 json 檔案，不容易有格式問題。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">library</span>(rjson)</span><br><span class="line"></span><br><span class="line">before_data &lt;- rjson::fromJSON(file =<span class="string">"dominoV2.json"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果使用 <code>read_json</code>，讀進來 R 時容易有此問題。</p>
+<ul>
+<li>原本的 json 資料，尚未使用 <code>read_json</code> and <code>write_json</code><br><img src="https://drive.google.com/u/2/uc?id=1RNGiKk3mj1Bel74_MBFDppmtcGoKOucG&export=download" alt=""></li>
+<li>經過 R 並且執行  <code>read_json</code> and <code>write_json</code><br><img src="https://drive.google.com/u/2/uc?id=1D4nMYBHpf0nWLNalblF8DsAskh3dAB9J&export=download" alt=""></li>
+</ul>
+<p>可以明顯知道，裡面的每一個欄位又都被包了一個 list，這樣非常不好，但我們使用套件的人員沒辦法解決此問題，因此只能夠換另一個套件包啦。</p>
+<p><a href="https://stackoverflow.com/questions/2617600/importing-data-from-a-json-file-into-r" target="_blank" rel="noopener">參考連結</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>R 真的好難RRR，這邊這個真的會弄得亂糟糟。太多套件太混亂了，加上中文資源並不多，所以大部分都從國外或是中國學資源。</p>
+<p>希望我可以做一個轉發，讓大家知道國外資源，也可以透過中文字來讓大家更快的解決問題。</p>
+<p>我解決這個問題花了 8 小時，很累QQ。</p>
+<p>期望 R 可以統整功能相似的包在一起，再有一個完整的說明文件，那就更棒了！</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>json</tag>
+      </tags>
+  </entry>
 </search>
