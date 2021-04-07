@@ -15104,4 +15104,216 @@
         <tag>json</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Codeforces 1483D - Playlist(Disjoint Set 並查集)</title>
+    <url>/2020/08/31/Codeforces/Codeforces%201483D/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個數列可以被一種方式移除，只要當前的數值與下一個數值是 \(gcd = 1\) 的情況就將後面的數值取出並記錄 index。</p>
+<p>請輸出有幾個數值被取出，並且那些 index 為何。</p>
+<p><a href="https://codeforces.com/contest/1483/problem/B" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解 GCD</li>
+<li>減少重複比對</li>
+<li><a href="https://theriseofdavid.github.io/2021/02/02/Explain_Algorithm/disjoint-set/" target="_blank" rel="noopener">熟悉並查集</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們可以先稍微進行分析</p>
+<ul>
+<li>只要 <code>gcd == 1</code> 就是移除後面的數值</li>
+<li>重複的比對相同數值是題目絕對不允許的</li>
+</ul>
+<p>這時我們可以用一種方式來進行思考，如果我們將 <code>gcd == 1</code> 後不將後者數值刪除，而是告訴前者數值的下一個數值是哪個的時候是不是可以解決問題？</p>
+<p>舉例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">index: 1 2 3</span><br><span class="line">value: 1 2 3</span><br><span class="line">merge: 1 2 3</span><br></pre></td></tr></table></figure>
+
+<p>其中前兩項 <code>gcd = 1</code>，這時我們只修改 merge 為</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">index: 1 2 3</span><br><span class="line">value: 1 2 3</span><br><span class="line">merge: 2 2 3</span><br></pre></td></tr></table></figure>
+
+<p>表示我們現在只要到 index 1 的時候就直接到 index 3，跳過被合併的 2，這樣我們可以減少大量的刪<br>除動作。</p>
+<p>現在我們可以知道一件事 merge 中相同數值的第一個 index 必定是尚未被消除過的數值，其他的 index 一定有被消除過且最後一個 index 必定等同於 merge 的數值。<br>這裡我們寫程式方便，會有一個 <code>del</code> 陣列來記錄被消除的 index。</p>
+<p>再來我們要減少重複比對，這時候就需要一個 <code>queue</code> 了，由於我們知道 <code>gcd(x,y)</code> 與 <code>gcd(y,x)</code>，一定相同，因此我們可以降低重複比對。</p>
+<p>假如現在有三個值 x,y,z，且都 \(gcd != 1\)，那我們只要做三遍 gcd 就可以知道這三個數值保證 \(gcd != 1\)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gcd(x,y)</span><br><span class="line">gcd(y,z)</span><br><span class="line">gcd(z,x)</span><br></pre></td></tr></table></figure>
+
+<p>這時我們就又知道了一件事情，每個數值都只會跟自己的下一個數值做 <code>gcd</code>，因此我們的 <code>queue</code> 只要記錄 gcd 的前項就好，後項不需要紀錄。</p>
+<p>那有沒有可能後項會被 gcd 的操作給移除掉? 不可能。<br>用上面的舉例，如果 <code>gcd(x,y)</code>，y 沒有被移除，那 y 在下次的 <code>gcd(y,z)</code> 不可能會被移除。</p>
+<p>因此我們可以得出結論</p>
+<ul>
+<li>使用並查集來 merge 消除的數值</li>
+<li>我們用 queue 紀錄 gcd 的第一項</li>
+<li>如果 <code>gcd(x,y) == 1</code>，那就讓 vector 紀錄 y，並且 <code>queue.push(x)</code>，因為 x 的下一個數值不在是 y，我們沒辦法保證 <code>gcd(x,z) == 1</code>，需要重做才知道。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://zhuanlan.zhihu.com/p/359628701" target="_blank" rel="noopener">Codeforces Round #709 (Div. 1, based on Technocup 2021 Final Round) by 一只蒟蒻</a><br><a href="https://www.cnblogs.com/-Wallace-/p/cf-709.html" target="_blank" rel="noopener">Codeforces Round #709 (Div. 1, based on Technocup 2021 Final Round) by <em>Wallace</em></a><br><a href="https://codeforces.com/blog/entry/88944" target="_blank" rel="noopener">Codeforces Round #709 / Technocup 2021 Final Round — Unofficial Editorial by Geothermal’s blog</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題學到很多，第一次意識到 disjoint set 也可以這樣操作，學了很多啊。</p>
+<p>希望自己透過這樣子的學習可以讓自己變得更強，並且更加靈活地應用在生活上！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e6</span>;</span><br><span class="line"><span class="keyword">int</span> a[MAXN], fa[MAXN], del[MAXN]; <span class="comment">//a 是數值，fa 是 merge，del 是那些 index 被消除過</span></span><br><span class="line"><span class="keyword">int</span> t, n;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; record; <span class="comment">//紀錄答案</span></span><br><span class="line"><span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123; <span class="comment">//並查集</span></span><br><span class="line">    <span class="keyword">return</span> fa[x] == x ? x : fa[x] = find_root(fa[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        q.clear(); <span class="comment">//清空，避免影響此次答案</span></span><br><span class="line">        record.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">            fa[i] = i;</span><br><span class="line">            del[i] = <span class="number">0</span>; <span class="comment">//清空</span></span><br><span class="line">            q.push_back(i); <span class="comment">//將未比對的 gcd 的數值放入 q</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!q.empty())&#123; <span class="comment">//如果空了表示，全部都有比對過</span></span><br><span class="line">            <span class="keyword">int</span> u = q.front(); q.pop_front(); <span class="comment">//</span></span><br><span class="line">            <span class="keyword">if</span>(del[u]) <span class="keyword">continue</span>; <span class="comment">//如果這邊之前有被消除過，就不需要比對</span></span><br><span class="line">            <span class="keyword">int</span> v = (find_root(u)+<span class="number">1</span>) % n; <span class="comment">//下一個未被消除的位置</span></span><br><span class="line">            <span class="keyword">if</span>(v == <span class="number">0</span>) v = n; <span class="comment">//如果是 0 是因為 mod 的問題，因此改回 n</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(__gcd(a[u], a[v]) == <span class="number">1</span>)&#123; <span class="comment">//可以被消除</span></span><br><span class="line">                record.push_back(v); <span class="comment">//紀錄消除的 index</span></span><br><span class="line">                <span class="keyword">int</span> fu = find_root(u); <span class="comment">//合併</span></span><br><span class="line">                <span class="keyword">int</span> fv = find_root(v);</span><br><span class="line">                fa[fu] = fv; <span class="comment">//讓 fv 的值給到 fu，f 表示 father</span></span><br><span class="line">                del[v] = <span class="number">1</span>; <span class="comment">//v 被移除</span></span><br><span class="line">                q.push_back(u); <span class="comment">//u 被放入，因為 gcd 的 v 被移除掉，他接下來還會匹配到新的 v</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; record.size(); <span class="comment">//輸出答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: record) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; it;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>Disjoint Set 並查集</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科通識課 國際關係 - 比較 G20 與台灣</title>
+    <url>/2021/04/07/NTUT_note/NTUT_national_relation/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用來記錄大衛在台北科技大學通識課 - 國際關係，何揚老師上課的作業。</p>
+<p>G20 與台灣的關係比較圖</p>
+<p>其資料都來自於 wiki</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E5%8D%81%E5%9C%8B%E9%9B%86%E5%9C%98" target="_blank" rel="noopener">二十國集團 by wiki</a><br><a href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E9%A1%9E%E7%99%BC%E5%B1%95%E6%8C%87%E6%95%B8%E5%88%97%E8%A1%A8" target="_blank" rel="noopener">人類發展指數列表 by wiki</a><br><a href="https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E5%90%84%E5%9B%BD%E5%92%8C%E5%9C%B0%E5%8C%BA%E9%9D%A2%E7%A7%AF%E5%88%97%E8%A1%A8" target="_blank" rel="noopener">世界各國和地區面積列表 by wiki</a><br><a href="https://en.wikipedia.org/wiki/Military#Capability_development" target="_blank" rel="noopener">Military by wiki</a><br><a href="https://en.wikipedia.org/wiki/List_of_countries_by_life_expectancy" target="_blank" rel="noopener">List of countries by life expectancy by wiki</a></p>
+<h2 id="內容"><a href="#內容" class="headerlink" title="內容"></a>內容</h2><p>我將我自己統整的資料放在網路中，供大家學習使用，但禁止抄襲。</p>
+<p><a href="https://drive.google.com/file/d/139cfMuF2MAoBYvDrmMv-1mdyJVei6wLp/view?usp=sharing" target="_blank" rel="noopener">圖表</a><br><a href="https://drive.google.com/file/d/1qcidPJModDkUJSdJ2pA726xpM3b0INi0/view?usp=sharing" target="_blank" rel="noopener">附註說明</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有些東西可以用爬蟲爬資料，真的是非常好用！</p>
+<p>但是有很多資料是不同的網頁，且對 G20 並沒有完全支援。<br>原本有打算要寫一個程式互相 link，但後來想想可能會更花時間就停下來了。</p>
+<p>總之，整理資料真的好累，文書作業感好重，又好想睡覺RRR。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>國際關係</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第四周作業-測試 Adaboost、KNN 兩種分類器</title>
+    <url>/2021/04/07/NTUT_note/NTUTcs_MediaHW04-1/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="題目如下，用圖片"><a href="#題目如下，用圖片" class="headerlink" title="題目如下，用圖片"></a>題目如下，用圖片</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1XsmKWOZfkH1oOtuxLvnf5bLG18N_SKc_&export=download" alt=""></p>
+</blockquote>
+<h2 id="Adaboost"><a href="#Adaboost" class="headerlink" title="Adaboost"></a>Adaboost</h2><p>主要是透過 python sklearn.ensemble 函式使用，裡面其中最重要的三個參數如下：</p>
+<ul>
+<li>n_estimators<br>為公式 的可最大疊代次數，其中 W_(k+1)就是每次的疊代次數記錄，通常標準是 50，如果太大可能會導致 overfitting，太小則又不夠精確。</li>
+<li>learning_rate<br>為每個分類器的權重，如果每個分類器的權重越大，那建議 n_estimators 可以小點，如果每個分類器的權重越小，則建議n_estimators 要更大些。</li>
+</ul>
+<p>透過鳶尾花資料集進行練習，我發現最主要的問題是 train_test_split 中的 test_size 比例越小時則其準確性越高，反之則越大。</p>
+<h3 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> AdaBoostClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_classification</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line"></span><br><span class="line">x = iris.data</span><br><span class="line">y = iris.target</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#test_size 越小，準確率越高，越大則準確率越低</span></span><br><span class="line"><span class="comment">#在learning_rate 越大，感覺越好，n_estimators注意不要 overfitting</span></span><br><span class="line">clf = AdaBoostClassifier(n_estimators=<span class="number">40</span>, learning_rate=<span class="number">1</span>, random_state=<span class="number">0</span>)</span><br><span class="line">clf.fit(x_train, y_train)</span><br><span class="line">print(<span class="string">"AdaBoost accuracy"</span>)</span><br><span class="line">print(clf.score(x, y))</span><br><span class="line">print()</span><br></pre></td></tr></table></figure>
+
+<h3 id="輸出結果"><a href="#輸出結果" class="headerlink" title="輸出結果"></a>輸出結果</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1k0IqTG1uy6mM2godTHsLo31rmW6PS5pW&export=download" alt=""></p>
+</blockquote>
+<h3 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h3><p>其中最酷的是 n_estimators在 40 的情況時，準確率會降低，但在 n_estimators 是 30 的情況下時，準確率卻又會上升至 n_estimators 等於 50。</p>
+<h3 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h3><p><img src="https://blog.csdn.net/TeFuirnever/article/details/100276569?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-4&spm=1001.2101.3001.4242" alt="sklearn.ensemble.AdaBoostClassifier()函数解析（最清晰的解释）by 我是管小亮"><br><img src="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html" alt="sklearn.ensemble.AdaBoostClassifier by scikit learn"><br><img src="https://ithelp.ithome.com.tw/articles/10197110" alt="[Day26]機器學習：KNN分類演算法！by iT邦幫忙"></p>
+<h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><p>主要是透過 python sklearn.neighbors函式使用，裡面其中最重要的三個參數如下：</p>
+<ul>
+<li>n_neighbors<br>預設是5，是 KKN 演算法中已離你最近的 K 的點為主，將自己也視為此類別。</li>
+<li>weights<br>以要被判斷的點為中心，有兩種方法 uniform 為只要在此範圍內的點權重都相同，而 distance 每個點權重都不同，取決於每個點到中心點的距離。</li>
+<li>algorithm<br>使用的演算法，預設是 auto，也就是函式自動使用適合的演算法，brute 是暴力搜尋，當訓練集大時非常耗時，而 kd_tree and ball_tree 則是用來改善 brute，而產生的演算法。</li>
+</ul>
+<h3 id="程式碼-1"><a href="#程式碼-1" class="headerlink" title="程式碼"></a>程式碼</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> AdaBoostClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_classification</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line"></span><br><span class="line">x = iris.data</span><br><span class="line">y = iris.target</span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#只有 weights 感受到差異</span></span><br><span class="line">neigh = KNeighborsClassifier(n_neighbors=<span class="number">5</span>, algorithm=<span class="string">'kd_tree'</span>, weights=<span class="string">'distance'</span>)</span><br><span class="line">neigh.fit(x_train, y_train)</span><br><span class="line">print(<span class="string">"KNN accuracy"</span>)</span><br><span class="line">print(neigh.predict(x_test))</span><br><span class="line"></span><br><span class="line">xx = neigh.predict(x_test)</span><br><span class="line">cnt = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(x_test)):</span><br><span class="line">  <span class="keyword">if</span>(xx[i] == y_test[i]):</span><br><span class="line">    cnt+=<span class="number">1</span></span><br><span class="line">print(<span class="string">"Accuracy"</span>, cnt/len(x_test))</span><br></pre></td></tr></table></figure>
+
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=12mD7k_q8kKndDtLLVJPPX82F1xHs4_Nu&export=download" alt=""></p>
+</blockquote>
+<h3 id="心得-1"><a href="#心得-1" class="headerlink" title="心得"></a>心得</h3><p>其中由於 KNN 會出來的是對於每個點的預測，於是我有在第 30行到第35行簡單的對每筆資料進行判斷。<br>其中得出我們的 weights 如果使用 distance 的準確率會比 uniform 來的更好。<br>而 n_neighbors 在這邊我們則不會感受到太大的差異，主要是因為資料量太小且 5 是標準函式預設的 n_neighbors，如果再小可能就會導致 overfitting。</p>
+<p>注意：n_neighbors 不可以設定為 1，此函式出來的結果畢竟會是100%準確，沒辦法發揮此函式的功用。</p>
+<h3 id="參考連結-1"><a href="#參考連結-1" class="headerlink" title="參考連結"></a>參考連結</h3><p><img src="https://tefuirnever.blog.csdn.net/article/details/99818078?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&dist_request_id=1328769.82134.16177873596971781&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control" alt="sklearn.neighbors.KNeighborsClassifier()函数解析（最清晰的解释）by 我是管小亮"><br><img src="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html" alt="sklearn.neighbors.KNeighborsClassifier by scikit learn"><br><img src="https://ithelp.ithome.com.tw/articles/10197110" alt="[Day26]機器學習：KNN分類演算法！by iT邦幫忙"></p>
+<h2 id="心得-2"><a href="#心得-2" class="headerlink" title="心得"></a>心得</h2><p>謝謝力瑋、梓琳兩位不願其煩的一直教我QQQ，這種東西沒有學過還不太熟悉RRR。</p>
+<p>總之紀錄一下自己學習的過程不是一件壞事情八(?。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第四周對於 SVM 的學習紀錄</title>
+    <url>/2021/04/07/NTUT_note/NTUTcs_MediaHW04_Note/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="學習紀錄"><a href="#學習紀錄" class="headerlink" title="學習紀錄"></a>學習紀錄</h2><ul>
+<li>給予越多的特徵，會有不同的結果，但規律可能不好找</li>
+<li>但越多的特徵給予 SVM 會使準確率變高</li>
+<li>kernel 使用 poly 方法，準確率最高，Sigmoid 則是最差</li>
+<li>C 值越大(對於錯誤的忍受度)，學習的準確率越高。但對測試集沒有任何影響</li>
+<li>gamma 盡量使用 scale，但是在 <code>kernel=&#39;linear&#39;</code>時則完全沒有用處，linear 不需要用到 gamma 參數。</li>
+<li><code>train_test_split</code> 的 test_size 越大時準確率越低。</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>謝謝力瑋、梓琳拯救我的多媒體，兩位大佬QAQ，我現在還對於多媒體沒有很了解，希望能夠趕快追上QQQQ。</p>
+<p>題外話，py 真的讓我用的不太上手RRR，numpy 跟 list 沒想到在 print 出來時長的一樣，但他們本身型態卻不同，弱型態語言我還沒有辦法完全掌控R。</p>
+<p>總之還是謝謝二位了QQQ。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11565 - Simple Equations (數論 Math theorm、暴力搜尋 Brute force)</title>
+    <url>/2020/04/07/UVa/UVa11565/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>你必須找出 x,y,z 三個數字符合下面的公式，其中 x,y,z 數字不可以相同</p>
+<ul>
+<li>\(x+y+z = A\)</li>
+<li>\(xyz=B\)</li>
+<li>\(x^2 + y^2 + z^2 = C\)</li>
+</ul>
+<p>給你 A,B,C 求出 x,y,z，如果有多組答案，請輸出依序最小的</p>
+<p><a href="https://onlinejudge.org/external/115/11565.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>對於暴力搜尋進行優化<ul>
+<li>反推 z</li>
+<li>了解題目數值最大上限</li>
+<li>得知題目可以負整數</li>
+</ul>
+</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>其實蠻水的XDDD，但是我花了蠻久才看的出來QQQ。</p>
+<p>理論上其實我們可以透過題目的三個公式得出一些想法</p>
+<ul>
+<li>由於 \(x^2 + y^2 + z^2 = C\)，且 \(C &lt;= 10000\)，因此理論上 x,y,z 不會超過 100。</li>
+<li>\(x+y+z = A\) x,y,z 有可能會是負整數，只要最後 A 是正就好</li>
+<li>\(xyz=B\) 基本上 x,y,z 如果要有負整數的情況，那一定是 x,y,z 中有兩個負整數</li>
+</ul>
+<p>判斷時間複雜度 \(O(100 (100))\)，不大，最後的 z 再進行反推就能夠求出答案。</p>
+<p>OK，那可以寫了對八！讓 x,y 從 -100 ~ 100，不斷嘗試。<br>注意：如果 x,y,z 其中有兩個數字一樣則不被視為答案。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://sayaurobuchi.github.io/cmusu/2017/06/10/UVa_11565.html" target="_blank" rel="noopener">[題解] UVa 11565 - Simple Equations by 巫術社的使魔群</a><br><a href="https://louisfghbvc.pixnet.net/blog/post/324071947-uva-11565-simple-equations" target="_blank" rel="noopener">Uva 11565 Simple Equations by louisfghbvc</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>難度不高，稍微動點腦就可以解出來。<br>用來增加大家信心的題目XD。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> A, B, C;</span><br><span class="line"><span class="keyword">int</span> t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x = <span class="number">-100</span>; x &lt; <span class="number">100</span>; x++)&#123; <span class="comment">//brute fouce</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> y = <span class="number">-100</span>; y &lt; <span class="number">100</span>; y++)&#123;</span><br><span class="line">            <span class="keyword">int</span> z = A - x -y; <span class="comment">//反推 z</span></span><br><span class="line">            <span class="keyword">if</span>(x - y == <span class="number">0</span> || y - z == <span class="number">0</span> || x - z == <span class="number">0</span>) <span class="keyword">continue</span>; <span class="comment">//判斷有沒有數值相同</span></span><br><span class="line">            <span class="keyword">if</span>(B != z * x * y) <span class="keyword">continue</span>; <span class="comment">//判斷是否符合題目公式</span></span><br><span class="line">            <span class="keyword">if</span>(C != (x*x + y*y + z*z)) <span class="keyword">continue</span>;  <span class="comment">//判斷是否符合題目公式</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">' '</span> &lt;&lt; y &lt;&lt; <span class="string">' '</span> &lt;&lt; z &lt;&lt; <span class="string">'\n'</span> ; <span class="comment">//通過挑戰，可以輸出答案</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B &gt;&gt; C;</span><br><span class="line">        <span class="keyword">if</span>(solve() == <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"No solution.\n"</span>; <span class="comment">//如果是 0 就輸出此文字。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
+        <tag>暴力搜尋 Brute force</tag>
+      </tags>
+  </entry>
 </search>
