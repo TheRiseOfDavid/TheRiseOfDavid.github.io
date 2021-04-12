@@ -14228,7 +14228,7 @@
       <tags>
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
-        <tag>多媒體技術與應用筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
   <entry>
@@ -14293,7 +14293,7 @@
       <tags>
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
-        <tag>多媒體技術與應用筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
   <entry>
@@ -14372,7 +14372,7 @@
       <tags>
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
-        <tag>多媒體技術與應用筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
   <entry>
@@ -14431,7 +14431,7 @@
       <tags>
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
-        <tag>多媒體技術與應用筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
   <entry>
@@ -15236,7 +15236,7 @@
       <tags>
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
-        <tag>多媒體技術與應用筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
   <entry>
@@ -15266,7 +15266,7 @@
       <tags>
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
-        <tag>多媒體技術與應用筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
   <entry>
@@ -15611,6 +15611,177 @@
         <tag>北科上課筆記</tag>
         <tag>統計學筆記</tag>
         <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進行HOG特徵提取並送入SVM分類器進行訓練進行辨識</title>
+    <url>/2021/04/12/NTUT_note/NTUTcs_MediaHW05G01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><p>直接透過程式碼來進行說明，相信會比較好理解。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Apr  8 12:28:01 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"></span><br><span class="line">lfw_people = fetch_lfw_people(min_faces_per_person=<span class="number">70</span>, resize=<span class="number">0.4</span>) <span class="comment">#接收 人臉資料</span></span><br><span class="line">n_samples, h, w = lfw_people.images.shape <span class="comment">#紀錄形狀</span></span><br><span class="line"></span><br><span class="line">x = lfw_people.data <span class="comment">#人臉全部資料</span></span><br><span class="line">n_features = x.shape[<span class="number">1</span>] <span class="comment">#特徵</span></span><br><span class="line"></span><br><span class="line">y = lfw_people.target <span class="comment">#每一個人臉辨識的類別</span></span><br><span class="line">target_names = lfw_people.target_names  <span class="comment">#type</span></span><br><span class="line">n_classes = target_names.shape[<span class="number">0</span>] <span class="comment">#有幾種類別</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Total dataset size:"</span>)</span><br><span class="line">print(<span class="string">"n_samples: %d"</span> % n_samples)</span><br><span class="line">print(<span class="string">"n_features: %d"</span> % n_features)</span><br><span class="line">print(<span class="string">"n_classes: %d"</span> % n_classes)</span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.25</span>, random_state=<span class="number">42</span>) </span><br><span class="line"><span class="comment"># 創造出訓練集與切割集</span></span><br><span class="line"></span><br><span class="line">n_components = <span class="number">150</span> <span class="comment">#降至 150 維度</span></span><br><span class="line">print(<span class="string">"Extracting the top %d eigenfaces from %d faces"</span></span><br><span class="line">      % (n_components, x_train.shape[<span class="number">0</span>]))</span><br><span class="line">t0 = time() <span class="comment">#計時</span></span><br><span class="line">pca = PCA(n_components=n_components, svd_solver=<span class="string">'randomized'</span>, </span><br><span class="line">          whiten=<span class="literal">True</span>).fit(x_train) <span class="comment">#訓練中，使用方法為 randomized</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0)) <span class="comment">#輸出時間</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#重新定義圖片大小</span></span><br><span class="line">eigenfaces = pca.components_.reshape((n_components, h, w))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Projecting the input data on the eigenfaces orthonormal basis"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line">x_train_pca = pca.transform(x_train) <span class="comment">#進行降維</span></span><br><span class="line">x_test_pca = pca.transform(x_test) <span class="comment">#進行降維</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line"></span><br><span class="line"><span class="comment"># #############################################################################</span></span><br><span class="line"><span class="comment"># Train a SVM classification model</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Fitting the classifier to the training set"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line"><span class="comment">#參數，用來告訴 gridsearchCV 的懲罰與誤差，是圖像決定好的</span></span><br><span class="line"><span class="comment">#param_grid = &#123;'C': [1e3, 5e3, 1e4, 5e4, 1e5],</span></span><br><span class="line"><span class="comment">#              'gamma': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1], &#125;</span></span><br><span class="line">param_grid = &#123;<span class="string">'C'</span>: [<span class="number">1e3</span>, <span class="number">5e3</span>, <span class="number">1e4</span>, <span class="number">5e4</span>, <span class="number">1e5</span>],</span><br><span class="line">              <span class="string">'gamma'</span>: [<span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.01</span>, <span class="number">0.1</span>], &#125; <span class="comment">#要給 SVC 的參數</span></span><br><span class="line">clf = GridSearchCV(SVC(kernel=<span class="string">'rbf'</span>, class_weight=<span class="string">'balanced'</span>), param_grid)</span><br><span class="line">fit = clf.fit(x_train_pca, y_train) <span class="comment">#尋找最佳化</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line">print(<span class="string">"Best estimator found by grid search:"</span>)</span><br><span class="line">print(clf.best_estimator_) <span class="comment">#找到最佳參數組合及其準確率。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #############################################################################</span></span><br><span class="line"><span class="comment"># Quantitative evaluation of the model quality on the test set</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Predicting people's names on the test set"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line">y_pred = clf.predict(x_test_pca) <span class="comment">#預測</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line"></span><br><span class="line">print(classification_report(y_test, y_pred, target_names=target_names))</span><br><span class="line"><span class="comment"># 輸出這次機器學習的結果，其中 f1-score 是學習成果中最重要的分數</span></span><br><span class="line"><span class="comment"># * precision 準確率，機器學習判定是正確圖片的準確率</span></span><br><span class="line"><span class="comment"># * recall 精準度，抽取出來的樣本，有多少樣本是有被視為正確的。</span></span><br><span class="line"><span class="comment"># 舉例：google 大衛的筆記，理論上要有 70 筆資料是關於大衛的筆記，卻只有輸出 40 筆，比例就是 40/70。</span></span><br><span class="line"><span class="comment">#print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html#sphx-glr-auto-examples-applications-plot-face-recognition-py" target="_blank" rel="noopener">Faces recognition example using eigenfaces and SVMs by scikit-learn</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html" target="_blank" rel="noopener">sklearn.decomposition.PCA by scikit-learn</a><br><a href="https://www.cnblogs.com/178mz/p/8558435.html" target="_blank" rel="noopener">机器学习classification_report方法及precision精确率和recall召回率 说明 by cnblogs</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html" target="_blank" rel="noopener">sklearn.metrics.classification_report by scikit-learn</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html" target="_blank" rel="noopener">sklearn.model_selection.GridSearchCV by scikit-learn</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html" target="_blank" rel="noopener">sklearn.model_selection.train_test_split by scikit-learn</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>機器學習裡面大量的數學公式與模型，我都還不懂，現在的我只是先按照著範例刻畫出正確的結果來，希望未來的我可以懂那些理論，因為我其實都不太懂這些理論。但是被要求做出此作業時，其實上手程度很難，某種情況來說算是壓力很大。</p>
+<p>總之，希望我能夠至少大概理解怎麼運作，之後如果有機會在進行底層實作，我一定就能夠了解更多！<br>現在只能大概理解語法在幹嘛，而不能知道怎麼運作。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第五周個人作業</title>
+    <url>/2021/04/12/NTUT_note/NTUTcs_MediaHW05t01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-在Python中引入scikit-learn函式庫，利用函式庫中所提供的函式進行練習，觀察HOG方法所提取出的特徵點，在可視化表現上有何種特色，並且調整HOG函式中的各項參數，觀察是否有甚麼差異。"><a href="#QUESTION-在Python中引入scikit-learn函式庫，利用函式庫中所提供的函式進行練習，觀察HOG方法所提取出的特徵點，在可視化表現上有何種特色，並且調整HOG函式中的各項參數，觀察是否有甚麼差異。" class="headerlink" title="QUESTION: 在Python中引入scikit-learn函式庫，利用函式庫中所提供的函式進行練習，觀察HOG方法所提取出的特徵點，在可視化表現上有何種特色，並且調整HOG函式中的各項參數，觀察是否有甚麼差異。"></a>QUESTION: 在Python中引入scikit-learn函式庫，利用函式庫中所提供的函式進行練習，觀察HOG方法所提取出的特徵點，在可視化表現上有何種特色，並且調整HOG函式中的各項參數，觀察是否有甚麼差異。</h2><p>hog 的語法如下</p>
+<ul>
+<li>Image 圖片本身資料，num.array 格式</li>
+<li>Orientation = 8，也就是每個 cell 的周遭</li>
+<li>pixels_per_cell 每一個單位的像素大小</li>
+<li>cells_per_block 每組單位的大小</li>
+<li>visualize 是否 return hog 特徵影像</li>
+<li>multichannel 支援多通道</li>
+</ul>
+<p>在測試的過程中，發現了 pixels_per_cell 是最重要的參數，他決定了產生出來的圖片像素大小，如果 pixels_per_cell 越小則運算速度也會越慢，邊緣越仔細，但如果越大則反而沒有辦法清楚描繪邊緣，因此要找好適合的大小。</p>
+<p>cells_per_block 我嘗試過，10、1、16其實我看不太出來差異，因此我認為他們並沒有太大差異。</p>
+<p>Orientation 在 8 的情況下，明顯比起 Orientation = 4 的時候跟詳細，跟清楚地描繪邊緣。</p>
+<p>透過查詢老師的講義，基本上沒有太大困難，只有前期的茫然不太清楚要做甚麼。</p>
+<h2 id="QUESTION-請想出一種情境，適合使用HOG-SVM進行分類，並說明原因。"><a href="#QUESTION-請想出一種情境，適合使用HOG-SVM進行分類，並說明原因。" class="headerlink" title="QUESTION:請想出一種情境，適合使用HOG+SVM進行分類，並說明原因。"></a>QUESTION:請想出一種情境，適合使用HOG+SVM進行分類，並說明原因。</h2><p>老師的講義有提過在行人辨識是很適合使用HOG+SVM進行分類，我認為如果依照這樣，根據現在最熱的火車事故新聞，我認為 HOG+SVM 應該也可以在火車行駛中辨識人或是大型雜物，如果有辨識到就進行剎車，相信一定可以拯救很多人的生命。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資財二管理資訊系統 個案一 怪獸公司—資訊系統促使之企業流程變革</title>
+    <url>/2021/04/12/NTUT_note/NTUTifm_Manager_t01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-為何業務人員抗拒公司的流程改造？"><a href="#QUESTION-為何業務人員抗拒公司的流程改造？" class="headerlink" title="QUESTION: 為何業務人員抗拒公司的流程改造？"></a>QUESTION: 為何業務人員抗拒公司的流程改造？</h2><p>原先未導入ERP系統前，一些背景知識</p>
+<ul>
+<li>業務人員包辦銷售、採購、金流、物流</li>
+<li>業務人員可以跟健身器材商有議價能力</li>
+<li>促銷、贈品、價格都是業務員對客戶的籌碼</li>
+<li>公司與業務只在意銷售額</li>
+</ul>
+<p>導入ERP系統前，一些背景知識</p>
+<ul>
+<li>採購權不在業務員而轉交到採購部門</li>
+<li>嚴格的對帳系統，業務員沒有彈性操作</li>
+<li>有最低販賣價格</li>
+<li>重視邊際貢獻</li>
+</ul>
+<p>業務員原先有許多彈性操作與他個人的策略可以去誘使客戶購買產品、解決自身錯誤問題，還能夠將一些無法解決的問題推給總公司或健身器材商，業務員曾經是公司的主角，透過一些王牌業務員的策略與給其彈性，來使業務員更順利的銷售產品，甚至可以聯合其他業務員一起做策略聯盟達到雙贏的局面，業務員就像軍師一樣，操控戰場情勢與發展。</p>
+<p>現在業務員的彈性空間被大大減少，失去議價能力，出現最低價格，原先可以透過大量採購而使銷售量提高的策略因為最低價格而被鎖死、部分客戶貪小便宜的心態卻因為有最低價格，重視邊際貢獻，導致些許客戶不願購買產品、加上嚴格的商品庫存管理規則讓業務員沒有犯錯空間，讓業務員從原本軍師的地位變成了士兵，原先可以透過與其他地區的業務員(軍師)一同進行策略聯盟，由於現在的地位變為士兵，只能專心販賣產品，進而就讓士兵不願意分享自己的戰鬥法則、生存策略，沒有互利共生的空間，業務員就不會選擇與他人合作。</p>
+<p>業務員原先可以操控商場的情勢與發展，適時的發展策略，現在卻變成了一名遵守紀律的士兵，許多經驗老道的業務員無法發揮策略、且獎金變少，在此情況下，必會十分抗拒公司的流程改造。</p>
+<h2 id="QUESTION-公司該如何讓系統成功導入"><a href="#QUESTION-公司該如何讓系統成功導入" class="headerlink" title="QUESTION: 公司該如何讓系統成功導入"></a>QUESTION: 公司該如何讓系統成功導入</h2><p>我認為這是系統在導入時會遇到的難題</p>
+<ul>
+<li>業務員需要彈性，有策略的空間</li>
+<li>嚴格的稽查制度，讓業務員犯錯沒有彈性的機會</li>
+<li>業務員長期持有高度壓力</li>
+<li>重視邊際貢獻，使帳目變得好看但實際營收卻降低</li>
+</ul>
+<p>我認為把這四點改好，應能夠成功改善業務抗拒系統，公司的主力核心是業務，因此讓業務們願意接受就能獲得大多數人的支持。</p>
+<h3 id="改善建議如下："><a href="#改善建議如下：" class="headerlink" title="改善建議如下："></a>改善建議如下：</h3><h4 id="業務員需要彈性，有策略的空間"><a href="#業務員需要彈性，有策略的空間" class="headerlink" title="業務員需要彈性，有策略的空間"></a>業務員需要彈性，有策略的空間</h4><p>主要的問題是業務員沒有辦法從根本去解決問題，客戶的期望勢必是低價格、多贈品，我認為可以讓最低價格制度進行改善，用數學公式 業務最低價格=(1-0.0業務員當月銷售數量)*公司最低價格，這樣遇到大量購買時客戶擁有較大的議價能力時，業務員就能透過此公式逐漸給客戶優惠，如果業務員能開夠用更高的價錢談成，那其中間利差給予業務員，而這部分就可以讓業務員有很好的想法與策略進行發揮，也可以看出業務員的能力。<br>可以透過先提高公司最低價格，增加公司營利。</p>
+<h4 id="嚴格的稽查制度，讓業務員犯錯沒有彈性的機會"><a href="#嚴格的稽查制度，讓業務員犯錯沒有彈性的機會" class="headerlink" title="嚴格的稽查制度，讓業務員犯錯沒有彈性的機會"></a>嚴格的稽查制度，讓業務員犯錯沒有彈性的機會</h4><p>只是程序上的問題需要補足，不一定要用懲罰來給員工壓力，也許會造成總公司跟健身器材商的談判能力降低，這點我認為可以已將 1. 的公式進行改進，業務最低價格=(1-0.0業務員當月銷售數量)<em>公司最低價格</em>1.業務疏失率<br>透過此方式給業務一些壓力，也可以對於疏失量過大的業務員警惕。如果業務最低價格多 1%，勢必會讓他接下來買賣產品更辛苦，在此前提下業務員會讓自己盡量不犯錯誤，也可以識情況給予業務員更多的寬鬆機會。</p>
+<h4 id="業務員長期持有高度壓力"><a href="#業務員長期持有高度壓力" class="headerlink" title="業務員長期持有高度壓力"></a>業務員長期持有高度壓力</h4><p>這邊我建議給予員工一視同仁的獎勵，工作資歷幾年以上的員工有甚麼優惠…，透過此方式讓員工知道只要自己能撐過去就能拿到更好的福利，且不會因為其他業務員有著更好的績效，而讓自己內心壓力變大，被家人親友碎念。<br>但也必須要有，淘汰掉不好的業務員的壓力，減少不必要的支出。</p>
+<h4 id="重視邊際貢獻，使帳目變得好看但實際營收卻降低"><a href="#重視邊際貢獻，使帳目變得好看但實際營收卻降低" class="headerlink" title="重視邊際貢獻，使帳目變得好看但實際營收卻降低"></a>重視邊際貢獻，使帳目變得好看但實際營收卻降低</h4><p>由於公司重視邊際貢獻，在乎一單位的產品要帶來多少的效益，這樣會造成利潤有限度的提升，因為失去了薄利多銷的策略，加上市場的競爭，在開放競爭市場不太能用這種做法，這種做法比較適合獨佔市場些，公司著重在於讓自己的推銷手法可以接觸到最多的消費者，在消費者心中有好的印象，透過此方式來讓自己的經營永續化，而非單重視邊際貢獻使公司成長緩慢、容易被她家品牌超越。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大管理資訊系統筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資財二管理資訊系統 個案二 怪獸公司—資訊系統促使之企業流程變革</title>
+    <url>/2021/04/12/NTUT_note/NTUTifm_Manager_t02/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-面對顧問公司的突然倒閉，你會如何處理？"><a href="#QUESTION-面對顧問公司的突然倒閉，你會如何處理？" class="headerlink" title="QUESTION: 面對顧問公司的突然倒閉，你會如何處理？"></a>QUESTION: 面對顧問公司的突然倒閉，你會如何處理？</h2><p>面對顧問公司的突然倒閉，我的想法如下：</p>
+<ul>
+<li>聯繫顧問公司的第一線主要顧問，確認詳情並表示有繼續完成之決心</li>
+<li>聯繫董事長等高層主管，是否願意先聘用顧問公司的第一線顧問</li>
+<li>同意時<ul>
+<li>聘請顧問並重新制定計劃表</li>
+<li>持續導入 ERP 系統直到完成</li>
+</ul>
+</li>
+<li>不同意時<ul>
+<li>根據內部現有 ERP 進行評估，判斷公司內部人員能做到哪些事</li>
+<li>對顧問表達無法聘請之意</li>
+<li>對於 ERP 系統做止血動作，公司內部人員進行能力範圍內的填補</li>
+<li>停止導入 ERP 系統</li>
+</ul>
+</li>
+</ul>
+<p>透過這種方式，如果董事會不願意聘請顧問時我們則停止導入 ERP，另而退而求其次有限度地使用 ERP 系統，只使用完成的模組，對於完成度較高的模組請公司內部資訊人員進行補救，嘗試讓模組完成。</p>
+<p>同意時，持續導入 ERP 系統，但由於顧問人員變為公司聘請，重新了解導入狀況並制定一份新的計畫，在依照此計畫逐步完成，使 ERP 上線。</p>
+<h2 id="QUESTION-如何向公司求償-是否會對X景科技提告"><a href="#QUESTION-如何向公司求償-是否會對X景科技提告" class="headerlink" title="QUESTION: 如何向公司求償?是否會對X景科技提告?"></a>QUESTION: 如何向公司求償?是否會對X景科技提告?</h2><p>必定先終止尾款與提示履約保證金，降低公司未來損失。</p>
+<p>如果董事會不願意繼續聘請原先顧問時，我認為要進行提告，透過提告的方式嘗試能否讓X景科技幫我們支付顧問聘請金額，用軟硬兼施的方式，迫使X景科技妥協。</p>
+<p>如果董事會願意繼續聘請原先顧問時，則不進行提告，提告可能會讓顧問們的士氣降低，因此我建議用溫和的態度對待原先的顧問群，如果公司需要，可以聘請他們做公司員工勢必會讓公司的 ERP 系統更加有完整度，且如果需要外加功能時也可以請顧問們進行修改，在更好的情況下，我們公司可以透過這些顧問外包機械公司搞入ERP系統的大工程。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大管理資訊系統筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資財二管理資訊系統 個案三 水靈科技—高雄市C-bike</title>
+    <url>/2021/04/12/NTUT_note/NTUTifm_Manager_t03/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-請問你身為腳踏車使用者-有甚麼樣的因素會讓你”不想”使用該腳踏車-舉例-籃子可能很多垃圾-道路危險-歸還地點少…"><a href="#QUESTION-請問你身為腳踏車使用者-有甚麼樣的因素會讓你”不想”使用該腳踏車-舉例-籃子可能很多垃圾-道路危險-歸還地點少…" class="headerlink" title="QUESTION: 請問你身為腳踏車使用者, 有甚麼樣的因素會讓你”不想”使用該腳踏車? 舉例: 籃子可能很多垃圾. 道路危險, 歸還地點少…"></a>QUESTION: 請問你身為腳踏車使用者, 有甚麼樣的因素會讓你”不想”使用該腳踏車? 舉例: 籃子可能很多垃圾. 道路危險, 歸還地點少…</h2><ul>
+<li>籃子裡有別人遺留下來的垃圾或物品<br>如果籃子裡面有別人的東西，我會覺得這台腳踏車先不要騎，怕有別人的東西；如果有遺留垃圾，我會覺得很沒有公德心，很不喜歡這種人，會覺得不必要幫他清理垃圾而不用此台腳踏車。</li>
+<li>租借麻煩<br>之前有次，想要租 youbike，將悠遊卡拿去感應等待了近 10 秒卻還是沒有理我，當下會感到不開心，就不會想要使用 youbike 服務。</li>
+<li>租借站離目的地太遠<br>如果最近的租借站離目的地太遠時，我就會選擇用其他方式，否則特意先將 youbike 騎到租借站還需要花 5 分鐘以上走到目的地，就會懶惰。</li>
+<li>腳踏車沒有飲料架<br>有時候想要買飲料兜風的時候，因為 youbike 沒有飲料架，如果把飲料放在籃子裡就會撞來撞去，可能會讓飲料傾倒出，這種時候就不會想要用 youbike。</li>
+<li>有一些國高中生或老人坐在腳踏車上休息<br>如果那台腳踏車上面有人坐著卻不租借，我會不開心，連而影響到不願意租借腳踏車。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大管理資訊系統筆記</tag>
       </tags>
   </entry>
 </search>
