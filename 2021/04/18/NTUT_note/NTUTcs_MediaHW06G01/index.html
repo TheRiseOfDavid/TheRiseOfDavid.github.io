@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    北科資工二多媒體技術與應用 第六周團隊作業 - 對兩類別影像進行 SIFT 特徵提取並送入SVM分類 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-NTUT_note/NTUTcs_MediaHW06G01" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  北科資工二多媒體技術與應用 第六周團隊作業 - 對兩類別影像進行 SIFT 特徵提取並送入SVM分類
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/18/NTUT_note/NTUTcs_MediaHW06G01/" class="article-date">
+  <time datetime="2021-04-18T15:59:50.000Z" itemprop="datePublished">2021-04-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="SIFT-簡介"><a href="#SIFT-簡介" class="headerlink" title="SIFT 簡介"></a>SIFT 簡介</h2><p>SIFT(Scale Invariant Feature Transform) 中文名為<strong>尺度不變特徵轉換</strong>，是機器用來偵測或描述影響的演算法，SIFT 對<strong>旋轉、尺度縮放、亮度變化</strong>有良好的完整性。</p>
+<p>由 David G.Lowe 教授發表。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1iT229eGknjvKzRNEeAWMzYwoUDH_yICp&export=download" alt=""></p>
+</blockquote>
+<h3 id="SIFT-優點"><a href="#SIFT-優點" class="headerlink" title="SIFT 優點"></a>SIFT 優點</h3><ul>
+<li>局部特徵、旋轉、尺度縮放、亮度變化，有很好的完整性；對視角變化、仿射變換、噪聲，也有一定的穩定度</li>
+<li>保留圖片獨特性、訊息量大，適合大量特徵，可進行快速、準確的匹配</li>
+<li>如果只有少數幾張圖片也可以產生大量的 SIFT 特徵</li>
+<li>最佳化的 SIFT 不需要花費時間就能完成</li>
+<li>方便與其他特徵向量結合</li>
+</ul>
+<h2 id="題目說明"><a href="#題目說明" class="headerlink" title="題目說明"></a>題目說明</h2><p>如果不想看那麼多話，建議可以直接略過。總之就像標題說的，對兩類別影像進行 SIFT 特徵提取並送入SVM分類。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=14YQXRcC3BLBcm4zDf8vpXfK9PRYE-lE-&export=download" alt=""></p>
+</blockquote>
+<h2 id="資料集"><a href="#資料集" class="headerlink" title="資料集"></a>資料集</h2><p>這裡我們採用兩組資料集來使用 SIFT 特徵辨識</p>
+<ul>
+<li><a href="https://drive.google.com/drive/folders/1YhFEnbyQ3NvUd08Y5A8Dz09Bn5ZE-BSw?usp=sharing" target="_blank" rel="noopener">貓與狗</a></li>
+<li><a href="https://drive.google.com/drive/folders/1P1oG5N2q3SCGgKMaDC4RyuBvo3h7dAZa?usp=sharing" target="_blank" rel="noopener">多拉A夢與名偵探柯南</a></li>
+</ul>
+<p>連結為個人在 google 圖片進行搜尋時的圖片，如果有版權冒犯請通知我，我會進行上架</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>自從上次學習過天佑的程式碼加上這次助教 pdf 詳細的解說後，我對於機器學習有著還不錯的了解，但只僅限在應用上XD，大該知道要怎麼進行訓練、辨識了XD。</p>
+<p>總之，謝謝在學習多媒體技術與應用時一路幫助過我的人，如果沒有他們幫助我，我可能到現在還甚麼都不會。</p>
+<p>其中，python 有兩個語法很相像，一個是 <code>sklearn.cluster.KMeans</code> 另一個是 <code>scipy.cluster.vq.kmeans</code>，我們要使用的是後者，請大家不要搞錯喔XD。</p>
+<p><del>我自己就搞錯了，花一堆時間除錯QQQQ</del></p>
+<p>也謝謝發明此演算法的大師，可以讓我運用，讓我學會此應用方式，沒有大家我都做不好QQ。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p>北科大二下多媒體技術與應用 L6 SIFT 特徵 PDF (幫最多忙)<br><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.vq.kmeans.html" target="_blank" rel="noopener">scipy.cluster.vq.kmeans¶ by sciPy.org</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank" rel="noopener">sklearn.cluster.KMeans by scikit learn</a><br><a href="https://blog.csdn.net/u012609509/article/details/70319293" target="_blank" rel="noopener">np.vstack, np.hstack by cltdevelop</a></p>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><p>直接透過程式碼來進行說明，相信會比較好理解。</p>
+<p>程式碼我將它分為兩部分，其中一份為 function，另一份則為主要的程式檔案</p>
+<h3 id="function"><a href="#function" class="headerlink" title="function"></a>function</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 15:58:29 2021</span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split </span><br><span class="line"><span class="comment">#如果懶惰的小夥伴們可以用 train_test_split 編寫</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(path, data_amount)</span>:</span> <span class="comment">#讀取圖片用，path 是圖片路徑、data_amount 是數量</span></span><br><span class="line">  data = list()</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, data_amount+<span class="number">1</span>):</span><br><span class="line">    image = cv2.imread(path % i) <span class="comment">#讀資料</span></span><br><span class="line">    image = cv2.resize(image, (<span class="number">349</span>,<span class="number">256</span>)) <span class="comment"># resize</span></span><br><span class="line">    data.append(image)</span><br><span class="line">  <span class="keyword">return</span> data <span class="comment">#回傳 list</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span><span class="params">(data)</span>:</span> <span class="comment">#SIFT 特徵取出 data 為讀取近 python 的原始圖片</span></span><br><span class="line">  output = list()</span><br><span class="line">  <span class="keyword">for</span> image <span class="keyword">in</span> data:</span><br><span class="line">    sift = cv2.SIFT_create() <span class="comment">#初始化特徵點</span></span><br><span class="line">    kp, des = sift.detectAndCompute(image, <span class="literal">None</span>) <span class="comment">#對圖片進行 sift 讀取</span></span><br><span class="line">    output.append(des) </span><br><span class="line">  <span class="keyword">return</span> output <span class="comment">#回傳 list</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmeans_return_features</span><span class="params">(k, sift)</span>:</span> <span class="comment">#取出特徵，透過 kmeans 分辨</span></span><br><span class="line">  <span class="comment">#k 為要分辨的特徵類別數量，建議是資料類別乘以 10，sift 為擁有圖片特徵的 list</span></span><br><span class="line">  descriptors = sift[<span class="number">0</span>] <span class="comment">#先給予一個值，以避免不能合併</span></span><br><span class="line">  <span class="keyword">for</span> it <span class="keyword">in</span> sift[<span class="number">1</span>:]:</span><br><span class="line">    descriptors = np.vstack((descriptors, it))  <span class="comment">#採用水平方式將陣列堆疊起來</span></span><br><span class="line">  </span><br><span class="line">  voc, variance = kmeans(descriptors,k,<span class="number">1</span>) </span><br><span class="line">  <span class="comment">#透過 kmeans 將特徵進行分配，相似的放在一起，並分成 k 倍，只進行 1 次 iteratior</span></span><br><span class="line">  <span class="comment">#voc 回傳陣列，長度為 k，第 i 類有著相同的特徵，</span></span><br><span class="line">  <span class="comment">#variance 回傳觀察值與中心點，可能會有失真問題，如果不要失真或許可以使用 kmeans2 方法</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#features histogram</span></span><br><span class="line">  im_features = np.zeros((len(sift), k), <span class="string">"float32"</span>) <span class="comment">#生成一個全為 0 的陣列</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sift)): <span class="comment">#</span></span><br><span class="line">    words, distance = vq(sift[i], voc)</span><br><span class="line">    <span class="comment">#將 voc 收集到的特徵，與圖片 sift[i] 與中心點進行比較，將最相似的特徵分配給適合的圖片</span></span><br><span class="line">    <span class="comment">#words 回傳陣列，接受此圖片最適合的所有特徵</span></span><br><span class="line">    <span class="comment">#distance 觀察值與中心點的距離，可能會有失真的可能性</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> words:  <span class="comment">#將特徵傳給 im_features</span></span><br><span class="line">      im_features[i][j] += <span class="number">1</span> <span class="comment">#表示此圖片的 j 特徵加一</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">return</span> im_features  <span class="comment">#回傳 list</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 15:57:30 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> hw06_fn <span class="comment">#這是我自己寫的 functional progamming，請自行將上面的 function python code</span></span><br><span class="line"><span class="comment">#與此檔案放在同個資料夾底下</span></span><br><span class="line"></span><br><span class="line">data_amount = <span class="number">100</span> <span class="comment">#每一個資料集總數 100</span></span><br><span class="line">train_amount = <span class="number">80</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line">test_amount = <span class="number">20</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果想要讓電腦辨識貓跟狗，請使用這些程式碼</span></span><br><span class="line">dogs = hw06_fn.read(<span class="string">"../resize_dog/dog_%.3d.jpg"</span>, data_amount)</span><br><span class="line">cats = hw06_fn.read(<span class="string">"../resize_cat/cat_%.3d.jpg"</span>, data_amount)</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果想要讓電腦辨識多拉A夢跟名偵探柯南，請使用這些程式碼</span></span><br><span class="line"><span class="comment"># dogs = hw06_fn.read("../Doraemon/images (%d).jpg", data_amount)</span></span><br><span class="line"><span class="comment"># cats = hw06_fn.read("../conan/images (%d).jpg", data_amount)</span></span><br><span class="line"></span><br><span class="line">sift_dogs = hw06_fn.sift(dogs) <span class="comment">#將資料送去 sift 特徵</span></span><br><span class="line">sift_cats = hw06_fn.sift(cats)</span><br><span class="line"></span><br><span class="line">train_sift = sift_dogs[:train_amount] + sift_cats[:train_amount] <span class="comment">#產生訓練集</span></span><br><span class="line">test_sift = sift_dogs[-test_amount:] + sift_cats[-test_amount:] <span class="comment">#產生測試集</span></span><br><span class="line"></span><br><span class="line">train_features = hw06_fn.kmeans_return_features(<span class="number">20</span>, train_sift) <span class="comment">#找出訓練集每張圖片特徵</span></span><br><span class="line">test_features = hw06_fn.kmeans_return_features(<span class="number">20</span>, test_sift) <span class="comment">#找出測試集每張圖片特徵</span></span><br><span class="line">train_target = [<span class="number">0</span>] * train_amount + [<span class="number">1</span>] * train_amount <span class="comment">#給予其正確的類別</span></span><br><span class="line">test_target = [<span class="number">0</span>] * test_amount + [<span class="number">1</span>] * test_amount <span class="comment">#給予其正確的類別</span></span><br><span class="line"></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>) <span class="comment">#透過 SVC 訓練</span></span><br><span class="line">clf.fit(train_features, train_target) <span class="comment">#開始進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>) <span class="comment">#準確率</span></span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(train_features, train_target)) <span class="comment">#訓練集分數</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(test_features, test_target)) <span class="comment">#測試集分數</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><h3 id="貓與狗"><a href="#貓與狗" class="headerlink" title="貓與狗"></a>貓與狗</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1zbSN_IxKfqE5AHLR9TGN0d3CFxH0Vwe6&export=download" alt=""></p>
+</blockquote>
+<h3 id="多拉A夢與柯南"><a href="#多拉A夢與柯南" class="headerlink" title="多拉A夢與柯南"></a>多拉A夢與柯南</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bRAv0haii4SFLH1YGRIvqpRvO7TnGVGB&export=download" alt=""></p>
+</blockquote>
+<h2 id="圖片辨識後結論"><a href="#圖片辨識後結論" class="headerlink" title="圖片辨識後結論"></a>圖片辨識後結論</h2><h3 id="貓與狗-1"><a href="#貓與狗-1" class="headerlink" title="貓與狗"></a>貓與狗</h3><p>由於貓跟小狗的身材較為相像且亮度變化在這裡或許會容易誤導 SVM 進行分別，導致相同的光亮度的貓與狗不好進行分配，才會使其在訓練集的準確率就不高，在此情況下，相對測試集就不高。</p>
+<p>可能需要白底 png 的大量貓狗照片，就能使得此機器學習辨識率更高。</p>
+<h3 id="多拉A夢與柯南-1"><a href="#多拉A夢與柯南-1" class="headerlink" title="多拉A夢與柯南"></a>多拉A夢與柯南</h3><p>這組是比較正確的一組，其中我認為哆啦A夢與名偵探柯南本身的光影明亮度稍微不同、邊緣也有大不同，因此在交由 SVM 進行分辨時，較能夠分辨得出差異性。因此在訓練集時準確率可以達到 92%，在測試集也可以達到 72%，算是不錯的辨識率。</p>
+<p>但認為可能還是需要白底的 png 照片，會讓他更為準確，我認為可能有些辨識失敗的原因是圖片有大量不相干的背景使得，那不相干的背景如果與另一類型的背景相似時，就有分辨失誤的可能性。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E5%AA%92%E9%AB%94%E6%8A%80%E8%A1%93%E8%88%87%E6%87%89%E7%94%A8%E7%AD%86%E8%A8%98/" rel="tag">多媒體技術與應用筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/18/NTUT_note/NTUTcs_MediaHW05G02/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進行HOG特徵提取並送入SVM分類器進行訓練進行辨識
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/04/18/NTUT_note/NTUTcs_MediaHW06T01/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">北科資工二多媒體技術與應用 第六周個人作業 - 觀察 Harris Corner Detection</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

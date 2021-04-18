@@ -77,6 +77,246 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-Python/Python_return_two_value_from_a_function" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/24/Python/Python_return_two_value_from_a_function/"
+    >Python 一個 function 回傳兩個值</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/24/Python/Python_return_two_value_from_a_function/" class="article-date">
+  <time datetime="2020-11-24T14:38:11.000Z" itemprop="datePublished">2020-11-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>在寫程式的時候，偶爾會需要一個 function 回傳兩個值，但你卻很懶惰的不想用一個 list 裝，此時又想到 C++ 有 pair 可以用，那 Python 有沒有呢？</p>
+</blockquote>
+<h2 id="答案是…沒有！"><a href="#答案是…沒有！" class="headerlink" title="答案是…沒有！"></a>答案是…沒有！</h2><p>但有兩種解決方案，如果你非常需要用到 pair 這資料結構時，那就直接自己寫一個 class 來定義吧！或是將兩個變數丟給 function，之後再回傳兩個 value。</p>
+<h3 id="解決方案-寫一個-Class"><a href="#解決方案-寫一個-Class" class="headerlink" title="解決方案 - 寫一個 Class"></a>解決方案 - 寫一個 Class</h3><p>就…手寫阿XD，之後宣告一個 pair 即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">pair</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,key,value)</span>:</span></span><br><span class="line">    self.key = key </span><br><span class="line">    self.value = value</span><br></pre></td></tr></table></figure>
+
+<h3 id="解決方案-function-return-two-value"><a href="#解決方案-function-return-two-value" class="headerlink" title="解決方案 - function return two value"></a>解決方案 - function return two value</h3><p>透過 function 回傳兩個值來解決此問題。</p>
+<p>觀看下方 function 可以了解到，<code>thing function</code>回傳了兩個值 a,b，並將 a 給予 c、b 給予 d。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">thing</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a , b </span><br><span class="line"></span><br><span class="line">c , d = thing()</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/9752958/how-can-i-return-two-values-from-a-function-in-python" target="_blank" rel="noopener">How can I return two values from a function in Python?</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Python 好簡單，可以把一些比較麻煩的事情都解決掉，設計出 Python 的人是天才八，好感謝這個世界有這麼多人無私的奉獻才有辦法讓我自學努力到現在。</p>
+<p>我想應該是有人有寫出這種類似 C++ pair 的套件，不過我不確定就是了。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Python/Python_do_until" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/24/Python/Python_do_until/"
+    >Python 有沒有 do...until 迴圈</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/24/Python/Python_do_until/" class="article-date">
+  <time datetime="2020-11-24T14:33:11.000Z" itemprop="datePublished">2020-11-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>Python 有沒有 do…until 迴圈來幫助我們寫呢？</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/11/24/Python/Python_do_until/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Python/Python_compare_time" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/24/Python/Python_compare_time/"
+    >Python 比較時間先後</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/11/24/Python/Python_compare_time/" class="article-date">
+  <time datetime="2020-11-24T14:27:11.000Z" itemprop="datePublished">2020-11-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>有時候在寫程式的時候，需要比較兩個時間的先來後到，那我們應該要怎麼比較呢？</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/11/24/Python/Python_compare_time/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-NTUT_note/statistics-ch6" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -633,256 +873,13 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-Explain_Algorithm/LCS" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/11/11/Explain_Algorithm/LCS/"
-    >演算法知識 - Longest Common Subsequence 最長共同子序列(時間複雜度 O(nlogn))</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/11/11/Explain_Algorithm/LCS/" class="article-date">
-  <time datetime="2020-11-10T16:37:07.000Z" itemprop="datePublished">2020-11-11</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="Longest-Common-Subsequence-介紹"><a href="#Longest-Common-Subsequence-介紹" class="headerlink" title="Longest Common Subsequence 介紹"></a>Longest Common Subsequence 介紹</h2><blockquote>
-<p>以下簡稱 LCS，在兩個序列中找出最長子序列的問題，序列是甚麼？只要順序一致即可，舉例：</p>
-<ul>
-<li>people</li>
-<li>apple</li>
-</ul>
-<ul>
-<li>這兩個的 LCS 就是 pple，長度為 4，子序列為 pple。</li>
-</ul>
-<p>看懂了嗎？ pple 在前面兩個字串中順序都是保持一致的。<br>被廣泛應用於生物資訊學與版本控制。</p>
-<p>這裡我們是教導時間複雜度為 \(O(n \log n)\) 的寫法，而非 \(O(n^2)\) 的寫法</p>
-<p>Longest Increasing Subsequence 最長遞增子序列，以下簡稱 LIS</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/11/11/Explain_Algorithm/LCS/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-Dynamic-programming/" rel="tag">動態規劃 Dynamic programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-contest_experence/ICPC2020" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/11/10/contest_experence/ICPC2020/"
-    >2020 International Collegiate Programming Contest Asia Taipei-Hsinchu Site (ICPC2020) - 65th 心得</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/11/10/contest_experence/ICPC2020/" class="article-date">
-  <time datetime="2020-11-10T15:33:09.000Z" itemprop="datePublished">2020-11-10</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/">競賽心得</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <blockquote>
-<p>僅此紀錄 2020/11/08 2020 ICPC 心得。<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去<br>沒有得獎拉，只是很可惜自己還不夠好吧。</p>
-<p><strong>明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。</strong></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/11/10/contest_experence/ICPC2020/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICPC/" rel="tag">ICPC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8Life/" rel="tag">大學Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E6%AF%94%E8%B3%BD/" rel="tag">程式比賽</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/" rel="tag">競賽心得</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa10192" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/11/07/UVa/UVa10192/"
-    >UVa10192 - Vacation (LCS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/11/07/UVa/UVa10192/" class="article-date">
-  <time datetime="2020-11-06T17:08:26.000Z" itemprop="datePublished">2020-11-07</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>爸媽想要出國出去玩，<del>可是今年有疫情欸，拔麻</del>，反正爸媽不管且還要求出國的遊玩順序一定要按照他們想法，這讓我非常煩惱，但他們願意略過一些他們想去的地方，但順序必須一樣，試問如果爸媽都有自己的出國遊玩順序再不影響他們順序時他們可以去的最大長度？</p>
-<p>注意：這題輸入字串會有 space , uppercase letters , lowercase letters<br>所以要使用 <code>getline(string,cin)</code> 會是最好的方法</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/11/07/UVa/UVa10192/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-Dynamic-programming/" rel="tag">動態規劃 Dynamic programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E4%B8%B2%E8%99%95%E7%90%86/" rel="tag">字串處理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E9%95%B7%E5%85%B1%E5%90%8C%E5%AD%90%E5%BA%8F%E5%88%97-Longest-Common-Subsequence/" rel="tag">最長共同子序列 Longest Common Subsequence</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/12/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/14/">下一頁</a>
+    <a class="extend prev" rel="prev" href="/page/12/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/14/">下一頁</a>
   </nav>
   
 </section>

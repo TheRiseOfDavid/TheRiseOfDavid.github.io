@@ -15614,7 +15614,7 @@
       </tags>
   </entry>
   <entry>
-    <title>北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進行HOG特徵提取並送入SVM分類器進行訓練進行辨識</title>
+    <title>北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進 PCA 降維後送入SVM分類器進行訓練進行辨識</title>
     <url>/2021/04/12/NTUT_note/NTUTcs_MediaHW05G01/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
 <p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
@@ -15892,6 +15892,172 @@
         <tag>程式解題</tag>
         <tag>數論 Math theorm</tag>
         <tag>暴力搜尋 Brute force</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進行HOG特徵提取並送入SVM分類器進行訓練進行辨識</title>
+    <url>/2021/04/18/NTUT_note/NTUTcs_MediaHW05G02/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目要求"><a href="#題目要求" class="headerlink" title="題目要求"></a>題目要求</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1EffGtNGwd_bo4fO4sfsw7eWzRsGTM5K-&export=download" alt=""></p>
+</blockquote>
+<h2 id="hog-簡介"><a href="#hog-簡介" class="headerlink" title="hog 簡介"></a>hog 簡介</h2><p>為 Dalad and Triggs 提出的一種在電腦視覺與影像處理中用來檢測物體特徵，善於<strong>描述物件的輪廓，並降低光影變化的影響</strong></p>
+<h3 id="SIFT-優點"><a href="#SIFT-優點" class="headerlink" title="SIFT 優點"></a>SIFT 優點</h3><ul>
+<li>可以將 cell 放大，提高性能</li>
+<li>對於<strong>影像幾何與光學變化都能保持很好的不變性</strong></li>
+<li>對於細微的動作可以將 cell 放大，來進行忽略而不影響檢測結果</li>
+</ul>
+<h2 id="資料集"><a href="#資料集" class="headerlink" title="資料集"></a>資料集</h2><p>這裡我們採用兩組資料集來使用 hog 特徵辨識</p>
+<ul>
+<li><a href="https://drive.google.com/drive/folders/1YhFEnbyQ3NvUd08Y5A8Dz09Bn5ZE-BSw?usp=sharing" target="_blank" rel="noopener">貓與狗</a></li>
+<li><a href="https://drive.google.com/drive/folders/1P1oG5N2q3SCGgKMaDC4RyuBvo3h7dAZa?usp=sharing" target="_blank" rel="noopener">多拉A夢與名偵探柯南</a></li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>自從學習過天佑的程式碼，我對於機器學習有著初步認識，但只僅限在應用上XD，大該知道要怎麼進行訓練、辨識了XD。</p>
+<p>總之，謝謝在學習多媒體技術與應用時一路幫助過我的人，如果沒有他們幫助我，我可能到現在還甚麼都不會。</p>
+<p>在最後一刻還沒有把作業做完，因為之前理解錯了題目意思，最後還需要助教幫忙再多開 10 分鐘，來上傳作業並將作業完成，真的是非常感謝助教QQQQQ。</p>
+<p><del>我自己就搞錯了，花一堆時間除錯QQQQ</del></p>
+<p>也謝謝發明此演算法的大師，可以讓我運用，讓我學會此應用方式，沒有大家我都做不好QQ。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p>北科大電資學士班林天佑</p>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><p>直接透過程式碼來進行說明，相信會比較好理解。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Apr 8 10:58:26 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">data_amount = <span class="number">100</span> <span class="comment">#每一個資料集總數 100</span></span><br><span class="line">train_amount = <span class="number">90</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line">test_amount = <span class="number">10</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line"></span><br><span class="line">dogs = list()</span><br><span class="line">cats = list()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,data_amount+<span class="number">1</span>): <span class="comment">#讀取狗原始資料</span></span><br><span class="line">  image = cv2.imread(<span class="string">"../resize_dog/dog_%.3d.jpg"</span> % i)</span><br><span class="line">  dogs.append(image)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,data_amount+<span class="number">1</span>): <span class="comment">#讀取貓原始資料</span></span><br><span class="line">  image = cv2.imread(<span class="string">"../resize_cat/cat_%.3d.jpg"</span> % i)  </span><br><span class="line">  cats.append(image)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 如果要讀柯南與哆啦A夢使用這邊的資料</span></span><br><span class="line"><span class="comment"># for i in range(1,data_amount+1):</span></span><br><span class="line"><span class="comment">#   image = cv2.imread("../conan/images (%d).jpg" % i)</span></span><br><span class="line"><span class="comment">#   image = cv2.resize(image, (349,256))</span></span><br><span class="line"><span class="comment">#   dogs.append(image)</span></span><br><span class="line"><span class="comment"># for i in range(1,data_amount+1):</span></span><br><span class="line"><span class="comment">#   image = cv2.imread("../Doraemon/images (%d).jpg" % i)  </span></span><br><span class="line"><span class="comment">#   image = cv2.resize(image, (349,256))</span></span><br><span class="line"><span class="comment">#   cats.append(image)</span></span><br><span class="line"></span><br><span class="line">hog_dogs = list()</span><br><span class="line">hog_cats = list()</span><br><span class="line"><span class="keyword">for</span> image <span class="keyword">in</span> dogs: <span class="comment">#將狗的原始資料透過 hog 描繪邊緣</span></span><br><span class="line">  fd, hog_image = hog(</span><br><span class="line">      image,</span><br><span class="line">      orientations=<span class="number">8</span>,</span><br><span class="line">      pixels_per_cell=(<span class="number">9</span>,<span class="number">9</span>),</span><br><span class="line">      cells_per_block=(<span class="number">1</span>,<span class="number">1</span>),</span><br><span class="line">      visualize=<span class="literal">True</span>,</span><br><span class="line">      )</span><br><span class="line">  hog_dogs.append(fd)</span><br><span class="line"><span class="keyword">for</span> image <span class="keyword">in</span> cats: <span class="comment">#將貓的原始資料透過 hog 描繪邊緣</span></span><br><span class="line">  fd, hog_image = hog( </span><br><span class="line">      image,</span><br><span class="line">      orientations=<span class="number">8</span>,</span><br><span class="line">      pixels_per_cell=(<span class="number">9</span>,<span class="number">9</span>),</span><br><span class="line">      cells_per_block=(<span class="number">1</span>,<span class="number">1</span>),</span><br><span class="line">      visualize=<span class="literal">True</span>,</span><br><span class="line">      )</span><br><span class="line">  hog_cats.append(fd)      </span><br><span class="line">  </span><br><span class="line"><span class="comment"># train model</span></span><br><span class="line">train_target_dog = [<span class="number">0</span>] * train_amount <span class="comment">#狗的訓練集數</span></span><br><span class="line">train_target_cat = [<span class="number">1</span>] * train_amount <span class="comment">#貓的訓練集數</span></span><br><span class="line">train_target = train_target_dog + train_target_cat <span class="comment">#合併</span></span><br><span class="line">train_images = hog_dogs[:train_amount] + hog_cats[:train_amount] <span class="comment">#圖片合併</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># test model</span></span><br><span class="line">test_target_dog = [<span class="number">0</span>] * test_amount <span class="comment">#狗的測試集數</span></span><br><span class="line">test_target_cat = [<span class="number">1</span>] * test_amount <span class="comment">#貓的測試集數</span></span><br><span class="line">test_target = test_target_dog + test_target_cat <span class="comment">#合併</span></span><br><span class="line">test_images = hog_dogs[-test_amount:] + hog_cats[-test_amount:] <span class="comment">#圖片合併</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#svm train</span></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>) <span class="comment">#設定方法</span></span><br><span class="line">clf.fit(train_images, train_target) <span class="comment">#進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>)</span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(train_images, train_target)) <span class="comment">#訓練集準確度</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(test_images, test_target), <span class="string">"\n"</span>) <span class="comment">#測試集準確度</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><h3 id="貓與狗"><a href="#貓與狗" class="headerlink" title="貓與狗"></a>貓與狗</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1A5227wHecgGpNPFMY0Gty2fG7DcEcODR&export=download" alt=""></p>
+</blockquote>
+<h3 id="多拉A夢與柯南"><a href="#多拉A夢與柯南" class="headerlink" title="多拉A夢與柯南"></a>多拉A夢與柯南</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1v3-SHWzi0jDnHTCzjmM_H3DGdqn2Yq-v&export=download" alt=""></p>
+</blockquote>
+<h2 id="圖片辨識後結論"><a href="#圖片辨識後結論" class="headerlink" title="圖片辨識後結論"></a>圖片辨識後結論</h2><h3 id="貓與狗-1"><a href="#貓與狗-1" class="headerlink" title="貓與狗"></a>貓與狗</h3><p>由於 hog 屬於輪廓辨識，小貓與小狗的體型較為類似，而我們的資料集圖片中小貓與小狗的比例佔大多數，因此 hog 辨識較差。</p>
+<p>我認為如果改用成年大狗與小貓，那辨識程度就會更高</p>
+<h3 id="多拉A夢與柯南-1"><a href="#多拉A夢與柯南-1" class="headerlink" title="多拉A夢與柯南"></a>多拉A夢與柯南</h3><p>這組的準確程度較高，因為多拉A夢的輪廓較圓滑、柯南的輪廓比較偏瘦，因此倆著在透過輪廓辨識時，比較容易辨識出來。</p>
+<p>測試集成功率達到 0.875，很高的辨識率，我認為算是蠻不錯的成績</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第六周團隊作業 - 對兩類別影像進行 SIFT 特徵提取並送入SVM分類</title>
+    <url>/2021/04/18/NTUT_note/NTUTcs_MediaHW06G01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="SIFT-簡介"><a href="#SIFT-簡介" class="headerlink" title="SIFT 簡介"></a>SIFT 簡介</h2><p>SIFT(Scale Invariant Feature Transform) 中文名為<strong>尺度不變特徵轉換</strong>，是機器用來偵測或描述影響的演算法，SIFT 對<strong>旋轉、尺度縮放、亮度變化</strong>有良好的完整性。</p>
+<p>由 David G.Lowe 教授發表。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1iT229eGknjvKzRNEeAWMzYwoUDH_yICp&export=download" alt=""></p>
+</blockquote>
+<h3 id="SIFT-優點"><a href="#SIFT-優點" class="headerlink" title="SIFT 優點"></a>SIFT 優點</h3><ul>
+<li>局部特徵、旋轉、尺度縮放、亮度變化，有很好的完整性；對視角變化、仿射變換、噪聲，也有一定的穩定度</li>
+<li>保留圖片獨特性、訊息量大，適合大量特徵，可進行快速、準確的匹配</li>
+<li>如果只有少數幾張圖片也可以產生大量的 SIFT 特徵</li>
+<li>最佳化的 SIFT 不需要花費時間就能完成</li>
+<li>方便與其他特徵向量結合</li>
+</ul>
+<h2 id="題目說明"><a href="#題目說明" class="headerlink" title="題目說明"></a>題目說明</h2><p>如果不想看那麼多話，建議可以直接略過。總之就像標題說的，對兩類別影像進行 SIFT 特徵提取並送入SVM分類。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=14YQXRcC3BLBcm4zDf8vpXfK9PRYE-lE-&export=download" alt=""></p>
+</blockquote>
+<h2 id="資料集"><a href="#資料集" class="headerlink" title="資料集"></a>資料集</h2><p>這裡我們採用兩組資料集來使用 SIFT 特徵辨識</p>
+<ul>
+<li><a href="https://drive.google.com/drive/folders/1YhFEnbyQ3NvUd08Y5A8Dz09Bn5ZE-BSw?usp=sharing" target="_blank" rel="noopener">貓與狗</a></li>
+<li><a href="https://drive.google.com/drive/folders/1P1oG5N2q3SCGgKMaDC4RyuBvo3h7dAZa?usp=sharing" target="_blank" rel="noopener">多拉A夢與名偵探柯南</a></li>
+</ul>
+<p>連結為個人在 google 圖片進行搜尋時的圖片，如果有版權冒犯請通知我，我會進行上架</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>自從上次學習過天佑的程式碼加上這次助教 pdf 詳細的解說後，我對於機器學習有著還不錯的了解，但只僅限在應用上XD，大該知道要怎麼進行訓練、辨識了XD。</p>
+<p>總之，謝謝在學習多媒體技術與應用時一路幫助過我的人，如果沒有他們幫助我，我可能到現在還甚麼都不會。</p>
+<p>其中，python 有兩個語法很相像，一個是 <code>sklearn.cluster.KMeans</code> 另一個是 <code>scipy.cluster.vq.kmeans</code>，我們要使用的是後者，請大家不要搞錯喔XD。</p>
+<p><del>我自己就搞錯了，花一堆時間除錯QQQQ</del></p>
+<p>也謝謝發明此演算法的大師，可以讓我運用，讓我學會此應用方式，沒有大家我都做不好QQ。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p>北科大二下多媒體技術與應用 L6 SIFT 特徵 PDF (幫最多忙)<br><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.vq.kmeans.html" target="_blank" rel="noopener">scipy.cluster.vq.kmeans¶ by sciPy.org</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank" rel="noopener">sklearn.cluster.KMeans by scikit learn</a><br><a href="https://blog.csdn.net/u012609509/article/details/70319293" target="_blank" rel="noopener">np.vstack, np.hstack by cltdevelop</a></p>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><p>直接透過程式碼來進行說明，相信會比較好理解。</p>
+<p>程式碼我將它分為兩部分，其中一份為 function，另一份則為主要的程式檔案</p>
+<h3 id="function"><a href="#function" class="headerlink" title="function"></a>function</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 15:58:29 2021</span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split </span><br><span class="line"><span class="comment">#如果懶惰的小夥伴們可以用 train_test_split 編寫</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(path, data_amount)</span>:</span> <span class="comment">#讀取圖片用，path 是圖片路徑、data_amount 是數量</span></span><br><span class="line">  data = list()</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, data_amount+<span class="number">1</span>):</span><br><span class="line">    image = cv2.imread(path % i) <span class="comment">#讀資料</span></span><br><span class="line">    image = cv2.resize(image, (<span class="number">349</span>,<span class="number">256</span>)) <span class="comment"># resize</span></span><br><span class="line">    data.append(image)</span><br><span class="line">  <span class="keyword">return</span> data <span class="comment">#回傳 list</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span><span class="params">(data)</span>:</span> <span class="comment">#SIFT 特徵取出 data 為讀取近 python 的原始圖片</span></span><br><span class="line">  output = list()</span><br><span class="line">  <span class="keyword">for</span> image <span class="keyword">in</span> data:</span><br><span class="line">    sift = cv2.SIFT_create() <span class="comment">#初始化特徵點</span></span><br><span class="line">    kp, des = sift.detectAndCompute(image, <span class="literal">None</span>) <span class="comment">#對圖片進行 sift 讀取</span></span><br><span class="line">    output.append(des) </span><br><span class="line">  <span class="keyword">return</span> output <span class="comment">#回傳 list</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmeans_return_features</span><span class="params">(k, sift)</span>:</span> <span class="comment">#取出特徵，透過 kmeans 分辨</span></span><br><span class="line">  <span class="comment">#k 為要分辨的特徵類別數量，建議是資料類別乘以 10，sift 為擁有圖片特徵的 list</span></span><br><span class="line">  descriptors = sift[<span class="number">0</span>] <span class="comment">#先給予一個值，以避免不能合併</span></span><br><span class="line">  <span class="keyword">for</span> it <span class="keyword">in</span> sift[<span class="number">1</span>:]:</span><br><span class="line">    descriptors = np.vstack((descriptors, it))  <span class="comment">#採用水平方式將陣列堆疊起來</span></span><br><span class="line">  </span><br><span class="line">  voc, variance = kmeans(descriptors,k,<span class="number">1</span>) </span><br><span class="line">  <span class="comment">#透過 kmeans 將特徵進行分配，相似的放在一起，並分成 k 倍，只進行 1 次 iteratior</span></span><br><span class="line">  <span class="comment">#voc 回傳陣列，長度為 k，第 i 類有著相同的特徵，</span></span><br><span class="line">  <span class="comment">#variance 回傳觀察值與中心點，可能會有失真問題，如果不要失真或許可以使用 kmeans2 方法</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#features histogram</span></span><br><span class="line">  im_features = np.zeros((len(sift), k), <span class="string">"float32"</span>) <span class="comment">#生成一個全為 0 的陣列</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sift)): <span class="comment">#</span></span><br><span class="line">    words, distance = vq(sift[i], voc)</span><br><span class="line">    <span class="comment">#將 voc 收集到的特徵，與圖片 sift[i] 與中心點進行比較，將最相似的特徵分配給適合的圖片</span></span><br><span class="line">    <span class="comment">#words 回傳陣列，接受此圖片最適合的所有特徵</span></span><br><span class="line">    <span class="comment">#distance 觀察值與中心點的距離，可能會有失真的可能性</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> words:  <span class="comment">#將特徵傳給 im_features</span></span><br><span class="line">      im_features[i][j] += <span class="number">1</span> <span class="comment">#表示此圖片的 j 特徵加一</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">return</span> im_features  <span class="comment">#回傳 list</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 15:57:30 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> hw06_fn <span class="comment">#這是我自己寫的 functional progamming，請自行將上面的 function python code</span></span><br><span class="line"><span class="comment">#與此檔案放在同個資料夾底下</span></span><br><span class="line"></span><br><span class="line">data_amount = <span class="number">100</span> <span class="comment">#每一個資料集總數 100</span></span><br><span class="line">train_amount = <span class="number">80</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line">test_amount = <span class="number">20</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果想要讓電腦辨識貓跟狗，請使用這些程式碼</span></span><br><span class="line">dogs = hw06_fn.read(<span class="string">"../resize_dog/dog_%.3d.jpg"</span>, data_amount)</span><br><span class="line">cats = hw06_fn.read(<span class="string">"../resize_cat/cat_%.3d.jpg"</span>, data_amount)</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果想要讓電腦辨識多拉A夢跟名偵探柯南，請使用這些程式碼</span></span><br><span class="line"><span class="comment"># dogs = hw06_fn.read("../Doraemon/images (%d).jpg", data_amount)</span></span><br><span class="line"><span class="comment"># cats = hw06_fn.read("../conan/images (%d).jpg", data_amount)</span></span><br><span class="line"></span><br><span class="line">sift_dogs = hw06_fn.sift(dogs) <span class="comment">#將資料送去 sift 特徵</span></span><br><span class="line">sift_cats = hw06_fn.sift(cats)</span><br><span class="line"></span><br><span class="line">train_sift = sift_dogs[:train_amount] + sift_cats[:train_amount] <span class="comment">#產生訓練集</span></span><br><span class="line">test_sift = sift_dogs[-test_amount:] + sift_cats[-test_amount:] <span class="comment">#產生測試集</span></span><br><span class="line"></span><br><span class="line">train_features = hw06_fn.kmeans_return_features(<span class="number">20</span>, train_sift) <span class="comment">#找出訓練集每張圖片特徵</span></span><br><span class="line">test_features = hw06_fn.kmeans_return_features(<span class="number">20</span>, test_sift) <span class="comment">#找出測試集每張圖片特徵</span></span><br><span class="line">train_target = [<span class="number">0</span>] * train_amount + [<span class="number">1</span>] * train_amount <span class="comment">#給予其正確的類別</span></span><br><span class="line">test_target = [<span class="number">0</span>] * test_amount + [<span class="number">1</span>] * test_amount <span class="comment">#給予其正確的類別</span></span><br><span class="line"></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>) <span class="comment">#透過 SVC 訓練</span></span><br><span class="line">clf.fit(train_features, train_target) <span class="comment">#開始進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>) <span class="comment">#準確率</span></span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(train_features, train_target)) <span class="comment">#訓練集分數</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(test_features, test_target)) <span class="comment">#測試集分數</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><h3 id="貓與狗"><a href="#貓與狗" class="headerlink" title="貓與狗"></a>貓與狗</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1zbSN_IxKfqE5AHLR9TGN0d3CFxH0Vwe6&export=download" alt=""></p>
+</blockquote>
+<h3 id="多拉A夢與柯南"><a href="#多拉A夢與柯南" class="headerlink" title="多拉A夢與柯南"></a>多拉A夢與柯南</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bRAv0haii4SFLH1YGRIvqpRvO7TnGVGB&export=download" alt=""></p>
+</blockquote>
+<h2 id="圖片辨識後結論"><a href="#圖片辨識後結論" class="headerlink" title="圖片辨識後結論"></a>圖片辨識後結論</h2><h3 id="貓與狗-1"><a href="#貓與狗-1" class="headerlink" title="貓與狗"></a>貓與狗</h3><p>由於貓跟小狗的身材較為相像且亮度變化在這裡或許會容易誤導 SVM 進行分別，導致相同的光亮度的貓與狗不好進行分配，才會使其在訓練集的準確率就不高，在此情況下，相對測試集就不高。</p>
+<p>可能需要白底 png 的大量貓狗照片，就能使得此機器學習辨識率更高。</p>
+<h3 id="多拉A夢與柯南-1"><a href="#多拉A夢與柯南-1" class="headerlink" title="多拉A夢與柯南"></a>多拉A夢與柯南</h3><p>這組是比較正確的一組，其中我認為哆啦A夢與名偵探柯南本身的光影明亮度稍微不同、邊緣也有大不同，因此在交由 SVM 進行分辨時，較能夠分辨得出差異性。因此在訓練集時準確率可以達到 92%，在測試集也可以達到 72%，算是不錯的辨識率。</p>
+<p>但認為可能還是需要白底的 png 照片，會讓他更為準確，我認為可能有些辨識失敗的原因是圖片有大量不相干的背景使得，那不相干的背景如果與另一類型的背景相似時，就有分辨失誤的可能性。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第六周個人作業 - 觀察 Harris Corner Detection</title>
+    <url>/2021/04/18/NTUT_note/NTUTcs_MediaHW06T01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目說明"><a href="#題目說明" class="headerlink" title="題目說明"></a>題目說明</h2><p>如果不想看那麼多話，建議可以直接略過。總之就像標題說的，觀察 Harris Corner Detection，然後得出結論</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-uF3AX3mAJL3Gf6y1WGZe0Xl5m3dcaNO&export=download" alt=""></p>
+</blockquote>
+<h2 id="Harris-Corner-Detection"><a href="#Harris-Corner-Detection" class="headerlink" title="Harris Corner Detection"></a>Harris Corner Detection</h2><p>Chris Harris 和 Mike StephensMike 中得出的演算法，主要可以判斷圖片中的每一個轉角(轉折處)。</p>
+<p>參數為</p>
+<ul>
+<li><code>dst = cv2.cornerHarris(src =gray, blockSize , ksize ksize , k, dst=None, borderType=None)</code><ul>
+<li>src 圖片的影響，必須是單通道 8-bit or numpy.float 的影像</li>
+<li>blocksize 轉角點檢測的區域大小</li>
+<li>ksize 高斯 Sobel 中使用的 blocksize 大小</li>
+<li>k 檢測方程中的自由參數</li>
+<li>dst 輸出影像</li>
+<li>boarderType 邊界類別</li>
+</ul>
+</li>
+</ul>
+<h2 id="調整其參數的結論為"><a href="#調整其參數的結論為" class="headerlink" title="調整其參數的結論為"></a>調整其參數的結論為</h2><ul>
+<li>blocksize 點越小，越沒辦法判斷轉角</li>
+<li>ksize 最大只能等於 blocksize</li>
+<li>ksize 在使用 gauss-sobel 此公式時的大小，如果越大則細節處理越不精細</li>
+<li>ksize 如果跟 blocksize 一樣大就只做一次 blocksize，越小做越多 blocksize</li>
+<li>k 越大則轉角必須要越明顯，才可以知道，反之越小時，只需要小轉角就可以判斷</li>
+</ul>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 18:17:58 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"./floor.jpg"</span>)</span><br><span class="line">cv2.imshow(<span class="string">'ori'</span>, img)</span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">gray = np.float32(gray)</span><br><span class="line"></span><br><span class="line">dst = cv2.cornerHarris(gray,<span class="number">5</span>,<span class="number">1</span>,<span class="number">0.1</span>)</span><br><span class="line">dst = cv2.dilate(dst, <span class="literal">None</span>)</span><br><span class="line">img[dst&gt;<span class="number">0.01</span>*dst.max()] = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>]</span><br><span class="line">cv2.imshow(<span class="string">'result'</span>, img)</span><br></pre></td></tr></table></figure>
+
+<h2 id="原本圖片"><a href="#原本圖片" class="headerlink" title="原本圖片"></a>原本圖片</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1cHgzZ5Z9NX_zLQjomnfc963cNSsu3lJl&export=download" alt=""></p>
+</blockquote>
+<h2 id="透過上面程式碼產生的圖片"><a href="#透過上面程式碼產生的圖片" class="headerlink" title="透過上面程式碼產生的圖片"></a>透過上面程式碼產生的圖片</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1lBROxsoHD8CewH7ow75BLQCSwDPrsBTc&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>多媒體技術與應用筆記</tag>
       </tags>
   </entry>
 </search>
