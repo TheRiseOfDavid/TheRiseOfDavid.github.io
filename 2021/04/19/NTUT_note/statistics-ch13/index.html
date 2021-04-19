@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    統計學(二) 筆記 - 第十三章 實驗設計與變異數分析(Experimental Design and Analysis of Variance) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-NTUT_note/statistics-ch13" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  統計學(二) 筆記 - 第十三章 實驗設計與變異數分析(Experimental Design and Analysis of Variance)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/19/NTUT_note/statistics-ch13/" class="article-date">
+  <time datetime="2021-04-19T09:59:50.000Z" itemprop="datePublished">2021-04-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">9分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="介紹實驗設計與變異數分析-An-Introduction-to-Experimental-Design-and-Analysis-of-Variance"><a href="#介紹實驗設計與變異數分析-An-Introduction-to-Experimental-Design-and-Analysis-of-Variance" class="headerlink" title="介紹實驗設計與變異數分析 An Introduction to Experimental Design and Analysis of Variance"></a>介紹實驗設計與變異數分析 An Introduction to Experimental Design and Analysis of Variance</h1><p>主要還是對平均數做檢定，只是透過變異數去進行。</p>
+<h2 id="統計學研究主要分成實驗型或觀察型"><a href="#統計學研究主要分成實驗型或觀察型" class="headerlink" title="統計學研究主要分成實驗型或觀察型"></a>統計學研究主要分成實驗型或觀察型</h2><ul>
+<li>實驗型 Experimental study<br>將控制一個或多個因素，然後觀察因素如何去影響變異數。EX:一群人吃早餐、另一群不吃早餐</li>
+<li>觀察型 Observational study<br>不去對因素進行控制。EX:我們沒辦法叫一群人都吸毒、另一組都不吸毒</li>
+<li>因果關係 Cause-and-effect relationships<br>實驗型比觀察型更能夠找出因果關係(關聯)。EX: A 跟 B 有正相關</li>
+<li>ANOVA (Analysis of variance)<br>此算法可用來分析資料，無論是實驗型或是觀察型</li>
+</ul>
+<h2 id="主要介紹這三種實驗設計"><a href="#主要介紹這三種實驗設計" class="headerlink" title="主要介紹這三種實驗設計"></a>主要介紹這三種實驗設計</h2><ul>
+<li>完全隨機設計 a Completely Randomized Design</li>
+<li>隨機集區設計 a Randomized Block Design </li>
+<li>因子實驗 a Factorial Experiment</li>
+</ul>
+<h2 id="名詞介紹"><a href="#名詞介紹" class="headerlink" title="名詞介紹"></a>名詞介紹</h2><ul>
+<li>因子 factor<br>EX:綠茶類型就是 factor</li>
+<li>treatment<br>factor 中的選項</li>
+<li>實驗單位 Experimental units<br>對每位接受實驗的 object 就是實驗</li>
+<li>完全隨機分配 completely randomized design<br>將 teatment 隨機平均分配給每個 Experimental units</li>
+</ul>
+<p>舉例：<br>綠茶是 factor，其中有 50 嵐綠茶、清心綠茶、comebuy 綠茶，這些則叫做 treatment。<br>其中有 30 位成年人要喝裡面的綠茶，來表示他們是否喜歡，而這 30 位成年人則是 Experimental units<br>再來我們將 50 嵐綠茶、清心綠茶、comebuy 綠茶 隨機分給尚未分配到飲料的實驗單位，這樣就是 completely randomized design</p>
+<h2 id="ANOVA-Analysis-of-variance"><a href="#ANOVA-Analysis-of-variance" class="headerlink" title="ANOVA (Analysis of variance)"></a>ANOVA (Analysis of variance)</h2><ul>
+<li>測試三個或以上的母體平均數，請不要被名子給誤導</li>
+<li>資料獲得可以從觀察型或是實驗型</li>
+<li>我們可以對樣本結果進行假設測試<ul>
+<li>\(H_0: \mu_1 = \mu_2 = … = \mu_k \)</li>
+<li>\(H_1: \text{Not all population means are equal}\)，只要其中一個不一樣即可。</li>
+<li>如果拒絕 \(H_0\)，我們沒辦法得出所有的母體平均數都相同</li>
+<li>拒絕 \(H_0\) 表示我們至少有兩組或以上的母體平均數不同</li>
+</ul>
+</li>
+<li>每個母體的觀察值(變數)都必須是常態分配</li>
+<li>每個母體的<strong>變異數</strong>都相同</li>
+<li>每個觀察值都是互相獨立</li>
+</ul>
+<h3 id="用圖表進行解釋"><a href="#用圖表進行解釋" class="headerlink" title="用圖表進行解釋"></a>用圖表進行解釋</h3><ul>
+<li>當樣本母體平均數都非常靠近時，\(H_0\)為真，\(\sigma_{\bar{x}}^2 = \frac{\sigma^2}{x}\)，這裡的 x 為平均數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1s3QSgXSAN07Ob1gjaO24VXy62NhDB4kA&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>當樣本母體平均數距離相差過大時，則拒絕\(H_0\)，\(\sigma_{\bar{x}}^2 != \frac{\sigma^2}{x}\)，這裡的 x 為平均數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1YIxqdOqGAAMvmfhpPHroe5aPlTsI3NrR&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此 ANOVA 可以比較母體之間 treatments 變異數，也可以比較母體內 treatments 變異數，下方進行解釋</li>
+</ul>
+<h1 id="分析變異數與完全隨機變數-Analysis-of-Variance-and-the-Completely-Randomized-Design"><a href="#分析變異數與完全隨機變數-Analysis-of-Variance-and-the-Completely-Randomized-Design" class="headerlink" title="分析變異數與完全隨機變數 Analysis of Variance and the Completely Randomized Design"></a>分析變異數與完全隨機變數 Analysis of Variance and the Completely Randomized Design</h1><ul>
+<li><a href="#比較母體之間-treatments-變異數-Between-Treatments-Estimate-of-Population-Variance">比較母體之間 treatments 變異數 Between-Treatments Estimate of Population Variance</a></li>
+<li><a href="#比較母體內-treatments-變異數-Within-Treatments-Estimate-of-Population-Variance">比較母體內 treatments 變異數 Within-Treatments Estimate of Population Variance</a> </li>
+<li><a href="#比較變異數的估計：F-檢定-Comparing-the-Variance-Estimates-The-F-test">比較變異數的估計：F 檢定 Comparing the Variance Estimates: The \(F\) test</a></li>
+<li><a href="#ANOVA-Table">ANOVA Table</a></li>
+<li><a href="#測試-k-個母體平均值是否相同-Test-for-the-Equality-of-k-Population-Means">測試 k 個母體平均值是否相同 Test for the Equality of k Population Means</a></li>
+</ul>
+<h2 id="比較母體之間-treatments-變異數-Between-Treatments-Estimate-of-Population-Variance"><a href="#比較母體之間-treatments-變異數-Between-Treatments-Estimate-of-Population-Variance" class="headerlink" title="比較母體之間 treatments 變異數 Between-Treatments Estimate of Population Variance"></a>比較母體之間 treatments 變異數 Between-Treatments Estimate of Population Variance</h2><ul>
+<li>我們要估計 \(\sigma^2\)，如果 \(H_0\)為真，則變異數差異不大，反之就會大。</li>
+<li>公式 \(MSTR = \frac{\sum_{j=1}^k n_j (\bar{x_j}-\bar{\bar{x}})^2}{k-1}\)<ul>
+<li>其中 x 表示平均數，\(\bar{\bar{x}}\) 為總平均數，\(\bar{x_j}\) 是 factor 中的每一個 treatment</li>
+<li>\(k-1\) 是自由度</li>
+<li>\( (\bar{x_j}-\bar{\bar{x}})^2 \) 是 SSTR，sum of square due to treatments，中文意思為處理間平方和</li>
+</ul>
+</li>
+<li>MSTR = mean square due to treatments，中文意思為處理間均方</li>
+</ul>
+<h2 id="比較母體內-treatments-變異數-Within-Treatments-Estimate-of-Population-Variance"><a href="#比較母體內-treatments-變異數-Within-Treatments-Estimate-of-Population-Variance" class="headerlink" title="比較母體內 treatments 變異數 Within-Treatments Estimate of Population Variance"></a>比較母體內 treatments 變異數 Within-Treatments Estimate of Population Variance</h2><ul>
+<li>我們要估計 \(\sigma^2\)，如果 \(H_0\)為真，則變異數差異不大，反之就會大。</li>
+<li>公式 \(MSE = \frac{\sum_{j=1}^k (n_j-1)s^2_j}{\bar{n_T}-k}\)<ul>
+<li>k 為母體數量、\(\bar{n_T}\)樣本個數、\((n_j-1)\) 第 j 組的數量、\(s^2_j\) 第 j 組的標準差</li>
+<li>\(\sum_{j=1}^k (n_j-1)s^2_j\) 是 SSE，sum of squares due to error，誤差平方和</li>
+<li>\(\bar{n_T}-k\) 是自由度</li>
+</ul>
+</li>
+<li>MSE = mean square error 中文為均方誤差</li>
+</ul>
+<h2 id="比較變異數的估計：F-檢定-Comparing-the-Variance-Estimates-The-F-test"><a href="#比較變異數的估計：F-檢定-Comparing-the-Variance-Estimates-The-F-test" class="headerlink" title="比較變異數的估計：F 檢定 Comparing the Variance Estimates: The \(F\) test"></a>比較變異數的估計：F 檢定 Comparing the Variance Estimates: The \(F\) test</h2><p>如果 \(H_0\) 成立，ANOVA 假設是有效，樣本描述是使用 \(MSTR / MSE\)，則 F 檢定的自由度在 MSTR 時\(k-1\) 是自由度，MSE \(\bar{n_T}-k\) 是自由度</p>
+<p>如果 k 母體的平均數不相等，則 \(MSTR / MSE\) 的值將會膨脹，因為 MSTR 有 \(\sigma^2\)</p>
+<p>因此我們可以得出，如果我們使用 F test，如果 F test 過大時，則拒絕 \(H_0\)，表示 \(MSTR \ MSE\) 將出現過大的數值</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-YnKscFFPaP8NBpobEE8tJMfFSsu0HWd&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>\(H_0\) 所有母體平均數相同</li>
+<li>\(H_1\) 有兩個或以上的母體平均數不同</li>
+</ul>
+<h3 id="用表格來說明"><a href="#用表格來說明" class="headerlink" title="用表格來說明"></a>用表格來說明</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1C8P4YsQTUGq8bgDGksqL7vZotZl1vtjQ&export=download" alt=""> </p>
+</blockquote>
+<h2 id="ANOVA-Table"><a href="#ANOVA-Table" class="headerlink" title="ANOVA Table"></a>ANOVA Table</h2><p>SST 為 data set 中全部的 treatmeat ，並表示自由度為 \(n_T -1\) 後的總樣本變異量<br>假如將整個資料做為一個樣本，則計算全部的總和平方(total sum of squares, SST)<br>公式為 \(SST = \sum_{j=1}^k \sum_{i=1}^{n_j} (\bar{x_ij}-\bar{\bar{x}})^2 = SSTR+SSE\)，其中 \(\bar{\bar{x}}\) 為樣本總平均數</p>
+<p>ANOVA 整個過程中可以視為將整個平方和與自由度分給 treatments and error。</p>
+<p>將整個平方和並使用適合的自由度、提供變異數估計與 F 值，來進行假設檢定判斷是否所有母體平均都等於。</p>
+<h2 id="測試-k-個母體平均值是否相同-Test-for-the-Equality-of-k-Population-Means"><a href="#測試-k-個母體平均值是否相同-Test-for-the-Equality-of-k-Population-Means" class="headerlink" title="測試 k 個母體平均值是否相同 Test for the Equality of k Population Means"></a>測試 k 個母體平均值是否相同 Test for the Equality of k Population Means</h2><ul>
+<li>Hypotheses <ul>
+<li>\(H_0: \mu_1 = \mu_2 = … = \mu_k \)</li>
+<li>\(H_1: \text{Not all population means are equal}\)，只要其中一個不一樣即可。</li>
+</ul>
+</li>
+<li>Test Statistic<br>\(F = MSTR / MSE \)</li>
+<li>Rejection Rule<ul>
+<li>p-value Approach: Reject \(H_0\) if \(p-value \leq \alpha\)</li>
+<li>Critical Value Approach: Reject \(H_0\) if \(F \geq F_a\)</li>
+<li>\(F_a\) numerator(分子) 自由度為 \(k-1\)、denominator(分母) 自由度為 \(n_T - k\)，\(n_T\) 是全部的樣本總數量，k 為母體數量</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：專門幫車子打蠟公司，將考慮三種打蠟材質，他們想知道這三種打蠟材質的持久性，15-輛車平均分配給-3-種打蠟材質，之後進行一次洗車，如果蠟還沒有脫落就再次洗車，直到沒有蠟為止，我們想知道這三種打蠟材質是否洗車次數都一樣"><a href="#舉例：專門幫車子打蠟公司，將考慮三種打蠟材質，他們想知道這三種打蠟材質的持久性，15-輛車平均分配給-3-種打蠟材質，之後進行一次洗車，如果蠟還沒有脫落就再次洗車，直到沒有蠟為止，我們想知道這三種打蠟材質是否洗車次數都一樣" class="headerlink" title="舉例：專門幫車子打蠟公司，將考慮三種打蠟材質，他們想知道這三種打蠟材質的持久性，15 輛車平均分配給 3 種打蠟材質，之後進行一次洗車，如果蠟還沒有脫落就再次洗車，直到沒有蠟為止，我們想知道這三種打蠟材質是否洗車次數都一樣?"></a>舉例：專門幫車子打蠟公司，將考慮三種打蠟材質，他們想知道這三種打蠟材質的持久性，15 輛車平均分配給 3 種打蠟材質，之後進行一次洗車，如果蠟還沒有脫落就再次洗車，直到沒有蠟為止，我們想知道這三種打蠟材質是否洗車次數都一樣?</h3><h4 id="名詞定義"><a href="#名詞定義" class="headerlink" title="名詞定義"></a>名詞定義</h4><ul>
+<li>Factor: 車蠟</li>
+<li>Treatments: Type1, Type2, Type3</li>
+<li>Experimental units: Cars</li>
+<li>Reesponse variable: 經過幾次的洗車</li>
+</ul>
+<h4 id="資料"><a href="#資料" class="headerlink" title="資料"></a>資料</h4><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1R39if8Wa6WWMbzguAc2aAK-ee3oKYMbm&export=download" alt=""> </p>
+</blockquote>
+<h4 id="進行判斷"><a href="#進行判斷" class="headerlink" title="進行判斷"></a>進行判斷</h4><ul>
+<li>Hypotheses<ul>
+<li>\(H_0: \mu_1 = \mu_2 = \mu_3 \)</li>
+<li>\(H_1: \text{Not all population means are equal}\)，只要其中一個不一樣即可。</li>
+<li>\(\mu_1\) 第 1 種材質的蠟</li>
+<li>\(\mu_2\) 第 2 種材質的蠟</li>
+<li>\(\mu_3\) 第 3 種材質的蠟</li>
+</ul>
+</li>
+<li>Mean Square Between Treatments<ul>
+<li>\(\bar{\bar{x}} = (\bar{x_1} + \bar{x_2} + \bar{x_3}) / 3 = (29+30.4+30)/3 = 29.8\)</li>
+<li>\(SSTR = 5(29-29.8)^2 + 5(30.4-29.8)^2 + 5(30-29.8)^2 = 5.2\)</li>
+<li>\(MSTR = 5.2/(3-1) = 2.6\)</li>
+</ul>
+</li>
+<li>Mean Square Error <ul>
+<li>\(SSE = 4(2.5) + 4(3.3) + 4(2.5) = 33.2\)</li>
+<li>\(MSE = 33.2 / (15-3) = 2.77\)</li>
+</ul>
+</li>
+<li>Rejection Rule<ul>
+<li>p-value approach: Reject \(H_0\) if \(p-value \leq 0.05 \)</li>
+<li>Critical value approach: Reject \(H_0\) if \(F \geq 3.89\)</li>
+<li>其中 numerator 自由度是 2、denominator 自由度是 12</li>
+<li>其中是透過 probability distribution app 計算得出<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xCSIP4-Auz3QUjBMMzhnYV7D-0LPeE1B&export=download" alt=""> </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Test Statistic<br>\(F = MSTR / MSE = 2.60 / 2.77 = 0.939\)</li>
+<li>ANOVA Table <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1cXFjSgx2UaGUe__CNNlyKlglBIsTR5jl&export=download" alt=""> </p>
+</blockquote>
+</li>
+<li>Conclusion <ul>
+<li>其中是透過 probability distribution app 計算得出<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1J3760RoSKgkTbrJUI-7paoI31OcSKg_f&export=download" alt=""> </p>
+</blockquote>
+</li>
+<li>p-value approach: Reject \(H_0\) if \(p-value = 0.42 \leq 0.05 \)，並不符合</li>
+<li>Critical value approach: Reject \(H_0\) if \(F=0.939 \geq 3.89\)，並不符合</li>
+<li>因此不可以拒絕 \(H_0\)</li>
+<li>因此我們不能得出這三種不同的蠟材質是否洗車次數並不一樣</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：老闆想要知道不同工廠經理工作時數是否不一樣，總共有三個工廠-B、P、D-、每個工廠-5-個經理，顯著性水準為-0-05"><a href="#舉例：老闆想要知道不同工廠經理工作時數是否不一樣，總共有三個工廠-B、P、D-、每個工廠-5-個經理，顯著性水準為-0-05" class="headerlink" title="舉例：老闆想要知道不同工廠經理工作時數是否不一樣，總共有三個工廠(B、P、D)、每個工廠 5 個經理，顯著性水準為 0.05"></a>舉例：老闆想要知道不同工廠經理工作時數是否不一樣，總共有三個工廠(B、P、D)、每個工廠 5 個經理，顯著性水準為 0.05</h3><h4 id="名詞定義-1"><a href="#名詞定義-1" class="headerlink" title="名詞定義"></a>名詞定義</h4><ul>
+<li>Factor: 公司</li>
+<li>Treatments: 三個工廠(B、P、D)</li>
+<li>Experimental units: 工廠經理</li>
+<li>Reesponse variable: 工作時數</li>
+</ul>
+<h4 id="資料-1"><a href="#資料-1" class="headerlink" title="資料"></a>資料</h4><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1_H2WuP_zWNzbApdGEllZoH_Fa2RgJ9T6&export=download" alt=""> </p>
+</blockquote>
+<h4 id="進行判斷-1"><a href="#進行判斷-1" class="headerlink" title="進行判斷"></a>進行判斷</h4><ul>
+<li>Hypotheses<ul>
+<li>\(H_0: \mu_1 = \mu_2 = \mu_3 \)</li>
+<li>\(H_1: \text{Not all population means are equal}\)，只要其中一個不一樣即可。</li>
+<li>\(\mu_1\) B 工廠</li>
+<li>\(\mu_2\) P 工廠</li>
+<li>\(\mu_3\) D 工廠</li>
+</ul>
+</li>
+<li>顯著性水準 0.05</li>
+<li>Mean Square Between Treatments<ul>
+<li>\(\bar{\bar{x}} = (\bar{x_1} + \bar{x_2} + \bar{x_3}) / 3 = (55+68+57)/3 = 60\)</li>
+<li>\(SSTR = 5(55-60)^2 + 5(68-60)^2 + 5(57-60)^2 = 490\)</li>
+<li>\(MSTR = 490/(3-1) = 245\)</li>
+</ul>
+</li>
+<li>Mean Square Error <ul>
+<li>\(SSE = 4(26.0) + 4(26.5) + 4(24.5) = 308\)</li>
+<li>\(MSE = 308 / (15-3) = 25.667\)</li>
+</ul>
+</li>
+<li>Rejection Rule<ul>
+<li>p-value approach: Reject \(H_0\) if \(p-value \leq 0.05 \)</li>
+<li>Critical value approach: Reject \(H_0\) if \(F \geq 3.89\)</li>
+<li>其中 numerator 自由度是 2、denominator 自由度是 12</li>
+<li>其中是透過 probability distribution app 計算得出<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xCSIP4-Auz3QUjBMMzhnYV7D-0LPeE1B&export=download" alt=""> </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Test Statistic<br>\(F = MSTR / MSE = 245 / 25.667 = 9.55\)</li>
+<li>ANOVA Table <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-yvcbHdpxqHIe7GsAIi148-m85QDZCDS&export=download" alt=""> </p>
+</blockquote>
+</li>
+<li>Conclusion <ul>
+<li>其中是透過 probability distribution app 計算得出<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xF-683si1j4i4vNRcJ-NFiZ5xAX-h05M&export=download" alt=""> </p>
+</blockquote>
+</li>
+<li>p-value approach: Reject \(H_0\) if \(p-value = 0.0033 \leq 0.05 \)，符合</li>
+<li>Critical value approach: Reject \(H_0\) if \(F=9.55 \geq 3.89\)，符合</li>
+<li>因此可以拒絕 \(H_0\)</li>
+<li>因此我們知道三個工廠的工廠經理工作時數並不相同</li>
+</ul>
+</li>
+</ul>
+<h1 id="多重比較-Multiple-Comparison-Procedures"><a href="#多重比較-Multiple-Comparison-Procedures" class="headerlink" title="多重比較 Multiple Comparison Procedures"></a>多重比較 Multiple Comparison Procedures</h1><h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/04/18/NTUT_note/NTUTcs_MediaHW05G02/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進行HOG特徵提取並送入SVM分類器進行訓練進行辨識</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
