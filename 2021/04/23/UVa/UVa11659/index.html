@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa11659 - Informants (數論 Math theorm、暴力搜尋 Brute force) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa11659" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa11659 - Informants (數論 Math theorm、暴力搜尋 Brute force)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/23/UVa/UVa11659/" class="article-date">
+  <time datetime="2021-04-23T05:51:59.000Z" itemprop="datePublished">2021-04-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">5分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>ACM 是一家間諜公司，裡面有很多的線民，但這些線民認為某部分線民講的不是實話、某些是實話。</p>
+<p>我們的目的是要找出最多的線民數量，且這些線民不會不信任彼此。</p>
+<p><a href="https://onlinejudge.org/external/116/11659.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>透過二進制進行效率優化</li>
+<li>理解 C++ 運算優先順序</li>
+</ul>
+<h2 id="分析與心得"><a href="#分析與心得" class="headerlink" title="分析與心得"></a>分析與心得</h2><p>一道好題。<br>只要是二進制的題目，我都認為他是好題，因為它打破了大部分的人的思考常規，可以讓我深刻的了解到當遇到大量關於是或否、對或錯時，都應該想到用二進制來解決這種問題。</p>
+<p>主要想法是對每一個線民所信任的線民、不信任的做紀錄(or 運算)，之後再暴力搜尋即可找出。<br>線民可以用此方式表示 \(011100\)，表示有 3 位線民，分別是 C、D、E。(從右至左開始字典序)</p>
+<p>這樣在記錄信任、不信任的線民時可以使用 or 運算。舉例：</p>
+<ul>
+<li>信任 A 線民 \(0001\)</li>
+<li>信任 B 線民 \(0010\)</li>
+<li>結果 (or 運算)  \(0011\)</li>
+</ul>
+<p>最壞時間複雜度大約是 \(2^20*20=20971520\)，基本上只要 judge 是有名的 judge 基本上能夠忍受的時間複雜度是 2000 萬 ~ 3000 萬，都可以去試試看。<del>能 AC 就是對的，效率優化在 AC 面前都沒有用</del></p>
+<p>主要大家要稍微注意，C++ 的二進制運算比起邏輯運算(or、and…) 優先順序更為後面，因此要善用括號。<br>沒想到，我就因為一直以為二進制的括號比邏輯運算優先度更高，讓我在 debug 一直抓錯想法…。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://docs.microsoft.com/zh-tw/cpp/cpp/cpp-built-in-operators-precedence-and-associativity?view=msvc-160" target="_blank" rel="noopener">C + + 內建運算子、優先順序和關聯性 by Microsoft</a><br><a href="https://hackmd.io/@txya900619/Uva11659" target="_blank" rel="noopener">Uva11659 Informants by txya900619</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">25</span>;</span><br><span class="line"><span class="keyword">int</span> n, a, x, y;</span><br><span class="line"><span class="keyword">int</span> say_wrong[MAXN], say_correct[MAXN];</span><br><span class="line"><span class="comment">// say_wrong 判斷 index 線民不信任那些人。二進制表示 0010，表示不喜歡 B 線民</span></span><br><span class="line"><span class="comment">// say_correct 判斷 index 線民信任那些人。二進制表示 0010，表示喜歡 B 線民</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bit_count</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123; <span class="comment">//判斷其最大長度，也就是可以信任的線民數量</span></span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>; <span class="comment">//此數字最大有幾個 1(幾個線民)</span></span><br><span class="line">    <span class="keyword">while</span>(x)&#123; <span class="comment">//不斷除2，然後判斷最尾數的位元是不是為 1，是就 cnt+1</span></span><br><span class="line">        <span class="keyword">if</span>(x &amp; <span class="number">1</span>) cnt += <span class="number">1</span>; </span><br><span class="line">        x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt; <span class="comment">//回傳線民</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; a &amp;&amp; (n+a!=<span class="number">0</span>))&#123;</span><br><span class="line">        <span class="built_in">memset</span>(say_correct, <span class="number">0</span>, <span class="keyword">sizeof</span>(say_correct)); <span class="comment">//清空資料</span></span><br><span class="line">        <span class="built_in">memset</span>(say_wrong, <span class="number">0</span>, <span class="keyword">sizeof</span>(say_wrong)); <span class="comment">//清空資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a; i++)&#123; <span class="comment">//輸入信任與不信任</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            <span class="keyword">if</span>(y &gt; <span class="number">0</span>) say_correct[x] |= <span class="number">1</span> &lt;&lt; y<span class="number">-1</span>; <span class="comment">//進行記錄，並且合併過去資料</span></span><br><span class="line">            <span class="keyword">if</span>(y &lt; <span class="number">0</span>) say_wrong[x] |= <span class="number">1</span> &lt;&lt; -y<span class="number">-1</span>; <span class="comment">//進行記錄，並且合併過去資料</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> limit = <span class="number">1</span> &lt;&lt; n; <span class="comment">//最大的排列組合數量</span></span><br><span class="line">        <span class="keyword">int</span> max1 = <span class="number">0</span>; <span class="comment">//最多的線民數量，且這些線民不會不信任彼此</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; limit; i++)&#123; <span class="comment">//開始進行暴力搜尋 </span></span><br><span class="line">            <span class="keyword">int</span> necessary_informants = i; <span class="comment">//每一種線民們的組合方式，EX: 0110，有 B、C 線民</span></span><br><span class="line">            <span class="keyword">int</span> flag = <span class="number">1</span>; <span class="comment">//判斷這組合有沒有互相不信任的線民</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123; <span class="comment">//對 j 線民找出信任與不信任的關聯</span></span><br><span class="line">                <span class="keyword">int</span> necessary_informant = necessary_informants &amp; (<span class="number">1</span> &lt;&lt; j<span class="number">-1</span>);</span><br><span class="line">                <span class="comment">//判斷這個組合的線民，第 j 個有沒有在這組合裡面。</span></span><br><span class="line">                <span class="comment">//如果有，那在做 &amp; 運算會大於 1，反之則是零。</span></span><br><span class="line">                <span class="comment">//(1 &lt;&lt; j-1) 讓第 j 位 bit 為 1，表示第 j 位有線民</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> is_wrong = ( ((say_wrong[j] &amp; i) != <span class="number">0</span>) || ((say_correct[j] &amp; i) != say_correct[j]));</span><br><span class="line">                <span class="comment">//判斷 j 號村民不信任的線民是否有在此組合內</span></span><br><span class="line">                <span class="comment">//((say_wrong[j] &amp; i) != 0) </span></span><br><span class="line">                <span class="comment">//如果不信任的線民與我們這次的組合有關聯則表示此組合並不正確</span></span><br><span class="line">                <span class="comment">//((say_correct[j] &amp; i) != say_correct[j])</span></span><br><span class="line">                <span class="comment">//信任的線民必須完全重疊於我們這次的組合，反之表示有些線民沒有被信任到，</span></span><br><span class="line">                <span class="comment">//那之後暴力搜尋會搜尋到，這裡先判斷為錯誤</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(necessary_informant &amp;&amp; is_wrong)&#123;</span><br><span class="line">                <span class="comment">//如果 necessary_informant 為否表示此組合沒有 j 號村民，因此不用在意他不信任誰</span></span><br><span class="line">                <span class="comment">// is_wrong 如果為否表示此組合有符合 j 號線民的想法。</span></span><br><span class="line">                <span class="comment">//如果上面兩個其中一個為 yes，則跳出組合，表示此組合不會是正確的組合。</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">//debug 用</span></span><br><span class="line">                    <span class="comment">/*</span></span><br><span class="line"><span class="comment">                    cout &lt;&lt; "i is " &lt;&lt; i &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">                    cout &lt;&lt; "necessary_informant " &lt;&lt; necessary_informant &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">                    cout &lt;&lt; "j is " &lt;&lt; j &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">                    cout &lt;&lt; "debug " &lt;&lt; say_wrong[j] &lt;&lt; ' ' &lt;&lt; say_correct[j] &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">                    cout &lt;&lt; "info " &lt;&lt; ((say_wrong[j] &amp; i) != 0) &lt;&lt; ' ' &lt;&lt; ((say_correct[j] &amp; i) != say_correct[j]) &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">                    cout &lt;&lt; "is_wrong " &lt;&lt; is_wrong &lt;&lt; '\n';</span></span><br><span class="line"><span class="comment">                    */</span></span><br><span class="line"></span><br><span class="line">                    flag = <span class="number">0</span>; <span class="comment">//表示此組合絕對不會是答案</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag)&#123; <span class="comment">//如果 flag 有可能是答案，那就跟 max1 比較誰有最大的線民數量</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; "i is " &lt;&lt; i &lt;&lt; '\n';</span></span><br><span class="line">                max1 = max(bit_count(necessary_informants), max1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; max1 &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用紙筆去-Debug"><a href="#用紙筆去-Debug" class="headerlink" title="用紙筆去 Debug"></a>用紙筆去 Debug</h2><p>因為只是自己在思考過程中隨手做的筆記，覺得不是對讀者這麼有幫助，因此放在文章最下面。</p>
+<p>有時候用想或用看的可能不太能夠懂這演算法，那就用寫的吧！這是大衛我自己學習的手稿，紀錄者我的學習過程。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Vz3egH5lJec1U1gBHfWgcLd1JF5zD02C&export=download" alt=""></p>
+</blockquote>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E6%90%9C%E5%B0%8B-Brute-force/" rel="tag">暴力搜尋 Brute force</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/25/life_experence/computer_repair_20210425/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            2021/04/25 電腦維修紀錄
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/04/21/NTUT_note/NTUTgec_inernational_relations/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">北科通識大二國際關係 期中考出題重點</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
