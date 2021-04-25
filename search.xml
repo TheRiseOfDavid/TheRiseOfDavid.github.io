@@ -16290,7 +16290,254 @@
 </ul>
 </li>
 </ul>
-<h1 id="多重比較-Multiple-Comparison-Procedures"><a href="#多重比較-Multiple-Comparison-Procedures" class="headerlink" title="多重比較 Multiple Comparison Procedures"></a>多重比較 Multiple Comparison Procedures</h1><h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1>]]></content>
+<h1 id="多重比較-Multiple-Comparison-Procedures"><a href="#多重比較-Multiple-Comparison-Procedures" class="headerlink" title="多重比較 Multiple Comparison Procedures"></a>多重比較 Multiple Comparison Procedures</h1><p>當我們前面拒絕 \(H_0\) 時，我們則需要再找出是那些母體平均數不同時，則可以使用 Fishers’s least significant difference(LSD, 最低顯著差異) 來確認哪些母體平均數不同</p>
+<h2 id="最低顯著差異-Fishers’s-least-significant-difference-LSD"><a href="#最低顯著差異-Fishers’s-least-significant-difference-LSD" class="headerlink" title="最低顯著差異 Fishers’s least significant difference(LSD)"></a>最低顯著差異 Fishers’s least significant difference(LSD)</h2><ul>
+<li>Hypotheses<ul>
+<li>\(H_0: \mu_i = \mu_j \)</li>
+<li>\(H_1: \mu_i != \mu_j\)</li>
+<li>如果有 3 個變數，理論上就應該要做 3 次 LSD；如果有 4 個那就需要做 10 次。<br>EX: 有 a,b,c 三變數，則 LSD 要做的有 ab, ac, bc。</li>
+</ul>
+</li>
+<li>Test Statistic \(t = \frac{\bar{x_i} - \bar{x_j}}{\sqrt{MSE (1/n_i + 1/n_j)}}\)<ul>
+<li>其中 MSE 是誤差均方</li>
+</ul>
+</li>
+<li>Rejection Rule<ul>
+<li>p-value approach: Reject \(H_0\) if \(p-value \leq \alpha\)</li>
+<li>Critical Value approach: Reject \(H_0\) if \(t \leq -t_{a/2} \) or \(t \geq t_{a/2}\)</li>
+<li>其中 \(t_{a/2}\) 的自由度為 \(n_T - k\)，\(n_T\)  是全部的樣本總數量，k 為母體數量</li>
+</ul>
+</li>
+</ul>
+<h3 id="進行移項優化的，更方便計算的最低顯著差異-Fishers’s-least-significant-difference-LSD"><a href="#進行移項優化的，更方便計算的最低顯著差異-Fishers’s-least-significant-difference-LSD" class="headerlink" title="進行移項優化的，更方便計算的最低顯著差異 Fishers’s least significant difference(LSD)"></a>進行移項優化的，更方便計算的最低顯著差異 Fishers’s least significant difference(LSD)</h3><ul>
+<li>Hypotheses<ul>
+<li>\(H_0: \mu_i = \mu_j \)</li>
+<li>\(H_1: \mu_i != \mu_j\)</li>
+<li>如果有 3 個變數，理論上就應該要做 3 次 LSD；如果有 4 個那就需要做 10 次。<br>EX: 有 a,b,c 三變數，則 LSD 要做的有 ab, ac, bc。</li>
+</ul>
+</li>
+<li>Test Statistic \(t = \bar{x_i} - \bar{x_j}\)<ul>
+<li>其中 MSE 是誤差均方</li>
+</ul>
+</li>
+<li>Rejection Rule<ul>
+<li>Critical Value approach: Reject \(H_0\) if \( |\bar{x_i} - \bar{x_j} | \geq LSD \)</li>
+<li>其中 LSD 是將 t 統計的分母移項至 \(t_{a/2}\) 那邊，因此 \(LSD = t_{a/2} \sqrt{MSE (1/n_i + 1/n_j)}  \)</li>
+<li>其中 \(t_{a/2}\) 的自由度為 \(n_T - k\)，\(n_T\)  是全部的樣本總數量，k 為母體數量</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：前面我們知道-工廠裡的經理工作時數不一致，因此我們要進行分析-LSD-來找出是哪個工廠的平均工作時數與其他工廠不同"><a href="#舉例：前面我們知道-工廠裡的經理工作時數不一致，因此我們要進行分析-LSD-來找出是哪個工廠的平均工作時數與其他工廠不同" class="headerlink" title="舉例：前面我們知道 工廠裡的經理工作時數不一致，因此我們要進行分析 LSD 來找出是哪個工廠的平均工作時數與其他工廠不同"></a>舉例：<a href="#舉例：老闆想要知道不同工廠經理工作時數是否不一樣，總共有三個工廠-B、P、D-、每個工廠-5-個經理，顯著性水準為-0-05">前面我們知道</a> 工廠裡的經理工作時數不一致，因此我們要進行分析 LSD 來找出是哪個工廠的平均工作時數與其他工廠不同</h3><ul>
+<li>compute <ul>
+<li>\(\alpha = 0.05\)</li>
+<li>自由度為 \(n_T - k = 15 - 3 = 12\)、\(t_{0.025} =2.179\)<br>\(n_T - k\)，\(n_T\)  是全部的樣本總數量，k 為母體數量</li>
+<li>\(LSD = t_{a/2} \sqrt{MSE(1/n_i + 1/n_j)}\)</li>
+<li>\(LSD = 2.179 \sqrt{25.667(1/5 + 1/5 )} = 6.98\)</li>
+<li>其中 25.667 是前面有進行計算，可以點舉例的 link 回去</li>
+</ul>
+</li>
+<li>LSD 對工廠 B 和工廠 P，求方便定義，下面數學公式工廠 B 為 1、工廠 P 為 2、工廠 D 為 3<ul>
+<li>Hypotheses<ul>
+<li>\(H_0 : \mu_1 = \mu_2 \)</li>
+<li>\(H_1: \mu_1 != \mu_2\)</li>
+</ul>
+</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_2} \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_2} = |55-68| = 13\)</li>
+<li>Conclusion<br>我們可以知道工廠 B 和工廠 P 的平均工作時數並不同。</li>
+</ul>
+</li>
+<li>LSD 對工廠 B 和工廠 D，求方便定義，下面數學公式工廠 B 為 1、工廠 P 為 2、工廠 D 為 3<ul>
+<li>Hypotheses<ul>
+<li>\(H_0 : \mu_1 = \mu_3 \)</li>
+<li>\(H_1: \mu_1 != \mu_3\)</li>
+</ul>
+</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_3} \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_3} = |55-57| = 2\)</li>
+<li>Conclusion<br>我們可以知道工廠 B 和工廠 D 的平均工作時數相同，無法拒絕 \(H_0\)。</li>
+</ul>
+</li>
+<li>LSD 對工廠 P 和工廠 D，求方便定義，下面數學公式工廠 B 為 1、工廠 P 為 2、工廠 D 為 3<ul>
+<li>Hypotheses<ul>
+<li>\(H_0 : \mu_2 = \mu_3 \)</li>
+<li>\(H_1: \mu_2 != \mu_3\)</li>
+</ul>
+</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_2} - \bar{x_3} \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_2} - \bar{x_3} = |68-57| = 11\)</li>
+<li>Conclusion<br>我們可以知道工廠 P 和工廠 D 的平均工作時數並不同。</li>
+</ul>
+</li>
+<li>過去資料<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1utNGDHbDxRFU9HLu4EBrc5ttsNV1xnE8&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>Conclusion<br>我們可以知道工廠 P 的工作時數與其他並不同，且工時來的更長更高；其他兩家則沒有明顯差異。</li>
+</ul>
+<h2 id="型一誤差-Type1-I-Error-Rates"><a href="#型一誤差-Type1-I-Error-Rates" class="headerlink" title="型一誤差 Type1 I Error Rates"></a>型一誤差 Type1 I Error Rates</h2><ul>
+<li>比較型一誤差率 comparison-wise Type 1 error rate<ul>
+<li>假設此兩個變數母體相同，但我們卻拒絕 \(H_0\)，的誤判機率是 0.05。 </li>
+</ul>
+</li>
+<li>實驗型一誤差率 experiment-wise Type 1 error rate<ul>
+<li>由於我們上面 LSD 會做多次的假設檢定也就會產生多次的比較型一誤差率，我們要確保我們從未發生過 Type 1 error，因此我們可以透過數學公式進行驗證</li>
+<li>\(a_{EW} = 1 - (1-a)^k\)，k 是進行得比較次數，a 則是顯著性水準</li>
+</ul>
+</li>
+<li>如果 \(a_{EW} \) 太大時，我們可以在一開始就將在<a href="#介紹實驗設計與變異數分析-An-Introduction-to-Experimental-Design-and-Analysis-of-Variance">ANOVA</a>將顯著性水準設定更小，即可避免此問題；但要注意，在固定樣本情況時，如果將顯著性水準過低則有可能考慮造成 Type2 Error 錯誤機率提高。</li>
+</ul>
+<h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><ul>
+<li>實驗單位 Experimental units<br>對每位接受實驗的 object 就是實驗</li>
+<li>完全隨機分配 completely randomized design<br>將 teatment 隨機平均分配給每個 Experimental units</li>
+</ul>
+<p>主要是為了避免在每個實驗單位有異質性的可能，而導致得出結果不一樣，而產生出的一種隨機選擇方法。<br>EX: 評測小孩子喜不喜歡喝牛奶，但可能裡面有些小孩本身對牛奶過敏(異質性)，就有機會導致我們的結果出錯。</p>
+<p>因此後來為了防止異質性的問題，我們將同質性的資料組成 BLOCK，之後再使用 ANOVA 算法。(但 ANOVA 的公式因為 block，而改變，下方則有提到。)</p>
+<h2 id="ANOVA-Procedure"><a href="#ANOVA-Procedure" class="headerlink" title="ANOVA Procedure"></a>ANOVA Procedure</h2><ul>
+<li>我們將總和平方(SST, sum of squares total)分成部分，由選項平方和(sum of squares due to treatments)、由集區的平方和(sum of squares due to blocks)、誤差平方和(sum of squares due to error)。</li>
+<li>因此公式為 \(SST = SSTR + SSBL + SSE\)<ul>
+<li>其中 SSTR 自由度為 \(n_T - k\)，\(n_T\)  是全部的樣本總數量，k 為母體數量</li>
+<li>SSBL 自由度為 \(k-1\)</li>
+<li>SSE 為 \((k-1)(b-1)\)，b 則是 block。</li>
+</ul>
+</li>
+<li>ANOVA table 如下。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=13ZhZ_Glmwv1wYq3fCY2seQyuxgFAC6Kr&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>F 計算方式為 \(F = MSTR / MSE \)</li>
+</ul>
+<h3 id="舉例：石油公司研發出三種新的混合方式，他們想確認每加侖的油可以跑多少英里？會不會不同。這邊找了五台汽車進行測試。資料如下："><a href="#舉例：石油公司研發出三種新的混合方式，他們想確認每加侖的油可以跑多少英里？會不會不同。這邊找了五台汽車進行測試。資料如下：" class="headerlink" title="舉例：石油公司研發出三種新的混合方式，他們想確認每加侖的油可以跑多少英里？會不會不同。這邊找了五台汽車進行測試。資料如下："></a>舉例：石油公司研發出三種新的混合方式，他們想確認每加侖的油可以跑多少英里？會不會不同。這邊找了五台汽車進行測試。資料如下：</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1RiqR0flhsGw3LtxeBQ6wXwhDrM09DLnE&export=download" alt=""></p>
+</blockquote>
+<p>由於我們不能確定，每台車的耗油量(異質型)，因此我們就要記錄每一台車(block, 內容全部同執行)所使用的油量。</p>
+<p>我們可以確定名詞了</p>
+<ul>
+<li>Factor 混和油 (Gasoline blend)</li>
+<li>Treatments 選項 (blend X, blend Y, blend Z)</li>
+<li>Blocks 車子 (automobiles)</li>
+<li>Response variable 每加侖跑多少英里(Mile per gallon) </li>
+</ul>
+<p>計算 ANOVA table</p>
+<ul>
+<li>compute<ul>
+<li>\(SST = (31-29)^2 + (30-29)^2 + … + (26-29)^2 = 62\)</li>
+<li>Mean Square of Treatment 為 29，因此 SSTR 計算如下<ul>
+<li>\(SSTR = 5[ (29.8-29)^2 + (28.8-29)^2 + (28.4-29)^2 ] = 5.2 \)，主要是因為我們 treatments 都有 5 筆資料，因此我們優化，將 5 提出來最後再做乘法。</li>
+<li>\(MSTR = 5.2 /  (3-1) = 2.6 \)</li>
+</ul>
+</li>
+<li>Mean Square Due to Blocks<ul>
+<li>\(SSBL = 3[(30.333-29)^2 + … + (25.667-29)^2] = 51.33\)，主要是因為我們 treatments 都有 3 筆資料，因此我們優化，將 3 提出來最後再做乘法。</li>
+<li>\(MSBL = 51.33/ (5-1) = 12.8\)</li>
+</ul>
+</li>
+<li>Mean Square Due to Error <ul>
+<li>\(SSE = 62 - 5.2 - 51.33 = 5.47\)</li>
+<li>\(MSE = 5.47 / [ (3-1) (5-1)] = 0.68\)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>畫成表格如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ONi5CBegb-ikQW8ur86eHkiSNLXNWaN7&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>F 計算方式為 \(F = MSTR / MSE \)<ul>
+<li>其中 F 是透過 \(2.60 / 0.68 = 3.82\)，自由度分子(x1) 則是 2、分母則是(x2) 8，因此機率算出為 0.07</li>
+<li>用 probability distribution app 計算如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ZMM2Ak7l9Ve8jrYeMuc2uWOrLcZSwXgl&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Rejection Rule <ul>
+<li>p-value approach: Reject \(H_0\) if \(p-value \leq 0.05 \)</li>
+<li>critical value approach: Reject \(H_0\) if \(F \geq 4.46\)</li>
+<li>在分子自由度為 2、分母自由度為 8 時，\(F_{0.05} = 4.46\)</li>
+</ul>
+</li>
+<li>conclusion<ul>
+<li>p-value approach: Reject \(H_0\) if \(0.07 \leq 0.05 \)，不符合  </li>
+<li>critical value approach: 由於 F 為 3.82， Reject \(H_0\) if \(3.82 \geq 4.46\)，不符合 </li>
+<li>並沒有符合。因此我們沒有辦法拒絕 \(H_0\)，因此我們沒有辦法表示油的混和方式對汽車每加侖的英里數有不同。</li>
+</ul>
+</li>
+</ul>
+<h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1><p>上述之前我們都是只針對一個 Factor 來進行探討，現在我們要針對多個 Factor來進行探討，但一樣是使用 ANOVA 來計算，但也會有些計算不同。</p>
+<p>舉例：如果 a factor 有 \(\alpha\) 個 treatment，b factor 有 \(\beta\) 個 treatment，那我們蒐集的資料就是有 \(\alpha \beta\) 個組合。</p>
+<p>主要用來判斷兩個因子是否有交互作用，也可以檢查到兩因子對變數的假設檢定</p>
+<h2 id="Two-Factor-Factorial-Experiment"><a href="#Two-Factor-Factorial-Experiment" class="headerlink" title="Two-Factor Factorial Experiment"></a>Two-Factor Factorial Experiment</h2><h3 id="ANOVA"><a href="#ANOVA" class="headerlink" title="ANOVA"></a>ANOVA</h3><ul>
+<li>公式為 \(SST = SSA + SSB + SSAB + SSE\)<ul>
+<li>其中 SST 為 sum of squares total，自由度為 \(n_T -1 \)是全部的樣本總數量。</li>
+<li>SSA sum of squares A，自由度為 \(n_a-1\)，為 a 樣本總數量</li>
+<li>SSB sum of squares B，自由度為 \(n_b-1\)，為 b 樣本總數量</li>
+<li>SSAB sum of squares A and B，自由度為 \((n_a-1)(n_b-1)\)<br>SAB 為 A 與 B 的關聯組合，其中 SSAB 與 SSA、SSB 不同，SSAB <strong>表示 A 中 treatment 與 B 中 treatment 的組合</strong></li>
+<li>SSE sum of squares error，自由度為 \(ab(r-1)\)，r 表示一個 a 的 treatment 與一個 b 的 treatment 中有幾筆資料</li>
+</ul>
+</li>
+<li>ANOVA table<ul>
+<li>我們可以透過 F 檢定來知道，SSA、SSB、SSAB、SSE、SST 有沒有都 reject \(H_0\)</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1w8dbocu-B_VVePQeuQ8p9DzKh8TrES3i&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>計算步驟如下<ul>
+<li>\(\alpha\) 表示 a 的所有 treatment</li>
+<li>\(\beta\) 表示 b 的所有 treatment</li>
+<li>\(r\) 表示有幾筆資料</li>
+<li>\(\bar{\bar{x}} \) 為總資料數量</li>
+<li>\(\sum_{i=1}^a\) 則是有幾個 treatment</li>
+<li>\(\bar{x_i.}\) 則是平均，這裡每一個 tretmnet 的平均值</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1w8dbocu-B_VVePQeuQ8p9DzKh8TrES3i&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1eEpSydPE6E__BakIidIWmm4WqArH5vbn&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：薪資調查公司，調查兩個產業與三個地點，我們想知道產業與地點是否會影響到他們的薪資，資料如下"><a href="#舉例：薪資調查公司，調查兩個產業與三個地點，我們想知道產業與地點是否會影響到他們的薪資，資料如下" class="headerlink" title="舉例：薪資調查公司，調查兩個產業與三個地點，我們想知道產業與地點是否會影響到他們的薪資，資料如下"></a>舉例：薪資調查公司，調查兩個產業與三個地點，我們想知道產業與地點是否會影響到他們的薪資，資料如下</h3><p>x 軸為地點、Y 軸為產業</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1p6jTIVIm_16Ub46CDXkpuGW5b-09ANPP&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>Factors<ul>
+<li>Factors A: 產業(2 treatment)</li>
+<li>Factor B: 地點 (3 treatment)</li>
+</ul>
+</li>
+<li>Replications<br>每一個實驗的情景 3 次。</li>
+<li>ANOVA Table 計算<ul>
+<li>可以使用 excel 中的資料分析，<strong>雙因子試驗</strong>計算，並選擇<strong>重複試驗</strong>，因為我們的 ANOVA 公式有 SSAB。有交互作用時則需要選擇<strong>重複試驗</strong><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1MnG9Mp19IeoH8ErS-UnaOvZCEG87_YVu&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>conclusions<ul>
+<li>ctitical value approach<ul>
+<li>產業： \(F=4.19 &lt; F_a = 4.75\)<br>不同的產業，薪水並不會有差別</li>
+<li>地點： \(F= 4.69 \geq F_a = 3.89\)<br>不同的地點，薪水並不會有差別</li>
+<li>交互作用： \(F=1.55 &lt; F_a = 3.89\)<br>此二因素並沒有關聯</li>
+</ul>
+</li>
+<li>p-value approach <ul>
+<li>產業： \(p-value=0.06 &gt; a = 0.05\)<br>不同的產業，薪水並不會有差別</li>
+<li>地點： \(p-value = 0.03 \leq a = 0.05\)<br>不同的地點，薪水並不會有差別</li>
+<li>交互作用： \(p-value=0.25 &gt; a = 0.05\)<br>此二因素並沒有關聯</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>我打到快死掉了QQQ，大二下怎麼那麼忙啦…。也謝謝丁秀儀老師的線上教學可以讓我將資料彙整並供我學習。</p>
+]]></content>
       <categories>
         <category>北科上課筆記</category>
       </categories>
