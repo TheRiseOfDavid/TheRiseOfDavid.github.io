@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">4.7k</span>
+            <span class="post-count">4.8k</span>
         </span>
     </span>
 
@@ -146,7 +146,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>每個母體的觀察值(變數)都必須是常態分配</li>
-<li>每個母體的<strong>變異數</strong>都相同</li>
+<li>我們是檢測每個母體的<strong>變異數</strong>來得知 \(H_0\) 是否為 true</li>
 <li>每個觀察值都是互相獨立</li>
 </ul>
 <h3 id="用圖表進行解釋"><a href="#用圖表進行解釋" class="headerlink" title="用圖表進行解釋"></a>用圖表進行解釋</h3><ul>
@@ -171,7 +171,7 @@ ga('send', 'pageview');
 <li>我們要估計 \(\sigma^2\)，如果 \(H_0\)為真，則變異數差異不大，反之就會大。</li>
 <li>公式 \(MSTR = \frac{\sum_{j=1}^k n_j (\bar{x_j}-\bar{\bar{x}})^2}{k-1}\)<ul>
 <li>其中 x 表示平均數，\(\bar{\bar{x}}\) 為總平均數，\(\bar{x_j}\) 是 factor 中的每一個 treatment</li>
-<li>\(k-1\) 是自由度</li>
+<li>\(k-1\) 是自由度，k 是母體數量</li>
 <li>\( (\bar{x_j}-\bar{\bar{x}})^2 \) 是 SSTR，sum of square due to treatments，中文意思為處理間平方和</li>
 </ul>
 </li>
@@ -182,14 +182,14 @@ ga('send', 'pageview');
 <li>公式 \(MSE = \frac{\sum_{j=1}^k (n_j-1)s^2_j}{\bar{n_T}-k}\)<ul>
 <li>k 為母體數量、\(\bar{n_T}\)樣本個數、\((n_j-1)\) 第 j 組的數量、\(s^2_j\) 第 j 組的標準差</li>
 <li>\(\sum_{j=1}^k (n_j-1)s^2_j\) 是 SSE，sum of squares due to error，誤差平方和</li>
-<li>\(\bar{n_T}-k\) 是自由度</li>
+<li>\(\bar{n_T}-k\) 是自由度，k 是母體數量</li>
 </ul>
 </li>
 <li>MSE = mean square error 中文為均方誤差</li>
 </ul>
 <h2 id="比較變異數的估計：F-檢定-Comparing-the-Variance-Estimates-The-F-test"><a href="#比較變異數的估計：F-檢定-Comparing-the-Variance-Estimates-The-F-test" class="headerlink" title="比較變異數的估計：F 檢定 Comparing the Variance Estimates: The \(F\) test"></a>比較變異數的估計：F 檢定 Comparing the Variance Estimates: The \(F\) test</h2><p>如果 \(H_0\) 成立，ANOVA 假設是有效，樣本描述是使用 \(MSTR / MSE\)，則 F 檢定的自由度在 MSTR 時\(k-1\) 是自由度，MSE \(\bar{n_T}-k\) 是自由度</p>
 <p>如果 k 母體的平均數不相等，則 \(MSTR / MSE\) 的值將會膨脹，因為 MSTR 有 \(\sigma^2\)</p>
-<p>因此我們可以得出，如果我們使用 F test，如果 F test 過大時，則拒絕 \(H_0\)，表示 \(MSTR \ MSE\) 將出現過大的數值</p>
+<p>因此我們可以得出，如果我們使用 F test，如果 F test 過大時，則拒絕 \(H_0\)，表示 \(MSTR / MSE\) 將出現過大的數值</p>
 <blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1-YnKscFFPaP8NBpobEE8tJMfFSsu0HWd&export=download" alt=""></p>
 </blockquote>
@@ -382,8 +382,8 @@ ga('send', 'pageview');
 <li>\(H_1: \mu_1 != \mu_2\)</li>
 </ul>
 </li>
-<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_2} \geq 6.98\)</li>
-<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_2} = |55-68| = 13\)</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_2}| \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_2}| = |55-68| = 13\)</li>
 <li>Conclusion<br>我們可以知道工廠 B 和工廠 P 的平均工作時數並不同。</li>
 </ul>
 </li>
@@ -393,8 +393,8 @@ ga('send', 'pageview');
 <li>\(H_1: \mu_1 != \mu_3\)</li>
 </ul>
 </li>
-<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_3} \geq 6.98\)</li>
-<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_3} = |55-57| = 2\)</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_3}| \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_3} |= |55-57| = 2\)</li>
 <li>Conclusion<br>我們可以知道工廠 B 和工廠 D 的平均工作時數相同，無法拒絕 \(H_0\)。</li>
 </ul>
 </li>
@@ -404,8 +404,8 @@ ga('send', 'pageview');
 <li>\(H_1: \mu_2 != \mu_3\)</li>
 </ul>
 </li>
-<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_2} - \bar{x_3} \geq 6.98\)</li>
-<li>Test Statistic<br>\(|\bar{x_2} - \bar{x_3} = |68-57| = 11\)</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_2} - \bar{x_3}| \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_2} - \bar{x_3}| = |68-57| = 11\)</li>
 <li>Conclusion<br>我們可以知道工廠 P 和工廠 D 的平均工作時數並不同。</li>
 </ul>
 </li>
@@ -426,6 +426,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>如果 \(a_{EW} \) 太大時，我們可以在一開始就將在<a href="#介紹實驗設計與變異數分析-An-Introduction-to-Experimental-Design-and-Analysis-of-Variance">ANOVA</a>將顯著性水準設定更小，即可避免此問題；但要注意，在固定樣本情況時，如果將顯著性水準過低則有可能考慮造成 Type2 Error 錯誤機率提高。</li>
+<li>可透過 Bonferroni adjstment 對顯著性水準進行調整，調整公式為 \(\alpha / k \)，這樣就可以將 \(a_{EW} \) 降低。</li>
 </ul>
 <h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><ul>
 <li>實驗單位 Experimental units<br>對每位接受實驗的 object 就是實驗</li>

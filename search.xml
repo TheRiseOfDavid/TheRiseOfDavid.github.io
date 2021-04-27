@@ -15473,7 +15473,7 @@
 <p><img src="https://drive.google.com/u/2/uc?id=1HIcHS64zaeFjyicLxQ26XOOQnFnnLe6c&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>因此 \(p-value = 0.05 \geq 0.0274 = x^2\)，reject \(H_0\)    </li>
+<li>因此 \(a = 0.05 \geq 0.0274 = p-value\)，reject \(H_0\)    </li>
 </ul>
 </li>
 <li>Critical Value<br>在自由度為 3 時，機率 0.05 為 \(X^2 =7.815\)，我們計算出來的卡方分配 \(9.149 \geq 7.815\)，所以拒絕 \(H_0\) </li>
@@ -15993,7 +15993,8 @@
 
 <h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 15:57:30 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> hw06_fn <span class="comment">#這是我自己寫的 functional progamming，請自行將上面的 function python code</span></span><br><span class="line"><span class="comment">#與此檔案放在同個資料夾底下</span></span><br><span class="line"></span><br><span class="line">data_amount = <span class="number">100</span> <span class="comment">#每一個資料集總數 100</span></span><br><span class="line">train_amount = <span class="number">80</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line">test_amount = <span class="number">20</span> <span class="comment">#訓練資料集筆數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果想要讓電腦辨識貓跟狗，請使用這些程式碼</span></span><br><span class="line">dogs = hw06_fn.read(<span class="string">"../resize_dog/dog_%.3d.jpg"</span>, data_amount)</span><br><span class="line">cats = hw06_fn.read(<span class="string">"../resize_cat/cat_%.3d.jpg"</span>, data_amount)</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果想要讓電腦辨識多拉A夢跟名偵探柯南，請使用這些程式碼</span></span><br><span class="line"><span class="comment"># dogs = hw06_fn.read("../Doraemon/images (%d).jpg", data_amount)</span></span><br><span class="line"><span class="comment"># cats = hw06_fn.read("../conan/images (%d).jpg", data_amount)</span></span><br><span class="line"></span><br><span class="line">sift_dogs = hw06_fn.sift(dogs) <span class="comment">#將資料送去 sift 特徵</span></span><br><span class="line">sift_cats = hw06_fn.sift(cats)</span><br><span class="line"></span><br><span class="line">train_sift = sift_dogs[:train_amount] + sift_cats[:train_amount] <span class="comment">#產生訓練集</span></span><br><span class="line">test_sift = sift_dogs[-test_amount:] + sift_cats[-test_amount:] <span class="comment">#產生測試集</span></span><br><span class="line"></span><br><span class="line">train_features = hw06_fn.kmeans_return_features(<span class="number">20</span>, train_sift) <span class="comment">#找出訓練集每張圖片特徵</span></span><br><span class="line">test_features = hw06_fn.kmeans_return_features(<span class="number">20</span>, test_sift) <span class="comment">#找出測試集每張圖片特徵</span></span><br><span class="line">train_target = [<span class="number">0</span>] * train_amount + [<span class="number">1</span>] * train_amount <span class="comment">#給予其正確的類別</span></span><br><span class="line">test_target = [<span class="number">0</span>] * test_amount + [<span class="number">1</span>] * test_amount <span class="comment">#給予其正確的類別</span></span><br><span class="line"></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>) <span class="comment">#透過 SVC 訓練</span></span><br><span class="line">clf.fit(train_features, train_target) <span class="comment">#開始進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>) <span class="comment">#準確率</span></span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(train_features, train_target)) <span class="comment">#訓練集分數</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(test_features, test_target)) <span class="comment">#測試集分數</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><h3 id="貓與狗"><a href="#貓與狗" class="headerlink" title="貓與狗"></a>貓與狗</h3><blockquote>
+<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>需要特別注意 <code>scipy.cluster.vq.kmean</code> 函式，一開始會隨機選擇一座標進行分類，因此每一次使用此函數不一定回傳值永遠相同，視每次分類而定；因此在執行我這份程式碼時，準確率與我不同並沒有錯。</p>
+<h3 id="貓與狗"><a href="#貓與狗" class="headerlink" title="貓與狗"></a>貓與狗</h3><blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1zbSN_IxKfqE5AHLR9TGN0d3CFxH0Vwe6&export=download" alt=""></p>
 </blockquote>
 <h3 id="多拉A夢與柯南"><a href="#多拉A夢與柯南" class="headerlink" title="多拉A夢與柯南"></a>多拉A夢與柯南</h3><blockquote>
@@ -16106,7 +16107,7 @@
 </ul>
 </li>
 <li>每個母體的觀察值(變數)都必須是常態分配</li>
-<li>每個母體的<strong>變異數</strong>都相同</li>
+<li>我們是檢測每個母體的<strong>變異數</strong>來得知 \(H_0\) 是否為 true</li>
 <li>每個觀察值都是互相獨立</li>
 </ul>
 <h3 id="用圖表進行解釋"><a href="#用圖表進行解釋" class="headerlink" title="用圖表進行解釋"></a>用圖表進行解釋</h3><ul>
@@ -16131,7 +16132,7 @@
 <li>我們要估計 \(\sigma^2\)，如果 \(H_0\)為真，則變異數差異不大，反之就會大。</li>
 <li>公式 \(MSTR = \frac{\sum_{j=1}^k n_j (\bar{x_j}-\bar{\bar{x}})^2}{k-1}\)<ul>
 <li>其中 x 表示平均數，\(\bar{\bar{x}}\) 為總平均數，\(\bar{x_j}\) 是 factor 中的每一個 treatment</li>
-<li>\(k-1\) 是自由度</li>
+<li>\(k-1\) 是自由度，k 是母體數量</li>
 <li>\( (\bar{x_j}-\bar{\bar{x}})^2 \) 是 SSTR，sum of square due to treatments，中文意思為處理間平方和</li>
 </ul>
 </li>
@@ -16142,14 +16143,14 @@
 <li>公式 \(MSE = \frac{\sum_{j=1}^k (n_j-1)s^2_j}{\bar{n_T}-k}\)<ul>
 <li>k 為母體數量、\(\bar{n_T}\)樣本個數、\((n_j-1)\) 第 j 組的數量、\(s^2_j\) 第 j 組的標準差</li>
 <li>\(\sum_{j=1}^k (n_j-1)s^2_j\) 是 SSE，sum of squares due to error，誤差平方和</li>
-<li>\(\bar{n_T}-k\) 是自由度</li>
+<li>\(\bar{n_T}-k\) 是自由度，k 是母體數量</li>
 </ul>
 </li>
 <li>MSE = mean square error 中文為均方誤差</li>
 </ul>
 <h2 id="比較變異數的估計：F-檢定-Comparing-the-Variance-Estimates-The-F-test"><a href="#比較變異數的估計：F-檢定-Comparing-the-Variance-Estimates-The-F-test" class="headerlink" title="比較變異數的估計：F 檢定 Comparing the Variance Estimates: The \(F\) test"></a>比較變異數的估計：F 檢定 Comparing the Variance Estimates: The \(F\) test</h2><p>如果 \(H_0\) 成立，ANOVA 假設是有效，樣本描述是使用 \(MSTR / MSE\)，則 F 檢定的自由度在 MSTR 時\(k-1\) 是自由度，MSE \(\bar{n_T}-k\) 是自由度</p>
 <p>如果 k 母體的平均數不相等，則 \(MSTR / MSE\) 的值將會膨脹，因為 MSTR 有 \(\sigma^2\)</p>
-<p>因此我們可以得出，如果我們使用 F test，如果 F test 過大時，則拒絕 \(H_0\)，表示 \(MSTR \ MSE\) 將出現過大的數值</p>
+<p>因此我們可以得出，如果我們使用 F test，如果 F test 過大時，則拒絕 \(H_0\)，表示 \(MSTR / MSE\) 將出現過大的數值</p>
 <blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1-YnKscFFPaP8NBpobEE8tJMfFSsu0HWd&export=download" alt=""></p>
 </blockquote>
@@ -16342,8 +16343,8 @@
 <li>\(H_1: \mu_1 != \mu_2\)</li>
 </ul>
 </li>
-<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_2} \geq 6.98\)</li>
-<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_2} = |55-68| = 13\)</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_2}| \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_2}| = |55-68| = 13\)</li>
 <li>Conclusion<br>我們可以知道工廠 B 和工廠 P 的平均工作時數並不同。</li>
 </ul>
 </li>
@@ -16353,8 +16354,8 @@
 <li>\(H_1: \mu_1 != \mu_3\)</li>
 </ul>
 </li>
-<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_3} \geq 6.98\)</li>
-<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_3} = |55-57| = 2\)</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_1} - \bar{x_3}| \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_1} - \bar{x_3} |= |55-57| = 2\)</li>
 <li>Conclusion<br>我們可以知道工廠 B 和工廠 D 的平均工作時數相同，無法拒絕 \(H_0\)。</li>
 </ul>
 </li>
@@ -16364,8 +16365,8 @@
 <li>\(H_1: \mu_2 != \mu_3\)</li>
 </ul>
 </li>
-<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_2} - \bar{x_3} \geq 6.98\)</li>
-<li>Test Statistic<br>\(|\bar{x_2} - \bar{x_3} = |68-57| = 11\)</li>
+<li>Rejection Rule<br>Reject \(H_0\) if \(|\bar{x_2} - \bar{x_3}| \geq 6.98\)</li>
+<li>Test Statistic<br>\(|\bar{x_2} - \bar{x_3}| = |68-57| = 11\)</li>
 <li>Conclusion<br>我們可以知道工廠 P 和工廠 D 的平均工作時數並不同。</li>
 </ul>
 </li>
@@ -16386,6 +16387,7 @@
 </ul>
 </li>
 <li>如果 \(a_{EW} \) 太大時，我們可以在一開始就將在<a href="#介紹實驗設計與變異數分析-An-Introduction-to-Experimental-Design-and-Analysis-of-Variance">ANOVA</a>將顯著性水準設定更小，即可避免此問題；但要注意，在固定樣本情況時，如果將顯著性水準過低則有可能考慮造成 Type2 Error 錯誤機率提高。</li>
+<li>可透過 Bonferroni adjstment 對顯著性水準進行調整，調整公式為 \(\alpha / k \)，這樣就可以將 \(a_{EW} \) 降低。</li>
 </ul>
 <h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><ul>
 <li>實驗單位 Experimental units<br>對每位接受實驗的 object 就是實驗</li>
@@ -16593,7 +16595,8 @@
 <h4 id="fail"><a href="#fail" class="headerlink" title="fail"></a>fail</h4><blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1iKkaFulJn1L-MYCucfEKYylGQgAw_aH4&export=download" alt=""></p>
 </blockquote>
-<h3 id="猜拳結果，使用-SIFT-演算法"><a href="#猜拳結果，使用-SIFT-演算法" class="headerlink" title="猜拳結果，使用 SIFT 演算法"></a>猜拳結果，使用 SIFT 演算法</h3><h4 id="tie，但是辨識錯誤"><a href="#tie，但是辨識錯誤" class="headerlink" title="tie，但是辨識錯誤"></a>tie，但是辨識錯誤</h4><blockquote>
+<h3 id="猜拳結果，使用-SIFT-演算法"><a href="#猜拳結果，使用-SIFT-演算法" class="headerlink" title="猜拳結果，使用 SIFT 演算法"></a>猜拳結果，使用 SIFT 演算法</h3><p>需要特別注意 <code>scipy.cluster.vq.kmean</code> 函式，一開始會隨機選擇一座標進行分類，因此每一次使用此函數不一定回傳值永遠相同，視每次分類而定；因此在執行我這份程式碼時，準確率與我不同並沒有錯。</p>
+<h4 id="tie，但是辨識錯誤"><a href="#tie，但是辨識錯誤" class="headerlink" title="tie，但是辨識錯誤"></a>tie，但是辨識錯誤</h4><blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=12s6gXZcgCok362uEKZ1btja78JVBs85G&export=download" alt=""></p>
 </blockquote>
 <h4 id="win，但是辨識錯誤"><a href="#win，但是辨識錯誤" class="headerlink" title="win，但是辨識錯誤"></a>win，但是辨識錯誤</h4><blockquote>
@@ -16878,6 +16881,120 @@
         <tag>大學Life</tag>
         <tag>人生旅途</tag>
         <tag>電腦維修紀錄</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1513D - GCD and MST(設計解題)</title>
+    <url>/2020/04/27/Codeforces/Codeforces%201513D/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>我們要生成出一個最小生成樹，設節點為 \(a_i\)，只要 \(a_i , a_i+1\) 就是 p 成本，但有一種情況下兩個點連接不是 p，，\(GCD(a_i, a_{i+1} , … , a_{j}) = min(a_i, a_{i+1} , … , a_{j}) \)，此時 \(a_i , a_j\) 也構成一條 edge。</p>
+<p>請輸出最小的成本。</p>
+<p>註：下面有時會將 \(GCD(a_i, a_{i+1} , … , a_{j}) = min(a_i, a_{i+1} , … , a_{j}) \) 省略講為 \(GCD = min\)</p>
+<p><a href="https://codeforces.com/contest/1513/problem/D" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解 Kruskal 演算法</li>
+<li>依照 Kruskal 進行優化</li>
+<li>了解如何擴展左右數列的程式碼</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們知道 Kruskal 是怎麼運作的，現在我們來看看這題，這題的 edge 比較簡單，只有 \(a_i , a_i+1\) 與 \(GCD = min\)的情況，剩下的就是降低成本。</p>
+<p>首先我們可以找到題目裡的一個重大線索，\(GCD(a_i, a_{i+1} , … , a_{j}) = min(a_i, a_{i+1} , … , a_{j}) \)，這表示 \(a_i, a_{i+1} , … , a_{j}\) 每個結點都有跟 \(a_i\) 連接，因此權重都是相同，如果要生成最小生成樹，我們可以讓每個點都連接且 cose 都是 \(min(a_i)\)。</p>
+<p>而其他不符合 \(GCD = min\) 的全部 cost 都是 p，並且他們都只有一條 edge  \(a_i , a_i+1\) 連接。</p>
+<p>因此我們只要對每個 \(a_i\) 進行排序，從最小的 \(a_i\) 開始向數列左右邊進行擴增直到 \(a_i\) 大於 p 為止，如果可以符合 \(GCD(a_i, a_{i+1} , … , a_{j}) = min(a_i, a_{i+1} , … , a_{j}) \)，就繼續擴增。</p>
+<p>我們可以用此方式來優化我們對邊的計算，由於我們有 n 個節點，因此 edge 會是 n-1，在前面我們推出無論是 \(gcd = min\) or 成本 p，我們都可以讓每個點都連接；因此我們只要記錄有幾個邊是 \(gcd = min\)，剩下的 edge cost 就是 p。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/qq_43597036/article/details/115707240" target="_blank" rel="noopener">Codeforces Round #714 (Div. 2) D. GCD and MST by 渴望成为大佬菜鸡</a>，獲益良多，很感謝QQQ<br><a href="https://blog.csdn.net/weixin_44178736/article/details/116052427" target="_blank" rel="noopener">Codeforces1513 D. GCD and MST（思维，MST） by live4m</a><br><a href="https://blog.csdn.net/tlyzxc/article/details/115795341" target="_blank" rel="noopener">CodeForces 1504E : GCD and MST 思维 by 匿枫 </a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>太棒了，這題目…QQQQ。把我考得落花流水，我一開始都是往實踐 Kruskal 的方式去實作，一直想不通要怎麼去解決 \(gcd = min\) 的問題。</p>
+<p>現在看到後才被打通自己的思路，其實不需要去想邊要怎麼連接，因為每一種連接方式(p , \(gcd = min\))的 edge cost 都相同，我們只需要去紀錄每種連接方式裡有幾個邊、cost 多少就好。</p>
+<p>總之，寫 codeforces 的題目常常能夠讓自己的思考邏輯更加發散，透過發散來讓自己的思考能力變得更好，更加寬廣，然後進行收斂，得到最好答案。<br>希望在任何地方我都能運用此技巧。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">300000</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, p, temp;</span><br><span class="line"><span class="built_in">deque</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; nodes; <span class="comment">//first 為 a[i] 值，second 為 index，是為了方便後面排序而這樣設計</span></span><br><span class="line"><span class="keyword">int</span> a[MAXN], visit[MAXN]; <span class="comment">//visit 判斷此節點有沒有與其他邊連接</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit)); <span class="comment">//清除，以避免資料被干擾</span></span><br><span class="line">        nodes.clear();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; p; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">            nodes.push_back(&#123;a[i], i&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(nodes.begin(), nodes.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>, remain_edge = n<span class="number">-1</span>; <span class="comment">//ans 答案，remain_edge 剩餘的邊數量</span></span><br><span class="line">        <span class="keyword">while</span>(nodes.size())&#123; <span class="comment">//開始進行擴展</span></span><br><span class="line">            pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; node = nodes.front();</span><br><span class="line">            <span class="comment">//cout &lt;&lt; node.first &lt;&lt; ' ' &lt;&lt; node.second &lt;&lt; '\n';</span></span><br><span class="line">            nodes.pop_front();</span><br><span class="line">            <span class="keyword">if</span>(node.first &gt; p) <span class="keyword">break</span>; <span class="comment">//如果 a[i] 值大於 p，則沒必要改變邊的 cost</span></span><br><span class="line">            <span class="keyword">if</span>(visit[node.second]) <span class="keyword">continue</span>; <span class="comment">//此節點已經與其他邊連結</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> l = node.second, r = node.second;</span><br><span class="line">            <span class="keyword">while</span>(l &gt; <span class="number">1</span> &amp;&amp; !visit[l] &amp;&amp; a[l<span class="number">-1</span>] % node.first == <span class="number">0</span>) l--; <span class="comment">//向左擴展</span></span><br><span class="line">            <span class="keyword">while</span>(r &lt; n &amp;&amp; !visit[r] &amp;&amp; a[r+<span class="number">1</span>] % node.first == <span class="number">0</span>) r++; <span class="comment">//向右擴展</span></span><br><span class="line">            <span class="comment">//while(不超過左邊邊界 &amp;&amp; r 並沒有被其他 gcd = min 使用 &amp;&amp;</span></span><br><span class="line">            <span class="comment">// gcd(a[i] , a[r-1]) == 0 )，向左擴展邏輯也是如此</span></span><br><span class="line">            <span class="comment">//需要特別注意的是，!visit[r] 是驗證此節點是否有沒有與其他 min = gcd 連通，有的話就不行</span></span><br><span class="line">            <span class="comment">// a[r+1] % node.first == 0 則是判斷是否可以延伸，如果 a[r+1] 小於 node.first 則不可能符合此邏輯式，也表示下個點不可能可以連通，直接將 r 停留在此就好。</span></span><br><span class="line">            <span class="comment">// l 邏輯也是相同</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//we sum edge, not node.</span></span><br><span class="line">            <span class="comment">//so we consider visit[i] used or not,</span></span><br><span class="line">            <span class="comment">//if visit[i] is true, then node[i] small than node.first</span></span><br><span class="line">            <span class="comment">//then don't be extend (left or right) sequence.</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = l; i &lt;= r; i++) visit[i] = <span class="number">1</span>; <span class="comment">//將此區間表示已用過</span></span><br><span class="line">            ans += node.first * (r-l); <span class="comment">//紀錄區間內的所有邊成本</span></span><br><span class="line">            remain_edge -= (r-l); <span class="comment">//剩下的邊減去區間的所有邊數量</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; "l r " &lt;&lt; l &lt;&lt; ' ' &lt;&lt; r &lt;&lt; '\n';</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; "ans " &lt;&lt; ans &lt;&lt; '\n';</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; "remain_edge " &lt;&lt; remain_edge &lt;&lt; '\n';</span></span><br><span class="line">        ans += remain_edge * p; <span class="comment">//ans +  p * 剩餘邊長數量</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資財二管理資訊系統 個案五 水靈科技—快樂遊網站</title>
+    <url>/2021/04/12/NTUT_note/NTUTifm_Manager_t05/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-請根據人力資源方面考量，個案的三位工作人員，只能使用周末（六，日）加班嗎？如果需要，那需要多少加班時間？如果不需要，那有甚麼方法嗎？"><a href="#QUESTION-請根據人力資源方面考量，個案的三位工作人員，只能使用周末（六，日）加班嗎？如果需要，那需要多少加班時間？如果不需要，那有甚麼方法嗎？" class="headerlink" title="QUESTION:請根據人力資源方面考量，個案的三位工作人員，只能使用周末（六，日）加班嗎？如果需要，那需要多少加班時間？如果不需要，那有甚麼方法嗎？"></a>QUESTION:請根據人力資源方面考量，個案的三位工作人員，只能使用周末（六，日）加班嗎？如果需要，那需要多少加班時間？如果不需要，那有甚麼方法嗎？</h2><p>我認為是需要加班的，但只需要加班一天即可。</p>
+<p>原本是預計完成一篇文章，必須要花費兩小時。我認為我們可以對尋找適合的網站此地方做優化，我認為並不需要找到30個網站這麼多，我們主要目的是推廣觀光局旅遊網站，我們只需要針對適合的旅遊論壇(如：PPT、DCARD)、BLOG PO 出其適合的文章。</p>
+<p>我認為我們最多只需要找 16 個網站，如果論壇則我們尋找適合的板來進行發文；而文章的質量是我們最注重的，一個好的文章可以不被發現是業配文章或是不讓人反感，因此每篇1小時是可以被接收的。</p>
+<p>而找到適合的板 PO文則需要花費 0.5 小時，由於我們認為部分論壇適合在不同的板不同角度的文章，因此這邊基本上也不建議進行調整也免造成不適合的文章在板上出沒。</p>
+<p>再來我們認為需要花 6 小時的時間對我們所發布的文章進行留言，留下有價值的留言也助於網友們觸及到我們文章的機會。</p>
+<h3 id="員工工作時數如下"><a href="#員工工作時數如下" class="headerlink" title="員工工作時數如下"></a>員工工作時數如下</h3><ul>
+<li>加班一天約 8*3=24hr</li>
+<li>禮拜一至禮拜五約 3<em>2</em>5=30hr</li>
+<li>工作總和 30+24=54hr</li>
+</ul>
+<h3 id="工作時數如下"><a href="#工作時數如下" class="headerlink" title="工作時數如下"></a>工作時數如下</h3><ul>
+<li>尋找適合的網站 18*0.5=8hr</li>
+<li>適合的文章 30*1=30hr</li>
+<li>將文章放在適合的板 16*0.5=8hr</li>
+<li>在發布的文章下留言 6hr</li>
+<li>總合為 30+8+8+6=52hr</li>
+</ul>
+<p>加班是很不樂見的一件事，但重點是突如其來的工作量往往讓人措手不及，因此我們建議公司應該要對資料組給予適當的休息，而非每次都安插緊急任務，會使員工士氣低落或經過文章鍛鍊後的員工，因壓力過大而跳槽去其他公司。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大管理資訊系統筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12694 - Meeting Room Arrangement (數論 Math theorm)</title>
+    <url>/2021/04/26/UVa/UVa12694/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個討論室每天開放 10 小時(0~10)，我們會給你每個會議的開始與結束時間，想請你幫我們在此會議室中塞入多的會議。</p>
+<p><a href="https://onlinejudge.org/external/126/12694.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>思考到效率提升 </li>
+<li>意識到可以用排序解決</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>通常比較直覺的寫法是直接對會議的開始與結束時間進行排序，先排序開始在排序結束，從最早的結束時間進行 greedy。</p>
+<p>這裡提供一種寫法，我們<strong>只需要排序結束時間即可</strong>，並且我們用一個變數紀錄討論室最後結束時間(定義 end)。</p>
+<p>接下來用 end 去跟每一個會議開始時間做比較，如果會議開始時間比討論室結束時間晚就將答案加一。</p>
+<p>原因是由於我們對結束時間排序，因此結束時間越早的則會在越前面，並且我們紀錄了討論室結束時間。如果遇到這種測資也可以避免</p>
+<ul>
+<li>當前討論室結束時間為 3</li>
+<li>兩筆資料<ul>
+<li>2 點開始 4 點結束</li>
+<li>3 點開始 4 點結束</li>
+</ul>
+</li>
+<li>結論<br>我們可以得出討論室結束時間為 3，其中第一筆資料開始時間為 2 點並不符合，而另一筆剛好從 3 點開始因此符合！</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://chucs.github.io/Meeting-Room-Arrangement/" target="_blank" rel="noopener">UVA 12694 by chucs</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>可惡，我沒辦法在 5 分鐘內寫完RRRR，好難過QQQ。一開始沒有想到這麼好的寫法，而是想到最直接的貪心解，但程式碼確實沒有比 chucs 大大還好看，因此就進行學習與修改。</p>
+<p>希望我未來遇到這種問題我都可以寫出漂亮且乾淨的程式碼。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, s, f; <span class="comment">//題目資料</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; meet; <span class="comment">//輸入題目會議用</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; x, pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; y)</span></span>&#123; <span class="comment">//從結束時間開始由小到大排序</span></span><br><span class="line">    <span class="keyword">return</span> x.second &lt; y.second;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> end = <span class="number">0</span>, ans = <span class="number">0</span>; <span class="comment">//end 會議開始時間, ans 答案時間</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: meet)&#123; <span class="comment">//開始 greedy</span></span><br><span class="line">        <span class="keyword">if</span>(end &lt;= it.first)&#123; <span class="comment">//討論室可以加入此會議</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; it.first &lt;&lt; ' ' &lt;&lt; it.second &lt;&lt; '\n';</span></span><br><span class="line">            end = it.second; <span class="comment">//紀錄討論室結束時間</span></span><br><span class="line">            ans++; <span class="comment">//答案加一</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans; <span class="comment">//回傳答案</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123; </span><br><span class="line">        meet.clear(); <span class="comment">//需要清除，以免資料被干擾</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; s &gt;&gt; f &amp;&amp; (s+f!=<span class="number">0</span>)) meet.push_back(&#123;s,f&#125;); <span class="comment">//不斷讀入資料</span></span><br><span class="line">        sort(meet.begin(), meet.end(), compare); <span class="comment">//排序</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; solve() &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
 </search>
