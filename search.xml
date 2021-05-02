@@ -16997,4 +16997,205 @@
         <tag>數論 Math theorm</tag>
       </tags>
   </entry>
+  <entry>
+    <title>統計學(二) 筆記 - 第十四章 簡單線性回歸(Simple Linear Rejression)</title>
+    <url>/2021/05/02/NTUT_note/statistics-ch14/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="簡單線性回歸-Simple-Linear-Regression-Model"><a href="#簡單線性回歸-Simple-Linear-Regression-Model" class="headerlink" title="簡單線性回歸 Simple Linear Regression Model"></a>簡單線性回歸 Simple Linear Regression Model</h1><ul>
+<li>功能<ul>
+<li>了解變數與變數的關聯性</li>
+<li>透過獨立變數(independent variable)去預測因變數(dependent variable)，定義 y</li>
+<li>透過 x 去預測 y</li>
+</ul>
+</li>
+<li>說明<ul>
+<li>簡單線性回歸<strong>只有一個獨立變數去預測因變數</strong></li>
+<li>因此關聯圖應該是一條直線</li>
+<li>如果需要多個獨立變數去預測因變數則使用<strong>複回歸(multiple regression)</strong></li>
+</ul>
+</li>
+<li>公式<ul>
+<li>簡單線性回歸模型(model) \(y = \beta_0 + \beta_1 x + \mathcal{E} \)<ul>
+<li>\(\beta_0\) and \(\beta_1\) 是模型的參數</li>
+<li>\(\mathcal{E}\) 則是隨機變數的誤差項(error term)</li>
+</ul>
+</li>
+<li>期望值的 y \(E(y) = \beta_0 + \beta_1 x\)，在此 \(\mathcal{E} = 0\)<ul>
+<li>\(\beta_0 \) 為回歸線的截距</li>
+<li>\(\beta_1 \) 為回歸線的斜率</li>
+<li>\(E(y)\) 是當 x 為多少時 y 的期望值</li>
+<li>正相關示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1U667lCV8MqEfyYHtro5LwSkPrDUlL2vR&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>負相關示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1cL1rX99D34gakdwqyF_xpZOrMeQIQuUJ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>無相關示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1SoN3ZEoPN76wrJqx0BUvF7-5qY6zOqOV&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>估計(estimated) 線性回歸 \(\hat{y} = b_0 + b_1 x\)<ul>
+<li>\(\b_0 \) 為回歸線的截距</li>
+<li>\(\b_1 \) 為回歸線的斜率</li>
+<li>\(\hat{y}\) 是當 x 為多少時 y 的期望值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>估計程序 Estimation Process<ul>
+<li>由於我們不能確定期望值方程式中的 \(\beta_0 + \beta_1 x\)，因此我們透過樣本資料與估計線性回歸方程式得出 \(\b_0, \b_1\)，再透過 \(\b_0, \b_1\) 去估計 \(\beta_0 , \beta_1 x\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1GJ7Tbeuby5jxwdS3sGXVqfDbCFPCwwEU&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Least-Squares-Method"><a href="#Least-Squares-Method" class="headerlink" title="Least Squares Method"></a>Least Squares Method</h1><h1 id="Cofficient-of-Determination"><a href="#Cofficient-of-Determination" class="headerlink" title="Cofficient of Determination"></a>Cofficient of Determination</h1><h1 id="Model-Assumptions"><a href="#Model-Assumptions" class="headerlink" title="Model Assumptions"></a>Model Assumptions</h1><h1 id="Testing-for-Significance"><a href="#Testing-for-Significance" class="headerlink" title="Testing for Significance"></a>Testing for Significance</h1><h1 id="Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction"><a href="#Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" class="headerlink" title="Using the Estimated Regression Equation for Estimation and Prediction"></a>Using the Estimated Regression Equation for Estimation and Prediction</h1><h1 id="Computer-Solution"><a href="#Computer-Solution" class="headerlink" title="Computer Solution"></a>Computer Solution</h1><h1 id="Residual-Analysis-Validating-Model-Assumptions"><a href="#Residual-Analysis-Validating-Model-Assumptions" class="headerlink" title="Residual Analysis: Validating Model Assumptions"></a>Residual Analysis: Validating Model Assumptions</h1><h1 id="Residual-Analysis-Outliers-and-Influential-Observations"><a href="#Residual-Analysis-Outliers-and-Influential-Observations" class="headerlink" title="Residual Analysis: Outliers and Influential Observations"></a>Residual Analysis: Outliers and Influential Observations</h1>]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R 檢測子字串與正規表達式是否存在此字串</title>
+    <url>/2021/05/03/R/Rstr_detect/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>有時候需要在一個 dataframe 中尋找某些字串，但字串又不像數字一樣可以用大於、小於等條件來找出數字，只能透過子字串方式來找？此時那該怎麼辦呢。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="str-detect-語法"><a href="#str-detect-語法" class="headerlink" title="str_detect 語法"></a><code>str_detect</code> 語法</h2><p>此語法需要安裝 <code>stringr</code> 套件包。</p>
+<p>安裝語法 <code>install.packages(&quot;stringr&quot;)</code><br>使用套件 <code>library(stringr)</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">str_detect(string, pattern)</span><br></pre></td></tr></table></figure>
+
+<p>其中 string 為被字串<br>而 pattern 則是我們要查詢的字串，支援正規表達式</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.rdocumentation.org/packages/stringr/versions/1.4.0/topics/str_detect" target="_blank" rel="noopener">str_detect: Detect the presence or absence of a pattern in a string. by rdocumentation</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講 R 真的蠻香的XDD，雖然之前一直嫌棄她不好用。但最近有點被調教成功了XD，多元的套件包就有多元的支持，讚啦！</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centOS6 安裝 nginx、安裝 SSL 憑證、進行反向代理</title>
+    <url>/2021/05/03/linux/centOS-nginx/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>記錄我在 linux 上學習安裝 nginx 以及反向代理 https to http時遇到的困難，自學真的好麻煩呀 QQ<br>教學示範作業系統 centOS6</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="centOS6-如何安裝-nginx"><a href="#centOS6-如何安裝-nginx" class="headerlink" title="centOS6 如何安裝 nginx"></a>centOS6 如何安裝 nginx</h2><ul>
+<li>安裝依賴套件 <code>sudo yum install epel-release</code></li>
+<li>安裝 nginx <code>sudo yum install nginx</code></li>
+</ul>
+<h2 id="nginx-安裝-ssl-憑證"><a href="#nginx-安裝-ssl-憑證" class="headerlink" title="nginx 安裝 ssl 憑證"></a>nginx 安裝 ssl 憑證</h2><p>我們先產生出 ssl 憑證，這邊我則是在 godaddy 的 ssl 憑證中下載 crt and key。<br>先對 <a href="https://www.sslshopper.com/ssl-checker.html#hostname=https://arch-backend.com/" target="_blank" rel="noopener">url 進行 ssl 檢查，來確定 ssl 是否正確</a>。</p>
+<p>複製好 crt 之後，我們先透過<a href="https://www.sslshopper.com/certificate-decoder.html" target="_blank" rel="noopener">網頁進行 crt 檢查</a>，如果檢查成功就沒問題啦</p>
+<blockquote>
+<p>檢查 ok 示意圖<br><img src="https://drive.google.com/u/2/uc?id=1ShDw31VtIqAiafrKZA62wIvI_EgYuQm-&export=download" alt=""></p>
+</blockquote>
+<p>如果沒有成功比對可以試試看<a href="https://tw.piliapp.com/text-diff/#diff" target="_blank" rel="noopener">文本比較器</a>，來找出哪些有錯誤。</p>
+<p>也可以在 linux 進行檢查</p>
+<ul>
+<li>檢查 csr<figure class="highlight plain"><figcaption><span>req -text -noout -verify -in CSR.csr```</span></figcaption><table><tr><td class="code"><pre><span class="line">* 檢查 key</span><br><span class="line">&#96;&#96;&#96;openssl rsa -in privateKey.key -check</span><br></pre></td></tr></table></figure></li>
+<li>檢查 crt<figure class="highlight plain"><figcaption><span>x509 -in certificate.crt -text -noout```</span></figcaption><table><tr><td class="code"><pre><span class="line">* 然後再 &#96;&#96;&#96;sudo vim &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;ssl.conf&#96;&#96;&#96; 加入紅筆中的這些</span><br><span class="line">&gt;![](https:&#x2F;&#x2F;drive.google.com&#x2F;u&#x2F;2&#x2F;uc?id&#x3D;1vVN1QJfOCsReSGsQCWa1IsScTIR0JB0L&amp;export&#x3D;download)</span><br><span class="line"></span><br><span class="line">## 開始進行反向代理</span><br><span class="line">* &#96;&#96;&#96; location  + &#x2F;url&#x2F; &#96;&#96;&#96;，就是我們 https:&#x2F;&#x2F;example.com&#x2F;url&#x2F;</span><br><span class="line">* &#96;&#96;&#96;proxy_pass api&#96;&#96;&#96;，就是我們要請 nginx 將 http 代理成 https，讓外網透過 https 連入 http api</span><br><span class="line">&gt;![](https:&#x2F;&#x2F;drive.google.com&#x2F;u&#x2F;2&#x2F;uc?id&#x3D;1mG5yNnUajyQBcA698vU0zAFKPVLKj7k4&amp;export&#x3D;download)</span><br><span class="line">* 加入 &#96;&#96;&#96;upstream&#96;&#96;&#96; 綠色區塊，然後 server 那邊放入我們需要的 api</span><br><span class="line">&gt;![](https:&#x2F;&#x2F;drive.google.com&#x2F;u&#x2F;2&#x2F;uc?id&#x3D;1Kg2frI4ELLPr8J3qq4LDhu4LA19UQyM0&amp;export&#x3D;download)</span><br><span class="line"></span><br><span class="line">## 啟動 nginx </span><br><span class="line">輸入語法，不過需要記住 nginx 需要分號，剛剛在打的時候要注意分號優 &#96;&#96;&#96;sudo service nginx start</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-6-with-yum" target="_blank" rel="noopener">How To Install nginx on CentOS 6 with yum by digitalocean</a><br><a href="https://www.sslshopper.com/ssl-checker.html" target="_blank" rel="noopener">SSL Checker by sslshopper</a><br><a href="https://www.sslshopper.com/certificate-decoder.html" target="_blank" rel="noopener">crt check by sslshopper</a><br><a href="https://oranwind.org/-devops-ubuntu-shang-nginx-an-zhuang-yu-she-ding/" target="_blank" rel="noopener">[ DevOps ] Nginx 設定 Proxy Server 及 Load balance by oranwind</a><br><a href="https://www.opencli.com/linux/nginx-setup-ssl" target="_blank" rel="noopener">Nginx 設定 SSL 網頁加密 by opencli</a><br><a href="https://junhanli.blogspot.com/2017/04/ubuntu-nginx-https-godaddy-ssl.html" target="_blank" rel="noopener">Ubuntu Nginx 設定HTTPS建立網頁加密連線 (Godaddy SSL憑證) by junhanli</a><br><a href="https://serverfault.com/questions/1021242/4562605504error0909006cpem-routinesget-nameno-start-linecrypto-pem-pem-lib" target="_blank" rel="noopener">4562605504:error:0909006C:PEM routines:get_name:no start line:crypto/pem/pem_lib.c:745:Expecting: TRUSTED CERTIFICATE by stackexchange</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好棒! 我終於把它寫出來了 centOS6 真的好難用QQQ，花了花多時間去把它學習，從不了解反向代理到理解反向代理，然後得知 ssl 是必須要去申請憑證，而非做一個假的 ssl 上線就可以讓 nginx 變成 https。</p>
+<p>之後找到 nginx 管理 https，原本是使用 redirect 307 發現會出現錯誤為 https 中有 http，再來使用 proxy_pass 成功代理了。</p>
+<p>一路上都是心血與痛苦，也謝謝網路上的大大願意寫 blog 分享資源，謝謝各位。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>linux</tag>
+        <tag>centOS</tag>
+        <tag>nignx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 nignx 時遇到 ERROR! Mixed Content The page at &#39;https://example.com/&#39; was loaded over HTTPS, but requested an insecure script &#39;http://example.com2/&#39;. This request has been blocked; the content must be served over HTTPS.</title>
+    <url>/2021/05/03/linux/centOS-Error-Mixed-Content/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>記錄我在 linux 上學習遇到 the content must be served over HTTPS. 困難，自學真的好麻煩呀 QQ<br>教學示範作業系統 centOS6</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="QUESTION-使用-nignx-時遇到-ERROR-Mixed-Content-The-page-at-‘https-example-com-39-was-loaded-over-HTTPS-but-requested-an-insecure-script-‘http-example-com2-39-This-request-has-been-blocked-the-content-must-be-served-over-HTTPS"><a href="#QUESTION-使用-nignx-時遇到-ERROR-Mixed-Content-The-page-at-‘https-example-com-39-was-loaded-over-HTTPS-but-requested-an-insecure-script-‘http-example-com2-39-This-request-has-been-blocked-the-content-must-be-served-over-HTTPS" class="headerlink" title="QUESTION: 使用 nignx 時遇到 ERROR! Mixed Content The page at ‘https://example.com/&#39; was loaded over HTTPS, but requested an insecure script ‘http://example.com2/&#39;. This request has been blocked; the content must be served over HTTPS."></a>QUESTION: 使用 nignx 時遇到 ERROR! Mixed Content The page at ‘<a href="https://example.com/&#39;" target="_blank" rel="noopener">https://example.com/&#39;</a> was loaded over HTTPS, but requested an insecure script ‘<a href="http://example.com2/&#39;" target="_blank" rel="noopener">http://example.com2/&#39;</a>. This request has been blocked; the content must be served over HTTPS.</h2><blockquote>
+<p>在使用 nignx 反向代理時，遇到一個問題是在 call api 時發現原本使用 nginx 引導至 server 內的 http api，會發生這種問題</p>
+<p>這邊的作業系統為 centOS6</p>
+</blockquote>
+<!-- more -->
+
+<h2 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h2><ul>
+<li>對 ssl 檔案進行編輯 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code></li>
+<li>在 location 中將原本是使用 <code>redirect http://example.com</code> 改為 <code>proxy_pass http://example.com</code><ul>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1N8R8nyWy80mzyHcGE7vpmsmRLOxCKmsD&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>這樣就可以了!</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://oranwind.org/-devops-ubuntu-shang-nginx-an-zhuang-yu-she-ding/" target="_blank" rel="noopener">[ DevOps ] Nginx 設定 Proxy Server 及 Load balance</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這個對我來說終於是個簡單的問題了QQ，我在弄 nginx 中一直遇到一些奇怪的問題(CentOS6) 環境QQQ，這次終於有輕鬆完成了。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>linux</tag>
+        <tag>nignx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centOS6 yum 停止維護後，讓 yum 繼續可以使用</title>
+    <url>/2021/05/03/linux/centOS6-yum/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>記錄我在 linux 上學習安裝 nginx 以及反向代理 https to http時遇到的困難，自學真的好麻煩呀 QQ</p>
+<p>教學示範作業系統 centOS6</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="如何讓-yum-繼續可以使用"><a href="#如何讓-yum-繼續可以使用" class="headerlink" title="如何讓 yum 繼續可以使用"></a>如何讓 yum 繼續可以使用</h2><p>只要輸入此指令即可拿來使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -o update-centos6yum.sh https:&#x2F;&#x2F;gitee.com&#x2F;usmile&#x2F;jenkinslibrary&#x2F;raw&#x2F;master&#x2F;update-centos6yum.sh</span><br><span class="line">chmod +x update-centos6yum.sh</span><br><span class="line">.&#x2F;update-centos6yum.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><p><a href="https://www.cnblogs.com/skymyyang/p/14108100.html" target="_blank" rel="noopener">centos6 yum源失效 by skymyyang</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>在 google 中花了很多時間找這個的解決方式，只有這網頁能給予我最快速的解決方式且還這麼簡單！真的太感謝他了QQQ。</p>
+<p>老實講，有時候網路上太多無用的資訊了，真希望 google search 可以有類似於 stackoverflow 可以讓網友對網頁進行按讚或倒讚，越少的讚放越後面，越多的讚則放前面。</p>
+<p>然後把農場文章都刪掉，農場文章會讓寫 blog 的人越來越沒有動力…。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>linux</tag>
+        <tag>centOS</tag>
+        <tag>nignx</tag>
+      </tags>
+  </entry>
 </search>
