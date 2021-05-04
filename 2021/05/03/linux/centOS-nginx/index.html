@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">658</span>
+            <span class="post-count">739</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">2分鐘</span>
+            <span class="post-count">3分鐘</span>
         </span>
     </span>
 </div>
@@ -128,15 +128,33 @@ ga('send', 'pageview');
 <p>如果沒有成功比對可以試試看<a href="https://tw.piliapp.com/text-diff/#diff" target="_blank" rel="noopener">文本比較器</a>，來找出哪些有錯誤。</p>
 <p>也可以在 linux 進行檢查</p>
 <ul>
-<li>檢查 csr<figure class="highlight plain"><figcaption><span>req -text -noout -verify -in CSR.csr```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* 檢查 key</span><br><span class="line">&#96;&#96;&#96;openssl rsa -in privateKey.key -check</span><br></pre></td></tr></table></figure></li>
-<li>檢查 crt<figure class="highlight plain"><figcaption><span>x509 -in certificate.crt -text -noout```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* 然後再 &#96;&#96;&#96;sudo vim &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;ssl.conf&#96;&#96;&#96; 加入紅筆中的這些</span><br><span class="line">&gt;![](https:&#x2F;&#x2F;drive.google.com&#x2F;u&#x2F;2&#x2F;uc?id&#x3D;1vVN1QJfOCsReSGsQCWa1IsScTIR0JB0L&amp;export&#x3D;download)</span><br><span class="line"></span><br><span class="line">## 開始進行反向代理</span><br><span class="line">* &#96;&#96;&#96; location  + &#x2F;url&#x2F; &#96;&#96;&#96;，就是我們 https:&#x2F;&#x2F;example.com&#x2F;url&#x2F;</span><br><span class="line">* &#96;&#96;&#96;proxy_pass api&#96;&#96;&#96;，就是我們要請 nginx 將 http 代理成 https，讓外網透過 https 連入 http api</span><br><span class="line">&gt;![](https:&#x2F;&#x2F;drive.google.com&#x2F;u&#x2F;2&#x2F;uc?id&#x3D;1mG5yNnUajyQBcA698vU0zAFKPVLKj7k4&amp;export&#x3D;download)</span><br><span class="line">* 加入 &#96;&#96;&#96;upstream&#96;&#96;&#96; 綠色區塊，然後 server 那邊放入我們需要的 api</span><br><span class="line">&gt;![](https:&#x2F;&#x2F;drive.google.com&#x2F;u&#x2F;2&#x2F;uc?id&#x3D;1Kg2frI4ELLPr8J3qq4LDhu4LA19UQyM0&amp;export&#x3D;download)</span><br><span class="line"></span><br><span class="line">## 啟動 nginx </span><br><span class="line">輸入語法，不過需要記住 nginx 需要分號，剛剛在打的時候要注意分號優 &#96;&#96;&#96;sudo service nginx start</span><br></pre></td></tr></table></figure>
-
+<li>檢查 csr <code>openssl req -text -noout -verify -in CSR.csr</code></li>
+<li>檢查 key <code>openssl rsa -in privateKey.key -check</code></li>
+<li>檢查 crt <code>openssl x509 -in certificate.crt -text -noout</code></li>
+<li>然後再 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code> 加入紅筆中的這些<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1vVN1QJfOCsReSGsQCWa1IsScTIR0JB0L&export=download" alt=""></p>
+</blockquote>
 </li>
 </ul>
+<h2 id="開始進行反向代理"><a href="#開始進行反向代理" class="headerlink" title="開始進行反向代理"></a>開始進行反向代理</h2><ul>
+<li><code>location  + /url/</code>，就是我們 <a href="https://example.com/url/" target="_blank" rel="noopener">https://example.com/url/</a></li>
+<li><code>proxy_pass api</code>，就是我們要請 nginx 將 http 代理成 https，讓外網透過 https 連入 http api<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1mG5yNnUajyQBcA698vU0zAFKPVLKj7k4&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>加入 <code>upstream</code> 綠色區塊，然後 server 那邊放入我們需要的 api<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Kg2frI4ELLPr8J3qq4LDhu4LA19UQyM0&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="啟動-nginx"><a href="#啟動-nginx" class="headerlink" title="啟動 nginx"></a>啟動 nginx</h2><p>輸入語法，不過需要記住 nginx 需要分號，剛剛在打的時候要注意分號優 <code>sudo service nginx start</code></p>
 <h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-6-with-yum" target="_blank" rel="noopener">How To Install nginx on CentOS 6 with yum by digitalocean</a><br><a href="https://www.sslshopper.com/ssl-checker.html" target="_blank" rel="noopener">SSL Checker by sslshopper</a><br><a href="https://www.sslshopper.com/certificate-decoder.html" target="_blank" rel="noopener">crt check by sslshopper</a><br><a href="https://oranwind.org/-devops-ubuntu-shang-nginx-an-zhuang-yu-she-ding/" target="_blank" rel="noopener">[ DevOps ] Nginx 設定 Proxy Server 及 Load balance by oranwind</a><br><a href="https://www.opencli.com/linux/nginx-setup-ssl" target="_blank" rel="noopener">Nginx 設定 SSL 網頁加密 by opencli</a><br><a href="https://junhanli.blogspot.com/2017/04/ubuntu-nginx-https-godaddy-ssl.html" target="_blank" rel="noopener">Ubuntu Nginx 設定HTTPS建立網頁加密連線 (Godaddy SSL憑證) by junhanli</a><br><a href="https://serverfault.com/questions/1021242/4562605504error0909006cpem-routinesget-nameno-start-linecrypto-pem-pem-lib" target="_blank" rel="noopener">4562605504:error:0909006C:PEM routines:get_name:no start line:crypto/pem/pem_lib.c:745:Expecting: TRUSTED CERTIFICATE by stackexchange</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好棒! 我終於把它寫出來了 centOS6 真的好難用QQQ，花了花多時間去把它學習，從不了解反向代理到理解反向代理，然後得知 ssl 是必須要去申請憑證，而非做一個假的 ssl 上線就可以讓 nginx 變成 https。</p>
 <p>之後找到 nginx 管理 https，原本是使用 redirect 307 發現會出現錯誤為 https 中有 http，再來使用 proxy_pass 成功代理了。</p>
 <p>一路上都是心血與痛苦，也謝謝網路上的大大願意寫 blog 分享資源，謝謝各位。</p>
+<h2 id="紀錄"><a href="#紀錄" class="headerlink" title="紀錄"></a>紀錄</h2><p>記錄我在採坑時，用到的那些 linux 指令，也許對未來的我或讀者有幫助</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> vim &#x2F;etc&#x2F;httpd&#x2F;conf&#x2F;httpd.conf</span><br><span class="line"> service httpd restart</span><br><span class="line"></span><br><span class="line">MEU8UD3PE67H57U6BLOEPLOZK8DGLLX9</span><br><span class="line"></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -keyout arch-backend.com&#x2F;.key -out arch-backend.com&#x2F;.csr</span><br><span class="line"></span><br><span class="line">sudo service nginx restart</span><br><span class="line"></span><br><span class="line"> sudo vim &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;ssl.conf</span><br><span class="line"> sudo fuser -k 443&#x2F;tcp</span><br><span class="line"></span><br><span class="line"> ssl_certificate &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt;</span><br><span class="line"> ssl_certificate &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;web.crt;</span><br><span class="line">    ssl_certificate_key &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;nginx-ssl.key;</span><br><span class="line">ssl_certificate_key &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;web.key;</span><br><span class="line"></span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt -text -noout</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;web.crt -text -noout</span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt -text -noout</span><br><span class="line"></span><br><span class="line">openssl rsa -in &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;web.key -check</span><br></pre></td></tr></table></figure>
+
 
       
       <!-- reward -->

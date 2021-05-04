@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    統計學(二) 筆記 - 第十四章 簡單線性回歸(Simple Linear Rejression) |  大衞的筆記
+    統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Rejression) |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  統計學(二) 筆記 - 第十四章 簡單線性回歸(Simple Linear Rejression)
+  統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Rejression)
 </h1>
   
 
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">428</span>
+            <span class="post-count">2.4k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">1分鐘</span>
+            <span class="post-count">9分鐘</span>
         </span>
     </span>
 </div>
@@ -116,7 +116,7 @@ ga('send', 'pageview');
 </blockquote>
 <a id="more"></a>
 
-<h1 id="簡單線性回歸-Simple-Linear-Regression-Model"><a href="#簡單線性回歸-Simple-Linear-Regression-Model" class="headerlink" title="簡單線性回歸 Simple Linear Regression Model"></a>簡單線性回歸 Simple Linear Regression Model</h1><ul>
+<h1 id="簡單線性迴歸-Simple-Linear-Regression-Model"><a href="#簡單線性迴歸-Simple-Linear-Regression-Model" class="headerlink" title="簡單線性迴歸 Simple Linear Regression Model"></a>簡單線性迴歸 Simple Linear Regression Model</h1><ul>
 <li>功能<ul>
 <li>了解變數與變數的關聯性</li>
 <li>透過獨立變數(independent variable)去預測因變數(dependent variable)，定義 y</li>
@@ -124,20 +124,20 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>說明<ul>
-<li>簡單線性回歸<strong>只有一個獨立變數去預測因變數</strong></li>
+<li>簡單線性迴歸<strong>只有一個獨立變數去預測因變數</strong></li>
 <li>因此關聯圖應該是一條直線</li>
-<li>如果需要多個獨立變數去預測因變數則使用<strong>複回歸(multiple regression)</strong></li>
+<li>如果需要多個獨立變數去預測因變數則使用<strong>複迴歸(multiple regression)</strong></li>
 </ul>
 </li>
 <li>公式<ul>
-<li>簡單線性回歸模型(model) \(y = \beta_0 + \beta_1 x + \mathcal{E} \)<ul>
+<li>簡單線性迴歸模型(model) \(y = \beta_0 + \beta_1 x + \mathcal{E} \)<ul>
 <li>\(\beta_0\) and \(\beta_1\) 是模型的參數</li>
 <li>\(\mathcal{E}\) 則是隨機變數的誤差項(error term)</li>
 </ul>
 </li>
 <li>期望值的 y \(E(y) = \beta_0 + \beta_1 x\)，在此 \(\mathcal{E} = 0\)<ul>
-<li>\(\beta_0 \) 為回歸線的截距</li>
-<li>\(\beta_1 \) 為回歸線的斜率</li>
+<li>\(\beta_0 \) 為迴歸線的截距</li>
+<li>\(\beta_1 \) 為迴歸線的斜率</li>
 <li>\(E(y)\) 是當 x 為多少時 y 的期望值</li>
 <li>正相關示意圖<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1U667lCV8MqEfyYHtro5LwSkPrDUlL2vR&export=download" alt=""></p>
@@ -153,23 +153,204 @@ ga('send', 'pageview');
 </li>
 </ul>
 </li>
-<li>估計(estimated) 線性回歸 \(\hat{y} = b_0 + b_1 x\)<ul>
-<li>\(\b_0 \) 為回歸線的截距</li>
-<li>\(\b_1 \) 為回歸線的斜率</li>
+<li>估計(estimated) 線性迴歸 \(\hat{y} = b_0 + b_1 x\)<ul>
+<li>\(\b_0 \) 為迴歸線的截距</li>
+<li>\(\b_1 \) 為迴歸線的斜率</li>
 <li>\(\hat{y}\) 是當 x 為多少時 y 的期望值</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>估計程序 Estimation Process<ul>
-<li>由於我們不能確定期望值方程式中的 \(\beta_0 + \beta_1 x\)，因此我們透過樣本資料與估計線性回歸方程式得出 \(\b_0, \b_1\)，再透過 \(\b_0, \b_1\) 去估計 \(\beta_0 , \beta_1 x\)<blockquote>
+<li>由於我們不能確定期望值方程式中的 \(\beta_0 + \beta_1 x\)，因此我們透過樣本資料與估計線性迴歸方程式得出 \(\b_0, \b_1\)，再透過 \(\b_0, \b_1\) 去估計 \(\beta_0 , \beta_1 x\)<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1GJ7Tbeuby5jxwdS3sGXVqfDbCFPCwwEU&export=download" alt=""></p>
 </blockquote>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="Least-Squares-Method"><a href="#Least-Squares-Method" class="headerlink" title="Least Squares Method"></a>Least Squares Method</h1><h1 id="Cofficient-of-Determination"><a href="#Cofficient-of-Determination" class="headerlink" title="Cofficient of Determination"></a>Cofficient of Determination</h1><h1 id="Model-Assumptions"><a href="#Model-Assumptions" class="headerlink" title="Model Assumptions"></a>Model Assumptions</h1><h1 id="Testing-for-Significance"><a href="#Testing-for-Significance" class="headerlink" title="Testing for Significance"></a>Testing for Significance</h1><h1 id="Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction"><a href="#Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" class="headerlink" title="Using the Estimated Regression Equation for Estimation and Prediction"></a>Using the Estimated Regression Equation for Estimation and Prediction</h1><h1 id="Computer-Solution"><a href="#Computer-Solution" class="headerlink" title="Computer Solution"></a>Computer Solution</h1><h1 id="Residual-Analysis-Validating-Model-Assumptions"><a href="#Residual-Analysis-Validating-Model-Assumptions" class="headerlink" title="Residual Analysis: Validating Model Assumptions"></a>Residual Analysis: Validating Model Assumptions</h1><h1 id="Residual-Analysis-Outliers-and-Influential-Observations"><a href="#Residual-Analysis-Outliers-and-Influential-Observations" class="headerlink" title="Residual Analysis: Outliers and Influential Observations"></a>Residual Analysis: Outliers and Influential Observations</h1>
+<h1 id="最小平方法-Least-Squares-Method"><a href="#最小平方法-Least-Squares-Method" class="headerlink" title="最小平方法 Least Squares Method"></a>最小平方法 Least Squares Method</h1><p>最小平方法用於判斷模型的誤差方式</p>
+<ul>
+<li>公式 Least Squares Criterion <ul>
+<li>標準公式 \(min \sum (y_i - \hat{y_i})^2\)</li>
+<li>\(y_i\) 實際的因變數</li>
+<li>\(\hat{y_i}\) 推估的因變數</li>
+</ul>
+</li>
+<li>估計迴歸方程式斜率 Slope for the Estimated Regression Equation <ul>
+<li>公式 \(b_1 = \frac{\sum (x_i - \bar{x}) (y_i - \bar{y})}{\sum (x_i - \bar{x})^2 }\)</li>
+<li>\(x_i\) 獨立變數的數值</li>
+<li>\(y_i\) 因變數的數值</li>
+<li>\(\bar{x}\) 獨立變數的平均值</li>
+<li>\(\bar{y}\) 因變數的平均值</li>
+</ul>
+</li>
+<li>y 截距 for 估計迴歸方程式斜率為 \(b_0 = \bar{y} - b_{1}\bar{x}\)</li>
+</ul>
+<h2 id="舉例：車車銷售商，有一個禮拜的促銷方案，會在電視上投放廣告，這裡則有前-5-次的銷售資料"><a href="#舉例：車車銷售商，有一個禮拜的促銷方案，會在電視上投放廣告，這裡則有前-5-次的銷售資料" class="headerlink" title="舉例：車車銷售商，有一個禮拜的促銷方案，會在電視上投放廣告，這裡則有前 5 次的銷售資料"></a>舉例：車車銷售商，有一個禮拜的促銷方案，會在電視上投放廣告，這裡則有前 5 次的銷售資料</h2><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1uFeLzj9CJd0uWBR1ThInMV9AM1qAU54x&export=download" alt=""></p>
+</blockquote>
+<h3 id="作答"><a href="#作答" class="headerlink" title="作答"></a>作答</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1I4vkFQn7plXMeye6JcKQVJYFAe_Oie5s&export=download" alt=""></p>
+</blockquote>
+<h1 id="判定係數-Cofficient-of-Determination"><a href="#判定係數-Cofficient-of-Determination" class="headerlink" title="判定係數 Cofficient of Determination"></a>判定係數 Cofficient of Determination</h1><ul>
+<li>公式A \(\sum (y_i - \bar{y})^2 = \sum (\hat{y_i}- \bar{y})^2 + \sum (y_i - \hat{y_i})^2 \)<ul>
+<li>其中 \(SST = \sum (y_i - \bar{y})^2\) 總平方和 total sum of squares</li>
+<li>其中 \(SSR = \sum (\hat{y_i}- \bar{y})^2\) 迴歸平方和</li>
+<li>其中 \(SSE = \sum (y_i - \hat{y_i})^2 \) 誤差平方和</li>
+</ul>
+</li>
+<li>透過圖表來進行描述，如果以單點來看，則紅色部分為 SSR，藍色部分為 SSE，而中間綠色的點則是 SST<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=16abqF3e8bShtixeIVBikFzMQ1JY5D1C8&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>公式 B  \(r^2 = SSR / SST \)<ul>
+<li>其中 SSR 迴歸平方和</li>
+<li>SST 誤差平方和</li>
+<li>當 r 越小時則表示此迴歸方程式能夠解讀資料的能力越好</li>
+</ul>
+</li>
+</ul>
+<h2 id="舉例：根據車車銷售商那題，求他的判定係數多少"><a href="#舉例：根據車車銷售商那題，求他的判定係數多少" class="headerlink" title="舉例：根據車車銷售商那題，求他的判定係數多少"></a>舉例：<a href="#舉例：車車銷售商，有一個禮拜的促銷方案，會在電視上投放廣告，這裡則有前-5-次的銷售資料">根據車車銷售商那題</a>，求他的判定係數多少</h2><p>\(r^2 = SSR / SST = 100 / 114 = 0.8772\)<br>因此我們可以知道此迴歸方程式可以很好的解釋這筆資料，有 87.72% 可以透過此方程式解讀電視廣告與汽車銷售數量。</p>
+<h2 id="樣本相關係數-Sample-Correlation-Coefficient"><a href="#樣本相關係數-Sample-Correlation-Coefficient" class="headerlink" title="樣本相關係數 Sample Correlation Coefficient"></a>樣本相關係數 Sample Correlation Coefficient</h2><ul>
+<li>如果相關係數為 1 表示正相關，如果是 -1 則是負相關</li>
+<li>定義 \(r_{xy}\) 為 x,y 變數相關係數</li>
+<li>\(r_{xy} = (\text{sign of} b_1) \sqrt{\text{Coefficient of Determination}}\)</li>
+<li>\(r_{xy} = (\text{sign of} b_1) \sqrt{r^2}\)</li>
+<li>\(b_1\) 則是迴歸估計方程式的斜率 \(\hat{y} = b_0 + b_1 x\)</li>
+</ul>
+<h3 id="舉例：根據車車銷售商那題，我們想知道電視廣告與銷售車車的相關係數"><a href="#舉例：根據車車銷售商那題，我們想知道電視廣告與銷售車車的相關係數" class="headerlink" title="舉例：根據車車銷售商那題，我們想知道電視廣告與銷售車車的相關係數"></a>舉例：根據車車銷售商那題，我們想知道電視廣告與銷售車車的相關係數</h3><ul>
+<li>\(r_{xy} = (\text{sign of} b_1) \sqrt{r^2}\)</li>
+<li>迴歸估計方程式為 \(\hat{y} = 10 + 5x \)，由於是 ‘+’ 號因此一定是正相關</li>
+<li>\(r_{xy} = + \sqrt{0.8772}\)</li>
+<li>\(r_{xy} = + 0.9366\)</li>
+</ul>
+<h1 id="假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E"><a href="#假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E" class="headerlink" title="假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)"></a>假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)</h1><p>我們對於 \(\mathcal{E}\) 有以下假設</p>
+<ul>
+<li>我們假設 \(\mathcal{E}\) 是平均數為零的隨機變數<ul>
+<li>因此我們可以表示 \(E(\mathcal{E}) = 0\)</li>
+<li>所以 \(y = \beta_0 + \beta_1 x + \mathcal{E}\)，才可以省略 \(\mathcal{E}\)</li>
+</ul>
+</li>
+<li>\(\mathcal{E}\) 的變異數定義為 \(\sigma^2\)，因此迴歸線裡面的所有的獨立變數都是 \(\sigma^2\)</li>
+<li>\(\mathcal{E}\) 為獨立變數，每一個變數的 \(\mathcal{E}\) 都不同，互相獨立</li>
+<li>\(\mathcal{E}\) 是常態分配的隨機變數</li>
+</ul>
+<h2 id="圖表解釋如下"><a href="#圖表解釋如下" class="headerlink" title="圖表解釋如下"></a>圖表解釋如下</h2><blockquote>
+<p>其中我們可以看到當 \(x=0\) 後，綠線(我們的期望線性迴歸模型)一路 x 遞增。<br>此時再 \(x=10\)，我們可以看到藍點的部分為綠線與紅線(實際情況的 y 因變數)的交接處，理論上我們期望線性迴歸模型是預估此點<br>而  \(\mathcal{E}\) 就是偏離藍點，並只出現在\(x=10\)紅線中的某一點，因此 \(y = \beta_0 + \beta_1 x + \mathcal{E}\)，才會是使用 ‘+’ 號<br>其中 \(x=10\) 也可以改成 20,30<br><img src="https://drive.google.com/u/2/uc?id=1YxI7RcEvPVTEOGFYNsFr6aw3m3BlChyF&export=download" alt=""></p>
+</blockquote>
+<h1 id="顯著性測試-Testing-for-Significance"><a href="#顯著性測試-Testing-for-Significance" class="headerlink" title="顯著性測試 Testing for Significance"></a>顯著性測試 Testing for Significance</h1><ul>
+<li>顯著性測試檢定 \(\beta_1\) 是否為零，來檢測獨立變數與因變數是否有關聯<br>主要透過簡單迴歸分析公式 \(y = \beta_0 + \beta_1 x + \mathcal{E} \)，當 \(\beta_1\) 為 0 時，我們可以得知那 x 跟 y 並沒有關係</li>
+<li>主要是使用 t 檢定 or f 檢定來假設測試顯著性測試</li>
+<li>t 檢定與 f 檢定變異數則是 \(\sigma^2\)，也就是 \(\mathcal{E} \) </li>
+<li>估計變異數 \(\sigma^2\)<ul>
+<li>公式 \(s^2 = MSE = SSE / (n-2)\)</li>
+<li>其中 \(SSE = \sum (y_i - \hat{y_i})^2 = \sum (y_i - b_0 - b_1 x_i \)</li>
+<li>因此估計標準差就為 \(s = \sqrt{MSE} = \sqrt{\frac{SSE}{n-2}}\)</li>
+</ul>
+</li>
+</ul>
+<h2 id="t-檢定-t-Test"><a href="#t-檢定-t-Test" class="headerlink" title="t 檢定 t Test"></a>t 檢定 t Test</h2><ul>
+<li>假設檢定<ul>
+<li>\(H_0: \beta_1 = 0 \)</li>
+<li>\(H_1: \beta_1 != 0\)</li>
+</ul>
+</li>
+<li>Test Statistic<ul>
+<li>公式 \(t = \frac{b_1}{s_{b_1}}\)</li>
+<li>其中 \(s_{b_1} = \frac{s}{\sqrt{\sum (x_i - \bar{x})^2}}\)</li>
+</ul>
+</li>
+<li>Rejcetion Rule <ul>
+<li>Reject \(H_0\) if \(p-value \leq \alpha \) or \(t \leq -t_{a/2} \) or \(t \geq t_{a/2}\)</li>
+<li>其中 \(t_{a/2}\) 為 t 描述</li>
+<li>\(n-2\) 為自由度，主要是因為減掉獨立變數與因變數</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：根據車車銷售商那題，我們想知道投放電視廣告與銷售車輛是否有關聯"><a href="#舉例：根據車車銷售商那題，我們想知道投放電視廣告與銷售車輛是否有關聯" class="headerlink" title="舉例：根據車車銷售商那題，我們想知道投放電視廣告與銷售車輛是否有關聯"></a>舉例：<a href="#舉例：車車銷售商，有一個禮拜的促銷方案，會在電視上投放廣告，這裡則有前-5-次的銷售資料">根據車車銷售商那題</a>，我們想知道投放電視廣告與銷售車輛是否有關聯</h3><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1J0B8QmN2FK-QRakCm_2si5sTIzerPuf7&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li><p>假設檢定</p>
+<ul>
+<li>\(H_0: \beta_1 = 0 \)</li>
+<li>\(H_1: \beta_1 != 0\)</li>
+</ul>
+</li>
+<li><p>顯著性水準為 \(\alpha = 0.05\)</p>
+</li>
+<li><p>Rejcetion Rule </p>
+<ul>
+<li>Reject \(H_0\) if \(p-value \leq \alpha \)  or \( |t| \geq t_{a/2} = 3.182\)，注意 \(a / 2 = 0.05\)</li>
+<li>其中 \(t_{a/2}\) 為 t 描述</li>
+<li>\(n-2\) 為自由度，主要是因為減掉獨立變數與因變數</li>
+<li>使用 probability distribution app 計算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1GYHjzgZJtP6KBqPKX7gGv4ahBO4LdEim&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Test Statistic<br>公式 \(t = \frac{b_1}{s_{b_1}} = \frac{5}{1.08} = 4.63\)，老師已經把 \(s_{b_1}\) 已經做完。</p>
+</li>
+<li><p>確認並拒絕 \(H_0\)<br>if \(p-value=0.01 \leq \alpha=0.05 \)  or \( 4.63=|t| \ geq t_{a/2} = 3.182\)，因此拒絕 \(H_0\)，我們可以確認電視廣告與汽車銷售數量是有關聯的。</p>
+</li>
+</ul>
+<h2 id="對-beta-1-做信賴區間"><a href="#對-beta-1-做信賴區間" class="headerlink" title="對 \(\beta_1\) 做信賴區間"></a>對 \(\beta_1\) 做信賴區間</h2><ul>
+<li>我們可以透過百分之 95 的信賴區間對 \(\beta_1\) 做假設檢定，如果要 reject \(H_0\)，那 \(\beta_1\) 就不能在信賴區間內。 </li>
+<li>信賴區間公式<ul>
+<li>公式為 \(\beta+1 \pm t_{a/2} s_{b_1}\)</li>
+<li>其中 \(t_{a/2}\) 為 t 描述</li>
+<li>\(n-2\) 為自由度，主要是因為減掉獨立變數與因變數</li>
+</ul>
+</li>
+<li>Reject Rule<br>reject \(H_0\)，那 \(\beta_1\) 就不能在信賴區間內。 </li>
+</ul>
+<h3 id="舉例：延續根據車車銷售商那題，請使用信賴區間做假設檢定"><a href="#舉例：延續根據車車銷售商那題，請使用信賴區間做假設檢定" class="headerlink" title="舉例：延續根據車車銷售商那題，請使用信賴區間做假設檢定"></a>舉例：延續<a href="#舉例：根據車車銷售商那題，我們想知道投放電視廣告與銷售車輛是否有關聯">根據車車銷售商那題</a>，請使用信賴區間做假設檢定</h3><ul>
+<li>百分之 95 的信賴區間計算<br>\(\beta_1 \pm t_{a/2} s_{b_1} = 5 \pm 3.182(1.08) = 5 \pm 3.44 \)</li>
+<li>結論<br>0 並沒有在 \(5 \pm 3.44\)，因此拒絕 \(H_0\)，我們可以確認電視廣告與汽車銷售數量是有關聯的。</li>
+</ul>
+<h2 id="F-檢定"><a href="#F-檢定" class="headerlink" title="F 檢定"></a>F 檢定</h2><ul>
+<li>假設檢定<ul>
+<li>\(H_0: \beta_1 = 0 \)</li>
+<li>\(H_1: \beta_1 != 0\)</li>
+</ul>
+</li>
+<li>F test Statisitic<br>\(F = MSR / MSE \)</li>
+<li>Rej3ection Rule <ul>
+<li>Reject \(H_0\) if \(p-value \leq \alpha \) or \(F \geq F_\alpha\)</li>
+<li>其中 \(F_a\) 為我們計算的 f 描述</li>
+<li>分子自由度為 1、分母自由度為 \(n-2\)</li>
+<li>\(n-2\) 為自由度，主要是因為減掉獨立變數與因變數</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：延續根據車車銷售商那題，請使用-F檢定做假設檢定"><a href="#舉例：延續根據車車銷售商那題，請使用-F檢定做假設檢定" class="headerlink" title="舉例：延續根據車車銷售商那題，請使用 F檢定做假設檢定"></a>舉例：延續<a href="#舉例：根據車車銷售商那題，我們想知道投放電視廣告與銷售車輛是否有關聯">根據車車銷售商那題</a>，請使用 F檢定做假設檢定</h3><ul>
+<li>假設檢定<ul>
+<li>\(H_0: \beta_1 = 0 \)</li>
+<li>\(H_1: \beta_1 != 0\)</li>
+</ul>
+</li>
+<li>顯著性測試 \(\alpha = 0.05\)</li>
+<li>Rejection rule<ul>
+<li>Reject \(H_0\) if \(p-value \leq 0.05 \) or \(F \geq 10.13\)，分子自由度為 1、分母自由度為 3</li>
+<li>使用 probability distribution app 計算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1vmJlPBRWyMHqR0bGUukoN5B8cs9mUapy&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>F test Statisitic<br>\(F = MSR / MSE = 100 / 4.667 = 21.43 \) </li>
+<li>Rej3ection Rule <ul>
+<li>Reject \(H_0\) if \(0.019 \leq \alpha \) or \(21.43 =F \geq F_\alpha = 10.13\)，都有符合；因此拒絕 \(H_0\)，我們可以確認電視廣告與汽車銷售數量是有關聯的。</li>
+</ul>
+</li>
+</ul>
+<h2 id="顯著性水準的重要解釋-Some-Cautions-about-the-Interpreatation-of-Significance-Tests"><a href="#顯著性水準的重要解釋-Some-Cautions-about-the-Interpreatation-of-Significance-Tests" class="headerlink" title="顯著性水準的重要解釋 Some Cautions about the Interpreatation of Significance Tests"></a>顯著性水準的重要解釋 Some Cautions about the Interpreatation of Significance Tests</h2><p>我們上面有進行假設檢定，如果成功 Reject \(H_0\)，我們必須注意<strong>我們並不能說 x 與 y 有因果關係，只能說有統計關係</strong>，因為我們不能夠確定這件事情的變數就只有這兩個。<br>也許其實這件事情應該要有 3 個變數，但我們的簡單迴歸模型則只有用 2 個變數，也許這兩個變數都是因變數，而那個沒有用的才是獨立變數。</p>
+<blockquote>
+<p>我們在做好假設檢定的顯著性水準後，我們必須說我們是<strong>針對模型的最小 x 值 to 最大 x 值去做假設檢定</strong>，因為我們沒有辦法肯定超出此範圍的 x,y 關係是如何；舉例：Largest x value 右邊之後就跟先前的線條不同，也就表示 Largest x value 右邊後的 y 會因為 x 而快速成長。<br><img src="https://drive.google.com/u/2/uc?id=14cBUNdzIjph9NRhiiBjbdNRjizoknd4L&export=download" alt=""></p>
+</blockquote>
+<h1 id="Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction"><a href="#Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" class="headerlink" title="Using the Estimated Regression Equation for Estimation and Prediction"></a>Using the Estimated Regression Equation for Estimation and Prediction</h1><h1 id="Computer-Solution"><a href="#Computer-Solution" class="headerlink" title="Computer Solution"></a>Computer Solution</h1><h1 id="Residual-Analysis-Validating-Model-Assumptions"><a href="#Residual-Analysis-Validating-Model-Assumptions" class="headerlink" title="Residual Analysis: Validating Model Assumptions"></a>Residual Analysis: Validating Model Assumptions</h1><h1 id="Residual-Analysis-Outliers-and-Influential-Observations"><a href="#Residual-Analysis-Outliers-and-Influential-Observations" class="headerlink" title="Residual Analysis: Outliers and Influential Observations"></a>Residual Analysis: Outliers and Influential Observations</h1>
       
       <!-- reward -->
       
