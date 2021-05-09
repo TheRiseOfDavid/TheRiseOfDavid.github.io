@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">4.8k</span>
+            <span class="post-count">4.9k</span>
         </span>
     </span>
 
@@ -150,11 +150,11 @@ ga('send', 'pageview');
 <li>每個觀察值都是互相獨立</li>
 </ul>
 <h3 id="用圖表進行解釋"><a href="#用圖表進行解釋" class="headerlink" title="用圖表進行解釋"></a>用圖表進行解釋</h3><ul>
-<li>當樣本母體平均數都非常靠近時，\(H_0\)為真，\(\sigma_{\bar{x}}^2 = \frac{\sigma^2}{x}\)，這裡的 x 為平均數<blockquote>
+<li>當樣本母體平均數都非常靠近時，\(H_0\)為真，\(\sigma_{\bar{x}}^2 = \frac{\sigma^2}{x}\)，這裡的 x 為樣本平均數，\(\mu\) 為母體平均數<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1s3QSgXSAN07Ob1gjaO24VXy62NhDB4kA&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>當樣本母體平均數距離相差過大時，則拒絕\(H_0\)，\(\sigma_{\bar{x}}^2 != \frac{\sigma^2}{x}\)，這裡的 x 為平均數<blockquote>
+<li>當樣本母體平均數距離相差過大時，則拒絕\(H_0\)，\(\sigma_{\bar{x}}^2 != \frac{\sigma^2}{x}\)，這裡的 x 為樣本平均數，\(\mu\) 為母體平均數<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1YIxqdOqGAAMvmfhpPHroe5aPlTsI3NrR&export=download" alt=""></p>
 </blockquote>
 </li>
@@ -170,7 +170,7 @@ ga('send', 'pageview');
 <h2 id="比較母體之間-treatments-變異數-Between-Treatments-Estimate-of-Population-Variance"><a href="#比較母體之間-treatments-變異數-Between-Treatments-Estimate-of-Population-Variance" class="headerlink" title="比較母體之間 treatments 變異數 Between-Treatments Estimate of Population Variance"></a>比較母體之間 treatments 變異數 Between-Treatments Estimate of Population Variance</h2><ul>
 <li>我們要估計 \(\sigma^2\)，如果 \(H_0\)為真，則變異數差異不大，反之就會大。</li>
 <li>公式 \(MSTR = \frac{\sum_{j=1}^k n_j (\bar{x_j}-\bar{\bar{x}})^2}{k-1}\)<ul>
-<li>其中 x 表示平均數，\(\bar{\bar{x}}\) 為總平均數，\(\bar{x_j}\) 是 factor 中的每一個 treatment</li>
+<li>其中 x 表示平均數，\(\bar{\bar{x}}\) 為總平均數，\(\bar{x_j}\) 是 factor 中的每一個 treatment，n 為母體數量</li>
 <li>\(k-1\) 是自由度，k 是母體數量</li>
 <li>\( (\bar{x_j}-\bar{\bar{x}})^2 \) 是 SSTR，sum of square due to treatments，中文意思為處理間平方和</li>
 </ul>
@@ -429,6 +429,7 @@ ga('send', 'pageview');
 <li>可透過 Bonferroni adjstment 對顯著性水準進行調整，調整公式為 \(\alpha / k \)，這樣就可以將 \(a_{EW} \) 降低。</li>
 </ul>
 <h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><ul>
+<li>如果使用 Excel 資料分析<strong>雙因子變數分析：重複試驗</strong></li>
 <li>實驗單位 Experimental units<br>對每位接受實驗的 object 就是實驗</li>
 <li>完全隨機分配 completely randomized design<br>將 teatment 隨機平均分配給每個 Experimental units</li>
 </ul>
@@ -505,9 +506,12 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1><p>上述之前我們都是只針對一個 Factor 來進行探討，現在我們要針對多個 Factor來進行探討，但一樣是使用 ANOVA 來計算，但也會有些計算不同。</p>
-<p>舉例：如果 a factor 有 \(\alpha\) 個 treatment，b factor 有 \(\beta\) 個 treatment，那我們蒐集的資料就是有 \(\alpha \beta\) 個組合。</p>
-<p>主要用來判斷兩個因子是否有交互作用，也可以檢查到兩因子對變數的假設檢定</p>
+<h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1><ul>
+<li>如果使用 Excel 資料分析<strong>雙因子變數分析：無重複試驗</strong></li>
+<li>上述之前我們都是只針對一個 Factor 來進行探討，現在我們要針對多個 Factor來進行探討，但一樣是使用 ANOVA 來計算，但也會有些計算不同。</li>
+<li>舉例：如果 a factor 有 \(\alpha\) 個 treatment，b factor 有 \(\beta\) 個 treatment，那我們蒐集的資料就是有 \(\alpha \beta\) 個組合。</li>
+<li>主要用來判斷兩個因子是否有交互作用，也可以檢查到兩因子對變數的假設檢定</li>
+</ul>
 <h2 id="Two-Factor-Factorial-Experiment"><a href="#Two-Factor-Factorial-Experiment" class="headerlink" title="Two-Factor Factorial Experiment"></a>Two-Factor Factorial Experiment</h2><h3 id="ANOVA"><a href="#ANOVA" class="headerlink" title="ANOVA"></a>ANOVA</h3><ul>
 <li>公式為 \(SST = SSA + SSB + SSAB + SSE\)<ul>
 <li>其中 SST 為 sum of squares total，自由度為 \(n_T -1 \)是全部的樣本總數量。</li>

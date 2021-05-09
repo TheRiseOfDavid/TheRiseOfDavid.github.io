@@ -16111,11 +16111,11 @@
 <li>每個觀察值都是互相獨立</li>
 </ul>
 <h3 id="用圖表進行解釋"><a href="#用圖表進行解釋" class="headerlink" title="用圖表進行解釋"></a>用圖表進行解釋</h3><ul>
-<li>當樣本母體平均數都非常靠近時，\(H_0\)為真，\(\sigma_{\bar{x}}^2 = \frac{\sigma^2}{x}\)，這裡的 x 為平均數<blockquote>
+<li>當樣本母體平均數都非常靠近時，\(H_0\)為真，\(\sigma_{\bar{x}}^2 = \frac{\sigma^2}{x}\)，這裡的 x 為樣本平均數，\(\mu\) 為母體平均數<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1s3QSgXSAN07Ob1gjaO24VXy62NhDB4kA&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>當樣本母體平均數距離相差過大時，則拒絕\(H_0\)，\(\sigma_{\bar{x}}^2 != \frac{\sigma^2}{x}\)，這裡的 x 為平均數<blockquote>
+<li>當樣本母體平均數距離相差過大時，則拒絕\(H_0\)，\(\sigma_{\bar{x}}^2 != \frac{\sigma^2}{x}\)，這裡的 x 為樣本平均數，\(\mu\) 為母體平均數<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1YIxqdOqGAAMvmfhpPHroe5aPlTsI3NrR&export=download" alt=""></p>
 </blockquote>
 </li>
@@ -16131,7 +16131,7 @@
 <h2 id="比較母體之間-treatments-變異數-Between-Treatments-Estimate-of-Population-Variance"><a href="#比較母體之間-treatments-變異數-Between-Treatments-Estimate-of-Population-Variance" class="headerlink" title="比較母體之間 treatments 變異數 Between-Treatments Estimate of Population Variance"></a>比較母體之間 treatments 變異數 Between-Treatments Estimate of Population Variance</h2><ul>
 <li>我們要估計 \(\sigma^2\)，如果 \(H_0\)為真，則變異數差異不大，反之就會大。</li>
 <li>公式 \(MSTR = \frac{\sum_{j=1}^k n_j (\bar{x_j}-\bar{\bar{x}})^2}{k-1}\)<ul>
-<li>其中 x 表示平均數，\(\bar{\bar{x}}\) 為總平均數，\(\bar{x_j}\) 是 factor 中的每一個 treatment</li>
+<li>其中 x 表示平均數，\(\bar{\bar{x}}\) 為總平均數，\(\bar{x_j}\) 是 factor 中的每一個 treatment，n 為母體數量</li>
 <li>\(k-1\) 是自由度，k 是母體數量</li>
 <li>\( (\bar{x_j}-\bar{\bar{x}})^2 \) 是 SSTR，sum of square due to treatments，中文意思為處理間平方和</li>
 </ul>
@@ -16390,6 +16390,7 @@
 <li>可透過 Bonferroni adjstment 對顯著性水準進行調整，調整公式為 \(\alpha / k \)，這樣就可以將 \(a_{EW} \) 降低。</li>
 </ul>
 <h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><ul>
+<li>如果使用 Excel 資料分析<strong>雙因子變數分析：重複試驗</strong></li>
 <li>實驗單位 Experimental units<br>對每位接受實驗的 object 就是實驗</li>
 <li>完全隨機分配 completely randomized design<br>將 teatment 隨機平均分配給每個 Experimental units</li>
 </ul>
@@ -16466,9 +16467,12 @@
 </ul>
 </li>
 </ul>
-<h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1><p>上述之前我們都是只針對一個 Factor 來進行探討，現在我們要針對多個 Factor來進行探討，但一樣是使用 ANOVA 來計算，但也會有些計算不同。</p>
-<p>舉例：如果 a factor 有 \(\alpha\) 個 treatment，b factor 有 \(\beta\) 個 treatment，那我們蒐集的資料就是有 \(\alpha \beta\) 個組合。</p>
-<p>主要用來判斷兩個因子是否有交互作用，也可以檢查到兩因子對變數的假設檢定</p>
+<h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1><ul>
+<li>如果使用 Excel 資料分析<strong>雙因子變數分析：無重複試驗</strong></li>
+<li>上述之前我們都是只針對一個 Factor 來進行探討，現在我們要針對多個 Factor來進行探討，但一樣是使用 ANOVA 來計算，但也會有些計算不同。</li>
+<li>舉例：如果 a factor 有 \(\alpha\) 個 treatment，b factor 有 \(\beta\) 個 treatment，那我們蒐集的資料就是有 \(\alpha \beta\) 個組合。</li>
+<li>主要用來判斷兩個因子是否有交互作用，也可以檢查到兩因子對變數的假設檢定</li>
+</ul>
 <h2 id="Two-Factor-Factorial-Experiment"><a href="#Two-Factor-Factorial-Experiment" class="headerlink" title="Two-Factor Factorial Experiment"></a>Two-Factor Factorial Experiment</h2><h3 id="ANOVA"><a href="#ANOVA" class="headerlink" title="ANOVA"></a>ANOVA</h3><ul>
 <li>公式為 \(SST = SSA + SSB + SSAB + SSE\)<ul>
 <li>其中 SST 為 sum of squares total，自由度為 \(n_T -1 \)是全部的樣本總數量。</li>
@@ -17043,15 +17047,15 @@
 </ul>
 </li>
 <li>估計(estimated) 線性迴歸 \(\hat{y} = b_0 + b_1 x\)<ul>
-<li>\(\b_0 \) 為迴歸線的截距</li>
-<li>\(\b_1 \) 為迴歸線的斜率</li>
+<li>\(b_0 \) 為迴歸線的截距</li>
+<li>\(b_1 \) 為迴歸線的斜率</li>
 <li>\(\hat{y}\) 是當 x 為多少時 y 的期望值</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>估計程序 Estimation Process<ul>
-<li>由於我們不能確定期望值方程式中的 \(\beta_0 + \beta_1 x\)，因此我們透過樣本資料與估計線性迴歸方程式得出 \(\b_0, \b_1\)，再透過 \(\b_0, \b_1\) 去估計 \(\beta_0 , \beta_1 x\)<blockquote>
+<li>由於我們不能確定期望值方程式中的 \(\beta_0 + \beta_1 x\)，因此我們透過樣本資料與估計線性迴歸方程式得出 \(b_0, b_1\)，再透過 \(b_0, b_1\) 去估計 \(\beta_0 , \beta_1 x\)<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1GJ7Tbeuby5jxwdS3sGXVqfDbCFPCwwEU&export=download" alt=""></p>
 </blockquote>
 </li>
@@ -17134,7 +17138,7 @@
 <li>t 檢定與 f 檢定變異數則是 \(\sigma^2\)，也就是 \(\mathcal{E} \) </li>
 <li>估計變異數 \(\sigma^2\)<ul>
 <li>公式 \(s^2 = MSE = SSE / (n-2)\)</li>
-<li>其中 \(SSE = \sum (y_i - \hat{y_i})^2 = \sum (y_i - b_0 - b_1 x_i \)</li>
+<li>其中 \(SSE = \sum (y_i - \hat{y_i})^2 = \sum (y_i - b_0 - b_1 x_i)^2 \)</li>
 <li>因此估計標準差就為 \(s = \sqrt{MSE} = \sqrt{\frac{SSE}{n-2}}\)</li>
 </ul>
 </li>
@@ -17239,7 +17243,154 @@
 <blockquote>
 <p>我們在做好假設檢定的顯著性水準後，我們必須說我們是<strong>針對模型的最小 x 值 to 最大 x 值去做假設檢定</strong>，因為我們沒有辦法肯定超出此範圍的 x,y 關係是如何；舉例：Largest x value 右邊之後就跟先前的線條不同，也就表示 Largest x value 右邊後的 y 會因為 x 而快速成長。<br><img src="https://drive.google.com/u/2/uc?id=14cBUNdzIjph9NRhiiBjbdNRjizoknd4L&export=download" alt=""></p>
 </blockquote>
-<h1 id="Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction"><a href="#Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" class="headerlink" title="Using the Estimated Regression Equation for Estimation and Prediction"></a>Using the Estimated Regression Equation for Estimation and Prediction</h1><h1 id="Computer-Solution"><a href="#Computer-Solution" class="headerlink" title="Computer Solution"></a>Computer Solution</h1><h1 id="Residual-Analysis-Validating-Model-Assumptions"><a href="#Residual-Analysis-Validating-Model-Assumptions" class="headerlink" title="Residual Analysis: Validating Model Assumptions"></a>Residual Analysis: Validating Model Assumptions</h1><h1 id="Residual-Analysis-Outliers-and-Influential-Observations"><a href="#Residual-Analysis-Outliers-and-Influential-Observations" class="headerlink" title="Residual Analysis: Outliers and Influential Observations"></a>Residual Analysis: Outliers and Influential Observations</h1>]]></content>
+<h1 id="使用估計迴歸方程式來預測或預估-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction"><a href="#使用估計迴歸方程式來預測或預估-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" class="headerlink" title="使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction"></a>使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction</h1><p>主要用途</p>
+<ul>
+<li>採用<strong>信心區間</strong>，給定 x 推出 y 的平均值為多少</li>
+<li>採用<strong>預測區間</strong>，給定 x 的值我們想知道在 x 的情況下 y 值(特定數值)為多少</li>
+<li>在使用預測區間時，其範圍會比信心區間來的更大</li>
+</ul>
+<h2 id="區間估計公式"><a href="#區間估計公式" class="headerlink" title="區間估計公式"></a>區間估計公式</h2><p>通常回歸方程式做完後預測出來的值不一定完全準確，因為我們的回歸預測方程式是 \(y = \beta_0 + \beta_1 x \)，我們忽略是 \(\mathcal{E} \)，因此我們要預估 \( \mathcal{E} \) 因此才需要此估計公式進行計算 </p>
+<ul>
+<li>信心區間估計 Confidence Interval Estimate of \(E(y^*)\)<ul>
+<li>\(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*\)</li>
+<li>其中信賴係數為 \(1-\alpha\)，自由度為 \(n-2\)</li>
+<li>\(s = \sqrt{MSE} \)</li>
+<li>\(s_{\hat{y}^*} = s \sqrt{\frac{1}{n} + \frac{( x^* - \bar{x} )^2}{\sum (x_i - \bar{x})^2}}\)</li>
+</ul>
+</li>
+<li>預測區間估計 Prediction Interval Estimate of \(y*\)<ul>
+<li>\(\hat{y}^* \pm t_{a/2} s_{\text{pred}}\)</li>
+<li>其中信賴係數為 \(1-\alpha\)，自由度為 \(n-2\)</li>
+<li>\(s = \sqrt{MSE} \)</li>
+<li>\(s_{\text{pred}} =  s \sqrt{1 + \frac{1}{n} + \frac{( x^* - \bar{x} )^2}{\sum (x_i - \bar{x})^2}} \) </li>
+</ul>
+</li>
+<li>圖片說明信心區間、預估區間<ul>
+<li>我們可以看到中間的信賴區間與預估區間最小，則是因為當 \(x^* = \bar{x}\)，那項會變成零，因此中間的範圍就變小</li>
+<li>我們可以看到預估區間的範圍比信賴區間大則是因為預估區間在 \(s_{\text{pred}} \) 多了一個 1<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1SY9oUioHwtdJOw83hs-PU3OysG2_dqPx&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：延續根據車車銷售商那題，再有-3-個電視廣告的情況下，我們透過信賴區間、預測區間可以得知平均汽車銷售數量為？"><a href="#舉例：延續根據車車銷售商那題，再有-3-個電視廣告的情況下，我們透過信賴區間、預測區間可以得知平均汽車銷售數量為？" class="headerlink" title="舉例：延續根據車車銷售商那題，再有 3 個電視廣告的情況下，我們透過信賴區間、預測區間可以得知平均汽車銷售數量為？"></a>舉例：延續<a href="#舉例：延續根據車車銷售商那題，請使用信賴區間做假設檢定">根據車車銷售商那題</a>，再有 3 個電視廣告的情況下，我們透過信賴區間、預測區間可以得知平均汽車銷售數量為？</h3><ul>
+<li>\(\hat{y} = 10 + 5(3) = 25\) cars，通過前面的資料可以推出</li>
+<li>\(E(y^*) \) 的信賴區間<ul>
+<li>\(E(y^*) \) 估計的標準差<ul>
+<li>\(s = \sqrt{MSE} = \sqrt{4.667}\)</li>
+<li>\(s_{\hat{y}^*} = s \sqrt{\frac{1}{n} + \frac{( x^* - \bar{x} )^2}{\sum (x_i - \bar{x})^2}}\)</li>
+<li>\(s_{\hat{y}^*} = 2.16025 \sqrt{\frac{1}{5} + \frac{(3-2)^2}{(1-2)^2+(3-2)^2+(2-2)^2+(1-2)^2+(3-2)^2}}\)</li>
+<li>\(s_{\hat{y}^*}  = 2.16025 \sqrt{\frac{1}{5} + \sqrt{1}{4}} = 1.4491\)</li>
+</ul>
+</li>
+<li>因此根據信心區間估計 \(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*\)<br>\(25 \pm 3.1824(1.4491) = 25 \pm 4.61\)，因此我們預估 3 個電視廣告，銷售汽車數量大約在 20.39 to 29.61 </li>
+</ul>
+</li>
+<li>\(y^* \) 的預估區間<ul>
+<li>\(y^* \) 估計的標準差<ul>
+<li>\(s_{\text{pred}} =  s \sqrt{1 + \frac{1}{n} + \frac{( x^* - \bar{x} )^2}{\sum (x_i - \bar{x})^2}} \) </li>
+<li>\(s_{\text{pred}} = 2.16025 \sqrt{1 + \frac{1}{5} + \frac{1}{4}}\)</li>
+<li>\(s_{\text{pred}} = 2.16025(1.20416) = 2.6013\)</li>
+</ul>
+</li>
+<li>因此根據預測區間估計 \(\hat{y}^* \pm t_{a/2} s_{\text{pred}}\)<ul>
+<li>\(25 \pm 3.1824(2.6013) = 25 \pm 8.28\)，因此我們預估 3 個電視廣告，銷售汽車數量大約在 16.72 to 33.28</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="使用電腦計算-Computer-Solution"><a href="#使用電腦計算-Computer-Solution" class="headerlink" title="使用電腦計算 Computer Solution"></a>使用電腦計算 Computer Solution</h1><p>根據上面文章我們可以知道如果使用手工去推估迴歸分析時非常麻煩，因此我們這邊則是使用電腦軟體來計算迴測。</p>
+<p>下面我們則是延續<a href="#舉例：延續根據車車銷售商那題，再有-3-個電視廣告的情況下，我們可以預期平均汽車銷售數量為？">根據車車銷售商那題</a>，使用 minitab 與 excel 分析</p>
+<ul>
+<li>Minitab，使用圖片進行說明，我目前也沒有操作過此軟體並不太熟，可以開兩個分頁來確認答案是否正確<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19hV5m394zOHwPT79VHUwTski6GYCZ1Cv&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>Excel 進行迴歸分析<ul>
+<li>操作方式 資料 &gt; 資料分析 &gt; 迴歸，對 x 輸入獨立變數、y 輸入因變數，檢查是否需要標記後按確定應該能產生此圖</li>
+<li>截距是 \(b_0\)</li>
+<li>我們可以用 #TV Ads(x) 對 x,y 是否有相關進行假設檢定，其中我們可以知道 1.5626 to 8.4374 並無包含 0，因此 reject \(H_0\)</li>
+<li>圖片說明<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1jU-s3U-92QoXUAIibjwNxiIk8pwWNcsl&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="殘差分析-合法模型假設-Residual-Analysis-Validating-Model-Assumptions"><a href="#殘差分析-合法模型假設-Residual-Analysis-Validating-Model-Assumptions" class="headerlink" title="殘差分析: 合法模型假設 Residual Analysis: Validating Model Assumptions"></a>殘差分析: 合法模型假設 Residual Analysis: Validating Model Assumptions</h1><ul>
+<li>我們之前在<a href="#假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E">假設模型下的誤差項</a> 提到<ul>
+<li>我們假設 \(\mathcal{E}\) 是平均數為零且常態分配的隨機變數</li>
+<li>因此我們可以表示 \(E(\mathcal{E}) = 0\)</li>
+<li>所以 \(y = \beta_0 + \beta_1 x + \mathcal{E}\)，才可以省略 \(\mathcal{E}\)</li>
+<li>\(\mathcal{E}\) 的變異數定義為 \(\sigma^2\)，因此迴歸線裡面的所有的獨立變數都是 \(\sigma^2\)<ul>
+<li>如果此假設成立，那理論上每個點的殘差應該都非常靠近此虛線<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1pv9K5eRM_ULog6zHHsAvdmJlraQbZ5EF&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>如果假設不成立，那每點殘差應該會非常離散<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1hFaPczK0DWBgSEPtzQldUhgGpBgFYned&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>還有一種情況，是我們的線並不適合此模型，但理論上我們可以根據殘差畫出區間，那表示我們的獨立變數可能並不適用<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ZbZSzV-6gsIqPvj79CVTMMH4KBddL5pi&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>\(\mathcal{E}\) 為獨立變數，每一個變數的 \(\mathcal{E}\) 都不同，互相獨立</li>
+<li>\(\mathcal{E}\) 為常態分配<ul>
+<li>殘差標準化公式為 <ul>
+<li>\(\frac{y_i - \hat{y_i}}{s_{y_i - \hat{y_i}}}\)</li>
+<li>其中 \(s_{y_i - \hat{y_i}} = s \sqrt{1-h_i}\)</li>
+<li>\( h_i = \frac{1}{n} + \frac{( x_i - \bar{x} )^2}{\sum (x_i - \bar{x})^2} \)</li>
+</ul>
+</li>
+<li>只要殘差標準化公式為 -2 to 2 之間，那我們就認定 \(\mathcal{E}\) 是常態分配</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>而我們這邊則是要對 \(\mathcal{E}\) 來判斷是否符合我們上面的假設<ul>
+<li>符合則表示有適用</li>
+<li>不符合我們的假設表示此模型並不適用</li>
+</ul>
+</li>
+<li>每一筆資料的殘差值公式為 \(y_i - \hat{y_i}\)</li>
+</ul>
+<h2 id="我們直接透過舉例來進行說明，一樣是車車銷售商"><a href="#我們直接透過舉例來進行說明，一樣是車車銷售商" class="headerlink" title="我們直接透過舉例來進行說明，一樣是車車銷售商"></a>我們直接透過舉例來進行說明，一樣是<a href="#舉例：延續根據車車銷售商那題，再有-3-個電視廣告的情況下，我們可以預期平均汽車銷售數量為？">車車銷售商</a></h2><blockquote>
+<p>資料如下，其中 \(\hat{y}\) 就是 Predicted y、\(y_i\) 是 number of Cars Sold、\(y_i - \hat{y_i}\) Residuals<br><img src="https://drive.google.com/u/2/uc?id=1agzOQ4mj58BstcoqOK_GUyRHDcoYOiuA&export=download" alt=""></p>
+</blockquote>
+<p>我們可以得知上面每一個 \(x_i\) 標準化殘差公式中都沒有數值超過 -2 or 2，因此我們可以認定 \(\mathcal{E}\) 是常態分配</p>
+<h2 id="Normal-Probability-Plot"><a href="#Normal-Probability-Plot" class="headerlink" title="Normal Probability Plot"></a>Normal Probability Plot</h2><p>在標準差為 1，平均數為 0 的標準常態機率分配中，我們使用機率隨機抽取出 x，定義 order_x 為隨機抽取出 x 並由小到大排序，再來我們與資料中每一個 \(x_i\) 標準化殘差公式進行畫圖。</p>
+<ul>
+<li>X 軸為 order_x</li>
+<li>Y 軸為 資料中每一個 \(x_i\) 標準化殘差公式</li>
+<li>再來我們以 45 度畫一條線，如果每一個紅點都離 45 度線非常近那我們一樣可以認定 \(\mathcal{E}\) 是常態分配</li>
+<li>畫圖如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1hCQ6DqoeJOc7zS6-GdrnkkFXvKh4fP76&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h1 id="殘差分析-離群值與能透過一個點就使線圖改變的值-Residual-Analysis-Outliers-and-Influential-Observations"><a href="#殘差分析-離群值與能透過一個點就使線圖改變的值-Residual-Analysis-Outliers-and-Influential-Observations" class="headerlink" title="殘差分析: 離群值與能透過一個點就使線圖改變的值 Residual Analysis: Outliers and Influential Observations"></a>殘差分析: 離群值與能透過一個點就使線圖改變的值 Residual Analysis: Outliers and Influential Observations</h1><p>在<a href="#Normal-Probability-Plot">Normal Probability Plot</a> 中，我們可以發現幾種情況</p>
+<ul>
+<li>Outier，其中有一個紅點離其他資料過遠<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1h91rqIrV_3AD8cUf2LBHq9tMRQYQv8c0&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>Influential Observations，只因為 Influential Observations value 就讓綠線圖原本應該跟隨藍線的圖，畫成了綠色<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-fgJ8t6-BXe5CXC129D19KPZT9z2IZj6&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>我們為了要避免這兩種狀況，我們則有一些方法</p>
+<ul>
+<li>將離群值大於 2 and 小於 2 刪除，但假如大量殘差都是 1.5 時，此種方法並不適用</li>
+<li>將殘差值的最大與最小前 5 % 刪除。</li>
+</ul>
+<p>謝謝大家把他看完，我也打了好久QQQQQ，學習的心得總是覺得很麻煩，但又一定要做。<br>我認為沒有留下紀錄的人生就是沒有存在過。</p>
+]]></content>
       <categories>
         <category>北科上課筆記</category>
       </categories>
@@ -17395,6 +17546,109 @@
         <tag>linux</tag>
         <tag>centOS</tag>
         <tag>nignx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10346 - Peter’s Smokes(水題)</title>
+    <url>/2021/05/09/UVa/UVa10346/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Peter 有 n 個大麻，每抽 k 個大麻後剩下的殘渣可以再捲成一個新大麻，Peter 總共可以抽幾個大麻</p>
+<p><a href="https://onlinejudge.org/external/103/10346.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>英文理解</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>理論我們都知道，我們只需要紀錄 n 個香菸，然後剩下的殘渣也進行紀錄，再把超過 k 的殘渣捲成大麻，直到不能夠再組成大麻為止。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>不是欸，大麻不可以寫在題目上八wwww。</p>
+<p>練習手感的一題</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, ans, component;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k)&#123; <span class="comment">//輸入資訊</span></span><br><span class="line">        ans = <span class="number">0</span>; <span class="comment">//總共有幾個香菸 peter 可以抽</span></span><br><span class="line">        component = <span class="number">0</span>; <span class="comment">//還有幾個殘渣可以抽</span></span><br><span class="line">        <span class="keyword">while</span>(n)&#123; <span class="comment">//現在有 n 個大麻</span></span><br><span class="line">            ans += n; <span class="comment">//peter 又有更多大麻可以抽了！</span></span><br><span class="line">            component += n; <span class="comment">//這些大麻抽完了，多了 n 個殘渣</span></span><br><span class="line">            n = component / k; <span class="comment">//這些殘渣可以組成新的 n 個香菸</span></span><br><span class="line">            component %= k; <span class="comment">//還剩下幾個殘渣</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出總共有幾個香菸</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10908 - Largest Square(DFS)</title>
+    <url>/2021/05/08/UVa/UVa10908/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>有一個長方形地圖，會給你一個正方形中心點，此中心點為對角線交叉點，請以此中心點找出最大的正方形，並輸出邊長。</p>
+<p><a href="https://onlinejudge.org/external/109/10908.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>如何找到最大邊長</li>
+<li>搜尋是否為正方形</li>
+<li>英文理解</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>概念其實很簡單，主要是對中心點向上下延伸伸展出最大的正方形，那要怎麼樣伸展才是最好寫得呢？</p>
+<p>可以用一個方式來寫會很好寫，從正方形中心點的左上角開始繞一圈進行搜尋，如果這一圈都是相同字元，那就可以在對下一圈進行搜尋。</p>
+<p>直到不能再對下一圈進行搜尋時就輸出最大正方形長度</p>
+<blockquote>
+<p>舉例來說：<br>紅色點為中心點，而藍色為第一圈、螢光黃色為起頭圍著中心點繞一圈(藍色線段)，只要能夠成功繞一圈那就可以將正方形擴展長度，再從更外面一圈(綠色線條)對中心點圍繞。<br><img src="https://drive.google.com/u/2/uc?id=1gwRyQKUG7tbgA7eH_T7DLVYsoFLDwqTd&export=download" alt=""></p>
+</blockquote>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這是一個很酷的題目，其實不難但是程式要寫的簡單、概念好懂卻是一個大工夫，我對這題研究大概 40mins，想出了這種最簡單又好寫的程式邏輯。</p>
+<p>透過此程式邏輯來寫出此題就快了很多，希望我可以將這些邏輯都應用在未來。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">120</span>;</span><br><span class="line"><span class="keyword">int</span> t, q, n, m;</span><br><span class="line"><span class="keyword">int</span> direct[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;+<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;,&#123;<span class="number">-1</span>,<span class="number">0</span>&#125;&#125;; <span class="comment">//依序是左、下、右、上，圍繞一圈的方向</span></span><br><span class="line"><span class="built_in">string</span> graph[MAXN]; <span class="comment">//儲存地圖</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isValid</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123; <span class="comment">//判斷這個位置是否非法</span></span><br><span class="line">    <span class="keyword">if</span>(x &gt;= <span class="number">0</span> &amp;&amp; x &lt; m &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; n) <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//判斷此位置是否超出邊界</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_square</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;<span class="comment">//position distance</span></span><br><span class="line">    <span class="keyword">int</span> d = <span class="number">1</span>; <span class="comment">//繞圓心一圈的邊長</span></span><br><span class="line">    <span class="keyword">int</span> root_char = graph[x][y]; <span class="comment">//圓心的字元</span></span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">1</span>; <span class="comment">//判斷這圈是否可以成功繞圓心一圈，1 表示可以、0 表示不行</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(flag)&#123;</span><br><span class="line">        d += <span class="number">2</span>; <span class="comment">//邊長增加兩個丹薇</span></span><br><span class="line">        <span class="keyword">int</span> nowX = x-(d/<span class="number">2</span>), nowY = y-(d/<span class="number">2</span>); <span class="comment">//找出此圈的左上角點</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)&#123; <span class="comment">//四個方向，共繞行一圈</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; d<span class="number">-1</span>; j++)&#123; <span class="comment">//每一個方向走 d 步</span></span><br><span class="line">                nowX += direct[i][<span class="number">0</span>]; <span class="comment">//計算當前位置</span></span><br><span class="line">                nowY += direct[i][<span class="number">1</span>];</span><br><span class="line">                <span class="comment">//cout &lt;&lt; "nowX nowY " &lt;&lt; nowX &lt;&lt; ' ' &lt;&lt; nowY &lt;&lt; ' ' &lt;&lt; isValid(nowX,nowY) &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(!isValid(nowX,nowY) || graph[nowX][nowY] != root_char)&#123; <span class="comment">//如果是非法位置 || 現在的 now 字元與 root_char 不同</span></span><br><span class="line">                    flag = <span class="number">0</span>; <span class="comment">//表示無法通行</span></span><br><span class="line">                    <span class="keyword">break</span>; </span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//cout &lt;&lt; "graph char " &lt;&lt; graph[nowX][nowY] &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">//如果無法通行則離開</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> d<span class="number">-2</span>; <span class="comment">//由於是 d 圈沒辦法繞完，因此 d-2 的距離那圈一定可以繞完。</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; m &gt;&gt; n &gt;&gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) <span class="built_in">cin</span> &gt;&gt; graph[i]; <span class="comment">//輸入地圖</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; m &lt;&lt; <span class="string">' '</span> &lt;&lt; n &lt;&lt; <span class="string">' '</span> &lt;&lt; q &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出地圖資訊</span></span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="keyword">while</span>(q--)&#123; <span class="comment">//讀入資訊</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y; <span class="comment">//給予圓心點 x,y</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; find_square(x, y) &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//尋找圓心最大邊長</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa1225 - Digit Counting(數論 Math theorm)</title>
+    <url>/2021/05/08/UVa/UVa1225/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一個數字，產生一組字串資料有 0 to n，請紀錄此字串 0 到 9 個出現幾次。</p>
+<p>舉例： n = 5，那字串為 “12345”</p>
+<p><a href="https://onlinejudge.org/external/12/1225.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>預處理概念</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們稍微可以進行分析，我們可以發現 \(n = 100\) 是最長的字串，但 \(n = 20\) 的字串則是 \(n = 100\) 的子字串，只要是 \(n &lt; 100\) 的都是 \(n = 100\) 的子字串</p>
+<p>然後又發現一件事情，這題的查詢基本上都是 \(n = 100\) 的子字串，因此我們可以預處理，從 n = 1 開始不斷紀錄 0 到 9 個出現幾次，然後用一個陣列紀錄，之後將字串再增加長度(\(n+1\)) 就可以紀錄每一種 n 的 0 到 9 個出現幾次，在題目要查詢 n 時就可以直接輸出。</p>
+<p>透過預處理的方式，來省略每次的查詢時間。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題主要是要給你預處理的概念，你要能夠在寫題目時想到裡面的資料大都具由重疊性抑或是向上、向下延伸，就可以想到預處理。</p>
+<p>希望我可以將這些概念應用在生活上，讓我可以變得更優秀。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">10000</span>; <span class="comment">//最大的字串長度</span></span><br><span class="line"><span class="keyword">int</span> record[MAXN][<span class="number">10</span>];  <span class="comment">//用來記錄 record[字串為 q 時][i] = i 數字的出現次數 </span></span><br><span class="line"><span class="keyword">int</span> n, t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pretreatment</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10000</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> num = i; <span class="comment">//表示增加了一個字串為 num</span></span><br><span class="line">        <span class="keyword">while</span>(num)&#123; <span class="comment">//將字串進行拆解，把每個數字放到 record 中</span></span><br><span class="line">            record[i][num % <span class="number">10</span>]++; <span class="comment">//字串為 i 時，[ num 的尾數] 出現次數加一</span></span><br><span class="line">            num /= <span class="number">10</span>; <span class="comment">//將 num 的尾數去掉</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//把 n = i-1 的紀錄傳給 n = i，</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) record[i][j] += record[i<span class="number">-1</span>][j]; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    pretreatment(); <span class="comment">//進行預處理</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; t; <span class="comment">//輸入查詢的字串 n，輸出答案</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//嚴格比對</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; record[t][<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; record[t][i];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
 </search>
