@@ -1487,19 +1487,25 @@
       </tags>
   </entry>
   <entry>
-    <title>QUESTION! data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?</title>
+    <title>QUESTION! data.frame 如何 append 新 row，有沒有比較快的方法?</title>
     <url>/2020/08/12/R/R-data-frame-append-data/</url>
     <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
 <p>寫程式的時候是不可能沒遇到 bug 的，bug 紀錄整理</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法"><a href="#QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法" class="headerlink" title="QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?"></a>QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?</h2><h3 id="answer"><a href="#answer" class="headerlink" title="answer:"></a>answer:</h3><p>那肯定是有的，使用最新的 tribble，就可以搞定。但要記住一開始如果宣告的為空值則必須使用</p>
-<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t &lt;- tribble(x=character() , y=numeric())</span><br></pre></td></tr></table></figure>
-<p>之後如果要加入資料就使使用</p>
-<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t &lt;- tribble(t , x=num , y = num)</span><br></pre></td></tr></table></figure>
+<h2 id="QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法"><a href="#QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法" class="headerlink" title="QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?"></a>QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?</h2><h3 id="answer"><a href="#answer" class="headerlink" title="answer:"></a>answer:</h3><p>那肯定是有的，使用 tribble library，就可以搞定，使用方法與 dataframe 相同</p>
+<p>如果沒有 tibble，那我們可以安裝 <code>install.packages(tibble)</code></p>
+<p>但 tibble 支持產生無資料的 dataframe，但必須給予欄位的型態，如：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">t &lt;- tibble(x=character() , y=numeric())</span><br></pre></td></tr></table></figure>
+
+<h3 id="之後每一次要-append-row-則使用此語法"><a href="#之後每一次要-append-row-則使用此語法" class="headerlink" title="之後每一次要 append row 則使用此語法"></a>之後每一次要 append row 則使用此語法</h3><figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">library</span>(tibble)</span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"></span><br><span class="line">t &lt;- t %&gt;% add_row(x=<span class="string">"a"</span> , y = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
 <p><strong><font color="#dd0000">必須特別注意: 他要求型態，於是你每次 add 的資料型態都絕對必須要對，可以從這裡進行檢查</font></strong></p>
-<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://stackoverflow.com/questions/48833807/initialize-an-empty-tibble-with-column-names-and-0-rows" target="_blank" rel="noopener">Initialize an empty tibble with column names and 0 rows</a><br><a href="https://github.com/tidyverse/tibble/issues/215" target="_blank" rel="noopener">Allow tribble to create empty tibble with defined column type</a><br><a href="https://tibble.tidyverse.org/reference/add_row.html" target="_blank" rel="noopener">Add rows to a data frame</a></p>
+<p>輸出結果如下：　</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># A tibble: 1 x 2</span><br><span class="line">  x         y</span><br><span class="line">  &lt;chr&gt; &lt;dbl&gt;</span><br><span class="line">1 a         1</span><br></pre></td></tr></table></figure>
+
+<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://stackoverflow.com/questions/31458244/how-to-create-and-add-new-columns-to-a-dataframe-in-r-within-a-loop" target="_blank" rel="noopener">How to create and add new columns to a dataframe in R within a loop? by stackoverflow</a><br><a href="https://stackoverflow.com/questions/48833807/initialize-an-empty-tibble-with-column-names-and-0-rows" target="_blank" rel="noopener">Initialize an empty tibble with column names and 0 rows</a><br><a href="https://github.com/tidyverse/tibble/issues/215" target="_blank" rel="noopener">Allow tribble to create empty tibble with defined column type</a><br><a href="https://tibble.tidyverse.org/reference/add_row.html" target="_blank" rel="noopener">Add rows to a data frame</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>程式語言的世界博大精神，要是沒有他們的付出我能走上現在的路嗎?<br>肯定是沒辦法的，於是我也需要更努力地去為社會付出。</p>
 ]]></content>
       <categories>
@@ -1508,6 +1514,7 @@
       <tags>
         <tag>R語言</tag>
         <tag>學習筆記</tag>
+        <tag>R dataframe</tag>
       </tags>
   </entry>
   <entry>
@@ -2819,7 +2826,7 @@
 <p>後來我的另外兩位隊友想用 struct + pointer 來解決問題，當下的我聽到時是十分震驚的，因為我覺得這是個瘋狂的舉動，在比賽的時候寫 pointer 不確定性太大、Debug 時不方便，在不容易知道自己問題會在哪部分的情況下，不應該要用 pointer，在他們後來發現不可行後。根據我的想法將樹壓縮一維陣列並透過遞迴實現，透過 Bill and Entroy 在我旁邊 Debug 與檢查錯誤讓我們在最後半小時內也對了這題，隊友也是很重要的！ </p>
 <h3 id="比賽結束了，名次到底是第幾呢"><a href="#比賽結束了，名次到底是第幾呢" class="headerlink" title="比賽結束了，名次到底是第幾呢"></a>比賽結束了，名次到底是第幾呢</h3><p>由於最後一小時比賽會凍結排名，我們最後一次看到我們自己的成績是第 17 名，我非常緊張，感覺這樣有失自己的自尊，不過後來有在最後半小時解出兩題，應該名次會往前，當時的猜測是自己會是第五名 or 第六名，因為都是比較晚的時間送出應該會成績不會太漂亮，果不其然，跟我的預估一樣拿到第五名、金獎。而且金獎還是最後一個名額阿，運氣真的很好。也謝謝自己的隊友可以幫助我能夠拿到金獎，沒有他們我說不定連金獎也都沒有吧！</p>
 <ul>
-<li><p>頒獎拉，金獎的我們<br><img src="/images/ncut2020_experience/5.jpg" alt=""></p>
+<li><p>頒獎拉，金獎的我們<br><img src="/images/ncut2020_experience/5.JPG" alt=""></p>
 </li>
 <li><p>很乖的 Entroy<br><img src="/images/ncut2020_experience/6.jpg" alt=""></p>
 </li>
@@ -3303,6 +3310,7 @@
       <tags>
         <tag>R語言</tag>
         <tag>學習筆記</tag>
+        <tag>R dataframe</tag>
       </tags>
   </entry>
   <entry>
@@ -17002,7 +17010,7 @@
       </tags>
   </entry>
   <entry>
-    <title>統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Rejression)</title>
+    <title>統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Regression)</title>
     <url>/2021/05/02/NTUT_note/statistics-ch14/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
 <p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
@@ -17087,7 +17095,7 @@
 <p><img src="https://drive.google.com/u/2/uc?id=1I4vkFQn7plXMeye6JcKQVJYFAe_Oie5s&export=download" alt=""></p>
 </blockquote>
 <h1 id="判定係數-Cofficient-of-Determination"><a href="#判定係數-Cofficient-of-Determination" class="headerlink" title="判定係數 Cofficient of Determination"></a>判定係數 Cofficient of Determination</h1><ul>
-<li>公式A \(\sum (y_i - \bar{y})^2 = \sum (\hat{y_i}- \bar{y})^2 + \sum (y_i - \hat{y_i})^2 \)<ul>
+<li>複習 ANOVA 公式 \(\sum (y_i - \bar{y})^2 = \sum (\hat{y_i}- \bar{y})^2 + \sum (y_i - \hat{y_i})^2 \)<ul>
 <li>其中 \(SST = \sum (y_i - \bar{y})^2\) 總平方和 total sum of squares</li>
 <li>其中 \(SSR = \sum (\hat{y_i}- \bar{y})^2\) 迴歸平方和</li>
 <li>其中 \(SSE = \sum (y_i - \hat{y_i})^2 \) 誤差平方和</li>
@@ -17097,10 +17105,10 @@
 <p><img src="https://drive.google.com/u/2/uc?id=16abqF3e8bShtixeIVBikFzMQ1JY5D1C8&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>公式 B  \(r^2 = SSR / SST \)<ul>
+<li>判定係數公式  \(r^2 = SSR / SST \)<ul>
 <li>其中 SSR 迴歸平方和</li>
 <li>SST 誤差平方和</li>
-<li>當 r 越小時則表示此迴歸方程式能夠解讀資料的能力越好</li>
+<li>當 \(r^2\) 越大時則表示此迴歸方程式能夠解讀資料的能力越好</li>
 </ul>
 </li>
 </ul>
@@ -17118,14 +17126,15 @@
 <li>\(r_{xy} = + \sqrt{0.8772}\)</li>
 <li>\(r_{xy} = + 0.9366\)</li>
 </ul>
-<h1 id="假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E"><a href="#假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E" class="headerlink" title="假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)"></a>假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)</h1><p>我們對於 \(\mathcal{E}\) 有以下假設</p>
+<h1 id="假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E"><a href="#假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E" class="headerlink" title="假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)"></a>假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)</h1><p>定義 \(\mathcal{E} = y_i - \hat{y_i}\)</p>
+<p>我們對於 \(\mathcal{E}\) 有以下假設</p>
 <ul>
 <li>我們假設 \(\mathcal{E}\) 是平均數為零的隨機變數<ul>
 <li>因此我們可以表示 \(E(\mathcal{E}) = 0\)</li>
 <li>所以 \(y = \beta_0 + \beta_1 x + \mathcal{E}\)，才可以省略 \(\mathcal{E}\)</li>
 </ul>
 </li>
-<li>\(\mathcal{E}\) 的變異數定義為 \(\sigma^2\)，因此迴歸線裡面的所有的獨立變數都是 \(\sigma^2\)</li>
+<li>\(\mathcal{E}\) 的變異數定義為 \(\sigma^2\)，因此迴歸線裡面的所有的獨立變數中的 \(\mathcal{E}\) 變異數為 都是 \(\sigma^2\)</li>
 <li>\(\mathcal{E}\) 為獨立變數，每一個變數的 \(\mathcal{E}\) 都不同，互相獨立</li>
 <li>\(\mathcal{E}\) 是常態分配的隨機變數</li>
 </ul>
@@ -17210,7 +17219,7 @@
 </ul>
 </li>
 <li>F test Statisitic<br>\(F = MSR / MSE \)</li>
-<li>Rej3ection Rule <ul>
+<li>Rejection Rule <ul>
 <li>Reject \(H_0\) if \(p-value \leq \alpha \) or \(F \geq F_\alpha\)</li>
 <li>其中 \(F_a\) 為我們計算的 f 描述</li>
 <li>分子自由度為 1、分母自由度為 \(n-2\)</li>
@@ -17234,7 +17243,7 @@
 </ul>
 </li>
 <li>F test Statisitic<br>\(F = MSR / MSE = 100 / 4.667 = 21.43 \) </li>
-<li>Rej3ection Rule <ul>
+<li>Conclusion<ul>
 <li>Reject \(H_0\) if \(0.019 \leq \alpha \) or \(21.43 =F \geq F_\alpha = 10.13\)，都有符合；因此拒絕 \(H_0\)，我們可以確認電視廣告與汽車銷售數量是有關聯的。</li>
 </ul>
 </li>
@@ -17251,10 +17260,10 @@
 </ul>
 <h2 id="區間估計公式"><a href="#區間估計公式" class="headerlink" title="區間估計公式"></a>區間估計公式</h2><p>通常回歸方程式做完後預測出來的值不一定完全準確，因為我們的回歸預測方程式是 \(y = \beta_0 + \beta_1 x \)，我們忽略是 \(\mathcal{E} \)，因此我們要預估 \( \mathcal{E} \) 因此才需要此估計公式進行計算 </p>
 <ul>
-<li>信心區間估計 Confidence Interval Estimate of \(E(y^*)\)<ul>
-<li>\(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*\)</li>
-<li>其中信賴係數為 \(1-\alpha\)，自由度為 \(n-2\)</li>
-<li>\(s = \sqrt{MSE} \)</li>
+<li>信心區間估計 Confidence Interval Estimate of \(E(y^*) \)<ul>
+<li>\(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*} \)</li>
+<li>其中信賴係數為 \(1-\alpha\)，自由度為 \(n-2\)，其中 2 為獨立變數與因變數的總和</li>
+<li>\(s = \sqrt{MSE} = SSE / (n-2) \)</li>
 <li>\(s_{\hat{y}^*} = s \sqrt{\frac{1}{n} + \frac{( x^* - \bar{x} )^2}{\sum (x_i - \bar{x})^2}}\)</li>
 </ul>
 </li>
@@ -17284,7 +17293,7 @@
 <li>\(s_{\hat{y}^*}  = 2.16025 \sqrt{\frac{1}{5} + \sqrt{1}{4}} = 1.4491\)</li>
 </ul>
 </li>
-<li>因此根據信心區間估計 \(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*\)<br>\(25 \pm 3.1824(1.4491) = 25 \pm 4.61\)，因此我們預估 3 個電視廣告，銷售汽車數量大約在 20.39 to 29.61 </li>
+<li>因此根據信心區間估計 \(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*} \)<br>\(25 \pm 3.1824(1.4491) = 25 \pm 4.61\)，因此我們預估 3 個電視廣告，銷售汽車數量大約在 20.39 to 29.61 </li>
 </ul>
 </li>
 <li>\(y^* \) 的預估區間<ul>
@@ -17455,6 +17464,7 @@
 </li>
 </ul>
 <h2 id="開始進行反向代理"><a href="#開始進行反向代理" class="headerlink" title="開始進行反向代理"></a>開始進行反向代理</h2><ul>
+<li>先對那文件進行編輯 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code></li>
 <li><code>location  + /url/</code>，就是我們 <a href="https://example.com/url/" target="_blank" rel="noopener">https://example.com/url/</a></li>
 <li><code>proxy_pass api</code>，就是我們要請 nginx 將 http 代理成 https，讓外網透過 https 連入 http api<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1mG5yNnUajyQBcA698vU0zAFKPVLKj7k4&export=download" alt=""></p>
@@ -17466,12 +17476,47 @@
 </li>
 </ul>
 <h2 id="啟動-nginx"><a href="#啟動-nginx" class="headerlink" title="啟動 nginx"></a>啟動 nginx</h2><p>輸入語法，不過需要記住 nginx 需要分號，剛剛在打的時候要注意分號優 <code>sudo service nginx start</code></p>
-<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-6-with-yum" target="_blank" rel="noopener">How To Install nginx on CentOS 6 with yum by digitalocean</a><br><a href="https://www.sslshopper.com/ssl-checker.html" target="_blank" rel="noopener">SSL Checker by sslshopper</a><br><a href="https://www.sslshopper.com/certificate-decoder.html" target="_blank" rel="noopener">crt check by sslshopper</a><br><a href="https://oranwind.org/-devops-ubuntu-shang-nginx-an-zhuang-yu-she-ding/" target="_blank" rel="noopener">[ DevOps ] Nginx 設定 Proxy Server 及 Load balance by oranwind</a><br><a href="https://www.opencli.com/linux/nginx-setup-ssl" target="_blank" rel="noopener">Nginx 設定 SSL 網頁加密 by opencli</a><br><a href="https://junhanli.blogspot.com/2017/04/ubuntu-nginx-https-godaddy-ssl.html" target="_blank" rel="noopener">Ubuntu Nginx 設定HTTPS建立網頁加密連線 (Godaddy SSL憑證) by junhanli</a><br><a href="https://serverfault.com/questions/1021242/4562605504error0909006cpem-routinesget-nameno-start-linecrypto-pem-pem-lib" target="_blank" rel="noopener">4562605504:error:0909006C:PEM routines:get_name:no start line:crypto/pem/pem_lib.c:745:Expecting: TRUSTED CERTIFICATE by stackexchange</a></p>
+<h3 id="啟動-nginx-錯誤：-nginx-emerg-bind-to-80-failed-98-Address-already-in-use"><a href="#啟動-nginx-錯誤：-nginx-emerg-bind-to-80-failed-98-Address-already-in-use" class="headerlink" title="啟動 nginx 錯誤： nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)"></a>啟動 nginx 錯誤： nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)</h3><blockquote>
+<p>錯誤圖片如下<br><img src="https://drive.google.com/u/2/uc?id=14F1FmFspxAIITm83_DPnEhbZgFPC4yDy&export=download" alt=""></p>
+</blockquote>
+<p>通常這時後要怎麼辦呢？</p>
+<p>有一種處理方式是將 443/tcp 全部清除後，再重新開啟一次 nginx 就可以順利完成</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo fuser -k 443&#x2F;tcp</span><br><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
+
+<h3 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h3><p><a href="https://stackoverflow.com/questions/14972792/nginx-nginx-emerg-bind-to-80-failed-98-address-already-in-use" target="_blank" rel="noopener">nginx - nginx: [emerg] bind() to [::]:80 failed (98: Address already in use) by stackoverflow</a></p>
+<h2 id="nginx-如何開啟-Cross-Origin-Resource-Sharing-CORS"><a href="#nginx-如何開啟-Cross-Origin-Resource-Sharing-CORS" class="headerlink" title="nginx 如何開啟 Cross-Origin Resource Sharing (CORS)"></a>nginx 如何開啟 Cross-Origin Resource Sharing (CORS)</h2><p>在一些服務上，有時候必須開啟 CORS 服務，通常 nginx 預設是關閉，那要怎麼打開比較好呢？</p>
+<ul>
+<li>打開 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code></li>
+<li>在 <code>location</code> 加入 <code>add_header Access-Control-Allow-Origin *;</code></li>
+<li>示意圖如下：<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ZisdV0KnBdTKk7j4hCXkDpdNatUmFVLM&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="CORS-跨來源資源共享-是甚麼？"><a href="#CORS-跨來源資源共享-是甚麼？" class="headerlink" title="CORS(跨來源資源共享) 是甚麼？"></a>CORS(跨來源資源共享) 是甚麼？</h3><ul>
+<li>平常 API 中 CORS 預設為關閉，因此瀏覽器中你的 domain(網域) 資源只能在你的 domain 下使用，其他 domain 都不行。</li>
+<li>當 CORS 開啟，則你的 domain 資源則可以在任意地方做使用。</li>
+</ul>
+<p>舉個例子：<br>現在你要在你的 blog 放入一張 FB 的圖片。</p>
+<ul>
+<li>如果 FB 的 CORS 是開啟，則我們可以順利獲得 FB(<a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a>) 的圖片崁入在 Blog 上。</li>
+<li>如果 FB 的 CORS 是關閉，那我們就無法獲得 FB(<a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a>) 上的圖片。</li>
+</ul>
+<p>為甚麼會需要 CORS 通常會關閉呢？ 我們把放入 FB(<a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a>) 的圖片稍微改下<br>現在你要在你的 blog 放入一張 FB(<a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a>) 的私人訊息。</p>
+<ul>
+<li>如果 FB 的 CORS 是開啟，則我們可以順利獲得 FB(<a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a>) 的私人訊息崁入在 Blog 上。</li>
+<li>如果 FB 的 CORS 是關閉，那我們就無法獲得 FB(<a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a>) 上的私人訊息。</li>
+</ul>
+<p>由於我們要保護我們的資料並不被惡意擷取，因此就產生了 CORS(跨來源資源共享)，願意共享才能共享。</p>
+<h3 id="參考連結-1"><a href="#參考連結-1" class="headerlink" title="參考連結"></a>參考連結</h3><p><a href="https://serverfault.com/questions/162429/how-do-i-add-access-control-allow-origin-in-nginx" target="_blank" rel="noopener">How do I add Access-Control-Allow-Origin in NGINX? by stackexchange</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS" target="_blank" rel="noopener">跨來源資源共用（CORS） by MDN </a></p>
+<h2 id="參考連結-2"><a href="#參考連結-2" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-6-with-yum" target="_blank" rel="noopener">How To Install nginx on CentOS 6 with yum by digitalocean</a><br><a href="https://www.sslshopper.com/ssl-checker.html" target="_blank" rel="noopener">SSL Checker by sslshopper</a><br><a href="https://www.sslshopper.com/certificate-decoder.html" target="_blank" rel="noopener">crt check by sslshopper</a><br><a href="https://oranwind.org/-devops-ubuntu-shang-nginx-an-zhuang-yu-she-ding/" target="_blank" rel="noopener">[ DevOps ] Nginx 設定 Proxy Server 及 Load balance by oranwind</a><br><a href="https://www.opencli.com/linux/nginx-setup-ssl" target="_blank" rel="noopener">Nginx 設定 SSL 網頁加密 by opencli</a><br><a href="https://junhanli.blogspot.com/2017/04/ubuntu-nginx-https-godaddy-ssl.html" target="_blank" rel="noopener">Ubuntu Nginx 設定HTTPS建立網頁加密連線 (Godaddy SSL憑證) by junhanli</a><br><a href="https://serverfault.com/questions/1021242/4562605504error0909006cpem-routinesget-nameno-start-linecrypto-pem-pem-lib" target="_blank" rel="noopener">4562605504:error:0909006C:PEM routines:get_name:no start line:crypto/pem/pem_lib.c:745:Expecting: TRUSTED CERTIFICATE by stackexchange</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好棒! 我終於把它寫出來了 centOS6 真的好難用QQQ，花了花多時間去把它學習，從不了解反向代理到理解反向代理，然後得知 ssl 是必須要去申請憑證，而非做一個假的 ssl 上線就可以讓 nginx 變成 https。</p>
 <p>之後找到 nginx 管理 https，原本是使用 redirect 307 發現會出現錯誤為 https 中有 http，再來使用 proxy_pass 成功代理了。</p>
 <p>一路上都是心血與痛苦，也謝謝網路上的大大願意寫 blog 分享資源，謝謝各位。</p>
+<p>現在目前比較傾向將錯誤寫在安裝的 blog 日誌上而非在創新的日誌來寫，不知道這樣會不會幫助到大家與我。</p>
+<p>目前也還在嘗試，還在努力，好希望可以成功。</p>
 <h2 id="紀錄"><a href="#紀錄" class="headerlink" title="紀錄"></a>紀錄</h2><p>記錄我在採坑時，用到的那些 linux 指令，也許對未來的我或讀者有幫助</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"> vim &#x2F;etc&#x2F;httpd&#x2F;conf&#x2F;httpd.conf</span><br><span class="line"> service httpd restart</span><br><span class="line"></span><br><span class="line">MEU8UD3PE67H57U6BLOEPLOZK8DGLLX9</span><br><span class="line"></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -keyout arch-backend.com&#x2F;.key -out arch-backend.com&#x2F;.csr</span><br><span class="line"></span><br><span class="line">sudo service nginx restart</span><br><span class="line"></span><br><span class="line"> sudo vim &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;ssl.conf</span><br><span class="line"> sudo fuser -k 443&#x2F;tcp</span><br><span class="line"></span><br><span class="line"> ssl_certificate &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt;</span><br><span class="line"> ssl_certificate &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;web.crt;</span><br><span class="line">    ssl_certificate_key &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;nginx-ssl.key;</span><br><span class="line">ssl_certificate_key &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;web.key;</span><br><span class="line"></span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt -text -noout</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;web.crt -text -noout</span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt -text -noout</span><br><span class="line"></span><br><span class="line">openssl rsa -in &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;web.key -check</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> vim &#x2F;etc&#x2F;httpd&#x2F;conf&#x2F;httpd.conf</span><br><span class="line"> service httpd restart</span><br><span class="line"></span><br><span class="line">MEU8UD3PE67H57U6BLOEPLOZK8DGLLX9</span><br><span class="line"></span><br><span class="line">openssl req -new -newkey rsa:2048 -nodes -keyout arch-backend.com&#x2F;.key -out arch-backend.com&#x2F;.csr</span><br><span class="line"></span><br><span class="line">sudo service nginx restart</span><br><span class="line"></span><br><span class="line"> sudo vim &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;ssl.conf</span><br><span class="line"> sudo fuser -k 443&#x2F;tcp</span><br><span class="line"></span><br><span class="line"> ssl_certificate &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt;</span><br><span class="line"> ssl_certificate &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;web.crt;</span><br><span class="line">    ssl_certificate_key &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;nginx-ssl.key;</span><br><span class="line">ssl_certificate_key &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;web.key;</span><br><span class="line"></span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt -text -noout</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;web.crt -text -noout</span><br><span class="line">openssl x509 -in &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;nginx-ssl.crt -text -noout</span><br><span class="line"></span><br><span class="line">openssl rsa -in &#x2F;etc&#x2F;ssl&#x2F;private&#x2F;web.key -check</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -17649,6 +17694,970 @@
         <tag>UVa</tag>
         <tag>程式解題</tag>
         <tag>數論 Math theorm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(二) 筆記 - 第十五章 複迴歸(Multiple Regression)</title>
+    <url>/2021/05/15/NTUT_note/statistics-ch15/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="複迴歸模型-Multiple-Regression-Model"><a href="#複迴歸模型-Multiple-Regression-Model" class="headerlink" title="複迴歸模型 Multiple Regression Model"></a>複迴歸模型 Multiple Regression Model</h1><p>在<a href="https://theriseofdavid.github.io/2021/05/02/NTUT_note/statistics-ch14/" target="_blank" rel="noopener">第十四章 簡單線性迴歸(Simple Linear Rejression)</a>提到的獨立變數，就是這邊的自變數。<br>因為獨立變數是表示只有此變數可以在簡單迴歸方程式中，但可以有多個<strong>自變數</strong>在複迴歸方程式中</p>
+<ul>
+<li>功能<ul>
+<li>考慮兩個或兩個以上的自變數的迴歸為複迴歸，如果只有一個為<a href="https://theriseofdavid.github.io/2021/05/02/NTUT_note/statistics-ch14/" target="_blank" rel="noopener">第十四章 簡單線性迴歸(Simple Linear Rejression)</a></li>
+<li>通常複迴歸比簡單線性迴歸的預測能力好<strong>更多</strong>，<del>廢話</del></li>
+</ul>
+</li>
+<li>Model 公式 <ul>
+<li>複迴歸公式為 \(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + … + \beta_p x_p +  \mathcal{E}  \)<ul>
+<li>其中 \(\beta\) 為自變數的係數</li>
+<li>\(p\) 表示總共的自變數數量</li>
+<li>\(\mathcal{E} \) 為隨機變數誤差項</li>
+</ul>
+</li>
+<li>Expect 公式 \(E(y) = \beta+0 + \beta_1 x_1 +  \beta_2 x_2 + … + \beta_p x_p \)<ul>
+<li>其中 \(\beta\) 為自變數的係數</li>
+<li>\(p\) 表示自變數數量</li>
+<li>\(\mathcal{E} = 0 \)，由於此自變數是期望值的誤差項，因此在計算期望值時並不需用到。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>估計複迴歸模型 Estimation Multiple Regression Equation<ul>
+<li>由於我們不能確定期望值方程式中的 \(\beta_0 + \beta_1 x + \beta_2 x_2 + … + \beta_p x_p \)，因此我們透過樣本資料與估計線性迴歸方程式得出 \(b_0, b_1, b_2, … , b_p\)，再透過 \(b_0, b_1, b_2, … , b_p\) 去估計 \(\beta_0 , \beta_1 ,  \beta_2  , … , \beta_p  \)</li>
+<li>其中我們的資料不可以有任意<strong>自變數</strong> 遺失，有遺失就必須刪除。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BgjNBOzhvHz-qTHEQ5WSNe8TdB7mF8JW&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="最小平方法-Least-Squares-Method"><a href="#最小平方法-Least-Squares-Method" class="headerlink" title="最小平方法 Least Squares Method"></a>最小平方法 Least Squares Method</h1><ul>
+<li>使用最小平方法來推複迴歸公式</li>
+<li>Least Squares Criterion 公式為 \(min \sum (y_i - \hat{y_i})^2\)</li>
+<li>由於我們有大量的的 \(b\) 要運算，且常會使用到矩陣運算，因此我們使用電腦進行運算</li>
+<li>因此主要重點為解讀資料，並非如何去計算複迴歸模型公式</li>
+</ul>
+<h2 id="舉例：程式設計師薪水調查，有-20-位程式設計師的資料，其中資料有-年資、程式能力、薪水，我們想要想確認年資是否與程式能力、年資有關係？"><a href="#舉例：程式設計師薪水調查，有-20-位程式設計師的資料，其中資料有-年資、程式能力、薪水，我們想要想確認年資是否與程式能力、年資有關係？" class="headerlink" title="舉例：程式設計師薪水調查，有 20 位程式設計師的資料，其中資料有 年資、程式能力、薪水，我們想要想確認年資是否與程式能力、年資有關係？"></a>舉例：程式設計師薪水調查，有 20 位程式設計師的資料，其中資料有 年資、程式能力、薪水，我們想要想確認年資是否與程式能力、年資有關係？</h2><blockquote>
+<p>資料如下：<br><img src="https://drive.google.com/u/2/uc?id=1SJeEBDR9TUxas8cI82ntr7LRuOV3CLme&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>訂出迴歸模型公式<ul>
+<li>\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \mathcal{E}\)</li>
+<li>其中 \(y = 薪水\)，1000 美金為一單位</li>
+<li>\(x_1 = 年資\)</li>
+<li>\(x_2 = 程式能力\)</li>
+<li>每個自變數定義都必須寫出來</li>
+</ul>
+</li>
+<li>透過程式進行運算，推出 \(b_0, b_1, b_2, R^2\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1LvXZvwYUjEI6sctCScznfIrr0d5SCmUV&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>運算結果如下<ul>
+<li>其中我們可以知道 常數 constant 3.17394</li>
+<li>經驗 \(x_1\) 的係數為 1.404</li>
+<li>程式能力 \(x_2\) 的係數為 0.251</li>
+<li>因此公式為 \(y = 3.174 + 1.404 x_1 + 0.251 x_2\)，其中 y 則是 1000 美金為一單位</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1LY622aygxLFrRMg9zh1kr0Nwl-M6kbD3&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>解釋相關係數 Interpreting the Coefficients<ul>
+<li>其中我們可以知道在其他數字不變，只有 \(b_i\) 改變的情況下，會給 y 帶來多少的改變</li>
+<li>舉例<ul>
+<li>在其他係數不變，年資每增加一單位，薪水則增加 1.404 單位。</li>
+<li>在其他係數不變，程式設計能力增加一單位，薪水增加 0.251 單位。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="複判定係數-Multiple-Cofficient-of-Determination"><a href="#複判定係數-Multiple-Cofficient-of-Determination" class="headerlink" title="複判定係數 Multiple Cofficient of Determination"></a>複判定係數 Multiple Cofficient of Determination</h1><ul>
+<li>判定係數：用來表示此迴歸模型可以解釋百分之 \(r^2\)的資料</li>
+<li>複習 ANOVA 公式 \(\sum (y_i - \bar{y})^2 = \sum (\hat{y_i}- \bar{y})^2 + \sum (y_i - \hat{y_i})^2 \)<ul>
+<li>其中 \(SST = \sum (y_i - \bar{y})^2\) 總平方和 total sum of squares</li>
+<li>其中 \(SSR = \sum (\hat{y_i}- \bar{y})^2\) 迴歸平方和</li>
+<li>其中 \(SSE = \sum (y_i - \hat{y_i})^2 \) 誤差平方和</li>
+</ul>
+</li>
+<li>我們透過電腦計算時 ANOVA 表則會有 SST 與 SSR，圖表如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Fy7lpnsn1vwt6KA0nDGSk_Rq-oR1KD41&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>判定係數公式 \(r^2 = SSR / SST \)<ul>
+<li>其中 SSR 迴歸平方和</li>
+<li>SST 誤差平方和</li>
+<li>當 \(r^2\) 越大時則表示此迴歸方程式能夠解讀資料的能力越好</li>
+</ul>
+</li>
+<li>調整複判定係數公式 Adjusted Multiple Coefficient of Determination <ul>
+<li>其中在複迴歸判定係數中，只要我們增加更多的自變數進入複迴歸，那 SSE 必定會減少，SST 不變，SSR 就會增加，因此 R 平方係數一定會增加，因此我們解釋資料一定會更好</li>
+<li>即使假如此自變數與 y 沒有關聯，但多一個變數勢必可以對誤差降低帶來影響。</li>
+<li>雖然只要增加新的自變數就可以讓 \(r^2\) 越高，但是如果我們增加更多的自變數，則我們的自由度會將低，(自由度是取決於資料筆數 - 自變數與因變數)，這樣我們在做顯著性測試、區間預測時則會因為自由度降低帶來負面效果。</li>
+<li>因此並不是追求增加變數就是好的 \(r^2\)，因此我們就調整判定係公式來推估在複迴歸</li>
+<li>調整後複判定係數公式 \(R_a^2 = 1 - (1- r^2) \frac{n-1}{n-p-1}\)<ul>
+<li>其中 \(r^2 \) 為<strong>未調整</strong>的判定係數</li>
+<li>\(n\) 資料筆數</li>
+<li>\(p\) 自變數與因變數的總和</li>
+</ul>
+</li>
+<li><a href="http://web.nchu.edu.tw/~finmyc/stat13p.pdf" target="_blank" rel="noopener">調整複判定係數公式 Adjusted Multiple Coefficient of Determination 資料來源為此連結 ppt 第 15 頁</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="舉例：根據先前程式設計師的舉例，請告訴我調整後判定係數的數值是多少"><a href="#舉例：根據先前程式設計師的舉例，請告訴我調整後判定係數的數值是多少" class="headerlink" title="舉例：根據先前程式設計師的舉例，請告訴我調整後判定係數的數值是多少"></a>舉例：<a href="#舉例：程式設計師薪水調查，有-20-位程式設計師的資料，其中資料有-年資、程式能力、薪水，我們想要想確認年資是否與程式能力、年資有關係？">根據先前程式設計師的舉例</a>，請告訴我調整後判定係數的數值是多少</h2><ul>
+<li>答：\(R_a^2 = 1 - (1- 0.834179) \frac{20-1}{20-2-1} = 0.814671\)</li>
+<li>透過圖片進行解釋<ul>
+<li>其中紅色線條就是我們的方程式，而其標示的米黃色亮面為 \(x_1, x_2\) 為任意數值情況下，所在的區域</li>
+<li>藍色線條為當 \(x_1, x_2 \) 為一固定值時，其位置在哪裡</li>
+<li>綠色圈圈則是我們預測的數值，透過紅色線條公式去計算後，所對應的點，且一定會在米黃色亮面上。</li>
+<li>紫色圈圈為實際的數值，紫色圈圈往下則有 \(\mathcal{E}\)，那就是針對此點的誤差範圍。</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1FuTSOJRTQjxUlF4Wp2MJ91j1hK2oedTP&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="複迴歸模型假設-Model-Assumptions"><a href="#複迴歸模型假設-Model-Assumptions" class="headerlink" title="複迴歸模型假設 Model Assumptions"></a>複迴歸模型假設 Model Assumptions</h1><p>定義 \(\mathcal{E} = y_i - \hat{y_i}\)</p>
+<p>我們對於 \(\mathcal{E}\) 有以下假設</p>
+<ul>
+<li>我們假設 \(\mathcal{E}\) 是平均數為零的隨機變數<ul>
+<li>因此我們可以表示 \(E(\mathcal{E}) = 0\)</li>
+<li>所以 \(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + … + \beta_p x_p + \mathcal{E}\)，才可以省略 \(\mathcal{E}\)</li>
+</ul>
+</li>
+<li>\(\mathcal{E}\) 的變異數定義為 \(\sigma^2\)，因此迴歸線裡面的所有的自變數中的 \(\mathcal{E}\) 變異數為 都是 \(\sigma^2\)</li>
+<li>\(\mathcal{E}\) 為獨立變數，每一個變數的 \(\mathcal{E}\) 都不同，互相獨立</li>
+<li>\(\mathcal{E}\) 是常態分配的隨機變數</li>
+</ul>
+<h1 id="顯著性測試-Testing-for-Significance"><a href="#顯著性測試-Testing-for-Significance" class="headerlink" title="顯著性測試 Testing for Significance"></a>顯著性測試 Testing for Significance</h1><ul>
+<li>在簡單線性迴歸方程式中，使用 F 檢定與 T 檢定都可以</li>
+<li>在複迴歸方程式中，F 檢定與 T 檢定則有不同意義<ul>
+<li>F 檢定是檢定<strong>所有的自變數是否跟 y 有關係</strong></li>
+<li>T 檢定是檢定<strong>單一自變數是否跟 y 有關係</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="F-test"><a href="#F-test" class="headerlink" title="F test"></a>F test</h2><ul>
+<li>假設檢定<ul>
+<li>\(H_0: \beta_1 = \beta_2 = … = \beta_p = 0 \)</li>
+<li>\(H_1: \) 上面公式不符合，表示並沒有全部自變數與 y 沒有關聯</li>
+</ul>
+</li>
+<li>F test Statisitic<br>\(F = MSR / MSE \)</li>
+<li>Rejection Rule <ul>
+<li>Reject \(H_0\) if \(p-value \leq \alpha \) or \(F \geq F_\alpha\)</li>
+<li>其中 \(F_a\) 為我們計算的 f 描述</li>
+<li>分子自由度為 \(p\)，使用的自變數總數、分母自由度為 \(n-p-1\)，資料總數 - 自變數 - 1</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯"><a href="#舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯" class="headerlink" title="舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與 y 有關聯"></a>舉例：<a href="#舉例：根據先前程式設計師的舉例，請告訴我調整後判定係數的數值是多少">根據先前程式設計師的舉例</a>，我們想確定這些自變數是否與 y 有關聯</h3><ul>
+<li>假設檢定<ul>
+<li>\(H_0: \beta_1 = \beta_2 = 0 \)</li>
+<li>\(H_1: \) 上面公式不符合</li>
+</ul>
+</li>
+<li>\(\alpha \) 為 0.05 </li>
+<li>Rejection Rule <ul>
+<li>Reject \(H_0\) if \(p-value \leq 0.05 \) or \(F \geq F_{0.05} = 3.59\)</li>
+<li>其中 \(F_a\) 為我們計算的 f 描述</li>
+<li>分子自由度為 \(p = 2\)，使用的自變數總數、分母自由度為 \(n-p-1 = 17\)，資料總數 - 自變數 - 1，其中 1 是因變數</li>
+</ul>
+</li>
+<li>F test Statisitic<br>\(F = MSR / MSE \)</li>
+<li>透過電腦計算 F 與 p-value，由於都是透過電腦計算，因此不需要使用 probability distribution app 計算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1wRfnC9CMK02Uemoa87CE1-qBMJXrN5k8&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>colclusion<br>由於我們計算出來的 \(F = 42.76 \geq F_{0.05} = 3.59\)，因此我們拒絕 \(H_0\)，表示並沒有全部自變數與 y 沒有關聯，因此我們需要做 t 檢定去看哪個自變數與 y 沒有關聯。</li>
+</ul>
+<h2 id="T-test"><a href="#T-test" class="headerlink" title="T test"></a>T test</h2><ul>
+<li>假設檢定<ul>
+<li>\(H_0: \beta_i = 0 \)</li>
+<li>\(H_1: \beta_i != 0\)</li>
+</ul>
+</li>
+<li>Test Statistic<ul>
+<li>公式 \(t = \frac{b_i}{s_{b_i}}\)</li>
+</ul>
+</li>
+<li>Rejcetion Rule <ul>
+<li>Reject \(H_0\) if \(p-value \leq \alpha \) or \(t \leq -t_{a/2} \) or \(t \geq t_{a/2}\)</li>
+<li>其中 \(t_{a/2}\) 為 t 描述</li>
+<li>自由度為 \(n-p-1\)，資料總數 - 自變數 - 1，其中 1 是因變數</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：根據先前程式設計師的舉例，我們想知道年資、程式能力是否與-y-有關聯"><a href="#舉例：根據先前程式設計師的舉例，我們想知道年資、程式能力是否與-y-有關聯" class="headerlink" title="舉例：根據先前程式設計師的舉例，我們想知道年資、程式能力是否與 y 有關聯"></a>舉例：<a href="#舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯">根據先前程式設計師的舉例</a>，我們想知道年資、程式能力是否與 y 有關聯</h3><ul>
+<li>假設檢定<ul>
+<li>\(H_0: \beta_i = 0 \)</li>
+<li>\(H_1: \beta_i != 0\)</li>
+</ul>
+</li>
+<li>Test Statistic<ul>
+<li>公式 \(t = \frac{b_i}{s_{b_i}}\)</li>
+</ul>
+</li>
+<li>\(\alpha \) 為 0.05 </li>
+<li>Rejcetion Rule <ul>
+<li>Reject \(H_0\) if \(p-value \leq \alpha = 0.05 \) or \(t \leq -t_{a/2} = 2.11\) or \(t \geq t_{a/2} = 2.11\)</li>
+<li>其中 \(t_{a/2}\) 為 t 描述</li>
+<li>自由度為 \(n-p-1 = 17\)，資料總數 - 自變數 - 1，其中 1 是因變數</li>
+</ul>
+</li>
+<li>透過電腦計算 T 與 p-value，由於都是透過電腦計算，因此不需要使用 probability distribution app 計算<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1HFTnpfKziq988vmjqLDi-3XoWckd5DSn&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>年資<ul>
+<li>Reject \(H_0\) if \(p-value = 0.00000 \leq \alpha = 0.05 \)</li>
+<li>拒絕 \(H_0\) 因此工作年資與薪資有關聯且正相關，因為迴歸方程式為 \(+ b_0\)</li>
+</ul>
+</li>
+<li>程式能力<ul>
+<li>Reject \(H_0\) if \(p-value = 0.00478 \leq \alpha = 0.05 \)</li>
+<li>拒絕 \(H_0\) 因此程式能力與薪資有關聯且正相關，因為迴歸方程式為 \(+ b_1\)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Multicollinearity-共線性"><a href="#Multicollinearity-共線性" class="headerlink" title="Multicollinearity 共線性"></a>Multicollinearity 共線性</h2><ul>
+<li>由於我們會有兩個以上的自變數，這時候我們沒有辦法保證自變數們沒有相關性，例如：有 A,B,C 三個自變數，其中 A,B 有大量相關性。</li>
+<li>比較寬鬆的方法是排列組合每一個自變數，兩個自變數為一組(定義 pair 自變數)，只要 pair 自變數的相關係數大於 0.7 (\(|r| &gt; 0.7\))，就必須將 pair 自變數中其中一個自變數做刪除。<a href="https://theriseofdavid.github.io/2020/10/15/NTUT_note/statistcs-ch3B/#Correlation-Coefficient-%E7%9B%B8%E9%97%9C%E4%BF%82%E6%95%B8" target="_blank" rel="noopener">相關係數說明 by 大衛的筆記</a></li>
+<li>引發甚麼問題？<ul>
+<li>由於我們只預測 y 值，如果兩個自變數\(x_1, x_2\) 相關係數高，舉例： \(y = 1 + 0.4 x_1 + 0.5 x_2 \)，那在實際應用上 \(x_1, x_2\) 都會呈同向或反向變動，此時這樣就會對 y 造成失真的問題。</li>
+<li>假設 \(x_1, x_2\) 分別是月收入，年收入、\(y\) 為生活支出花費，如果月收入降低，年收入也會降低，那麼在實際資料上兩者會同時降低或增加，\(y\) 就會大量劇動，導致失真。</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7" target="_blank" rel="noopener">資料來源 by wiki</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="使用估計迴歸方程式來預測或預估-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction"><a href="#使用估計迴歸方程式來預測或預估-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" class="headerlink" title="使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction"></a>使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction</h1><p>主要用途</p>
+<ul>
+<li>採用<strong>信心區間</strong>，給定 x 推出 y 的平均值為多少</li>
+<li>採用<strong>預測區間</strong>，給定 x 的值我們想知道在 x 的情況下 y 值(特定數值)為多少</li>
+<li>在使用預測區間時，其範圍會比信心區間來的更大</li>
+<li>複迴歸計算較為麻煩，因此<strong>全部都用軟體運算，因此就不講了QQ</strong>，如果不清楚上面名詞則可以透過簡單線性迴歸中的估計迴歸方程式來預測或預估，來了解這些知識。</li>
+</ul>
+<p>我們可以看 <a href="https://theriseofdavid.github.io/2021/05/02/NTUT_note/statistics-ch14/#%E4%BD%BF%E7%94%A8%E4%BC%B0%E8%A8%88%E8%BF%B4%E6%AD%B8%E6%96%B9%E7%A8%8B%E5%BC%8F%E4%BE%86%E9%A0%90%E6%B8%AC%E6%88%96%E9%A0%90%E4%BC%B0-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" target="_blank" rel="noopener">第十四章 簡單線性迴歸(Simple Linear Rejression) - 使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction by 大衞的筆記</a> 來知道信心區間、預測區間是甚麼，為甚麼預測區間會比信心區間來的大。</p>
+<h1 id="類別型變數在複迴歸下的應用-Categorical-Independent-Variables"><a href="#類別型變數在複迴歸下的應用-Categorical-Independent-Variables" class="headerlink" title="類別型變數在複迴歸下的應用 Categorical Independent Variables"></a>類別型變數在複迴歸下的應用 Categorical Independent Variables</h1><h1 id="殘差分析-Residual-Analysis"><a href="#殘差分析-Residual-Analysis" class="headerlink" title="殘差分析 Residual Analysis"></a>殘差分析 Residual Analysis</h1><h1 id="羅吉斯迴歸-Logistic-Regression"><a href="#羅吉斯迴歸-Logistic-Regression" class="headerlink" title="羅吉斯迴歸 Logistic Regression"></a>羅吉斯迴歸 Logistic Regression</h1>]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R plumber 套件在解析 json 時的問題(plumber invalid json)</title>
+    <url>/2021/05/11/R/R-error-invaild-json/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
+<p>R plumber 製作 api 後，如果要 post json 會出現 invalid json 的時候該怎麼辦呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h2><h3 id="先確定是否有拆解正確"><a href="#先確定是否有拆解正確" class="headerlink" title="先確定是否有拆解正確"></a>先確定是否有拆解正確</h3><p>由於傳送 json 的時候是 raw，因此我們要將解析出 postbody，裡面那包才是真正的 json，其他都是附帶資訊</p>
+<p>示意圖如下</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">library</span>(plumber)</span><br><span class="line"><span class="keyword">library</span>(jsonlite)</span><br><span class="line"><span class="comment">#* parse JSON</span></span><br><span class="line"><span class="comment">#* @param req  the request object</span></span><br><span class="line"><span class="comment">#* @get /json_echo</span></span><br><span class="line"><span class="comment">#* @post /json_echo</span></span><br><span class="line">json_echo &lt;- <span class="keyword">function</span>(req)&#123; <span class="comment">#req post 的所有資訊</span></span><br><span class="line">  json_content &lt;- req$postBody <span class="comment">#req$postBody 為 post 中 user 傳送的資料</span></span><br><span class="line">  <span class="keyword">return</span>(json_content) <span class="comment">#回傳 user post 的 json</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如果確認是正確，那我們必須要檢查-plumber-套件版本是否大於-0-4-6"><a href="#如果確認是正確，那我們必須要檢查-plumber-套件版本是否大於-0-4-6" class="headerlink" title="如果確認是正確，那我們必須要檢查 plumber 套件版本是否大於 0.4.6"></a>如果確認是正確，那我們必須要檢查 plumber 套件版本是否大於 0.4.6</h3><p>在我搜尋資料的過程中發現 plumber 小於等於 0.4.6 的版本再傳送 json 時都有此問題，而在後面的版本都有解決此問題，因此我們就要將 plumber 包更新。</p>
+<p>如何更新呢？</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">install.packages(<span class="string">"plumber"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://github.com/rstudio/plumber/issues/270" target="_blank" rel="noopener">Unnecessary warning when POST (JSON) body has multiple lines by jnolis</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>希望我能夠完全熟用 R，現在還有很多都不太懂，還需要花時間去慢慢解決呢！</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R 效率提升經驗紀錄，盡量使用向量、不對龐大 dataframe 進行修改</title>
+    <url>/2021/05/11/R/R-dataframe_edit_and_for_faster/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
+<p>如果發現自己寫的 R 跑得太慢時，應該要怎麼樣解決會比較好呢？</p>
+<p>標題已經有大概講述怎麼解決了XD</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="舉例："><a href="#舉例：" class="headerlink" title="舉例：　"></a>舉例：　</h2><p>透過我自己製作的 PPT 來舉例，如果 R 如果大量使用 for，不使用向量，都針對大量的 dataframe 進行修改會怎麼樣。</p>
+<p>以及解決後的效率提升有多快。</p>
+<p><a href="https://drive.google.com/file/d/13roU8hs7_CBsxRwH5BdyxyrrIofsDoYG/view?usp=sharing" target="_blank" rel="noopener">20210511_R_dataframe回測資料過大問題</a></p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>回測</tag>
+        <tag>R dataframe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>台灣財富管理規劃顧問認證協會 - 2021 全國大專院校第十一屆財富管理競賽</title>
+    <url>/2020/05/10/contest_experence/WMPCCA2021/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>僅此紀錄 2021/05 月所製作的財富管理競賽<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去</p>
+<p>每一次的努力都證明著自己的光輝</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="報名參加"><a href="#報名參加" class="headerlink" title="報名參加"></a>報名參加</h2><p>在北科大大二財富金融實習中，老師希望我們去參加財富管理競賽，於是請了兩位台灣財富管理規劃顧問認證協會顧問，我們坐在那邊強制聽了兩個小時後的洗腦後….，恩！參加這個競賽吧，感覺對我很有用呢！</p>
+<p>班上同學彭元俊 and 許閔修 來找我一組後，我想他們都對金融有興趣那做起來一定會很順利吧！</p>
+<h2 id="第十一屆財富管理競賽題目"><a href="#第十一屆財富管理競賽題目" class="headerlink" title="第十一屆財富管理競賽題目"></a>第十一屆財富管理競賽題目</h2><blockquote>
+<p><a href="https://drive.google.com/file/d/1soapYdnTVuxWSvZdbGgA4JdFK8alOisl/view?usp=sharing" target="_blank" rel="noopener">檔案連結</a></p>
+</blockquote>
+<p>大概知道了題目，發現報名完後只剩下一個月時間可以做了！</p>
+<h2 id="意見分歧-時間看法"><a href="#意見分歧-時間看法" class="headerlink" title="意見分歧 - 時間看法"></a>意見分歧 - 時間看法</h2><p>我認為只剩下一個月有點太趕，應該要早點做，但閔修認為應該等顧問來了再做，稍微有一些意見紛歧，不過我這邊還是有在緩速進行。</p>
+<h2 id="報名"><a href="#報名" class="headerlink" title="報名"></a>報名</h2><p>報名交給元俊負責，這比較沒有甚麼問題，簡單的順利繳費就完成報名了。</p>
+<h2 id="操作系統-題目方案"><a href="#操作系統-題目方案" class="headerlink" title="操作系統 - 題目方案"></a>操作系統 - 題目方案</h2><p>操作系統讓元俊負責 Key-In 資料，基本上題目方案沒有甚麼太大問題</p>
+<h2 id="意見分歧-德宏規劃"><a href="#意見分歧-德宏規劃" class="headerlink" title="意見分歧 - 德宏規劃"></a>意見分歧 - 德宏規劃</h2><p>我們在對德宏規劃有一些很大想法不同，我比較偏向砍孝親費，從父母的支出減少，而元俊與閔修則是比較偏好刪掉孩子教育費的部分。</p>
+<p>我個人認為小孩是家庭未來的主人翁，基本上我都不太願意進行刪減，只願意增加。</p>
+<h2 id="只剩下我的意見"><a href="#只剩下我的意見" class="headerlink" title="只剩下我的意見"></a>只剩下我的意見</h2><p>由於我對於我的看法具有堅持性，而另外兩人則不太能夠順利說服我，因此我就不太願意改變我的想法；但在有些部分我不熟就不會進行針對，例如：投資與保險</p>
+<p>但時間久了發現他們的想法沒了反而充斥者我大量的想法，不再是想法交流，而是我命令。</p>
+<p>我很不喜歡這樣，我會堅持我的想法是因為我認為這樣是對的，理論上他們應該要能夠說服我，改變我的思考方式，而不是直接選擇閉口不說，這樣我做起來怎麼會有踏實感？</p>
+<p>我不確定大家需不需要踏實感，但我很需要，如果沒有踏實感那怎麼對自己做出的作品有信心呢？</p>
+<p>沒有踏實感的作品就不是自己的作品。</p>
+<p>其實我也很歡迎大家跟我討論，只是我覺得他們可能也不太確定怎麼表達才會讓我改觀吧！</p>
+<h2 id="寫文本"><a href="#寫文本" class="headerlink" title="寫文本"></a>寫文本</h2><p>由於時間只剩下兩個禮拜，且截止日那天剛好又是段考周，因此我決定要趕快寫出文本，做好分配後就開始寫文本，其中我覺得閔修的排版並不好，會給予我一種他並沒有再認真做得感覺，就會讓我有灰心感。</p>
+<p>總之，我可能也沒有達到有效溝通，他們也不想要欺負我才會這樣吧，我也很苦惱我應該怎麼做比較好。</p>
+<p>中間我也有再分配內容時，對他比較苛刻、口氣比較差點，我確實也要說聲抱歉，這是我的 blog，但我也不會全都只講我的優點，畢竟這是我寫給未來的自己看的鴨。</p>
+<p><a href="https://hackmd.io/@VPjv3cgTSymc7fcZHA3GjQ/rygC1hWLu" target="_blank" rel="noopener">文本規劃</a></p>
+<h2 id="顧問"><a href="#顧問" class="headerlink" title="顧問"></a>顧問</h2><p>顧問在倒數第二周終於來到我們學校，來告訴我們應該怎麼做，其中最重要的資訊就是<strong>德宏 38 歲，公司大量賺錢卻沒有分利，是否可以考慮跳槽</strong>，這我覺得非常好啊。</p>
+<p>不過顧問太晚才來跟我們分享資訊導致我們前面做的東西都必須要修改，我覺得顧問那麼晚來並不好:(<br>認為協會聘請的顧問理應要早點來，讓大家有時間用心做，而不是匆匆的兩個禮拜就做完。</p>
+<p>再來顧問在 Line 中回覆我們的訊息比較慢，這點比較難過，但顧問都有提出不合理的問題，舉例：保險缺口計算問題、資料來源修改、110 現況收入與支出計算錯誤</p>
+<p>理論上是個很好的顧問，就是有時候回得比較慢，滿腔的熱忱隨著時間過去就會變得無所謂，我都在盡力避免讓我的熱情消逝。</p>
+<p><a href="https://hackmd.io/@VPjv3cgTSymc7fcZHA3GjQ/SJY6C-hUO" target="_blank" rel="noopener">紀錄顧問的建議</a></p>
+<h2 id="統整意見"><a href="#統整意見" class="headerlink" title="統整意見"></a>統整意見</h2><p><a href="https://hackmd.io/@VPjv3cgTSymc7fcZHA3GjQ/rkLaEYxEu" target="_blank" rel="noopener">統整意見</a></p>
+<p>經過大戰後，終於定下來了！</p>
+<p>雖然一開始我很反對用跳槽來讓德宏加薪，但因為時間真的不夠了沒有辦法再改了…，被時間威脅同意了。</p>
+<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><p>這是一件很痛苦的事情呢！</p>
+<p>老實講，我們這組的人對於 word 排版、美觀都比我還要差…，所以這些事情都我來做，不然我看到他們的排版真的會發瘋，然後我請閔修幫我弄封面，這邊我就有點生氣了，閔修說他 mac 沒有 ps 所以就說要用我的電腦做，就把事情放在那邊了！我認為這是一個很不對的事情，我這邊就有一堆事情在趕工了，基本上這時候組員要分擔這些工作，不是說等我這邊的事情做完了在來讓他做，這樣直接讓我來做就好了啊！</p>
+<p>由於必須很快速地進行排版，另外兩人根本沒有任何排版、美觀可言，於是我只好先拿著高中備審資料的格式去排版，我在這邊又有一個新體悟，有一個屬於自己的排版真的很重要，如果在時間過趕的情況下才可以迅速生成一個漂亮的 word。</p>
+<p>至於首頁與封底也都是直接修改我的高中備審資料，我其實很難過，因為我認為這些應該要是我們用心做的，但是因為旁邊兩人對這問題都不擅長，也不好好去學習，趁我在忙碌的情況，一直討論研究所話題，真的會讓人很不爽。</p>
+<p>畢竟這些事情並不是我的事情，明明是團隊的事情可是竟然都只有我在做。</p>
+<p>雖然他們有關心我，但老實講聽到那些話題真的會讓我生氣。</p>
+<h2 id="等等，元俊將-keys-系統搞錯了！"><a href="#等等，元俊將-keys-系統搞錯了！" class="headerlink" title="等等，元俊將 keys 系統搞錯了！"></a>等等，元俊將 keys 系統搞錯了！</h2><p>在我排版完後，元俊說 keys 系統他有些東西並沒有設對，我們將第一版資料傳給顧問看後，顧問提出來的，後來我們才知道我們的算法並不對！</p>
+<p>我記得是星期六的早上看到，當下的我雖然很不爽，但我明白，錯誤的東西有提出來比起不提更重要，因此我不會進行責怪，但讓我很不開心的地方是，他們提出來的政策也太不讓人接受了八。<br>調薪起伏變更大…，我當下看到已經不想再說甚麼，這看起來就有點像是小學生想出的辦法，一點都不大學生。簡直就是想要草草了事。</p>
+<p>總之，我很不開心，不過我還是秉持著團隊的精神接受了這個方案，畢竟我永遠都被時間綁架，根本事情就做不完。<br>如果我不接受，那取而代之的就是文章胎死腹中。</p>
+<h2 id="寄信"><a href="#寄信" class="headerlink" title="寄信"></a>寄信</h2><p>寄信的時候真的非常寂寞，那天是禮拜五，我那天有演算法以及一堆事情要忙，體育課完後，另外兩人直接跑去找女朋友、跳舞，沒有人關心我們的家長通知書問題，這讓我感覺到非常難過，我認為我們是個團隊應該要互相追進度，而不是自己在做事情QQ，自己一個人在寄資料的時候還真的是滿滿的辛酸感呢！忙著要交資料又得要忙著去買晚餐。</p>
+<p>結果買晚餐的時候才發現我沒有寫 WMPCCA 中文名稱，趕緊跑回去郵局一趟！幸好郵局人都很有善、信也還沒寄出，我才可以順利填補收件人。<br>總之也是一個驚魂夜，每天都在上演這種生活的話，我哪受的了。</p>
+<blockquote>
+<p>最終成果<br><img src="https://drive.google.com/u/2/uc?id=1i3UWdxz68R1BdFJLJpj3Kl33lE8BIn5z&export=download" alt=""></p>
+</blockquote>
+<p>當我寄完後，也沒有人對我說一聲感謝，我也是感覺百般無奈，沒有得到愛。</p>
+<h2 id="改版與送出"><a href="#改版與送出" class="headerlink" title="改版與送出"></a>改版與送出</h2><p>我們將檔案做完後，我請另外兩人幫我檢查是否哪裡有錯字、語意不順的地方，第一次有抓出一個邏輯上的錯，接下來就從未抓錯，我傳給他們正式的版本，不知道他們有沒有好好閱讀過，他們都沒有報出錯誤，而我這邊卻一直不斷地發現錯誤，還真不知道是我的國中太強，還是他們有點不認真看。</p>
+<p>每次抓錯字都很麻煩，心也很累啦唉，不過沒有比遇到爛隊友累。</p>
+<p>總之最後改到第八版後，我就將資料送出了。 希望可以拿到佳作八。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>以上都是我的心得，我的觀點提出XD。 沒有任何公正、公開的言論，只有偏頗。</p>
+<p>我覺得閔修感覺在這件事情上面不知道是很不用心 or 很沒想法，我認為很多地方他能夠提出來當一個指揮者，畢竟我不是一個理財規劃大師，我其實並沒有很擅長這種東西，所以我覺得我應該要拿出我的熱情給大家看，但是我感覺閔修一直再持消極態度，我很不喜歡消極態度，我做甚麼事情基本上都很積極，我每一件事情都希望是讓我滿意地交出去，這也導致有很多人在跟我當團隊時，會很受不了我的原因。</p>
+<p>但反過來想，如果那不是團隊滿意的東西，我們就將資料丟出去。那能夠是你滿意的作品嗎？我要的是問心無愧，不是甚麼特優、第一名。<br>總之我認為閔修的缺點是過於消極、沒有想法，只局限於做團隊報告中，畢竟考試入學的，你不可以說他沒有能力，只是沒有發揮 or 這裡剛好是他的短處。<br>元俊的缺點就是不擅長抓錯，基本上很多東西都可以用 excel 數字去推導，但他似乎都沒有去注意這些問題。</p>
+<p>而兩者共同的最大缺點就是都沒有創意，我覺得他們都沒有辦法發揮自己的創意，他們只是將自己的身體灌入別人訓練好的知識而已。</p>
+<p>講講我的缺點好了<br>過於自信、過分要求，其實我並不是一個很棒的人，我也有很多的壞毛病，我的壞毛病都具有可視型，我的優點基本上不具有可視性，這也是有很多人都看不起我的原因，覺得我沒有很優秀，那是因為大家沒有體會過我的優點，我的能力基本上都是在關鍵時刻才可以發揮或是隱藏在一些細微的角落。</p>
+<p>我並不覺得我做的事情是錯的，如果有人要我剎車，那就必須點出我的缺點來讓我信服，但是現在的人基本上根本不願意點出他人缺點，其實我很願意點出他人缺點，只是沒人喜歡聽，後來就不太喜歡講了。<br>這也是為甚麼我想要用文字表達的原因。</p>
+<p>不太擅長安排時間，基本上對我而言，只有相對時間而沒有絕對時間，我其實根本不在乎一件事情要花多少時間，我只在乎這件事情我能不能做完，因此這會讓我的任何事情完成度很高，但缺點是我學到知識就比別人少，或是我的其他時間就比別人少，因為我只在意把事情完成，而不是讓自己的知識最大化、完成的事項最多。<br>這其實並不是一個很好的習慣，但我其實也不太想改變，我認為每件事情都要打破砂鍋問到底，才有學習的意義。</p>
+<h2 id="作品"><a href="#作品" class="headerlink" title="作品"></a>作品</h2><p>最後，這是我們團隊的作品，希望大家會喜歡。</p>
+<p>此檔案著作權保護，此財富管理競賽之理財規劃書嚴禁抄襲，僅供使用者參考。<br>轉發需標明出處<br><a href="https://drive.google.com/file/d/1FuF29rymUS6iqJ_m2vdW1ceByhHtA4Bd/view?usp=sharing" target="_blank" rel="noopener">左手希望右手毀滅 - 理財規劃案例書面審查資料</a></p>
+]]></content>
+      <categories>
+        <category>競賽心得</category>
+      </categories>
+      <tags>
+        <tag>競賽心得</tag>
+        <tag>人生旅途</tag>
+        <tag>金融競賽</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux 刪除後台工作</title>
+    <url>/2021/05/12/linux/jobs-kill/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
+<p>我們都知道，只要將運行的程式搬到後臺去執行，只需要在 <code>command &amp;</code> 即可，那我們要怎麼樣去刪除後台正在運行的程式呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="查詢指令-jobs"><a href="#查詢指令-jobs" class="headerlink" title="查詢指令 jobs"></a>查詢指令 jobs</h2><p>先來介紹查詢指令 <code>jobs -l</code>，能夠將正在後臺運行的程式都展示出來，並會出現一個 4,5 位數字，為工作 ID。</p>
+<h2 id="刪除後台執行-kill"><a href="#刪除後台執行-kill" class="headerlink" title="刪除後台執行 kill"></a>刪除後台執行 kill</h2><p>而如果要刪除後台工作指令則是透過 <code>kill XXXXX</code>，其中 XXXX 是工作 ID，只要我們將他刪除就可以將工作刪掉了！</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://serverfault.com/questions/240155/how-can-i-kill-all-stopped-jobs" target="_blank" rel="noopener">How can I kill all stopped jobs? by stackExchange</a></p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R installation of package ‘sodium’ had non-zero exit status 解決方法</title>
+    <url>/2021/05/11/R/R-sodium-non-zero-exit/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
+<p>在 centOS6 作業系統中在安裝 R plumber，卻發生此問題那該怎麼辦呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h2><p>在我的 server 中，主要是缺乏 libsodium-devel 此套件，因此我們要去安裝此套件就能解決此問題。</p>
+<p>以下是每一種 os 中如果要安裝 sodium 一定需要的套件</p>
+<ul>
+<li>ubuntu 安裝 libsodium-dev</li>
+<li>Fedora、EPEL 安裝 libsodium-devel </li>
+<li>Solaris 安裝 libsodium_dev</li>
+<li>OSX 安裝 libsodium</li>
+</ul>
+<h2 id="centOS-安裝-libsodium-出錯，內容為-error-‘crypto-auth-hmacsha512-BYTES’-undeclared-first-use-in-this-function-did-you-mean-‘crypto-auth-hmacsha512256-BYTES’"><a href="#centOS-安裝-libsodium-出錯，內容為-error-‘crypto-auth-hmacsha512-BYTES’-undeclared-first-use-in-this-function-did-you-mean-‘crypto-auth-hmacsha512256-BYTES’" class="headerlink" title="centOS 安裝 libsodium 出錯，內容為 error: ‘crypto_auth_hmacsha512_BYTES’ undeclared (first use in this function); did you mean ‘crypto_auth_hmacsha512256_BYTES’"></a>centOS 安裝 libsodium 出錯，內容為 error: ‘crypto_auth_hmacsha512_BYTES’ undeclared (first use in this function); did you mean ‘crypto_auth_hmacsha512256_BYTES’</h2><p>根據前面，於是我開始安裝 libsodium，但卻發生此錯誤 </p>
+<p>先確認 libsodium 的版本，因為如果是早期 libsodium 的版本則有此漏洞，必須有新版本來改進此漏洞。</p>
+<p>而在 R 語言中使用 libsodium 的版本必須是要 1.0.3 才不會遇到此漏洞，因此我們要更新 libsodium </p>
+<p>安裝語法如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install libsodium #安裝 libsodium </span><br><span class="line"></span><br><span class="line">yum update libsodium  #如果之前有安裝，那麼更新就好</span><br></pre></td></tr></table></figure>
+
+<h3 id="解決方法-centOS6"><a href="#解決方法-centOS6" class="headerlink" title="解決方法 - centOS6"></a>解決方法 - centOS6</h3><p>可能是虛擬機服務商的 libsodium-level 最高版本就是 0.4.5，並不符合 R 的要求，因此我們必須要去有更新的 libsodium-level 的網站下載。</p>
+<p>stackoverflow 建議的版本為 lux<br><a href="https：//pkgs.org/download/libsodium-devel">此網頁很香，所有的套件都有</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo rpm -Uvh http:&#x2F;&#x2F;repo.iotti.biz&#x2F;CentOS&#x2F;6&#x2F;noarch&#x2F;lux-release-6-3.noarch.rpm</span><br><span class="line">sudo rpm --import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-LUX</span><br></pre></td></tr></table></figure>
+
+<p>再來我們去更改 repo 的位置<br>先 <code>vim /etc/yum.repos.d/lux.repo</code> 然後將內容修改為</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[lux]</span><br><span class="line">name&#x3D;CentOS $releasever - $basearch - Lux</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;repo.iotti.biz&#x2F;CentOS&#x2F;6</span><br><span class="line">enabled&#x3D;1</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;file:&#x2F;&#x2F;&#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-LUX</span><br></pre></td></tr></table></figure>
+
+<p>再來我們重新安裝 <code>sudo yum install libsodium-devel</code></p>
+<p>之後我們 R 安裝 <code>install.packages(&quot;sodium&quot;)</code> 我就再也沒遇到問題。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://community.rstudio.com/t/installation-of-package-sodium-had-non-zero-exit-status/63624" target="_blank" rel="noopener">installation of package ‘sodium’ had non-zero exit status by Rstudio Community</a><br><a href="https://github.com/jeroen/sodium/issues/4" target="_blank" rel="noopener">Error installing on RHEL6 by github</a><br><a href="https://cran.r-project.org/web/packages/sodium/index.html" target="_blank" rel="noopener">sodium: A Modern and Easy-to-Use Crypto Library by cran-r</a></p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>RESTAPI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資財二管理資訊系統 個案六 中信銀—eTrust網路銀行個資事件</title>
+    <url>/2021/05/17/NTUT_note/NTUTifm_Manager_t06/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>（請閱讀W12_中信銀—eTrust網路銀行個資事件）</p>
+</blockquote>
+<a id="more"></a>
+
+
+
+<h2 id="請分析中信銀在此次事件中犯了那些錯誤"><a href="#請分析中信銀在此次事件中犯了那些錯誤" class="headerlink" title="請分析中信銀在此次事件中犯了那些錯誤?"></a>請分析中信銀在此次事件中犯了那些錯誤?</h2><p> 我認為中信金犯了這幾個錯誤：</p>
+<ul>
+<li>主管查核不確實</li>
+<li>資訊附著在各部門，各部門主管與資訊人員有溝通問題</li>
+<li>中信金不在擁有資訊高層，公司不再注重資訊</li>
+<li>資訊部門的選拔依據</li>
+</ul>
+<h3 id="主管查核不確實"><a href="#主管查核不確實" class="headerlink" title="主管查核不確實"></a>主管查核不確實</h3><p>網站要上架前，內部的主管必須全部檢查一遍，確認並沒有任何錯誤後，才允許上架，這是每一個公司與每一位主管都必須負的責任義務。</p>
+<h3 id="資訊附著在各部門，各部門主管與資訊人員有溝通問題"><a href="#資訊附著在各部門，各部門主管與資訊人員有溝通問題" class="headerlink" title="資訊附著在各部門，各部門主管與資訊人員有溝通問題"></a>資訊附著在各部門，各部門主管與資訊人員有溝通問題</h3><p>由於 2013 年後資訊部門被分散在於各部門，主管從專業主管也改變為業務主管，業務主管不懂資訊技術，當資訊人員完成自身作業時，需要一位有經驗的資訊組長來做檢查，但業務主管並不熟資訊技術，在檢查時就不一定能發現錯誤。</p>
+<h3 id="中信金不在擁有資訊高層，公司不再注重資訊"><a href="#中信金不在擁有資訊高層，公司不再注重資訊" class="headerlink" title="中信金不在擁有資訊高層，公司不再注重資訊"></a>中信金不在擁有資訊高層，公司不再注重資訊</h3><p>與上面概念相同，但前面注重的是每一位資訊人員的權益，這裡則是注重於公司大型會議時資訊人員的權益，在一些公司重要會議時，如果沒有資訊部門給予資訊提醒或是一些資訊判斷，那麼在資訊成本、建置時間都不一定會有精準的判斷；也有可能上層的商業專業判斷並沒有辦法與資訊做結合，但會議卻沒有資訊部門提出其可能性，而導致上層與下層有溝通、實作障礙。</p>
+<h3 id="資訊部門的選拔依據"><a href="#資訊部門的選拔依據" class="headerlink" title="資訊部門的選拔依據"></a>資訊部門的選拔依據</h3><p>由於資訊的選拔是透過人資部門進行選拔，但人資部門以不是資訊專長的人員，資訊很吃實戰經驗，如果只透過表面的履歷並不一定可以完全確認招募人才的資訊能力，如果有一個資訊部門可以全方位了解公司真正需要的諮詢人才，搭配上人資部門的專業判斷，就能找出真正適合公司的人才。</p>
+<h2 id="你認為個資外洩的問題該由誰來負責"><a href="#你認為個資外洩的問題該由誰來負責" class="headerlink" title="你認為個資外洩的問題該由誰來負責?"></a>你認為個資外洩的問題該由誰來負責?</h2><p>公司主管、高層、資訊長。<br>將資訊部門裁撤，並將人員分布到各部門中，導致公司的資訊力量並不足以補足公司的資訊風險，各部門中沒有辦法有效監督資訊人員的作為、了解資訊人員的能力，才出現這次危機。</p>
+<p>高層沒有意識到此問題的重要性，資訊長也應該在資訊部門是否裁撤會議上講出發生的問題以及後果，讓高層作判斷，一家銀行部門理應不該承受資訊風險，也可以從趨勢看出商業資訊明顯是大幅成長，而非下降，如果可以是一個資訊部門中分成許多組，每個組都可以互相搭配各部門，但並不受各部門影響，而是透過專業的資訊組長來進行規劃、溝通。<br>類似於委託方式，來完備各項資訊服務。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大管理資訊系統筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 安裝 pip.py (for windows)</title>
+    <url>/2021/05/18/Python/Python_install_pip/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>我們都知道 python 安裝套件時，是使用 <code>pip install package</code> 的指令，那假如一開始沒有 pip 那應該要怎麼辦呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="檢查電腦是否有-Python-and-pip"><a href="#檢查電腦是否有-Python-and-pip" class="headerlink" title="檢查電腦是否有 Python and pip"></a>檢查電腦是否有 Python and pip</h2><ul>
+<li>先檢查 python 是否有安裝，在 cmd 輸入 <code>python -v</code><br>如果有成功安裝則會輸出當前在你電腦的版本</li>
+<li>再來我們檢查 pip 是否有安裝，在 cmd 輸入 <code>pip help</code><br>如果有安裝成功則會輸出一些指令如何使用</li>
+</ul>
+<p>如果電腦一開始沒有安裝 python，必須先安裝 python </p>
+<h2 id="安裝-pip"><a href="#安裝-pip" class="headerlink" title="安裝 pip"></a>安裝 pip</h2><ul>
+<li><a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">下載 get-pip.py</a> 使用 ctrl+s 儲存</li>
+<li>完成後將 get-pip.py 移到桌面</li>
+<li>再來我們在 cmd 中輸入 <code>python get-pip.py</code></li>
+</ul>
+<p>然後我們就安裝成功了！</p>
+<h2 id="確認-pip-是否有成功被安裝"><a href="#確認-pip-是否有成功被安裝" class="headerlink" title="確認 pip 是否有成功被安裝"></a>確認 pip 是否有成功被安裝</h2><p>如果 pip 有成功被安裝，那我們在 cmd 打 <code>pip help</code>，則應該會輸出 pip 的版本</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://phoenixnap.com/kb/install-pip-windows" target="_blank" rel="noopener">How To Install PIP to Manage Python Packages On Windows by phoenixnap </a><br><a href="https://phoenixnap.com/kb/install-pip-windows" target="_blank" rel="noopener">如何在 Windows 環境下安裝 pip by 傑瑞窩在這</a></p>
+<h2 id="參考來源-1"><a href="#參考來源-1" class="headerlink" title="參考來源"></a>參考來源</h2><p>老了…，有些事情之前都知道怎麼做但是因為太久沒有做而忘記了QQ，希望我可以都不要忘記這些知識，讓我可以順利應用他們！</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R dataframe 使用兩個條件去找出特定的資料</title>
+    <url>/2021/05/18/R/R-dataframe-two-condition-search/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
+<p>如果 dataframe 使用兩個條件去找出特定的資料想不到怎麼做？ 那就來看我這篇 blog 就對了！</p>
+<p>標題已經有大概講述怎麼解決了XD</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="問題解決與舉例："><a href="#問題解決與舉例：" class="headerlink" title="問題解決與舉例："></a>問題解決與舉例：</h2><p>我們先產生出一個 dataframe，定義語法如下</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df &lt;- data.frame(a = c(<span class="number">1</span>:<span class="number">5</span>), b = c(<span class="number">6</span>:<span class="number">10</span>), c = c(<span class="number">11</span>:<span class="number">15</span>))</span><br></pre></td></tr></table></figure>
+
+<p>出來的資料如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  a  b  c</span><br><span class="line">1 1  6 11</span><br><span class="line">2 2  7 12</span><br><span class="line">3 3  8 13</span><br><span class="line">4 4  9 14</span><br><span class="line">5 5 10 15</span><br></pre></td></tr></table></figure>
+
+<h3 id="塞選出-dataframe-中-b-的值要-gt-7-and-lt-9，要怎麼做呢"><a href="#塞選出-dataframe-中-b-的值要-gt-7-and-lt-9，要怎麼做呢" class="headerlink" title="塞選出 dataframe 中 b 的值要 &gt;= 7 and &lt;= 9，要怎麼做呢"></a>塞選出 dataframe 中 b 的值要 &gt;= 7 and &lt;= 9，要怎麼做呢</h3><p>那麼我們使用的語法如下</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df[which(df$b &gt;= <span class="number">7</span> &amp; df$b &lt;= <span class="number">9</span>), ]</span><br><span class="line"><span class="comment">#which 塞選出特定的值，中間的 and 與 or 則使用 2 進位塞選，後面的 , 則是表示輸出所有欄位</span></span><br></pre></td></tr></table></figure>
+
+<p>因此執行完此語法後應該如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  a b  c</span><br><span class="line">2 2 7 12</span><br><span class="line">3 3 8 13</span><br><span class="line">4 4 9 14</span><br></pre></td></tr></table></figure>
+
+<p>漂亮，成功解決我們的問題</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/4935479/how-to-combine-multiple-conditions-to-subset-a-data-frame-using-or" target="_blank" rel="noopener">How to combine multiple conditions to subset a data-frame using “OR”? by stackoverflow</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>R 是一種玄學，只需要抱持著盡量向量化、少用迴圈，你一定也可以寫出很 R 風格的程式！</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>回測</tag>
+        <tag>R dataframe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R 檔案路徑用法教學 (檢查路徑、新增路徑)</title>
+    <url>/2021/05/18/R/R-dir_using/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>在寫 R 語言時有時要輸出檔案時則會遇到一些要新增資料夾或是檢查此路徑是否存在之類的，那應該要怎麼辦才好呢？</p>
+<p>內容大概講述 R 對於一些路徑的使用方法</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="setwd-設定路徑"><a href="#setwd-設定路徑" class="headerlink" title="````setwd()``` 設定路徑"></a>````setwd()``` 設定路徑</h2><p>有時候必須要在同個資料夾中讀取大量檔案，但卻又不想每一個都設絕對路徑時，<code>setwd</code> 可以幫助你</p>
+<h3 id="舉例：假如你現在有-3-個-csv-要打開，資料在-C-User-user-下"><a href="#舉例：假如你現在有-3-個-csv-要打開，資料在-C-User-user-下" class="headerlink" title="舉例：假如你現在有 3 個 csv 要打開，資料在 C:/User/user 下"></a>舉例：假如你現在有 3 個 csv 要打開，資料在 C:/User/user 下</h3><p>那我們可以透過 setwd() 來加速</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">setwd(<span class="string">"C:/Users/user/Desktop"</span>)</span><br><span class="line">a1 &lt;- read.csv(<span class="string">"./1.csv"</span>)</span><br><span class="line">a2 &lt;- read.csv(<span class="string">"./2.csv"</span>)</span><br><span class="line">a3 &lt;- read.csv(<span class="string">"./3.csv"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>這樣 a1, a2, a3 就可以直接用相對路徑了！</p>
+<h2 id="getwd-查看當前設定的路徑位置"><a href="#getwd-查看當前設定的路徑位置" class="headerlink" title="getwd() 查看當前設定的路徑位置"></a><code>getwd()</code> 查看當前設定的路徑位置</h2><p>我們可以透過 getwd() 來找出現在 R 語言的路徑位置</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">getwd()</span><br><span class="line"><span class="comment">#[1] "C:/Users/user/Documents"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h3><p><a href="https://stackoverflow.com/questions/38902954/how-can-i-use-the-command-pwd-in-r-to-load-data" target="_blank" rel="noopener">How can I use the command “pwd” in R to load data? by stackoverflow</a></p>
+<h2 id="file-exists-檢查路徑是否存在"><a href="#file-exists-檢查路徑是否存在" class="headerlink" title="file.exists() 檢查路徑是否存在"></a><code>file.exists()</code> 檢查路徑是否存在</h2><p>我們可以透過 <code>file.exists()</code> 來知道路徑是否有被存在。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">file.exists(<span class="string">"C:/Users/user/Desktop"</span>) <span class="comment">#true</span></span><br><span class="line">file.exists(<span class="string">"D:/Desktop"</span>) <span class="comment">#false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="參考來源-1"><a href="#參考來源-1" class="headerlink" title="參考來源"></a>參考來源</h3><p><a href="https://stackoverflow.com/questions/4216753/check-existence-of-directory-and-create-if-doesnt-exist" target="_blank" rel="noopener">Check existence of directory and create if doesn’t exist by stackoverflow</a></p>
+<h2 id="dir-create-新增資料夾"><a href="#dir-create-新增資料夾" class="headerlink" title="dir.create() 新增資料夾"></a><code>dir.create()</code> 新增資料夾</h2><p>我們可以透過 <code>file.create()</code> 來新增資料夾。</p>
+<h3 id="舉例：我們可以檢查桌面是否有-folder，如果沒有我們就新增資料夾"><a href="#舉例：我們可以檢查桌面是否有-folder，如果沒有我們就新增資料夾" class="headerlink" title="舉例：我們可以檢查桌面是否有 folder，如果沒有我們就新增資料夾"></a>舉例：我們可以檢查桌面是否有 folder，如果沒有我們就新增資料夾</h3><figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!file.exists(<span class="string">"C:/Users/user/Desktop/folder"</span>)) dir.create(<span class="string">"./folder"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="file-path-合併路徑"><a href="#file-path-合併路徑" class="headerlink" title="file.path() 合併路徑"></a><code>file.path()</code> 合併路徑</h2><p>其實大致上可以用 string 來合併路徑，但是如果這份程式碼會給不同的 os 系統使用時，那使用 file.path() 可以避免 string 合併路徑時，因為路徑的樣式不同(例如 mac 與 os 路徑就不相同) 等狀況。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!file.exists( file.path(<span class="string">"C:/Users/user/Desktop"</span>, <span class="string">"folder"</span>)) dir.create(<span class="string">"folder"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果當前的 R console 路徑就在桌面，那可以考慮使用 getwd 替換 "C:/Users/user/Desktop"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="參考來源-2"><a href="#參考來源-2" class="headerlink" title="參考來源"></a>參考來源</h3><p><a href="https://stackoverflow.com/questions/51533664/file-path-function-in-r" target="_blank" rel="noopener">file.path function in R by stackoverflow</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>紀錄我之前遇到的所有困難，這樣我之後就能夠在自己的 blog 中找到問題，避免再 google 搜尋卻遇到大量農場文章或是不相干的資料。</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資財二資料探勘研究與實務 期中專題 - 利用 Data Mining 分析學生在學業上的表現</title>
+    <url>/2021/05/17/NTUT_note/NTUT_dataMinging_midternPPT/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下資料探勘研究與實務專題紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>（謝謝林湘霖老師的指導）<br>資料來源：<a href="https://www.kaggle.com/aljarah/xAPI-Edu-Data" target="_blank" rel="noopener">Students’ Academic Performance Dataset by kaggle</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="期中專案報告"><a href="#期中專案報告" class="headerlink" title="期中專案報告"></a>期中專案報告</h2><p>以下是我們這組的期中報告，供大家學習與閱讀。<br><a href="https://drive.google.com/file/d/1xyiycVzRT1qlkHLixaWsmxrzjKK20Ql1/view?usp=sharing" target="_blank" rel="noopener">利用 Data Mining 分析學生在學業上的表現</a></p>
+<p>此備審資料嚴禁抄襲，僅供使用者參考。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老師透過 Weka 來教導我們如何做資料探勘，讓我們了解到關聯規則、決策樹、KNN，以及判定其是否有效的方法，老師在教導我們的過程中非常詳細，讓我們非常清楚的知道每一個步驟，我是資料探勘的初學者，老師的教導方式讓我獲益良多！</p>
+<p>老師是系上比較年輕的老師，講話蠻有趣的XDDD，會開系上的一些玩笑，學習過程中歡樂而不失其專業性，是一位好老師，我從他的課程中學習到許多知識，也大概知道處理資料時最重要的是資料前處理、解讀資料，我很感謝老師的教導。</p>
+<p>題外話：可以請老師當我的指導教授嘛XD，我覺得我會獲益良多；怎麼感覺我的心得都是在講老師很好www。</p>
+<p>不過透過這次的專題，讓我明顯知道 Weka 如何使用，如何透過 Weka 來解讀資料。希望可以供我在未來遇到需要用此技術的問題時都能夠順利地想起且成功應用。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大資料探勘研究與實務筆記</tag>
+        <tag>資料探勘 Data Mining</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R 尋找前 n 筆的 dataframe 或是後 n 筆的 dataframe</title>
+    <url>/2021/05/18/R/R-search-tail-or-head/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>有時候我們會想要找出 dataframe 從上找 n 筆或是由下往上找 n 筆資料，R 有沒有甚麼好語法提供呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><h3 id="找-dataframe-前-n-筆資料"><a href="#找-dataframe-前-n-筆資料" class="headerlink" title="找 dataframe 前 n 筆資料"></a>找 dataframe 前 n 筆資料</h3><p>可以這樣子寫</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">head(dataframe, n) <span class="comment"># n 是 interger</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="找-dataframe-後-n-筆資料"><a href="#找-dataframe-後-n-筆資料" class="headerlink" title="找 dataframe 後 n 筆資料"></a>找 dataframe 後 n 筆資料</h3><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">tail(dataframe, n) <span class="comment"># n 是 interger</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="進階操作：例如我們有一個迴圈每次的-row-都需要前一筆-row-的資料來計算那該怎麼辦呢？"><a href="#進階操作：例如我們有一個迴圈每次的-row-都需要前一筆-row-的資料來計算那該怎麼辦呢？" class="headerlink" title="進階操作：例如我們有一個迴圈每次的 row 都需要前一筆 row 的資料來計算那該怎麼辦呢？"></a>進階操作：例如我們有一個迴圈每次的 row 都需要前一筆 row 的資料來計算那該怎麼辦呢？</h2><p>這時候我們就可以使用 <code>head</code> 來幫忙</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">dataframe$last_row &lt;- c(<span class="number">0</span>, head(dataframe$row, nrow(dataframe)-<span class="number">1</span>))</span><br><span class="line"><span class="comment">#由於我們都需要前一筆的資料，但是第一筆資料則沒有前一個 row，因此我們放零。</span></span><br><span class="line"><span class="comment"># head 則是因為我們都需要前一筆的，因此後面我們用 head 拼接</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/28008177/r-language-how-to-print-the-first-or-last-rows-of-a-data-set/28008180" target="_blank" rel="noopener">R Language: How to print the first or last rows of a data set? [duplicate]<br> by stackoverflow</a></p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>R dataframe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R dataframe 增加新的 column</title>
+    <url>/2021/05/18/R/R-dataframe_append_column/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
+<p>如果 dataframe 想要在中途增加 column 時，那該怎麼辦呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>增加新的 column 要怎麼做呢？看我示範八：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df &lt;- data.frame(a=c(<span class="number">1</span>:<span class="number">5</span>), b=c(<span class="number">6</span>:<span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#兩種方式都可以增加 column</span></span><br><span class="line">new_column &lt;- <span class="string">"david"</span></span><br><span class="line"></span><br><span class="line">df[[new_column]] &lt;- <span class="number">0</span> <span class="comment">#透過變數命名，增加新的 column</span></span><br><span class="line">df[[<span class="string">"david"</span>]] &lt;- <span class="number">0</span> <span class="comment">#透過字串，增加新的 column</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>R dataframe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第七次團隊作業 - 使用 google colab 與 yolo 訓練後進行圖像辨識</title>
+    <url>/2021/05/19/NTUT_note/NTUTcs_MediaHW07G01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+<p>訓練的資料是助教同意讓我們在這堂課做使用，並非同意我將訓練資料拿來散步，因此不將訓練資料生出來。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="專案說明"><a href="#專案說明" class="headerlink" title="專案說明"></a>專案說明</h2><blockquote>
+<p>如紅色線條上方說明文字<br><img src="https://drive.google.com/u/2/uc?id=1N5XAy7nAjgKzX9oEI7fti519yKNyujVm&export=download" alt=""></p>
+</blockquote>
+<p>此文章的目的是紀錄如何透過 yolo 與 google colab 來進行圖像辨識</p>
+<h2 id="yolo-說明"><a href="#yolo-說明" class="headerlink" title="yolo 說明"></a>yolo 說明</h2><p>yolo 是一種需要高度運算，但在建立模型時則不需要大量的圖像背景知識就可以順利完成，yolo 擁有著高辨識度，且只要一開始的辨識物件訓練有做好，那 yolo 能夠辨識每一張圖片中的物件，是個非常方便的圖像辨識。</p>
+<h2 id="安裝-labelIMG-在-Windows-OS、VS-code"><a href="#安裝-labelIMG-在-Windows-OS、VS-code" class="headerlink" title="安裝 labelIMG 在 Windows OS、VS code"></a>安裝 labelIMG 在 Windows OS、VS code</h2><h3 id="labelIMG-介紹"><a href="#labelIMG-介紹" class="headerlink" title="labelIMG 介紹"></a>labelIMG 介紹</h3><p>labelIMG 是 open source 軟體，專用於 yolo 的圖像標記，也就是 yolo 所需要的訓練集。</p>
+<p><a href="https://github.com/tzutalin/labelImg/releases" target="_blank" rel="noopener">下載連結 windows 請安裝 zip </a><br><a href="https://github.com/tzutalin/labelImg" target="_blank" rel="noopener">安裝的一些操作手冊</a></p>
+<p>下面會說明如何在 window 安裝，以及一些說明，依序是</p>
+<ul>
+<li>安裝 labelImg</li>
+<li>產生訓練集</li>
+<li>透過 labelImg 標記影像</li>
+<li>使用 google colab 進行圖像訓練</li>
+<li>完美結果</li>
+</ul>
+<p>如果需要跳至其特定章節，可以點選右邊，右邊有針對每一個大項目進行連結(錨點)</p>
+<h3 id="windows-環境安裝-labelImg"><a href="#windows-環境安裝-labelImg" class="headerlink" title="windows 環境安裝 labelImg"></a>windows 環境安裝 labelImg</h3><ul>
+<li>先確認 cmd 環境中是否有安裝 python、pip<br><a href="https://theriseofdavid.github.io//2021/05/18/Python/Python_install_pip/" target="_blank" rel="noopener">如果沒有可以點擊此教學說明</a></li>
+<li>在 vscode 中安裝 python</li>
+<li><a href="https://www.riverbankcomputing.com/software/pyqt/download" target="_blank" rel="noopener">python 安裝 pyqt5</a><br>安裝語法 <code>pip install PyQt5</code></li>
+<li><a href="https://lxml.de/installation.html" target="_blank" rel="noopener">python 安裝 lxml</a><br>安裝語法 <code>pip install lxml</code></li>
+<li>再來我們要把 pyqt5 加入 windows 的環境變數，順便確認 python 是否在 windows 環境變數，沒有就加入<ul>
+<li>點擊 控制台 -&gt; 系統及安全性 -&gt; 系統 -&gt; 進階系統設定 -&gt; 點擊 -&gt; 進階 -&gt; 環境變數，最後畫面應該如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1PK6xqALMXCjRnKwrsm-0vftWeAuErJed&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>點擊系統變數 -&gt; path -&gt; 編輯<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BhKw_AyqZzS06sSjfQ1gRO-C1OAF0Y0y&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>找出存在 python.exe 的資料夾路徑並加入環境變數，如果曾經有則不需要，紅色線條為 python.exe 資料夾路徑<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1E0YdKxVSrVzCAgjVogyTcYPdVaKHFglG&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>找出 pyqt5 的資料夾路徑並加入環境變數，通常應該在 python.exe 資料夾中的 script 資料夾，紅色線條為 pyqt5 資料夾路徑<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xcmt8--dAYanJnvp7q_-zBfrFvSx1bEs&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>再來我們需要編譯<br>編譯語法如下 <code>For pyqt5, pyrcc5 -o libs/resources.py resources.qrc</code></li>
+<li>我們在 VScode 打開 labelImg.py，直接執行 F5，</li>
+<li>如果可以成功，畫面如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1fUwv9mmfHXKTtiBy0hciTXBZwlSLov22&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="產生訓練集"><a href="#產生訓練集" class="headerlink" title="產生訓練集"></a>產生訓練集</h2><p>由於助教給我們的影片有四部且每部都是長達 20s 的影片，於是我將前 3 部影片視為訓練集，將影片每幀擷取下來，擷取後的每張照片就可以當作我們的測試集。</p>
+<p>因此我們寫一個程式碼，每 10 幀就擷取一張圖片。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">path = <span class="string">"D:/NTUT/大二下/多媒體技術與應用/hw07/helmet/"</span></span><br><span class="line">os.chdir(path) <span class="comment">#設定要讀取圖片的資料夾路徑</span></span><br><span class="line"></span><br><span class="line">fname = <span class="string">"helmet3.mp4"</span></span><br><span class="line">video_capture = cv2.VideoCapture(fname) <span class="comment">#讀取影片</span></span><br><span class="line"></span><br><span class="line">ret = <span class="literal">False</span> <span class="comment">#ret 判斷這幀是否有圖片</span></span><br><span class="line"><span class="keyword">if</span> video_capture.isOpened(): <span class="comment">#判斷 video_capture 是否有被打開</span></span><br><span class="line">    ret, frame = video_capture.read() <span class="comment"># ret 回傳這一幀是否有圖片，fname 為圖片本體</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"此影片正在被使用中！"</span>)</span><br><span class="line">    print(<span class="string">"影片路徑："</span>, os.getcwd(), <span class="string">"\\"</span>, fname)</span><br><span class="line"></span><br><span class="line">timeFormat = <span class="number">10</span> <span class="comment">#每 10 幀取一張</span></span><br><span class="line">timeCount =  <span class="number">1</span> <span class="comment">#紀錄現在讀到哪一幀</span></span><br><span class="line">pictureCount = <span class="number">1</span> <span class="comment">#紀錄輸出第幾張圖片</span></span><br><span class="line"><span class="keyword">while</span> ret: <span class="comment">#如果上幀有圖片</span></span><br><span class="line">    ret, frame = video_capture.read() <span class="comment">#這幀再讀一次</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ret: <span class="keyword">break</span> <span class="comment">#如果這幀沒有就離開迴圈</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(timeCount % timeFormat ==  <span class="number">0</span>): <span class="comment">#已經是第 10 幀就輸出圖片</span></span><br><span class="line">        picName = <span class="string">".\\images\\"</span> + <span class="string">"helmet3_"</span> + str(pictureCount) + <span class="string">".jpg"</span></span><br><span class="line">        cv2.imwrite(picName, frame)</span><br><span class="line">        print(<span class="string">"影片路徑："</span>, picName, sep=<span class="string">''</span>)</span><br><span class="line">        </span><br><span class="line">        pictureCount += <span class="number">1</span> <span class="comment">#紀錄圖片 +1</span></span><br><span class="line">        timeCount = <span class="number">0</span> <span class="comment">#重新計算</span></span><br><span class="line">    timeCount += <span class="number">1</span></span><br><span class="line">    <span class="comment">#cv2.waitKey(1)</span></span><br><span class="line"></span><br><span class="line">video_capture.release() <span class="comment">#python opencv 不再讀取此圖片</span></span><br></pre></td></tr></table></figure>
+
+<p>透過這種方式就能夠讓資料夾裡面出現大量圖片了！</p>
+<h2 id="如何使用-labelImg"><a href="#如何使用-labelImg" class="headerlink" title="如何使用 labelImg"></a>如何使用 labelImg</h2><ul>
+<li>點擊 open dir，之後應該會出現圖片，右下角的 file list 也會有大量圖片</li>
+<li>再來我們可以點擊 Next Image, Prev Image 而到下一張圖片或是前一張圖片</li>
+<li>再來將此圖示點至 yolo 模式<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1U9tkd6_JD7EhkBvxVkvI3lhNB40hMfTb&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>之後點擊 Create\nReactBox，選取想要辨識的畫面<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1sEV7evC-Xf8gUhcPg8mRi9kyi4ZuiwgJ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>然後輸入你定義此畫面的 label，記住，如果要進行圖像辨識那理論上相同 label 的圖片至少要 20 個，且要不同張。</li>
+<li>持續你的<del>人工辨識</del>，找到你的耐心。</li>
+<li>經過一段痛苦的 label 後</li>
+</ul>
+<h3 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h3><ul>
+<li>完成後資料夾內應該要有一個 <code>class.txt</code>、一堆圖片和圖片名子相同，但檔名是 txt 的資料<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=12JeZB8S9StCpvTZ1G_0PmzhsiTKG2vzA&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>隨意點擊某一個 txt 的資料，內容大致如下<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="number">16</span> <span class="number">0.567578</span> <span class="number">0.327778</span> <span class="number">0.146094</span> <span class="number">0.563889</span></span><br><span class="line"><span class="number">16</span> <span class="number">0.468750</span> <span class="number">0.211806</span> <span class="number">0.095312</span> <span class="number">0.420833</span></span><br><span class="line"><span class="number">15</span> <span class="number">0.777344</span> <span class="number">0.790972</span> <span class="number">0.328125</span> <span class="number">0.418056</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#資料依序是 class(根據 class.txt 的行數) ,x 座標, y 座標, x 長度, y 長度</span></span><br></pre></td></tr></table></figure></li>
+<li><code>class.txt</code> 則是所有你定義的 label 名稱</li>
+</ul>
+<h2 id="使用-google-colab-來進行圖像辨識"><a href="#使用-google-colab-來進行圖像辨識" class="headerlink" title="使用 google colab 來進行圖像辨識"></a>使用 google colab 來進行圖像辨識</h2><p>google colab 提供一個環境讓你能夠使用 google 資源來圖像辨識，且 google 的顯卡、處理器規格都是屬於非常棒的規格，因此如果只是簡單的事情我都建議用 google colab 來做。</p>
+<p>但 google colab 有一些限制</p>
+<ul>
+<li>太久沒有使用 google colab 會被強制退出</li>
+<li>訓練模型最多只能夠使用 12 小時</li>
+</ul>
+<h3 id="一開始的環境處理"><a href="#一開始的環境處理" class="headerlink" title="一開始的環境處理"></a>一開始的環境處理</h3><ul>
+<li>先在 google 雲端硬碟建立一個資料夾，以下的資料夾舉例會是 <code>/content/drive/MyDrive/NTUT/&#39;大二下- 資工多媒體技術與應用/yolo&#39;</code></li>
+<li>將你透過 labelImg 完成 label 標記的資料夾壓縮後放入雲端硬碟，在這邊我的資料夾名稱為 <code>dataset</code></li>
+<li>從<a href="https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137" target="_blank" rel="noopener">網路上下載 yolov4.conv.137 檔案</a>，之後放入雲端硬碟，此檔案是我們在進行圖像辨識時，用於訓練的必備檔案。</li>
+<li>將我們手工標記好的 label 資料夾中的 <code>class.txt</code> rename 為 <code>obj.names</code>，上傳至 google 雲端硬碟</li>
+</ul>
+<h3 id="使用-google-colab-與進行-yolo-訓練"><a href="#使用-google-colab-與進行-yolo-訓練" class="headerlink" title="使用 google colab 與進行 yolo 訓練"></a>使用 google colab 與進行 yolo 訓練</h3><p>接下來我們要使用 google colab 來進行圖像辨識，內容會比較麻煩，因為必須與本機和雲端硬碟交互操作。</p>
+<ul>
+<li>根據我們原本建立的 google 雲端硬碟資料夾，對空白處右鍵 -&gt; 更多 -&gt; 連結我的應用程式 -&gt; 搜尋 colab<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1aoUuFRP0sg2jmd28jUYOjZcGEuo9-gLD&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>建立一個 google colab 與進行 yolo 訓練<ul>
+<li>以下全部都是在 google colab 運行</li>
+<li>開啟 google GPU 運算<ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1aulM7kfOEEmx-_FWF6ApIBQQC5Q6gaWe&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1VZY9AGIi7CJ61w1kvCVecCcTv7hD_9NK&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>我們必須允許 colab 對我們的雲端硬碟操作，因此需要勾選；也許會需要你同意 google colab 使用<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1_jSBZh29eEuvZqh-BqEt0kzUvC16NoMF&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><code>!git clone https://github.com/AlexeyAB/darknet</code></li>
+<li><code>%cd darknet/</code></li>
+<li>接下來我們先找 <code>/content/darknet/Makefile</code> 進行修改，修改內容如下<ul>
+<li>開啟 GPU 加速，將 GPU 設定改為 1</li>
+<li>OPENCV 開啟，才可讀取影片、影像，將 OPENCV = 1</li>
+<li>CUDNN = 1，用於加速深度學習框架</li>
+<li>CUDNN_HALF = 1，加速偵測物件</li>
+<li>示意圖如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gBIJq6dC7LCsNsdkqptx4uvKTcby0V3b&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>完成後，我們進行 <code>!make</code></li>
+<li><strong>再來我們要去修改 yolov4-custom.cfg</strong><ul>
+<li>選擇資料夾 <code>/content/darknet/cfg/yolov4-custom.cfg</code></li>
+<li>我們必須將裡面的 filter 參數修改成 \((n+5)*3\)，n 為總共有多少 class，並且必須是數字，不可以是公式(類似於 css)</li>
+<li>class 則必須改成我們標記的 class 數字</li>
+<li>上面講的兩點只在 yolov4-custom.cfg 的 963、970、1051、1058、1139、1146 修改<ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18V0lasogNMKzsPgWT_CwLIcE-_ZcJz9A&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1GAFilxLBmDAPhbqwFop5KBaZcBuD8OH1&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1VRK8cBUfu_QVmTrceGNSab-pyv2JqMDb&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>如果接下來在下方訓練時，有遇到 <code>out of memory</code> 問題時，必須改為 subdivisions = 32 or 64<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=11WvYjcEGTfHZCLlzUnz-KQDjqz9gvpe2&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>max_batches 則是資料集 class 個數乘以 2000<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1nQsU6wAQ4GFLdfJ76OgatAAQqz-Tq1VV&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>steps 則是 max_batches 的 80% or 90%<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=183naBtkh2ubLy3G_gQqD2r4A7fRsk4GH&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>再來我們將這份修改好的檔案 copy 下來到我們的電腦上，取名為 yolov4-custom.cfg<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1x2rFu2M2MB3_uegP8dKxJTJcllaOJIZi&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>再來我們在將 yolov4-custom.cfg 上傳至雲端硬碟上，位置為 <code>/content/drive/MyDrive/NTUT/&#39;大二下- 資工多媒體技術與應用&#39;/yolo/</code></li>
+</ul>
+</li>
+<li>再來我們將 <code>/content/drive/MyDrive/NTUT/&#39;大二下- 資工多媒體技術與應用&#39;/yolo/</code> google 雲端硬碟資料夾做一個 link，讓我們只要輸入此名詞就可以成功 link 到此資料夾<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">!ln -f -s /content/drive/MyDrive/NTUT/<span class="string">'大二下- 資工多媒體技術與應用'</span>/yolo /drive</span><br><span class="line">!ls /drive</span><br></pre></td></tr></table></figure></li>
+<li>再來我們要將上傳的 dataset.zip 解壓縮，並且放入 <code>yolo/</code> 資料夾中<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!unzip &#x2F;drive&#x2F;dataset.zip -d &#x2F;drive</span><br></pre></td></tr></table></figure></li>
+<li>將所有圖片收錄到 train.txt、valid.txt<br>由於我們是要讓 google colab 來幫我們做圖像辨識，因此我們必須要產生一個檔案，讓 google coloab 在訓練時知道有哪些資料需要訓練。<ul>
+<li>其中<ul>
+<li><code>train.txt</code> 為訓練集資料</li>
+<li><code>valid.txt</code> 為測試集資料</li>
+<li>如果沒有測試集資料，那我們直接將 train.txt 資料 copy 一份至 valid.txt 即可。</li>
+</ul>
+</li>
+<li>train.txt 裡面要收錄著我們全部的測試集圖片，並且路徑必須是 <strong>google 雲端上絕對路徑</strong></li>
+<li>我們可以寫一份程式來快速產生出所有的訓練集圖片資訊<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os </span><br><span class="line"></span><br><span class="line">path = <span class="string">"D:/NTUT/大二下/多媒體技術與應用/hw07/yolo"</span> <span class="comment">#讀本機資料夾路徑</span></span><br><span class="line">output_path = <span class="string">"/drive/yolo/"</span> <span class="comment">#google drive 絕對路徑，支援捷徑</span></span><br><span class="line">images_file = list()</span><br><span class="line">os.chdir(os.path.join(path, <span class="string">"dataset"</span>)) <span class="comment"># dataset 為圖片訓練集</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> os.listdir(os.getcwd()): <span class="comment">#不斷讀入資料</span></span><br><span class="line">    <span class="keyword">if</span> fname.endswith(<span class="string">".jpg"</span>): <span class="comment">#必須是 jpg </span></span><br><span class="line">        images_file.append(<span class="string">"dataset/"</span> + fname)</span><br><span class="line"></span><br><span class="line">os.chdir(<span class="string">".."</span>) <span class="comment">#回到上一層</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"train.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> output: <span class="comment">#打開 train.txt </span></span><br><span class="line">    <span class="keyword">for</span> image <span class="keyword">in</span> images_file: <span class="comment">#不斷讀入 images_file 並且將路徑 + 圖片輸入至 train.txt</span></span><br><span class="line">        output.write(output_path + image)</span><br><span class="line">        output.write(<span class="string">"\n"</span>)</span><br><span class="line">    output.close()</span><br><span class="line">os.chdir(<span class="string">".."</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>再來我們設定 <code>obj.data</code><ul>
+<li>其中所有的路徑都必須是 google driver 的絕對路徑</li>
+<li>class 為 label 總共有幾個</li>
+<li>train 為訓練集資料位置</li>
+<li>valid 為測試集資料位置</li>
+<li>names 為這些 label 的名字</li>
+<li>backup 為訓練好的模型輸出位置</li>
+<li>語法如下<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">classes &#x3D; 17</span><br><span class="line">train &#x3D; &#x2F;drive&#x2F;yolo&#x2F;helmet&#x2F;train.txt</span><br><span class="line">valid &#x3D; &#x2F;drive&#x2F;yolo&#x2F;helmet&#x2F;valid.txt</span><br><span class="line">names &#x3D; &#x2F;drive&#x2F;yolo&#x2F;helmet&#x2F;obj.names</span><br><span class="line">backup &#x3D; &#x2F;drive&#x2F;yolo&#x2F;helmet&#x2F;</span><br></pre></td></tr></table></figure></li>
+<li>再來我們在將 obj.data 上傳至雲端硬碟上，位置為 <code>/content/drive/MyDrive/NTUT/&#39;大二下- 資工多媒體技術與應用&#39;/yolo/</code></li>
+</ul>
+</li>
+<li>我們這邊檢查是否路徑是否設對，如果沒有設對可以回去進行檢查<ul>
+<li>語法 <code>%cat /drive/obj.data</code></li>
+<li>會輸出的畫面必須是<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1wfelMvzobqKHn9kWa5x_6ilWuKUne7xA&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>再來我們就來進行 yolo 模型訓練拉，第一個是 obj.data、第二個是 cfg 設定、第三個是我們上傳的權重，<strong>基本上訓練模型時間一定要 1 小時以上</strong>，因此我們需要將，語法如下<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!.&#x2F;darknet detector train &#x2F;drive&#x2F;obj.data \</span><br><span class="line">&#x2F;drive&#x2F;yolov4-custom.cfg \</span><br><span class="line">&#x2F;drive&#x2F;yolov4.conv.137 -dont_show</span><br><span class="line"></span><br><span class="line">#之後如果再跑此模型有問題，下方有附註我有遇到的問題。</span><br><span class="line">#可以看右邊標題列中的，訓練模型遇到的錯誤問題</span><br></pre></td></tr></table></figure></li>
+<li>可以檢查 <code>/content/drive/MyDrive/NTUT/&#39;大二下- 資工多媒體技術與應用&#39;/yolo/</code> 是否有 yolov4-custom_last.weights 此檔案，如果有就表示已經訓練完成了！ </li>
+<li>進行 yolo 辨識<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!.&#x2F;darknet detector demo &#x2F;drive&#x2F;obj.data  \</span><br><span class="line">&#x2F;drive&#x2F;yolov4-custom.cfg \</span><br><span class="line">&#x2F;drive&#x2F;yolov4-custom_last.weights \</span><br><span class="line">-dont_show &#x2F;drive&#x2F;test.mp4 \</span><br><span class="line">-out_filename &#x2F;drive&#x2F;test_out.mp4 </span><br><span class="line"></span><br><span class="line">#之後如果再跑此模型有問題，下方有附註我有遇到的問題。</span><br><span class="line">#可以看右邊標題列中的，辨識模型遇到的錯誤問題</span><br></pre></td></tr></table></figure></li>
+<li>如果最後 YOLO 辨識完有輸出此圖就表示成功了！<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1mw18qhcBAkltlAtpb8Fp-pGMaGEe8L6Y&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><a href="https://colab.research.google.com/drive/1lxR-mS4oy46HSDdSjcWfaSQJTlGIGQp5?usp=sharing" target="_blank" rel="noopener">如果需要我的 google colab 這邊開放給大家，但是跟我的上面教學不太一樣，請斟酌使用</a></li>
+</ul>
+<h3 id="一些範例影片"><a href="#一些範例影片" class="headerlink" title="一些範例影片"></a>一些範例影片</h3><p>如果可以被成功輸出，那應該會出現類似這樣的影片</p>
+<ul>
+<li><div class="video-container"><iframe src="https://www.youtube.com/embed/enjm1fGZYR4" frameborder="0" loading="lazy" allowfullscreen></iframe></div></li>
+<li><div class="video-container"><iframe src="https://www.youtube.com/embed/hO2DCPJEJl0" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+
+
+</li>
+</ul>
+<h3 id="訓練模型遇到的錯誤問題"><a href="#訓練模型遇到的錯誤問題" class="headerlink" title="訓練模型遇到的錯誤問題"></a><strong>訓練</strong>模型遇到的錯誤問題</h3><ul>
+<li><code>Can&#39;t open label file</code>，圖片資訊如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1dgsCr9sZ2EECPE-LBptqC_XJM-M419ao&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>解決方法是必須<strong>檢查你的每一個路徑是否有設錯的可能性</strong></li>
+</ul>
+</li>
+<li><code>out of memory</code>，已經有將 subdivisions 設定為 32 or 64<ul>
+<li>調整 width、height，個人建議為 416<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1q0ePNI7mrcI69H__Ilsy60Mkg922Yn8t&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="辨識模型遇到的錯誤問題"><a href="#辨識模型遇到的錯誤問題" class="headerlink" title="辨識模型遇到的錯誤問題"></a><strong>辨識</strong>模型遇到的錯誤問題</h3><ul>
+<li>使用別人訓練好的 <code>yolov4-custom_last.weights</code>，但卻一直出錯<br>檢查別人的 <code>yolov4-custom.cfg</code> 是否與你相同</li>
+<li><code>darknet: ./src/utils.c:331: error: Assertion &#39;0&#39; failed</code>，圖片資訊如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1d5Uy6O3UJwqkTjbzPedVpAcH-Ff9m2Sy&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>這有很多種可能的解決方式，我的解決方式是 調整 width、height，個人建議為 416<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1q0ePNI7mrcI69H__Ilsy60Mkg922Yn8t&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他問題"><a href="#其他問題" class="headerlink" title="其他問題"></a>其他問題</h3><ul>
+<li>在設定路徑的捷徑後，透過 ls 此捷徑卻沒有辦法輸出正確的當前路徑下的所有檔案內容，圖片資訊如下<ul>
+<li>錯誤的捷徑<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qtL6eZ9OFvLxfdijicxfjLgkI3iCFZWl&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>正確的捷徑<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=184rg0jXoefef9plwp_zYimC9wXHUtxH_&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>你必須檢查你當前目錄的資料夾 <code>!ls</code> 中的檔案名字是否有與你設定的捷徑名字相同</li>
+</ul>
+</li>
+<li>當你在訓練模型後一直告訴你 <code>gpu isn&#39;t used</code><br>必須回去重新設定 <code>/content/darknet/Makefile</code>，之後進行 <code>!make</code></li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>天啊，這真的好難….。 我根本就是 google colab 踩雷大師，我一開始還以為 yolov4-costom.cfg 支持運算，害我在每一個 filiter 都放入 \(5 + n)*3\) QQ。</p>
+<p>google colab 每次都會把我登出，我就必須要重新登入，每一次重新登入就必須要重新設定一次 makefile，我常常會不小心就直接 make 而沒修改 makefile…。</p>
+<p>為甚麼設定捷徑運氣那麼不好，剛好設定與 ls 資料夾中相同名稱的捷徑導致衝突！ಥ⌣ಥ</p>
+<p>助教的 ppt 都沒有跟我說 vaild.txt and yolov4.conv.137 是拿來幹嘛的QQ，害我在旁邊摸索好久。</p>
+<p>為甚麼 google 的路徑這麼難設定，我一直設定失敗，中文是不是有毒QQ，在訓練模型的時候加入中文路徑都不可以…，但是在捷徑的時候設定中文路徑就可以過！</p>
+<p>雖然我有很多東西想要抱怨的，不過我還是很謝謝助教可以出這個題目讓我學習到這麼多知識，看看我打這麼多訊息就知道了XD。</p>
+<p>也要謝謝陳力瑋一直不厭其煩的教導我，幫我排除困難，還給我他的金魚 weights 讓我做測試，要是這次沒有他，我看我弄個 1 個禮拜都弄不完八…。<br>新手入行總是特別辛苦嘛，有個師父帶非常感動QQQQ。</p>
+<p>要是沒有力瑋在旁邊提點我要怎麼做，我可能做一做就生氣了八..。</p>
+<p>我覺得我這次的圖像辨識沒有到很精準，主要原因是因為我在 labelImg 時是圈出每個人的輪廓，而非圈出頭 + 帽子，在我訓練的過程中，我將有些只有下半身的人也視為沒戴帽子的人，也許是這個原因才讓 yolo 在辨識中畫圖特別凌亂八。</p>
+<blockquote>
+<p>像這樣子，我也會視為是一個沒戴帽子的人<br><img src="https://drive.google.com/u/2/uc?id=14ATnLq-hZhEcSMRBJoMrwLJY3EtqWQj5&export=download" alt=""></p>
+</blockquote>
+<p>最後最後，我想要說 labelImg 能不能聰明一點啦QQQQQ，我不想要一直去用人工辨識去辨識一大堆圖片拉QQQQ。<br>整個手都點到酸了…，才發現自己只有辨識 60 張。</p>
+<p>有時候都想說還是我請個國中生給他 168，讓他幫我做。<del>資本主義的力量</del></p>
+<p>總之，謝謝助教、力瑋來讓我學會這份專案。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://stackoverflow.com/questions/45501829/installing-pyqt5-on-windows-with-pip" target="_blank" rel="noopener">Installing PyQt5 on windows with pip by stack overflow</a><br><a href="https://blog.csdn.net/xinxing__8185/article/details/48440133" target="_blank" rel="noopener">python编程：使用opencv按一定间隔截取视频帧 by CSDN 张某人ER</a><br>[darknet yolov4训练遭遇 darknet: ./src/utils.c:326: error: Assertion `0‘ failed. by CSDN 江湖夜雨十年灯。。。](<a href="https://blog.csdn.net/xgd2016/article/details/107716702" target="_blank" rel="noopener">https://blog.csdn.net/xgd2016/article/details/107716702</a>)<br><a href="https://hackmd.io/@Titi/Sy9nQAauI" target="_blank" rel="noopener">YOLO 簡單訓練自己的資料集 by Titi</a><br><a href="https://stackoverflow.com/questions/63580887/yolov4-custom-object-detection-error-during-training" target="_blank" rel="noopener">yolov4 custom object detection error during training by stackoverflow</a></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
 </search>

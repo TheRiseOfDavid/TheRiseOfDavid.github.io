@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Rejression) |  大衞的筆記
+    統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Regression) |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Rejression)
+  統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Regression)
 </h1>
   
 
@@ -194,7 +194,7 @@ ga('send', 'pageview');
 <p><img src="https://drive.google.com/u/2/uc?id=1I4vkFQn7plXMeye6JcKQVJYFAe_Oie5s&export=download" alt=""></p>
 </blockquote>
 <h1 id="判定係數-Cofficient-of-Determination"><a href="#判定係數-Cofficient-of-Determination" class="headerlink" title="判定係數 Cofficient of Determination"></a>判定係數 Cofficient of Determination</h1><ul>
-<li>公式A \(\sum (y_i - \bar{y})^2 = \sum (\hat{y_i}- \bar{y})^2 + \sum (y_i - \hat{y_i})^2 \)<ul>
+<li>複習 ANOVA 公式 \(\sum (y_i - \bar{y})^2 = \sum (\hat{y_i}- \bar{y})^2 + \sum (y_i - \hat{y_i})^2 \)<ul>
 <li>其中 \(SST = \sum (y_i - \bar{y})^2\) 總平方和 total sum of squares</li>
 <li>其中 \(SSR = \sum (\hat{y_i}- \bar{y})^2\) 迴歸平方和</li>
 <li>其中 \(SSE = \sum (y_i - \hat{y_i})^2 \) 誤差平方和</li>
@@ -204,10 +204,10 @@ ga('send', 'pageview');
 <p><img src="https://drive.google.com/u/2/uc?id=16abqF3e8bShtixeIVBikFzMQ1JY5D1C8&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>公式 B  \(r^2 = SSR / SST \)<ul>
+<li>判定係數公式  \(r^2 = SSR / SST \)<ul>
 <li>其中 SSR 迴歸平方和</li>
 <li>SST 誤差平方和</li>
-<li>當 r 越小時則表示此迴歸方程式能夠解讀資料的能力越好</li>
+<li>當 \(r^2\) 越大時則表示此迴歸方程式能夠解讀資料的能力越好</li>
 </ul>
 </li>
 </ul>
@@ -225,14 +225,15 @@ ga('send', 'pageview');
 <li>\(r_{xy} = + \sqrt{0.8772}\)</li>
 <li>\(r_{xy} = + 0.9366\)</li>
 </ul>
-<h1 id="假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E"><a href="#假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E" class="headerlink" title="假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)"></a>假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)</h1><p>我們對於 \(\mathcal{E}\) 有以下假設</p>
+<h1 id="假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E"><a href="#假設模型下的誤差項-Model-Assumptions-About-the-Error-Term-mathcal-E" class="headerlink" title="假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)"></a>假設模型下的誤差項 Model Assumptions About the Error Term \(\mathcal{E}\)</h1><p>定義 \(\mathcal{E} = y_i - \hat{y_i}\)</p>
+<p>我們對於 \(\mathcal{E}\) 有以下假設</p>
 <ul>
 <li>我們假設 \(\mathcal{E}\) 是平均數為零的隨機變數<ul>
 <li>因此我們可以表示 \(E(\mathcal{E}) = 0\)</li>
 <li>所以 \(y = \beta_0 + \beta_1 x + \mathcal{E}\)，才可以省略 \(\mathcal{E}\)</li>
 </ul>
 </li>
-<li>\(\mathcal{E}\) 的變異數定義為 \(\sigma^2\)，因此迴歸線裡面的所有的獨立變數都是 \(\sigma^2\)</li>
+<li>\(\mathcal{E}\) 的變異數定義為 \(\sigma^2\)，因此迴歸線裡面的所有的獨立變數中的 \(\mathcal{E}\) 變異數為 都是 \(\sigma^2\)</li>
 <li>\(\mathcal{E}\) 為獨立變數，每一個變數的 \(\mathcal{E}\) 都不同，互相獨立</li>
 <li>\(\mathcal{E}\) 是常態分配的隨機變數</li>
 </ul>
@@ -317,7 +318,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>F test Statisitic<br>\(F = MSR / MSE \)</li>
-<li>Rej3ection Rule <ul>
+<li>Rejection Rule <ul>
 <li>Reject \(H_0\) if \(p-value \leq \alpha \) or \(F \geq F_\alpha\)</li>
 <li>其中 \(F_a\) 為我們計算的 f 描述</li>
 <li>分子自由度為 1、分母自由度為 \(n-2\)</li>
@@ -341,7 +342,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>F test Statisitic<br>\(F = MSR / MSE = 100 / 4.667 = 21.43 \) </li>
-<li>Rej3ection Rule <ul>
+<li>Conclusion<ul>
 <li>Reject \(H_0\) if \(0.019 \leq \alpha \) or \(21.43 =F \geq F_\alpha = 10.13\)，都有符合；因此拒絕 \(H_0\)，我們可以確認電視廣告與汽車銷售數量是有關聯的。</li>
 </ul>
 </li>
@@ -358,10 +359,10 @@ ga('send', 'pageview');
 </ul>
 <h2 id="區間估計公式"><a href="#區間估計公式" class="headerlink" title="區間估計公式"></a>區間估計公式</h2><p>通常回歸方程式做完後預測出來的值不一定完全準確，因為我們的回歸預測方程式是 \(y = \beta_0 + \beta_1 x \)，我們忽略是 \(\mathcal{E} \)，因此我們要預估 \( \mathcal{E} \) 因此才需要此估計公式進行計算 </p>
 <ul>
-<li>信心區間估計 Confidence Interval Estimate of \(E(y^*)\)<ul>
-<li>\(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*\)</li>
-<li>其中信賴係數為 \(1-\alpha\)，自由度為 \(n-2\)</li>
-<li>\(s = \sqrt{MSE} \)</li>
+<li>信心區間估計 Confidence Interval Estimate of \(E(y^*) \)<ul>
+<li>\(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*} \)</li>
+<li>其中信賴係數為 \(1-\alpha\)，自由度為 \(n-2\)，其中 2 為獨立變數與因變數的總和</li>
+<li>\(s = \sqrt{MSE} = SSE / (n-2) \)</li>
 <li>\(s_{\hat{y}^*} = s \sqrt{\frac{1}{n} + \frac{( x^* - \bar{x} )^2}{\sum (x_i - \bar{x})^2}}\)</li>
 </ul>
 </li>
@@ -391,7 +392,7 @@ ga('send', 'pageview');
 <li>\(s_{\hat{y}^*}  = 2.16025 \sqrt{\frac{1}{5} + \sqrt{1}{4}} = 1.4491\)</li>
 </ul>
 </li>
-<li>因此根據信心區間估計 \(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*\)<br>\(25 \pm 3.1824(1.4491) = 25 \pm 4.61\)，因此我們預估 3 個電視廣告，銷售汽車數量大約在 20.39 to 29.61 </li>
+<li>因此根據信心區間估計 \(\hat{y}^* \pm t_{a/2} s_{\hat{y}^*} \)<br>\(25 \pm 3.1824(1.4491) = 25 \pm 4.61\)，因此我們預估 3 個電視廣告，銷售汽車數量大約在 20.39 to 29.61 </li>
 </ul>
 </li>
 <li>\(y^* \) 的預估區間<ul>

@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    QUESTION! data.frame 要 append 新 data 太麻煩，有沒有比較快的方法? |  大衞的筆記
+    QUESTION! data.frame 如何 append 新 row，有沒有比較快的方法? |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  QUESTION! data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?
+  QUESTION! data.frame 如何 append 新 row，有沒有比較快的方法?
 </h1>
   
 
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">229</span>
+            <span class="post-count">297</span>
         </span>
     </span>
 
@@ -116,12 +116,18 @@ ga('send', 'pageview');
 </blockquote>
 <a id="more"></a>
 
-<h2 id="QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法"><a href="#QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法" class="headerlink" title="QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?"></a>QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?</h2><h3 id="answer"><a href="#answer" class="headerlink" title="answer:"></a>answer:</h3><p>那肯定是有的，使用最新的 tribble，就可以搞定。但要記住一開始如果宣告的為空值則必須使用</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t &lt;- tribble(x=character() , y=numeric())</span><br></pre></td></tr></table></figure>
-<p>之後如果要加入資料就使使用</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t &lt;- tribble(t , x=num , y = num)</span><br></pre></td></tr></table></figure>
+<h2 id="QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法"><a href="#QUESTION-data-frame-要-append-新-data-太麻煩，有沒有比較快的方法" class="headerlink" title="QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?"></a>QUESTION: data.frame 要 append 新 data 太麻煩，有沒有比較快的方法?</h2><h3 id="answer"><a href="#answer" class="headerlink" title="answer:"></a>answer:</h3><p>那肯定是有的，使用 tribble library，就可以搞定，使用方法與 dataframe 相同</p>
+<p>如果沒有 tibble，那我們可以安裝 <code>install.packages(tibble)</code></p>
+<p>但 tibble 支持產生無資料的 dataframe，但必須給予欄位的型態，如：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t &lt;- tibble(x=character() , y=numeric())</span><br></pre></td></tr></table></figure>
+
+<h3 id="之後每一次要-append-row-則使用此語法"><a href="#之後每一次要-append-row-則使用此語法" class="headerlink" title="之後每一次要 append row 則使用此語法"></a>之後每一次要 append row 則使用此語法</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(tibble)</span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"></span><br><span class="line">t &lt;- t %&gt;% add_row(x=<span class="string">"a"</span> , y = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
 <p><strong><font color="#dd0000">必須特別注意: 他要求型態，於是你每次 add 的資料型態都絕對必須要對，可以從這裡進行檢查</font></strong></p>
-<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://stackoverflow.com/questions/48833807/initialize-an-empty-tibble-with-column-names-and-0-rows" target="_blank" rel="noopener">Initialize an empty tibble with column names and 0 rows</a><br><a href="https://github.com/tidyverse/tibble/issues/215" target="_blank" rel="noopener">Allow tribble to create empty tibble with defined column type</a><br><a href="https://tibble.tidyverse.org/reference/add_row.html" target="_blank" rel="noopener">Add rows to a data frame</a></p>
+<p>輸出結果如下：　</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 1 x 2</span><br><span class="line">  x         y</span><br><span class="line">  &lt;chr&gt; &lt;dbl&gt;</span><br><span class="line">1 a         1</span><br></pre></td></tr></table></figure>
+
+<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><p><a href="https://stackoverflow.com/questions/31458244/how-to-create-and-add-new-columns-to-a-dataframe-in-r-within-a-loop" target="_blank" rel="noopener">How to create and add new columns to a dataframe in R within a loop? by stackoverflow</a><br><a href="https://stackoverflow.com/questions/48833807/initialize-an-empty-tibble-with-column-names-and-0-rows" target="_blank" rel="noopener">Initialize an empty tibble with column names and 0 rows</a><br><a href="https://github.com/tidyverse/tibble/issues/215" target="_blank" rel="noopener">Allow tribble to create empty tibble with defined column type</a><br><a href="https://tibble.tidyverse.org/reference/add_row.html" target="_blank" rel="noopener">Add rows to a data frame</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>程式語言的世界博大精神，要是沒有他們的付出我能走上現在的路嗎?<br>肯定是沒辦法的，於是我也需要更努力地去為社會付出。</p>
 
       
@@ -146,7 +152,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-dataframe/" rel="tag">R dataframe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
 
 
     </footer>
