@@ -18660,4 +18660,148 @@
         <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
+  <entry>
+    <title>演算法知識 - Josephus problem 約瑟夫問題 遞迴公式說明與應用</title>
+    <url>/2021/05/21/Explain_Algorithm/josephus/</url>
+    <content><![CDATA[<h2 id="Josephus-problem-約瑟夫問題介紹"><a href="#Josephus-problem-約瑟夫問題介紹" class="headerlink" title="Josephus problem 約瑟夫問題介紹"></a>Josephus problem 約瑟夫問題介紹</h2><blockquote>
+<p>約瑟夫問題是一個非常黑暗的問題XD，主要是殘兵們不想被對方軍團俘虜，而想出一種自殺方式，其內容大概如下</p>
+<ul>
+<li>全部人圍成一個圓圈，編號 \(1,2,3,…,n\)</li>
+<li>定義一個數字 \(k\)，只要數到第 k 個數字，那麼那個人就自殺。</li>
+<li>接下來，從死掉的那個人開始在數 k 個數字，再來第 \(2k\) 的人自殺。</li>
+<li>不斷數著 k、不斷地自殺，不斷循環，直到最後只剩下一個人為止。</li>
+</ul>
+<p>而我們的主角 Josephus 則不想要自殺，於是他必須找到一個位置，並且是最後剩下的那個人。</p>
+<p>表達大致上的意思，並沒有全部完整表達。</p>
+<p>下方我的證明可能並沒有很好閱讀，因此不懂的讀者可以參考<a href="https://blog.csdn.net/u011500062/article/details/72855826" target="_blank" rel="noopener">约瑟夫环——公式法（递推公式） by 陈浅墨</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="模擬操作解法"><a href="#模擬操作解法" class="headerlink" title="模擬操作解法"></a>模擬操作解法</h2><p>時間複雜度為 \(O(nm)\)，當 n,m 大於一百萬時，必會耗時許久。</p>
+<p>但如果題目有說必須<strong>依序</strong>輸出被殺死的人時，那我們就必須使用此方法。</p>
+<h2 id="遞迴公式-求出最後一位生還者"><a href="#遞迴公式-求出最後一位生還者" class="headerlink" title="遞迴公式 - 求出最後一位生還者"></a>遞迴公式 - 求出最後一位生還者</h2><p>時間複雜度為 \(O(n)\)，快了超級多！ 但我們只能夠求出最後一位生還者。</p>
+<blockquote>
+<p>詳細的說明請看 YT<br><a href="https://drive.google.com/file/d/13qZKBMaNog67XSO9zT2QG9axRmITzjO7/view?usp=sharing" target="_blank" rel="noopener">上面影片中約瑟夫問題 說明的 excel 文件 pdf 檔案</a><br><a href="https://drive.google.com/file/d/1O4O08M6xr57ygTQEJmy0MiWHI0MtJE5b/view?usp=sharing" target="_blank" rel="noopener">上面影片中約瑟夫問題 說明的 excel 文件 excel 檔案</a></p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/eZWhZwgpOII" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+</blockquote>
+<h2 id="程式碼說明"><a href="#程式碼說明" class="headerlink" title="程式碼說明"></a>程式碼說明</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">josephus</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">0</span>; <span class="comment">//一開始的編號</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) s = (s+k) % i; <span class="comment">//第 i 輪中，他的位置是第 s </span></span><br><span class="line">    <span class="keyword">return</span> s+<span class="number">1</span>; <span class="comment">//如果題目的編號一開始是 1，那我們就加一</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="相關題目"><a href="#相關題目" class="headerlink" title="相關題目"></a>相關題目</h2><ul>
+<li><a href="https://theriseofdavid.github.io//2021/05/21/UVa/UVa10774/" target="_blank" rel="noopener">UVa10774 - Repeated Josephus(數論 Math theorm、Josephus problem 約瑟夫問題) by 大衞的筆記 </a></li>
+<li><a href="https://theriseofdavid.github.io//2021/05/21/UVa/UVa11531/" target="_blank" rel="noopener">UVa11531 - Last Man Standing(數論 Math theorm、Josephus problem 約瑟夫問題) by 大衞的筆記</a></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/u011500062/article/details/72855826" target="_blank" rel="noopener">约瑟夫环——公式法（递推公式） by 陈浅墨</a><br><a href="https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%E6%96%AF%E9%97%AE%E9%A2%98#%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC%E8%A7%A3%E6%B3%95" target="_blank" rel="noopener">約瑟夫斯問題 by wiki</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實這題我學習很久…，主要是他的證明比較抽象化，不太好在腦內思考，後來是找到一篇很棒的文章！幫助了我思考XD。</p>
+<p><a href="https://blog.csdn.net/u011500062/article/details/72855826" target="_blank" rel="noopener">约瑟夫环——公式法（递推公式） by 陈浅墨</a>這篇文章非常好懂，大力推！<br>只是他的 Q1 必須看留言會更好懂些。不愧是大佬，可以用文字敘述就表達此題！我這次想要用文字敘述來表達都表達不出來QQQ。</p>
+<p>有稍微讓自己的腦袋運動了一下，希望腦袋經過這次的摧殘後又變得越來越聰明XD。</p>
+<p>不過有時候還是會覺得，花了這麼多時間在讓自己證明這些東西，結果以後如果要是忘記了就覺得好可惜QQ。</p>
+<p>總之，希望我可以在這份證明學習到的知識，應用在任何一個可以應用的地方上。<br>我最怕的就學會卻不會應用。</p>
+<h2 id="學習紀錄"><a href="#學習紀錄" class="headerlink" title="學習紀錄"></a>學習紀錄</h2><p>我有用紙筆來進行學習，現在拍下照片來記錄！</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JEGCrPHKVfWqm9rWEA8aqbYaqVrLmkge&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1SismCacNxlsP7IzQyhUq1yv3AcwnrFc6&export=download" alt=""></p>
+</blockquote>
+<h1 id="這邊為我之前原本想要用文字進行說明，卻發現我沒辦法很明顯用文字進行說明，但我這邊留下來進行紀錄"><a href="#這邊為我之前原本想要用文字進行說明，卻發現我沒辦法很明顯用文字進行說明，但我這邊留下來進行紀錄" class="headerlink" title="這邊為我之前原本想要用文字進行說明，卻發現我沒辦法很明顯用文字進行說明，但我這邊留下來進行紀錄"></a>這邊為我之前原本想要用文字進行說明，卻發現我沒辦法很明顯用文字進行說明，但我這邊留下來進行紀錄</h1><h3 id="我們來舉個例：有-8-個人，依序並且不斷循環，只要數到第-3-個人，那他則必須自殺，最後存活下來的人是誰？"><a href="#我們來舉個例：有-8-個人，依序並且不斷循環，只要數到第-3-個人，那他則必須自殺，最後存活下來的人是誰？" class="headerlink" title="我們來舉個例：有 8 個人，依序並且不斷循環，只要數到第 3 個人，那他則必須自殺，最後存活下來的人是誰？"></a>我們來舉個例：有 8 個人，依序並且不斷循環，只要數到第 3 個人，那他則必須自殺，最後存活下來的人是誰？</h3><ul>
+<li>來個想法，我們可以簡單的看的出來 \(n=8, k=3\) 的情況下，最後存活的人是誰嗎？</li>
+<li>我們來把題目稍微簡單化<ul>
+<li>在 \(n = 1, k = 3\) 的情況下，會有人死掉嗎？<br>不會，因為她是倖存的最後一位，因此存活的會是 1。</li>
+<li>在 \(n = 2, k = 3\) 的情況下，哪一個人可以活到最後呢？<br>2，因為數到 3 剛好是 1。</li>
+<li>在 \(n = 3, k = 3\) 的情況下，哪一個人可以活到最後呢？<br>2，第一次數到 3 時位置在第 3、第二次數到 3 時位置在 1。</li>
+</ul>
+</li>
+<li>在剛剛的應用中，我們大概知道一些規則，這時候我們用 \(n = 3, k = 3\) 來舉例<ul>
+<li>定義隊伍為 \(1,2,3,…\)，且不斷循環，因此可以寫成 \(1,2,3,1,2,3,…\)</li>
+<li>由於是循環排序，因此前面的數字會被移到隊伍最後方，我們永遠只需要從數列第一個開始計算第 k 個</li>
+<li>如果我們移除了數字 a，那們我們的隊伍則不可以再有數字 a</li>
+<li>因此順序是<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pos: 1 2 3 4 5 6 7 8 9</span><br><span class="line">val: 1 2 3 1 2 3 1 2 3</span><br></pre></td></tr></table></figure></li>
+<li>當我們數到第三個位置時， 3 必須被移除，不再排序中，因此我們將隊伍中所有的 3 移除<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        ^</span><br><span class="line">pos:1 2 3 4 5 6</span><br><span class="line">val:1 2 1 2 1 2</span><br><span class="line">#我們將 pos 3 的數字全部刪除，並且將空缺位置補上。</span><br><span class="line"># ^ 為下一次數列的開始位置</span><br></pre></td></tr></table></figure></li>
+<li>我們再來數到第三個位置時，將他移除，這邊我們會移除的則是 1，因此我們將隊伍中所有的 1 移除<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        ^</span><br><span class="line">pos:1 2 3 </span><br><span class="line">val:2 2 2</span><br><span class="line"># 我們將 pos 3 的數字全部刪除，並且將空缺位置補上。</span><br><span class="line"># ^ 為下一次數列的開始位置</span><br></pre></td></tr></table></figure></li>
+<li>現在隊伍裡面只剩下一個數字了，那就是 2。</li>
+</ul>
+</li>
+<li>剛剛我們舉例了 n 從 3 -&gt; 1，發現這是一種模擬操作對吧？現在我們換個角度來看，來算算看 n 從 1 -&gt; 3 <ul>
+<li>定義存活的數字為 2，英文為 alive。</li>
+<li>\(n = 1\)的隊伍是 \(2(alive),2,2,…,2\)，我們並不需要移除，因為只剩下一個數字</li>
+<li>剛剛我們是將<strong>前面的數字移到隊伍最後方，現在我們則將後面的數字移到隊伍最前方，還原操作</strong></li>
+<li>\(n = 2\)的隊伍是 \(1(k = 1),2(k = 2),1(被移除的數字, k = 3),2(alive),…,1,2\)</li>
+<li>\(n = 3\)的隊伍是 \(1(k=1),2(k=2),3(被移除的數字,k=3),1(n=2,k=1),2(n=2,k=2),3(n= 2, 數字被移除),1(被移除的數字, n = 2,k = 3,),2,,…,1,2,3\)</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>數論 Math theorm</tag>
+        <tag>Josephus problem 約瑟夫問題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10774 - Repeated Josephus(數論 Math theorm、Josephus problem 約瑟夫問題)</title>
+    <url>/2021/05/21/UVa/UVa10774/</url>
+    <content><![CDATA[<h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>我不想浪費你的時間在讀題目，這裡有 n 個人要約瑟夫問題，其中 k = 2，倖存者的位置為 x，如果 \(x != n\)，那我們將讓 \(n = x\)，n 等於 x，重新進行一次約瑟夫問題，而新的倖存者位置如果等於 n，那我們就輸出，這是第幾次執行約瑟夫問題(不包含第一次)，第 n 個人的位置是多少？</p>
+<p>舉例：n = 5 時的約瑟夫問題為 3，\(5 != 3\)，將 \(n =3\) 執行約瑟夫問題，這次 \(n = 3, x = 3\)，重複執行了 1 次約瑟夫問題，最後一次的約瑟夫問題的 x 是 3。<br>因此輸出 “1 3”</p>
+<p><a href="https://onlinejudge.org/external/107/10774.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>能了解此題題目，不誇張，我看了 30min</li>
+<li><a href="https://theriseofdavid.github.io/2021/05/21/Explain_Algorithm/josephus/" target="_blank" rel="noopener">約瑟夫問題</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>其實這題並沒有太大的難度，只要你了解約瑟夫問題。</p>
+<p>之後就是判斷有沒有與 n 相同，沒有就重做，有就繼續做。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva10774" target="_blank" rel="noopener">Uva10774 - Repeated Josephus by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>謝謝力瑋的詳解QQQQ。<br>我寫這個寫得好痛苦。</p>
+<p>我之前是有學過約瑟夫問題，但是年代久遠後似乎就忘記了，現在要重學一遍發現自己都忘得差不多，快跟一個初學者差不多了…。</p>
+<p>我不想忘記我所學過的事物阿。</p>
+<p>不過謝謝力瑋，我看他的程式碼才了解他的英文…。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, repeat, kase;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">josephus</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span>&#123; <span class="comment">//約瑟夫問題 請直接點選 重點觀念-約瑟夫問題 來了解相關知識</span></span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) s = (s+k) % i;</span><br><span class="line">    <span class="keyword">return</span> s+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        kase++;</span><br><span class="line">        <span class="keyword">int</span> n, survivor=<span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        repeat = <span class="number">0</span>; <span class="comment">//判斷總共做了幾次約瑟夫問題(不包含第一次)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">            survivor = josephus(n,<span class="number">2</span>); <span class="comment">//表示這次的倖存者位置</span></span><br><span class="line">            <span class="keyword">if</span>(survivor == n) <span class="keyword">break</span>; <span class="comment">//如果倖存者位置與 n 相同就跳出</span></span><br><span class="line">            n = survivor; <span class="comment">//將 n 設定為倖存者位置</span></span><br><span class="line">            repeat++; <span class="comment">//約瑟夫問題將會重做一次</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; kase &lt;&lt; <span class="string">": "</span> &lt;&lt; repeat &lt;&lt; <span class="string">" "</span> &lt;&lt; n &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
+        <tag>Josephus problem 約瑟夫問題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11531 - Last Man Standing(數論 Math theorm、Josephus problem 約瑟夫問題)</title>
+    <url>/2021/05/21/UVa/UVa11351/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p><a href="https://theriseofdavid.github.io/2021/05/21/Explain_Algorithm/josephus/" target="_blank" rel="noopener">約瑟夫問題</a>，給你 n,k，總共有 n 個人，數到第 k 個人，那人則必須離開。</p>
+<p>試問，最後一個人會是離開的人是誰？</p>
+<p><a href="https://onlinejudge.org/external/113/11351.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/05/21/Explain_Algorithm/josephus/" target="_blank" rel="noopener">約瑟夫問題</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>只要你了解約瑟夫問題，這題基本上小學生都會寫。</p>
+<p>實現約瑟夫問題的遞迴公式即可。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>我學約瑟夫問題學了 4hr，現在來一題簡單的，有點開心嗎(? XD。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, k, kase;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">        <span class="keyword">int</span> survivor = <span class="number">0</span>;  <span class="comment">//約瑟夫問題 請直接點選 重點觀念-約瑟夫問題 來了解相關知識</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) survivor = (survivor + k) % i;</span><br><span class="line">        survivor++;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span> &lt;&lt; survivor &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>數論 Math theorm</tag>
+        <tag>Josephus problem 約瑟夫問題</tag>
+      </tags>
+  </entry>
 </search>
