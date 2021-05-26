@@ -1906,8 +1906,8 @@
       </categories>
       <tags>
         <tag>UVa</tag>
-        <tag>Merge-sort</tag>
         <tag>程式解題</tag>
+        <tag>合併排序 merge sort</tag>
       </tags>
   </entry>
   <entry>
@@ -5856,7 +5856,7 @@
       </tags>
   </entry>
   <entry>
-    <title>演算法知識 - Radix Sort 基數排序</title>
+    <title>演算法知識 - 基數排序 Radix Sort</title>
     <url>/2020/10/20/Explain_Algorithm/radix-sort/</url>
     <content><![CDATA[<h2 id="Radix-Sort-介紹與應用"><a href="#Radix-Sort-介紹與應用" class="headerlink" title="Radix Sort 介紹與應用"></a>Radix Sort 介紹與應用</h2><blockquote>
 <p>Radix Sort 與我們一般常見的比較排序不同，採用分配式排序法(透過特定方式將值分別放入不同的  array)，Radix Sort 是特殊的整數排序法，Radix Sort 是根據每一位的數值放入相對應的 index。</p>
@@ -5892,7 +5892,7 @@
       <tags>
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
-        <tag>數論 Math theorm</tag>
+        <tag>基數排序 Radix Sort</tag>
       </tags>
   </entry>
   <entry>
@@ -7114,6 +7114,7 @@
       <tags>
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
+        <tag>Binary Search 二分搜尋</tag>
       </tags>
   </entry>
   <entry>
@@ -17937,6 +17938,7 @@
 <li><a href="https://zh.wikipedia.org/wiki/%E5%A4%9A%E9%87%8D%E5%85%B1%E7%BA%BF%E6%80%A7" target="_blank" rel="noopener">資料來源 by wiki</a></li>
 </ul>
 </li>
+<li>因此建議我們在跑回歸方程式時，先確定自變數(\(x\)) 是否有共線性問題，以避免我們回歸做太多次。</li>
 </ul>
 <h1 id="使用估計迴歸方程式來預測或預估-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction"><a href="#使用估計迴歸方程式來預測或預估-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" class="headerlink" title="使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction"></a>使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction</h1><p>主要用途</p>
 <ul>
@@ -17946,7 +17948,154 @@
 <li>複迴歸計算較為麻煩，因此<strong>全部都用軟體運算，因此就不講了QQ</strong>，如果不清楚上面名詞則可以透過簡單線性迴歸中的估計迴歸方程式來預測或預估，來了解這些知識。</li>
 </ul>
 <p>我們可以看 <a href="https://theriseofdavid.github.io/2021/05/02/NTUT_note/statistics-ch14/#%E4%BD%BF%E7%94%A8%E4%BC%B0%E8%A8%88%E8%BF%B4%E6%AD%B8%E6%96%B9%E7%A8%8B%E5%BC%8F%E4%BE%86%E9%A0%90%E6%B8%AC%E6%88%96%E9%A0%90%E4%BC%B0-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" target="_blank" rel="noopener">第十四章 簡單線性迴歸(Simple Linear Rejression) - 使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction by 大衞的筆記</a> 來知道信心區間、預測區間是甚麼，為甚麼預測區間會比信心區間來的大。</p>
-<h1 id="類別型變數在複迴歸下的應用-Categorical-Independent-Variables"><a href="#類別型變數在複迴歸下的應用-Categorical-Independent-Variables" class="headerlink" title="類別型變數在複迴歸下的應用 Categorical Independent Variables"></a>類別型變數在複迴歸下的應用 Categorical Independent Variables</h1><h1 id="殘差分析-Residual-Analysis"><a href="#殘差分析-Residual-Analysis" class="headerlink" title="殘差分析 Residual Analysis"></a>殘差分析 Residual Analysis</h1><h1 id="羅吉斯迴歸-Logistic-Regression"><a href="#羅吉斯迴歸-Logistic-Regression" class="headerlink" title="羅吉斯迴歸 Logistic Regression"></a>羅吉斯迴歸 Logistic Regression</h1>]]></content>
+<h1 id="類別型變數在複迴歸下的應用-Categorical-Independent-Variables"><a href="#類別型變數在複迴歸下的應用-Categorical-Independent-Variables" class="headerlink" title="類別型變數在複迴歸下的應用 Categorical Independent Variables"></a>類別型變數在複迴歸下的應用 Categorical Independent Variables</h1><p>在建立回歸模型時，有一些是類別型的變數，例如我們現在加入一個變數 \(x_2\)，只要他是男生就是 1、女生就是 0。這種作法，我們稱之為 虛擬或表示變數 dummy or indicator variable</p>
+<h2 id="舉例：-根據先前程式設計師的舉例-舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資"><a href="#舉例：-根據先前程式設計師的舉例-舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資" class="headerlink" title="舉例：[根據先前程式設計師的舉例](#舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資"></a>舉例：[根據先前程式設計師的舉例](#舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資</h2><ul>
+<li>因此我們現在的預估方程式改為 \(\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \mathcal{E}\)<ul>
+<li>其中 \(\hat{y}\) 是薪水</li>
+<li>\(x_1\) 是年資</li>
+<li>\(x_2\) 是程式能力</li>
+<li>\(x_3\) 是否有碩士學歷，0 表示沒有、1 表示有，此變數為 dummy or indicator variable</li>
+</ul>
+</li>
+<li>計算出來的 ANOVA 表如下，其中在這次的回歸測試中，調整後 \(R^2\) 比沒有加入碩士學歷此變數的回歸模型調整後 \(R^2 \) 更好<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Ey7Ivr8RruTr1PFdoq9OiWVzLx_wkfxy&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>我們現在看 t test，針對每一個變數進行假設檢定<ul>
+<li>可以發現 \(x_3\) 是否有碩士學歷與 y 並沒有關係。註： test score 為程式能力</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1nf5VD0ABhlLjeWZJjTREM6iyZjgXjk5Y&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="複雜的類別變數-More-Complex-Categorical-Variables"><a href="#複雜的類別變數-More-Complex-Categorical-Variables" class="headerlink" title="複雜的類別變數 More Complex Categorical Variables"></a>複雜的類別變數 More Complex Categorical Variables</h2><ul>
+<li>在某些情況下，類別型變數會有超過 2 個以上的類別型變數，舉例：信用卡的銀行</li>
+<li>在這種情況，我們是增加自變數的變數量<ul>
+<li>舉例：某一類別型變數有 3 個分類，分類的 level 為 A、B、C</li>
+<li>答：那我們則需要新增兩個自變數 \(x_1, x_2\)，其中 \(A = (0,0),B = (1,0),C = (0,1)\)，\((i,j)\) 分別是 \(x_1, x_2\)</li>
+</ul>
+</li>
+<li>如果我們有更多的 level 要進行分類，那就需要更多的自變數表示，如果有 \(k-level\) 那我們的自變數就需要 \(k-1\)<br>每一個 \(k-level\) 只能在一個 dummy variable 中表示 1，除了有一個 \(level\) 可以再全部的 dummy variable 表示零</li>
+</ul>
+<h1 id="殘差分析-Residual-Analysis"><a href="#殘差分析-Residual-Analysis" class="headerlink" title="殘差分析 Residual Analysis"></a>殘差分析 Residual Analysis</h1><ul>
+<li>在<a href="https://theriseofdavid.github.io/2021/05/02/NTUT_note/statistics-ch14/#%E6%AE%98%E5%B7%AE%E5%88%86%E6%9E%90-%E5%90%88%E6%B3%95%E6%A8%A1%E5%9E%8B%E5%81%87%E8%A8%AD-Residual-Analysis-Validating-Model-Assumptions" target="_blank" rel="noopener">統計學(二) 筆記 - 第十四章 簡單線性迴歸(Simple Linear Regression) 中 殘差分析: 合法模型假設 Residual Analysis: Validating Model Assumptions by 大衞的筆記</a>有提到關於誤差項的假設，那這邊我們一樣要對殘差分析進行驗證</li>
+<li>檢查標準化殘差(通常使用電腦計算)是否 \(residuals &lt;= |2|\)，resuduals 就是殘差，來判斷是否為常態分配</li>
+<li>我們將 \(y, residuals\) 畫出散佈圖後，則可以明顯發現圖中有離群值</li>
+<li>舉例<ul>
+<li>舉例資料如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1GQFhQq9-dQnbbaKS78WyCjiQw94MxkN_&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>舉例的散佈圖如下，可以發現有一點離群值<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JZvEiwyxERbqIDuMVQqHEI0FESDAON8E&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="羅吉斯迴歸-Logistic-Regression"><a href="#羅吉斯迴歸-Logistic-Regression" class="headerlink" title="羅吉斯迴歸 Logistic Regression"></a>羅吉斯迴歸 Logistic Regression</h1><ul>
+<li>有一些自變數是屬於類別變數，那我們要怎麼拿來回測呢？如果這個類別變數只有二元的關係時，可以將變數設定為 0、1。EX: 要不要來上課，\(不上課 = 0\)、\(上課 = 1\)</li>
+<li>如果 \(y\) 變數是類別型變數時，那麼我們的模型回歸方程式也會跟著改變，羅吉斯回歸方程式</li>
+<li>羅吉斯回歸方程式如下：(blog 的 bug mathjax 在次方項太長時，顯示效果並不好)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1hYJ_dxIDa-mjV9FN58oAdd3Oe7bd3JC-&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此我們在解釋羅吉斯回歸方程式，我們會這樣解釋 \(E(y) = \text{estimate of } P(y=1| x_1, x_2, …, x_p)\)，在 \( x_1, x_2, …, x_p\) 都是特定值的情況下，那我們會做 \(y\) 的機率是多少？<ul>
+<li>由於我們要預測類別型變數時，我們沒辦法接受 y 值為負，因為 y 也是類別型函數，因此變數只有 0、1，如果有負值或大於 1 就表示超出合理範圍內，舉例示意圖如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1PjEAwJxc0ul3OkCFaj--KdcqnZEfwxhb&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>因此我們的預估羅吉斯回歸方程式如下：(blog 的 bug mathjax 在次方項太長時，顯示效果並不好) <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1SGa76UUNJygvVwpjFBfnPZ_gFzVDE1rw&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>其中 \(b\) 是預估 \(\beta\)參數</li>
+</ul>
+</li>
+</ul>
+<h2 id="舉例：西門公司想要發行型錄，型錄裡面都會附上-200-元的折扣卷，由於型錄成本過高，所以主管想透過顧客是否為使用折價卷來判定是否需要給此顧客型錄，因此西門管理部門想要透過回歸來判斷我們應該要給那些顧客型錄，這樣就能降低折扣卷成本，我們用來預測的自變數有西門聯名信用卡公司、顧客去年花費"><a href="#舉例：西門公司想要發行型錄，型錄裡面都會附上-200-元的折扣卷，由於型錄成本過高，所以主管想透過顧客是否為使用折價卷來判定是否需要給此顧客型錄，因此西門管理部門想要透過回歸來判斷我們應該要給那些顧客型錄，這樣就能降低折扣卷成本，我們用來預測的自變數有西門聯名信用卡公司、顧客去年花費" class="headerlink" title="舉例：西門公司想要發行型錄，型錄裡面都會附上 200 元的折扣卷，由於型錄成本過高，所以主管想透過顧客是否為使用折價卷來判定是否需要給此顧客型錄，因此西門管理部門想要透過回歸來判斷我們應該要給那些顧客型錄，這樣就能降低折扣卷成本，我們用來預測的自變數有西門聯名信用卡公司、顧客去年花費"></a>舉例：西門公司想要發行型錄，型錄裡面都會附上 200 元的折扣卷，由於型錄成本過高，所以主管想透過顧客是否為使用折價卷來判定是否需要給此顧客型錄，因此西門管理部門想要透過回歸來判斷我們應該要給那些顧客型錄，這樣就能降低折扣卷成本，我們用來預測的自變數有西門聯名信用卡公司、顧客去年花費</h2><ul>
+<li>其中我們找了 100 份樣本<ul>
+<li>50 份發給有西門聯名的信用卡客戶</li>
+<li>50 份則是發給沒有西門聯名信用卡的客戶</li>
+</ul>
+</li>
+<li>我們會記錄以下資訊<ul>
+<li>此顧客去年花多少錢在我們公司上</li>
+<li>此顧客是否使用西門聯名信用卡消費</li>
+<li>此顧客是否有使用型錄中的 200 元折扣卷</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>其中我們將 \(x_1, x_2\) 分別為年花費、是否有聯名信用卡，\(y\) 則是我們要預測的是否有使用 200 元折扣卷，其中我們這邊擷取 10 筆資料，作為示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Pvj8CKMMg3DD5TlEirqMBD3pCV6NopH1&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>其中預估羅吉斯回歸方程式請看圖片，通常都透過電腦進行計算 (blog 的 bug mathjax 在次方項太長時，顯示效果並不好) <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-lth9LlMGs2-cWxLsNHZ2fQVQp20SE6T&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此我們可以進行推估<ul>
+<li>消費 2000 元、沒有使用西門聯名信用卡，那使用折價卷的機率則是 0.1880　(blog 的 bug mathjax 在次方項太長時，顯示效果並不好) </li>
+<li>消費 2000 元、<strong>有</strong>使用西門聯名信用卡，那使用折價卷的機率則是 0.4099　(blog 的 bug mathjax 在次方項太長時，顯示效果並不好) </li>
+<li>計算如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1nGqgIpOGiT6pDRSkLv2wZnlLE5fqooBT&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>我們將資料彙成表，公司則是決定在 \(\hat{y} &gt;= 0.4\) 的才進行發行<ul>
+<li>因此如果有聯名信用卡，年花費必須大於等於 2000 來給予型錄</li>
+<li>因此如果<strong>沒有</strong>聯名信用卡，年花費必須大於等於 6000 來給予型錄<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xA0u8OAOkERM3fgKmSpVzsJ5kC8TTZUS&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="顯著性測試-Testing-for-Signifcance"><a href="#顯著性測試-Testing-for-Signifcance" class="headerlink" title="顯著性測試 Testing for Signifcance"></a>顯著性測試 Testing for Signifcance</h2><p>在羅吉斯回歸中，我們也有的顯著性測試</p>
+<h3 id="整體的顯著性測試"><a href="#整體的顯著性測試" class="headerlink" title="整體的顯著性測試"></a>整體的顯著性測試</h3><ul>
+<li>Hypotheses<ul>
+<li>\(H_0: \beta_1 = \beta_2 = … = 0 \)</li>
+<li>\(H_1:\) 不符合上面方程式</li>
+</ul>
+</li>
+<li>Test Statistics 使用 Statistic G，這邊我們暫時不對 G 做解釋，<del>因為老師沒有教</del></li>
+<li>Rejection Rule: Reject \(H_0\) if \(p-value \leq \alpha\)</li>
+</ul>
+<h3 id="單體顯著性測試"><a href="#單體顯著性測試" class="headerlink" title="單體顯著性測試"></a>單體顯著性測試</h3><ul>
+<li>Hypotheses<ul>
+<li>\(H_0: \beta_1 = 0 \)</li>
+<li>\(H_1:\) 不符合上面方程式</li>
+</ul>
+</li>
+<li>Test Statistics 使用 Statistic z，\(z = b_i / s_{b_i}\)</li>
+<li>Rejection Rule: Reject \(H_0\) if \(p-value \leq \alpha\)</li>
+</ul>
+<h3 id="舉例：根據先前西門公司的舉例，我們想知道整體顯著性測試是否拒絕-H-0-，如果沒有，那我們要找出哪個自變數沒有拒絕-H-0"><a href="#舉例：根據先前西門公司的舉例，我們想知道整體顯著性測試是否拒絕-H-0-，如果沒有，那我們要找出哪個自變數沒有拒絕-H-0" class="headerlink" title="舉例：根據先前西門公司的舉例，我們想知道整體顯著性測試是否拒絕 \(H_0\)，如果沒有，那我們要找出哪個自變數沒有拒絕 \(H_0\)"></a>舉例：<a href="#舉例：西門公司想要發行型錄，型錄裡面都會附上-200-元的折扣卷，由於型錄成本過高，所以主管想透過顧客是否為使用折價卷來判定是否需要給此顧客型錄，因此西門管理部門想要透過回歸來判斷我們應該要給那些顧客型錄，這樣就能降低折扣卷成本，我們用來預測的自變數有西門聯名信用卡公司、顧客去年花費">根據先前西門公司的舉例</a>，我們想知道整體顯著性測試是否拒絕 \(H_0\)，如果沒有，那我們要找出哪個自變數沒有拒絕 \(H_0\)</h3><ul>
+<li>可以看出整體的顯著性測試(G) 的 p-value = 0.001，因此全部都有符合</li>
+<li>可以看到截距、花費、是否有信用卡的顯著性測試(Z) 的 p-value 分別為 0.000、0.008、0.013，因此都有符合單體顯著性測試<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1tl6RTK3HrUGizUiJx5zZz9TuDavagZc9&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="勝算比-Odds-Ration"><a href="#勝算比-Odds-Ration" class="headerlink" title="勝算比 Odds Ration"></a>勝算比 Odds Ration</h2><ul>
+<li>我們有時候會好奇，在 \(x_1, x_2 , … , x_p \) 都是固定的狀態下時，那我們能獲得 \(y\) 的機率是多少？這就是勝算比。注意：\(y=1\) 是我們期望的結果、\(y=0\) 則是我們不希望的結果。<br>勝算公式： \(odds = \frac{P(1| x_1, x_2,…,x_p)}{P(0| x_1, x_2,…,x_p)} = \frac{P(1| x_1, x_2,…,x_p)}{1 - P(1| x_1, x_2,…,x_p)}\)</li>
+<li>那們如果我們想要比較兩種 \(x_1, x_2 , … , x_p \) 不一樣的狀態時分別定義 A、B，這時就是用到 Odds Rations 勝算比，我們是比較<strong>但 B 勝出一次時 A 會勝出幾次</strong><ul>
+<li>因此勝算比公式： \(Odds Ratio = \frac{odd_A}{odd_B} = e^{\beta_i}\)</li>
+<li>舉例<br>假如 A 狀態是 \(x_1 = 1, x_2 = 2\)、B 狀態為 \(x_1 = 2, x_2 = 1\)，那 \(odds_A = \frac{0.4}{0.6} = 0.67\)、\(odds_B = \frac{0.6}{0.4} = 1.5\)，那麼 \(\text{Odds Ratio} = \frac{0.67}{1.5} = 0.45\)，因此但 B 勝出一次時 A 會勝出 0.45 次。</li>
+<li>資料參考：<a href="https://chungyizhen.medium.com/%E7%82%BA%E4%BB%80%E9%BA%BC%E9%83%BD%E7%94%A8-%E5%8B%9D%E7%AE%97%E6%AF%94-odds-ratio-or-%E8%80%8C%E4%B8%8D%E6%98%AF-%E7%9B%B8%E5%B0%8D%E9%A2%A8%E9%9A%AA-rr-%E5%91%A2-5c62fe84787c" target="_blank" rel="noopener">為什麼都用「勝算比」odds ratio(OR) 而不是「相對風險」 (RR)呢？ by Kevin Tseng</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：根據先前西門公司的舉例，我們想要知道有用信用卡進行消費會比沒有用信用卡消費的人的勝算比"><a href="#舉例：根據先前西門公司的舉例，我們想要知道有用信用卡進行消費會比沒有用信用卡消費的人的勝算比" class="headerlink" title="舉例：根據先前西門公司的舉例，我們想要知道有用信用卡進行消費會比沒有用信用卡消費的人的勝算比"></a>舉例：<a href="#舉例：根據先前西門公司的舉例，我們想知道整體顯著性測試是否拒絕-H-0-，如果沒有，那我們要找出哪個自變數沒有拒絕-H-0">根據先前西門公司的舉例</a>，我們想要知道有用信用卡進行消費會比沒有用信用卡消費的人的勝算比</h3><blockquote>
+<p>答案如下：<br><img src="https://drive.google.com/u/2/uc?id=1GL20uZeUo3_oZc9GWZPssXplMvh7u84s&export=download" alt=""></p>
+</blockquote>
+]]></content>
       <categories>
         <category>北科上課筆記</category>
       </categories>
@@ -18011,7 +18160,7 @@
   </entry>
   <entry>
     <title>台灣財富管理規劃顧問認證協會 - 2021 全國大專院校第十一屆財富管理競賽</title>
-    <url>/2020/05/10/contest_experence/WMPCCA2021/</url>
+    <url>/2021/05/10/contest_experence/WMPCCA2021/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>僅此紀錄 2021/05 月所製作的財富管理競賽<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去</p>
 <p>每一次的努力都證明著自己的光輝</p>
@@ -18802,6 +18951,320 @@
         <tag>程式解題</tag>
         <tag>數論 Math theorm</tag>
         <tag>Josephus problem 約瑟夫問題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - insertion sort 插入排序</title>
+    <url>/2021/05/24/Explain_Algorithm/Insertion_sort/</url>
+    <content><![CDATA[<h2 id="Insertion-sort-插入排序-介紹與實作原理"><a href="#Insertion-sort-插入排序-介紹與實作原理" class="headerlink" title="Insertion sort 插入排序 介紹與實作原理"></a>Insertion sort 插入排序 介紹與實作原理</h2><blockquote>
+<p>插入排序是最簡單的一種排序法之一，以遞減排序為例。</p>
+<ul>
+<li>先給定一陣列，index 1 是最大，之後的陣列數值遞減</li>
+<li>透過雙重迴圈<ul>
+<li>第一層迴圈，決定第 i 大的位置的數字</li>
+<li>第二層迴圈，判斷從第 i 以後的的位置，哪個數字最大就放置後面</li>
+</ul>
+</li>
+</ul>
+<p>時間複查度為 \(O(n^2)\)，雖然不實用，但對初學者直觀</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Insertion-Sort-程式碼說明與應用"><a href="#Insertion-Sort-程式碼說明與應用" class="headerlink" title="Insertion Sort 程式碼說明與應用"></a>Insertion Sort 程式碼說明與應用</h2><p>主要核心是</p>
+<ul>
+<li>i 迴圈，數列 i 要被放置哪個位置</li>
+<li>j 迴圈，找出第 (i+1)~n 的數值中，哪個數字最大</li>
+</ul>
+<p>由於我們 i 從 0 開始，只要我們每一個 i 都放入 i~n 的最大值，那麼第 i 的數值一定會比 i+1 還大，以此類推，證明這是有效的排序。</p>
+<p>下面主要示範由大到小排序</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[] = &#123;<span class="number">4</span>,<span class="number">96</span>,<span class="number">1546</span>,<span class="number">13</span>,<span class="number">48</span>,<span class="number">34</span>,<span class="number">77</span>,<span class="number">48</span>,<span class="number">31</span>&#125;; <span class="comment">//要交換的數列</span></span><br><span class="line"><span class="keyword">int</span> num_size; <span class="comment">//要排序的數列大小</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_sort</span><span class="params">()</span></span>&#123;</span><br><span class="line">    num_size = <span class="keyword">sizeof</span>(num) / <span class="keyword">sizeof</span>(num[<span class="number">0</span>]); <span class="comment">//判斷數列長度</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num_size; i++)&#123; <span class="comment">//判斷第 i 個位置，要放哪個數值，</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; num_size; j++)&#123; <span class="comment">//判斷從 i~n，哪個數字最大</span></span><br><span class="line">            <span class="keyword">if</span>(num[i] &lt; num[j]) swap(num[i], num[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>&#123; <span class="comment">//輸出資料用</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num_size; i++) <span class="built_in">cout</span> &lt;&lt; num[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    insert_sort();</span><br><span class="line">    output();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<!-- 
+## 心得
+我們北科資財教資料結構的老師，我很不喜歡他的教法，他的教法就是把資料結構當作國文課在上，完全沒有教學生怎麼做，讓學生動手寫，就是照 ppt 宣科，根本沒有讓學生學習到東西，就像是通識課一樣，學過就忘了。
+
+明明演算法是非常不適合忘記的資料。
+
+總之，幸好我終於快逃離這堂課了，這堂課讓我活得很痛苦阿！高中教導我的演算法老師比大學老師還認真、還仔細教QQQQ。
+
+我真的要哭了...。
+ -->
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>由於 C++ 已經有很多 sort 套件了，因此我在高中學會後我就再也沒有去複習這些知識。</p>
+<p>剛好現在上課有用到那就來複習，順便把它寫出邏輯八！</p>
+<h2 id="程式執行結果"><a href="#程式執行結果" class="headerlink" title="程式執行結果"></a>程式執行結果</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Hs2w4JRj0Wh9lT6uazLpP2WvqBnTPCZP&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>數論 Math theorm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - 快速排序 quick sort</title>
+    <url>/2021/05/24/Explain_Algorithm/quick_sort/</url>
+    <content><![CDATA[<h2 id="quick-sort-快速排序-介紹與實作原理"><a href="#quick-sort-快速排序-介紹與實作原理" class="headerlink" title="quick sort 快速排序 介紹與實作原理"></a>quick sort 快速排序 介紹與實作原理</h2><blockquote>
+<p>快速排序顧名思義就是快的排序嘛XD。平均時間複雜度為 \(O(n log n\)，算是平常大家會用的演算法之一</p>
+<p>實作原理如下：</p>
+<ul>
+<li>定義 L 與 R，分別是當前數列的最左邊 index 與最右邊的 index</li>
+<li>standard 為每次 quick_sort 的第一值，每個人可以定義如何選擇此數字。<ul>
+<li>定義：x 為數值，數堆為 standard 左 or 右 邊的數值</li>
+<li>我們主要是想讓陣列從原本的 <code>standard x x x x x x</code>，透過程式碼運算後改成 <code>x x x standard x x x</code>，再讓 standard 的左右邊再進行一次 quick_sort。</li>
+<li>而我們交換的方式就是使用兩個指針 L and R，從 L 開始不斷往右找直到找出第一個值比 standard 還大；從 R 開始不斷往左找直到找出第一個值比 standard 還大</li>
+<li>找到後進行交換，之後重複上一點，直到 L、R 指針相遇</li>
+<li>其中 standard 的左邊一定比 standard 還小，standard 的右邊一定比 standard 還大</li>
+<li>因此要找出最適合此排序的 standard 會讓排序變得更輕鬆，否則如果選出過大的 standard 會使的分好的兩堆數量過於偏頗，如： ```x x x x x standard x ``，</li>
+</ul>
+</li>
+<li>之後將 standard 隔開的兩數堆在進行 quick_sort，直到 standard 的左右沒辦法在分堆(遇到邊界)</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Insertion-Sort-程式碼說明與應用"><a href="#Insertion-Sort-程式碼說明與應用" class="headerlink" title="Insertion Sort 程式碼說明與應用"></a>Insertion Sort 程式碼說明與應用</h2><p>透過程式碼來進行說明相信會更好理解，以下我們示範從小到大排序</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; </span><br><span class="line"><span class="keyword">int</span> num[] = &#123;<span class="number">4</span>,<span class="number">96</span>,<span class="number">1546</span>,<span class="number">13</span>,<span class="number">48</span>,<span class="number">34</span>,<span class="number">77</span>,<span class="number">48</span>,<span class="number">31</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> num_size;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>&#123; <span class="comment">//輸出排序</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; num_size ; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> L , <span class="keyword">int</span> R  )</span></span>&#123; <span class="comment">//快速排序，L、R 此堆的左邊界、右邊界</span></span><br><span class="line">    <span class="keyword">if</span>(L &gt; R) <span class="keyword">return</span> ; <span class="comment">//如果 L &gt; R 表示這邊沒有數堆</span></span><br><span class="line">    <span class="comment">//standard 分堆的標準， l，r 當前數堆的左邊界、右邊界</span></span><br><span class="line">    <span class="keyword">int</span> standard = num[L] , l = L , r = R+<span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123; </span><br><span class="line">        <span class="comment">//如果左邊界的數值，比 standard 大就跳出迴圈，因為我們找到要交換的 l，注意左右指針不可相遇 </span></span><br><span class="line">        <span class="keyword">while</span>(standard &gt; num[++l] &amp;&amp; R &gt; l  ); </span><br><span class="line">        <span class="comment">//如果右邊界的數值，比 standard 大就跳出迴圈，因為我們找到要交換的 r，注意左右指針不可相遇 </span></span><br><span class="line">        <span class="keyword">while</span>(standard &lt; num[--r] &amp;&amp; L &lt; r );</span><br><span class="line">        <span class="keyword">if</span>(l &gt;= r ) <span class="keyword">break</span>; <span class="comment">//如果左右指針相遇就離開迴圈</span></span><br><span class="line">        swap(num[l] , num[r]); <span class="comment">//對我們找到的 l 與 r 進行交換</span></span><br><span class="line">        output();</span><br><span class="line">    &#125;</span><br><span class="line">    swap(num[L] , num[r]); <span class="comment">//我們會發現 num[L] 就是 standard，我們要將他換到兩數堆的中間，</span></span><br><span class="line">    <span class="comment">//也就是兩堆數值的交界點</span></span><br><span class="line">    output(); <span class="comment">//輸出排序</span></span><br><span class="line">    quick_sort( L , r<span class="number">-1</span> ); <span class="comment">//將左數堆進行 quick_sort</span></span><br><span class="line">    quick_sort( r+<span class="number">1</span> , R); <span class="comment">//將右數堆進行 quick_sort</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    num_size = <span class="keyword">sizeof</span>(num) / <span class="keyword">sizeof</span>(num[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    output();</span><br><span class="line">    quick_sort(<span class="number">0</span>, num_size<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>由於 C++ 已經有很多 sort 套件了，因此我在高中學會後我就再也沒有去複習這些知識。</p>
+<p>剛好現在上課有用到那就來複習，順便把它寫出邏輯八！</p>
+<h2 id="程式執行結果"><a href="#程式執行結果" class="headerlink" title="程式執行結果"></a>程式執行結果</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1kt6hLJ5CwQDML1FJf1-eysbnLBbaNThr&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>數論 Math theorm</tag>
+        <tag>快速排序 quick sort</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(二) 筆記 - 第十六章 迴歸分析 - 模型建立(Regression Analysis - Model Building)</title>
+    <url>/2021/05/24/NTUT_note/statistics-ch16/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="一般線性模型與二階模型-General-Linear-Model-and-a-second-order-model"><a href="#一般線性模型與二階模型-General-Linear-Model-and-a-second-order-model" class="headerlink" title="一般線性模型與二階模型 General Linear Model and a second-order model"></a>一般線性模型與二階模型 General Linear Model and a second-order model</h1><ul>
+<li>在<a href="https://theriseofdavid.github.io/2021/05/15/NTUT_note/statistics-ch15/" target="_blank" rel="noopener">統計學(二) 筆記 - 第十五章 複迴歸(Multiple Regression) by 大衞的筆記</a>中，我們知道所有的回歸線性方程式中所有自變數都是一次項。</li>
+<li>我們的自變數用 \(p\) 來表示，因此線性模型方程式的表達會是<br>\(y = \beta_0 + \beta_1 z_1 + \beta_2 z_2 + … + \beta_p z_p +  \mathcal{E}  \)，原本在第 15 章中，\(z\) 的位置是 \(x\)，但在這邊，\(z\) 可以是許多 \(x\) 的組合，如： \(z_1 = x_1 * x_2 * x_3 \)</li>
+<li>我們進行舉例，\(y = \beta_0 + \beta_1 z_1 + \beta_2 z_2 + … + \beta_p z_p +  \mathcal{E}  \) 的變化<ul>
+<li>staright-line relationship<ul>
+<li>當 \(z_1 = x_1\)</li>
+<li>則 \(y = \beta_0 + \beta_1 x_1 +  \mathcal{E}\)，</li>
+</ul>
+</li>
+<li>曲線型模型 curvilinear realtionship <ul>
+<li>當 \(z_1 = x_1, z_2 = x_1^2\)</li>
+<li>則 \(y = \beta_0 + \beta_1 x_1 + \beta_2 x_1^2 \mathcal{E}\)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- 
+## 舉例：在 2011年許多城市的房屋租金比房屋每月繳還貸款更便宜，我們蒐集了 10 個程式的中位數資料，來討論一些問題
+* Question A: 請將租金設定為自變數，貸款為應變數，並劃出散佈圖
+* Question B: 使用簡單線性回歸模型，透過租金去預估貸款；並且在想透過殘差圖來判斷此模型適不適合
+* Question C: 我們使用 second-order model(二階模型，方程式中有二次方)，透過租金去預估貸款
+* Question D: 用簡單線性回歸模型比較好，還是用 second-order model 比較好 
+-->
+
+<h2 id="自變數內交互作用-Interaction"><a href="#自變數內交互作用-Interaction" class="headerlink" title="自變數內交互作用 Interaction"></a>自變數內交互作用 Interaction</h2><p>我們想要觀察原始資料中的兩個自變數(分別為 \(x_1, x_2\))，是否有關連性，我們可以使用 a second-order model with two predictor vaiables(透過二階模型預測兩遍數)</p>
+<p>公式為：\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1^2 + \beta_4 x_2^2 + \beta_5 x_1 x_2 +  \mathcal{E}  \)，而 \(\beta\) 後面的項目則是我們的 \(z\)，舉例：\(z_5 = x_1 x_2\) </p>
+<h3 id="舉例"><a href="#舉例" class="headerlink" title="舉例"></a>舉例</h3><blockquote>
+<p>在這張圖中，可以明顯看出來在 Selling Prices 是 2.00 時，投入越多的廣告費用則獲益越大，但 Selling Prices 是 2.50 時，投入越多的廣告費用沒有比 2.00 大，在 Selling Prices 是 3.00 時，廣告的效益幾乎沒有了。<br>Difference of 是原始資料在相同的銷售價額中，投入最少的廣告費用與最多的廣告費用差額<br><img src="https://drive.google.com/u/2/uc?id=1vOb6M0tNzaAt302D5B6WliNvRpvxwbqi&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>在這張圖中，上面的公式的 \(\beta_3 x_1 x_2\) 是 PriceAdv，可以看出銷售價格與廣告費用有負相關<br>我們對 PriceAdv 做假設檢定，也可以得出 \(p = 0.000\)，表示拒絕 \(H_0\)，此變數與 y 有關係<br>\(adj(R^2)\) 也表現良好，來到 97.5%，很棒的結果<br>F 檢定也判定出所有的自變數都與 y 有關聯，\(p = 0.000\)<br><img src="https://drive.google.com/u/2/uc?id=1pEVj0EAxKVtE38tW_w6bGdT2ogWXv69V&export=download" alt=""></p>
+</blockquote>
+<h2 id="關於應變數的轉換-Transformations-Involving-the-Dependent-Variable"><a href="#關於應變數的轉換-Transformations-Involving-the-Dependent-Variable" class="headerlink" title="關於應變數的轉換 Transformations Involving the Dependent Variable"></a>關於應變數的轉換 Transformations Involving the Dependent Variable</h2><ul>
+<li>在有時候我們會遇到有些自變數沒有變異數的狀況(EX: 交互作用)，遇到這些問題我們要怎麼解決呢？<ul>
+<li>方法 A: 將回歸方程式的 \(\mathcal{E} \) 改為 \(e = 2.71828 \) 也就是 \(log_10\)</li>
+<li>方法 B: 將 y 變成 \(1/y\) 後，我們的回歸方程式改成去預測 \(1/y\)</li>
+</ul>
+</li>
+</ul>
+<h2 id="有些非線型的模型可以透過數學轉換為線性模型-Nonlinear-Models-That-are-Intrinsically-Linear"><a href="#有些非線型的模型可以透過數學轉換為線性模型-Nonlinear-Models-That-are-Intrinsically-Linear" class="headerlink" title="有些非線型的模型可以透過數學轉換為線性模型 Nonlinear Models That are Intrinsically Linear"></a>有些非線型的模型可以透過數學轉換為線性模型 Nonlinear Models That are Intrinsically Linear</h2><ul>
+<li>假設我們模型中有 \(\beta_0, \beta_1, …, \beta_p\)，且她們的 z 有些有 \(x^n\)，大於或等於 a second-order model</li>
+<li>這時候我們可以進行一些數學的轉換來讓他們變成線性模型<ul>
+<li>EX: 原本的非線性方程式 \(E(y) = \beta_0 \beta_1^x\)</li>
+<li>我們可以透過 log 進行轉換， \(log E(y) = log \beta_0 + x log \beta_1\)，把前面的公式每項變數改為 \(y’ = \beta_0’ + beta_1’ x\)，這樣就成為了一個線性模型！</li>
+</ul>
+</li>
+</ul>
+<h1 id="確認何時進行刪除與增加變數-Determining-When-to-Add-or-Delete-Variables"><a href="#確認何時進行刪除與增加變數-Determining-When-to-Add-or-Delete-Variables" class="headerlink" title="確認何時進行刪除與增加變數 Determining When to Add or Delete Variables"></a>確認何時進行刪除與增加變數 Determining When to Add or Delete Variables</h1><h1 id="選擇變數的程序-Variable-Selection-Procedures"><a href="#選擇變數的程序-Variable-Selection-Procedures" class="headerlink" title="選擇變數的程序 Variable Selection Procedures"></a>選擇變數的程序 Variable Selection Procedures</h1><h1 id="實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental"><a href="#實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental" class="headerlink" title="實驗設計複回歸方法 Multiple Regression Approach to Experimental"></a>實驗設計複回歸方法 Multiple Regression Approach to Experimental</h1><h1 id="資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test"><a href="#資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test" class="headerlink" title="資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test"></a>資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test</h1>]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12190 - Electric Bill(Binary Search 二分搜尋 )</title>
+    <url>/2021/05/24/UVa/UVa12190/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>在 2100 年，電變得非常昂貴，電力公司的累進費率如下</p>
+<ul>
+<li>1~10CHw 2元</li>
+<li>101~10000 3元</li>
+<li>10001~1000000 5元</li>
+<li><blockquote>
+<p>1000000 7元</p>
+</blockquote>
+</li>
+</ul>
+<p>電力公司為了賺更多錢想出一種方法，電力公司會給你 A、B 兩個數字，其中</p>
+<ul>
+<li>A 是你的用電量與鄰居用電量的總和，如果合在一起的電費帳單</li>
+<li>B 是你的電費與鄰居電費的差額</li>
+</ul>
+<p>如果想知道自己的電費，則必須付給電力公司計算費，但你想要省下這筆錢，所以來寫程式計算八！<br>我們可以保證的是，我們一定比鄰居的用電量還少！<br>注意：在這題中，每組題目都答案只會有一組解。不必擔心多組解問題</p>
+<p><a href="https://onlinejudge.org/external/121/12190.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>如何計算電費</li>
+<li>如何找出 鄰居、你 的用電量</li>
+<li>想到使用二分搜尋來找出鄰居、你的用電量</li>
+<li>在有兩種未知數，並且有一定的線性規律時可以透過二分搜尋來確認此未知數。</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們可以透過一些簡單的數學公式找出一些邏輯，定義我的帳單是 billA 用電量為 chwA、鄰居的帳單是 billB、用電量是 chwB。<br>加上題目 A、B </p>
+<ul>
+<li>用 A 推出 (chwA + chwB)，總和的電費我們稱為 chwAll</li>
+<li>再來我們要如何推出我們的電費、鄰居的電費呢？</li>
+</ul>
+<p>由於我們知道 B，但是現在我們還是有兩個未知數 chwA、chwB 阿，我們總不能夠用 <code>for(int chwA = 0; i &lt; chwAll; i++)</code>，再讓 chwAll - chwA 推出 chwB 後，再用 chwA、chwB 計算帳單費用，比較差額是否與 B 相同。</p>
+<p>但是我們可以做些小優化，我們知道，如果 chwA、chwB 越相近，則電費差額會越低，如果越遠則電費差額會越高。<br>那我們原本是用 for 一個一個慢慢找，可不可以改成用二分搜尋，只要電費差額 &gt; B，我們就讓鄰居跟我們的電費差額變小，直到完全一樣。<br>如果電費差額 &lt; B，那我們就讓電費差額變大，直到完全一樣。</p>
+<p>當然，偶爾會有變大又變小的時候，畢竟二分搜尋有可能不小心變更大嘛。</p>
+<p>如果不懂二分搜尋，可以參考此文章<a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">演算法知識 - Binary Search 二分搜尋 by 大衛的筆記</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva12190" target="_blank" rel="noopener">Uva12190 - Electric Bill by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>QQ，我再搞清楚這題為甚麼要用二分搜尋時花了一堆時間…，有時候想要用數學去推論一題的 UVa 並不是那麼容易的事情呀，唉。</p>
+<p>現在大概清楚，在哪些狀況怎麼做比較好！</p>
+<p>我的功力還不足，還需要繼續努力。</p>
+<p>還有就是，我的英文真的好菜阿！需要找時間好好多準備英文單字，讓自己的英文能力變得更強，閱讀更快！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN_quota = <span class="number">1e18</span>; <span class="comment">//最終的額度，由於題目限度是 1e9</span></span><br><span class="line"><span class="keyword">int</span> price[] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>&#125;; <span class="comment">//電的價格分類</span></span><br><span class="line"><span class="keyword">int</span> quota[] = &#123;<span class="number">100</span>,<span class="number">9900</span>,<span class="number">990000</span>, MAXN_quota&#125;; <span class="comment">//電的額度分類</span></span><br><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bill_convert_to_cwh</span><span class="params">(<span class="keyword">int</span> bill)</span></span>&#123; <span class="comment">//電價轉換成用電量</span></span><br><span class="line">    <span class="keyword">int</span> chw = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)&#123; </span><br><span class="line">        <span class="keyword">if</span>(bill &gt; <span class="number">0</span>)&#123; <span class="comment">//如果帳單還沒有歸零</span></span><br><span class="line">            <span class="comment">//判斷在當前的價格中，是剩下的帳單費用 / 當前價格是否有將額度用完，</span></span><br><span class="line">            <span class="comment">//如果有，那讓用電家 += 額度</span></span><br><span class="line">            <span class="comment">//如果沒，就讓用電量 += 帳單費用 / 當前用電量</span></span><br><span class="line">            chw += min(bill/price[i], quota[i]); <span class="comment">//紀錄在這個費用下，增加多少的用電量</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">//帳單扣掉在此額度下用掉的費用</span></span><br><span class="line">            bill -= min(bill/price[i], quota[i]) * price[i];  </span><br><span class="line">            <span class="comment">//cout &lt;&lt; "now_bill " &lt;&lt; bill &lt;&lt; '\n';</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> chw; <span class="comment">//回傳用電量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">chw_convert_to_bill</span><span class="params">(<span class="keyword">int</span> chw)</span></span>&#123; <span class="comment">//用電量轉換帳單</span></span><br><span class="line">    <span class="keyword">int</span> bill = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(chw &gt; <span class="number">0</span>)&#123; <span class="comment">//還有用電量</span></span><br><span class="line">            <span class="comment">//判斷在當前的價格中，是剩下的用電量是否有將額度用完，</span></span><br><span class="line">            <span class="comment">//如果有，那讓價格 * 額度</span></span><br><span class="line">            <span class="comment">//如果沒，就讓用電量 * 額度</span></span><br><span class="line">            bill += min(chw, quota[i]) * price[i]; </span><br><span class="line"></span><br><span class="line">            <span class="comment">//用電量扣掉在此額度下用掉的電量</span></span><br><span class="line">            chw -= min(chw, quota[i]);</span><br><span class="line">            <span class="comment">//cout &lt;&lt; "now_chw " &lt;&lt; chw &lt;&lt; '\n';</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bill; <span class="comment">//回傳電量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果不懂，可以看 演算法知識 - Binary Search 二分搜尋 by 大衛的筆記，在分析的最下方。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binary_serach</span><span class="params">(<span class="keyword">int</span> chw)</span></span>&#123; <span class="comment">//二分搜尋，找出 billB - billA = B</span></span><br><span class="line">    <span class="keyword">int</span> billA, billB;</span><br><span class="line">    <span class="keyword">int</span> left=<span class="number">0</span>, right=chw; <span class="comment">//chw 總用電量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(right &gt; left)&#123; <span class="comment">//二分搜尋</span></span><br><span class="line">        <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">        billA = chw_convert_to_bill(mid); </span><br><span class="line">        billB = chw_convert_to_bill(chw - mid);</span><br><span class="line">        <span class="comment">//cout &lt;&lt; "bill " &lt;&lt; billA &lt;&lt; ' ' &lt;&lt; billB &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> diff = billB - billA; <span class="comment">//找出差額</span></span><br><span class="line">        <span class="keyword">if</span>(diff == b) <span class="keyword">break</span>; <span class="comment">//如果差額 == b，表示找到答案</span></span><br><span class="line">        <span class="keyword">if</span>(diff &lt; b) right = mid; <span class="comment">//如果差額小於 b，則表示要找右區間、擴大差額</span></span><br><span class="line">        <span class="keyword">if</span>(diff &gt; b) left = mid+<span class="number">1</span>; <span class="comment">//如果差額大於 b，則表示要找左區間、縮小差額</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> billA; <span class="comment">//回傳帳單</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> chwAll, chwA;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &amp;&amp; a+b != <span class="number">0</span>)&#123;</span><br><span class="line">        chwAll = bill_convert_to_cwh(a); <span class="comment">//找出總店輛</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; chwAll &lt;&lt; '\n';</span></span><br><span class="line">        <span class="keyword">int</span> chwA = binary_serach(chwAll); <span class="comment">//進行二分搜尋</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; chwA &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出我們的用電量</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; chw_convert_to_bill(chwA) &lt;&lt; '\n';</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Binary Search 二分搜尋</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - 合併排序 merge sort</title>
+    <url>/2021/05/24/Explain_Algorithm/merge_sort/</url>
+    <content><![CDATA[<h2 id="合併排序-merge-sort-介紹與實作原理"><a href="#合併排序-merge-sort-介紹與實作原理" class="headerlink" title="合併排序 merge sort 介紹與實作原理"></a>合併排序 merge sort 介紹與實作原理</h2><blockquote>
+<p>合併排序主要是透過 divide 的方式將每一個數列不斷分割成兩數堆(將數列進行分割)，平均時間複雜度為 \(O(n log n\)，是目前時間穩定、效率優質的演算法之一。<br>也是目前大家會選擇的排序演算法之一。</p>
+<p>實作原理如下：</p>
+<ul>
+<li>以下舉例是由小到大</li>
+<li>準備一個暫存的數列 temp</li>
+<li>先不斷進行遞迴，將數列分割成兩個子數列</li>
+<li>處理程序：<ul>
+<li>如果不能夠再分割，直接回傳數字</li>
+<li>將先前遞迴好的兩子數列，定義 A、B，分別給於這兩個子數列一個指針，定義 start_l、start_r</li>
+<li>將 start_l、start_r 指針指定的數字進行比較，如果 start_l 比較小就放入 temp，並將 start_;+1，反之 start_r 比較小就反入 temp，並將 start_r+1，</li>
+<li>上面此點主要是將兩個已經排序好的子數列，再依照順序放入 temp 中，因為我們可以知道 A、B 一開始一定是最小的數值，後面都是更大的數值，所以我們可以透過此操作來進行優化</li>
+<li>如果已經有一邊的子數列用完，而另一邊沒有用完，則將剩下的另一邊依照順序放入 temp</li>
+<li>之後將 temp 的數列放回原本的數列</li>
+</ul>
+</li>
+</ul>
+<p>最後就可以輸出答案！ </p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">合併排序 by wiki</a></p>
+<h2 id="合併排序-merge-sort-程式碼說明與應用"><a href="#合併排序-merge-sort-程式碼說明與應用" class="headerlink" title="合併排序 merge sort 程式碼說明與應用"></a>合併排序 merge sort 程式碼說明與應用</h2><p>透過程式碼來進行說明相信會更好理解，以下我們示範從小到大排序</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e5</span>;</span><br><span class="line"><span class="keyword">int</span> num[] = &#123;<span class="number">4</span>,<span class="number">96</span>,<span class="number">1546</span>,<span class="number">13</span>,<span class="number">48</span>,<span class="number">34</span>,<span class="number">77</span>,<span class="number">48</span>,<span class="number">31</span>&#125;; <span class="comment">//要排序的數字</span></span><br><span class="line"><span class="keyword">int</span> temp[MAXN]; <span class="comment">//暫存用</span></span><br><span class="line"><span class="keyword">int</span> num_size; <span class="comment">//要排序的數字大小</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>&#123; <span class="comment">//輸出排序</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; num_size ; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span>&#123; <span class="comment">//進行合併搜尋</span></span><br><span class="line">    <span class="keyword">if</span>(L &gt;= R) <span class="keyword">return</span> ; <span class="comment">//表示沒有子數列，所以 return</span></span><br><span class="line">    <span class="comment">//m 表示兩邊的分割點</span></span><br><span class="line">    <span class="keyword">int</span> m=(L+R)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> start_l = L, end_l = m; <span class="comment">//start_l 為指針，end_l 為子數列的長度</span></span><br><span class="line">    <span class="keyword">int</span> start_r = m+<span class="number">1</span>, end_r = R; <span class="comment">//與上方相同</span></span><br><span class="line"></span><br><span class="line">    merge_sort(start_l, end_l); <span class="comment">//將左子數列進行 merge_sort</span></span><br><span class="line">    merge_sort(start_r, end_r); <span class="comment">//與上方相同</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> index = l; <span class="comment">//我們用於紀錄 temp 資料放入哪些哪邊</span></span><br><span class="line">    <span class="keyword">while</span>(start_l &lt;= end_l &amp;&amp; start_r &lt;= end_r) <span class="comment">//如果 A、B 兩數列的指針並還沒到子數列的最大長度</span></span><br><span class="line">        <span class="comment">//判斷是 start_l 此指針的數值是否有比 start_r 小，如果有，</span></span><br><span class="line">        <span class="comment">//則將 start_l 指針的值放入 temp，並讓 start_l+1，反之亦同</span></span><br><span class="line">        <span class="comment">//注意：這邊有很多++ 的動作請進行留意</span></span><br><span class="line">        temp[index++] = num[start_l] &lt; num[start_r] ? num[start_l++] : num[start_r++];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果 A 數列還沒用完，就將 A 數列的值依序放入 temp，判斷的標準則是 start_l 是否已經到 end_l，下方相同</span></span><br><span class="line">    <span class="keyword">while</span>(start_l &lt;= end_l) temp[index++] = num[start_l++]; </span><br><span class="line">    <span class="keyword">while</span>(start_r &lt;= end_r) temp[index++] = num[start_r++];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//將這次 merge_sort 好的值放入原本的 num，因為我們是要對 num 進行排序，而非 temp</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = L; i &lt;= R; i++) num[i] = temp[i]; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    num_size = <span class="keyword">sizeof</span>(num) / <span class="keyword">sizeof</span>(num[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    merge_sort(<span class="number">0</span>, num_size<span class="number">-1</span>);</span><br><span class="line">    output(); <span class="comment">//輸出答案</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>由於 C++ 已經有很多 sort 套件了，因此我在高中學會後我就再也沒有去複習這些知識。</p>
+<p>剛好現在上課有用到那就來複習，順便把它寫出邏輯八！</p>
+<h2 id="程式執行結果"><a href="#程式執行結果" class="headerlink" title="程式執行結果"></a>程式執行結果</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1z3BiITZyFRgY03M8Eg5tZq022YIpBDib&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>合併排序 merge sort</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11052 - Economic phone calls(動態規劃 Dynamic programming )</title>
+    <url>/2021/05/24/UVa/UVa11052/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>我有一台很老的手機，他的 RAM 並不大，最近我們遇上了 RAM 用滿的問題，我們現在必須刪除一些電話紀錄，但有一些規則要遵守</p>
+<ul>
+<li>最後一次電話紀錄一定是今年的紀錄</li>
+<li>格式為 <code>mm:dd:HH:MM phone +\-</code>，前面為時間，電話名稱，是否為重要紀錄</li>
+<li>我們只能夠刪除非重要紀錄</li>
+<li>手機並不會記錄年份，因此我們判斷年份是使用相對時間，也就是如果前一筆的時間 &lt; 下一筆的時間，我們可以定義這兩筆資料在同年份；如果前一筆的時間 &gt;= 下一筆的時間 我們則定義這兩筆資料的年份不一樣，前一筆的資料年份比較遠、後一筆資料年份比較近。</li>
+<li>我們可以透過上一點來判斷年份，也就是每年至少都要用一筆資料。</li>
+</ul>
+<p>請告訴我們最少需要保存幾個資料，就可以將重要資料全部保存並且可以判斷每通紀錄的年份。</p>
+<p><a href="https://onlinejudge.org/external/110/11052.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>動態規劃的時機 (當資料並不能延續狀態，而是會需要前面資料輔助時就用動態規劃)</li>
+<li>了解時間可以用字串比較</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題是我認為算是非常麻煩的問題，我學習他花了將近 4 小時。</p>
+<p>由於我們要保存最少的資料，但完整性、一樣能辨識年份，我們主要會遇到一些困難點</p>
+<ul>
+<li>找出最後一年的重要紀錄，如果沒有就直接隨便找一筆紀錄</li>
+<li>假如兩筆重要紀錄分別是 2001, 2003 年，那我們要留下 2002 的<strong>一筆</strong>不重要紀錄</li>
+<li>舉例如下，那我們是不是這三筆資料都必須留下，否則年份辨識不正確<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">01:10:11 1234 + </span><br><span class="line">01:02:23 2345 -</span><br><span class="line">01:12:11 3456 +</span><br></pre></td></tr></table></figure></li>
+<li>所有的重要紀錄都必須被留下</li>
+</ul>
+<p>根據這些困難點，會發現如果我們使用 greedy 會很難寫，因為例如第三點的情況，我們的 greedy 就必須根據過去資料去判斷，如果第一筆資料與第二筆資料中間又塞入很多的非重要紀錄那就更麻煩了。</p>
+<p>因此這邊我們就使用可以提取過去資料與當前資料判斷的動態規劃。</p>
+<p>主要的動態規劃則是</p>
+<ul>
+<li><code>dp[i]</code> 保留至第 i 個紀錄中最少要保存幾個紀錄</li>
+<li><code>在重要紀錄中的那些不重要紀錄我只紀錄一筆</code>，<code>dp[i] = min(dp[i], dp[j]+1、i &lt; j &lt; n，j 表示同年份的資料</code>，如果直接提取 <code>dp[j]+1</code>，+1 則是紀錄 i</li>
+<li>如果碰到重要紀錄，則直接跳出 <code>for j</code> 迴圈，因為重要紀錄不可省略</li>
+</ul>
+<p>主要架構如上述所說，如果有些不清楚則建議查看下方<a href="#題目程式碼">題目程式碼</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11052" target="_blank" rel="noopener">Uva11052 - Economic phone calls by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題好難QQQ，而且好複雜！ 我原本是想要用 greedy 去做，做到一半才發現第三點用 greedy 去做並不好做。</p>
+<p>但是也沒有想到 dp 要怎麼做比較好，就看力瑋的程式碼，不斷思考怎麼運作，後來詢問力瑋程式碼意思才逐漸開竅。</p>
+<p>能想出這份程式碼的人真的太聰明了，我的缺點是遇到太多大問題時不擅長拆解，但我擅長將小問題解決，可能跟我的個性有關吧，喜歡注重細節，但常常忽略大局。</p>
+<p>總之，中庸之道我也需要攝取攝取。<br>但我想要成為一位優秀的人，住在漂亮的房子、給小孩好的教育，幸福的人生。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1020</span>;</span><br><span class="line"><span class="keyword">int</span> n, dp[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">record</span>&#123;</span> <span class="comment">//用於記錄每筆資訊</span></span><br><span class="line">    <span class="built_in">string</span> time, phone, mark;</span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//constructor </span></span><br><span class="line">    record(<span class="built_in">string</span> _time, <span class="built_in">string</span> _phone, <span class="built_in">string</span> _mark, <span class="keyword">int</span> _year)&#123;</span><br><span class="line">        time = _time;</span><br><span class="line">        phone = _phone;</span><br><span class="line">        mark = _mark;</span><br><span class="line">        year = _year;</span><br><span class="line">    &#125;;</span><br><span class="line">    record(): time(<span class="string">""</span>), phone(<span class="string">""</span>), mark(<span class="string">""</span>), year(<span class="number">0</span>)&#123;&#125; <span class="comment">//一開 year 始預設為 0</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">deque</span>&lt;record&gt; info; <span class="comment">//用於紀錄題目每筆紀錄</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug</span><span class="params">()</span></span>&#123; <span class="comment">//debug 無意義</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; info[i].time &lt;&lt; <span class="string">' '</span> &lt;&lt; info[i].phone &lt;&lt; <span class="string">' '</span> &lt;&lt; info[i].mark &lt;&lt; <span class="string">' '</span> &lt;&lt; info[i].year &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &amp;&amp; n)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="built_in">string</span> time, phone, mark;</span><br><span class="line">        info.clear(); <span class="comment">//清空，避免影響到其他測資</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; time &gt;&gt; phone &gt;&gt; mark;</span><br><span class="line">            info.push_back( record(time, phone, mark, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> year = <span class="number">0</span>; <span class="comment">//先對題目的資料做辨識年份</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(info[i].time &lt;= info[i<span class="number">-1</span>].time) info[i].year = ++year; <span class="comment">//年份不同， year 因此加一</span></span><br><span class="line">            <span class="keyword">else</span> info[i].year = year;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//debug();</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//first_mark 為年份最久的重要記錄，因為在遠的紀錄我們不須留下</span></span><br><span class="line">        <span class="comment">// flag 判斷是否已經讀取到年份最新的重要紀錄</span></span><br><span class="line">        <span class="comment">//last_mark 年份最新的重要紀錄</span></span><br><span class="line">        <span class="keyword">int</span> first_mark = n, flag = <span class="number">1</span>, last_mark;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(info[i].mark == <span class="string">"+"</span>) first_mark = i; <span class="comment">//最後一次讀取就是年份最久的重要紀錄</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//我們必須把最新的年份直到出現今年的重要紀錄時都讓 dp[i] = 1，</span></span><br><span class="line">            <span class="comment">//因為這些紀錄，我們只需要紀錄一筆即可</span></span><br><span class="line">            dp[i] = flag &amp;&amp; info[i].year == year ? <span class="number">1</span> : n-i; </span><br><span class="line">            <span class="keyword">if</span>(flag &amp;&amp; (info[i].mark == <span class="string">"+"</span> || info[i].year != year))&#123; <span class="comment">//更新最近紀錄</span></span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">                last_mark = i;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//dp 動態規劃，由最近年份至最遠年份</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = last_mark; i &gt;= first_mark; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; n; j++)&#123; <span class="comment">//不斷的往最近年份推</span></span><br><span class="line">                <span class="comment">//由於我們動態規劃的核心是想要做成 重要紀錄、一筆非重要紀錄、重要紀錄</span></span><br><span class="line">                <span class="comment">//重要紀錄、非重要紀錄，視為一個區塊</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//但中間的一筆非重要紀錄，不一定只有一筆，所以我們就透過下方 if 來 dp</span></span><br><span class="line">                <span class="comment">//我們選擇*哪一個*非重要紀錄可以讓我們的 dp[i] 最小，下方的 dp[j] 則是上一個區塊，我們從上一個區塊中哪一個 dp[j] 可以使 dp[i] 最小</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//如果年份相同 or (前一年的資料，但離第 i 份資料不差超過一年)</span></span><br><span class="line">                <span class="keyword">if</span>(info[i].year == info[j].year || \</span><br><span class="line">                   (info[i].year + <span class="number">1</span> == info[j].year &amp;&amp; info[i].time &gt;= info[j].time))</span><br><span class="line">                    <span class="comment">//判斷 dp[i] 的資料是否比較少 or 省略 j~i 的紀錄，直接 dp[j]+1 誰少</span></span><br><span class="line">                    dp[i] = min(dp[i], dp[j]+<span class="number">1</span>); </span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>; <span class="comment">//當前區塊結束，跳出迴圈，原因是並非同區塊的資料</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(info[j].mark == <span class="string">"+"</span>) <span class="keyword">break</span>; <span class="comment">//當前區塊結束，跳出迴圈，原因是遇到重要紀錄</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//for(int i = 0; i &lt; n; i++) cout &lt;&lt; dp[i] &lt;&lt; ' ';</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; dp[first_mark] &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出保留至第一個紀錄中最少要保存幾個紀錄</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
 </search>
