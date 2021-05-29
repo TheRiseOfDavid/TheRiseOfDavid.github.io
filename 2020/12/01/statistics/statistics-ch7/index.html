@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    統計學(一) 筆記 - 第七章 抽樣與抽樣分配(Sampling and Sampling Distributions) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-statistics/statistics-ch7" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  統計學(一) 筆記 - 第七章 抽樣與抽樣分配(Sampling and Sampling Distributions)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/01/statistics/statistics-ch7/" class="article-date">
+  <time datetime="2020-12-01T15:59:50.000Z" itemprop="datePublished">2020-12-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">11分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="名詞介紹"><a href="#名詞介紹" class="headerlink" title="名詞介紹"></a>名詞介紹</h2><ul>
+<li>element<br>我們收集到的每一個資料</li>
+<li>population 母體<br>我們資料整體，樣本(sample)則是資料裡面的其中一個集合</li>
+<li>target population (目標母體)<br>我們想要選擇的母體</li>
+<li>sampled population 抽樣母體<br>我們抽樣的整體資料</li>
+<li>frame 抽樣清單<br>從 sampled population 抽取的清單</li>
+</ul>
+<h2 id="Selecting-Sample-選擇樣本"><a href="#Selecting-Sample-選擇樣本" class="headerlink" title="Selecting Sample 選擇樣本"></a>Selecting Sample 選擇樣本</h2><h3 id="Sampling-from-a-Finite-Population-有限母體"><a href="#Sampling-from-a-Finite-Population-有限母體" class="headerlink" title="Sampling from a Finite Population (有限母體)"></a>Sampling from a Finite Population (有限母體)</h3><p>舉例，信用卡名單、倉庫存貨、公司股東。</p>
+<ul>
+<li>簡單隨機樣本<br>每一個元素被抽出的機率相同</li>
+<li>sampling with replacement 歸還抽樣<br>抽完放回去</li>
+<li>sampling without replacement 不歸還抽樣<br>抽完不放回去</li>
+</ul>
+<h3 id="Sampling-from-a-Infinite-Population-無限母體"><a href="#Sampling-from-a-Infinite-Population-無限母體" class="headerlink" title="Sampling from a Infinite Population (無限母體)"></a>Sampling from a Infinite Population (無限母體)</h3><p>在無限母體中沒有 frame，因為 frame 會等於無限。<br>舉例：銀行產生的交易，因為會不斷產生因此不確定性很高。</p>
+<ul>
+<li>random sample <ul>
+<li>每一個元素都是從相同母題抽出來</li>
+<li>每一個元素都是獨立，即抽完不放回</li>
+</ul>
+</li>
+</ul>
+<h2 id="Point-Estimation-點估計量"><a href="#Point-Estimation-點估計量" class="headerlink" title="Point Estimation 點估計量"></a>Point Estimation 點估計量</h2><p>推測母體參數中某個數值</p>
+<ul>
+<li>\( \bar{x} \) 的點估計量就是平均值</li>
+<li>s 點估計量為母體標準差</li>
+<li>\( \bar{p} \) 為母體比例 p 的點估計量</li>
+</ul>
+<h3 id="舉例-St-Andrew’s-College"><a href="#舉例-St-Andrew’s-College" class="headerlink" title="舉例 - St. Andrew’s College"></a>舉例 - St. Andrew’s College</h3><p>Recall that St. Andrew’s College received 900 applications from prospective students. The application form contains a variety of information including the individual’s Scholastic Aptitude Test (SAT) score and whether or not the individual desires on-campus housing.</p>
+<p>回想一下，聖安德魯學院收到了來自潛在學生的900份申請。 申請表包含各種信息，包括個人的學業能力測驗（SAT）分數以及個人是否希望在校內住宿。</p>
+<p>P.S. 這裡的資料是在影片前面的抽樣資料為虛擬且抽樣數為 30，因此數字看看就好</p>
+<ul>
+<li>20 為申請住宿的量</li>
+<li>50520 為分數總合</li>
+<li>210512 則是透過公式與原始資料得出</li>
+</ul>
+<blockquote>
+<p><img src="/images/statistics-ch7/2.PNG" alt=""></p>
+</blockquote>
+<p>下面這張圖片則是透過<strong>完整原始資料</strong>來進行計算</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/3.PNG" alt=""></p>
+</blockquote>
+<h4 id="比較："><a href="#比較：" class="headerlink" title="比較："></a>比較：</h4><blockquote>
+<p><img src="/images/statistics-ch7/4.PNG" alt=""></p>
+</blockquote>
+<h2 id="Introduction-to-Sampling-Distributions-抽樣分配"><a href="#Introduction-to-Sampling-Distributions-抽樣分配" class="headerlink" title="Introduction to Sampling Distributions 抽樣分配"></a>Introduction to Sampling Distributions 抽樣分配</h2><p><strong>每一次的抽樣計算出來的值都有可能不一樣</strong>，因為選擇的樣本不同。</p>
+<p>但透過抽樣分配的次數越多，根據抽樣分配的次數會發現圖形長得像常態分配，即越偏差母體標準差的抽樣分配機率越小，越靠近的越大。</p>
+<h3 id="舉例-關於公司管理職"><a href="#舉例-關於公司管理職" class="headerlink" title="舉例 - 關於公司管理職"></a>舉例 - 關於公司管理職</h3><p>公司總共有 2500 位管理職(母體)，我們想要知道下面以下問題：</p>
+<ul>
+<li>母體的平均年薪</li>
+<li>母體的年薪標準差</li>
+<li>母體中有完成教育訓練的值(母體參數)</li>
+</ul>
+<h4 id="答案-透過點估計量"><a href="#答案-透過點估計量" class="headerlink" title="答案 - 透過點估計量"></a>答案 - 透過點估計量</h4><ul>
+<li><p>抽樣資料如下，有 30 筆</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/5.PNG" alt=""></p>
+</blockquote>
+</li>
+<li><p>Point estimation</p>
+<ul>
+<li>\(\bar{x} = \frac{\Sigma X_i}{n} = \frac{1,554,420}{30} = 51,814 \)</li>
+<li>\(s = \sqrt{\frac{\Sigma (X_i - \bar{x})^2 }{n-1}} = \sqrt{\frac{325,009,260}{29}} = 3348 \)</li>
+<li>\(\bar{p} = \frac{x}{n} = \frac{19}{30} = 0.63 \)</li>
+</ul>
+</li>
+<li><p>為甚麼樣本標準差分母是？ n-1 觀念說明</p>
+<ul>
+<li><a href="https://www.researchmfg.com/2016/07/sigma-n-1/" target="_blank" rel="noopener">為什麼統計的樣本標準差計算要除(n-1)而母體標準差則除n？ - 電子製造，工作狂人 </a></li>
+<li><a href="https://mathcenter.ck.tp.edu.tw/Resources/Ctrl/ePaper/eArticleDetail.aspx?id=c4181f30-955f-4063-87ea-576b0f318c73" target="_blank" rel="noopener">淺談自由度 (樣本標準差公式中的分母為什麼要採用 n-1 ) - 教育部高中數學學科電子報</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="比對-原始資料"><a href="#比對-原始資料" class="headerlink" title="比對 - 原始資料"></a>比對 - 原始資料</h4><blockquote>
+<p><img src="/images/statistics-ch7/6.PNG" alt=""></p>
+</blockquote>
+<h2 id="Sampling-Distribution-of-bar-x"><a href="#Sampling-Distribution-of-bar-x" class="headerlink" title="Sampling Distribution of \(\bar{x} \)"></a>Sampling Distribution of \(\bar{x} \)</h2><p>就是要找出母體平均數。</p>
+<ul>
+<li>Expected Value of \(\bar{x} \)<br>公式為 \(E(\bar{x})=\mu \)，其中 \(\mu \) 為母體平均值</li>
+<li>Standard Deviation of \(\bar{x} \) <ul>
+<li>\(\sigma_{\bar{x}} \) 為<strong>樣本</strong>標準差，也稱為<strong>標準誤(standard error)</strong></li>
+<li>\(\sigma \) 為<strong>母體</strong>標準差</li>
+<li>\(n \) 為樣本大小</li>
+<li>\(N \) 為母體大小</li>
+<li>Finite Population 有限母體公式<ul>
+<li>\(\sigma_x = \sqrt{\frac{N-n}{N-1}}(\frac{\sigma}{\sqrt{n}})\)</li>
+<li>其中前項為校正因子(\(\sqrt{\frac{N-n}{N-1}}\))用來修正數值，但當 N 的數量趨近無限大時，校正因子幾乎會被視為零。</li>
+<li>當 \(n/N \leq 0.05 \) 時，就可以使用無限母體公式會更好計算，校正因子也幾乎變為零</li>
+<li>當 \(\frac{n}{N} &gt; 0.05 \) 時，\(\bar{x} \) 為常態分配</li>
+</ul>
+</li>
+<li>Infinite Population 無限母體公式<br>\(\sigma_x = \frac{\sigma}{\sqrt{n}}\) 且 \(\bar{x} \) 為常態分配</li>
+</ul>
+</li>
+<li>\(\bar{x} \) 服從常態分配有以下情況<ul>
+<li>樣本資料大於等於 30 筆資料時</li>
+<li>如果有高度偏態(skew)或是 outliers(離群值)太多時，只要樣本資料大於 50 筆也會是常態分配</li>
+</ul>
+</li>
+<li>透過機率來說明 \(\bar{x} \) 有多靠近母體平均值</li>
+</ul>
+<h2 id="Central-Limit-Theorem-中央極限定理"><a href="#Central-Limit-Theorem-中央極限定理" class="headerlink" title="Central Limit Theorem (中央極限定理)"></a>Central Limit Theorem (中央極限定理)</h2><p>中央極限定理提出越是大量的樣本抽取數量其圖形會逐漸變成常態分佈的形狀</p>
+<h3 id="透過圖形來證明"><a href="#透過圖形來證明" class="headerlink" title="透過圖形來證明"></a>透過圖形來證明</h3><ul>
+<li>Population 2 的圖形通常稱為兔耳型圖圖</li>
+</ul>
+<blockquote>
+<p><img src="/images/statistics-ch7/7.PNG" alt=""><br><img src="/images/statistics-ch7/8.PNG" alt=""></p>
+</blockquote>
+<p>我們透過上面的圖可以推出無論是什麼樣的圖都可以推出常態分布的樣本分配，只要樣本資料夠多</p>
+<h3 id="舉例-我們想找出離母體平均數加減-10-分有多少數量，也就是我們想要找-1687-1707-間的母體數量"><a href="#舉例-我們想找出離母體平均數加減-10-分有多少數量，也就是我們想要找-1687-1707-間的母體數量" class="headerlink" title="舉例 - 我們想找出離母體平均數加減 10 分有多少數量，也就是我們想要找 1687 ~ 1707 間的母體數量"></a>舉例 - 我們想找出離母體平均數加減 10 分有多少數量，也就是我們想要找 1687 ~ 1707 間的母體數量</h3><p>我們在先前的舉例中算出 \(\sigma_x = \frac{\sigma}{\sqrt{n}} = \frac{87.4}{\sqrt{30}} = 15.96 \)</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/9.PNG" alt=""></p>
+</blockquote>
+<p>現在我們先計算 z 值來轉換成標準常態機率分配，\(z = (1707 - 1697) / 15.96 = 0.63 \)，查表可以看到 z = 0.63 時機率為 0.7357，再來 \(z = (1687 - 1697) / 15.96 = -0.63 \)，查表可以得出 0.2643，兩個相減就等於 0.4714</p>
+<h3 id="舉例-根據上面的例子，我們現在抽樣-100-樣本，我們想要找-1687-1707-間的母體數量"><a href="#舉例-根據上面的例子，我們現在抽樣-100-樣本，我們想要找-1687-1707-間的母體數量" class="headerlink" title="舉例 - 根據上面的例子，我們現在抽樣 100 樣本，我們想要找 1687 ~ 1707 間的母體數量"></a>舉例 - 根據上面的例子，我們現在抽樣 100 樣本，我們想要找 1687 ~ 1707 間的母體數量</h3><p>這時候 \(E(x)\) 不變，母體平均值還是 1697。</p>
+<p>但因為我們的抽取樣本數量改變，因此標準差改變，透過標準差公式也就變成，\(\sigma_x = \sqrt{\frac{N-n}{N-1}}(\frac{\sigma}{\sqrt{n}}) = \frac{900-100}{900-1}(\frac{87.4}{\sqrt{100}}) = 0.9433(8.74) = 8.2\)</p>
+<p>跟上一個舉例進行比較，可以得證當樣本數量變大時，會符合中央極限定理</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/10.PNG" alt=""></p>
+</blockquote>
+<p>因為圖形不同，因此區間面積也不同需要再重新計算，當 n = 100 時，\(P(1687 \leq \bar{x} \leq 1707 ) = 0.7776\)</p>
+<h2 id="Sampling-Distribution-of-bar-p"><a href="#Sampling-Distribution-of-bar-p" class="headerlink" title="Sampling Distribution of \(\bar{p} \)"></a>Sampling Distribution of \(\bar{p} \)</h2><p>透過抽取 n 個元素的隨機樣本，計算\(\bar{p} \)之後再推論 \(p\)。</p>
+<ul>
+<li>Expected Value of \(\bar{p} \)<br>公式為 \(E(\bar{p}) = p \)</li>
+<li>Standard Deviation of \(\bar{p} \) <ul>
+<li>\(\sigma_{\bar{p}} \) 為<strong>樣本</strong>標準差，也稱為<strong>標準誤(standard error)</strong></li>
+<li>\(\sigma \) 為<strong>母體</strong>標準差</li>
+<li>\(n \) 為樣本大小</li>
+<li>\(N \) 為母體大小</li>
+<li>當 \(np &gt; 5 \) 時，\(n(1-p) \geq 5 \) 為常態分配</li>
+<li>Finite Population 有限母體公式<ul>
+<li>\(\sigma_p = \sqrt{\frac{N-n}{N-1}}(\sqrt{\frac{p(1-p)}{n}})\)</li>
+<li>其中前項為校正因子(\(\sqrt{\frac{N-n}{N-1}}\))用來修正數值，但當 N 的數量趨近無限大時，校正因子幾乎會被視為零。</li>
+<li>當 \(n/N \leq 0.05 \) 時，就可以使用無限母體公式會更好計算，校正因子也幾乎變為零</li>
+</ul>
+</li>
+<li>Infinite Population 無限母體公式<br>公式為 \(\sigma_p =(\sqrt{\frac{p(1-p)}{n}})\)</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例-有-72-的學生申請宿舍，我們抽樣-30-學生，想請問在此樣本中學生申請宿舍的在-72-加減-0-05-的機率是多少"><a href="#舉例-有-72-的學生申請宿舍，我們抽樣-30-學生，想請問在此樣本中學生申請宿舍的在-72-加減-0-05-的機率是多少" class="headerlink" title="舉例 - 有 72 % 的學生申請宿舍，我們抽樣 30 學生，想請問在此樣本中學生申請宿舍的在 72% 加減 0.05 的機率是多少"></a>舉例 - 有 72 % 的學生申請宿舍，我們抽樣 30 學生，想請問在此樣本中學生申請宿舍的在 72% 加減 0.05 的機率是多少</h3><p>我們先檢查是否有常態分配，n=30, p=0.72，因此 \(np = 30(0.72) = 21.6 \geq 5 \) and \(n(1-p) = 30(0.28) = 8.4 \geq 5 \)，都有大於 5，因此符合使用常態分配條件。</p>
+<p>由於這裡我們並不確定母體有多少學生，因此是 Infinite Population，計算就是 \(\sigma_{\bar{p}} = \sqrt{\frac{0.72(1-0.72)}{30}} = 0.082\)</p>
+<p>一樣先轉換成 z 值成為標準常態機率分配，\(z = (0.77-0.72)/0.082 =0.61\)，查表發現 \(0.61z = 0.7291 \)，再來查另外一個值 \(z = (0.67-0.72)/0.082 =-0.61\)，查表發現 \(-0.61z = 0.2709 \)，兩個相減就得出常態分配面積區間，答案為 0.4582。</p>
+<p>因此在這樣本中有 \((0.67 * 30) \) ~ \( (0.77 * 30)\) 機率的學生要申請宿舍的機率為 0.4582。</p>
+<h3 id="舉例-主管的抽樣分配，題目如下，想詢問抽樣值為平均值-pm-500-的機率為多少"><a href="#舉例-主管的抽樣分配，題目如下，想詢問抽樣值為平均值-pm-500-的機率為多少" class="headerlink" title="舉例 - 主管的抽樣分配，題目如下，想詢問抽樣值為平均值 \(\pm 500\) 的機率為多少"></a>舉例 - 主管的抽樣分配，題目如下，想詢問抽樣值為平均值 \(\pm 500\) 的機率為多少</h3><blockquote>
+<p><img src="/images/statistics-ch7/11.PNG" alt=""></p>
+</blockquote>
+<p>也就是我們要找出 \(P(51300 \leq \bar{x} \leq 52300) \)，的機率是多少，如果用手算的話則需要用到 Z，\(z = \frac{51300-51800}{730.30} = -0.68 \)、\(z = \frac{52300-51800}{730.30} = 0.68 \)</p>
+<p>\(P(51300 \leq \bar{x} \leq 52300) \\<br>= P(-0.68 \leq z \leq 0.68 ) \\<br>= P(z \leq 0.68 ) - P(z \leq -0.68 )  \\<br>= 0.7517 - 0.2484 = 0.5034 \)</p>
+<h4 id="compare-between-n-30-and-n-100"><a href="#compare-between-n-30-and-n-100" class="headerlink" title="compare between n = 30 and n = 100"></a>compare between n = 30 and n = 100</h4><blockquote>
+<p><img src="/images/statistics-ch7/12.PNG" alt=""><br>作法與先前相同，就不贅述</p>
+</blockquote>
+<h3 id="舉例-承上題，當抽樣數為-100-n-100-，抽樣主管有成功完成教育訓練的標準誤"><a href="#舉例-承上題，當抽樣數為-100-n-100-，抽樣主管有成功完成教育訓練的標準誤" class="headerlink" title="舉例 - 承上題，當抽樣數為 100 (n = 100)，抽樣主管有成功完成教育訓練的標準誤"></a>舉例 - 承上題，當抽樣數為 100 (n = 100)，抽樣主管有成功完成教育訓練的<strong>標準誤</strong></h3><p>旁邊的公式為答案。</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/13.PNG" alt=""></p>
+</blockquote>
+<p>60 % 的人會完成員工訓練，因此期望值為 0.6，再來透過公式計算。<br>\(\sigma_{p} = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.6(1-0.6)}{30}} = 0.894 \)</p>
+<h3 id="舉例-承上題，抽樣主管有成功完成教育訓練的值在期望至-pm-0-05"><a href="#舉例-承上題，抽樣主管有成功完成教育訓練的值在期望至-pm-0-05" class="headerlink" title="舉例 - 承上題，抽樣主管有成功完成教育訓練的值在期望至 \(\pm 0.05 \)"></a>舉例 - 承上題，抽樣主管有成功完成教育訓練的值在期望至 \(\pm 0.05 \)</h3><p>先透過 Z 轉換，之後即可，題目大同小異，透過圖片附上答案。</p>
+<blockquote>
+<p><img src="/images/statistics-ch7/14.PNG" alt=""></p>
+</blockquote>
+<h2 id="Propertires-of-Point-Estimators-點估計量的特性"><a href="#Propertires-of-Point-Estimators-點估計量的特性" class="headerlink" title="Propertires of Point Estimators 點估計量的特性"></a>Propertires of Point Estimators 點估計量的特性</h2><ul>
+<li>點估計量的符號為 \(\hat{\theta}\)</li>
+<li>Unbiased 不偏性<ul>
+<li>期望值等於要估計的母體參數  </li>
+<li>圖舉例，右邊是 Biased 有偏誤<blockquote>
+<p><img src="/images/statistics-ch7/15.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Efficiency 有效性<ul>
+<li>在有兩個抽樣分配的 \(\hat{\theta}\)，且兩個的\(\hat{\theta}\) 位置一樣時，則先取標準差(x 軸)比較少的值</li>
+<li>圖舉例 <blockquote>
+<p><img src="/images/statistics-ch7/16.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Consistency 一致性<ul>
+<li>當樣本數(n)變大時，標準差則會越來越小，當樣本數越大時則優先使用此點估計量</li>
+</ul>
+</li>
+</ul>
+<h2 id="Other-Sampling-Methods-其他抽樣方法"><a href="#Other-Sampling-Methods-其他抽樣方法" class="headerlink" title="Other Sampling Methods 其他抽樣方法"></a>Other Sampling Methods 其他抽樣方法</h2><ul>
+<li>機率抽樣<br>每一個母體元素都有一個特定的機率被選為抽樣樣本</li>
+<li>非機率抽樣<br>由於我們沒辦法預估每一個母體元素機率為多少，因此稱為<strong>非機率抽樣</strong>。</li>
+<li>找出最適合的抽樣方法<strong>最重要</strong>。</li>
+</ul>
+<h3 id="機率抽樣-Stratified-Random-Sampling-分層隨機抽樣"><a href="#機率抽樣-Stratified-Random-Sampling-分層隨機抽樣" class="headerlink" title="機率抽樣 - Stratified Random Sampling 分層隨機抽樣"></a>機率抽樣 - Stratified Random Sampling 分層隨機抽樣</h3><ul>
+<li>strata<br>將母體分成好幾組</li>
+<li>母體的每一個元素都必須被使用分組，且只能使用一次</li>
+<li>每一組的元素同質性越高越好<br>可以根據年齡、工作部門、產業來區分 </li>
+<li>有符合上述條件時，精準度會集高且抽樣資料不須太多</li>
+<li>圖表<blockquote>
+<p><img src="/images/statistics-ch7/17.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="機率抽樣-Cluster-Sampling-叢式-集群抽樣"><a href="#機率抽樣-Cluster-Sampling-叢式-集群抽樣" class="headerlink" title="機率抽樣 - Cluster Sampling 叢式/集群抽樣"></a>機率抽樣 - Cluster Sampling 叢式/集群抽樣</h3><ul>
+<li>clusters<br>將母體分組，每組<strong>同質性極低</strong>，小生態圈</li>
+<li>接下來抽出幾群，那些就是我們的抽樣資料</li>
+<li>Sampling<br>透過市區、學校來抽樣</li>
+<li>Advantage<br>節省成本</li>
+<li>Disadvantage<br>抽樣資料比分成抽樣的資料需要更大些，才符合真實性</li>
+<li>圖表<blockquote>
+<p><img src="/images/statistics-ch7/18.PNG" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="機率抽樣-Systematic-Sampling-系統抽樣"><a href="#機率抽樣-Systematic-Sampling-系統抽樣" class="headerlink" title="機率抽樣 - Systematic Sampling 系統抽樣"></a>機率抽樣 - Systematic Sampling 系統抽樣</h3><ul>
+<li>先將母體資料打亂後再進行編號</li>
+<li>從母體(N)抽出樣本(n)，那我們就是 \(y = N/n\) 為我們要抽出的元素量(y)</li>
+<li>再透過母體資料編號，<code>for(i = 0 ; i&lt;= y ; i++)</code>，找出我們的抽樣元素</li>
+<li>Advantage<br>簡單</li>
+</ul>
+<h3 id="非機率抽樣-Convenience-Sampling-便利抽樣"><a href="#非機率抽樣-Convenience-Sampling-便利抽樣" class="headerlink" title="非機率抽樣 - Convenience Sampling 便利抽樣"></a>非機率抽樣 - Convenience Sampling 便利抽樣</h3><ul>
+<li>透過非機率抽樣</li>
+<li>Sampling<br>如發傳單，因為沒辦法得知收到傳單與沒收到傳單的機率。</li>
+<li>Advantage<br>抽樣很方便</li>
+<li>Disadvantage<br>沒辦法很精準的代表母體</li>
+</ul>
+<h3 id="非機率抽樣-Judgment-Sampling-判斷抽樣"><a href="#非機率抽樣-Judgment-Sampling-判斷抽樣" class="headerlink" title="非機率抽樣 - Judgment Sampling 判斷抽樣"></a>非機率抽樣 - Judgment Sampling 判斷抽樣</h3><ul>
+<li>透過個人的知識去推斷出母體那些值可以被參考</li>
+<li>例如記者想詢問立委對環保的意見<br>記者可以找出對比較熟悉環保的立委進行尋問</li>
+<li>Advantage<br><del>可以造謠，</del>比較簡單。</li>
+<li>Disadvantage<br>很看記者素質</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/12/02/NTUT_note/investment-stock-Asset-Portfolio-Management-Basic/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            投資學 筆記 - 股票資產組合管理基礎篇(報酬與風險)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/12/01/NTUT_note/investment_stock_trading_system/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">投資學 筆記 - 股票交易制度</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

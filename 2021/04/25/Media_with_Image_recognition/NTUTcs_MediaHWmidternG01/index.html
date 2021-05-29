@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    北科資工二多媒體技術與應用 期中專案一 - 剪刀石頭布 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Media_with_Image_recognition/NTUTcs_MediaHWmidternG01" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  北科資工二多媒體技術與應用 期中專案一 - 剪刀石頭布
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/25/Media_with_Image_recognition/NTUTcs_MediaHWmidternG01/" class="article-date">
+  <time datetime="2021-04-25T15:59:50.000Z" itemprop="datePublished">2021-04-25</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E5%A4%9A%E5%AA%92%E9%AB%94%E8%88%87%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98-Image-Recognition/">多媒體與圖像辨識 Image Recognition</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">4.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">19分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目說明"><a href="#題目說明" class="headerlink" title="題目說明"></a>題目說明</h2><p>如果不想看那麼多話，建議可以直接略過。總之就像標題說的，給兩張圖片，辨識是哪種手勢，判斷剪刀石頭布的勝負。</p>
+<p>這裡為求方便起見，玩家的部分改成抽取圖片。<br>可以使用 SVC 訓練模型，選擇 hog or sift 演算法來進行實作，這邊我則使用 hog，但我 sift 也有做。(只是 sift 訊練準確率較不準)。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xfXG0MaWav6WUMo5tSexiR9HPJxiSVPJ&export=download" alt=""></p>
+</blockquote>
+<h2 id="資料集"><a href="#資料集" class="headerlink" title="資料集"></a>資料集</h2><p>這裡我們則使用組員 林紀緯、郭梓琳、江大衞的手來當作圖片資料集</p>
+<blockquote>
+<p><a href="https://drive.google.com/drive/folders/1LvQ7akdOiTRLSDI0lf78ucllBFqdKDKc?usp=sharing" target="_blank" rel="noopener">資料集網址</a></p>
+</blockquote>
+<p>連結為個人在 google 圖片進行搜尋時的圖片，如果有版權冒犯請通知我，我會進行下架</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這次的程式碼，寫得還算順利。就是今天出了點慘事….，桌上型電腦的電腦供應器壞掉了…，害我今天都沒有辦法好好的去工作，只好使用筆電來進行工作，但是不太習慣筆電的鍵盤高度，總是會讓自己的手掌後半部感到不適且我覺得筆電畫面很不適合寫程式，畫面太小不容易使人閱讀，且沒有我最喜歡的雙螢幕阿QQQQQ。</p>
+<p>總之，學到了一件事，桌上型電腦電源有問題時要用筆電RRR。</p>
+<p>hog 演算法明顯比起 sift 演算法來說更準確些，我自己在寫 sift 遇到一堆坑QQQQ，例如 kmeans 語法如果圖片的特徵數量小於之前 sift 訓練的 model 時，就會噴錯QQQ。</p>
+<p>我認為 sift 可以保留光影、選轉，才使得相同光影或相同選轉的手勢都被視為一樣的手勢。例如相同光影的剪刀與相同光影的石頭有可能在 sift 中被視為相同的手勢。才使得 sift 演算法辨識率過低。</p>
+<p>因為 hog 他只對邊緣進行辨識，剪刀、石頭、布的邊緣都不一樣，其中還是會有些許的誤差，想必是在剪刀平面、布平面的情況下，才有機會被 hog 視為相同手勢。</p>
+<p>經過這次的研究，我學會了很多。謝謝助教、老師、與我一起努力的組員呢。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://jennaweng0621.pixnet.net/blog/post/403517807-%5bpython-%2b-opencv%5d-%e5%b0%87%e5%85%a9%e5%bc%b5%e5%bd%b1%e5%83%8f%e5%90%88%e6%88%90%e4%b8%80%e5%bc%b5" target="_blank" rel="noopener">Python + OpenCV 將兩張影像合成一張 by K_程式人</a><br><a href="https://docs.python.org/zh-tw/3/library/random.html" target="_blank" rel="noopener">random — 生成伪随机数 by Python</a><br><a href="https://ithelp.ithome.com.tw/articles/10207483" target="_blank" rel="noopener">Day19-Random模組 by it邦幫忙</a><br><a href="https://www.w3schools.com/python/gloss_python_raise.asp" target="_blank" rel="noopener">Python Raise an Exception by w3schools</a><br><a href="https://stackoverflow.com/questions/63802563/updating-scikit-learn-svc-object-has-no-attribute-proba" target="_blank" rel="noopener">Updating scikit-learn: ‘SVC’ object has no attribute ‘_probA’? by stackoverflow</a></p>
+<p>圖片提供</p>
+<ul>
+<li><a href="https://rowdymclean.com/7-ways-to-win-the-recovery/" target="_blank" rel="noopener">7 Ways to win the recovery by Rowdy</a></li>
+<li><a href="https://www.reddit.com/r/LegendsOfRuneterra/comments/djt7z9/tie_games/" target="_blank" rel="noopener">Tie games by reddit </a></li>
+<li><a href="https://dict.eudic.net/dicts/en/fail" target="_blank" rel="noopener">fail by 歐陸辭典</a></li>
+<li><a href="https://stackoverflow.com/questions/63802563/updating-scikit-learn-svc-object-has-no-attribute-proba" target="_blank" rel="noopener">Updating scikit-learn: ‘SVC’ object has no attribute ‘_probA’? by stackoverflow</a></li>
+</ul>
+<h2 id="結果畫面"><a href="#結果畫面" class="headerlink" title="結果畫面"></a>結果畫面</h2><h3 id="svm-SIFT-演算法訓練集測試結果"><a href="#svm-SIFT-演算法訓練集測試結果" class="headerlink" title="svm SIFT 演算法訓練集測試結果"></a>svm SIFT 演算法訓練集測試結果</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Uzi7QxKLG7ZC3ybGvRFtupT3yBAjRdfE&export=download" alt=""></p>
+</blockquote>
+<h3 id="svm-HOG-演算法訓練集測試結果"><a href="#svm-HOG-演算法訓練集測試結果" class="headerlink" title="svm HOG 演算法訓練集測試結果"></a>svm HOG 演算法訓練集測試結果</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1l-PI0CE_x8MQ_F237Bhn7hS71jp76hmn&export=download" alt=""></p>
+</blockquote>
+<h3 id="猜拳結果，使用-HOG-演算法"><a href="#猜拳結果，使用-HOG-演算法" class="headerlink" title="猜拳結果，使用 HOG 演算法"></a>猜拳結果，使用 HOG 演算法</h3><h4 id="tie"><a href="#tie" class="headerlink" title="tie"></a>tie</h4><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1vF42tRV8GCxUHNdyeCqr2hrzD-pUeYTB&export=download" alt=""></p>
+</blockquote>
+<h4 id="fail"><a href="#fail" class="headerlink" title="fail"></a>fail</h4><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1iKkaFulJn1L-MYCucfEKYylGQgAw_aH4&export=download" alt=""></p>
+</blockquote>
+<h3 id="猜拳結果，使用-SIFT-演算法"><a href="#猜拳結果，使用-SIFT-演算法" class="headerlink" title="猜拳結果，使用 SIFT 演算法"></a>猜拳結果，使用 SIFT 演算法</h3><p>需要特別注意 <code>scipy.cluster.vq.kmean</code> 函式，一開始會隨機選擇一座標進行分類，因此每一次使用此函數不一定回傳值永遠相同，視每次分類而定；因此在執行我這份程式碼時，準確率與我不同並沒有錯。</p>
+<h4 id="tie，但是辨識錯誤"><a href="#tie，但是辨識錯誤" class="headerlink" title="tie，但是辨識錯誤"></a>tie，但是辨識錯誤</h4><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=12s6gXZcgCok362uEKZ1btja78JVBs85G&export=download" alt=""></p>
+</blockquote>
+<h4 id="win，但是辨識錯誤"><a href="#win，但是辨識錯誤" class="headerlink" title="win，但是辨識錯誤"></a>win，但是辨識錯誤</h4><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=109TkYG5IwtB9I4X6bawZLimyLopoHq7t&export=download" alt=""></p>
+</blockquote>
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><p>直接透過程式碼來進行說明，相信會比較好理解。</p>
+<p><strong>特別注意：你必須先在你的電腦環境先 train 一次要使用的演算法 model，由於每個電腦所使用的套件版本不同，在 <code>joblib.load</code> 會發生衝突。因此建議先在你的電腦環境先 train 一次要使用的演算法 model，就不會發生此問題。</strong></p>
+<p>程式碼我將它分為四部分</p>
+<ul>
+<li><a href="#hw07-fn-py"><code>hw07_fn.py</code> 大部分 function 存放此處，給下方程式使用</a></li>
+<li><a href="#hog-train-py"><code>hog_train.py</code> hog 演算法 SVC 模型訓練</a></li>
+<li><a href="#sift-train-py"><code>sift_train.py</code> sift演算法 SVC 模型訓練</a></li>
+<li><a href="#super-bang4-py"><code>super_bang4.py</code> 主要用來辨識剪刀石頭布，判斷輸贏</a></li>
+</ul>
+<h3 id="hw07-fn-py"><a href="#hw07-fn-py" class="headerlink" title="hw07_fn.py"></a><code>hw07_fn.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 15:58:29 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Apr 8 10:58:26 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog <span class="keyword">as</span> feature_hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> os </span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">path_check</span><span class="params">(path)</span>:</span> <span class="comment">#由於這裡是 path，防呆測試。避免使用者輸入路徑時</span></span><br><span class="line">                      <span class="comment">#後面沒有 '/'，導致路徑被合併</span></span><br><span class="line">    <span class="keyword">if</span>(path[<span class="number">-1</span>] != <span class="string">'/'</span>):</span><br><span class="line">        path += <span class="string">'/'</span></span><br><span class="line">    <span class="keyword">return</span> path</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename_image</span><span class="params">(folder, category)</span>:</span> <span class="comment">#將資料夾裡面的檔案全部重新命名</span></span><br><span class="line">    folder = path_check(folder) <span class="comment">#路徑防呆測試</span></span><br><span class="line">    images = os.listdir(folder)  <span class="comment">#讀取路徑全部資料</span></span><br><span class="line">    i = <span class="number">1</span> <span class="comment">#編號從 1 開始</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> old_name <span class="keyword">in</span> images:</span><br><span class="line">        new_name = <span class="string">"%s-%d.jpg"</span> % (category, i) <span class="comment">#命名格式</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">not</span> os.path.isfile(folder+new_name)): </span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            <span class="comment">#判定新的檔名有沒有被使用過，如果有就放棄</span></span><br><span class="line">        os.rename(folder+old_name, folder+new_name) <span class="comment">#將資料改名</span></span><br><span class="line">        print(<span class="string">"修改當前檔案"</span>, old_name, new_name)</span><br><span class="line">        i += <span class="number">1</span> <span class="comment"># i += 1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(path)</span>:</span></span><br><span class="line">  data = list()</span><br><span class="line">  images = os.listdir(path) <span class="comment">#讀資料夾</span></span><br><span class="line">  <span class="keyword">for</span> image <span class="keyword">in</span> images: <span class="comment">#iterator </span></span><br><span class="line">    <span class="comment">#print("正在讀取", path + image)</span></span><br><span class="line">    image = cv2.imread(path + image) <span class="comment">#必須是相對路徑</span></span><br><span class="line">    <span class="comment">#image = cv2.resize(image, (2375,3137))</span></span><br><span class="line">    image = cv2.resize(image, (<span class="number">237</span>,<span class="number">313</span>)) <span class="comment">#重新 resize，如果沒有那訓練模型可能會極大</span></span><br><span class="line">    <span class="comment">#效率極差，程式跑很久</span></span><br><span class="line">    data.append(image) <span class="comment">#image 加入 list</span></span><br><span class="line">  <span class="keyword">return</span> data <span class="comment">#回傳資料</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span><span class="params">(data)</span>:</span> <span class="comment">#SIFT 特徵取出 data 為讀取近 python 的原始圖片</span></span><br><span class="line">  output = list()</span><br><span class="line">  sift_feature = cv2.SIFT_create() <span class="comment">#初始化特徵點</span></span><br><span class="line">  <span class="keyword">for</span> image <span class="keyword">in</span> data:</span><br><span class="line">    kp, des = sift_feature.detectAndCompute(image, <span class="literal">None</span>) <span class="comment">#對圖片進行 sift 讀取</span></span><br><span class="line">    output.append(des) </span><br><span class="line">  <span class="keyword">return</span> output <span class="comment">#回傳 list</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hog</span><span class="params">(data)</span>:</span></span><br><span class="line">    output = list() </span><br><span class="line">    <span class="keyword">for</span> image <span class="keyword">in</span> data:</span><br><span class="line">        fd, hog_image = feature_hog( <span class="comment">#將資料透過 hog 描繪邊緣</span></span><br><span class="line">        image, </span><br><span class="line">        orientations=<span class="number">8</span>, <span class="comment">#8方向，上下左右、左上下、右上下</span></span><br><span class="line">        pixels_per_cell=(<span class="number">9</span>,<span class="number">9</span>), <span class="comment">#(9,9) 為一個邊緣區塊</span></span><br><span class="line">        cells_per_block=(<span class="number">1</span>,<span class="number">1</span>), <span class="comment">#(1,1) 個邊緣區塊是一個大區塊</span></span><br><span class="line">        visualize=<span class="literal">True</span>, <span class="comment">#可視性 true</span></span><br><span class="line">        )</span><br><span class="line">        output.append(fd) <span class="comment">#存入 output </span></span><br><span class="line">    <span class="keyword">return</span> output <span class="comment">#回傳 list</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmeans_return_features</span><span class="params">(k, sift)</span>:</span> <span class="comment">#取出特徵，透過 kmeans 分辨</span></span><br><span class="line">  <span class="comment">#k 為要分辨的特徵類別數量，建議是資料類別乘以 10，sift 為擁有圖片特徵的 list</span></span><br><span class="line">  descriptors = sift[<span class="number">0</span>] <span class="comment">#先給予一個值，以避免不能合併</span></span><br><span class="line">  <span class="keyword">for</span> it <span class="keyword">in</span> sift[<span class="number">1</span>:]:</span><br><span class="line">    descriptors = np.vstack((descriptors, it)) <span class="comment">#採用水平方式將陣列堆疊起來</span></span><br><span class="line">  </span><br><span class="line">  print(len(descriptors))</span><br><span class="line">  <span class="keyword">if</span>(len(descriptors) &lt; k): <span class="comment">#有可能圖片的特徵數小於 k，就無法做 kmean 演算法，因此在這邊做提醒</span></span><br><span class="line">    <span class="keyword">raise</span> Exception(<span class="string">"無法辨識，因為此圖片特徵數小於 k"</span>)</span><br><span class="line"></span><br><span class="line">  voc, train_variance = kmeans(descriptors,k,<span class="number">1</span>)</span><br><span class="line">  <span class="comment">#透過 kmeans 將特徵進行分配，相似的放在一起，並分成 k 倍，只進行 1 次 iteratior</span></span><br><span class="line">  <span class="comment">#voc 回傳陣列，長度為 k，第 i 類有著相同的特徵，</span></span><br><span class="line">  <span class="comment">#variance 回傳觀察值與中心點，可能會有失真問題，如果不要失真或許可以使用 kmeans2 方法</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">#features histogram</span></span><br><span class="line">  im_features = np.zeros((len(sift), k), <span class="string">"float32"</span>) <span class="comment">#生成一個全為 0 的陣列</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sift)):</span><br><span class="line">    words, distance = vq(sift[i], voc)</span><br><span class="line">    <span class="comment">#將 voc 收集到的特徵，與圖片 sift[i] 與中心點進行比較，將最相似的特徵分配給適合的圖片</span></span><br><span class="line">    <span class="comment">#words 回傳陣列，接受此圖片最適合的所有特徵</span></span><br><span class="line">    <span class="comment">#distance 觀察值與中心點的距離，可能會有失真的可能性</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> words:   <span class="comment">#將特徵傳給 im_features</span></span><br><span class="line">      im_features[i][j] += <span class="number">1</span> <span class="comment">#表示此圖片的 j 特徵加一</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">return</span> im_features <span class="comment">#回傳 list</span></span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_image</span><span class="params">(folder)</span>:</span> <span class="comment">#隨機選擇資料夾圖片</span></span><br><span class="line">    folder = path_check(folder) <span class="comment">#防呆測試</span></span><br><span class="line">    images = os.listdir(folder) <span class="comment">#將資料夾全部圖片讀出</span></span><br><span class="line">    random_filename = random.choice(images) <span class="comment">#隨機選擇其中一張圖片</span></span><br><span class="line">    image = cv2.imread(folder + random_filename) <span class="comment">#路徑合併，並 opencv 讀取</span></span><br><span class="line">    image = cv2.resize(image, (<span class="number">237</span>,<span class="number">313</span>)) <span class="comment">#圖片需要 resize 與訓練模型圖片 size 相同</span></span><br><span class="line">    print(folder + random_filename) <span class="comment">#輸出路徑檢查</span></span><br><span class="line">    <span class="keyword">return</span> image <span class="comment">#回傳圖片</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="hog-train-py"><a href="#hog-train-py" class="headerlink" title="hog_train.py"></a><code>hog_train.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 17:08:38 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 14:12:06 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> joblib</span><br><span class="line"><span class="keyword">import</span> hw07_fn <span class="comment">#這是我自己寫的 functional progamming，請自行將上面的 function python code</span></span><br><span class="line"><span class="comment">#與此檔案放在同個資料夾底下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#將資料夾裡面全部資料夾的名子全部統一格式，通常只需要使用一次，資料夾內容全部統一命名。</span></span><br><span class="line"><span class="comment">#hw07_fn.rename_image("./scissors/", "scissor")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./papers/", "paper")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./rocks/", "rock")</span></span><br><span class="line"></span><br><span class="line">scissors = hw07_fn.read(<span class="string">"./scissors/"</span>) <span class="comment">#讀此資料夾資料</span></span><br><span class="line">papers = hw07_fn.read(<span class="string">"./papers/"</span>) <span class="comment">#讀此資料夾資料</span></span><br><span class="line">rocks = hw07_fn.read(<span class="string">"./rocks/"</span>) <span class="comment">#讀此資料夾資料</span></span><br><span class="line"></span><br><span class="line">sift_scissors = hw07_fn.hog(scissors) <span class="comment">#對剪刀圖片進行 hog 演算法</span></span><br><span class="line">sift_papers = hw07_fn.hog(papers) <span class="comment">#對剪刀圖片進行 hog 演算法</span></span><br><span class="line">sift_rocks = hw07_fn.hog(rocks) <span class="comment">#對剪刀圖片進行 hog 演算法</span></span><br><span class="line"></span><br><span class="line">x = sift_scissors + sift_rocks + sift_papers <span class="comment">#data 合併</span></span><br><span class="line">y = [<span class="string">"剪刀"</span>] * len(sift_scissors) + [<span class="string">"石頭"</span>] * len(sift_rocks) + [<span class="string">"布"</span>] * len(sift_papers)</span><br><span class="line"><span class="comment">#target 合併</span></span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>) </span><br><span class="line"><span class="comment">#產生出訓練資料集、測試資料集</span></span><br><span class="line"></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>, probability=<span class="literal">True</span>) <span class="comment">#SVC 訓練</span></span><br><span class="line">clf.fit(x_train, y_train) <span class="comment">#開始進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>) <span class="comment">#準確率</span></span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(x_train, y_train)) <span class="comment">#訓練集分數</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(x_test, y_test)) <span class="comment">#測試集分數</span></span><br><span class="line"></span><br><span class="line">joblib.dump(clf, <span class="string">"hog_paper_scissor_rock_game.pkl"</span>) <span class="comment">#輸出成檔案，在需要使用時 load，以方便使用。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sift-train-py"><a href="#sift-train-py" class="headerlink" title="sift_train.py"></a><code>sift_train.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 14:12:06 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> joblib</span><br><span class="line"><span class="keyword">import</span> hw07_fn <span class="comment">#這是我自己寫的 functional progamming，請自行將上面的 function python code</span></span><br><span class="line"><span class="comment">#與此檔案放在同個資料夾底下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#將資料夾裡面全部資料夾的名子全部統一格式，通常只需要使用一次，資料夾內容全部統一命名。</span></span><br><span class="line"><span class="comment">#hw07_fn.rename_image("./scissors/", "scissor")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./papers/", "paper")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./rocks/", "rock")</span></span><br><span class="line"></span><br><span class="line">scissors = hw07_fn.read(<span class="string">"./scissors/"</span>) <span class="comment">#讀此資料夾資料</span></span><br><span class="line">papers = hw07_fn.read(<span class="string">"./papers/"</span>) <span class="comment">#讀此資料夾資料</span></span><br><span class="line">rocks = hw07_fn.read(<span class="string">"./rocks/"</span>) <span class="comment">#讀此資料夾資料</span></span><br><span class="line"></span><br><span class="line">sift_scissors = hw07_fn.sift(scissors) <span class="comment">#對剪刀圖片進行 sift 演算法</span></span><br><span class="line">sift_papers = hw07_fn.sift(papers)  <span class="comment">#對石頭圖片進行 sift 演算法</span></span><br><span class="line">sift_rocks = hw07_fn.sift(rocks)  <span class="comment">#對布圖片進行 sift 演算法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#data 透過 kmeans 分類特徵</span></span><br><span class="line">x = hw07_fn.kmeans_return_features(<span class="number">24</span>, sift_scissors + sift_rocks + sift_papers)</span><br><span class="line">y = [<span class="string">"剪刀"</span>] * len(sift_scissors) + [<span class="string">"石頭"</span>] * len(sift_rocks) + [<span class="string">"布"</span>] * len(sift_papers)</span><br><span class="line"><span class="comment">#target 合併</span></span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</span><br><span class="line"><span class="comment">#產生出訓練資料集、測試資料集</span></span><br><span class="line"></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>, probability=<span class="literal">True</span>) <span class="comment">#SVC 訓練</span></span><br><span class="line">clf.fit(x_train, y_train) <span class="comment">#開始進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>) <span class="comment">#準確率</span></span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(x_train, y_train)) <span class="comment">#訓練集分數</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(x_test, y_test)) <span class="comment">#測試集分數</span></span><br><span class="line"></span><br><span class="line">joblib.dump(clf, <span class="string">"sift_paper_scissor_rock_game.pkl"</span>)</span><br><span class="line"><span class="comment"># 輸出成檔案，在需要使用時 load，以方便使用。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="super-bang4-py"><a href="#super-bang4-py" class="headerlink" title="super_bang4.py"></a><code>super_bang4.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 15:26:14 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> joblib</span><br><span class="line"><span class="keyword">import</span> hw07_fn</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span><span class="params">(image)</span>:</span> <span class="comment">#使用 sift 辨識，讀入圖片</span></span><br><span class="line">    clf = joblib.load(<span class="string">"./sift_paper_scissor_rock_game.pkl"</span>) <span class="comment">#讀入前面 sift 的模型</span></span><br><span class="line">    sift_image = hw07_fn.sift([image]) <span class="comment">#讀入圖片，必須是 list 格式。hw07_fn 前面要求</span></span><br><span class="line">    x = hw07_fn.kmeans_return_features(<span class="number">24</span>, sift_image) <span class="comment">#找出圖片分類特徵</span></span><br><span class="line">    predict = clf.predict(x) <span class="comment">#進行預測，輸出類別</span></span><br><span class="line">    print(<span class="string">"sift 辨識"</span>)</span><br><span class="line">    print(predict) <span class="comment">#輸出類別</span></span><br><span class="line">    print(clf.predict_proba(x)) <span class="comment">#輸出判斷為每個類別機率</span></span><br><span class="line">    <span class="keyword">return</span> predict <span class="comment">#回傳類別</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hog</span><span class="params">(image)</span>:</span></span><br><span class="line">    clf = joblib.load(<span class="string">"./hog_paper_scissor_rock_game.pkl"</span>) <span class="comment">#讀入前面 hog 的模型</span></span><br><span class="line">    x = hw07_fn.hog([image]) <span class="comment">#讀入圖片，必須是 list 格式。hw07_fn 前面要求</span></span><br><span class="line">    predict = clf.predict(x) <span class="comment">#進行預測，輸出類別</span></span><br><span class="line">    print(<span class="string">"hog 辨識"</span>)</span><br><span class="line">    print(predict) <span class="comment">#輸出類別</span></span><br><span class="line">    print(clf.predict_proba(x)) <span class="comment">#輸出判斷為每個類別機率</span></span><br><span class="line">    <span class="keyword">return</span> predict <span class="comment">#回傳類別</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#hw07_fn.rename_image("./game/", "image")p1 = hw07_fn.random_image("./game")</span></span><br><span class="line"></span><br><span class="line">p1 = hw07_fn.random_image(<span class="string">"./game"</span>) <span class="comment">#隨機從資料集抽一張圖片</span></span><br><span class="line"><span class="comment">#cv2.imshow("player1", p1) #show</span></span><br><span class="line">p2 = hw07_fn.random_image(<span class="string">"./game"</span>) <span class="comment">#隨機從資料集抽一張圖片</span></span><br><span class="line"><span class="comment">#cv2.imshow("player1", p1) #show</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#有可能 sift 的圖片特徵不夠多，小於 SVC sift 演算法的 k，就會出錯</span></span><br><span class="line"><span class="comment">#出錯如下 Exception: 無法辨識，因為此圖片特徵數小於 k</span></span><br><span class="line"><span class="comment">#predict1 = sift(p2) #進行 sift 演算法 </span></span><br><span class="line"><span class="comment">#predict2 = sift(p2) #進行 sift 演算法</span></span><br><span class="line">predict1 = hog(p1) <span class="comment">#進行 hog 演算法</span></span><br><span class="line">predict2 = hog(p2) <span class="comment">#進行 hog 演算法</span></span><br><span class="line"></span><br><span class="line">lose = cv2.imread(<span class="string">"lose.jpg"</span>) <span class="comment">#讀取失敗圖片</span></span><br><span class="line">lose = cv2.resize(lose, (<span class="number">400</span>,<span class="number">313</span>)) <span class="comment">#resize</span></span><br><span class="line">win = cv2.imread(<span class="string">"win.jpg"</span>) <span class="comment">#讀取勝利圖片</span></span><br><span class="line">win = cv2.resize(lose, (<span class="number">400</span>,<span class="number">313</span>)) <span class="comment">#resize</span></span><br><span class="line">tie = cv2.imread(<span class="string">"tie.png"</span>)  <span class="comment">#讀取平手圖片</span></span><br><span class="line">tie = cv2.resize(tie, (<span class="number">400</span>,<span class="number">313</span>)) <span class="comment">#resize</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#判斷剪刀石頭布輸贏規則</span></span><br><span class="line"><span class="keyword">if</span>(predict1 == <span class="string">"剪刀"</span> <span class="keyword">and</span> predict2 == <span class="string">"石頭"</span>):</span><br><span class="line">    result = np.hstack((p1,lose,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"石頭"</span> <span class="keyword">and</span> predict2 == <span class="string">"布"</span>):</span><br><span class="line">    result = np.hstack((p1,lose,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"布"</span> <span class="keyword">and</span> predict2 == <span class="string">"剪刀"</span>):</span><br><span class="line">    result = np.hstack((p1,lose,p2)) </span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"剪刀"</span> <span class="keyword">and</span> predict2 == <span class="string">"布"</span>):</span><br><span class="line">    result = np.hstack((p1,win,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"布"</span> <span class="keyword">and</span> predict2 == <span class="string">"石頭"</span>):</span><br><span class="line">    result = np.hstack((p1,win,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"石頭"</span> <span class="keyword">and</span> predict2 == <span class="string">"剪刀"</span>):</span><br><span class="line">    result = np.hstack((p1,win,p2))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    result = np.hstack((p1,tie,p2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">"result"</span>, result) <span class="comment">#輸出結果畫面</span></span><br><span class="line"><span class="comment">#cv2.imshow("result", np.hstack((p1,tie,p2)))</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="原始程式碼"><a href="#原始程式碼" class="headerlink" title="原始程式碼"></a>原始程式碼</h2><p>下面是沒有註解程式碼</p>
+<p>程式碼我將它分為四部分</p>
+<ul>
+<li><a href="#hw07-fn-py-1"><code>hw07_fn.py</code> 大部分 function 存放此處，給下方程式使用</a></li>
+<li><a href="#hog-train-py-1"><code>hog_train.py</code> hog 演算法 SVC 模型訓練</a></li>
+<li><a href="#sift-train-py-1"><code>sift_train.py</code> sift演算法 SVC 模型訓練</a></li>
+<li><a href="#super-bang4-py-1"><code>super_bang4.py</code> 主要用來辨識剪刀石頭布，判斷輸贏</a></li>
+</ul>
+<h3 id="hw07-fn-py-1"><a href="#hw07-fn-py-1" class="headerlink" title="hw07_fn.py"></a><code>hw07_fn.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sun Apr 18 15:58:29 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: user</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Apr 8 10:58:26 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog <span class="keyword">as</span> feature_hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> os </span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">path_check</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="keyword">if</span>(path[<span class="number">-1</span>] != <span class="string">'/'</span>):</span><br><span class="line">        path += <span class="string">'/'</span></span><br><span class="line">    <span class="keyword">return</span> path</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename_image</span><span class="params">(folder, category)</span>:</span></span><br><span class="line">    folder = path_check(folder)</span><br><span class="line">    images = os.listdir(folder) </span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> old_name <span class="keyword">in</span> images:</span><br><span class="line">        new_name = <span class="string">"%s-%d.jpg"</span> % (category, i)</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">not</span> os.path.isfile(folder+new_name)): </span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        os.rename(folder+old_name, folder+new_name)</span><br><span class="line">        print(<span class="string">"修改當前檔案"</span>, old_name, new_name)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span><span class="params">(path)</span>:</span></span><br><span class="line">  data = list()</span><br><span class="line">  images = os.listdir(path)</span><br><span class="line">  <span class="keyword">for</span> image <span class="keyword">in</span> images:</span><br><span class="line">    <span class="comment">#print("正在讀取", path + image)</span></span><br><span class="line">    image = cv2.imread(path + image) <span class="comment">#必須是相對路徑</span></span><br><span class="line">    <span class="comment">#image = cv2.resize(image, (2375,3137))</span></span><br><span class="line">    image = cv2.resize(image, (<span class="number">237</span>,<span class="number">313</span>))</span><br><span class="line">    data.append(image)</span><br><span class="line">  <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span><span class="params">(data)</span>:</span></span><br><span class="line">  output = list()</span><br><span class="line">  sift_feature = cv2.SIFT_create()</span><br><span class="line">  <span class="keyword">for</span> image <span class="keyword">in</span> data:</span><br><span class="line">    kp, des = sift_feature.detectAndCompute(image, <span class="literal">None</span>)</span><br><span class="line">    output.append(des)</span><br><span class="line">  <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hog</span><span class="params">(data)</span>:</span></span><br><span class="line">    output = list()</span><br><span class="line">    <span class="keyword">for</span> image <span class="keyword">in</span> data:</span><br><span class="line">        fd, hog_image = feature_hog(</span><br><span class="line">        image,</span><br><span class="line">        orientations=<span class="number">8</span>,</span><br><span class="line">        pixels_per_cell=(<span class="number">9</span>,<span class="number">9</span>),</span><br><span class="line">        cells_per_block=(<span class="number">1</span>,<span class="number">1</span>),</span><br><span class="line">        visualize=<span class="literal">True</span>,</span><br><span class="line">        )</span><br><span class="line">        output.append(fd)</span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmeans_return_features</span><span class="params">(k, sift)</span>:</span></span><br><span class="line">  descriptors = sift[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">for</span> it <span class="keyword">in</span> sift[<span class="number">1</span>:]:</span><br><span class="line">    descriptors = np.vstack((descriptors, it))  </span><br><span class="line">  </span><br><span class="line">  print(len(descriptors))</span><br><span class="line">  <span class="keyword">if</span>(len(descriptors) &lt; k):</span><br><span class="line">    <span class="keyword">raise</span> Exception(<span class="string">"無法辨識，因為此圖片特徵數小於 k"</span>)</span><br><span class="line">  voc, train_variance = kmeans(descriptors,k,<span class="number">1</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">#features histogram</span></span><br><span class="line">  im_features = np.zeros((len(sift), k), <span class="string">"float32"</span>)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sift)):</span><br><span class="line">    words, distance = vq(sift[i], voc)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> words:</span><br><span class="line">      im_features[i][j] += <span class="number">1</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">return</span> im_features    </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_image</span><span class="params">(folder)</span>:</span></span><br><span class="line">    folder = path_check(folder)</span><br><span class="line">    images = os.listdir(folder)</span><br><span class="line">    random_filename = random.choice(images)</span><br><span class="line">    image = cv2.imread(folder + random_filename)</span><br><span class="line">    image = cv2.resize(image, (<span class="number">237</span>,<span class="number">313</span>))</span><br><span class="line">    print(folder + random_filename)</span><br><span class="line">    <span class="keyword">return</span> image</span><br></pre></td></tr></table></figure>
+
+<h3 id="hog-train-py-1"><a href="#hog-train-py-1" class="headerlink" title="hog_train.py"></a><code>hog_train.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 17:08:38 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 14:12:06 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> joblib</span><br><span class="line"><span class="keyword">import</span> hw07_fn <span class="comment">#這是我自己寫的 functional progamming，請自行將上面的 function python code</span></span><br><span class="line"><span class="comment">#與此檔案放在同個資料夾底下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#hw07_fn.rename_image("./scissors/", "scissor")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./papers/", "paper")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./rocks/", "rock")</span></span><br><span class="line"></span><br><span class="line">scissors = hw07_fn.read(<span class="string">"./scissors/"</span>)</span><br><span class="line">papers = hw07_fn.read(<span class="string">"./papers/"</span>)</span><br><span class="line">rocks = hw07_fn.read(<span class="string">"./rocks/"</span>)</span><br><span class="line"></span><br><span class="line">sift_scissors = hw07_fn.hog(scissors)</span><br><span class="line">sift_papers = hw07_fn.hog(papers)</span><br><span class="line">sift_rocks = hw07_fn.hog(rocks)</span><br><span class="line"></span><br><span class="line">x = sift_scissors + sift_rocks + sift_papers</span><br><span class="line">y = [<span class="string">"剪刀"</span>] * len(sift_scissors) + [<span class="string">"石頭"</span>] * len(sift_rocks) + [<span class="string">"布"</span>] * len(sift_papers)</span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>, probability=<span class="literal">True</span>)</span><br><span class="line">clf.fit(x_train, y_train) <span class="comment">#開始進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>) <span class="comment">#準確率</span></span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(x_train, y_train)) <span class="comment">#訓練集分數</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(x_test, y_test)) <span class="comment">#測試集分數</span></span><br><span class="line"></span><br><span class="line">joblib.dump(clf, <span class="string">"hog_paper_scissor_rock_game.pkl"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="sift-train-py-1"><a href="#sift-train-py-1" class="headerlink" title="sift_train.py"></a><code>sift_train.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 14:12:06 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> skimage.feature <span class="keyword">import</span> hog</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line"><span class="keyword">from</span> scipy.cluster.vq <span class="keyword">import</span> kmeans, vq</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> joblib</span><br><span class="line"><span class="keyword">import</span> hw07_fn <span class="comment">#這是我自己寫的 functional progamming，請自行將上面的 function python code</span></span><br><span class="line"><span class="comment">#與此檔案放在同個資料夾底下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#hw07_fn.rename_image("./scissors/", "scissor")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./papers/", "paper")</span></span><br><span class="line"><span class="comment"># hw07_fn.rename_image("./rocks/", "rock")</span></span><br><span class="line"></span><br><span class="line">scissors = hw07_fn.read(<span class="string">"./scissors/"</span>)</span><br><span class="line">papers = hw07_fn.read(<span class="string">"./papers/"</span>)</span><br><span class="line">rocks = hw07_fn.read(<span class="string">"./rocks/"</span>)</span><br><span class="line"></span><br><span class="line">sift_scissors = hw07_fn.sift(scissors)</span><br><span class="line">sift_papers = hw07_fn.sift(papers)</span><br><span class="line">sift_rocks = hw07_fn.sift(rocks)</span><br><span class="line"></span><br><span class="line">x = hw07_fn.kmeans_return_features(<span class="number">20</span>, sift_scissors + sift_rocks + sift_papers)</span><br><span class="line">y = [<span class="string">"剪刀"</span>] * len(sift_scissors) + [<span class="string">"石頭"</span>] * len(sift_rocks) + [<span class="string">"布"</span>] * len(sift_papers)</span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">clf = svm.SVC(kernel=<span class="string">"linear"</span>, C=<span class="number">1</span>, gamma=<span class="string">"auto"</span>, probability=<span class="literal">True</span>)</span><br><span class="line">clf.fit(x_train, y_train) <span class="comment">#開始進行訓練</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"accuracy"</span>) <span class="comment">#準確率</span></span><br><span class="line">print(<span class="string">"train:"</span>, clf.score(x_train, y_train)) <span class="comment">#訓練集分數</span></span><br><span class="line">print(<span class="string">"test:"</span>, clf.score(x_test, y_test)) <span class="comment">#測試集分數</span></span><br><span class="line"></span><br><span class="line">joblib.dump(clf, <span class="string">"sift_paper_scissor_rock_game.pkl"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="super-bang4-py-1"><a href="#super-bang4-py-1" class="headerlink" title="super_bang4.py"></a><code>super_bang4.py</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Sat Apr 24 15:26:14 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> joblib</span><br><span class="line"><span class="keyword">import</span> hw07_fn</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span><span class="params">(image)</span>:</span></span><br><span class="line">    clf = joblib.load(<span class="string">"./sift_paper_scissor_rock_game.pkl"</span>) </span><br><span class="line">    sift_image = hw07_fn.sift([image])</span><br><span class="line">    x = hw07_fn.kmeans_return_features(<span class="number">20</span>, sift_image)</span><br><span class="line">    predict = clf.predict(x)</span><br><span class="line">    print(<span class="string">"sift 辨識"</span>)</span><br><span class="line">    print(predict)</span><br><span class="line">    print(clf.predict_proba(x))</span><br><span class="line">    <span class="keyword">return</span> predict</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hog</span><span class="params">(image)</span>:</span></span><br><span class="line">    clf = joblib.load(<span class="string">"./hog_paper_scissor_rock_game.pkl"</span>) </span><br><span class="line">    x = hw07_fn.hog([image])</span><br><span class="line">    predict = clf.predict(x)</span><br><span class="line">    print(<span class="string">"hog 辨識"</span>)</span><br><span class="line">    print(predict)</span><br><span class="line">    print(clf.predict_proba(x))</span><br><span class="line">    <span class="keyword">return</span> predict</span><br><span class="line"></span><br><span class="line"><span class="comment">#hw07_fn.rename_image("./game/", "image")p1 = hw07_fn.random_image("./game")</span></span><br><span class="line"></span><br><span class="line">p1 = hw07_fn.random_image(<span class="string">"./game"</span>)</span><br><span class="line"><span class="comment">#cv2.imshow("player1", p1)</span></span><br><span class="line">p2 = hw07_fn.random_image(<span class="string">"./game"</span>)</span><br><span class="line"><span class="comment">#cv2.imshow("player1", p1)</span></span><br><span class="line"></span><br><span class="line">predict1 = sift(p1) </span><br><span class="line">predict2 = sift(p2) </span><br><span class="line"></span><br><span class="line"><span class="comment">#predict1 = hog(p1) </span></span><br><span class="line"><span class="comment">#predict2 = hog(p2)</span></span><br><span class="line"></span><br><span class="line">lose = cv2.imread(<span class="string">"lose.jpg"</span>)</span><br><span class="line">lose = cv2.resize(lose, (<span class="number">400</span>,<span class="number">313</span>))</span><br><span class="line">win = cv2.imread(<span class="string">"win.jpg"</span>)</span><br><span class="line">win = cv2.resize(win, (<span class="number">400</span>,<span class="number">313</span>))</span><br><span class="line">tie = cv2.imread(<span class="string">"tie.png"</span>)</span><br><span class="line">tie = cv2.resize(tie, (<span class="number">400</span>,<span class="number">313</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(predict1 == <span class="string">"剪刀"</span> <span class="keyword">and</span> predict2 == <span class="string">"石頭"</span>):</span><br><span class="line">    result = np.hstack((p1,lose,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"石頭"</span> <span class="keyword">and</span> predict2 == <span class="string">"布"</span>):</span><br><span class="line">    result = np.hstack((p1,lose,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"布"</span> <span class="keyword">and</span> predict2 == <span class="string">"剪刀"</span>):</span><br><span class="line">    result = np.hstack((p1,lose,p2)) </span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"剪刀"</span> <span class="keyword">and</span> predict2 == <span class="string">"布"</span>):</span><br><span class="line">    result = np.hstack((p1,win,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"布"</span> <span class="keyword">and</span> predict2 == <span class="string">"石頭"</span>):</span><br><span class="line">    result = np.hstack((p1,win,p2))</span><br><span class="line"><span class="keyword">elif</span>(predict1 == <span class="string">"石頭"</span> <span class="keyword">and</span> predict2 == <span class="string">"剪刀"</span>):</span><br><span class="line">    result = np.hstack((p1,win,p2))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    result = np.hstack((p1,tie,p2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">"result"</span>, result)</span><br><span class="line"><span class="comment">#cv2.imshow("result", np.hstack((p1,tie,p2)))</span></span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%9A%E5%AA%92%E9%AB%94%E6%8A%80%E8%A1%93%E8%88%87%E6%87%89%E7%94%A8%E7%AD%86%E8%A8%98/" rel="tag">北科大多媒體技術與應用筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/26/UVa/UVa12694/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa12694 - Meeting Room Arrangement (數論 Math theorm)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/04/25/Python/Python_ValueError%20Cannot%20take%20a%20larger%20sample%20than%20population%20when%20'replace=False'/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">在訓練 Kmeans 遇到問題，valueerror cannot take a larger sample than population when &#39;replace=false&#39;，是甚麼原因？</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

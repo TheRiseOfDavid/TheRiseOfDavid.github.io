@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-statistics/statistics-ch9" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/27/statistics/statistics-ch9/" class="article-date">
+  <time datetime="2021-02-27T15:59:50.000Z" itemprop="datePublished">2021-02-27</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">4.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">18分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="假說檢定-hypothesis-testing-介紹"><a href="#假說檢定-hypothesis-testing-介紹" class="headerlink" title="假說檢定(hypothesis testing) 介紹"></a>假說檢定(hypothesis testing) 介紹</h2><p>決定一個數值透過母體參數產生的是否可以信任。</p>
+<p>信任就是對立假設，反之虛無假設。</p>
+<ul>
+<li>虛無假設 null hypothesis<br>表示這個人是亂猜的，就是虛無假設，透過 \(H_0\) 表示。</li>
+<li><strong>拒絕</strong>虛無假設 reject null hypothesis<br>通常拒絕虛無假設以機率來進行計算，常見的有 \(1 \%\)、\(5 \%\)、\(10 \%\)，也就是當虛無假設機率低於一定值時就是對立假設。</li>
+<li>對立假設 alternative hypothesis<br>透過 boolean 來想虛無假設是 false，對立假設就是 true，透過 \(H_1 \) or \(H_A \) 表示。</li>
+</ul>
+<h2 id="在-Probability-Distribution-APP-上計算-z-值的方法"><a href="#在-Probability-Distribution-APP-上計算-z-值的方法" class="headerlink" title="在 Probability Distribution APP 上計算 z 值的方法"></a>在 Probability Distribution APP 上計算 z 值的方法</h2><ul>
+<li>在母體平均值已知的情況下打開 APP，點 <code>normal</code><ul>
+<li>算出 z 後，將 z 的值放入 x</li>
+<li>決定左尾、右尾、雙尾，在紅色格子的 \(P(X&gt;x)\) 這邊可以選擇，第一個是右尾、第二左尾、第三雙尾</li>
+<li>圖片說明<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1mfPzfLCmLPsrfex4bcFUsSf-8g0tQpnj&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>在母體平均值已知的情況下打開 APP，點 <code>t</code><ul>
+<li>算出 z 後，將 z 的值放入 x</li>
+<li>t 為樣本數量 -1</li>
+<li>決定左尾、右尾、雙尾，在紅色格子的 \(P(X&gt;x)\) 這邊可以選擇，第一個是右尾、第二左尾、第三雙尾</li>
+<li>圖片說明<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1VkQccUO68-RR_LnC2FDKlUZVEbMnUKTu&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何決定虛無假設與對立假設"><a href="#如何決定虛無假設與對立假設" class="headerlink" title="如何決定虛無假設與對立假設"></a>如何決定虛無假設與對立假設</h3><ul>
+<li>對立假設就是我們研究論點<br>也就是決定好甚麼是 TRUE 甚麼是 FALSE，通常對立假設就是我們研究論點，透過對立假設來證明我們的論點是對的，先設定 \(H_1\) 在設定 \(H_0 \)。<ul>
+<li>舉例：九點上課會不會讓學生有精神？<ul>
+<li>\(H_1 \) 九點上課比較好</li>
+<li>\(H_0\)  九點上課並不會讓學生比較好。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用假設檢定挑戰別人的論點<br>此時我們的目標是讓別人的論點 false，以否定別人論點為目標，因此先設定 \(H_0\) 在設定 \(H_1 \)<ul>
+<li>舉例：當前政策內車道禁行機車會比較好嗎?<ul>
+<li>\(H_0 \) 不會比較好</li>
+<li>\(H_1\)  是好的沒錯</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>統整，使用方法<ul>
+<li>利用樣本統計量驗證的假設 \(H_1\)</li>
+<li>他人主張 \(H_0\)</li>
+<li>會造成負面結果的 \(H_0\)，正面放 \(H_1\)</li>
+<li>反面主張 \(H_0\)，</li>
+<li>通常正面放 \(H_1\)，反面 \(H_0\)</li>
+</ul>
+</li>
+</ul>
+<h1 id="母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean"><a href="#母體平均數假設檢定-Summary-of-Forms-for-Null-and-Alternative-Hypotheses-about-a-Population-Mean" class="headerlink" title="母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean"></a>母體平均數假設檢定 Summary of Forms for Null and Alternative Hypotheses about a Population Mean</h1><p>使用此檢定時，有一定義<strong>如果母體平均數相等時，則永遠都表示虛無假設</strong>，因為如果驗證一樣時，那就並不是我們研究的論點所支持，還是他人的論點相同，無法推翻。</p>
+<p>在此檢定中用來判斷假設的標準通常是者幾種</p>
+<ul>
+<li>Lower-tail 左尾<ul>
+<li>\(H_0 = \mu \geq u_0 \) </li>
+<li>\(H_1 = \mu &lt; u_0 \) </li>
+</ul>
+</li>
+<li>Upper-tail 右尾<ul>
+<li>\(H_0 = \mu \leq u_0 \) </li>
+<li>\(H_1 = \mu &lt; u_0 \) </li>
+</ul>
+</li>
+<li>Two-tailed 兩尾<ul>
+<li>\(H_0 = \mu = u_0 \) </li>
+<li>\(H_1 = \mu != u_0 \) </li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到-12-分鐘就要進行改善。"><a href="#舉例：某一城市有-20-個醫療人員，平均只需要-12-分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到-12-分鐘就要進行改善。" class="headerlink" title="舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到 12 分鐘就要進行改善。"></a>舉例：某一城市有 20 個醫療人員，平均只需要 12 分鐘就可以服務，決定虛無假設與對立假設，如果沒有達到 12 分鐘就要進行改善。</h3><p>這邊我們要判斷是否達到目標，沒有則要進行改善，因此這邊我們認為是需要改善所以對立假設就會是 \(H_1 = \mu &gt; 12 \)<br>虛無假設就是 \(H_0 = \mu \leq 12 \)<br>對立假設就是 \(H_1 = \mu &gt; 12 \)</p>
+<p><strong>要特別注意我們的檢定資料是使用母體還是抽測樣本</strong></p>
+<h2 id="型一錯誤-Type1-Error-or-顯著性檢定-significance-tests"><a href="#型一錯誤-Type1-Error-or-顯著性檢定-significance-tests" class="headerlink" title="型一錯誤 Type1 Error or 顯著性檢定 significance tests"></a>型一錯誤 Type1 Error or 顯著性檢定 significance tests</h2><p>我們認為 \(H_0\) 是錯誤的，但其實是對的。</p>
+<p>透過樣本資料推出的假設檢定是對的，但是樣本資料明顯與母體資料偏差。</p>
+<p>型一錯誤 Type1 Error 也稱為 顯著性檢定 significance tests </p>
+<h2 id="型二錯誤-Type2-Error"><a href="#型二錯誤-Type2-Error" class="headerlink" title="型二錯誤 Type2 Error"></a>型二錯誤 Type2 Error</h2><p>我們認為 \(H_0\) 是對的，但其實並不是正確的。</p>
+<p>由於這種錯誤通常沒有辦法發現，需要等到再次驗證時才有機率發現(類似於 bug)，因此為了避免一開始說錯的風險，所以會用比較保守的說法，我們<strong>不反對 \(H_0\)</strong>，而不是我們<strong>相信 \(H_0\)</strong>。</p>
+<p>通常在沒有足夠信心時使用。</p>
+<blockquote>
+<p>統整<br><img src="https://drive.google.com/u/2/uc?id=1c6CvvbRpAqi86sUR5N9NyXmAWnK761bQ&export=download" alt=""></p>
+</blockquote>
+<h2 id="p-Value-Approach-to-One-Tailed-Hypothesis-Testing-p-值法單尾假設檢定"><a href="#p-Value-Approach-to-One-Tailed-Hypothesis-Testing-p-值法單尾假設檢定" class="headerlink" title="p-Value Approach to One-Tailed Hypothesis Testing p 值法單尾假設檢定"></a>p-Value Approach to One-Tailed Hypothesis Testing p 值法單尾假設檢定</h2><p>p 本身的意思是 probability 也就是要找機率(可能性)，根據樣本結果可以支持虛無假設的機率是多少？</p>
+<p>如果 p-value 越小且小於顯著姓測試 \(\alpha \)，我們就可以拒絕虛無假設。</p>
+<p>因此公式就是：拒絕 \(H_0 \) if the \(p-value \leq \alpha \)</p>
+<p>透過標準差 z，我們去設定顯著性測試的 \(z_a\)，與結果的 z 來判斷是否支持虛無假設</p>
+<h3 id="Lower-Tailed-Test-About-a-Population-Mean-左尾-p-value-檢定法"><a href="#Lower-Tailed-Test-About-a-Population-Mean-左尾-p-value-檢定法" class="headerlink" title="Lower-Tailed Test About a Population Mean 左尾 p-value 檢定法"></a>Lower-Tailed Test About a Population Mean 左尾 p-value 檢定法</h3><p>透過常態分配的方法，只要我們的 z 值小於顯著性測試的 \(z_a\) 值時我們就可以拒絕此虛無假設</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1LvvtPA1gAe1rcFKeKQHMAFEvBaur1zqb&export=download" alt=""></p>
+</blockquote>
+<h3 id="Upper-Tailed-Test-About-a-Population-Mean-右尾-p-value-檢定法"><a href="#Upper-Tailed-Test-About-a-Population-Mean-右尾-p-value-檢定法" class="headerlink" title="Upper-Tailed Test About a Population Mean 右尾 p-value 檢定法"></a>Upper-Tailed Test About a Population Mean 右尾 p-value 檢定法</h3><p>與上方類似，只要我們的 z 值<strong>大於</strong>顯著性測試的 \(z_a\) 值時我們就可以拒絕此虛無假設</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1DAOfWZqgz2C3kZv2M8p9vCVSDCB111RM&export=download" alt=""></p>
+</blockquote>
+<h2 id="Critical-Value-Approach-to-One-Tailed-Hypothesis-Testing-臨界值檢定法"><a href="#Critical-Value-Approach-to-One-Tailed-Hypothesis-Testing-臨界值檢定法" class="headerlink" title="Critical Value Approach to One-Tailed Hypothesis Testing 臨界值檢定法"></a>Critical Value Approach to One-Tailed Hypothesis Testing 臨界值檢定法</h2><p>一樣透過標準常態機率分配的 \(z_a\) 值來判斷，設定一個面積，只要我們的檢測值落在 \(z_a\) 面積上就可以拒絕此假設</p>
+<ul>
+<li>Lower tail: Reject \(H_0\) if \(z \leq - z_a\)</li>
+<li>Upper tail: Reject \(H_0\) if \(z \geq - z_a\)</li>
+</ul>
+<h3 id="Lower-Tailed-Test-About-a-Population-Mean-左尾臨界值檢定法"><a href="#Lower-Tailed-Test-About-a-Population-Mean-左尾臨界值檢定法" class="headerlink" title="Lower-Tailed Test About a Population Mean 左尾臨界值檢定法"></a>Lower-Tailed Test About a Population Mean 左尾臨界值檢定法</h3><p>設定 \(z_a\) 的值，以下圖來看如果檢測結果 z 值落在<strong>藍色面積</strong>，就拒絕，沒有就不拒絕</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1RJeKWXMcuanfhh9cb42JgEiYNJZXVcyP&export=download" alt=""></p>
+</blockquote>
+<h3 id="Upper-Tailed-Test-About-a-Population-Mean-右尾臨界值檢定法"><a href="#Upper-Tailed-Test-About-a-Population-Mean-右尾臨界值檢定法" class="headerlink" title="Upper-Tailed Test About a Population Mean 右尾臨界值檢定法"></a>Upper-Tailed Test About a Population Mean 右尾臨界值檢定法</h3><p>設定 \(z_a\) 的值，以下圖來看如果檢測結果 z 值落在<strong>藍色面積</strong>，就拒絕，沒有就不拒絕</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1cUqgMdoQJl0sQCdCqx711Fm1auBfc5ND&export=download" alt=""></p>
+</blockquote>
+<h2 id="Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數已知的情況"><a href="#Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數已知的情況" class="headerlink" title="Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數已知的情況"></a>Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數已知的情況</h2><ul>
+<li>建立虛無假設與對立假設</li>
+<li>設定顯著性測試</li>
+<li>收集樣本資料，計算 z</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value</li>
+<li>根據 p-value 判斷是否拒絕虛無假設</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>透過這兩種方法檢測答案都必須相同</li>
+</ul>
+<h3 id="舉例-抽取-40-筆樣本資料，平均回應緊急時間為-13-25-min，母體標準差為-3-2，做一假設檢定，0-05-的顯著性測試，能不能在-12-分鐘以內回應緊急事件，不行則進行改善"><a href="#舉例-抽取-40-筆樣本資料，平均回應緊急時間為-13-25-min，母體標準差為-3-2，做一假設檢定，0-05-的顯著性測試，能不能在-12-分鐘以內回應緊急事件，不行則進行改善" class="headerlink" title="舉例 - 抽取 40 筆樣本資料，平均回應緊急時間為 13.25 min，母體標準差為 3.2，做一假設檢定，0.05 的顯著性測試，能不能在 12 分鐘以內回應緊急事件，不行則進行改善"></a>舉例 - 抽取 40 筆樣本資料，平均回應緊急時間為 13.25 min，母體標準差為 3.2，做一假設檢定，0.05 的顯著性測試，能不能在 12 分鐘以內回應緊急事件，不行則進行改善</h3><ul>
+<li>建立虛無假設與對立假設<ul>
+<li>\(H_0: \mu \leq 12 \)</li>
+<li>\(H_1: \mu &gt; 12\)，由於我們的觀點是想要進行改善，因此設定 \(H_1: \mu &gt; 12\)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.5</li>
+<li>收集樣本，計算 z<br>\(z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{13.25 - 12}{3.2 / \sqrt{40}} = 2.47\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value<br>\(z = 2.47\)，算出 0.9932，\(p-value = 1 - 0.9932 = 0.0068\)</li>
+<li>根據 p-value 判斷是否拒絕虛無假設<br>\(\alpha = 0.05 \geq 0.0068 = p-value\)，因此拒絕 \(H_0\)。因此我們沒有辦法在 12 分鐘內緊急回應</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間<br>\(\alpha = 0.05, z_{0.05} = 1.645\)，因此拒絕 \(H_0 \geq 1.645\)</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間<br>\(z = 2.47 &gt; 1.645 \)落在拒絕區間，因此拒絕 \(H_0\)。因此我們沒有辦法在 12 分鐘內緊急回應</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Two-Tailed-Hypothesis-雙尾假設檢定"><a href="#Two-Tailed-Hypothesis-雙尾假設檢定" class="headerlink" title="Two-Tailed Hypothesis 雙尾假設檢定"></a>Two-Tailed Hypothesis 雙尾假設檢定</h2><h3 id="p-Value-Approach-to-Two-Tailed-Hypothesis-Testing-p-值法雙尾假設檢定"><a href="#p-Value-Approach-to-Two-Tailed-Hypothesis-Testing-p-值法雙尾假設檢定" class="headerlink" title="p-Value Approach to Two-Tailed Hypothesis Testing p 值法雙尾假設檢定"></a>p-Value Approach to Two-Tailed Hypothesis Testing p 值法雙尾假設檢定</h3><ul>
+<li>計算標準常態分配的 z 值</li>
+<li>計算 z 的機率</li>
+<li>將機率<strong>乘二</strong></li>
+<li>Reject \(H_0\) if the \(p-value \leq \alpha\)</li>
+</ul>
+<h3 id="Critival-Value-Approach-to-Two-Tailed-Hypothesis-Testing-臨界值法雙尾假設檢定"><a href="#Critival-Value-Approach-to-Two-Tailed-Hypothesis-Testing-臨界值法雙尾假設檢定" class="headerlink" title="Critival Value Approach to Two-Tailed Hypothesis Testing 臨界值法雙尾假設檢定"></a>Critival Value Approach to Two-Tailed Hypothesis Testing 臨界值法雙尾假設檢定</h3><p>透過標準常態機率分配找出 \(z_{a/2}\) 的面積</p>
+<p>因此 Reject \(H_0\) if the \(z \leq -z_{a/2}\) or \(z \geq z_{a/2}\)</p>
+<h3 id="舉例-牙膏平均重量是-6oz，進行假設檢定，如果大於或小於-6oz-就改善，抽-30-隻牙膏為樣本資料，樣本平均值是-6-1oz，標準差是-0-2oz，顯著性測試為-0-03"><a href="#舉例-牙膏平均重量是-6oz，進行假設檢定，如果大於或小於-6oz-就改善，抽-30-隻牙膏為樣本資料，樣本平均值是-6-1oz，標準差是-0-2oz，顯著性測試為-0-03" class="headerlink" title="舉例: 牙膏平均重量是 6oz，進行假設檢定，如果大於或小於 6oz 就改善，抽 30 隻牙膏為樣本資料，樣本平均值是 6.1oz，標準差是 0.2oz，顯著性測試為 0.03"></a>舉例: 牙膏平均重量是 6oz，進行假設檢定，如果大於或小於 6oz 就改善，抽 30 隻牙膏為樣本資料，樣本平均值是 6.1oz，標準差是 0.2oz，顯著性測試為 0.03</h3><ul>
+<li>建立虛無假設與對立假設<ul>
+<li>\(H_0: \mu = 6\)</li>
+<li>\(H_1: \mu &lt;&gt; 6 \)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.03</li>
+<li>收集樣本，計算 z<br>\(z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{6.1 - 6}{0.2 / \sqrt{30}} = 2.74\)</li>
+<li>使用方法<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value<br>\(z = 2.74\)，算出 0.9969，\(p-value = 2(1 - 0.9932) = 0.0062\)</li>
+<li>根據 p-value 判斷是否拒絕虛無假設<br>\(\alpha = 0.03 \geq 0.0062 = p-value\)，因此拒絕 \(H_0\)。因此需要進行改善</li>
+<li>用圖進行解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1T22SDb3Q8g6nCS9H1-_3hUb1b1uRQ7lJ&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間<br>\(\alpha / 2 = 0.03 / 2 = 0.015 , z_{0.015} = 2.17\)，因此拒絕 \(H_0 \geq 2.17\)</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間<br>\(z = 2.47 &gt; 2.17 \)落在拒絕區間，因此拒絕 \(H_0\)。因此我們沒有辦法在 12 分鐘內緊急回應</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Confidence-Interval-Approach-to-Two-Tailed-Hypothesis-Testing-信賴區間法雙尾假設檢定"><a href="#Confidence-Interval-Approach-to-Two-Tailed-Hypothesis-Testing-信賴區間法雙尾假設檢定" class="headerlink" title="Confidence Interval Approach to Two-Tailed Hypothesis Testing 信賴區間法雙尾假設檢定"></a>Confidence Interval Approach to Two-Tailed Hypothesis Testing 信賴區間法雙尾假設檢定</h3><p>計算信賴區間的公式為 \(\bar{x} \pm z_{a/2} \frac{\sigma}{\sqrt{n}}\)，如果假設檢定的值在信賴區間內時我們就<strong>不拒絕零 (to reject)</strong>，但如果在<strong>等於的情況時必須拒絕</strong>。</p>
+<h4 id="透過剛剛舉例算信賴區間法雙尾假設檢定法"><a href="#透過剛剛舉例算信賴區間法雙尾假設檢定法" class="headerlink" title="透過剛剛舉例算信賴區間法雙尾假設檢定法"></a>透過剛剛舉例算信賴區間法雙尾假設檢定法</h4><p>顯著性測試為 0.03，因此有百分之 97 的信賴區間，因此 \(\mu \) 要是 \(\bar{x} \pm z_{a/2} \frac{\sigma}{\sqrt{n}} = 6.1 \pm 2.17(0.2 / \sqrt{30}) = 6.1 \pm 0.07924\)，也就是 6.02076 to 6.17924，因此 \( \mu_0 = 6 \) 不再此區間，因此拒絕 \(H_0\)。</p>
+<h2 id="Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數未知的情況"><a href="#Steps-of-Hypoththesis-Testing-假設檢定的步驟，母體平均數未知的情況" class="headerlink" title="Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數未知的情況"></a>Steps of Hypoththesis Testing 假設檢定的步驟，母體平均數未知的情況</h2><p>這時候就需要用到 t 了XD，公式為 \(t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}\)，其中 \(n - 1\) 就是自由度</p>
+<ul>
+<li>p-Value Approach<br>Reject \(H_0\) if \(\alpha \geq p-value\)</li>
+<li>Critical Value Approach<ul>
+<li>\(H_0: \mu \geq \mu_0 \) Reject \(H_0\) if \(t \leq -t_{a}\)</li>
+<li>\(H_0: \mu \leq \mu_0 \) Reject \(H_0\) if \(t \geq t_{a}\)</li>
+<li>\(H_0: \mu = \mu_0\) Reject \(H_0\) if \(t \leq -t_{a/2} \ or t \geq t_{a/2} \ \)</li>
+</ul>
+</li>
+<li>p-Value and the t Distribution<br>如果用統計書的附錄算 t 值，大多不太精準，因此盡量使用軟體上的來計算。</li>
+</ul>
+<h3 id="舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為-65，進行假設檢定，在-64-筆的樣本資料，平均速度是-66-2，標準差-4-2，顯著性測試為-0-05"><a href="#舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為-65，進行假設檢定，在-64-筆的樣本資料，平均速度是-66-2，標準差-4-2，顯著性測試為-0-05" class="headerlink" title="舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為 65，進行假設檢定，在 64 筆的樣本資料，平均速度是 66.2，標準差 4.2，顯著性測試為 0.05"></a>舉例：高速公路常常會超速，因此我們要設測速照相機，測速的速度我們想假設為 65，進行假設檢定，在 64 筆的樣本資料，平均速度是 66.2，標準差 4.2，顯著性測試為 0.05</h3><ul>
+<li>建立虛無假設與對立假設<ul>
+<li>\(H_0: \mu \leq 65 \)</li>
+<li>\(H_1: \mu &gt; 65 \)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>收集樣本，計算 z<br>\(z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{66.2 - 65}{4.2 / \sqrt{64}} = 2.286\)<ul>
+<li>p-Value Approach<ul>
+<li>計算 p-value<br>\(t = 2.286\)，算出 0.01281</li>
+<li>根據 p-value 判斷是否拒絕虛無假設<br>\(\alpha = 0.05 \geq 0.01281 = p-value\)，因此拒絕 \(H_0\)。因此大部分這邊人都會超速，可以設測速照相</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>設定顯著型測試的區間<br>\(\alpha  = 0.05 , d.f. = 64 - 1 = 63, t_{0.005} = 1.669\)，因此 reject \(h_0\) if \(t \geq 1.669\)</li>
+<li>根據樣本的 z 值判斷是否落在拒絕區間<br>\(t = 2.286 &gt; 1.669 \)落在拒絕區間，因此拒絕 \(H_0\)。因此大部分這邊人都會超速，可以設測速照相</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>圖片解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1lbc1gj5E5u0ZGL90IrvbfTe7TELQkAc0&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h1 id="A-Summary-of-Forms-for-Null-and-Alternaitve-Hypotheses-About-a-Population-Proportion-母體參數假設檢定"><a href="#A-Summary-of-Forms-for-Null-and-Alternaitve-Hypotheses-About-a-Population-Proportion-母體參數假設檢定" class="headerlink" title="A Summary of Forms for Null and Alternaitve Hypotheses About a Population Proportion 母體參數假設檢定"></a>A Summary of Forms for Null and Alternaitve Hypotheses About a Population Proportion 母體參數假設檢定</h1><ul>
+<li>等號永遠都在 \(H_0\)</li>
+<li>以 p 表示母體比例</li>
+<li>\(p_0\) 就是虛無假設</li>
+<li>Lower-tail 左尾<ul>
+<li>\(H_0 = p \geq p_0 \) </li>
+<li>\(H_1 = p &lt; p_0 \) </li>
+</ul>
+</li>
+<li>Upper-tail 右尾<ul>
+<li>\(H_0 = p \leq p_0 \) </li>
+<li>\(H_1 = p &lt; p_0 \) </li>
+</ul>
+</li>
+<li>Two-tailed 兩尾<ul>
+<li>\(H_0 = p = p_0 \) </li>
+<li>\(H_1 = p != p_0 \) </li>
+</ul>
+</li>
+</ul>
+<h2 id="計算會用到的數值"><a href="#計算會用到的數值" class="headerlink" title="計算會用到的數值"></a>計算會用到的數值</h2><ul>
+<li>z 的公式為 \(z = \frac{\bar{p} - p_0}{\sigma_\bar{p}}\)，用到的 p 為假設檢定所設定 \(H_0\)的 p 值</li>
+<li>\(\sigma_\bar{p}\) 為 \(\sigma_\bar{p} = \frac{\sqrt{p_0(1-p_0)}}{n}\)</li>
+<li>其中在使用 z 公式時，\(np \geq 5\) and \(n(1-p) \geq 5\)</li>
+</ul>
+<h2 id="P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則"><a href="#P-Value-Approach-and-Critical-Value-Approach-Rejection-Rule-p-值法與臨界值法拒絕法則" class="headerlink" title="P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則"></a>P-Value Approach and Critical Value Approach Rejection Rule p 值法與臨界值法拒絕法則</h2><ul>
+<li>p-value<br>Reject \( H_0\) if \(p-value \leq \alpha\)</li>
+<li>Critical Value<ul>
+<li>\(H_0: p \leq p_0\) Reject \(H_0 \) if \(z \leq z_a\)</li>
+<li>\(H_0: p \geq p_0\) Reject \(H_0 \) if \(z \geq z_a\)</li>
+<li>\(H_0: p = p_0\) Reject \(H_0 \) if \(z \leq -z_{a/2} \ or \ z \geq z_{a/2}\)</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例-在新年期間中，國道車禍有-500-人死亡，其中有-50-是酒駕造成，樣本資料中-120-筆有-67-筆是酒駕，使用假設檢定，並且顯著性測試為-0-05，我們想要推翻其推論"><a href="#舉例-在新年期間中，國道車禍有-500-人死亡，其中有-50-是酒駕造成，樣本資料中-120-筆有-67-筆是酒駕，使用假設檢定，並且顯著性測試為-0-05，我們想要推翻其推論" class="headerlink" title="舉例: 在新年期間中，國道車禍有 500 人死亡，其中有 50 % 是酒駕造成，樣本資料中 120 筆有 67 筆是酒駕，使用假設檢定，並且顯著性測試為 0.05，我們想要推翻其推論"></a>舉例: 在新年期間中，國道車禍有 500 人死亡，其中有 50 % 是酒駕造成，樣本資料中 120 筆有 67 筆是酒駕，使用假設檢定，並且顯著性測試為 0.05，我們想要推翻其推論</h3><ul>
+<li>設定假設<ul>
+<li>\(H_0: p = 0.5 \)</li>
+<li>\(H_1: p != 0.5 \)</li>
+</ul>
+</li>
+<li>設定顯著性測試 0.05</li>
+<li>收集樣本，計算 z and \(\sigma_\bar{p}\)，<strong>其中下面的 \(p_0\) 就是 \(H_0: p\)，也就是 0.5</strong><ul>
+<li>\(\sigma_{\bar{p}} = \sqrt{\frac{p_0 (1-p_0)}{n}} = \frac{0.5(1-0.5)}{120} = 0.045644\)，注意是要用 \(H_0\) 的值</li>
+<li>\(z = \frac{\bar{p} - p_0 }{\sigma_\bar{p}} = \frac{(67/120)-0.5}{0.045644} = 1.28\)</li>
+</ul>
+</li>
+<li>兩方法計算<ul>
+<li>p-Value Approach<ul>
+<li>\(z = 1.28, p = 0.8997\)，\(1-p-value = 2(1 - 0.8997) = 0.2006\)</li>
+<li>因為 \(p-value = 0.2006 &gt; \alpha = 0.05\)，因此我們不能拒絕 \(H_0\)</li>
+</ul>
+</li>
+<li>Critical Value Approach<ul>
+<li>\(a / 2 = 0.05/2 = 0.025， z_{0.025} = 1.96\)，因此 Reject \(H_0\) if \(z \leq -1.96 \ or \ z \geq 1.96 \)</li>
+<li>1.278 介於 -1.96 與 1.96 之間，因此我們不能拒絕 \(H_0\)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Hypothesis-Testing-and-Decision-Making-假設檢定的決策"><a href="#Hypothesis-Testing-and-Decision-Making-假設檢定的決策" class="headerlink" title="Hypothesis Testing and Decision Making 假設檢定的決策"></a>Hypothesis Testing and Decision Making 假設檢定的決策</h1><ul>
+<li>如果答案是拒絕 \(H_0\)，就必須修改決策</li>
+<li>如果答案是不拒絕 \(H_0\)，就不用修改決策</li>
+</ul>
+<h1 id="Calculating-the-Probability-of-a-Type-2-Error-in-Hypothesis-Tests-About-a-Population-Mean-母體平均值計算-Type-2-Error"><a href="#Calculating-the-Probability-of-a-Type-2-Error-in-Hypothesis-Tests-About-a-Population-Mean-母體平均值計算-Type-2-Error" class="headerlink" title="Calculating the Probability of a Type 2 Error in Hypothesis Tests About a Population Mean 母體平均值計算 Type 2 Error"></a>Calculating the Probability of a Type 2 Error in Hypothesis Tests About a Population Mean 母體平均值計算 Type 2 Error</h1><ul>
+<li>列出 \(H_0\) and \(H_1\)</li>
+<li>使用 Critical Value Approach 與顯著型測試，確認是否符合拒絕法則(Reject \(H_0\))</li>
+<li>找出 z 在甚麼情況會接受 \(H_0\)，我們將此定義為 \(\bar{x}\)</li>
+<li>給定 \(\mu \) 是大於顯著型測試的範圍，</li>
+</ul>
+<h2 id="舉例-EMS-隨機抽取-40-筆資料，平均數-13-25-分鐘，母體標準差是-3-2-分鐘，顯著性測試為-0-05，我們想知道緊急服務抵達會不會小於-12-分鐘，不會就改善。"><a href="#舉例-EMS-隨機抽取-40-筆資料，平均數-13-25-分鐘，母體標準差是-3-2-分鐘，顯著性測試為-0-05，我們想知道緊急服務抵達會不會小於-12-分鐘，不會就改善。" class="headerlink" title="舉例: EMS 隨機抽取 40 筆資料，平均數 13.25 分鐘，母體標準差是 3.2 分鐘，顯著性測試為 0.05，我們想知道緊急服務抵達會不會小於 12 分鐘，不會就改善。"></a>舉例: EMS 隨機抽取 40 筆資料，平均數 13.25 分鐘，母體標準差是 3.2 分鐘，顯著性測試為 0.05，我們想知道緊急服務抵達會不會小於 12 分鐘，不會就改善。</h2><ul>
+<li>設定假設<ul>
+<li>\(H_0: mu \leq  12 \)</li>
+<li>\(H_1: \mu &gt; 12 \)</li>
+</ul>
+</li>
+<li>Reject rule is: Reject \(H_0\) if \(z \geq 1.645\)</li>
+<li>計算樣本平均值拒絕的區域<ul>
+<li>\(z = \frac{\bar{x}-12}{3.2 / \sqrt{40}} \geq 1.645\)</li>
+<li>\(\bar{x} \geq 12 + 1.645 (\frac{3.2}{\sqrt{40}}) = 12.8323\)</li>
+</ul>
+</li>
+<li>因此我們接受 \(H_0\) 必須在 \(\bar{x} &lt; 12.8323\)</li>
+<li>計算 Type2 Error  <ul>
+<li>我們先假設一個值，此值要是符合 \(H_1\)，這裡假設為 14，因此 \(\mu = 14\)</li>
+<li>計算樣本標準差 \(\sigma_\bar{x} = \frac{3.2}{\sqrt{40}} = 0.5060 \)</li>
+<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / sqrt{n}} = \frac{12.8323 - 14}{3.2 / \sqrt{40}} = -2.31 \) </li>
+<li>再來我們找出 \(z = -2.31 \) 的機率為 0.0104，就是 \(\beta \)</li>
+<li>圖片解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qhP93dQujI_jGQcsgiCWLs32KJ7-VZZS&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>算出每個 value of mu 的 beta 係數，其中的 \(1-\beta\) 的值就是正確率，如果離 \(H_0\) 越近有很高機率會做出錯誤判斷<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1TUD1SA4j3AjLAsmtuM2GnlHBQytttqp3&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Power-of-the-Test-假設檢定正確率"><a href="#Power-of-the-Test-假設檢定正確率" class="headerlink" title="Power of the Test 假設檢定正確率"></a>Power of the Test 假設檢定正確率</h2><p>就是剛剛舉例中的 \(1-\beta\)，越大表示我們的正確率越高。</p>
+<p>透過剛剛的例子畫成圖表表示 </p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-keA5OCOB_h-O_IAWFYsVuXbIWlw-k2i&export=download" alt=""></p>
+</blockquote>
+<h2 id="在一個單尾-左尾-舉例"><a href="#在一個單尾-左尾-舉例" class="headerlink" title="在一個單尾(左尾)舉例"></a>在一個單尾(左尾)舉例</h2><ul>
+<li>題目一些資訊，\( \sigma = 12, n = 36, \mu = 120\)</li>
+<li>設定假設<ul>
+<li>\(H_0: \mu \geq  120 \)</li>
+<li>\(H_1: \mu &lt; 120 \)</li>
+</ul>
+</li>
+<li>Reject rule is: Reject \(H_0\) if \(z \leq -1.645\)</li>
+<li>計算樣本平均值拒絕的區域<ul>
+<li>\(z = \frac{\bar{x}-120}{12 / \sqrt{36}} \leq -1.645\)</li>
+<li>\(\bar{x} \leq  - 1.645 (\frac{12}{\sqrt{36}} ) = 116.71\)</li>
+</ul>
+</li>
+<li>因此我們接受 \(H_0\) 必須在 \(\bar{x} &gt; 116.71\)</li>
+<li>計算 Type2 Error  <ul>
+<li>我們先假設一個值，此值要是符合 \(H_1\)，這裡假設為 112，因此 \(\mu = 112\)</li>
+<li>計算樣本標準差 \(\sigma_\bar{x} = \frac{12}{\sqrt{36}} = 2 \)</li>
+<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} = \frac{116.71 - 112}{12 / \sqrt{36}} = 2.36 \) </li>
+<li>再來我們找出 \(z = 2.36 \) 的機率為 0.0091，就是 \(\beta \)</li>
+<li>圖片解釋<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19fmdAfQql-zh8nnhPE6A5gk7xoMO6x9h&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>算出每個 value of mu 的 beta 係數，其中的 \(1-\beta\) 的值就是正確率，如果離 \(H_0\) 越近有很高機率會做出錯誤判斷<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Jb0c1osleRhpEvtxNWV7MnzOIhKFdTdY&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>畫成圖表則是<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1cWn1hDljGIflcVOT1gyuB9YZZ1P06TV0&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Determining-the-Sample-Suze-for-a-Hypothesis-Test-About-a-Population-Mean-確認樣本大小來進行母體平均值假設測試"><a href="#Determining-the-Sample-Suze-for-a-Hypothesis-Test-About-a-Population-Mean-確認樣本大小來進行母體平均值假設測試" class="headerlink" title="Determining the Sample Suze for a Hypothesis Test About a Population Mean 確認樣本大小來進行母體平均值假設測試"></a>Determining the Sample Suze for a Hypothesis Test About a Population Mean 確認樣本大小來進行母體平均值假設測試</h1><p>我們先設定好型一誤差與型二誤差後，找出適合的樣本大小數量來進行假設測試 </p>
+<p>用圖來進行說明，我們說些重點</p>
+<ul>
+<li>在這張圖中，是右尾檢定，因為 \(\mu &gt; \mu_0\)</li>
+<li>左邊是 Type1 Error，右邊是 Type2 Error，c 是臨界值，兩張圖藍色的部分就是誤差區</li>
+<li>因此我們可以知道兩張圖的 C 是相同</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bYpgRmwnGNVaCt01WjQ5v0ezdXn9XzL8&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>再來我們將公式進行合併，公式計算如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1diujZTQvgqNnDdYUBB1yAE3IsRfkAATv&export=download" alt=""></p>
+</blockquote>
+<p>因此我們可以知道當我們要設定 n 的大小時的公式為 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2}\)</p>
+<ul>
+<li>\(z_a\) 是 z value 提供 \(\alpha\) 的面積</li>
+<li>\(z_b\) 是 z value 提供 \(\beta\) 的面積</li>
+<li>\(\sigma\) 是母體標準差</li>
+<li>\(\mu_0\) 是\(H_0\)母體平均值</li>
+<li>\(\mu_a\) 是母體平均值，再用於檢測 Type2 Error 的值</li>
+<li>在雙尾時，\(z_a/2 \) 而不是使用 \(z_a \)</li>
+</ul>
+<h2 id="舉例-平均回應緊急時間為-13-25-min，母體標準差為-3-2，期望能在-12-分鐘內回應，那-Type1-Error-0-05，如果超過-0-75-分鐘的機率不可以大於-0-1，也就是-Type2-Error-0-1，求樣本大小"><a href="#舉例-平均回應緊急時間為-13-25-min，母體標準差為-3-2，期望能在-12-分鐘內回應，那-Type1-Error-0-05，如果超過-0-75-分鐘的機率不可以大於-0-1，也就是-Type2-Error-0-1，求樣本大小" class="headerlink" title="舉例: 平均回應緊急時間為 13.25 min，母體標準差為 3.2，期望能在 12 分鐘內回應，那 Type1 Error = 0.05，如果超過 0.75 分鐘的機率不可以大於 0.1，也就是 Type2 Error = 0.1，求樣本大小"></a>舉例: 平均回應緊急時間為 13.25 min，母體標準差為 3.2，期望能在 12 分鐘內回應，那 Type1 Error = 0.05，如果超過 0.75 分鐘的機率不可以大於 0.1，也就是 Type2 Error = 0.1，求樣本大小</h2><p>因此我們這邊可以先統整資訊</p>
+<ul>
+<li>\(\alpha = 0.05 \)</li>
+<li>\(\beta = 0.1\)</li>
+<li>\(z_a = 1.645\)，\(a = 0.05\)</li>
+<li>\(z_b = 1.28\)，\(b = 0.1\)</li>
+<li>\(\mu_0 = 12, \mu_1 = 12.75\)</li>
+<li>\(\sigma = 3.2\)</li>
+</ul>
+<p>計算 \(n = \frac{(z_a + z_b )^2 \sigma^2}{(\mu_0 - \mu_a)^2} = \frac{(1.645+1.28)^2 (3.2)^2}{(12-12.75)^2} = 155.75 \)，約等於 156。<strong>如果數字有小數點時必須 +1，樣本沒辦法分割所以就直接加一</strong></p>
+<p>一旦我們有了 \(\alpha, \beta, n\)，其中兩項，我們就可以算出另一項，透過公式我們可以提出一些重點。</p>
+<ul>
+<li>當 n 固定時，\(\alpha\) 變小，則 \(\beta\)變大，反之亦同。</li>
+</ul>
+<p><strong>謝謝大家的努力拉</strong></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/02/28/blog/hackmd_view_googledricePIC/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Markdown 放入 google drive 圖片
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/02/27/UVa/UVa10305/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa10305 - Ordering Tasks(拓樸排序)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

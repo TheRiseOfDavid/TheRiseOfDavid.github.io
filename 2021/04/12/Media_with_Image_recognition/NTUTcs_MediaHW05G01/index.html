@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進 PCA 降維後送入SVM分類器進行訓練進行辨識 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Media_with_Image_recognition/NTUTcs_MediaHW05G01" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  北科資工二多媒體技術與應用 第五周團隊作業 - 對兩類別影像進 PCA 降維後送入SVM分類器進行訓練進行辨識
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/12/Media_with_Image_recognition/NTUTcs_MediaHW05G01/" class="article-date">
+  <time datetime="2021-04-12T15:59:50.000Z" itemprop="datePublished">2021-04-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E5%A4%9A%E5%AA%92%E9%AB%94%E8%88%87%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98-Image-Recognition/">多媒體與圖像辨識 Image Recognition</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">6分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h2><p>直接透過程式碼來進行說明，相信會比較好理解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Apr  8 12:28:01 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"></span><br><span class="line">lfw_people = fetch_lfw_people(min_faces_per_person=<span class="number">70</span>, resize=<span class="number">0.4</span>) <span class="comment">#接收 人臉資料</span></span><br><span class="line">n_samples, h, w = lfw_people.images.shape <span class="comment">#紀錄形狀</span></span><br><span class="line"></span><br><span class="line">x = lfw_people.data <span class="comment">#人臉全部資料</span></span><br><span class="line">n_features = x.shape[<span class="number">1</span>] <span class="comment">#特徵</span></span><br><span class="line"></span><br><span class="line">y = lfw_people.target <span class="comment">#每一個人臉辨識的類別</span></span><br><span class="line">target_names = lfw_people.target_names  <span class="comment">#type</span></span><br><span class="line">n_classes = target_names.shape[<span class="number">0</span>] <span class="comment">#有幾種類別</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Total dataset size:"</span>)</span><br><span class="line">print(<span class="string">"n_samples: %d"</span> % n_samples)</span><br><span class="line">print(<span class="string">"n_features: %d"</span> % n_features)</span><br><span class="line">print(<span class="string">"n_classes: %d"</span> % n_classes)</span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.25</span>, random_state=<span class="number">42</span>) </span><br><span class="line"><span class="comment"># 創造出訓練集與切割集</span></span><br><span class="line"></span><br><span class="line">n_components = <span class="number">150</span> <span class="comment">#降至 150 維度</span></span><br><span class="line">print(<span class="string">"Extracting the top %d eigenfaces from %d faces"</span></span><br><span class="line">      % (n_components, x_train.shape[<span class="number">0</span>]))</span><br><span class="line">t0 = time() <span class="comment">#計時</span></span><br><span class="line">pca = PCA(n_components=n_components, svd_solver=<span class="string">'randomized'</span>, </span><br><span class="line">          whiten=<span class="literal">True</span>).fit(x_train) <span class="comment">#訓練中，使用方法為 randomized</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0)) <span class="comment">#輸出時間</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#重新定義圖片大小</span></span><br><span class="line">eigenfaces = pca.components_.reshape((n_components, h, w))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Projecting the input data on the eigenfaces orthonormal basis"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line">x_train_pca = pca.transform(x_train) <span class="comment">#進行降維</span></span><br><span class="line">x_test_pca = pca.transform(x_test) <span class="comment">#進行降維</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line"></span><br><span class="line"><span class="comment"># #############################################################################</span></span><br><span class="line"><span class="comment"># Train a SVM classification model</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Fitting the classifier to the training set"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line"><span class="comment">#參數，用來告訴 gridsearchCV 的懲罰與誤差，是圖像決定好的</span></span><br><span class="line"><span class="comment">#param_grid = &#123;'C': [1e3, 5e3, 1e4, 5e4, 1e5],</span></span><br><span class="line"><span class="comment">#              'gamma': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1], &#125;</span></span><br><span class="line">param_grid = &#123;<span class="string">'C'</span>: [<span class="number">1e3</span>, <span class="number">5e3</span>, <span class="number">1e4</span>, <span class="number">5e4</span>, <span class="number">1e5</span>],</span><br><span class="line">              <span class="string">'gamma'</span>: [<span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.01</span>, <span class="number">0.1</span>], &#125; <span class="comment">#要給 SVC 的參數</span></span><br><span class="line">clf = GridSearchCV(SVC(kernel=<span class="string">'rbf'</span>, class_weight=<span class="string">'balanced'</span>), param_grid)</span><br><span class="line">fit = clf.fit(x_train_pca, y_train) <span class="comment">#尋找最佳化</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line">print(<span class="string">"Best estimator found by grid search:"</span>)</span><br><span class="line">print(clf.best_estimator_) <span class="comment">#找到最佳參數組合及其準確率。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #############################################################################</span></span><br><span class="line"><span class="comment"># Quantitative evaluation of the model quality on the test set</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Predicting people's names on the test set"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line">y_pred = clf.predict(x_test_pca) <span class="comment">#預測</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line"></span><br><span class="line">print(classification_report(y_test, y_pred, target_names=target_names))</span><br><span class="line"><span class="comment"># 輸出這次機器學習的結果，其中 f1-score 是學習成果中最重要的分數</span></span><br><span class="line"><span class="comment"># * precision 準確率，機器學習判定是正確圖片的準確率</span></span><br><span class="line"><span class="comment"># * recall 精準度，抽取出來的樣本，有多少樣本是有被視為正確的。</span></span><br><span class="line"><span class="comment"># 舉例：google 大衛的筆記，理論上要有 70 筆資料是關於大衛的筆記，卻只有輸出 40 筆，比例就是 40/70。</span></span><br><span class="line"><span class="comment">#print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://scikit-learn.org/stable/auto_examples/applications/plot_face_recognition.html#sphx-glr-auto-examples-applications-plot-face-recognition-py" target="_blank" rel="noopener">Faces recognition example using eigenfaces and SVMs by scikit-learn</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html" target="_blank" rel="noopener">sklearn.decomposition.PCA by scikit-learn</a><br><a href="https://www.cnblogs.com/178mz/p/8558435.html" target="_blank" rel="noopener">机器学习classification_report方法及precision精确率和recall召回率 说明 by cnblogs</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html" target="_blank" rel="noopener">sklearn.metrics.classification_report by scikit-learn</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html" target="_blank" rel="noopener">sklearn.model_selection.GridSearchCV by scikit-learn</a><br><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html" target="_blank" rel="noopener">sklearn.model_selection.train_test_split by scikit-learn</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>機器學習裡面大量的數學公式與模型，我都還不懂，現在的我只是先按照著範例刻畫出正確的結果來，希望未來的我可以懂那些理論，因為我其實都不太懂這些理論。但是被要求做出此作業時，其實上手程度很難，某種情況來說算是壓力很大。</p>
+<p>總之，希望我能夠至少大概理解怎麼運作，之後如果有機會在進行底層實作，我一定就能夠了解更多！<br>現在只能大概理解語法在幹嘛，而不能知道怎麼運作。</p>
+<h2 id="無註解程式碼"><a href="#無註解程式碼" class="headerlink" title="無註解程式碼"></a>無註解程式碼</h2><p>提供無註解程式碼</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Apr  8 12:28:01 2021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: User</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"></span><br><span class="line">lfw_people = fetch_lfw_people(min_faces_per_person=<span class="number">70</span>, resize=<span class="number">0.4</span>)</span><br><span class="line">n_samples, h, w = lfw_people.images.shape</span><br><span class="line"></span><br><span class="line">x = lfw_people.data</span><br><span class="line">n_features = x.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">y = lfw_people.target</span><br><span class="line">target_names = lfw_people.target_names</span><br><span class="line">n_classes = target_names.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Total dataset size:"</span>)</span><br><span class="line">print(<span class="string">"n_samples: %d"</span> % n_samples)</span><br><span class="line">print(<span class="string">"n_features: %d"</span> % n_features)</span><br><span class="line">print(<span class="string">"n_classes: %d"</span> % n_classes)</span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="number">0.25</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">n_components = <span class="number">150</span></span><br><span class="line">print(<span class="string">"Extracting the top %d eigenfaces from %d faces"</span></span><br><span class="line">      % (n_components, x_train.shape[<span class="number">0</span>]))</span><br><span class="line">t0 = time()</span><br><span class="line">pca = PCA(n_components=n_components, svd_solver=<span class="string">'randomized'</span>, </span><br><span class="line">          whiten=<span class="literal">True</span>).fit(x_train) <span class="comment">#降維至 150 層</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line"></span><br><span class="line"><span class="comment">#重新定義圖片大小</span></span><br><span class="line">eigenfaces = pca.components_.reshape((n_components, h, w))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Projecting the input data on the eigenfaces orthonormal basis"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line">x_train_pca = pca.transform(x_train) <span class="comment">#進行降維</span></span><br><span class="line">x_test_pca = pca.transform(x_test) <span class="comment">#進行降維</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line"></span><br><span class="line"><span class="comment"># #############################################################################</span></span><br><span class="line"><span class="comment"># Train a SVM classification model</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Fitting the classifier to the training set"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line"><span class="comment">#參數，用來告訴 gridsearchCV 的懲罰與誤差，是圖像決定好的</span></span><br><span class="line"><span class="comment">#param_grid = &#123;'C': [1e3, 5e3, 1e4, 5e4, 1e5],</span></span><br><span class="line"><span class="comment">#              'gamma': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1], &#125;</span></span><br><span class="line">param_grid = &#123;<span class="string">'C'</span>: [<span class="number">1e3</span>, <span class="number">5e3</span>, <span class="number">1e4</span>, <span class="number">5e4</span>, <span class="number">1e5</span>],</span><br><span class="line">              <span class="string">'gamma'</span>: [<span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.01</span>, <span class="number">0.1</span>], &#125;</span><br><span class="line">clf = GridSearchCV(SVC(kernel=<span class="string">'rbf'</span>, class_weight=<span class="string">'balanced'</span>), param_grid)</span><br><span class="line">fit = clf.fit(x_train_pca, y_train) <span class="comment">#開始訓練，找最適合的</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line">print(<span class="string">"Best estimator found by grid search:"</span>)</span><br><span class="line">print(clf.best_estimator_) <span class="comment">#找到最佳參數組合及其準確率。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #############################################################################</span></span><br><span class="line"><span class="comment"># Quantitative evaluation of the model quality on the test set</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"Predicting people's names on the test set"</span>)</span><br><span class="line">t0 = time()</span><br><span class="line">y_pred = clf.predict(x_test_pca) <span class="comment">#預測</span></span><br><span class="line">print(<span class="string">"done in %0.3fs"</span> % (time() - t0))</span><br><span class="line"></span><br><span class="line">print(classification_report(y_test, y_pred, target_names=target_names))</span><br><span class="line"><span class="comment">#print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))</span></span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%9A%E5%AA%92%E9%AB%94%E6%8A%80%E8%A1%93%E8%88%87%E6%87%89%E7%94%A8%E7%AD%86%E8%A8%98/" rel="tag">北科大多媒體技術與應用筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/17/UVa/UVa11742/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa11742 - Social Constraints (數論 Math theorm、暴力搜尋 Brute force)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/04/12/Media_with_Image_recognition/NTUTcs_MediaHW05t01/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">北科資工二多媒體技術與應用 第五周個人作業</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
