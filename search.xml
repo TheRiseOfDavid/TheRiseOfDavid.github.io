@@ -13635,10 +13635,7 @@
 <li>1~10CHw 2元</li>
 <li>101~10000 3元</li>
 <li>10001~1000000 5元</li>
-<li><blockquote>
-<p>1000000 7元</p>
-</blockquote>
-</li>
+<li>1000000 7元</li>
 </ul>
 <p>電力公司為了賺更多錢想出一種方法，電力公司會給你 A、B 兩個數字，其中</p>
 <ul>
@@ -19590,13 +19587,13 @@
 <a id="more"></a>
 
 <h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://www.geeksforgeeks.org/heap-sort/" target="_blank" rel="noopener">HeapSort by geeksforgeeks</a></p>
-<h2 id="合併排序-merge-sort-程式碼說明與應用"><a href="#合併排序-merge-sort-程式碼說明與應用" class="headerlink" title="合併排序 merge sort 程式碼說明與應用"></a>合併排序 merge sort 程式碼說明與應用</h2><p>透過程式碼來進行說明相信會更好理解，以下我們示範從小到大排序</p>
+<h2 id="heap-sort-堆積排序-程式碼說明與應用"><a href="#heap-sort-堆積排序-程式碼說明與應用" class="headerlink" title="heap sort 堆積排序 程式碼說明與應用"></a>heap sort 堆積排序 程式碼說明與應用</h2><p>透過程式碼來進行說明相信會更好理解，以下我們示範從小到大排序</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[] = &#123;<span class="number">4</span>,<span class="number">96</span>,<span class="number">1546</span>,<span class="number">13</span>,<span class="number">48</span>,<span class="number">34</span>,<span class="number">77</span>,<span class="number">48</span>,<span class="number">31</span>&#125;; </span><br><span class="line"><span class="keyword">int</span> num_size; <span class="comment">//陣列的 size</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>&#123; <span class="comment">//輸出結果</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; num_size ; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> i)</span></span>&#123; <span class="comment">//建構、調整堆積樹，i 表示數值、n 表示樹的 size</span></span><br><span class="line">    <span class="keyword">int</span> root = i; <span class="comment">//root </span></span><br><span class="line">    <span class="keyword">int</span> L = <span class="number">2</span> * i; <span class="comment">//subtree</span></span><br><span class="line">    <span class="keyword">int</span> R = <span class="number">2</span> * i + <span class="number">1</span>; <span class="comment">//subtree</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//注意：以下只有交換 index</span></span><br><span class="line">    <span class="keyword">if</span>(L &lt; n &amp;&amp; num[L] &gt; num[root]) root = L; <span class="comment">//如果 root 比左子樹小就交換</span></span><br><span class="line">    <span class="keyword">if</span>(R &lt; n &amp;&amp; num[R] &gt; num[root]) root = R; <span class="comment">//如果 root 比右子樹小就交換</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果 root 已經被交換</span></span><br><span class="line">    <span class="keyword">if</span>(root != i)&#123;</span><br><span class="line">        swap(num[root], num[i]); <span class="comment">//這邊才真正進行交換</span></span><br><span class="line">        heapify(n, root); <span class="comment">//繼續遞迴，讓 i 可以到達完整的最大堆積樹，也就是當 i 為 root，左、右子樹都比 root 小。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">()</span></span>&#123; <span class="comment">//進行 heap_sort 排序</span></span><br><span class="line">    <span class="comment">//將每個數值放到適合的堆積位置</span></span><br><span class="line">    <span class="comment">//注意：i 是從 num_size/2 開始，因為我們是從最下層的子樹(root、L、R) 不斷做 heapify</span></span><br><span class="line">    <span class="comment">//到第一層的子樹，這樣才可以將之前堆積的狀態延續至上層。</span></span><br><span class="line">    <span class="comment">//如果從第一層開始做，那每一個 root 都只會是 L、R 的最大值，</span></span><br><span class="line">    <span class="comment">//但上層的 root 並不一定會大於下層或下下層的 root，這整棵樹就並不是一個完整堆積樹</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = num_size/<span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) heapify(num_size, i);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//不斷地拿出 root(最大數值)，放到數列最後面。</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = num_size<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        swap(num[<span class="number">0</span>], num[i]); <span class="comment">//與數列中的最後一個數值交換。這樣越大的數值會被放到越後面</span></span><br><span class="line">        heapify(i, <span class="number">0</span>); <span class="comment">//由於 root 已經不再是最大，因此再次進行 heapify</span></span><br><span class="line">        <span class="comment">//注意：如果我們已經將 1 次 root 與數列最後一個數值交換，那我們下次就不可以把數列中的最後一個數值放入 heapify，不然這次做的堆積樹又會變成下次堆積樹 root，因此我們要將 num_size 減少。</span></span><br><span class="line">        <span class="comment">//因此這裡的 i 為未確定排序陣列的大小。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    num_size = <span class="keyword">sizeof</span>(num) / <span class="keyword">sizeof</span>(num[<span class="number">0</span>]); <span class="comment">//紀錄陣列 size</span></span><br><span class="line">    heap_sort();</span><br><span class="line">    output();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>由於 C++ 已經有很多 sort 套件了，因此我在高中學會後我就再也沒有去複習這些知識。</p>
 <p>剛好現在上課有用到那就來複習，順便把它寫出邏輯八！</p>
 <h2 id="程式執行結果"><a href="#程式執行結果" class="headerlink" title="程式執行結果"></a>程式執行結果</h2><blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1z3BiITZyFRgY03M8Eg5tZq022YIpBDib&export=download" alt=""></p>
+<p><img src="https://drive.google.com/u/2/uc?id=1Mh7M-7VluSDr0HlvYdabkXABieMRcdpJ&export=download" alt=""></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -19606,6 +19603,120 @@
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
         <tag>數論 Math theorm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第六周個人作業 - 討論適合 yolov4 的情境、yoloV4 解決那些問題，為何被大量使用</title>
+    <url>/2021/06/01/Media_with_Image_recognition/NTUTcs_MediaHW07T01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="請提出一種情境設想適合使用-YOLOv4並寫下原因。"><a href="#請提出一種情境設想適合使用-YOLOv4並寫下原因。" class="headerlink" title="請提出一種情境設想適合使用 YOLOv4並寫下原因。"></a>請提出一種情境設想適合使用 YOLOv4並寫下原因。</h2><p>我認為 YOLOv4 很適合用於醫院的人流控制，可以在重要的醫護室、病房、手術房中進行職業辨識，辨識是醫生？護士？或是其他職業。</p>
+<p>例如病房的話，我們就可以檢測有多少護士現在在哪裡？哪個病房裡面有幾位護士、幾位家屬，可以讓護理長方便了解現在每個病房有多少護士，哪個病房裡面有過多的家屬，可能引發危險的狀態或不利於護士照顧病人。</p>
+<h2 id="請思考-YOLOv4-在近幾年被大量使用的原因，對比HOG與SIFT，YOLOv4-解決了哪些問題"><a href="#請思考-YOLOv4-在近幾年被大量使用的原因，對比HOG與SIFT，YOLOv4-解決了哪些問題" class="headerlink" title="請思考 YOLOv4 在近幾年被大量使用的原因，對比HOG與SIFT，YOLOv4 解決了哪些問題"></a>請思考 YOLOv4 在近幾年被大量使用的原因，對比HOG與SIFT，YOLOv4 解決了哪些問題</h2><p>YOLOv4 與 hog、sift 最大的不同為，yolov4 可以在一張圖片中辨識許多物件，且 yoloV4 訓練是透過類神經網路演算法，可讓訓練變得很簡單，前提是要克服環境的設定、colab 的環境後最重要的一環，我們可以透過 labelImg 來對每一個圖像進行人工辨識，連國中生都可以操作。</p>
+<p>後兩者則是 SVM，則需要我們去對 kernel、C、gamma 去設定，普通的學生不一定可以找到最適點。<br>如果是 Sift 則需要提取特徵，還要避免圖片特徵不足的問題。<br>Hog 則需要我們去思考 block and cell 的問題。</p>
+<p>Faster R-CNN，其主要概念如下</p>
+<ul>
+<li>捲積層取出特徵</li>
+<li>ROI 將特徵像似的分類 </li>
+<li>CNN 提取 ROI 的分類</li>
+<li>softMAX 分類</li>
+</ul>
+<p>但還是有些許的缺點，例如我們再提取特徵項似的分類時，我們還是要對每一個分類進行計算，無法省略這步驟，在特徵項似的分類量非常大的時候，計算就會變為更緩慢。</p>
+<p>但 Faster R-CNN 提高準確率與速度，實現了點到點檢測目標框架，生成建議框架只需要大約 10s。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第八次團隊作業 - 使用 google colab 與 LSTM 進行期貨價格預測</title>
+    <url>/2021/05/31/Media_with_Image_recognition/NTUTcs_MediaHW08G01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+<p>訓練的資料是從 <a href="https://api.finmindtrade.com/docs" target="_blank" rel="noopener">FinMind Api</a> 取得，謝謝他們的無私奉獻，讓我們可以輕鬆讀取資料。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="專案說明"><a href="#專案說明" class="headerlink" title="專案說明"></a>專案說明</h2><blockquote>
+<p>如紅色線條上方說明文字<br><img src="https://drive.google.com/u/2/uc?id=1xF9nYaQNrgflJApxgQTi8tPVUohvVzRV&export=download" alt=""></p>
+</blockquote>
+<p>此文章的目的是紀錄如何透過 LSTM 與 google colab 來進行期貨價格預測</p>
+<h2 id="Long-Short-Term-Memory-LSTM-模型說明"><a href="#Long-Short-Term-Memory-LSTM-模型說明" class="headerlink" title="Long Short-Term Memory(LSTM) 模型說明"></a>Long Short-Term Memory(LSTM) 模型說明</h2><p>LSTM 主要是透過 cell 組成，cell 由輸入門、遺忘門、輸出門、單元狀態組成。</p>
+<ul>
+<li>輸入門：決定當下輸入的資料有多少要保留到此 cell </li>
+<li>遺忘門：決定前一個 cell 給我們的資料要保留多少</li>
+<li>輸出門：決定有多少資料要輸出給下一個 cell</li>
+</ul>
+<p>詳細的講解可以看這篇，解釋得很好，<a href="https://www.zhihu.com/question/64470274/answer/256379387" target="_blank" rel="noopener">Keras关于LSTM的units参数，还是不理解? by lonlon ago</a></p>
+<h2 id="LSTM-訓練流層"><a href="#LSTM-訓練流層" class="headerlink" title="LSTM 訓練流層"></a>LSTM 訓練流層</h2><ul>
+<li>讀取資料、資料前處理</li>
+<li>將資料處理成 train_dataset、test_dataset</li>
+<li>建立 LSTM 神經網路模型，設定模型內的神經網路</li>
+<li>將資料送入網路進行訓練</li>
+<li>使用訓練好的模型進行預測</li>
+</ul>
+<h2 id="使用-google-colab-進行期貨價格預測"><a href="#使用-google-colab-進行期貨價格預測" class="headerlink" title="使用 google colab 進行期貨價格預測"></a>使用 google colab 進行期貨價格預測</h2><p>如果不知道 colab 如何打開，可以看看 <a href="https://theriseofdavid.github.io/2021/05/19/Media_with_Image_recognition/NTUTcs_MediaHW07G01/#%E4%BD%BF%E7%94%A8-google-colab-%E4%BE%86%E9%80%B2%E8%A1%8C%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98" target="_blank" rel="noopener">使用 google colab 與進行 yolo 訓練 by 大衞的筆記</a></p>
+<h3 id="import-package"><a href="#import-package" class="headerlink" title="import package"></a>import package</h3><p>第一步先 import 資料</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense, LSTM</span><br></pre></td></tr></table></figure>
+
+<h3 id="從-Findmind-API-獲取期貨資料"><a href="#從-Findmind-API-獲取期貨資料" class="headerlink" title="從 Findmind API 獲取期貨資料"></a>從 Findmind API 獲取期貨資料</h3><p>Findmind API 是蒐集了主要大國投資商品的資料，包括台股、期貨….。</p>
+<p>我們只需要 call API，就可以獲得大量的資料，是非常方便的工具。</p>
+<p>謝謝 Findmind 團隊們用心支援且有免費的項目可讓學生順利用來測試。</p>
+<ul>
+<li><a href="https://github.com/FinMind/FinMind" target="_blank" rel="noopener">Findmind github</a></li>
+<li><a href="https://finmind.github.io/tutor/TaiwanMarket/Derivative/#taiwanfuturesdaily" target="_blank" rel="noopener">Findmind API 期貨獲得資料教學</a></li>
+</ul>
+<p>接下來我們 call api，獲得資料</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">url = <span class="string">"https://api.finmindtrade.com/api/v4/data"</span></span><br><span class="line">parameter = &#123;</span><br><span class="line">    <span class="string">"dataset"</span>: <span class="string">"TaiwanFuturesDaily"</span>,</span><br><span class="line">    <span class="string">"data_id"</span>: <span class="string">"TX"</span>,</span><br><span class="line">    <span class="string">"start_date"</span>: <span class="string">"2021-05-01"</span>,</span><br><span class="line">    <span class="string">"end_date"</span>: <span class="string">"2021-05-29"</span>,</span><br><span class="line">    <span class="string">"token"</span>: <span class="string">""</span>, <span class="comment"># 參考登入，獲取金鑰</span></span><br><span class="line">&#125;</span><br><span class="line">resp = requests.get(url, params=parameter)</span><br><span class="line">data = resp.json()</span><br><span class="line">data = pd.DataFrame(data[<span class="string">"data"</span>])</span><br><span class="line">print(data.head())</span><br><span class="line">data = data.set_index(<span class="string">"date"</span>)</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>其完成後主要如下，雖然我覺得 google colab 會隱藏資訊不是很好…。但是他提供強大運算，超讚的拉！<br><img src="https://drive.google.com/u/2/uc?id=1IFmjMTlz7uUDh73bCkvBIlPharJUtjim&export=download" alt=""></p>
+</blockquote>
+<h3 id="畫出趨勢圖"><a href="#畫出趨勢圖" class="headerlink" title="畫出趨勢圖"></a>畫出趨勢圖</h3><p>我們先畫出趨勢圖，檢查這份資料是否有異常的情況</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#劃出趨勢圖</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_picture</span><span class="params">(data = data)</span>:</span></span><br><span class="line">  data[<span class="string">'close'</span>].plot()</span><br><span class="line">  plt.figure(figsize=(<span class="number">100</span>, <span class="number">50</span>)) <span class="comment">#figsize 設定寬度、長度</span></span><br><span class="line">  plt.show()</span><br><span class="line">get_picture(data)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>趨勢圖大概如下<br><img src="https://drive.google.com/u/2/uc?id=1V67PQEpM-Ail8UTgazmAJBGz-lS8bXq-&export=download" alt=""></p>
+</blockquote>
+<h3 id="將-dataframe-的-date-轉換為時間軸，好讓-LSTM-認清楚新舊資料"><a href="#將-dataframe-的-date-轉換為時間軸，好讓-LSTM-認清楚新舊資料" class="headerlink" title="將 dataframe 的 date 轉換為時間軸，好讓 LSTM 認清楚新舊資料"></a>將 dataframe 的 date 轉換為時間軸，好讓 LSTM 認清楚新舊資料</h3><p>於是我們將資料進行轉換</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#轉換序列</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processing</span><span class="params">(data=data, long=<span class="number">11</span>)</span>:</span> <span class="comment">#long 是我們的記憶長度，也就是我們通常用 11 筆來預測預估一筆資料</span></span><br><span class="line">  <span class="comment">#將資料型態轉換為 float，怕資料讀取時 dataframe 誤以為字串</span></span><br><span class="line">  data[<span class="string">"close"</span>] = data[<span class="string">"close"</span>].astype(float) </span><br><span class="line">  sample_size = len(data) - long + <span class="number">1</span> <span class="comment">#計算樣本長度</span></span><br><span class="line">  print(<span class="string">"共有&#123;&#125;個樣本"</span>.format(sample_size))</span><br><span class="line">  </span><br><span class="line">  data_sample = [] <span class="comment">#新增 list 用來儲存</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(sample_size): </span><br><span class="line">    data_sample.append(data[<span class="string">"close"</span>][i:i+long]) <span class="comment">#將前 11 筆資料，一同放入 data_sample</span></span><br><span class="line">    <span class="comment">#注意：python dataframe [i:i+3]，最後一筆資料是不會抓的</span></span><br><span class="line">    <span class="comment">#舉例：df[1:3] py 只抓兩筆資料</span></span><br><span class="line"></span><br><span class="line">  data_sample = np.array(data_sample) <span class="comment">#將 list 轉換為 num array </span></span><br><span class="line">  <span class="keyword">return</span> data_sample</span><br><span class="line"></span><br><span class="line">processing(data)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>完成後大概如下<br><img src="https://drive.google.com/u/2/uc?id=16cZvDIlhf766yYCulYcA7cxXmLEkF67Q&export=download" alt=""></p>
+</blockquote>
+<h3 id="建立-LSTM-模型"><a href="#建立-LSTM-模型" class="headerlink" title="建立 LSTM 模型"></a>建立 LSTM 模型</h3><p>此 function 則是建立且訓練 LSTM 網路</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stock_LSTM</span><span class="params">(input_data=None)</span>:</span> <span class="comment">#input_data 要訓練的資料</span></span><br><span class="line">  scaler_x = MinMaxScaler() <span class="comment">#將原先的資料數值分布改分散至 0~1 區間，稱為歸一化</span></span><br><span class="line">  scaler_y = MinMaxScaler() <span class="comment">#同上</span></span><br><span class="line">  x = input_data[:, :<span class="number">-1</span>] <span class="comment"># x 軸為所有期貨資料</span></span><br><span class="line">  y = input_data[:, <span class="number">-1</span>]  <span class="comment">#y 軸則是最後一筆期貨資料</span></span><br><span class="line">  x = scaler_x.fit_transform(x) <span class="comment">#資料進行歸一化，使用方法為找出轉換資料規則</span></span><br><span class="line">  y = scaler_y.fit_transform(np.reshape(y, (len(y), <span class="number">1</span>))) <span class="comment">#將資料進行 reshape</span></span><br><span class="line">  spilt = int(len(y) * <span class="number">0.8</span>) <span class="comment">#0.8 為訓練集 0.2 為測試集</span></span><br><span class="line">  x_train = x[:spilt] <span class="comment">#py dataframe 切資料</span></span><br><span class="line">  x_test = x[spilt:]</span><br><span class="line">  y_train = y[:spilt]</span><br><span class="line">  y_test = y[spilt:] <span class="comment">#以上</span></span><br><span class="line">  print(x_train.shape[<span class="number">0</span>], x_train.shape[<span class="number">1</span>])</span><br><span class="line">  x_train = np.reshape(x_train, (x_train.shape[<span class="number">0</span>], x_train.shape[<span class="number">1</span>], <span class="number">1</span>)) <span class="comment">#將資料 reshape</span></span><br><span class="line">  x_test = np.reshape(x_test, (x_test.shape[<span class="number">0</span>], x_test.shape[<span class="number">1</span>], <span class="number">1</span>)) <span class="comment">#將資料 reshape</span></span><br><span class="line"></span><br><span class="line">  model = Sequential() <span class="comment">#初始化 Sequentail 模型，序列模型</span></span><br><span class="line">  <span class="comment">#加入 LSTM 深度學習，使用 50 個維度，並輸入資料</span></span><br><span class="line">  model.add(LSTM(<span class="number">50</span>, input_shape=(x_train.shape[<span class="number">1</span>],<span class="number">1</span>), return_sequences=<span class="literal">True</span>))</span><br><span class="line">  <span class="comment">#model.add(LSTM(100)) 如果使用 100 個維度就使用這個，越多維度理論上會越精準，但要小心 overfitting</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#加入 dense 激勵函數，主要是判定權重用</span></span><br><span class="line">  model.add(Dense(<span class="number">1</span>, activation=<span class="string">"linear"</span>)) </span><br><span class="line">  model.compile(loss=<span class="string">"mse"</span>, optimizer=<span class="string">"rmsprop"</span>) <span class="comment">#進行訓練，選擇遺失函數的方法、與 optimizer 方法</span></span><br><span class="line">  print(<span class="string">"訓練中..."</span>)</span><br><span class="line">  <span class="comment">#開始進行模型擬和，batch_size 的大小，epochs 疊代大小，</span></span><br><span class="line">  <span class="comment">#validation_split 將訓連集資料一部份用於模型測試</span></span><br><span class="line">  history = model.fit(x_train, y_train, batch_size=<span class="number">8</span>, epochs=<span class="number">300</span>, validation_split=<span class="number">0.1</span>) </span><br><span class="line"></span><br><span class="line">  <span class="comment">#繪製多圖，row 1 column 2</span></span><br><span class="line">  fig, (ax1, ax2) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">12</span>, <span class="number">4.5</span>))</span><br><span class="line"></span><br><span class="line">  <span class="comment">#劃出 train_loss，這個資料的不確定姓</span></span><br><span class="line">  ax1.set_title(<span class="string">"train_loss"</span>)</span><br><span class="line">  ax1.set_ylabel(<span class="string">"loss"</span>)</span><br><span class="line">  ax1.set_xlabel(<span class="string">"Epoch"</span>)</span><br><span class="line">  ax1.plot(history.history[<span class="string">"loss"</span>])</span><br><span class="line"></span><br><span class="line">  <span class="comment">#劃出預測圖</span></span><br><span class="line">  predict = model.predict(x_test)</span><br><span class="line">  <span class="comment">#將原本進行規一化的資料，反轉為原始數據</span></span><br><span class="line">  y_test = scaler_y.inverse_transform(np.reshape(y_test, (len(y_test), <span class="number">1</span>)))</span><br><span class="line">  <span class="comment">#將原本進行規一化的資料，反轉為原始數據</span></span><br><span class="line">  predict = scaler_y.inverse_transform(predict)</span><br><span class="line"></span><br><span class="line">  <span class="comment">#劃出預測圖</span></span><br><span class="line">  ax2.set_title(<span class="string">"stock predict result"</span>)</span><br><span class="line">  ax2.set_ylabel(<span class="string">"price"</span>)</span><br><span class="line">  ax2.set_xlabel(<span class="string">"time"</span>)</span><br><span class="line">  ax2.plot(predict, <span class="string">"g:"</span>)</span><br><span class="line">  ax2.plot(y_test, <span class="string">"r-"</span>)</span><br><span class="line">  fig.show()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>必須看到疊代跑到 300 才表示 LSTM 完成，接下來則會看到兩張圖<br>train_loss 表示資料的不確定性、stock predict result 的綠色折線圖則是原始的歷史價格走勢、紅色則是 LSTM 的預測價格走勢，可以發現 LSTM 其實理論上蠻準的，用於預測趨勢是可行的！<br><img src="https://drive.google.com/u/2/uc?id=1-QEv6PvpZy3KkGOK_fHhxTCbScygMRkW&export=download" alt=""></p>
+</blockquote>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>北科資工大二下 多媒體技術與應用 L10 課程<br><a href="https://wenwender.wordpress.com/2019/10/18/%E5%AF%A6%E4%BD%9C%E9%80%8F%E9%81%8Elstm%E9%A0%90%E6%B8%AC%E8%82%A1%E7%A5%A8/" target="_blank" rel="noopener">實作:透過LSTM預測股票 by nthu</a><br><a href="https://ithelp.ithome.com.tw/articles/10191725" target="_blank" rel="noopener">Day 05：Keras 模型、函數及參數使用說明 by I code so I am</a><br><a href="https://keras-cn.readthedocs.io/en/latest/layers/core_layer/" target="_blank" rel="noopener">Keras 中文文檔</a><br><a href="https://keras.io/api/optimizers/" target="_blank" rel="noopener">Keras Optimizers</a><br><a href="https://blog.csdn.net/yunfeather/article/details/106463327" target="_blank" rel="noopener">tensorflow中model.fit()用法 by yunfeather</a><br><a href="https://blog.csdn.net/htuhxf/article/details/82986440" target="_blank" rel="noopener">python 可视化：fig, ax = plt.subplots()画多表图的3中常见样例 &amp; 自定义图表格式 by htuhxf</a><br><a href="https://blog.csdn.net/qq_34840129/article/details/86257790" target="_blank" rel="noopener">inverse_transform()的用法 by bebr</a><br><a href="https://keras.io/zh/getting-started/sequential-model-guide/" target="_blank" rel="noopener">开始使用 Keras Sequential 顺序模型 by Keras 中文文檔</a><br><a href="https://keras.io/zh/optimizers/" target="_blank" rel="noopener">RMSprop by Keras 中文文檔</a><br><a href="https://blog.csdn.net/weixin_40683253/article/details/81508321" target="_blank" rel="noopener">数据归一化 - MinMaxScaler()/MaxAbsScaler() - Python代码 by 黄大侠aa</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>謝謝助教與老師！這是我很有收穫的一次！</p>
+<p>上次的 yolo 其實也大有收穫，但是 yolo 太多我不懂的問題了，讓我在突破的時候充滿痛苦感QQ，但是這次的 LSTM 就不會很有痛苦感，而且可以用於我感興趣的。</p>
+<p>這次助教的 code 給的很詳細，然後我在寫 blog 時就可以將一些在寫 code 沒有注意到的事項補足、加強，這樣我就可以將應用 LSTM 用的在更好些。</p>
+<p>希望我可以應用看看股票預測。</p>
+<p>也要謝謝力瑋告訴我 finMind API 可以讓我獲得資料，這是非常好用的 API，也要謝謝力瑋可以在 6/1 01:04 時還可以解釋我的問題。</p>
+<p>嗚嗚，我的資工導師QQ。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
       </tags>
   </entry>
 </search>
