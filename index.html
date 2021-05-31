@@ -164,7 +164,7 @@ ga('send', 'pageview');
        
 <h2 itemprop="name">
   <a class="article-title" href="/2021/06/01/Explain_Algorithm/interpolation_search/"
-    >Explain_Algorithm/interpolation_search</a
+    >演算法知識 - 插值搜尋 inerpolation search</a
   >
 </h2>
   
@@ -175,9 +175,13 @@ ga('send', 'pageview');
     
     <div class="article-meta">
       <a href="/2021/06/01/Explain_Algorithm/interpolation_search/" class="article-date">
-  <time datetime="2021-05-31T17:15:59.536Z" itemprop="datePublished">2021-06-01</time>
+  <time datetime="2021-06-01T08:54:07.000Z" itemprop="datePublished">2021-06-01</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
       
       
       
@@ -194,6 +198,15 @@ ga('send', 'pageview');
       
 
       
+      <h2 id="插值搜尋-inerpolation-search-介紹與實作原理"><a href="#插值搜尋-inerpolation-search-介紹與實作原理" class="headerlink" title="插值搜尋 inerpolation search 介紹與實作原理"></a>插值搜尋 inerpolation search 介紹與實作原理</h2><blockquote>
+<p>插值搜尋主要用在於資料量大，且資料離散程度大致相同的數列。</p>
+<p>其概念與<a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">二分搜尋 by 大衞的筆記</a> 概念大致相同，只有對於 mid 並不同。</p>
+<p>二分搜尋再分成左右子樹時，是切半分配。<br>插值搜尋則是透過斜率公式去進行優化。</p>
+<p>其主要插值法的選擇原理如下<br>value 是我們要查詢的值，那 \(x_1, x_2\) 則是我們現在進行搜尋的區間，因為我們要搜尋的數列是<strong>已經排序好</strong>的數列，那我們假設區間的資料都是相同離散分布，因此理論上我們可以透過斜率來猜測我們的 value 應該位於 m 處(數列 index)。<br>也就是我們透過 \(m = \frac{(value - y_1)(x_2 - x_1)}{(y_2 - y_1)} + x_1\)。</p>
+<p><img src="https://drive.google.com/u/2/uc?id=1c-CeW3Cg8KwD7aruMKQ3lqAxUQY6EDQH&export=download" alt=""></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/06/01/Explain_Algorithm/interpolation_search/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -206,6 +219,8 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
 
     </footer>
 
@@ -1037,7 +1052,7 @@ ga('send', 'pageview');
 <script>
   try {
     var typed = new Typed("#subtitle", {
-      strings: ['筱柔，我想要緊緊抱住你，那感覺就像得到了全世界。', '希望未來還可以跟你在一起，我會努力做好稱職的男朋友的！', '未來也請多指教拉 ε٩(๑&gt; ₃ &lt;)۶з，親親抱抱揉揉胸~'],
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
       startDelay: 0,
       typeSpeed: 200,
       loop: true,

@@ -19720,8 +19720,36 @@
       </tags>
   </entry>
   <entry>
-    <title>Explain_Algorithm/interpolation_search</title>
+    <title>演算法知識 - 插值搜尋 inerpolation search</title>
     <url>/2021/06/01/Explain_Algorithm/interpolation_search/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="插值搜尋-inerpolation-search-介紹與實作原理"><a href="#插值搜尋-inerpolation-search-介紹與實作原理" class="headerlink" title="插值搜尋 inerpolation search 介紹與實作原理"></a>插值搜尋 inerpolation search 介紹與實作原理</h2><blockquote>
+<p>插值搜尋主要用在於資料量大，且資料離散程度大致相同的數列。</p>
+<p>其概念與<a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">二分搜尋 by 大衞的筆記</a> 概念大致相同，只有對於 mid 並不同。</p>
+<p>二分搜尋再分成左右子樹時，是切半分配。<br>插值搜尋則是透過斜率公式去進行優化。</p>
+<p>其主要插值法的選擇原理如下<br>value 是我們要查詢的值，那 \(x_1, x_2\) 則是我們現在進行搜尋的區間，因為我們要搜尋的數列是<strong>已經排序好</strong>的數列，那我們假設區間的資料都是相同離散分布，因此理論上我們可以透過斜率來猜測我們的 value 應該位於 m 處(數列 index)。<br>也就是我們透過 \(m = \frac{(value - y_1)(x_2 - x_1)}{(y_2 - y_1)} + x_1\)。</p>
+<p><img src="https://drive.google.com/u/2/uc?id=1c-CeW3Cg8KwD7aruMKQ3lqAxUQY6EDQH&export=download" alt=""></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="插值搜尋-inerpolation-search-程式碼說明與應用"><a href="#插值搜尋-inerpolation-search-程式碼說明與應用" class="headerlink" title="插值搜尋 inerpolation search  程式碼說明與應用"></a>插值搜尋 inerpolation search  程式碼說明與應用</h2><p>透過程式碼來進行說明相信會更好理解，以下我們示範搜尋 4 這個位置。</p>
+<p>由於我們資料離散程度相當，因此只需要一次我們就可以成功找到。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;; <span class="comment">//已經排序好的數列 </span></span><br><span class="line"><span class="keyword">int</span> num_size; <span class="comment">//數列長度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">interpolation_search</span><span class="params">(<span class="keyword">int</span> val)</span></span>&#123; <span class="comment">//val 要查詢的值</span></span><br><span class="line">    <span class="keyword">int</span> L = <span class="number">0</span>; <span class="comment">//左邊界</span></span><br><span class="line">    <span class="keyword">int</span> R = num_size<span class="number">-1</span>; <span class="comment">//右邊界</span></span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"interpolation search start.\n"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(R &gt;= L)&#123; <span class="comment">//如果右邊界 &gt;= 左邊界，就繼續執行</span></span><br><span class="line">        <span class="comment">//斜率優化公式找出 mid</span></span><br><span class="line">        <span class="keyword">int</span> mid = L + (val-num[L]) * (R-L) / (num[R]-num[L]);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ++cnt &lt;&lt; <span class="string">" search. find "</span> &lt;&lt; num[mid] &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="keyword">if</span>(num[mid] == val) <span class="keyword">return</span> mid; <span class="comment">//如果成功找到，就輸出 index</span></span><br><span class="line">        <span class="comment">//如果 num[mid] &gt; val，表示資料在左邊界，那就將左邊界改為 mid+1</span></span><br><span class="line">        <span class="keyword">if</span>(num[mid] &gt; val) L = mid+<span class="number">1</span>;</span><br><span class="line">        <span class="comment">//如果 num[mid] &lt; val，表示資料在右邊界，那就將右邊界改為 mid+1 </span></span><br><span class="line">        <span class="keyword">if</span>(num[mid] &lt; val) R = mid; </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"cat't find "</span> &lt;&lt; val &lt;&lt; <span class="string">"\n"</span>; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//無法找到，輸出 -1</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    num_size = <span class="keyword">sizeof</span>(num) / <span class="keyword">sizeof</span>(num[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">int</span> val = <span class="number">4</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; val &lt;&lt; <span class="string">" position is "</span> &lt;&lt; interpolation_search(val) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://ithelp.ithome.com.tw/articles/10207069" target="_blank" rel="noopener">[演算法] 插補搜尋 (Interpolation Search) by ramonliao</a><br><a href="http://notepad.yehyeh.net/Content/Algorithm/Search/InterpolationSearch/InterpolationSearch.php#" target="_blank" rel="noopener">[演算法] 插補搜尋法(Interpolation Search) by yehyeh notepad</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>由於 C++ 已經有搜尋的函式 <code>upper_bound</code>、<code>lower_bound</code>，因此我在高中學會後我就再也沒有去複習這些知識。</p>
+<p><a href="https://theriseofdavid.github.io/2021/02/28/C++/C++_binarysearch/" target="_blank" rel="noopener">QUESTION! C++11 upperbound and lowerbound 用法 by 大衞的筆記</a></p>
+<p>剛好現在上課有用到那就來複習，順便把它寫出邏輯八！</p>
+<h2 id="程式執行結果"><a href="#程式執行結果" class="headerlink" title="程式執行結果"></a>程式執行結果</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1n6OF2TTPELwlThdEbcZqI8DpZLBBiy5v&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>數論 Math theorm</tag>
+      </tags>
   </entry>
 </search>
