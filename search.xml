@@ -15864,7 +15864,158 @@
 </ul>
 </li>
 </ul>
-<h1 id="確認何時進行刪除與增加變數-Determining-When-to-Add-or-Delete-Variables"><a href="#確認何時進行刪除與增加變數-Determining-When-to-Add-or-Delete-Variables" class="headerlink" title="確認何時進行刪除與增加變數 Determining When to Add or Delete Variables"></a>確認何時進行刪除與增加變數 Determining When to Add or Delete Variables</h1><h1 id="選擇變數的程序-Variable-Selection-Procedures"><a href="#選擇變數的程序-Variable-Selection-Procedures" class="headerlink" title="選擇變數的程序 Variable Selection Procedures"></a>選擇變數的程序 Variable Selection Procedures</h1><h1 id="實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental"><a href="#實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental" class="headerlink" title="實驗設計複回歸方法 Multiple Regression Approach to Experimental"></a>實驗設計複回歸方法 Multiple Regression Approach to Experimental</h1><h1 id="資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test"><a href="#資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test" class="headerlink" title="資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test"></a>資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test</h1>]]></content>
+<h1 id="確認何時進行刪除與增加變數-Determining-When-to-Add-or-Delete-Variables"><a href="#確認何時進行刪除與增加變數-Determining-When-to-Add-or-Delete-Variables" class="headerlink" title="確認何時進行刪除與增加變數 Determining When to Add or Delete Variables"></a>確認何時進行刪除與增加變數 Determining When to Add or Delete Variables</h1><ul>
+<li>我們有時候沒有辦法確定現在模型中的所有應變數都是適合預測</li>
+<li>刪除 A 應變數，我們能保證刪除她更好預測嗎？</li>
+<li>增加 B 應變數，我們能保證有加入他更適合預測嗎？</li>
+<li>此時我們使用 F 檢定來進行判斷<ul>
+<li>公式概念：\(F = \frac{(SSE(\text{增加 or 缺少的應變數})) / \text{number of extra terms}}{MSE(\text{增加 or 缺少的應變數})}\)</li>
+<li>不懂 SSE、MSE 則可以看 <a href="https://theriseofdavid.github.io/2021/05/02/statistics/statistics-ch14/#%E5%88%A4%E5%AE%9A%E4%BF%82%E6%95%B8-Cofficient-of-Determination" target="_blank" rel="noopener">判定係數 by 大衛的筆記</a></li>
+<li>公式：\(F = \frac{(SSE(x_1) - SSE(x_1, x_2)) / 1 }{(SSE(x_1, x_2)) / (n-p-1)}\)<ul>
+<li>這邊我們假設，全部的應變數最多有兩個，我們刪除 \(x_2\) 的情況</li>
+<li>因此 \(\text{number of extra terms} = 1\) 移除了 \(x_2\)</li>
+<li>\(p=1\)，因為我們使用的參數只剩下 \(x_1\)</li>
+</ul>
+</li>
+<li>接下來我們透過 F 檢定計算出 \(p-value\) 後去對 \(\alpha\) 比較<ul>
+<li>Reject \(H_0\) 就可以執行此命令</li>
+<li>如果沒有，就不進行改動</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>除了使用 F 檢定我們也可以用 t 檢定進行刪除或增加變數，還記得我們之前有在<a href="https://theriseofdavid.github.io/2021/05/15/statistics/statistics-ch15/#%E9%A1%AF%E8%91%97%E6%80%A7%E6%B8%AC%E8%A9%A6-Testing-for-Significance" target="_blank" rel="noopener">複回歸做顯著性測試嗎?</a>，<ul>
+<li>我們會找出所有應變數的 t，如果 t not reject \(H_0\) 我們就可以移除此變數</li>
+<li>如果沒有，那我們可以將 t 值最小的進行移除，<strong>記住，每移除一個變數就必須重做一次回歸</strong>，因為我們沒有辦法保證移除一個變數後，整個回歸方程式的線依然不變，有可能我們移除此變數後，其他變數的 t 值就改變。 </li>
+</ul>
+</li>
+</ul>
+<h1 id="選擇變數的程序-Variable-Selection-Procedures"><a href="#選擇變數的程序-Variable-Selection-Procedures" class="headerlink" title="選擇變數的程序 Variable Selection Procedures"></a>選擇變數的程序 Variable Selection Procedures</h1><h2 id="變數選擇：逐步回歸-Variable-Selection-Stepwise-Regression"><a href="#變數選擇：逐步回歸-Variable-Selection-Stepwise-Regression" class="headerlink" title="變數選擇：逐步回歸 Variable Selection: Stepwise Regression"></a>變數選擇：逐步回歸 Variable Selection: Stepwise Regression</h2><ul>
+<li>一開始我們先只有一個自變數在回歸方程式，然後跑一遍</li>
+<li>再來我們進行疊代<ul>
+<li>移除疊代<ul>
+<li>設定 \(\alpha\) 值</li>
+<li>移除一個應變數</li>
+<li>判斷移除後的回歸方程式的 F 檢定 p-value 是否有大於 \(\alpha\)</li>
+<li>如果有，可以移除；如果沒有，不可以移除</li>
+</ul>
+</li>
+<li>增加疊代<ul>
+<li>如果已經不能再做移除疊代，則做增加疊代</li>
+<li>設定 \(\alpha\) 值，必須<strong>小於</strong>移除疊代的 \(\alpha\) 不同，不可以等於，這樣則會無窮迴圈</li>
+<li><strong>增加</strong>一個應變數</li>
+<li>判斷移除後的回歸方程式的 F 檢定 p-value 是否有小於 \(\alpha\)</li>
+<li>如果有，可以增加，並<strong>重新進行移除疊代</strong>；如果沒有，不可以增加</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如此來找出最好的回歸方程式</li>
+<li>流層圖如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1eq2MkP8onnyc1-Vx4rn0US9UQtGPb7kg&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="變數選擇：-不斷消除-Variable-Selection-Backward-Elimination"><a href="#變數選擇：-不斷消除-Variable-Selection-Backward-Elimination" class="headerlink" title="變數選擇： 不斷消除 Variable Selection: Backward Elimination"></a>變數選擇： 不斷消除 Variable Selection: Backward Elimination</h2><ul>
+<li>一開始我們<strong>所有</strong>自變數在回歸方程式，然後跑一遍</li>
+<li>再來我們進行疊代<ul>
+<li>移除疊代<ul>
+<li>設定 \(\alpha\) 值</li>
+<li>移除一個應變數</li>
+<li>判斷移除後的回歸方程式的 F 檢定 p-value 是否有小於 \(\alpha\)</li>
+<li>如果有，可以移除，並重複此步驟；如果沒有，就不在需要進行疊代</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如此來找出最好的回歸方程式</li>
+<li>流層圖如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1oWTjVxAiLR38fO5_q7QqNrKhhTCUrAPA&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="舉例：房地產公司想針對-A-地區做房價預測，於是他找出-25-筆當地房屋成交資料，我們透過-Backward-Elimination-找出迴歸分析需要的自變數，-alpha-0-05"><a href="#舉例：房地產公司想針對-A-地區做房價預測，於是他找出-25-筆當地房屋成交資料，我們透過-Backward-Elimination-找出迴歸分析需要的自變數，-alpha-0-05" class="headerlink" title="舉例：房地產公司想針對 A 地區做房價預測，於是他找出 25 筆當地房屋成交資料，我們透過 Backward Elimination 找出迴歸分析需要的自變數，\(alpha = 0.05\)"></a>舉例：房地產公司想針對 A 地區做房價預測，於是他找出 25 筆當地房屋成交資料，我們透過 Backward Elimination 找出迴歸分析需要的自變數，\(alpha = 0.05\)</h3><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1rRF7ismKXpsZJs6wVF7flOrw5P3veNpD&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>現在我們有四個自變數(House Size, Bedrooms, Bathrooms, Cars)，與一個因變數(price)，開始進行迴歸分析中的變數選擇： 不斷消除<ul>
+<li>我們可以發現 Cars 的 p-value 最大並且大於 0.05(\(\alpha\))，因此我們進行移除。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1dXapSPVrbYmp89baD__6P0BVzd2gJTTP&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>我們可以發現 Bedrooms 的 p-value 最大並且大於 0.05(\(\alpha\))，因此我們進行移除。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1b4gQgYowplFFnORL6V5kR1gbQyzbVCXr&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>我們可以發現 Bathrooms 的 p-value 最大並且大於 0.05(\(\alpha\))，因此我們進行移除。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=10SNPQ5NU3MRXWRPVg6gwbQyfoGUT6B5w&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>我們可以發現 Bathrooms 的 p-value 最大，可是<strong>小於</strong> 0.05(\(\alpha\))，因此我們<strong>無法</strong>移除。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=11vBT4IPyTdnWDb7w73XAMotJUm6WqUEhH&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此我們到這邊就好，不需要再做改變</li>
+</ul>
+</li>
+<li>接下來我們根據只有 house size 做回歸方程式，預測的回歸方程式為 \(\hat{y} = -9.8669 + 11.3383(\text{House Size})\)</li>
+</ul>
+<h2 id="變數選擇：-不斷增加-Variable-Selection-Forward-Elimination"><a href="#變數選擇：-不斷增加-Variable-Selection-Forward-Elimination" class="headerlink" title="變數選擇： 不斷增加 Variable Selection: Forward Elimination"></a>變數選擇： 不斷增加 Variable Selection: Forward Elimination</h2><ul>
+<li>一開始我們先只有一個自變數在回歸方程式，然後跑一遍</li>
+<li>再來我們進行疊代<ul>
+<li>增加疊代<ul>
+<li>設定 \(\alpha\) 值</li>
+<li><strong>增加</strong>一個應變數</li>
+<li>判斷移除後的回歸方程式的 F 檢定 p-value 是否有小於 \(\alpha\)</li>
+<li>如果有，增加此自變數；如果沒有，就不在需要進行疊代</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如此來找出最好的回歸方程式</li>
+<li>流層圖如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1sZQMdb3uxYpfUm2ecUEuV6UAksLA01bw&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="變數選擇：-最佳子集合-Variable-Selection-Best-Subest-Regression"><a href="#變數選擇：-最佳子集合-Variable-Selection-Best-Subest-Regression" class="headerlink" title="變數選擇： 最佳子集合 Variable Selection: Best-Subest Regression"></a>變數選擇： 最佳子集合 Variable Selection: Best-Subest Regression</h2><ul>
+<li>由於變數選擇： 不斷增加、變數選擇： 不斷消除、變數選擇：逐步回歸，這三種變數選擇方式都不一定可以找出最好的結果，但一定可以找出離最佳解最近的組合。</li>
+<li>那我們要找出最佳解，怎麼找呢？<strong>排列組合</strong></li>
+<li>我們可以定義我們要用幾個自變數進行迴歸分析，之後進行排列組合，並且每種組合輸出他的回歸方程式。</li>
+<li>再來我們在每種組合中找出最棒的組合回歸方程式，也就是 \(\text{adjust} R^2\) 最高。</li>
+<li>我們就使用她進行回歸方程式。</li>
+<li>當然，我們也不一定要限定<strong>幾個</strong>，我們可以全部都來，從 1 個自變數到 n 個自變數都差不多。</li>
+</ul>
+<h3 id="舉例：我們想要預測高爾夫球比賽分數結果，下面會顯示我們的變數有哪些，請使用變數選擇：-最佳子集合找出迴歸分析需要的自變數，-alpha-0-05"><a href="#舉例：我們想要預測高爾夫球比賽分數結果，下面會顯示我們的變數有哪些，請使用變數選擇：-最佳子集合找出迴歸分析需要的自變數，-alpha-0-05" class="headerlink" title="舉例：我們想要預測高爾夫球比賽分數結果，下面會顯示我們的變數有哪些，請使用變數選擇： 最佳子集合找出迴歸分析需要的自變數，\(alpha = 0.05\)"></a>舉例：我們想要預測高爾夫球比賽分數結果，下面會顯示我們的變數有哪些，請使用變數選擇： 最佳子集合找出迴歸分析需要的自變數，\(alpha = 0.05\)</h3><ul>
+<li>變數名稱與內容如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BRF1y9xvZ5H21QLv6Sdqy8z1XZdSYxP5&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>資料有 Part1、Part2、Part3 由於這是舉例，因此就不類舉完整資料給大家看<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JKo05nYzEW5Phi2jOW6WAAx4Hm8P5tqH&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>我們先用共線性進行判斷，看看哪兩個變數有共線性，看起來沒有<strong>明顯共線性</strong>，圖表如下<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1u95jVz_dPqCCh5MnX6UBd9CSUsQRTJKZ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>再來我們進行排列組合，這裡只印出在使用 n 種自變數下，前兩個最好的\(\text{adjust} R^2\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19IuLuaos5Dq2auK4EkB37dcYXojhZLRB&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>再來我們使用最好的\(\text{adjust} R^2\) 進行迴歸分析(也就是上面圖片中倒數第三個, n=4, \(\text{adjust} R^2 = 66.8\))<ul>
+<li>其中我們可以看到 p-value 都有達顯著性水準(三顆星)</li>
+<li>其中三顆星的標準如下，0.01、0.005、0.001</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1z7_Tq7BoS_ysYdFoDCNx6MrXahermE-M&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental"><a href="#實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental" class="headerlink" title="實驗設計複回歸方法 Multiple Regression Approach to Experimental"></a>實驗設計複回歸方法 Multiple Regression Approach to Experimental</h1><h1 id="資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test"><a href="#資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test" class="headerlink" title="資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test"></a>資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test</h1>]]></content>
       <categories>
         <category>北科上課筆記</category>
         <category>統計 statistics</category>
@@ -19415,6 +19566,46 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>北科大管理資訊系統筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - heap sort 堆積排序</title>
+    <url>/2021/05/31/Explain_Algorithm/heap_sort/</url>
+    <content><![CDATA[<h2 id="heap-sort-堆積排序-介紹與實作原理"><a href="#heap-sort-堆積排序-介紹與實作原理" class="headerlink" title="heap sort 堆積排序 介紹與實作原理"></a>heap sort 堆積排序 介紹與實作原理</h2><blockquote>
+<p>堆積排序是透過最大堆積樹來進行排序，其實作與原理如下<br>主要核心是要讓 root 大於左右子樹，由於我們每次都能夠找出 root，且必定大於左右子樹，因此我們只需要將 root 提出來，再讓左右子樹中的最大值替補 root，依序遞迴擊可。</p>
+<ul>
+<li>我們用一維陣列來表達我們的二元樹</li>
+<li>其中 index 0 一定是二元樹中最大的數字</li>
+<li>透過遞迴，參數： i<ul>
+<li>以當前 i 節點為 root，L、R 分別是左右子樹</li>
+<li>如果左子樹數值比 i 數值還要大，那就讓 i 與左子樹交換</li>
+<li>如果右子樹數值比 i 數值還要大，那就讓 i 與右子樹交換</li>
+<li>如果先前有進行交換的動作，那我們就讓與 i 交換的子樹再重新進行遞迴</li>
+</ul>
+</li>
+</ul>
+<p>我們主要是維護二元堆積樹的 root 最大，如果 root 與其他數值有做交換，那我們必須讓 root 往下至其適合的位置，適合的位置：左右子樹都沒有比他還大，root 本身比左右子樹更大</p>
+<p>時間複查度為 \(O(n log n)\)，在某些演算法中會用到堆積排序，因此算是篇重要的排序演算法之一。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://www.geeksforgeeks.org/heap-sort/" target="_blank" rel="noopener">HeapSort by geeksforgeeks</a></p>
+<h2 id="合併排序-merge-sort-程式碼說明與應用"><a href="#合併排序-merge-sort-程式碼說明與應用" class="headerlink" title="合併排序 merge sort 程式碼說明與應用"></a>合併排序 merge sort 程式碼說明與應用</h2><p>透過程式碼來進行說明相信會更好理解，以下我們示範從小到大排序</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[] = &#123;<span class="number">4</span>,<span class="number">96</span>,<span class="number">1546</span>,<span class="number">13</span>,<span class="number">48</span>,<span class="number">34</span>,<span class="number">77</span>,<span class="number">48</span>,<span class="number">31</span>&#125;; </span><br><span class="line"><span class="keyword">int</span> num_size; <span class="comment">//陣列的 size</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>&#123; <span class="comment">//輸出結果</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; num_size ; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> i)</span></span>&#123; <span class="comment">//建構、調整堆積樹，i 表示數值、n 表示樹的 size</span></span><br><span class="line">    <span class="keyword">int</span> root = i; <span class="comment">//root </span></span><br><span class="line">    <span class="keyword">int</span> L = <span class="number">2</span> * i; <span class="comment">//subtree</span></span><br><span class="line">    <span class="keyword">int</span> R = <span class="number">2</span> * i + <span class="number">1</span>; <span class="comment">//subtree</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//注意：以下只有交換 index</span></span><br><span class="line">    <span class="keyword">if</span>(L &lt; n &amp;&amp; num[L] &gt; num[root]) root = L; <span class="comment">//如果 root 比左子樹小就交換</span></span><br><span class="line">    <span class="keyword">if</span>(R &lt; n &amp;&amp; num[R] &gt; num[root]) root = R; <span class="comment">//如果 root 比右子樹小就交換</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果 root 已經被交換</span></span><br><span class="line">    <span class="keyword">if</span>(root != i)&#123;</span><br><span class="line">        swap(num[root], num[i]); <span class="comment">//這邊才真正進行交換</span></span><br><span class="line">        heapify(n, root); <span class="comment">//繼續遞迴，讓 i 可以到達完整的最大堆積樹，也就是當 i 為 root，左、右子樹都比 root 小。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">()</span></span>&#123; <span class="comment">//進行 heap_sort 排序</span></span><br><span class="line">    <span class="comment">//將每個數值放到適合的堆積位置</span></span><br><span class="line">    <span class="comment">//注意：i 是從 num_size/2 開始，因為我們是從最下層的子樹(root、L、R) 不斷做 heapify</span></span><br><span class="line">    <span class="comment">//到第一層的子樹，這樣才可以將之前堆積的狀態延續至上層。</span></span><br><span class="line">    <span class="comment">//如果從第一層開始做，那每一個 root 都只會是 L、R 的最大值，</span></span><br><span class="line">    <span class="comment">//但上層的 root 並不一定會大於下層或下下層的 root，這整棵樹就並不是一個完整堆積樹</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = num_size/<span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) heapify(num_size, i);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//不斷地拿出 root(最大數值)，放到數列最後面。</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = num_size<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        swap(num[<span class="number">0</span>], num[i]); <span class="comment">//與數列中的最後一個數值交換。這樣越大的數值會被放到越後面</span></span><br><span class="line">        heapify(i, <span class="number">0</span>); <span class="comment">//由於 root 已經不再是最大，因此再次進行 heapify</span></span><br><span class="line">        <span class="comment">//注意：如果我們已經將 1 次 root 與數列最後一個數值交換，那我們下次就不可以把數列中的最後一個數值放入 heapify，不然這次做的堆積樹又會變成下次堆積樹 root，因此我們要將 num_size 減少。</span></span><br><span class="line">        <span class="comment">//因此這裡的 i 為未確定排序陣列的大小。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    num_size = <span class="keyword">sizeof</span>(num) / <span class="keyword">sizeof</span>(num[<span class="number">0</span>]); <span class="comment">//紀錄陣列 size</span></span><br><span class="line">    heap_sort();</span><br><span class="line">    output();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>由於 C++ 已經有很多 sort 套件了，因此我在高中學會後我就再也沒有去複習這些知識。</p>
+<p>剛好現在上課有用到那就來複習，順便把它寫出邏輯八！</p>
+<h2 id="程式執行結果"><a href="#程式執行結果" class="headerlink" title="程式執行結果"></a>程式執行結果</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1z3BiITZyFRgY03M8Eg5tZq022YIpBDib&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>數論 Math theorm</tag>
       </tags>
   </entry>
 </search>

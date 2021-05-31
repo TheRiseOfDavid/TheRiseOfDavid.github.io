@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    北科資財二管理資訊系統 個案七 宸訊科技-開放政府資料打造精準農場決策 |  大衞的筆記
+    演算法知識 - heap sort 堆積排序 |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-case_report/NTUTifm_Manager_t07" class="article article-type-post" itemscope
+  <article id="post-Explain_Algorithm/heap_sort" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  北科資財二管理資訊系統 個案七 宸訊科技-開放政府資料打造精準農場決策
+  演算法知識 - heap sort 堆積排序
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/05/28/case_report/NTUTifm_Manager_t07/" class="article-date">
-  <time datetime="2021-05-28T15:59:50.000Z" itemprop="datePublished">2021-05-28</time>
+      <a href="/2021/05/31/Explain_Algorithm/heap_sort/" class="article-date">
+  <time datetime="2021-05-31T08:54:07.000Z" itemprop="datePublished">2021-05-31</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%80%8B%E6%A1%88%E5%A0%B1%E5%91%8A-Case-Report/">個案報告 Case Report</a> / <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">693</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">2分鐘</span>
+            <span class="post-count">4分鐘</span>
         </span>
     </span>
 </div>
@@ -111,34 +111,33 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
-<p>（請閱讀W11_宸訊科技-開放政府資料打造精準農場決策）</p>
+      <h2 id="heap-sort-堆積排序-介紹與實作原理"><a href="#heap-sort-堆積排序-介紹與實作原理" class="headerlink" title="heap sort 堆積排序 介紹與實作原理"></a>heap sort 堆積排序 介紹與實作原理</h2><blockquote>
+<p>堆積排序是透過最大堆積樹來進行排序，其實作與原理如下<br>主要核心是要讓 root 大於左右子樹，由於我們每次都能夠找出 root，且必定大於左右子樹，因此我們只需要將 root 提出來，再讓左右子樹中的最大值替補 root，依序遞迴擊可。</p>
+<ul>
+<li>我們用一維陣列來表達我們的二元樹</li>
+<li>其中 index 0 一定是二元樹中最大的數字</li>
+<li>透過遞迴，參數： i<ul>
+<li>以當前 i 節點為 root，L、R 分別是左右子樹</li>
+<li>如果左子樹數值比 i 數值還要大，那就讓 i 與左子樹交換</li>
+<li>如果右子樹數值比 i 數值還要大，那就讓 i 與右子樹交換</li>
+<li>如果先前有進行交換的動作，那我們就讓與 i 交換的子樹再重新進行遞迴</li>
+</ul>
+</li>
+</ul>
+<p>我們主要是維護二元堆積樹的 root 最大，如果 root 與其他數值有做交換，那我們必須讓 root 往下至其適合的位置，適合的位置：左右子樹都沒有比他還大，root 本身比左右子樹更大</p>
+<p>時間複查度為 \(O(n log n)\)，在某些演算法中會用到堆積排序，因此算是篇重要的排序演算法之一。</p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="請探討公司因業務分析需要從「政府開放系統」下載資料庫時，會遭遇什麼障礙？以及該怎麼解決？"><a href="#請探討公司因業務分析需要從「政府開放系統」下載資料庫時，會遭遇什麼障礙？以及該怎麼解決？" class="headerlink" title="請探討公司因業務分析需要從「政府開放系統」下載資料庫時，會遭遇什麼障礙？以及該怎麼解決？"></a>請探討公司因業務分析需要從「政府開放系統」下載資料庫時，會遭遇什麼障礙？以及該怎麼解決？</h2><p>公司在使用「政府開放系統」時，我們不一定可以獲得公司所需要的資料，由於「政府開放系統」的資料基本上不會有敏感、私人資訊，有時候企業需要往更深的資訊去探索相關可能性時就會被資料不足所限制住。</p>
-<p>例如：氣象預報最多只會到鄉鎮市區，不會精準到街。</p>
-<h3 id="此時解決方法應該是有兩種："><a href="#此時解決方法應該是有兩種：" class="headerlink" title="此時解決方法應該是有兩種："></a>此時解決方法應該是有兩種：</h3><ul>
-<li>購買政府資料<br>購買政府資料相對簡單，不需要大量的檢測設備，只要與政府協議在合理的價格就可以進行購買，可以快速進行運用，但缺點是我們為資料的被動方<ul>
-<li>有可能資料錯誤，但我們不好進行判定</li>
-<li>政府的檢測設備不夠精準，有些資料有錯誤的問題</li>
-<li>資訊的排版並不適合我們排版，我們需要花大量時間做資料預處理、資料清洗的動作</li>
-</ul>
-</li>
-<li>自行蒐集資料<br>其中自行蒐集資料較不容易，但可以完整整理出適合公司的資料架構，如果公司需要對資料做運用時就非常容易，購買政府資料的缺點都可以透過自行蒐集資料來補足，但自行蒐集資料的缺點非常致命。 <ul>
-<li>檢測設備費用</li>
-<li>資料庫設備費用</li>
-<li>檢測人員費用</li>
-<li>資料庫人員費用</li>
-<li>檢測資料是否正確</li>
-<li>耗時，建立初期需要大量時間</li>
-<li>是否會引起部分人民、財團反抗</li>
-<li>資料保管成本</li>
-</ul>
-</li>
-</ul>
-<p>但如果能夠克服這些問題，我們可以建立起優秀的資料庫，並且完全配合公司的政策，需要甚麼都可以從公司資料庫提取，基本上所有的資料分析問題與 bug 公司都可以自行解決。<br>但公司需要大量成本與時間去做建立與維護，因此我認為除非有 5年以上的時間都在進行資料分析，否則能夠使用他人的正確資訊會更輕鬆、效率更快、更符合成本效益。</p>
+<h2 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h2><p><a href="https://www.geeksforgeeks.org/heap-sort/" target="_blank" rel="noopener">HeapSort by geeksforgeeks</a></p>
+<h2 id="合併排序-merge-sort-程式碼說明與應用"><a href="#合併排序-merge-sort-程式碼說明與應用" class="headerlink" title="合併排序 merge sort 程式碼說明與應用"></a>合併排序 merge sort 程式碼說明與應用</h2><p>透過程式碼來進行說明相信會更好理解，以下我們示範從小到大排序</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[] = &#123;<span class="number">4</span>,<span class="number">96</span>,<span class="number">1546</span>,<span class="number">13</span>,<span class="number">48</span>,<span class="number">34</span>,<span class="number">77</span>,<span class="number">48</span>,<span class="number">31</span>&#125;; </span><br><span class="line"><span class="keyword">int</span> num_size; <span class="comment">//陣列的 size</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">()</span></span>&#123; <span class="comment">//輸出結果</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; num_size ; i++)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num[i] &lt;&lt; <span class="string">' '</span> ;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> i)</span></span>&#123; <span class="comment">//建構、調整堆積樹，i 表示數值、n 表示樹的 size</span></span><br><span class="line">    <span class="keyword">int</span> root = i; <span class="comment">//root </span></span><br><span class="line">    <span class="keyword">int</span> L = <span class="number">2</span> * i; <span class="comment">//subtree</span></span><br><span class="line">    <span class="keyword">int</span> R = <span class="number">2</span> * i + <span class="number">1</span>; <span class="comment">//subtree</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//注意：以下只有交換 index</span></span><br><span class="line">    <span class="keyword">if</span>(L &lt; n &amp;&amp; num[L] &gt; num[root]) root = L; <span class="comment">//如果 root 比左子樹小就交換</span></span><br><span class="line">    <span class="keyword">if</span>(R &lt; n &amp;&amp; num[R] &gt; num[root]) root = R; <span class="comment">//如果 root 比右子樹小就交換</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果 root 已經被交換</span></span><br><span class="line">    <span class="keyword">if</span>(root != i)&#123;</span><br><span class="line">        swap(num[root], num[i]); <span class="comment">//這邊才真正進行交換</span></span><br><span class="line">        heapify(n, root); <span class="comment">//繼續遞迴，讓 i 可以到達完整的最大堆積樹，也就是當 i 為 root，左、右子樹都比 root 小。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">()</span></span>&#123; <span class="comment">//進行 heap_sort 排序</span></span><br><span class="line">    <span class="comment">//將每個數值放到適合的堆積位置</span></span><br><span class="line">    <span class="comment">//注意：i 是從 num_size/2 開始，因為我們是從最下層的子樹(root、L、R) 不斷做 heapify</span></span><br><span class="line">    <span class="comment">//到第一層的子樹，這樣才可以將之前堆積的狀態延續至上層。</span></span><br><span class="line">    <span class="comment">//如果從第一層開始做，那每一個 root 都只會是 L、R 的最大值，</span></span><br><span class="line">    <span class="comment">//但上層的 root 並不一定會大於下層或下下層的 root，這整棵樹就並不是一個完整堆積樹</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = num_size/<span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) heapify(num_size, i);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//不斷地拿出 root(最大數值)，放到數列最後面。</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = num_size<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        swap(num[<span class="number">0</span>], num[i]); <span class="comment">//與數列中的最後一個數值交換。這樣越大的數值會被放到越後面</span></span><br><span class="line">        heapify(i, <span class="number">0</span>); <span class="comment">//由於 root 已經不再是最大，因此再次進行 heapify</span></span><br><span class="line">        <span class="comment">//注意：如果我們已經將 1 次 root 與數列最後一個數值交換，那我們下次就不可以把數列中的最後一個數值放入 heapify，不然這次做的堆積樹又會變成下次堆積樹 root，因此我們要將 num_size 減少。</span></span><br><span class="line">        <span class="comment">//因此這裡的 i 為未確定排序陣列的大小。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    num_size = <span class="keyword">sizeof</span>(num) / <span class="keyword">sizeof</span>(num[<span class="number">0</span>]); <span class="comment">//紀錄陣列 size</span></span><br><span class="line">    heap_sort();</span><br><span class="line">    output();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>由於 C++ 已經有很多 sort 套件了，因此我在高中學會後我就再也沒有去複習這些知識。</p>
+<p>剛好現在上課有用到那就來複習，順便把它寫出邏輯八！</p>
+<h2 id="程式執行結果"><a href="#程式執行結果" class="headerlink" title="程式執行結果"></a>程式執行結果</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1z3BiITZyFRgY03M8Eg5tZq022YIpBDib&export=download" alt=""></p>
+</blockquote>
 
       
       <!-- reward -->
@@ -162,7 +161,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E7%AE%A1%E7%90%86%E8%B3%87%E8%A8%8A%E7%B3%BB%E7%B5%B1%E7%AD%86%E8%A8%98/" rel="tag">北科大管理資訊系統筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -173,19 +172,10 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2021/05/31/Explain_Algorithm/heap_sort/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            演算法知識 - heap sort 堆積排序
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/05/28/case_report/NTUTifm_Manager_t08/" class="article-nav-link">
+      <a href="/2021/05/28/case_report/NTUTifm_Manager_t07/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">北科資財二管理資訊系統 個案八 趣吧-網路共享旅遊平台</div>
+        <div class="article-nav-title">北科資財二管理資訊系統 個案七 宸訊科技-開放政府資料打造精準農場決策</div>
       </a>
     
   </nav>
