@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">2.5k</span>
+            <span class="post-count">4.1k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">9分鐘</span>
+            <span class="post-count">15分鐘</span>
         </span>
     </span>
 </div>
@@ -315,7 +315,158 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h1 id="實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental"><a href="#實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental" class="headerlink" title="實驗設計複回歸方法 Multiple Regression Approach to Experimental"></a>實驗設計複回歸方法 Multiple Regression Approach to Experimental</h1><h1 id="資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test"><a href="#資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test" class="headerlink" title="資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test"></a>資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test</h1>
+<h1 id="針對虛擬變數做實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental-of-dummy-variable"><a href="#針對虛擬變數做實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental-of-dummy-variable" class="headerlink" title="針對虛擬變數做實驗設計複回歸方法 Multiple Regression Approach to Experimental of dummy variable"></a>針對虛擬變數做實驗設計複回歸方法 Multiple Regression Approach to Experimental of dummy variable</h1><ul>
+<li><a href="https://theriseofdavid.github.io/2021/05/15/statistics/statistics-ch15/#%E9%A1%9E%E5%88%A5%E5%9E%8B%E8%AE%8A%E6%95%B8%E5%9C%A8%E8%A4%87%E8%BF%B4%E6%AD%B8%E4%B8%8B%E7%9A%84%E6%87%89%E7%94%A8-Categorical-Independent-Variables" target="_blank" rel="noopener">我們在第 15 章時有提到類別型變數在複迴歸下的應用，這邊則進行範例。</a></li>
+<li>我們也可已針對虛擬變數做 ANOVA</li>
+<li>當然也可以進行顯著性測試。</li>
+<li>透過舉例來讓大家知道</li>
+</ul>
+<h2 id="舉例：製造商想要知道-Buffalo-Pittsburgh-Detroit-三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試"><a href="#舉例：製造商想要知道-Buffalo-Pittsburgh-Detroit-三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試" class="headerlink" title="舉例：製造商想要知道 Buffalo, Pittsburgh, Detroit 三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試"></a>舉例：製造商想要知道 Buffalo, Pittsburgh, Detroit 三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試</h2><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1w7DkGfq_vrvU9Sb8Aw-SbPSo27pA4Fee&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>定義類別至虛擬變數<ul>
+<li>\(A=0, B=0\) 為 Buffalo </li>
+<li>\(A=1, B=0\) 為 Pittsburgh</li>
+<li>\(A=0, B=1\) 為 Detroit</li>
+</ul>
+</li>
+<li>因此將資料分類後，如下圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17gRlhCekF3VNOe0G_yCyaIUZEkZ60O0G&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此我們的期望值計算為 \(E(y) = \beta_0 + \beta_1 A + beta_2 B\)<ul>
+<li>For Buffalo: \(E(y) = \beta_0 + \beta_1 (0) + beta_2 (0) = \beta_0\)</li>
+<li>For Pittsburgh: \(E(y) = \beta_0 + \beta_1 (1) + beta_2 (0) = \beta_1\)</li>
+<li>For Detroit: \(E(y) = \beta_0 + \beta_1 (0) + beta_2 (1) = \beta_2\)</li>
+</ul>
+</li>
+<li>因此，我們透過電腦計算好的回歸方程式如下。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1eMGuMfgl8Jz-WRzavlFs1aHHWQW9tVRS&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>變數對於母體之顯著性測試<ul>
+<li>首先，我們可以知道，在一般的母體顯著性測試中，\(H_0\) 都假設 y 與自變數沒有關係，這裡也是如此。<br>原因：如果 y 與自變數沒有任何關係，則理論上我用所有的自變數來預測 y 時，那 y 應該都要保持一樣的數字，才合理。</li>
+<li>因此我們的假設檢定如下<ul>
+<li>\(H_0: \beta_1 = \beta_2 = 0\)</li>
+<li>\(H_1:\) 不符合上面公式</li>
+</ul>
+</li>
+<li>進行 F 檢定，根據 ANOVA 公式計算，可以發現 \(0.003 = p-value &lt; 0.05 = \alpha\)，因此拒絕 \(H_0\)</li>
+<li>結論：可以透過工廠的場地此變數來推估工廠經理的工作時數。</li>
+</ul>
+</li>
+</ul>
+<h1 id="資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test"><a href="#資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test" class="headerlink" title="資料序列相關與 Durbin-Watson Test,  Autocorrelation and the Durbin-Watson Test"></a>資料序列相關與 Durbin-Watson Test,  Autocorrelation and the Durbin-Watson Test</h1><ul>
+<li>當 y 預測值會隨著時間的週期、順序，而有著不一樣的可能時，就不適用我們一般的複回歸方程式。</li>
+<li>通常如果與時間有相關的 data 我們會稱為 autocorrelation: 序列相關、時間相關<ul>
+<li>Positive Autocorrelation，前一期的殘差會使下一期殘差為正<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gM5pDw2e2fis04VQzYfBfNHOT6XWyGw1&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>Negative Autocorrelation，前一期的殘差會使下一期殘差為負<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1OrvMc_hXutnf2YLVNH4S8P-v7CSpNSMP&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>如果資料擁有此現象時，則違反了<a href="https://theriseofdavid.github.io/2021/05/02/statistics/statistics-ch14/#%E5%81%87%E8%A8%AD%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E8%AA%A4%E5%B7%AE%E9%A0%85-Model-Assumptions-About-the-Error-Term-mathcal-E" target="_blank" rel="noopener">假設模型下的誤差項 Model Assumptions About the Error Term E</a> </li>
+<li><em>\(\mathcal{E}\) 為獨立變數，每一個變數的 \(\mathcal{E}\) 都不同，互相獨立*</em>，因為 \(\mathcal{E} \) 不在是獨立變數了</li>
+</ul>
+<h2 id="Durbin-Watson-Test"><a href="#Durbin-Watson-Test" class="headerlink" title="Durbin-Watson Test"></a>Durbin-Watson Test</h2><ul>
+<li>由於我們的 \(\mathcal{E}\) 不再符合我們的假設模型，因此我們幫他建立新公式</li>
+<li>\( \mathcal{E}_t = \rho \mathcal{E}_{t-1} + z_t\)<ul>
+<li>\(\rho \) 上一期有多少的資訊會留給當前資料，此數值介於 \(-1 - 1\)，-1 表示負相關、1 表示正相關、0 表示無相關</li>
+<li>\(\mathcal{E}_{t-1}\) 前一期的殘差項</li>
+<li>\( z_t\) 原先<a href="https://theriseofdavid.github.io/2021/05/02/statistics/statistics-ch14/#%E5%81%87%E8%A8%AD%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E8%AA%A4%E5%B7%AE%E9%A0%85-Model-Assumptions-About-the-Error-Term-mathcal-E" target="_blank" rel="noopener">假設模型下的誤差項 Model Assumptions About the Error Term E</a>中 <strong>\(\mathcal{E}\)  是常態分配的隨機變數</strong></li>
+</ul>
+</li>
+<li>Durbin-Watson Test 假設檢定<ul>
+<li>我們的 Durbin-Watson Test 假設檢定就是要檢定我們的資料是否有 Autocorrelation。</li>
+<li>\(H_0: \rho = 0 \)</li>
+<li>\(H_1: \rho &gt; 0, \rho &lt; 0, \rho != 0\)，都可以分別代表，正相關、負相關、有相關；再適合的時機使用就好。</li>
+</ul>
+</li>
+<li>Durbin-Watson Test Statistic 的公式則為 <ul>
+<li>\(d = \frac{\sum_{t=2}^n \ (e_t - e_{t-1} \ )^2 }{ \sum_{t=1}^n \  (e_t^2)}\)，通常都透過電腦去計算</li>
+<li>其中 \(e_t = y_t - \hat{y}_t\)，實際資料減去估計資料，也就是殘差</li>
+</ul>
+</li>
+<li>Durbin-Watson Test 公式判讀<ul>
+<li>我們可以觀察此公式 \(d = \frac{\sum_{t=2}^n \ (e_t - e_{t-1} \ )^2 }{ \sum_{t=1}^n \  (e_t^2)}\)</li>
+<li>我們假設，完全<strong>正</strong>相關時則 \( e_t - e_{t-1} = 0\)<br>如果是完全<strong>正</strong>相關，那每一個殘差值則必須完全相同，因此 \(d = 0\)</li>
+<li>我們假設，完全<strong>負</strong>相關時則 \( e_t - e_{t-1} = -2 \ \text{or} \ 2 \)，這裡我們將每個 \(e_t\) 都假設只會有 1,-1 兩種結果。<br>如果是完全<strong>負</strong>相關，那每一個殘差值則必須完全不相同，因此 \(d = 4\)</li>
+<li>因此我們可以知道<ul>
+<li>當 \(d = 0\) 資料正相關</li>
+<li>當 \(d = 4\) 資料負相關</li>
+<li>因此我們可透過前面兩點推出，當 \(d = 2\) 資料無相關</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Durbin-Watson Test Statistic 檢定結果<ul>
+<li>當資料筆數大於 15 時，才能進行解釋，當資料筆數大於 50 時，才有解釋的準確度</li>
+<li>通常我們做 \(\alpha\) 後，Durbin-Watson Test Statistic 會給予 \(d_L\)、\(d_U\)，分別是檢定的上下界線。<ul>
+<li>如果我們計算出來的 Durbin-Watson Test Statistic 洛在此上下界線則無法進行判讀。</li>
+<li>這是因為這個地方過於模糊，無法肯定是有關係還是沒關係；類似於 Type 2 Error</li>
+</ul>
+</li>
+<li>假設檢定<ul>
+<li>正相關判讀<ul>
+<li>\(H_0: \rho = 0 \) 資料不相關</li>
+<li>\(H_1: \rho &gt; 0 \) 資料正相關</li>
+<li>用數線表示；英文補充說明 Inconclusive: 無法下結論、No evidence of positive autocorrelation: 資料不相關<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1fCK1_45Llx-ffs8rNO2KRtXs1D-mQL0r&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>負相關判讀<ul>
+<li>\(H_0: \rho = 0 \) 資料不相關</li>
+<li>\(H_1: \rho &lt; 0 \) 資料負相關</li>
+<li>由於剛剛的公式判讀，因此我們得知完全負相關時必須接近於 4，因此我們會直接將 \(d_L\)、\(d_U\) 同乘 4，此區間則是無法判讀，而比 \(4-d_L\) 大的就是資料負相關</li>
+<li>用數線表示；英文補充說明 Inconclusive: 無法下結論、No evidence of positive autocorrelation: 資料不相關<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=16CIDRjywGuuxZr-_KFZlubsaJ7pzFW5k&export=download" alt="">        </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><strong>資料相關判讀</strong><ul>
+<li>\(H_0: \rho = 0 \) 資料不相關</li>
+<li>\(H_1: \rho != 0 \) 資料 (正 or 負) 相關</li>
+<li>由於剛剛的公式判讀，因此我們得知完全負相關時必須接近於 4，因此我們會直接將 \(d_L\)、\(d_U\) 同乘 4，此區間則是無法判讀，而比 \(4-d_L\) 大的就是資料負相關</li>
+<li>用數線表示；英文補充說明 Inconclusive: 無法下結論、No evidence of positive autocorrelation: 資料不相關<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JhB1z1srTW5kI7yurEUT-XQDjI3237_H&export=download" alt="">        </p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：這裡有一份透過-minitab-產生的資訊，請針對-Durbin-Watson-Test-進行解讀"><a href="#舉例：這裡有一份透過-minitab-產生的資訊，請針對-Durbin-Watson-Test-進行解讀" class="headerlink" title="舉例：這裡有一份透過 minitab 產生的資訊，請針對 Durbin-Watson Test 進行解讀"></a>舉例：這裡有一份透過 minitab 產生的資訊，請針對 Durbin-Watson Test 進行解讀</h3><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1YDAXzNpxdAfltKip28Mk7nHh4Iiu1g1s&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1KrgqE6GgxjT8egQjgE3kcP488ntFjgb_&export=download" alt="">   </p>
+</blockquote>
+<ul>
+<li>我們可以透過 ANOVA 表(Analysis of Variance) 得知這邊資料總數有 19 個</li>
+<li>解釋能力高達 93.94%，非常不賴</li>
+<li>我們可以從第二張圖看到，minital 的 Durbin-Watson Test 為 0.7981</li>
+<li>我們進行查表，由於表中的 n = 20，我們的資料總數有 19，19 與 20 非常相近，因此我們直接看 n=20 的 Durbin-Watson Test<ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1sBiJOUxI_Laqj22pOBkU1uKn5j3Jgstl&export=download" alt="">   </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>結論與分析<ul>
+<li>再 0.5 的顯著性測試中，\(d_L = 1.20, d_U = 1.41\)，\(d &lt;= d_L\) 因此資料呈現於正相關。</li>
+<li>由於經過 Durbin-Watson Test 可以得知這份資料有強烈的序列相關，因此我們應該要加入一個時間變數來降低 Durbin-Watson Test 使回測具有可用性、可靠性</li>
+</ul>
+</li>
+</ul>
+
       
       <!-- reward -->
       

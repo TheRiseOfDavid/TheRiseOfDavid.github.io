@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Codeforces 1513D - GCD and MST(設計解題) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Codeforces/Codeforces 1521C" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Codeforces 1513D - GCD and MST(設計解題)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/06/03/Codeforces/Codeforces%201521C/" class="article-date">
+  <time datetime="2021-06-02T17:07:27.000Z" itemprop="datePublished">2021-06-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">8分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Nastia 有一個數列，但我們並不知道數列裡面的數值，我們現在必須知道這些數值是甚麼，其中我們得知數列裡面的數值，是 1 ~ 數列長度。</p>
+<p>我們可以像 Nastia 進行詢問，但 Nastia 不接受普通的詢問方式，她接受的詢問方式如下</p>
+<ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)</li>
+<li>\(t=2 : mim(max(x,p_i), max(x+1, p_j)) \) </li>
+<li>其中 \(t\) 為我們選擇哪種查詢公式，\(p_i,p_j\) 則是數列的 index 當下數值，\(x\) 則是我們任意給的值，但 \(x\) 必須是數列中的數字。</li>
+<li>\(t=1\) or \(t=2, 1 \leq i,j \leq n, i != j, 1 \leq x \leq n-1\)，一定要符合這些條件。  </li>
+</ul>
+<p>我們可以對 Nastia 最多查詢 \( \frac{3*n}{2} + 30 \)，必須在這些次數前確認出所有的數列。</p>
+<p>如果已經確定數列，那輸出格式為 <code>! a b c</code>，其中 a,b,c 為數列的數字， index 從 1 開始。</p>
+<p><a href="https://codeforces.com/contest/1521/problem/C" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>理解交互式解題</li>
+<li>找出 \(t=1, t=2\) 公式，在甚麼情況下可以省略裡面一些邏輯式</li>
+<li>如何確定數列中的每個數值</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們可以對這題進行分析。<br>稍微看看這兩個公式</p>
+<blockquote>
+<ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)</li>
+<li>\(t=2 : min(max(x,p_i), max(x+1, p_j)) \) </li>
+</ul>
+</blockquote>
+<h3 id="公式分析一下"><a href="#公式分析一下" class="headerlink" title="公式分析一下"></a>公式分析一下</h3><ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)<br>當 \(x\) 設為無限大時，那我們可以簡化為 \(max(p_i,p_j) \)</li>
+<li>\(t=2 : min(max(x,p_i), max(x+1, p_j)) \)<br>當 \(x\) 設為無限小時，那我們可以簡化為 \(min(p_i,p_j) \)</li>
+</ul>
+<h3 id="我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？"><a href="#我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？" class="headerlink" title="我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？"></a>我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？</h3><ul>
+<li>那我們可以設為數列的最大數值與最小數值，分別式 \(n,1\)。</li>
+<li>現在我們知道可以將公式化簡了，但我沒有辦法知道 index \(i,j\) 要放哪些數值<br>很簡單，我們只要將 \(min(p_i,p_j) \)，將 \(p_j\) 放最大，那 \(p_i\) 就是我們要的數值。<br>另外一個公式亦同。</li>
+<li>我們以 <strong>我們只要將 \(min(p_i,p_j) \)，將 \(p_j\) 放最大，那 \(p_i\) 就是我們要的數值。</strong> 來進行探討</li>
+<li>將 \(p_j\) 放最大，那我們要先找出數列中的最大值<br>由於題目的查詢方式不可以讓我們的 \(x\) 放最大，因此就用數列最大值。</li>
+</ul>
+<h3 id="那我們進行分析，如何找出數列中最大值"><a href="#那我們進行分析，如何找出數列中最大值" class="headerlink" title="那我們進行分析，如何找出數列中最大值"></a>那我們進行分析，如何找出數列中最大值</h3><ul>
+<li>根據上面的公式，我們有提到，當 \(x\) 設為無限小時，那我們可以簡化為 \(min(p_i,p_j) \)，因此我們要找到的是此公式中的最大值。</li>
+<li>因此公式就是 \(t=1 : max(min(n,p_i), min(n+1, p_j)) = n \)，n 是數列最大值，我們把 x 設為 n<br>理論上現在我們可以知道數列最大值是在 \(i,j\) 這兩個位置，但我要怎麼寫呢？</li>
+<li>不斷循序漸進，也就是 \(i =i, j = i+1\)，for 迴圈一次進行 i,j</li>
+<li>我已經知道最大的數值在 \(i,j\) 位置，那我要怎麼確定她在 i 還是 j 呢？</li>
+<li>似乎不太能夠確定呢…</li>
+</ul>
+<h3 id="那我們再稍微簡化一下，我們鎖定-j-的位置一定是題目最大值的位置。"><a href="#那我們再稍微簡化一下，我們鎖定-j-的位置一定是題目最大值的位置。" class="headerlink" title="那我們再稍微簡化一下，我們鎖定 j 的位置一定是題目最大值的位置。"></a>那我們再稍微簡化一下，我們鎖定 j 的位置一定是題目最大值的位置。</h3><ul>
+<li>因此公式就是 \(t=1 : max(min(n-1,p_i), min(n, p_j)) = n\)，n 是數列最大值，我們把 x 設為 n</li>
+<li>這樣 \(min(n, p_j) \) 一定是題目最大值。</li>
+<li>但現在有個問題，那如果依照迴圈去寫假如數列 index i 才是最大值，那該怎麼辦<ul>
+<li>我們可以知道一件事情，\(min(n-1,p_i)\)，最大的數值為 \(n-1\)</li>
+<li>如果 \(p_i = n\)，那 \(min(n, p_j) &lt; n \)</li>
+<li>因此只要我們 \(t=1 : max(min(n-1,p_i), min(n, p_j)) = n-1\)，我們就讓 \(i,j\) 位置互換</li>
+</ul>
+</li>
+<li>紀錄最大的數值位置</li>
+</ul>
+<h3 id="現在我們有了最大的數值位置，求出其他位置數值"><a href="#現在我們有了最大的數值位置，求出其他位置數值" class="headerlink" title="現在我們有了最大的數值位置，求出其他位置數值"></a>現在我們有了最大的數值位置，求出其他位置數值</h3><ul>
+<li>可以用 \(t=2 : min(max(x,p_i), max(x+1, p_j)) \) 反推</li>
+<li>現在我們定義 \(p_m\) 表示最大的數值位置</li>
+<li>\(t=2 : min(max(x,p_i), max(x+1, p_m)) \)<ul>
+<li>\(max(x+1, p_m) &gt; p_i \) </li>
+<li>因此我們只要把 x 設到最小即可。</li>
+<li>數列中最小值是 0。</li>
+</ul>
+</li>
+<li>因此我們只要對每一個 index 進行一次查詢就能推出答案！</li>
+</ul>
+<p><strong>注意：不可以在查詢時出現 \(? 2 p_i p_m 1 \)，其中 \(p_i == p_m\)，題目有說明 i 不可以等於 j</strong>，如果你這樣做則 codeforces 則會輸出 WA: <code>wrong answer Indices should be distinct (test case 1)</code></p>
+<h3 id="稍微檢查下查詢次數會不會大於-frac-3-n-2-30"><a href="#稍微檢查下查詢次數會不會大於-frac-3-n-2-30" class="headerlink" title="稍微檢查下查詢次數會不會大於 \( \frac{3*n}{2} + 30 \)"></a>稍微檢查下查詢次數會不會大於 \( \frac{3*n}{2} + 30 \)</h3><ul>
+<li>找出數列最大值 index 進行查詢次數 \(n/2+1\)</li>
+<li>每一個數值與數列最大值進行 \(t=2\)查詢次數 \(n-1\)</li>
+<li>因此最多的查詢次數只會有 \( \frac{3*n}{2}  \)</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/JophieQu/article/details/116524323" target="_blank" rel="noopener">C. Nastia and a Hidden Permutation by JophieQu</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實我之前並沒有寫過交互式解題，因此對這種流程非常不熟，是我的朋友們告訴我交互式解題我們應該要注重的是 input，而非 output，我原本在這邊思考了很久都一直鬼打牆…。腦袋不給力阿QQ。</p>
+<p>後來再看 JophieQu 大大的詳解時，我一直寫錯…，我忘記 \(n-1 = max(min(n-1,p_i), min(n, p_j))) 的現象，因此要進行確認，然後再將 \(i,j\) 位置顛倒，為甚麼會忘記呢？因為我那時候認為我這樣比較好寫。<del>可是是錯的阿</del></p>
+<p>然後我還忘記題目的說明，題目有說明 不可以在查詢時出現 \(? t i j x \)，其中 \(i != j\)，對！我有看到。<br>但是我把每個 index 都帶入 \(t=2\) 去推出數列的數值，卻一直得到 WA，我就一直用紙筆去推敲，就是得不出這樣會錯的結果，後來再重新看一遍題目才知道，…，\(p_m\) 也是數列中的一個 index，如果直接用 for 迴圈去跑每一個 index，那其中會有一個 index 與 \(m\) 相同。</p>
+<p>唉，還不夠聰明，腦袋還不夠好。還需要多多訓練自己的腦袋R。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">30000</span>;</span><br><span class="line"><span class="keyword">int</span> T, a, n;</span><br><span class="line"><span class="keyword">int</span> num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="built_in">string</span> cmd, <span class="keyword">int</span> t, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> x)</span></span>&#123; <span class="comment">//用於查詢</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; cmd &lt;&lt; <span class="string">" "</span> &lt;&lt; t &lt;&lt; <span class="string">' '</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span> &lt;&lt; j &lt;&lt; <span class="string">' '</span> &lt;&lt; x &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; value;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> max_index = <span class="number">0</span>, value; <span class="comment">//max_index 為記錄最大值的 index</span></span><br><span class="line">        <span class="comment">// value 為 query function 回傳值</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i+=<span class="number">2</span>)&#123; <span class="comment">//找出最大的數值</span></span><br><span class="line">            <span class="keyword">if</span>(n &amp; <span class="number">1</span> &amp;&amp; i == n)&#123; <span class="comment">//由於我是 i+=2，但有可能數列是奇數的情況，因此如果</span></span><br><span class="line">                <span class="comment">//數列是奇數，並且到現在還沒有找到最大值，那麼最後一個數值一定是最大值。</span></span><br><span class="line">                max_index = n; <span class="comment">//紀錄最大值 index</span></span><br><span class="line">                num[n] = i; <span class="comment">//並放入數列中</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//找到最大值跳出迴圈</span></span><br><span class="line">            &#125;</span><br><span class="line">            value = query(<span class="string">"?"</span>, <span class="number">1</span>, i, i+<span class="number">1</span>, n<span class="number">-1</span>); <span class="comment">//進行查詢，查詢 i,j 內是否有數列最大值</span></span><br><span class="line">            <span class="keyword">if</span>(value == n)&#123; <span class="comment">//如果有，並且出現在 j 位置，j = i+1</span></span><br><span class="line">                max_index = i+<span class="number">1</span>; <span class="comment">//紀錄最大值 index</span></span><br><span class="line">                num[i+<span class="number">1</span>] = n;  <span class="comment">//並放入數列中</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//找到最大值跳出迴圈</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(value == n<span class="number">-1</span>)&#123; <span class="comment">// p_i 有 7 or 8 的可能，我們在一次進行驗證</span></span><br><span class="line">                value = query(<span class="string">"?"</span>, <span class="number">1</span>, i+<span class="number">1</span>, i, n<span class="number">-1</span>); <span class="comment">//將 i,j 相反後再 query 一次</span></span><br><span class="line">                <span class="keyword">if</span>(value == n)&#123; <span class="comment">//如果發現 i 真的是最大值</span></span><br><span class="line">                    max_index = i;  <span class="comment">//紀錄最大值 index</span></span><br><span class="line">                    num[i] = n; <span class="comment">//並放入數列中</span></span><br><span class="line">                    <span class="keyword">break</span>; <span class="comment">//找到最大值跳出迴圈</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "max_index " &lt;&lt; max_index &lt;&lt; '\n';</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//找到最大值後，利用 t=2 公式找出每個數列的數值</span></span><br><span class="line">            <span class="comment">//由於 max_index 的值會在 i 裡面，題目的查詢有說明不可以用兩個 index 相同去查詢</span></span><br><span class="line">            <span class="comment">//因此我們要避免這種情況，才會寫這個 if </span></span><br><span class="line">            <span class="keyword">if</span>(i == max_index) <span class="keyword">continue</span>; </span><br><span class="line">            num[i] = query(<span class="string">"?"</span>, <span class="number">2</span>, i, max_index, <span class="number">1</span>); <span class="comment">//找出 i 數列的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"!"</span>; <span class="comment">//輸出答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; num[i];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="思考流程"><a href="#思考流程" class="headerlink" title="思考流程"></a>思考流程</h2><p>透過紙筆與黑板而思考而成的片段，放在網路上供我紀念XD</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1v-asVesqGLqzgFYY8dml9OmyKN_k7ciw&export=download" alt=""></p>
+</blockquote>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">交互式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/06/02/Explain_Algorithm/fib_search/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">演算法知識 - 費氏搜尋 Fibonacci Search</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

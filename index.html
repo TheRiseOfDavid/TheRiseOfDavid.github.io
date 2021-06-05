@@ -77,6 +77,93 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-Codeforces/Codeforces 1521C" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/06/03/Codeforces/Codeforces%201521C/"
+    >Codeforces 1513D - GCD and MST(設計解題)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/06/03/Codeforces/Codeforces%201521C/" class="article-date">
+  <time datetime="2021-06-02T17:07:27.000Z" itemprop="datePublished">2021-06-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Nastia 有一個數列，但我們並不知道數列裡面的數值，我們現在必須知道這些數值是甚麼，其中我們得知數列裡面的數值，是 1 ~ 數列長度。</p>
+<p>我們可以像 Nastia 進行詢問，但 Nastia 不接受普通的詢問方式，她接受的詢問方式如下</p>
+<ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)</li>
+<li>\(t=2 : mim(max(x,p_i), max(x+1, p_j)) \) </li>
+<li>其中 \(t\) 為我們選擇哪種查詢公式，\(p_i,p_j\) 則是數列的 index 當下數值，\(x\) 則是我們任意給的值，但 \(x\) 必須是數列中的數字。</li>
+<li>\(t=1\) or \(t=2, 1 \leq i,j \leq n, i != j, 1 \leq x \leq n-1\)，一定要符合這些條件。  </li>
+</ul>
+<p>我們可以對 Nastia 最多查詢 \( \frac{3*n}{2} + 30 \)，必須在這些次數前確認出所有的數列。</p>
+<p>如果已經確定數列，那輸出格式為 <code>! a b c</code>，其中 a,b,c 為數列的數字， index 從 1 開始。</p>
+<p><a href="https://codeforces.com/contest/1521/problem/C" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/06/03/Codeforces/Codeforces%201521C/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">交互式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Explain_Algorithm/fib_search" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -810,103 +897,13 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa12190" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/24/UVa/UVa12190/"
-    >UVa12190 - Electric Bill(Binary Search 二分搜尋 )</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/24/UVa/UVa12190/" class="article-date">
-  <time datetime="2021-05-24T05:51:59.000Z" itemprop="datePublished">2021-05-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>在 2100 年，電變得非常昂貴，電力公司的累進費率如下</p>
-<ul>
-<li>1~10CHw 2元</li>
-<li>101~10000 3元</li>
-<li>10001~1000000 5元</li>
-<li>1000000 7元</li>
-</ul>
-<p>電力公司為了賺更多錢想出一種方法，電力公司會給你 A、B 兩個數字，其中</p>
-<ul>
-<li>A 是你的用電量與鄰居用電量的總和，如果合在一起的電費帳單</li>
-<li>B 是你的電費與鄰居電費的差額</li>
-</ul>
-<p>如果想知道自己的電費，則必須付給電力公司計算費，但你想要省下這筆錢，所以來寫程式計算八！<br>我們可以保證的是，我們一定比鄰居的用電量還少！<br>注意：在這題中，每組題目都答案只會有一組解。不必擔心多組解問題</p>
-<p><a href="https://onlinejudge.org/external/121/12190.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/24/UVa/UVa12190/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search-%E4%BA%8C%E5%88%86%E6%90%9C%E5%B0%8B/" rel="tag">Binary Search 二分搜尋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/2/">下一頁</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/2/">下一頁</a>
   </nav>
   
 </section>

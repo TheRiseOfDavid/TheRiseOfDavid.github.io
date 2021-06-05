@@ -16012,7 +16012,158 @@
 </ul>
 </li>
 </ul>
-<h1 id="實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental"><a href="#實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental" class="headerlink" title="實驗設計複回歸方法 Multiple Regression Approach to Experimental"></a>實驗設計複回歸方法 Multiple Regression Approach to Experimental</h1><h1 id="資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test"><a href="#資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test" class="headerlink" title="資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test"></a>資料序列相關與 Durbin-Watson Test  Autocorrelation and the Durbin-Watson Test</h1>]]></content>
+<h1 id="針對虛擬變數做實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental-of-dummy-variable"><a href="#針對虛擬變數做實驗設計複回歸方法-Multiple-Regression-Approach-to-Experimental-of-dummy-variable" class="headerlink" title="針對虛擬變數做實驗設計複回歸方法 Multiple Regression Approach to Experimental of dummy variable"></a>針對虛擬變數做實驗設計複回歸方法 Multiple Regression Approach to Experimental of dummy variable</h1><ul>
+<li><a href="https://theriseofdavid.github.io/2021/05/15/statistics/statistics-ch15/#%E9%A1%9E%E5%88%A5%E5%9E%8B%E8%AE%8A%E6%95%B8%E5%9C%A8%E8%A4%87%E8%BF%B4%E6%AD%B8%E4%B8%8B%E7%9A%84%E6%87%89%E7%94%A8-Categorical-Independent-Variables" target="_blank" rel="noopener">我們在第 15 章時有提到類別型變數在複迴歸下的應用，這邊則進行範例。</a></li>
+<li>我們也可已針對虛擬變數做 ANOVA</li>
+<li>當然也可以進行顯著性測試。</li>
+<li>透過舉例來讓大家知道</li>
+</ul>
+<h2 id="舉例：製造商想要知道-Buffalo-Pittsburgh-Detroit-三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試"><a href="#舉例：製造商想要知道-Buffalo-Pittsburgh-Detroit-三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試" class="headerlink" title="舉例：製造商想要知道 Buffalo, Pittsburgh, Detroit 三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試"></a>舉例：製造商想要知道 Buffalo, Pittsburgh, Detroit 三個地方的工廠經理工時是否一樣，因此我們透過簡單隨機抽樣抽取樣本後，透過平均工時得知是哪地方的工廠經理，我們再針對這三個地方做回歸方程式、顯著性測試</h2><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1w7DkGfq_vrvU9Sb8Aw-SbPSo27pA4Fee&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>定義類別至虛擬變數<ul>
+<li>\(A=0, B=0\) 為 Buffalo </li>
+<li>\(A=1, B=0\) 為 Pittsburgh</li>
+<li>\(A=0, B=1\) 為 Detroit</li>
+</ul>
+</li>
+<li>因此將資料分類後，如下圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17gRlhCekF3VNOe0G_yCyaIUZEkZ60O0G&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此我們的期望值計算為 \(E(y) = \beta_0 + \beta_1 A + beta_2 B\)<ul>
+<li>For Buffalo: \(E(y) = \beta_0 + \beta_1 (0) + beta_2 (0) = \beta_0\)</li>
+<li>For Pittsburgh: \(E(y) = \beta_0 + \beta_1 (1) + beta_2 (0) = \beta_1\)</li>
+<li>For Detroit: \(E(y) = \beta_0 + \beta_1 (0) + beta_2 (1) = \beta_2\)</li>
+</ul>
+</li>
+<li>因此，我們透過電腦計算好的回歸方程式如下。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1eMGuMfgl8Jz-WRzavlFs1aHHWQW9tVRS&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>變數對於母體之顯著性測試<ul>
+<li>首先，我們可以知道，在一般的母體顯著性測試中，\(H_0\) 都假設 y 與自變數沒有關係，這裡也是如此。<br>原因：如果 y 與自變數沒有任何關係，則理論上我用所有的自變數來預測 y 時，那 y 應該都要保持一樣的數字，才合理。</li>
+<li>因此我們的假設檢定如下<ul>
+<li>\(H_0: \beta_1 = \beta_2 = 0\)</li>
+<li>\(H_1:\) 不符合上面公式</li>
+</ul>
+</li>
+<li>進行 F 檢定，根據 ANOVA 公式計算，可以發現 \(0.003 = p-value &lt; 0.05 = \alpha\)，因此拒絕 \(H_0\)</li>
+<li>結論：可以透過工廠的場地此變數來推估工廠經理的工作時數。</li>
+</ul>
+</li>
+</ul>
+<h1 id="資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test"><a href="#資料序列相關與-Durbin-Watson-Test-Autocorrelation-and-the-Durbin-Watson-Test" class="headerlink" title="資料序列相關與 Durbin-Watson Test,  Autocorrelation and the Durbin-Watson Test"></a>資料序列相關與 Durbin-Watson Test,  Autocorrelation and the Durbin-Watson Test</h1><ul>
+<li>當 y 預測值會隨著時間的週期、順序，而有著不一樣的可能時，就不適用我們一般的複回歸方程式。</li>
+<li>通常如果與時間有相關的 data 我們會稱為 autocorrelation: 序列相關、時間相關<ul>
+<li>Positive Autocorrelation，前一期的殘差會使下一期殘差為正<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gM5pDw2e2fis04VQzYfBfNHOT6XWyGw1&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>Negative Autocorrelation，前一期的殘差會使下一期殘差為負<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1OrvMc_hXutnf2YLVNH4S8P-v7CSpNSMP&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>如果資料擁有此現象時，則違反了<a href="https://theriseofdavid.github.io/2021/05/02/statistics/statistics-ch14/#%E5%81%87%E8%A8%AD%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E8%AA%A4%E5%B7%AE%E9%A0%85-Model-Assumptions-About-the-Error-Term-mathcal-E" target="_blank" rel="noopener">假設模型下的誤差項 Model Assumptions About the Error Term E</a> </li>
+<li><em>\(\mathcal{E}\) 為獨立變數，每一個變數的 \(\mathcal{E}\) 都不同，互相獨立*</em>，因為 \(\mathcal{E} \) 不在是獨立變數了</li>
+</ul>
+<h2 id="Durbin-Watson-Test"><a href="#Durbin-Watson-Test" class="headerlink" title="Durbin-Watson Test"></a>Durbin-Watson Test</h2><ul>
+<li>由於我們的 \(\mathcal{E}\) 不再符合我們的假設模型，因此我們幫他建立新公式</li>
+<li>\( \mathcal{E}_t = \rho \mathcal{E}_{t-1} + z_t\)<ul>
+<li>\(\rho \) 上一期有多少的資訊會留給當前資料，此數值介於 \(-1 - 1\)，-1 表示負相關、1 表示正相關、0 表示無相關</li>
+<li>\(\mathcal{E}_{t-1}\) 前一期的殘差項</li>
+<li>\( z_t\) 原先<a href="https://theriseofdavid.github.io/2021/05/02/statistics/statistics-ch14/#%E5%81%87%E8%A8%AD%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E8%AA%A4%E5%B7%AE%E9%A0%85-Model-Assumptions-About-the-Error-Term-mathcal-E" target="_blank" rel="noopener">假設模型下的誤差項 Model Assumptions About the Error Term E</a>中 <strong>\(\mathcal{E}\)  是常態分配的隨機變數</strong></li>
+</ul>
+</li>
+<li>Durbin-Watson Test 假設檢定<ul>
+<li>我們的 Durbin-Watson Test 假設檢定就是要檢定我們的資料是否有 Autocorrelation。</li>
+<li>\(H_0: \rho = 0 \)</li>
+<li>\(H_1: \rho &gt; 0, \rho &lt; 0, \rho != 0\)，都可以分別代表，正相關、負相關、有相關；再適合的時機使用就好。</li>
+</ul>
+</li>
+<li>Durbin-Watson Test Statistic 的公式則為 <ul>
+<li>\(d = \frac{\sum_{t=2}^n \ (e_t - e_{t-1} \ )^2 }{ \sum_{t=1}^n \  (e_t^2)}\)，通常都透過電腦去計算</li>
+<li>其中 \(e_t = y_t - \hat{y}_t\)，實際資料減去估計資料，也就是殘差</li>
+</ul>
+</li>
+<li>Durbin-Watson Test 公式判讀<ul>
+<li>我們可以觀察此公式 \(d = \frac{\sum_{t=2}^n \ (e_t - e_{t-1} \ )^2 }{ \sum_{t=1}^n \  (e_t^2)}\)</li>
+<li>我們假設，完全<strong>正</strong>相關時則 \( e_t - e_{t-1} = 0\)<br>如果是完全<strong>正</strong>相關，那每一個殘差值則必須完全相同，因此 \(d = 0\)</li>
+<li>我們假設，完全<strong>負</strong>相關時則 \( e_t - e_{t-1} = -2 \ \text{or} \ 2 \)，這裡我們將每個 \(e_t\) 都假設只會有 1,-1 兩種結果。<br>如果是完全<strong>負</strong>相關，那每一個殘差值則必須完全不相同，因此 \(d = 4\)</li>
+<li>因此我們可以知道<ul>
+<li>當 \(d = 0\) 資料正相關</li>
+<li>當 \(d = 4\) 資料負相關</li>
+<li>因此我們可透過前面兩點推出，當 \(d = 2\) 資料無相關</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Durbin-Watson Test Statistic 檢定結果<ul>
+<li>當資料筆數大於 15 時，才能進行解釋，當資料筆數大於 50 時，才有解釋的準確度</li>
+<li>通常我們做 \(\alpha\) 後，Durbin-Watson Test Statistic 會給予 \(d_L\)、\(d_U\)，分別是檢定的上下界線。<ul>
+<li>如果我們計算出來的 Durbin-Watson Test Statistic 洛在此上下界線則無法進行判讀。</li>
+<li>這是因為這個地方過於模糊，無法肯定是有關係還是沒關係；類似於 Type 2 Error</li>
+</ul>
+</li>
+<li>假設檢定<ul>
+<li>正相關判讀<ul>
+<li>\(H_0: \rho = 0 \) 資料不相關</li>
+<li>\(H_1: \rho &gt; 0 \) 資料正相關</li>
+<li>用數線表示；英文補充說明 Inconclusive: 無法下結論、No evidence of positive autocorrelation: 資料不相關<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1fCK1_45Llx-ffs8rNO2KRtXs1D-mQL0r&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>負相關判讀<ul>
+<li>\(H_0: \rho = 0 \) 資料不相關</li>
+<li>\(H_1: \rho &lt; 0 \) 資料負相關</li>
+<li>由於剛剛的公式判讀，因此我們得知完全負相關時必須接近於 4，因此我們會直接將 \(d_L\)、\(d_U\) 同乘 4，此區間則是無法判讀，而比 \(4-d_L\) 大的就是資料負相關</li>
+<li>用數線表示；英文補充說明 Inconclusive: 無法下結論、No evidence of positive autocorrelation: 資料不相關<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=16CIDRjywGuuxZr-_KFZlubsaJ7pzFW5k&export=download" alt="">        </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><strong>資料相關判讀</strong><ul>
+<li>\(H_0: \rho = 0 \) 資料不相關</li>
+<li>\(H_1: \rho != 0 \) 資料 (正 or 負) 相關</li>
+<li>由於剛剛的公式判讀，因此我們得知完全負相關時必須接近於 4，因此我們會直接將 \(d_L\)、\(d_U\) 同乘 4，此區間則是無法判讀，而比 \(4-d_L\) 大的就是資料負相關</li>
+<li>用數線表示；英文補充說明 Inconclusive: 無法下結論、No evidence of positive autocorrelation: 資料不相關<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JhB1z1srTW5kI7yurEUT-XQDjI3237_H&export=download" alt="">        </p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：這裡有一份透過-minitab-產生的資訊，請針對-Durbin-Watson-Test-進行解讀"><a href="#舉例：這裡有一份透過-minitab-產生的資訊，請針對-Durbin-Watson-Test-進行解讀" class="headerlink" title="舉例：這裡有一份透過 minitab 產生的資訊，請針對 Durbin-Watson Test 進行解讀"></a>舉例：這裡有一份透過 minitab 產生的資訊，請針對 Durbin-Watson Test 進行解讀</h3><blockquote>
+<p>資料如下<br><img src="https://drive.google.com/u/2/uc?id=1YDAXzNpxdAfltKip28Mk7nHh4Iiu1g1s&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1KrgqE6GgxjT8egQjgE3kcP488ntFjgb_&export=download" alt="">   </p>
+</blockquote>
+<ul>
+<li>我們可以透過 ANOVA 表(Analysis of Variance) 得知這邊資料總數有 19 個</li>
+<li>解釋能力高達 93.94%，非常不賴</li>
+<li>我們可以從第二張圖看到，minital 的 Durbin-Watson Test 為 0.7981</li>
+<li>我們進行查表，由於表中的 n = 20，我們的資料總數有 19，19 與 20 非常相近，因此我們直接看 n=20 的 Durbin-Watson Test<ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1sBiJOUxI_Laqj22pOBkU1uKn5j3Jgstl&export=download" alt="">   </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>結論與分析<ul>
+<li>再 0.5 的顯著性測試中，\(d_L = 1.20, d_U = 1.41\)，\(d &lt;= d_L\) 因此資料呈現於正相關。</li>
+<li>由於經過 Durbin-Watson Test 可以得知這份資料有強烈的序列相關，因此我們應該要加入一個時間變數來降低 Durbin-Watson Test 使回測具有可用性、可靠性</li>
+</ul>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>北科上課筆記</category>
         <category>統計 statistics</category>
@@ -16511,7 +16662,7 @@
 <li>可透過 Bonferroni adjstment 對顯著性水準進行調整，調整公式為 \(\alpha / k \)，這樣就可以將 \(a_{EW} \) 降低。</li>
 </ul>
 <h1 id="隨機區組設計-Randomized-Block-Design"><a href="#隨機區組設計-Randomized-Block-Design" class="headerlink" title="隨機區組設計 Randomized Block Design"></a>隨機區組設計 Randomized Block Design</h1><ul>
-<li>如果使用 Excel 資料分析<strong>雙因子變數分析：重複試驗</strong></li>
+<li>如果使用 Excel 資料分析<strong>雙因子變數分析：無重複試驗</strong></li>
 <li>實驗單位 Experimental units<br>對每位接受實驗的 object 就是實驗</li>
 <li>完全隨機分配 completely randomized design<br>將 teatment 隨機平均分配給每個 Experimental units</li>
 </ul>
@@ -16589,7 +16740,7 @@
 </li>
 </ul>
 <h1 id="因子實驗-Factorial-Experiment"><a href="#因子實驗-Factorial-Experiment" class="headerlink" title="因子實驗 Factorial Experiment"></a>因子實驗 Factorial Experiment</h1><ul>
-<li>如果使用 Excel 資料分析<strong>雙因子變數分析：無重複試驗</strong></li>
+<li>如果使用 Excel 資料分析<strong>雙因子變數分析：重複試驗</strong></li>
 <li>上述之前我們都是只針對一個 Factor 來進行探討，現在我們要針對多個 Factor來進行探討，但一樣是使用 ANOVA 來計算，但也會有些計算不同。</li>
 <li>舉例：如果 a factor 有 \(\alpha\) 個 treatment，b factor 有 \(\beta\) 個 treatment，那我們蒐集的資料就是有 \(\alpha \beta\) 個組合。</li>
 <li>主要用來判斷兩個因子是否有交互作用，也可以檢查到兩因子對變數的假設檢定</li>
@@ -16928,7 +17079,7 @@
 </ul>
 <p>我們可以看 <a href="https://theriseofdavid.github.io/2021/05/02/NTUT_note/statistics-ch14/#%E4%BD%BF%E7%94%A8%E4%BC%B0%E8%A8%88%E8%BF%B4%E6%AD%B8%E6%96%B9%E7%A8%8B%E5%BC%8F%E4%BE%86%E9%A0%90%E6%B8%AC%E6%88%96%E9%A0%90%E4%BC%B0-Using-the-Estimated-Regression-Equation-for-Estimation-and-Prediction" target="_blank" rel="noopener">第十四章 簡單線性迴歸(Simple Linear Rejression) - 使用估計迴歸方程式來預測或預估 Using the Estimated Regression Equation for Estimation and Prediction by 大衞的筆記</a> 來知道信心區間、預測區間是甚麼，為甚麼預測區間會比信心區間來的大。</p>
 <h1 id="類別型變數在複迴歸下的應用-Categorical-Independent-Variables"><a href="#類別型變數在複迴歸下的應用-Categorical-Independent-Variables" class="headerlink" title="類別型變數在複迴歸下的應用 Categorical Independent Variables"></a>類別型變數在複迴歸下的應用 Categorical Independent Variables</h1><p>在建立回歸模型時，有一些是類別型的變數，例如我們現在加入一個變數 \(x_2\)，只要他是男生就是 1、女生就是 0。這種作法，我們稱之為 虛擬或表示變數 dummy or indicator variable</p>
-<h2 id="舉例：-根據先前程式設計師的舉例-舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資"><a href="#舉例：-根據先前程式設計師的舉例-舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資" class="headerlink" title="舉例：[根據先前程式設計師的舉例](#舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資"></a>舉例：[根據先前程式設計師的舉例](#舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資</h2><ul>
+<h2 id="舉例：根據先前程式設計師的舉例"><a href="#舉例：根據先前程式設計師的舉例" class="headerlink" title="舉例：根據先前程式設計師的舉例"></a>舉例：<a href="#舉例：根據先前程式設計師的舉例，我們想確定這些自變數是否與-y-有關聯），原本自變數是年資、程式能力，我們現在加入是否有碩士學歷來預估薪資">根據先前程式設計師的舉例</a></h2><ul>
 <li>因此我們現在的預估方程式改為 \(\hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \mathcal{E}\)<ul>
 <li>其中 \(\hat{y}\) 是薪水</li>
 <li>\(x_1\) 是年資</li>
@@ -19796,6 +19947,103 @@
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
         <tag>數論 Math theorm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Codeforces 1513D - GCD and MST(設計解題)</title>
+    <url>/2021/06/03/Codeforces/Codeforces%201521C/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Nastia 有一個數列，但我們並不知道數列裡面的數值，我們現在必須知道這些數值是甚麼，其中我們得知數列裡面的數值，是 1 ~ 數列長度。</p>
+<p>我們可以像 Nastia 進行詢問，但 Nastia 不接受普通的詢問方式，她接受的詢問方式如下</p>
+<ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)</li>
+<li>\(t=2 : mim(max(x,p_i), max(x+1, p_j)) \) </li>
+<li>其中 \(t\) 為我們選擇哪種查詢公式，\(p_i,p_j\) 則是數列的 index 當下數值，\(x\) 則是我們任意給的值，但 \(x\) 必須是數列中的數字。</li>
+<li>\(t=1\) or \(t=2, 1 \leq i,j \leq n, i != j, 1 \leq x \leq n-1\)，一定要符合這些條件。  </li>
+</ul>
+<p>我們可以對 Nastia 最多查詢 \( \frac{3*n}{2} + 30 \)，必須在這些次數前確認出所有的數列。</p>
+<p>如果已經確定數列，那輸出格式為 <code>! a b c</code>，其中 a,b,c 為數列的數字， index 從 1 開始。</p>
+<p><a href="https://codeforces.com/contest/1521/problem/C" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>理解交互式解題</li>
+<li>找出 \(t=1, t=2\) 公式，在甚麼情況下可以省略裡面一些邏輯式</li>
+<li>如何確定數列中的每個數值</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們可以對這題進行分析。<br>稍微看看這兩個公式</p>
+<blockquote>
+<ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)</li>
+<li>\(t=2 : min(max(x,p_i), max(x+1, p_j)) \) </li>
+</ul>
+</blockquote>
+<h3 id="公式分析一下"><a href="#公式分析一下" class="headerlink" title="公式分析一下"></a>公式分析一下</h3><ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)<br>當 \(x\) 設為無限大時，那我們可以簡化為 \(max(p_i,p_j) \)</li>
+<li>\(t=2 : min(max(x,p_i), max(x+1, p_j)) \)<br>當 \(x\) 設為無限小時，那我們可以簡化為 \(min(p_i,p_j) \)</li>
+</ul>
+<h3 id="我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？"><a href="#我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？" class="headerlink" title="我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？"></a>我們沒有辦法設定為無限小或無限大，那該怎麼辦呢？</h3><ul>
+<li>那我們可以設為數列的最大數值與最小數值，分別式 \(n,1\)。</li>
+<li>現在我們知道可以將公式化簡了，但我沒有辦法知道 index \(i,j\) 要放哪些數值<br>很簡單，我們只要將 \(min(p_i,p_j) \)，將 \(p_j\) 放最大，那 \(p_i\) 就是我們要的數值。<br>另外一個公式亦同。</li>
+<li>我們以 <strong>我們只要將 \(min(p_i,p_j) \)，將 \(p_j\) 放最大，那 \(p_i\) 就是我們要的數值。</strong> 來進行探討</li>
+<li>將 \(p_j\) 放最大，那我們要先找出數列中的最大值<br>由於題目的查詢方式不可以讓我們的 \(x\) 放最大，因此就用數列最大值。</li>
+</ul>
+<h3 id="那我們進行分析，如何找出數列中最大值"><a href="#那我們進行分析，如何找出數列中最大值" class="headerlink" title="那我們進行分析，如何找出數列中最大值"></a>那我們進行分析，如何找出數列中最大值</h3><ul>
+<li>根據上面的公式，我們有提到，當 \(x\) 設為無限小時，那我們可以簡化為 \(min(p_i,p_j) \)，因此我們要找到的是此公式中的最大值。</li>
+<li>因此公式就是 \(t=1 : max(min(n,p_i), min(n+1, p_j)) = n \)，n 是數列最大值，我們把 x 設為 n<br>理論上現在我們可以知道數列最大值是在 \(i,j\) 這兩個位置，但我要怎麼寫呢？</li>
+<li>不斷循序漸進，也就是 \(i =i, j = i+1\)，for 迴圈一次進行 i,j</li>
+<li>我已經知道最大的數值在 \(i,j\) 位置，那我要怎麼確定她在 i 還是 j 呢？</li>
+<li>似乎不太能夠確定呢…</li>
+</ul>
+<h3 id="那我們再稍微簡化一下，我們鎖定-j-的位置一定是題目最大值的位置。"><a href="#那我們再稍微簡化一下，我們鎖定-j-的位置一定是題目最大值的位置。" class="headerlink" title="那我們再稍微簡化一下，我們鎖定 j 的位置一定是題目最大值的位置。"></a>那我們再稍微簡化一下，我們鎖定 j 的位置一定是題目最大值的位置。</h3><ul>
+<li>因此公式就是 \(t=1 : max(min(n-1,p_i), min(n, p_j)) = n\)，n 是數列最大值，我們把 x 設為 n</li>
+<li>這樣 \(min(n, p_j) \) 一定是題目最大值。</li>
+<li>但現在有個問題，那如果依照迴圈去寫假如數列 index i 才是最大值，那該怎麼辦<ul>
+<li>我們可以知道一件事情，\(min(n-1,p_i)\)，最大的數值為 \(n-1\)</li>
+<li>如果 \(p_i = n\)，那 \(min(n, p_j) &lt; n \)</li>
+<li>因此只要我們 \(t=1 : max(min(n-1,p_i), min(n, p_j)) = n-1\)，我們就讓 \(i,j\) 位置互換</li>
+</ul>
+</li>
+<li>紀錄最大的數值位置</li>
+</ul>
+<h3 id="現在我們有了最大的數值位置，求出其他位置數值"><a href="#現在我們有了最大的數值位置，求出其他位置數值" class="headerlink" title="現在我們有了最大的數值位置，求出其他位置數值"></a>現在我們有了最大的數值位置，求出其他位置數值</h3><ul>
+<li>可以用 \(t=2 : min(max(x,p_i), max(x+1, p_j)) \) 反推</li>
+<li>現在我們定義 \(p_m\) 表示最大的數值位置</li>
+<li>\(t=2 : min(max(x,p_i), max(x+1, p_m)) \)<ul>
+<li>\(max(x+1, p_m) &gt; p_i \) </li>
+<li>因此我們只要把 x 設到最小即可。</li>
+<li>數列中最小值是 0。</li>
+</ul>
+</li>
+<li>因此我們只要對每一個 index 進行一次查詢就能推出答案！</li>
+</ul>
+<p><strong>注意：不可以在查詢時出現 \(? 2 p_i p_m 1 \)，其中 \(p_i == p_m\)，題目有說明 i 不可以等於 j</strong>，如果你這樣做則 codeforces 則會輸出 WA: <code>wrong answer Indices should be distinct (test case 1)</code></p>
+<h3 id="稍微檢查下查詢次數會不會大於-frac-3-n-2-30"><a href="#稍微檢查下查詢次數會不會大於-frac-3-n-2-30" class="headerlink" title="稍微檢查下查詢次數會不會大於 \( \frac{3*n}{2} + 30 \)"></a>稍微檢查下查詢次數會不會大於 \( \frac{3*n}{2} + 30 \)</h3><ul>
+<li>找出數列最大值 index 進行查詢次數 \(n/2+1\)</li>
+<li>每一個數值與數列最大值進行 \(t=2\)查詢次數 \(n-1\)</li>
+<li>因此最多的查詢次數只會有 \( \frac{3*n}{2}  \)</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/JophieQu/article/details/116524323" target="_blank" rel="noopener">C. Nastia and a Hidden Permutation by JophieQu</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實我之前並沒有寫過交互式解題，因此對這種流程非常不熟，是我的朋友們告訴我交互式解題我們應該要注重的是 input，而非 output，我原本在這邊思考了很久都一直鬼打牆…。腦袋不給力阿QQ。</p>
+<p>後來再看 JophieQu 大大的詳解時，我一直寫錯…，我忘記 \(n-1 = max(min(n-1,p_i), min(n, p_j))) 的現象，因此要進行確認，然後再將 \(i,j\) 位置顛倒，為甚麼會忘記呢？因為我那時候認為我這樣比較好寫。<del>可是是錯的阿</del></p>
+<p>然後我還忘記題目的說明，題目有說明 不可以在查詢時出現 \(? t i j x \)，其中 \(i != j\)，對！我有看到。<br>但是我把每個 index 都帶入 \(t=2\) 去推出數列的數值，卻一直得到 WA，我就一直用紙筆去推敲，就是得不出這樣會錯的結果，後來再重新看一遍題目才知道，…，\(p_m\) 也是數列中的一個 index，如果直接用 for 迴圈去跑每一個 index，那其中會有一個 index 與 \(m\) 相同。</p>
+<p>唉，還不夠聰明，腦袋還不夠好。還需要多多訓練自己的腦袋R。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">30000</span>;</span><br><span class="line"><span class="keyword">int</span> T, a, n;</span><br><span class="line"><span class="keyword">int</span> num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="built_in">string</span> cmd, <span class="keyword">int</span> t, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> x)</span></span>&#123; <span class="comment">//用於查詢</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; cmd &lt;&lt; <span class="string">" "</span> &lt;&lt; t &lt;&lt; <span class="string">' '</span> &lt;&lt; i &lt;&lt; <span class="string">' '</span> &lt;&lt; j &lt;&lt; <span class="string">' '</span> &lt;&lt; x &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; value;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> max_index = <span class="number">0</span>, value; <span class="comment">//max_index 為記錄最大值的 index</span></span><br><span class="line">        <span class="comment">// value 為 query function 回傳值</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i+=<span class="number">2</span>)&#123; <span class="comment">//找出最大的數值</span></span><br><span class="line">            <span class="keyword">if</span>(n &amp; <span class="number">1</span> &amp;&amp; i == n)&#123; <span class="comment">//由於我是 i+=2，但有可能數列是奇數的情況，因此如果</span></span><br><span class="line">                <span class="comment">//數列是奇數，並且到現在還沒有找到最大值，那麼最後一個數值一定是最大值。</span></span><br><span class="line">                max_index = n; <span class="comment">//紀錄最大值 index</span></span><br><span class="line">                num[n] = i; <span class="comment">//並放入數列中</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//找到最大值跳出迴圈</span></span><br><span class="line">            &#125;</span><br><span class="line">            value = query(<span class="string">"?"</span>, <span class="number">1</span>, i, i+<span class="number">1</span>, n<span class="number">-1</span>); <span class="comment">//進行查詢，查詢 i,j 內是否有數列最大值</span></span><br><span class="line">            <span class="keyword">if</span>(value == n)&#123; <span class="comment">//如果有，並且出現在 j 位置，j = i+1</span></span><br><span class="line">                max_index = i+<span class="number">1</span>; <span class="comment">//紀錄最大值 index</span></span><br><span class="line">                num[i+<span class="number">1</span>] = n;  <span class="comment">//並放入數列中</span></span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//找到最大值跳出迴圈</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(value == n<span class="number">-1</span>)&#123; <span class="comment">// p_i 有 7 or 8 的可能，我們在一次進行驗證</span></span><br><span class="line">                value = query(<span class="string">"?"</span>, <span class="number">1</span>, i+<span class="number">1</span>, i, n<span class="number">-1</span>); <span class="comment">//將 i,j 相反後再 query 一次</span></span><br><span class="line">                <span class="keyword">if</span>(value == n)&#123; <span class="comment">//如果發現 i 真的是最大值</span></span><br><span class="line">                    max_index = i;  <span class="comment">//紀錄最大值 index</span></span><br><span class="line">                    num[i] = n; <span class="comment">//並放入數列中</span></span><br><span class="line">                    <span class="keyword">break</span>; <span class="comment">//找到最大值跳出迴圈</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "max_index " &lt;&lt; max_index &lt;&lt; '\n';</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//找到最大值後，利用 t=2 公式找出每個數列的數值</span></span><br><span class="line">            <span class="comment">//由於 max_index 的值會在 i 裡面，題目的查詢有說明不可以用兩個 index 相同去查詢</span></span><br><span class="line">            <span class="comment">//因此我們要避免這種情況，才會寫這個 if </span></span><br><span class="line">            <span class="keyword">if</span>(i == max_index) <span class="keyword">continue</span>; </span><br><span class="line">            num[i] = query(<span class="string">"?"</span>, <span class="number">2</span>, i, max_index, <span class="number">1</span>); <span class="comment">//找出 i 數列的值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"!"</span>; <span class="comment">//輸出答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; num[i];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="思考流程"><a href="#思考流程" class="headerlink" title="思考流程"></a>思考流程</h2><p>透過紙筆與黑板而思考而成的片段，放在網路上供我紀念XD</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1v-asVesqGLqzgFYY8dml9OmyKN_k7ciw&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>交互式解題</tag>
       </tags>
   </entry>
 </search>
