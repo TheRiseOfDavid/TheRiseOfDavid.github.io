@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    使用 google app script 擴增 google docs 功能 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-google/google_app_script_connect_google_doc" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  使用 google app script 擴增 google docs 功能
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/06/07/google/google_app_script_connect_google_doc/" class="article-date">
+  <time datetime="2021-06-07T15:59:50.000Z" itemprop="datePublished">2021-06-07</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/google/">google</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">6分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記僅記錄大衛如何使用 google docs 中的建立程式碼，來寫成一份外掛程式。<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生，或是版本更新就不適用</strong></p>
+<p>由於我並不是 google app script 大神，可能有些地方沒有寫得很棒，還請多包涵。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Google-App-Script-是甚麼"><a href="#Google-App-Script-是甚麼" class="headerlink" title="Google App Script 是甚麼"></a>Google App Script 是甚麼</h2><ul>
+<li>是 Google 以 JS 為基底再衍伸出的一種腳本</li>
+<li>能專門在 Google Workspace 進行輕量應用開發<br>Google Workspace: gmail, drive, Jam….，只要是 google 提供的服務都是 Google Workspace</li>
+<li>Google App Script 可以在 docs、sheet、slide 建立插件。</li>
+</ul>
+<h1 id="主題：Google-App-Script-連接-Google-docs"><a href="#主題：Google-App-Script-連接-Google-docs" class="headerlink" title="主題：Google App Script 連接 Google docs"></a>主題：Google App Script 連接 Google docs</h1><p>這次我們要講 Google App Script 應用在 Google docs，大家應該都很清楚，我們有時候再運用 Google docs 上總是會覺得功能不夠多，不夠好用，這時候自己寫一個外掛程式就可以幫助我們，那要怎麼寫呢？</p>
+<p>首先，我們必須要學會 JavaScript，這應該對大家都還行。</p>
+<p>這裡我們會細分兩部分</p>
+<ul>
+<li>再 google docs 加入外掛，供使用者進行使用</li>
+<li>使用追縱器，追蹤使用者打開文件<br>如果是 google sheet，甚至可以追蹤文件修改。</li>
+</ul>
+<h2 id="google-docs-加入外掛，供使用者進行使用"><a href="#google-docs-加入外掛，供使用者進行使用" class="headerlink" title="google docs 加入外掛，供使用者進行使用"></a>google docs 加入外掛，供使用者進行使用</h2><ul>
+<li>這裡我們只是做一個簡單的快速開始，我之前有再工作時應用到，但是這是工作機密因此無法洩漏，</li>
+<li>不過有興趣做此應用的讀者可以考慮做做看：蒐集新聞，並放入 google docs 裡面，製作成報刊。</li>
+<li>我知道 google 的 example，並不是非常好用，所以我在這邊做一個簡單介紹，方便使用者快速上手。</li>
+<li><strong>那我們範例的專案就是讓 google docs 裡面的單字放到 alert 來提醒我們。</strong></li>
+<li>提供一個方向給初學者參考，google App Script 都是以 class 為主，因此當我們需要用到 google docs 我們就使用 <code>DocumentApp</code>、使用 google sheet 就用 <code>spreadsheet</code>，一些常用的套件則也有 class。<del>稍微比一般的 js 容易閱讀、使用</del><ul>
+<li><a href="https://developers.google.com/apps-script/reference/drive" target="_blank" rel="noopener">Google Drive Class</a></li>
+<li><a href="https://developers.google.com/apps-script/reference/document" target="_blank" rel="noopener">Google Document Class</a></li>
+<li>舉著兩個例子，大家可以去這邊看看 Google App Script 的 class  <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1LEErmw-9Scy7otm4E_noaxiP0TwzFdrM&export=download" alt=""></p>
+</blockquote>
+<h3 id="介紹開始"><a href="#介紹開始" class="headerlink" title="介紹開始"></a>介紹開始</h3></li>
+</ul>
+</li>
+<li>首先我們必須先開啟一份 google docs</li>
+<li>之後我們點選 工具 &gt; 指令碼編輯器，注意：指令碼編輯器必須要是此文件的編輯者<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1K28zuxBX0oGW4WwqGFevYjBQ33Mi9WvT&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>再來我們進入程式碼編輯區，大家可以自行摸索下</li>
+<li>我們可以從 <a href="https://developers.google.com/apps-script/reference/document" target="_blank" rel="noopener">Google Document Class</a> 得知，google Docs 的程式結構類似於 html，因此必須熟讀 <a href="https://developers.google.com/apps-script/reference/document" target="_blank" rel="noopener">Google Document Class</a> 才可以知道程式碼要如何運作。</li>
+<li>將此專案進行改名，點此改名，這邊我們改名 <strong>跳出 word 內所有單字訊息</strong><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=16fd8c3nD4GRVVI9kA5YhkKaKo-u9U-k3&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>這邊我們則直接寫程式，直接作範例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>)</span>&#123; <span class="comment">//主要執行區</span></span><br><span class="line">  <span class="comment">//使我們的外掛套件增加一個按鈕，當點擊此按鈕執行 function pathfinder_update_word</span></span><br><span class="line">  <span class="keyword">var</span> ui = DocumentApp.getUi(); </span><br><span class="line">  ui.createAddonMenu()</span><br><span class="line">  .addItem(<span class="string">"print doc word"</span>, <span class="string">"print_doc_word"</span>)</span><br><span class="line">  .addToUi();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print_doc_word</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> ui = DocumentApp.getUi(); <span class="comment">//使用 ui.class </span></span><br><span class="line">  <span class="keyword">var</span> result = ui.alert(<span class="string">"準備將文字進行輸出..."</span>); <span class="comment">//送出警示</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//告訴 google 你想要用程式操作的 google doc 是正在執行的 google doc </span></span><br><span class="line">  <span class="keyword">var</span> source = DocumentApp.getActiveDocument(); </span><br><span class="line">  <span class="keyword">var</span> body = source.getBody(); <span class="comment">//進入 doc body</span></span><br><span class="line">  <span class="keyword">var</span> get_text = body.getText(); <span class="comment">//獲得 body 內的所有文字</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> result = ui.alert(get_text);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Google-App-Script-操作"><a href="#Google-App-Script-操作" class="headerlink" title="Google App Script 操作"></a>Google App Script 操作</h3><ul>
+<li>先將資料進行儲存(ctrl+s)，之後我們要選擇當程式啟動後，第一個呼叫的程式是哪個，這裡的話則是呼叫 <code>main</code><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1UyxmhczY5xClJQ0Rf7CITrxaJAcCW0my&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><strong>寫完後的第一次執行</strong>，通常會告訴你需要授權這份專案存取你的資料，那我們一定也會答應的，除非你自己寫的這份程式碼有毒XDDD。</li>
+<li>因此點選 審查權限 &gt; 選擇帳戶(必須與 Google App Script 的帳戶相同) &gt; 允許。</li>
+<li>執行程式</li>
+</ul>
+<h3 id="Google-Doc-加入外掛套件"><a href="#Google-Doc-加入外掛套件" class="headerlink" title="Google Doc 加入外掛套件"></a>Google Doc 加入外掛套件</h3><ul>
+<li>Google App Script 操作完成後，點選 外掛程式 &gt; 跳出 word 內所有單字訊息 &gt; update keyword<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1b2I1v8Www260lE4Um7e-nDadkv5pdVXb&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>成果畫面 A<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=171fsp9wfbGl86qM8FvHgzvO6__XxzU5A&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>成果畫面 B<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19pGM5VjUA0k0eSULCeg-vGfC_MLdttIb&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="讓此外掛永遠存在此文件"><a href="#讓此外掛永遠存在此文件" class="headerlink" title="讓此外掛永遠存在此文件"></a>讓此外掛永遠存在此文件</h3><ul>
+<li>有些讀者應該有發現，當我們 refresh google doc 則我們的外掛套件就會消失</li>
+<li>如果我們執行過程式，則 google doc 的外掛程式<strong>永遠只會是第一次執行的結果</strong>，如果先前有做修改，那我們就 refresh google doc，從做上面兩大操作。</li>
+<li>那當我們執行好後，應該要如何讓我們寫的程式外掛一直都存在這份文件呢？</li>
+<li>請按照此照片的步驟進行點選，中間的主畫面則交給使用者進行微調。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ofM-huUw2T8NNpMKaMn9kNoRXFJUU2qq&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Google-App-Script-使用其他方式來編輯-google-doc"><a href="#Google-App-Script-使用其他方式來編輯-google-doc" class="headerlink" title="Google App Script 使用其他方式來編輯 google doc"></a>Google App Script 使用其他方式來編輯 google doc</h2><p>有時候我們一份程式碼並不一定只用在當前的 google docs <code>DocumentApp.getActiveDocument()</code>，如果他有需要用到其他 google doc <code>DocumentApp.openById(id)</code>，另一份 google doc 如果想要透過 google doc ID 來編輯、追蹤此文件，則可以查看下行連結<br><a href="https://stackoverflow.com/questions/67443862/can-i-use-documentapp-openbyid-with-read-only-permission" target="_blank" rel="noopener">Can I use DocumentApp.openById() with read only permission? by stackoverflow</a></p>
+<p>而 google doc ID 我們要怎麼知道呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;docs.google.com&#x2F;document&#x2F;d&#x2F;XXX&#x2F;edit</span><br></pre></td></tr></table></figure>
+
+<p>其中 XXX 處中的所有文字就是這份文件的 ID。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://developers.google.com/apps-script/reference/drive" target="_blank" rel="noopener">Google Drive Class</a><br><a href="https://developers.google.com/apps-script/reference/document" target="_blank" rel="noopener">Google Document Class</a><br><a href="https://developers.google.com/apps-script/reference/document/element" target="_blank" rel="noopener">Google Document Interface Element</a><br><a href="https://stackoverflow.com/questions/67443862/can-i-use-documentapp-openbyid-with-read-only-permission" target="_blank" rel="noopener">Can I use DocumentApp.openById() with read only permission? by stackoverflow</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>Google 的說明文件真的很不好閱讀欸…，給我快速開始拉QQQ。</p>
+<p>想當然，Google 的服務自然是非常好用，非常棒，但有些部分還沒有到完全齊全，對使用者來說可以達到百分之百的友善。</p>
+<p>如果讀者有好好的去查看他們的說明文件則會發現他們的 method 都沒有給舉例，因此常常會發現，他告訴我有這個函式、這個功能！可是我不知道怎麼用，怎麼寫…。接下來我們再去用 google search 去找如何使用此函數，或是他有沒有一些必備的前置動作之類的，畢竟雲端程式最大的缺點就是 debug 非常不容易…，每次 debug 都跟通靈沒啥不一樣QQ。</p>
+<p>但還是謝謝 google 發明這份程式且願意免費讓我來使用QQ，很感謝你們，嗚嗚。<br>但拜託不要養套殺我拉。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google-app-script/" rel="tag">google app script</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/06/07/google/google_doc_add_text_anime/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">使用 google app script 來輸入文字，並加入打字特效</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
