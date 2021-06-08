@@ -15291,7 +15291,7 @@
 </li>
 <li><p>Test Statistic<br>公式 \(t = \frac{b_1}{s_{b_1}} = \frac{5}{1.08} = 4.63\)，老師已經把 \(s_{b_1}\) 已經做完。</p>
 </li>
-<li><p>確認並拒絕 \(H_0\)<br>if \(p-value=0.01 \leq \alpha=0.05 \)  or \( 4.63=|t| \ geq t_{a/2} = 3.182\)，因此拒絕 \(H_0\)，我們可以確認電視廣告與汽車銷售數量是有關聯的。</p>
+<li><p>確認並拒絕 \(H_0\)<br>if \(p-value=0.01 \leq \alpha=0.05 \)  or \( 4.63=|t| \geq t_{a/2} = 3.182\)，因此拒絕 \(H_0\)，我們可以確認電視廣告與汽車銷售數量是有關聯的。</p>
 </li>
 </ul>
 <h2 id="對-beta-1-做信賴區間"><a href="#對-beta-1-做信賴區間" class="headerlink" title="對 \(\beta_1\) 做信賴區間"></a>對 \(\beta_1\) 做信賴區間</h2><ul>
@@ -16800,14 +16800,14 @@
 </li>
 <li>conclusions<ul>
 <li>ctitical value approach<ul>
-<li>產業： \(F=4.19 &lt; F_a = 4.75\)<br>不同的產業，薪水並不會有差別</li>
-<li>地點： \(F= 4.69 \geq F_a = 3.89\)<br>不同的地點，薪水並不會有差別</li>
+<li>產業： \(F=4.19 \leq F_a = 4.75\)<br>不同的產業，薪水並不會有差別</li>
+<li>地點： \(F= 4.69 &gt; F_a = 3.89\)<br>不同的地點，薪水並<strong>會有差別</strong></li>
 <li>交互作用： \(F=1.55 &lt; F_a = 3.89\)<br>此二因素並沒有關聯</li>
 </ul>
 </li>
 <li>p-value approach <ul>
 <li>產業： \(p-value=0.06 &gt; a = 0.05\)<br>不同的產業，薪水並不會有差別</li>
-<li>地點： \(p-value = 0.03 \leq a = 0.05\)<br>不同的地點，薪水並不會有差別</li>
+<li>地點： \(p-value = 0.03 \leq a = 0.05\)<br>不同的地點，薪水<strong>會有差別</strong></li>
 <li>交互作用： \(p-value=0.25 &gt; a = 0.05\)<br>此二因素並沒有關聯</li>
 </ul>
 </li>
@@ -20140,16 +20140,16 @@
 <p>但還是謝謝 google 發明這份程式且願意免費讓我來使用QQ，很感謝你們，嗚嗚。<br>但拜託不要養套殺我拉。</p>
 ]]></content>
       <categories>
-        <category>google</category>
+        <category>Google App Script</category>
       </categories>
       <tags>
         <tag>學習筆記</tag>
-        <tag>google app script</tag>
         <tag>google</tag>
+        <tag>Google App Script</tag>
       </tags>
   </entry>
   <entry>
-    <title>使用 google app script 來輸入文字，並加入打字特效</title>
+    <title>使用 Google App Script 來輸入文字，並加入打字特效</title>
     <url>/2021/06/07/google/google_doc_add_text_anime/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
 <p>此筆記僅記錄大衛如何使用 google docs 中的建立程式碼，來寫成一份外掛程式。<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生，或是版本更新就不適用</strong></p>
@@ -20157,14 +20157,67 @@
 </blockquote>
 <a id="more"></a>
 
-<h2 id="如何"><a href="#如何" class="headerlink" title="如何"></a>如何</h2>]]></content>
+<h2 id="使用-google-app-script-來輸入文字，並加入打字特效"><a href="#使用-google-app-script-來輸入文字，並加入打字特效" class="headerlink" title="使用 google app script 來輸入文字，並加入打字特效"></a>使用 google app script 來輸入文字，並加入打字特效</h2><ul>
+<li><a href="https://theriseofdavid.github.io//2021/06/07/google/google_app_script_connect_google_doc/" target="_blank" rel="noopener">必須要先熟知此文件，看這份文件才容易理解、閱讀</a></li>
+<li>這邊會講述一些，如果想要給女友製造一些小浪漫時，我們可以怎麼做XD。</li>
+<li>或是如果要在報告時，稍微做出一些酷酷的特效。</li>
+<li><strong>這種方式會大量的浪費 google 效能，請大家三思</strong></li>
+</ul>
+<p>其主要是這樣的，如果讀者之前有用過</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> source = DocumentApp.getActiveDocument(); </span><br><span class="line"><span class="keyword">var</span> body = source.getBody(); <span class="comment">//進入 doc body</span></span><br><span class="line"><span class="keyword">var</span> printer = body.editAsText(); <span class="comment">//啟動編輯模式</span></span><br><span class="line">printer.appendText(text[i]); <span class="comment">//輸入文字</span></span><br><span class="line">source.saveAndClose(); <span class="comment">//google App Script 可以不用寫這行，那預設會到整份程式碼執行完畢才關閉</span></span><br><span class="line"><span class="comment">//關閉程式碼，將 printer 中的所有文字輸出到 word 上</span></span><br></pre></td></tr></table></figure>
+
+<p>可以發現，其實 printer 只是一個 buffer，他會等到 <code>source.saveAndClose();</code> 執行 or 整份程式碼結束時才會更新 word，但如果我們需要先送出資料讓使用者輸入後我們再進行下一步動作，或是打字特效時就很不方便。</p>
+<p>因此，如果要先將存在 buffer 裡面的字串都先輸出，我們就必須要先 <code>source.saveAndClose();</code>，之後就可以將所有字串先輸出到 google docs 上。</p>
+<p>再來我們可以透過程式在做下一步。</p>
+<h2 id="Google-App-Script-程式碼"><a href="#Google-App-Script-程式碼" class="headerlink" title="Google App Script 程式碼"></a>Google App Script 程式碼</h2><p>一樣我們是先進入 google doc 後，我們點擊 工具 &gt; 指令碼編輯器，之後來寫 code 啦。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//告訴 google 你想要用程式操作的 google doc 是正在執行的 google doc</span></span><br><span class="line">  <span class="keyword">var</span> source = DocumentApp.getActiveDocument(); </span><br><span class="line">  <span class="keyword">var</span> body = source.getBody(); <span class="comment">//進入 doc body</span></span><br><span class="line">  body.clear(); <span class="comment">//將 google doc 裡面全部的資料清除</span></span><br><span class="line">  source.saveAndClose(); <span class="comment">//保存，並關閉程式碼對 google doc 的控制 </span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> text = <span class="string">"Hi David, My name is Alice."</span>; <span class="comment">//要進行打字特效的動作</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; text.length; i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> source = DocumentApp.getActiveDocument(); </span><br><span class="line">    <span class="keyword">var</span> body = source.getBody(); <span class="comment">//進入 doc body</span></span><br><span class="line">    <span class="keyword">var</span> printer = body.editAsText(); <span class="comment">//進入編輯模式</span></span><br><span class="line">    printer.setFontFamily(<span class="string">"微軟正黑體"</span>); <span class="comment">//設定字體為 微軟正黑體</span></span><br><span class="line">    printer.setFontSize(<span class="number">14</span>); <span class="comment">//設定字體大小為 14</span></span><br><span class="line">    printer.appendText(text[i]); <span class="comment">//將字串讀入 google doc 內</span></span><br><span class="line">    source.saveAndClose(); <span class="comment">//保存，並關閉程式碼對 google doc 的控制，此時則會將 printer butter text 輸出。</span></span><br><span class="line">    Utilities.sleep(<span class="number">200</span>); <span class="comment">//暫停，等待 200ms。</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果檢查沒有問題後，再來我們就是打開觸發條件，如下</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1PY8O1rXYnLVhwbZcQLK_zf4jJBw_Ng33&export=download" alt=""></p>
+</blockquote>
+<p>但其實可以發現，這樣其實對 google 很壞，很吃他的效能。<br>因為不斷關閉又刪除…，對不起 google….。<br>但我真的很想要這個酷酷的東西XD。</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>研究 google App Script 應該是我這周六日花最多的時間呢，<del>我才不會告訴你說最近我很喜歡打 LOL</del>，不過這個特效我自己研究了好久都還找不太出來怎麼顯現這個特效。</p>
+<p>畢竟 google Doc Class 並沒有針對 <code>DocumentApp.editAsText().AppendText()</code> 中有講述到他是先將資料放入 buffer 內。<br>因此我的小笨腦袋都以為他會邊 print 邊執行程式。</p>
+<p>而且我原本想要在 google App Script 寫如何在裡面放入圖片，但我還沒有讀懂如何放入圖片…，牠放入圖片的難度有點高，主要原因是我不知道 <code>BlobSource</code> 此 class，要如何產生比較好…。</p>
+<p>我覺得應該可以讓  <code>DocumentApp.editAsText().AppendImage()</code> 這邊放一個快速開始，告訴大家如何在 google doc 內放入圖片，這樣我就不需要一直通靈這怎麼寫了QQQ。<del>到現在還通靈不出來</del></p>
+<p>寫程式中，通靈真的是最難最痛苦的一件事RRR。</p>
+<p>但還是謝謝 google 發明這份程式且願意免費讓我來使用QQ，很感謝你們，嗚嗚。<br>但拜託不要養套殺我拉。</p>
+]]></content>
       <categories>
-        <category>google</category>
+        <category>Google App Script</category>
       </categories>
       <tags>
         <tag>學習筆記</tag>
-        <tag>google app script</tag>
         <tag>google</tag>
+        <tag>Google App Script</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資財二管理資訊系統 個案九 少林旅行社—標錯價格事件</title>
+    <url>/2021/06/08/case_report/NTUTifm_Manager_t09/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>（請閱讀 W16_少林旅行社—標錯價格事件）</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="如何改善「標錯價」的問題？"><a href="#如何改善「標錯價」的問題？" class="headerlink" title="如何改善「標錯價」的問題？"></a>如何改善「標錯價」的問題？</h2><p>改善標錯價的問題，我認為可以透過兩方面進行改善。</p>
+<h3 id="方案一：改革公司制度"><a href="#方案一：改革公司制度" class="headerlink" title="方案一：改革公司制度"></a>方案一：改革公司制度</h3><p>個案中有說到，將旅遊上架的都是業務部且時間點都很不一致，在某些時段並不會有公司人員發現到此問題，因此我建議每天早上 10 點讓主管們齊聚一堂開會並透過 email 傳送給決定價錢的所有公司員工，讓所有的長官一同同意此價格再進行標價。</p>
+<p>如果業務部做不好文書處理的事情，那就讓主管們來做，這樣就不可以將下屬進行解雇，將責任都丟給解聘的下屬，會使主管擁有責任，主管就會更加仔細的檢查問題。</p>
+<p>公司內部可以透明化，稽核就相對容易，也比較不會有丟皮球的問題。</p>
+<h3 id="方法二：透過電腦判定此價格是否有問題"><a href="#方法二：透過電腦判定此價格是否有問題" class="headerlink" title="方法二：透過電腦判定此價格是否有問題"></a>方法二：透過電腦判定此價格是否有問題</h3><p>我們可以透過要求使用者在刊登旅遊商品資訊時，必須一同報上成本與利潤，當 成本+利潤 = 售價時，我們才刊登此商品，如果 成本+利潤 != 售價時，我們就可以給予刊登者提示訊息，表示他的上傳商品不正確，並傳送資訊給主管，他必須要追蹤此商品價格資訊。</p>
+<p>如果第三次刊登失敗，就會將刊登的頁面鎖住，不讓業務進行刊登，同時系統透過鈴聲提醒主管，因為通常刊登三次失敗那應該就是更上面的細節有問題，並不會單單只有業務 key-in 輸入錯誤的可能性。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>我認為這兩種方式都可以降低刊登錯誤的可能性，且第二種理論上可以大幅下降，也比較不會讓主管們感覺到作業感。<br>雖然方法二無法稽查業務故意 key 錯資訊，但這並不是我們這次要考論的重點。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>個案報告 Case Report</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大管理資訊系統筆記</tag>
       </tags>
   </entry>
 </search>
