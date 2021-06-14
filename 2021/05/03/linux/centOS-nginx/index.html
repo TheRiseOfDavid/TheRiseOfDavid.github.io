@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    centOS6 安裝 nginx、安裝 SSL 憑證、進行反向代理 |  大衞的筆記
+    centOS6 安裝 nginx、安裝 SSL 憑證、進行反向代理、發布網頁 |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  centOS6 安裝 nginx、安裝 SSL 憑證、進行反向代理
+  centOS6 安裝 nginx、安裝 SSL 憑證、進行反向代理、發布網頁
 </h1>
   
 
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">2k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">5分鐘</span>
+            <span class="post-count">8分鐘</span>
         </span>
     </span>
 </div>
@@ -134,6 +134,78 @@ ga('send', 'pageview');
 <li>然後再 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code> 加入紅筆中的這些<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1vVN1QJfOCsReSGsQCWa1IsScTIR0JB0L&export=download" alt=""></p>
 </blockquote>
+</li>
+</ul>
+<h2 id="發布網頁"><a href="#發布網頁" class="headerlink" title="發布網頁"></a>發布網頁</h2><ul>
+<li>首先我們有一個資料夾，存放要 show 給全部人的資料，例如 index.html….。</li>
+<li>檢查網域位置<ul>
+<li>我們可以進去 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code>，可以看到 root 的位置在 <code>/usr/share/nginx/html</code><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-k1NJqIZnFBLcp0GxtFG5URePp7ctSXa&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此當我們打 <code>https://localhost</code> 時是進到  <code>/usr/share/nginx/html</code> 這個資料夾</li>
+<li>再來我們如果打 <code>https://localhost/david</code> 時是進到  <code>/usr/share/nginx/html/david</code> 這個資料夾</li>
+<li>如果沒有這個資料夾 <code>/usr/share/nginx/html/david</code> ，這時 nginx 會判斷下面你的 local 是否有此網域，如果有就轉過去，沒有就輸出 404。</li>
+</ul>
+</li>
+<li>修改網域位置<ul>
+<li>假如我們有個網域位置在 <code>/home/david/public_html</code>，我們想讓 <code>https://localhost</code> 指到此網域</li>
+<li>那我們針對 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code> 修改，修改如下<ul>
+<li>將 root 進行註解<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1TuVwcVCiU-wNs3V7ftr8O-sQKyUKVEbY&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>增加 location，並且預設如果指到資料夾位置時，會自動開啟 index.html、index.php<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qM8CT_68CMBiY0xyJNRDWXBW2xEComAy&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>啟動 nginx 輸入 <code>sudo service nginx start</code></li>
+<li>這樣你再輸入 <code>https://localhost</code>，則會打開 <code>/home/david/public_html/index.html</code>，前提是你資料夾下必須有此檔案拉XD。</li>
+</ul>
+<h3 id="權限問題-forbidden-13-Permission-denied-、靜態網頁-403-forbidden"><a href="#權限問題-forbidden-13-Permission-denied-、靜態網頁-403-forbidden" class="headerlink" title="權限問題  forbidden (13: Permission denied)、靜態網頁 403 forbidden"></a>權限問題  forbidden (13: Permission denied)、<strong>靜態網頁</strong> 403 forbidden</h3><ul>
+<li>問題描述<ul>
+<li>我們打開 localhost 網頁中的某一個資料夾(包含初始位置資料夾)，不管怎麼打開都會出現 403 forbidden 訊息，這該怎麼辦呢？</li>
+<li>我們先檢查 error_log 輸入指令 <code>vim /var/log/nginx/error.log</code></li>
+<li>往下滑，檢查最後一個錯誤，發現內容大致上寫著 forbidden (13: Permission denied)</li>
+<li>該怎麼辦呢？</li>
+</ul>
+</li>
+<li>解決方法<ul>
+<li>通常遇到這種問題，表示設定為 root 的資料夾 or 子資料夾權限不足，因此我們修改資料夾的權限，提供 nginx 來使用。</li>
+<li>提供方式如下，假設我們的 root <code>/home/david/public_html/</code>，權限不足，那我們就打指令 ```chmod 777 /home/david/public_html/``</li>
+<li>之後 啟動 nginx 輸入 <code>sudo service nginx restart</code></li>
+</ul>
+</li>
+<li>參考連結<ul>
+<li><a href="https://www.arthurtoday.com/2014/12/how-to-quickly-fix-a-nginx-403-forbidden-error.html" target="_blank" rel="noopener">快速排除 Nginx 出現 403 Forbidden 錯誤 by 阿舍的隨手記記</a></li>
+<li><a href="https://www.huaweicloud.com/articles/0bfc32c8f7cd4f21f71523e378c088a1.html" target="_blank" rel="noopener">Nginx报错403 forbidden (13: Permission denied)的解决办法 by 華為雲</a></li>
+<li><a href="http://learn-web-hosting-domain-name.mygreatname.com/chmod-tutorial.html" target="_blank" rel="noopener">檔案或目錄的權限設定 (chmod files and directory) by learn web hosting</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="靜態網頁-405-Not-Allow，且靜態網頁有使用-POST-request"><a href="#靜態網頁-405-Not-Allow，且靜態網頁有使用-POST-request" class="headerlink" title="靜態網頁 405 Not Allow，且靜態網頁有使用 POST request"></a><strong>靜態網頁</strong> 405 Not Allow，且靜態網頁有使用 POST request</h3><ul>
+<li>問題描述<ul>
+<li>在一些靜態網頁中有使用 POST request，我們的 nginx 會跳出 405 Not Allow，此時該怎麼辦比較好呢？</li>
+</ul>
+</li>
+<li>解決方法<ul>
+<li>使用 hack 技巧XD。</li>
+<li>由於絕大多數的 web server(Apache、IIS、nginx) 都不允許靜態網頁使用 POST request，因此我們這邊的做法是<strong>當 nginx 要將頁面轉為 405 時，我們再轉回來當前網址，如此一來就可以使用 POST 了！</strong></li>
+<li>解決方法如下，修改 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code>，在最後加入這行指令<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bIWwTL4LYOjzK8xUt-0CtfCBXl3jnAgp&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>之後 啟動 nginx 輸入 <code>sudo service nginx restart</code></li>
+</ul>
+</li>
+<li>參考連結<ul>
+<li><a href="https://stackoverflow.com/questions/24415376/post-request-not-allowed-405-not-allowed-nginx-even-with-headers-included" target="_blank" rel="noopener">POST request not allowed - 405 Not Allowed - nginx, even with headers included by stackoverflow</a></li>
+<li><a href="https://www.jianshu.com/p/9ede80f2b876" target="_blank" rel="noopener">nginx 解决 405 not allowed错误 by 簡書</a></li>
+</ul>
 </li>
 </ul>
 <h2 id="開始進行反向代理"><a href="#開始進行反向代理" class="headerlink" title="開始進行反向代理"></a>開始進行反向代理</h2><ul>

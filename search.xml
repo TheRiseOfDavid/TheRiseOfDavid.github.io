@@ -12754,7 +12754,7 @@
       </tags>
   </entry>
   <entry>
-    <title>centOS6 安裝 nginx、安裝 SSL 憑證、進行反向代理</title>
+    <title>centOS6 安裝 nginx、安裝 SSL 憑證、進行反向代理、發布網頁</title>
     <url>/2021/05/03/linux/centOS-nginx/</url>
     <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
 <p>記錄我在 linux 上學習安裝 nginx 以及反向代理 https to http時遇到的困難，自學真的好麻煩呀 QQ<br>教學示範作業系統 centOS6</p>
@@ -12779,6 +12779,78 @@
 <li>然後再 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code> 加入紅筆中的這些<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1vVN1QJfOCsReSGsQCWa1IsScTIR0JB0L&export=download" alt=""></p>
 </blockquote>
+</li>
+</ul>
+<h2 id="發布網頁"><a href="#發布網頁" class="headerlink" title="發布網頁"></a>發布網頁</h2><ul>
+<li>首先我們有一個資料夾，存放要 show 給全部人的資料，例如 index.html….。</li>
+<li>檢查網域位置<ul>
+<li>我們可以進去 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code>，可以看到 root 的位置在 <code>/usr/share/nginx/html</code><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-k1NJqIZnFBLcp0GxtFG5URePp7ctSXa&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>因此當我們打 <code>https://localhost</code> 時是進到  <code>/usr/share/nginx/html</code> 這個資料夾</li>
+<li>再來我們如果打 <code>https://localhost/david</code> 時是進到  <code>/usr/share/nginx/html/david</code> 這個資料夾</li>
+<li>如果沒有這個資料夾 <code>/usr/share/nginx/html/david</code> ，這時 nginx 會判斷下面你的 local 是否有此網域，如果有就轉過去，沒有就輸出 404。</li>
+</ul>
+</li>
+<li>修改網域位置<ul>
+<li>假如我們有個網域位置在 <code>/home/david/public_html</code>，我們想讓 <code>https://localhost</code> 指到此網域</li>
+<li>那我們針對 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code> 修改，修改如下<ul>
+<li>將 root 進行註解<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1TuVwcVCiU-wNs3V7ftr8O-sQKyUKVEbY&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>增加 location，並且預設如果指到資料夾位置時，會自動開啟 index.html、index.php<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qM8CT_68CMBiY0xyJNRDWXBW2xEComAy&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>啟動 nginx 輸入 <code>sudo service nginx start</code></li>
+<li>這樣你再輸入 <code>https://localhost</code>，則會打開 <code>/home/david/public_html/index.html</code>，前提是你資料夾下必須有此檔案拉XD。</li>
+</ul>
+<h3 id="權限問題-forbidden-13-Permission-denied-、靜態網頁-403-forbidden"><a href="#權限問題-forbidden-13-Permission-denied-、靜態網頁-403-forbidden" class="headerlink" title="權限問題  forbidden (13: Permission denied)、靜態網頁 403 forbidden"></a>權限問題  forbidden (13: Permission denied)、<strong>靜態網頁</strong> 403 forbidden</h3><ul>
+<li>問題描述<ul>
+<li>我們打開 localhost 網頁中的某一個資料夾(包含初始位置資料夾)，不管怎麼打開都會出現 403 forbidden 訊息，這該怎麼辦呢？</li>
+<li>我們先檢查 error_log 輸入指令 <code>vim /var/log/nginx/error.log</code></li>
+<li>往下滑，檢查最後一個錯誤，發現內容大致上寫著 forbidden (13: Permission denied)</li>
+<li>該怎麼辦呢？</li>
+</ul>
+</li>
+<li>解決方法<ul>
+<li>通常遇到這種問題，表示設定為 root 的資料夾 or 子資料夾權限不足，因此我們修改資料夾的權限，提供 nginx 來使用。</li>
+<li>提供方式如下，假設我們的 root <code>/home/david/public_html/</code>，權限不足，那我們就打指令 ```chmod 777 /home/david/public_html/``</li>
+<li>之後 啟動 nginx 輸入 <code>sudo service nginx restart</code></li>
+</ul>
+</li>
+<li>參考連結<ul>
+<li><a href="https://www.arthurtoday.com/2014/12/how-to-quickly-fix-a-nginx-403-forbidden-error.html" target="_blank" rel="noopener">快速排除 Nginx 出現 403 Forbidden 錯誤 by 阿舍的隨手記記</a></li>
+<li><a href="https://www.huaweicloud.com/articles/0bfc32c8f7cd4f21f71523e378c088a1.html" target="_blank" rel="noopener">Nginx报错403 forbidden (13: Permission denied)的解决办法 by 華為雲</a></li>
+<li><a href="http://learn-web-hosting-domain-name.mygreatname.com/chmod-tutorial.html" target="_blank" rel="noopener">檔案或目錄的權限設定 (chmod files and directory) by learn web hosting</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="靜態網頁-405-Not-Allow，且靜態網頁有使用-POST-request"><a href="#靜態網頁-405-Not-Allow，且靜態網頁有使用-POST-request" class="headerlink" title="靜態網頁 405 Not Allow，且靜態網頁有使用 POST request"></a><strong>靜態網頁</strong> 405 Not Allow，且靜態網頁有使用 POST request</h3><ul>
+<li>問題描述<ul>
+<li>在一些靜態網頁中有使用 POST request，我們的 nginx 會跳出 405 Not Allow，此時該怎麼辦比較好呢？</li>
+</ul>
+</li>
+<li>解決方法<ul>
+<li>使用 hack 技巧XD。</li>
+<li>由於絕大多數的 web server(Apache、IIS、nginx) 都不允許靜態網頁使用 POST request，因此我們這邊的做法是<strong>當 nginx 要將頁面轉為 405 時，我們再轉回來當前網址，如此一來就可以使用 POST 了！</strong></li>
+<li>解決方法如下，修改 <code>sudo vim /etc/nginx/conf.d/ssl.conf</code>，在最後加入這行指令<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bIWwTL4LYOjzK8xUt-0CtfCBXl3jnAgp&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>之後 啟動 nginx 輸入 <code>sudo service nginx restart</code></li>
+</ul>
+</li>
+<li>參考連結<ul>
+<li><a href="https://stackoverflow.com/questions/24415376/post-request-not-allowed-405-not-allowed-nginx-even-with-headers-included" target="_blank" rel="noopener">POST request not allowed - 405 Not Allowed - nginx, even with headers included by stackoverflow</a></li>
+<li><a href="https://www.jianshu.com/p/9ede80f2b876" target="_blank" rel="noopener">nginx 解决 405 not allowed错误 by 簡書</a></li>
+</ul>
 </li>
 </ul>
 <h2 id="開始進行反向代理"><a href="#開始進行反向代理" class="headerlink" title="開始進行反向代理"></a>開始進行反向代理</h2><ul>
@@ -19757,7 +19829,7 @@
       </tags>
   </entry>
   <entry>
-    <title>北科資工二多媒體技術與應用 第六周個人作業 - 討論適合 yolov4 的情境、yoloV4 解決那些問題，為何被大量使用</title>
+    <title>北科資工二多媒體技術與應用 第七周個人作業 - 討論適合 yolov4 的情境、yoloV4 解決那些問題，為何被大量使用</title>
     <url>/2021/06/01/Media_with_Image_recognition/NTUTcs_MediaHW07T01/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
 <p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
@@ -20218,6 +20290,156 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>北科大管理資訊系統筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第七周個人作業 - 請提出一種情境設想，適合使用LSTM (不可與課程講義中所提到的範例相同)，並寫下原因(使用 LSTM 比起 RNN 及其他神經網路結構的優勢)。</title>
+    <url>/2021/06/14/Media_with_Image_recognition/NTUTcs_MediaHW08T01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="請提出一種情境設想，適合使用LSTM-不可與課程講義中所提到的範例相同-，並寫下原因-使用-LSTM-比起-RNN-及其他神經網路結構的優勢-。"><a href="#請提出一種情境設想，適合使用LSTM-不可與課程講義中所提到的範例相同-，並寫下原因-使用-LSTM-比起-RNN-及其他神經網路結構的優勢-。" class="headerlink" title="請提出一種情境設想，適合使用LSTM (不可與課程講義中所提到的範例相同)，並寫下原因(使用 LSTM 比起 RNN 及其他神經網路結構的優勢)。"></a>請提出一種情境設想，適合使用LSTM (不可與課程講義中所提到的範例相同)，並寫下原因(使用 LSTM 比起 RNN 及其他神經網路結構的優勢)。</h2><p>LSTM 最大的優勢是他可以對於長短期記憶有效地進行思考，也就是說它適合用於會被時間軸干擾的情境。</p>
+<p>我們可以對台灣的不分區立委政黨票進行預測，我們可以判斷國民黨或民進黨的不分區立委票數來預測今年國民黨、民進黨的不分區立委有幾席，讓黨內最優秀的人才可以去立法院進行監督。</p>
+<p>其實選民的結構會不斷地進行改變，但改變的幅度不大，主要是老年人辭世，更多年輕人擁有投票權，台灣人大部分都有自己偏好的政黨較不容易會出現大改動，因此如果透過 LSTM 去記錄那微小的選民結構偏好政黨移動，就能夠精準預測出台灣的政黨變化，也可以讓黨內人士去評估到時候可以用多少的人力在立法院內與其他黨聯合、抗爭。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第十周個人作業 - 請提出一種情境設想，適合在架構中加入GAN(不可與課程講義 中的內容重複)，並說明理由(甚麼情況使得需要加入GAN，可以 搭配甚麼模型架構等等)。</title>
+    <url>/2021/06/14/Media_with_Image_recognition/NTUTcs_MediaHW10T01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="請提出一種情境設想，適合在架構中加入GAN-不可與課程講義-中的內容重複-，並說明理由-甚麼情況使得需要加入GAN，可以-搭配甚麼模型架構等等-。"><a href="#請提出一種情境設想，適合在架構中加入GAN-不可與課程講義-中的內容重複-，並說明理由-甚麼情況使得需要加入GAN，可以-搭配甚麼模型架構等等-。" class="headerlink" title="請提出一種情境設想，適合在架構中加入GAN(不可與課程講義 中的內容重複)，並說明理由(甚麼情況使得需要加入GAN，可以 搭配甚麼模型架構等等)。"></a>請提出一種情境設想，適合在架構中加入GAN(不可與課程講義 中的內容重複)，並說明理由(甚麼情況使得需要加入GAN，可以 搭配甚麼模型架構等等)。</h2><p>我認為可以讓程式設計中加入GAN，透過程式自己編寫程式，生成模型不斷產生程式，判別模型則類似於judge 進行評判，透過這樣的方式讓生成模型寫出一份能用的程式，再來我可以在判別模型中加入時間限制，限制生成模型程式的運行時間，讓生成模型可以寫出更快的程式。</p>
+<p>由此一來，程式設計師就可以減少部分負擔，將一些底層不需要人力維護的程式設計交給GAN做，使程式設計師可以專心研發、思考開發與設計的流程。</p>
+<p>至於需要大量維護得程式碼，我並不建議交給GAN去做，因為註解以及程式碼的編寫流程不一定會跟維護的人概念相同，且生成模型寫得程式模型變數也不一定對人類具有可讀性，因此我認為後端部分可以交由GAN來進行實作。</p>
+<p>例如我們想要讓 Social LSTM 內部的計算可以更優化，我們可以先給生成模型原先的程式設計，並讓判別模型限定生成模型得程式不可以花超過4秒鐘。</p>
+<p>如此一來，透過GAN產生的程式效率速度就能變快，其中GAN得程式並不好懂，我們也不太需要去理解。<br>因為我們已經知道其實做概念，我們只需要用GAN給我們的核心去加速運算即可，或是我們也可以研究GAN是怎麼加速的，供我們未來進步用。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 第八周個人作業 - 請提出一種情境設想，適合在架構中加入Encoder-Decoder(不可以 課程講義中的內容重複)，並說明理由(甚麼情況使得需要加入 Encoder-Decoder，可以搭配甚麼模型架構等等)。</title>
+    <url>/2021/06/14/Media_with_Image_recognition/NTUTcs_MediaHW09T01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="請提出一種情境設想，適合在架構中加入Encoder-Decoder-不可以-課程講義中的內容重複-，並說明理由-甚麼情況使得需要加入-Encoder-Decoder，可以搭配甚麼模型架構等等-。"><a href="#請提出一種情境設想，適合在架構中加入Encoder-Decoder-不可以-課程講義中的內容重複-，並說明理由-甚麼情況使得需要加入-Encoder-Decoder，可以搭配甚麼模型架構等等-。" class="headerlink" title="請提出一種情境設想，適合在架構中加入Encoder-Decoder(不可以 課程講義中的內容重複)，並說明理由(甚麼情況使得需要加入 Encoder-Decoder，可以搭配甚麼模型架構等等)。"></a>請提出一種情境設想，適合在架構中加入Encoder-Decoder(不可以 課程講義中的內容重複)，並說明理由(甚麼情況使得需要加入 Encoder-Decoder，可以搭配甚麼模型架構等等)。</h2><p>我認為可以在法庭上做說謊驗證，判斷犯人講話是不是有邏輯錯誤。</p>
+<p>Encoder-Decoder 擅長將現實問題轉換為邏輯問題，因此我認為我們如果可以將犯人的供詞轉換為變數，就可以變成 A=B+C 的狀態，接下來如果犯人說 A=C+D 我們就可以判斷出他在說謊。</p>
+<p>因為人們的聽力並沒有辦法可以對 30 分鐘的所有內容都記錄下來並找出其不合理之處，如果可以透過程式進行量化那就更為方便且也能夠省去書記官記錄文字。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科通識大二英文初級期末考作文 - 定義成功與失敗</title>
+    <url>/2021/06/14/NTUT_note/NTUTgec108-2_english_essay/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學英文初級期末考作文－ 定義成功與失敗<br><font color="#dd0000">並非所有人都適用，我的英文很爛，可能有大量文法錯誤、單字錯誤，還讓大家見笑了。</font><br><strong>這是作文，可能不太適用會未來的學生</strong></p>
+<p>由於是我自己寫作，並不一定全部都是正確，只是個人想法。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="題目要求"><a href="#題目要求" class="headerlink" title="題目要求"></a>題目要求</h2><ul>
+<li>How would you define success?</li>
+<li>Do you have the same idea of success as your parents?</li>
+<li>To what extent will your encourage your children to become successful?</li>
+<li>Do you think failures can contribute to a person’s success?</li>
+<li>Can you think of any famous people who encountered failure before success?</li>
+</ul>
+<h2 id="我的寫作"><a href="#我的寫作" class="headerlink" title="我的寫作"></a>我的寫作</h2><p>Define Success is more difficult than everything. My parents always say “have rich make you feel at ease.” My parents very poor when they young, so they hate poverty. In this case, I also think money is important in my life, no money no everything, but money isn’t everything.</p>
+<p>Personally, money is important in my life, but it isn’t my life goal. My goal is I can do everything whatever I want. Since I was little, my parents always hard-working, never rest. Now, my parents are short-sightedness, When I make a decision and this decision can’t earn money, they against me this decision and they always say “what are you think about?” </p>
+<p>I know they worry about me will be a Poor, but I get friendship. Good network can give you one chance. If I take the opportunity, maybe I will be success. </p>
+<p>In my senior school life, My teacher wanted me to do something, like programming, run errands, then I shared school thing to my parents, they say run errands, programming doesn’t have any money, why do you do? School teacher should gave your money to encourage, but I thaught teacher gave me to learn chance, maybe teacher gave my chance in my future, maybe tomorrow, next month… </p>
+<p>Once, my senior school teacher give me one chance! I told my teacher that I wanted to sign up Science Fair then my teacher offered to help me. I feel SURPRISED! Teacher can help me, so we practice and discussion from now to Science Fair day.</p>
+<p>It is hard process, but my teacher don’t feel tired. He always hard-working with me. Meeting every day, improving every day. </p>
+<p>Finally, We got 3th. I’m so happy cause I hug with my teacher. Tonight, I shared with my parents, then they say “This teacher is good teacher, Thanks my teacher.”</p>
+<p>Sometimes, We don’t know, when the opportunity come? If the opportunity come, then I take the opportunity, maybe I will be success.<br>So, I don’t think my parents define success is the best, I think success is “I have the ability to help people, and people will help me”.</p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好久沒有寫作文了…，我的英文作文還是一樣的爛阿…，有很多詞彙我想要抽換成另外一個概念，但是我的英文單字量太少了，腦中都只有同個單字，例如：事情，我一直都只有想到 thing，英文應該還有其他單字可以用的…。</p>
+<p>還有我不太擅長用 that、what…連接詞，在閱讀時我都會看得懂並且能夠理解，但是在英文寫作時我常常會苦惱，我興奮到抱起我的老師，這句話要怎麼講…，我想了將近快 10 分鐘，結果最後竟然用 cause…XD，應該可以用 so that，可是我沒有想到阿…可惡！</p>
+<p>還有就是，不要再交稿日最後一小時才開始寫作文，明明我下午就接受到老師的通知，表示我還沒有把期末考作文交出去，但是我一直拖，拖到最後一個小時我才開始寫作，導致我作文後面質量很差QAQ。</p>
+<p>一堆單字、文法都是憑感覺直接寫出來，沒有好好仔細思考一番QQ。</p>
+<p>總之，希望我可以學會時間管理，我還太不會時間管理，自制力不足</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大通識</tag>
+        <tag>英文 Englisg</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11753 - Creating Palindrome(DFS )</title>
+    <url>/2021/06/11/UVa/UVa11753/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>你來幫幫 ICPC 的忙，ICPC 會給你一組數列，與一個數字 k，請你告訴 ICPC 要在這數列中至少要插入幾個數字才可以成為迴文數列，如果插入的次數大於 k 輸出 too difficult，如果不需要插入輸出 too easy，除此之外，輸出你插入的次數。</p>
+<p><a href="https://onlinejudge.org/external/117/11753.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>思考這題是 DFS 的應用</li>
+<li>了解這題貪心不一定會是好解法</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們可以先透過數列進行簡單分析，定義數列的左邊界指針為 L、右邊界指針為 R，數列為 num</p>
+<ul>
+<li>如果 \(num[L] == num[R] \) 就 L-1、R-1。</li>
+<li>如果 \(num[L] != num[R] \)，我們可以怎麼做?<ul>
+<li>用貪心解嗎？<br>你可能會這麼覺得，我就只要判斷下一個數字有沒有等於 \(num[L] \) or \(num[R] \) 就好了，可是那假如下下個數字等於  \(num[L] \) or  \(num[R] \) 呢？</li>
+<li>用 DFS 嗎？<br>效率很差，但是看看這邊的 K 只有 20，也就是說 DFS 只要跑到 20 就好，那並不會讓 DFS 過長。</li>
+<li>用 DP 嗎？<br>不妥，因為 DP 時當字串過長時，會有大量座標浪費在解不出來的情況，例如：(1,2000) = 1999，那我們就有很多時間浪費在跑 y = 1~2000 的情況</li>
+</ul>
+</li>
+</ul>
+<p>主要是透過 DFS 去找出最適合的組合，當 \(num[L] != num[R] \)，就延伸出兩種 DFS，<code>L+1, R</code>、<code>L,R-1</code>。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11753" target="_blank" rel="noopener">Uva11753 - Creating Palindrome by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題算是輕鬆題目，寫的算快。希望以後都能能輕鬆寫完啦。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 0x3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, k, kase=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; num;</span><br><span class="line"><span class="keyword">int</span> ans_d; <span class="comment">//最小的插入次數</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> L, <span class="keyword">int</span> R, <span class="keyword">int</span> d)</span></span>&#123; <span class="comment">//DFS 找出最好排列組合</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "num L R " &lt;&lt; num[L] &lt;&lt; ' ' &lt;&lt; num[R] &lt;&lt; '\n';</span></span><br><span class="line">    <span class="keyword">if</span>(L &gt;= R )&#123; <span class="comment">//左指針與右指針相遇就 return，注意：奇數迴文則不需要在意最中間的數值</span></span><br><span class="line">        ans_d = min(d, ans_d); <span class="comment">//找出最小插入次數</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//大於題目最大要求的 k 時，直接 return，並將這次的 d 設定為 k+1，才能讓最後輸出時可以輸出 too difficult</span></span><br><span class="line">    <span class="keyword">if</span>(d &gt; k)&#123; </span><br><span class="line">        ans_d = min(k+<span class="number">1</span>, ans_d); </span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(num[L] == num[R]) dfs(L+<span class="number">1</span>, R<span class="number">-1</span>, d); <span class="comment">//一樣，左右指針 -1</span></span><br><span class="line">    <span class="keyword">if</span>(num[L] != num[R])&#123; <span class="comment">//不一樣時</span></span><br><span class="line">        dfs(L+<span class="number">1</span>, R, d+<span class="number">1</span>); <span class="comment">//讓左指針 +1，步數+1</span></span><br><span class="line">        dfs(L, R<span class="number">-1</span>, d+<span class="number">1</span>); <span class="comment">//讓右指針 -1，步數+1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123; </span><br><span class="line">        num.clear(); <span class="comment">//清除數列，以免被先前資料影響</span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//讀資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; temp;</span><br><span class="line">            num.push_back(temp);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ans_d = MAXN;</span><br><span class="line">        dfs(<span class="number">0</span>, num.size()<span class="number">-1</span>, <span class="number">0</span>); <span class="comment">//進行 DFS</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "ans_d " &lt;&lt; ans_d &lt;&lt; '\n';</span></span><br><span class="line">        <span class="comment">//判斷是哪種狀態，太簡單、太難，還是輸出插入次數</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        <span class="keyword">if</span>(ans_d == <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Too easy\n"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ans_d &lt;= k) <span class="built_in">cout</span> &lt;&lt; ans_d &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ans_d &gt; k) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Too difficult\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
       </tags>
   </entry>
 </search>
