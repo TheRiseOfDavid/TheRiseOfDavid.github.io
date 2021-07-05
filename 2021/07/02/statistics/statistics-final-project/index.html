@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    統計學(二) 筆記 - 期末專案 國內股票型基金分析 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-statistics/statistics-final-project" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  統計學(二) 筆記 - 期末專案 國內股票型基金分析
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/02/statistics/statistics-final-project/" class="article-date">
+  <time datetime="2021-07-02T13:59:50.000Z" itemprop="datePublished">2021-07-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">4.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">16分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>我們根據<a href="https://fund.bot.com.tw/w/wq/wq02.djhtm?a=ET001004&b=BANKFUNDID&customershowall=0" target="_blank" rel="noopener">台灣銀行可申購的基金</a>，針對國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金做探討。</p>
+<p>國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，以下簡稱為<strong>三類基金</strong><br>我們主要想探討的是，在這三種類型的所有基金中，透過統計的方式找出哪些基金值得被購買，適合消費者購買。</p>
+<p>過程中我們使用 <strong>R 語言</strong> 進行分析。<br><a href="https://drive.google.com/file/d/1TZ9b66NvqLzXglfXqvaQRIfvtH89nkx1/view?usp=sharing" target="_blank" rel="noopener">我們這組的期末 ppt 報告</a></p>
+<p>此文章記錄用途只在於台北科技大學資訊與財金管理系大二下期末專案<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="章節"><a href="#章節" class="headerlink" title="章節"></a>章節</h2><ul>
+<li>蒐集資料，透過 yahoo 基金網頁下載歷史資料。</li>
+<li>根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。<ul>
+<li>其中國內股票開放型一般股票型基金最好的基金定義為 normal_fund</li>
+<li>其中國內股票開放型中小型基金最好的基金定義為 small_fund</li>
+<li>其中國內股票開放型科技型基金最好的基金定義為 tech_fund</li>
+</ul>
+</li>
+<li>再來我們針對 normal_fund、small_fund、tech_fund 比較看看這些基金是否有差異。</li>
+<li>再來為這 normal_fund、small_fund、tech_fund 基金做迴歸分析，X 變數是 normal_fund、small_fund、tech_fund 的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。</li>
+<li>再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中</li>
+<li>資料來源</li>
+<li>心得</li>
+</ul>
+<p>如果想跳到這些章節，請點選右邊的章節列描點過去。</p>
+<p><font color="#dd0000">以下的統計分析的 alpha 都是 0.05。</font></p>
+<h2 id="資料取得"><a href="#資料取得" class="headerlink" title="資料取得"></a>資料取得</h2><ul>
+<li>我們資料使用 <a href="https://tw.stock.yahoo.com/基金" target="_blank" rel="noopener">yahoo 基金</a> 從 2017~2020 的資料作統計分析。</li>
+<li>之後透過 R 語言處理資料。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment">#merge.data.R </span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(tibble)</span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line">data_merge &lt;- <span class="keyword">function</span>(folder_name)&#123;</span><br><span class="line">  <span class="comment">#"一般股票型"</span></span><br><span class="line">  path &lt;- file.path(getwd(), <span class="string">"基金CSV"</span>, folder_name)</span><br><span class="line">  files &lt;- dir(path)</span><br><span class="line">  data &lt;- tibble(YM = character(), name = character(), <span class="keyword">return</span> = numeric(),</span><br><span class="line">                 sharpe = numeric(), sd = numeric())</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (fname <span class="keyword">in</span> files)&#123;</span><br><span class="line">    </span><br><span class="line">    path &lt;- file.path(getwd(), <span class="string">"基金CSV"</span>, folder_name, fname)</span><br><span class="line">    fund &lt;- read.csv(path)</span><br><span class="line">    fname &lt;- gsub(<span class="string">".csv"</span>, <span class="string">""</span>, fname)</span><br><span class="line">    fund$date &lt;- fund$日期 %&gt;% as.Date() %&gt;% as.character() <span class="comment">#將日期與 yahoo 股價一致</span></span><br><span class="line">    fund$漲跌幅 &lt;- gsub(<span class="string">"%"</span>, <span class="string">""</span>, fund$漲跌幅) %&gt;% as.numeric()  <span class="comment">#子串轉數字</span></span><br><span class="line">    fund &lt;- fund[-grep(<span class="string">"2021"</span>, fund$date) ,] <span class="comment">#消除 2021 的資料</span></span><br><span class="line">    fund &lt;- fund[-grep(<span class="string">"2016"</span>, fund$date) ,] <span class="comment">#消除 2016 的資料</span></span><br><span class="line">    <span class="keyword">if</span>(nrow(fund) &lt;= <span class="number">0</span>) <span class="keyword">next</span></span><br><span class="line">    </span><br><span class="line">    fund$YM &lt;- substr(fund$date, <span class="number">1</span>, <span class="number">4</span>)<span class="comment">#year with month 取出年份與月份</span></span><br><span class="line">    YMs &lt;- unique(fund$YM) </span><br><span class="line"></span><br><span class="line">    <span class="comment">#將基金的每日資料合併成每年的資料</span></span><br><span class="line">    <span class="keyword">for</span>(ym <span class="keyword">in</span> YMs)&#123;</span><br><span class="line">      sub_fund &lt;- fund[fund$YM == ym, ]</span><br><span class="line">      <span class="keyword">return</span> &lt;- (tail(sub_fund$淨值,<span class="number">1</span>) - head(sub_fund$淨值,<span class="number">1</span>)) / head(sub_fund$淨值,<span class="number">1</span>) <span class="comment">#計算報酬率</span></span><br><span class="line">      data &lt;- data %&gt;% add_row(YM = ym, name = fname,</span><br><span class="line">                         <span class="keyword">return</span> = <span class="keyword">return</span>,</span><br><span class="line">                         sharpe = (mean(sub_fund$漲跌幅) - <span class="number">0.0000232</span>) / sd(sub_fund$漲跌幅) * (sqrt(<span class="number">252</span>)), <span class="comment"># sharpe ratio</span></span><br><span class="line">                         sd = sd(sub_fund$漲跌幅)) <span class="comment"># 標準差</span></span><br><span class="line">    <span class="comment">#sharpe ratio 的無風險利率使用台灣銀行一天的利息做標準 0.0000232 </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="蒐集資料，透過-yahoo-基金網頁下載歷史資料。"><a href="#蒐集資料，透過-yahoo-基金網頁下載歷史資料。" class="headerlink" title="蒐集資料，透過 yahoo 基金網頁下載歷史資料。"></a>蒐集資料，透過 yahoo 基金網頁下載歷史資料。</h2><p>選擇 yahoo 某一檔基金，這裡用<a href="https://tw.stock.yahoo.com/fund/summary/F0HKG05X22:FO" target="_blank" rel="noopener">安聯台灣科技基金為例</a>，點擊 <strong>歷史淨值</strong> &gt; 往下看，會看到一個<strong>下載歷史報價</strong>，選擇自己想要的期間去下載。 </p>
+<h2 id="根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。"><a href="#根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。" class="headerlink" title="根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。"></a>根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。</h2><ul>
+<li>將資料轉化成以每年為單位的基金資料</li>
+<li>再來我們做 ANOVA 分析，看看這些基金的 報酬率、sharpe ratio 是否都一樣</li>
+<li>如果 ANOVA 分析這些基金的 報酬率、sharpe ratio 不一樣，則做 LSD 找出最前段班的組別。<br>我們會先做報酬率，並取出 LSD 最好的一組，再去做 sharpe ratio 分析</li>
+<li>下結論</li>
+<li>從最好的基金們中找出最好的基金。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment">#fund.R</span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(stats)</span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./merge_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./loading_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"></span><br><span class="line">fund_type &lt;- c(<span class="string">"一般股票型"</span>, <span class="string">"中小型"</span>, <span class="string">"科技型"</span>)</span><br><span class="line"><span class="comment">#data_return &lt;- function(folder_name)</span></span><br><span class="line">data &lt;- data_merge(<span class="string">"一般股票型"</span>)</span><br><span class="line"><span class="comment">#write.csv(data, "一般股票型.csv")</span></span><br><span class="line">write.csv(data, <span class="string">"./ppt材料/一般股票型統計.csv"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#報酬率</span></span><br><span class="line">fit &lt;- aov(formula = <span class="keyword">return</span> ~ name, data = data) <span class="comment"># anova 分析</span></span><br><span class="line">anova_table &lt;- anova(fit)</span><br><span class="line">lsd &lt;- LSD.test(fit, <span class="string">"name"</span>, p.adj =<span class="string">"none"</span>, alpha = <span class="number">0.05</span>) <span class="comment">#判斷 LSD 分析</span></span><br><span class="line">lsd$groups$name &lt;- lsd$groups %&gt;% row.names()</span><br><span class="line">row.names(lsd$groups) &lt;- <span class="literal">NULL</span> <span class="comment">#將 rownames 轉為 index</span></span><br><span class="line">View(lsd$groups)</span><br><span class="line">good_funds &lt;- lsd$groups$name[grep(<span class="string">"a"</span>, lsd$groups$groups)]</span><br><span class="line">data &lt;- data[data$name %<span class="keyword">in</span>% good_funds, ]</span><br><span class="line"></span><br><span class="line"><span class="comment">#sharpe</span></span><br><span class="line">fit &lt;- aov(formula = sharpe ~ name, data = data) <span class="comment">#anova 分析</span></span><br><span class="line">anova_table &lt;- anova(fit)</span><br><span class="line">lsd &lt;- LSD.test(fit, <span class="string">"name"</span>, p.adj =<span class="string">"none"</span>, alpha = <span class="number">0.05</span>) <span class="comment">#判斷 LSD 分析</span></span><br><span class="line">lsd$groups$name &lt;- lsd$groups %&gt;% row.names()</span><br><span class="line">row.names(lsd$groups) &lt;- <span class="literal">NULL</span> <span class="comment">#將 rownames 轉為 index</span></span><br><span class="line">View(lsd$groups)</span><br><span class="line">good_funds &lt;- lsd$groups$name[grep(<span class="string">"a"</span>, lsd$groups$groups)]</span><br><span class="line">data &lt;- data[data$name %<span class="keyword">in</span>% good_funds, ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="結果與結論"><a href="#結果與結論" class="headerlink" title="結果與結論"></a>結果與結論</h3><ul>
+<li><p>一般股票型</p>
+<ul>
+<li>return <ul>
+<li>ANOVA，一般股票型基金的報酬差沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19bum8ZSvbmeCnKKovx8KHVCl685-gkS8&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Bb0LplP1vkSfzl_VXAPymdzuRcyys7BM&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>sharpe ratio<ul>
+<li>ANOVA，一般股票型基金的 sharpe ratio 沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1KzVqrgiSoqKu6rMZZrxq67LsboFhIqxR&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=16vDV4ghesv1pQIrGsDeqs_Aawo6zJ_o1&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>中小型</p>
+<ul>
+<li>return <ul>
+<li>ANOVA，中小型基金的報酬差沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1zi443MEVinhnJRNUcK4i-kYb7XxbOgHm&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1CfZRmGEdlS-ArM9MBx7TrvLXG3UEiggM&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>sharpe ratio<ul>
+<li>ANOVA，中小型基金的 sharpe ratio 沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1AZ4aOovpoPf8obCQ76YJwMt6i2N-roNy&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=12w11gSiXrXBvlsMNtaNhlslUyKi1xzBQ&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>科技型</p>
+<ul>
+<li>return <ul>
+<li>ANOVA，科技型的報酬差沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ibAPTLZitwZAzHGVLInwJQcNakNMpQoU&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1_93_Zmy-2ZJ0fm9qf2U4cK27rqoSOd76&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>sharpe ratio<ul>
+<li>ANOVA，科技型基金的 sharpe ratio 沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BQRdg1uS8U8u50E-eKn0rZQSuxNIpiDM&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-7iFT9d-qWRxGTW5rI2clUS8iq2cDQ0x&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>結論</p>
+<ul>
+<li><p>蠻意外的，沒想到在 2017~2020 中每個類型中的所有基金的 return、sharpe ratio 全部都一樣。ummm…所以這樣應該也就表示其實所有的基金管理人都差不多優秀，沒有明顯被坑的情況。</p>
+</li>
+<li><p>因此我們就選出三類基金中的 return、sharpe ratio LSD 綜合排名第一名，來當作我們這三類基金的 normal_fund、small_fund、tech_fund</p>
+<ul>
+<li>其中國內股票開放型一般股票型基金最好的基金<strong>安聯台灣智慧基金</strong>定義為 normal_fund  </li>
+<li>其中國內股票開放型中小型基金最好的基金<strong>復華中小精選基金</strong>定義為 small_fund </li>
+<li>其中國內股票開放型科技型基金最好的基金<strong>安聯台灣科技基金</strong>定義為 tech_fund</li>
+</ul>
+</li>
+<li><p>normal_fund、small_fund、tech_fund 的報酬率、sharpe ratio 折線圖</p>
+<ul>
+<li>return     <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1RXtkEPP0G2y1wOptf1zZ6EbErmmh-_lZ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>sharpe ratio 折線圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1rH4dc0yVpd6tHZPS7rsjr4lX3PFbuSkC&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="再來我們針對-normal-fund、small-fund、tech-fund-比較看看這些基金是否有差異。"><a href="#再來我們針對-normal-fund、small-fund、tech-fund-比較看看這些基金是否有差異。" class="headerlink" title="再來我們針對 normal_fund、small_fund、tech_fund 比較看看這些基金是否有差異。"></a>再來我們針對 normal_fund、small_fund、tech_fund 比較看看這些基金是否有差異。</h2><ul>
+<li><strong>結論：normal_fund、small_fund、tech_fund　這三個基金的變異數都相等。</strong></li>
+<li>下面有六張圖，請根據圖片中的 <code>data: xxx_fund and aaa_fund</code>，來得知是哪兩個基金比較。<ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1olFq5iIq6yzQTOTX6EKIrx3UxpvrQ4s_&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gJCnHIF2VMI7H4qfes0OYqIaviDZye13&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Zsdh_q-SSLJxI2lHkT6cKU_J0Ochd53N&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1OutFoK56DPngaUaHkprq_py1FHFkt2hW&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qywg5tbMcQHtC-JSell3IXVRMSUJeHML&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1zRMe_YRTLlFnjUgg528e1XwV_vsw02Kg&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment">#var.R</span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(stats)</span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./merge_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#在使用此函式前，必須先使用 *_fund.R 先判斷哪些基金最好</span></span><br><span class="line"></span><br><span class="line">fund_type &lt;- c(<span class="string">"一般股票型"</span>, <span class="string">"中小型"</span>, <span class="string">"科技型"</span>)</span><br><span class="line"><span class="comment">#data_return &lt;- function(folder_name)</span></span><br><span class="line">normal_fund &lt;- data_merge(<span class="string">"一般股票型"</span>)</span><br><span class="line">small_fund &lt;- data_merge(<span class="string">"中小型"</span>)</span><br><span class="line">tech_fund &lt;- data_merge(<span class="string">"科技型"</span>)</span><br><span class="line"></span><br><span class="line">write.csv(normal_fund[normal_fund$name == <span class="string">"安聯台灣智慧基金"</span>,], <span class="string">"./ppt材料/安聯台灣智慧基金統計.csv"</span>)</span><br><span class="line">write.csv(small_fund[small_fund$name == <span class="string">"復華中小精選基金"</span>,], <span class="string">"./ppt材料/復華中小精選基金統計.csv"</span>)</span><br><span class="line">write.csv(tech_fund[tech_fund$name == <span class="string">"安聯台灣科技基金"</span>,], <span class="string">"./ppt材料/安聯台灣科技基金統計.csv"</span>)</span><br><span class="line">normal_fund &lt;- normal_fund$<span class="keyword">return</span>[normal_fund$name == <span class="string">"安聯台灣智慧基金"</span>] </span><br><span class="line">small_fund &lt;- small_fund$<span class="keyword">return</span>[small_fund$name == <span class="string">"復華中小精選基金"</span>]</span><br><span class="line">tech_fund &lt;- tech_fund$<span class="keyword">return</span>[tech_fund$name == <span class="string">"安聯台灣科技基金"</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var(normal_fund)</span><br><span class="line">var(small_fund)</span><br><span class="line">var(tech_fund)</span><br><span class="line"><span class="comment">#Reject</span></span><br><span class="line">var.test(normal_fund, </span><br><span class="line">         small_fund,</span><br><span class="line">         alternative = <span class="string">"two.sided"</span>) <span class="comment">#less 表示 A 股票比 B 股票標準差更大</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="再來為這-normal-fund、small-fund、tech-fund-基金做迴歸分析，X-變數是-normal-fund、small-fund、tech-fund-的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。"><a href="#再來為這-normal-fund、small-fund、tech-fund-基金做迴歸分析，X-變數是-normal-fund、small-fund、tech-fund-的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。" class="headerlink" title="再來為這 normal_fund、small_fund、tech_fund 基金做迴歸分析，X 變數是 normal_fund、small_fund、tech_fund 的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。"></a>再來為這 normal_fund、small_fund、tech_fund 基金做迴歸分析，X 變數是 normal_fund、small_fund、tech_fund 的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。</h2><ul>
+<li>以下的 x 變數是前十大股票當天漲跌幅</li>
+<li>y 都是基金當天漲跌幅</li>
+</ul>
+<h3 id="normal-fund-基金回歸"><a href="#normal-fund-基金回歸" class="headerlink" title="normal_fund 基金回歸"></a>normal_fund 基金回歸</h3><ul>
+<li>共線性測試，並沒有明顯共線性問題<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1T6D-XTxzcTyQx_ko3iXSz5uu0CravQLJ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>回歸模型，\(adj_R^2 = 0.7381\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1CBDAM-7tZHJiCZR-emaTZFuOqfcKtQBe&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 係數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-UYBTwNfRid5lbARBr7AVaP5pXEQsxM8&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 的 t test，每一個都與 y 有關聯<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=10iVIHLXSQf3AIAGHk7I_UsUXkwF-aao9&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>殘差分析、常態機率等圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1lo5kNGjQ0qRl-KWc_pCZjxpWcuD6-_jL&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>結論<br>如果我們買前十大基金並搭配 x 係數的資金分配，那我們就可以達到基金大約 73% 的功效，也就是說我們如果單純只買這幾支股票，那麼我們理論上會跟這基金有百分之 73% 漲幅相同，也許投資人可以嘗試看看自己買股票，就可以減少基金投資人手續費。</li>
+</ul>
+<h3 id="small-fund-基金回歸"><a href="#small-fund-基金回歸" class="headerlink" title="small_fund 基金回歸"></a>small_fund 基金回歸</h3><ul>
+<li>共線性測試，並沒有明顯共線性問題<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1J7LQMRGdeWtUk-ivL_207ncUguBZESOJ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>回歸模型，\(adj_R^2 = 0.6952\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1h3gAhuhFuY85N8b2kqFOVpJZREPnltFf&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 係數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ppMc_Fg0Rc6uoxpLSQ2H9ckv3q0KevvC&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 的 t test，每一個都與 y 有關聯<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gn55G2j8QYiXKenRFJj8-fsvX3Gl93i0&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>殘差分析、常態機率等圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1mlEFl481HJnPUIwt5RR7EFls9hR16Rdm&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>結論<br>如果我們買前十大基金並搭配 x 係數的資金分配，那我們就可以達到基金大約 70% 的功效，也就是說我們如果單純只買這幾支股票，那麼我們理論上會跟這基金有百分之 70% 漲幅相同，也許投資人可以嘗試看看自己買股票，就可以減少基金投資人手續費。</li>
+</ul>
+<h3 id="tech-fund-基金回歸"><a href="#tech-fund-基金回歸" class="headerlink" title="tech_fund 基金回歸"></a>tech_fund 基金回歸</h3><ul>
+<li>共線性測試，2327 與 2492 有明顯貢獻性關係，2492 在這檔基金的權重較高，因此我們刪除 2327<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=13Vtty6mouxE2VRlUS-PNUyNjtdAIOj4y&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>回歸模型，\(adj_R^2 = 0.8399\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1rRyDF0i1ewMsOz_b4u2roTSm0CUIGEUT&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 係數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1R9pCSJse9yFvB7FW7d82LWXgcNntP_DG&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 的 t test，每一個都與 y 有關聯<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1KcTR7KkPHOg7nLbRblMnqBR9nZBtlx5M&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>殘差分析、常態機率等圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qipc8LEY37jUMZxq0vHYX0j5tnZ4sI1a&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>結論<br>如果我們買前十大基金並搭配 x 係數的資金分配，那我們就可以達到基金大約 84% 的功效，也就是說我們如果單純只買這幾支股票，那麼我們理論上會跟這基金有百分之 84% 漲幅相同，也許投資人可以嘗試看看自己買股票，就可以減少基金投資人手續費。</li>
+</ul>
+<h3 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment"># lm.R </span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(tibble)</span><br><span class="line"><span class="keyword">library</span>(ggfortify)</span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./merge_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"></span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line">fund_type &lt;- c(<span class="string">"一般股票型"</span>, <span class="string">"中小型"</span>, <span class="string">"科技型"</span>)</span><br><span class="line"><span class="comment">#data_return &lt;- function(folder_name)</span></span><br><span class="line"></span><br><span class="line">path &lt;- file.path(getwd(), <span class="string">"基金CSV"</span>, <span class="string">"科技型"</span>, <span class="string">"安聯台灣科技基金.csv"</span>)</span><br><span class="line"></span><br><span class="line">fund &lt;- read.csv(path)</span><br><span class="line">fund$date &lt;- fund$日期 %&gt;% as.Date() %&gt;% as.character()</span><br><span class="line"></span><br><span class="line">fund$<span class="keyword">return</span> &lt;- gsub(<span class="string">"%"</span>, <span class="string">""</span>, fund$漲跌幅) %&gt;% as.numeric() </span><br><span class="line">fund$<span class="keyword">return</span> &lt;- fund$<span class="keyword">return</span> * <span class="number">0.01</span></span><br><span class="line">date &lt;- fund$date</span><br><span class="line"></span><br><span class="line"><span class="comment">#基金的前十大股票</span></span><br><span class="line">codes &lt;- c(<span class="string">"2330.TW"</span>, <span class="string">"3529.TWO"</span>, <span class="string">"2492.TW"</span>, <span class="string">"2327.TW"</span>, <span class="string">"2337.TW"</span>, <span class="string">"8016.TW"</span>, <span class="string">"6510.TWO"</span>,</span><br><span class="line">           <span class="string">"6732.TWO"</span>, <span class="string">"4966.TWO"</span>, <span class="string">"3035.TW"</span>)</span><br><span class="line"><span class="keyword">for</span> (code <span class="keyword">in</span> codes)&#123; <span class="comment">#找出所有股票的共同日期</span></span><br><span class="line">  stock &lt;- getSymbols(code, auto.assign = <span class="literal">FALSE</span> , from = <span class="string">"2016-01-01"</span> ) %&gt;% na.omit() %&gt;% data.frame()</span><br><span class="line">  names(stock) &lt;- c(<span class="string">"open"</span>, <span class="string">"high"</span>, <span class="string">"low"</span>, <span class="string">"close"</span>, <span class="string">"vol"</span>, <span class="string">"adjPrice"</span>)</span><br><span class="line">  stock$date &lt;- rownames(stock) %&gt;% as.Date() %&gt;% as.character()</span><br><span class="line">  rownames(stock) &lt;- <span class="literal">NULL</span></span><br><span class="line">  date &lt;- intersect(date, stock$date)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data &lt;- tibble(date = date, <span class="keyword">return</span> = fund$<span class="keyword">return</span>[fund$date %<span class="keyword">in</span>% date])</span><br><span class="line"><span class="keyword">for</span>(code <span class="keyword">in</span> codes)&#123; <span class="comment">#找出所有股票的共同日期的報酬率</span></span><br><span class="line">  stock &lt;- getSymbols(code, auto.assign = <span class="literal">FALSE</span> , from = <span class="string">"2016-01-01"</span> ) %&gt;% na.omit() %&gt;% data.frame()</span><br><span class="line">  names(stock) &lt;- c(<span class="string">"open"</span>, <span class="string">"high"</span>, <span class="string">"low"</span>, <span class="string">"close"</span>, <span class="string">"vol"</span>, <span class="string">"adjPrice"</span>)</span><br><span class="line">  stock$date &lt;- rownames(stock) %&gt;% as.Date() %&gt;% as.character()</span><br><span class="line">  stock$last_close &lt;- c(<span class="literal">Inf</span>, head(stock$close, length(stock$close)-<span class="number">1</span>))</span><br><span class="line">  stock$<span class="keyword">return</span> &lt;- (stock$close - stock$last_close) / stock$last_close</span><br><span class="line">  rownames(stock) &lt;- <span class="literal">NULL</span></span><br><span class="line">  data[ , code] &lt;- stock$<span class="keyword">return</span>[stock$date %<span class="keyword">in</span>% date]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#共線性測試，</span></span><br><span class="line">cor.test &lt;- cor(data[<span class="number">3</span>:ncol(data)])</span><br><span class="line">cor.test</span><br><span class="line"></span><br><span class="line"><span class="comment">#將共線性過高的刪除</span></span><br><span class="line">data[<span class="string">"2327.TW"</span>] &lt;- <span class="literal">NULL</span></span><br><span class="line">write.csv(data, <span class="string">"科技股回歸資料.csv"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#迴歸分析</span></span><br><span class="line">model &lt;- lm(formula = <span class="keyword">return</span> ~ ., data = data[, <span class="number">2</span>:ncol(data)]) </span><br><span class="line">View(model)</span><br><span class="line">sum_model &lt;- summary(model)</span><br><span class="line">View(sum_model)</span><br><span class="line"></span><br><span class="line"><span class="comment">#殘差圖、標準常態圖</span></span><br><span class="line">autoplot(model)</span><br></pre></td></tr></table></figure>
+
+<h2 id="再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中"><a href="#再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中" class="headerlink" title="再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中"></a>再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中</h2><ul>
+<li>我們有請教<a href="http://web.fin.mcu.edu.tw/zh-hant/content/%E5%85%BC%E4%BB%BB%E5%B8%AB%E8%B3%87" target="_blank" rel="noopener">王甡老師</a> 如果要做三檔基金時要怎麼樣計算，老師給了我們一份 word 資料，提供我們學習。<br>我將檔案連結放在這邊，由於是<a href="https://drive.google.com/file/d/1eOMUrfjgTLIIECHG8-JLlR2vZJbW-tGz/view?usp=sharing" target="_blank" rel="noopener">老師的檔案我沒有權力共享，因此只有設定我的帳號才可以查看、瀏覽，提供我學習XD</a>。</li>
+<li>再來我們借助 excel 的矩陣運算與最佳求解，找出三種資產的最適資產配置比例<ul>
+<li>利用前面假設檢定挑選出的各基金類別中最好的基金進行最適資產配置</li>
+<li>計算年化報酬率、共變異數矩陣</li>
+<li>最適風險性資產投資組合的權重是投資組合變異數最小的權重</li>
+<li>最小變異數的投資組合為標準差4.79%，預期報酬率31.2%</li>
+</ul>
+</li>
+<li>結論資產配置<ul>
+<li>權重為安聯台灣智慧基金111.00%</li>
+<li>復華中小精選基金-18.71%</li>
+<li>安聯台灣科技基金7.71%</li>
+</ul>
+</li>
+<li>表示若要選擇風險最小的投資組合必須將投資在復華中小精選基金的資金，投資到另外兩檔基金，需要借貸資金才能達到風險最小的投資組合</li>
+<li>圖表 <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1FhK2u15yqpvjHXHxT9t29Ly8pCI5N3ye&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="非常有趣的資產配置方法"><a href="#非常有趣的資產配置方法" class="headerlink" title="非常有趣的資產配置方法"></a>非常有趣的資產配置方法</h3><ul>
+<li>由於我們知道資產配置不可以有負值，如果有，表示這三種並不適合一起拿來做資產配置，或負比例基金移除。</li>
+<li>但我們這邊做一個啟發。</li>
+<li>公式推導<ul>
+<li>A:安聯台灣智慧基金 B:復華中小精選基金C:安聯台灣科技基金 </li>
+<li>A+B+C = 100，其中因為 B 是負，導致投資人沒辦法正確資產配置，因此我們將 B 改為 0。</li>
+<li>\(A+B+C=100\) ，\(A+C=100+B\) ，其中 \(B = -18.71\)</li>
+<li>\(A+C = 100 + B = 118.71\) ,\(A+C=118.71\)</li>
+<li>\(111+7.71 = 118.71\)，\(A+C=100\) ，\(同除 1.1871\)</li>
+<li>\(C=6.4948%\) ，\(A=93.505%\)</li>
+</ul>
+</li>
+<li>因此我們推薦投資人買安聯台灣智慧基金 93.505%  ，安聯台灣科技基金 = 6.4948%</li>
+<li>這個完全沒有任何論文根據，純粹個人推導，如果並不是這樣我不負責喔XD。不過可以跟我說我錯在哪裡。</li>
+</ul>
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><p><a href="https://rdrr.io/r/base/row.names.html" target="_blank" rel="noopener">row.names: Get and Set Row Names for Data Frames by rdrr.io</a><br><a href="https://bookdown.org/jefflinmd38/r4biost/basicfunctiuon.html" target="_blank" rel="noopener">Chapter 6 基本函式 by bookdown</a><br><a href="https://stat.ethz.ch/pipermail/r-help/2008-January/152105.html" target="_blank" rel="noopener">[R] subsetting a data frame using string matching by stat.ethz</a><br><a href="https://stackoverflow.com/questions/15326792/select-column-2-to-last-column-in-r" target="_blank" rel="noopener">Select column 2 to last column in R by stackoverflow</a><br><a href="https://stackoverflow.com/questions/11991692/using-rs-lm-on-a-dataframe-with-a-list-of-predictors" target="_blank" rel="noopener">Using R’s lm on a dataframe with a list of predictors by stackoverflow</a><br><a href="https://stackoverflow.com/questions/6286313/remove-an-entire-column-from-a-data-frame-in-r" target="_blank" rel="noopener">Remove an entire column from a data.frame in R by stackoverflow</a><br><a href="https://bookdown.org/wangminjie/R4DS/lm.html#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">33.2 线性回归模型 by bookdown</a><br><a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm" target="_blank" rel="noopener">lm: Fitting Linear Models by rdocu</a><br><a href="https://www.statmethods.net/stats/correlations.html" target="_blank" rel="noopener">Correlations by Quick-R</a><br><a href="http://www.sthda.com/english/wiki/f-test-compare-two-variances-in-r" target="_blank" rel="noopener"> F-Test: Compare Two Variances in R by STHDA</a><br><a href="https://stat.ethz.ch/pipermail/r-help/2010-January/225345.html" target="_blank" rel="noopener">[R] Extract R-squared from summary of lm by stat.ethz</a><br><a href="https://zhuanlan.zhihu.com/p/49149862" target="_blank" rel="noopener">R语言(3)-四张图检验线性回归模型 by 知乎</a><br><a href="https://slidesplayer.com/slide/17269077/" target="_blank" rel="noopener">R教學 變異數分析R指令與範例 by 羅琪老師.</a><br><a href="https://stackoverflow.com/questions/12208090/selecting-columns-in-r-data-frame-based-on-those-not-in-a-vector" target="_blank" rel="noopener">Selecting columns in R data frame based on those <em>not</em> in a vector by stackoverflow</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好累阿，不過先謝謝我們的組員們，畢竟我們一起努力生出這份專案 <strong>吳淑萍、彭元俊、王奕淇</strong>，也要謝謝丁秀儀老師，其實我一直很想用統計做一個投資的專案，終於讓我做出來了www。<br>也要謝謝王甡老師，有他在後面督促我們，引導方向，我們才可以順利產出，並且有符合實務。</p>
+<p>其實一路上再用 R 寫統計專案真的是很累QQ，不過這已經比其他的程式語言都還好用，只是自己摸不熟拉，剛好透過這次的專案摸熟。<br>其實 R 真的很有用，建議大家有機會的話可以學學他。</p>
+<p>謝謝吳淑萍幫我們做 PPT，還有跟我開那麼多會，一直跟我溝通，辛苦了XD。<br>謝謝彭元俊幫我們做資產配置，使用 excel 做資產配置最適規劃。<br>謝謝王奕淇幫我們蒐集資料。</p>
+<p>總之我覺得我們這組做的很棒，也很不賴！有各位才順利。</p>
+<p>不過老實講，我自己在弄統計的時候，其實寫程式寫久都會有一種負能量產生，因為寫程式寫太久一直再找 bug 常常腦中就會有RRRRR，怎麼只有我一個人再找 bug，不行，工作質量分配不均！我要上訴，之類的奇怪想法在我腦海裏面wwww，可是其實我就會想一下，我除了寫程式以外其他都沒有比較擅長的，我也只有這個會做，有了這個反擊後，我就又會乖乖的寫程式。<br>直到下一次 bug 找不到為止www。</p>
+<p>不過也要很感謝 R 開放套件的人，如果沒有他們，我就會更難寫程式了！</p>
+<blockquote>
+<p>附上一張詢問王甡老師的照片<br><img src="https://drive.google.com/u/2/uc?id=1AKOiMXtk--MC6O-GNxDZjA9UG8rQuIoo&export=download" alt=""></p>
+</blockquote>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/06/30/UVa/UVa11147/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa11147 - kuPellaKeS BST(遞迴)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

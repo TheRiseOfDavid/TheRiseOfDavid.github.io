@@ -14152,7 +14152,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少" class="headerlink" title="舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少"></a>舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少</h4><ul>
+<h4 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-population-size-120balls-population-mean-275yards-standard-error-15yards-B-公司-population-size-80balls-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-population-size-120balls-population-mean-275yards-standard-error-15yards-B-公司-population-size-80balls-mean-258yards-standard-error-20yards，詢問在-95-的信心水準之中，這兩家公司的平均擊球差異是多少" class="headerlink" title="舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 population size 120balls, population mean 275yards, standard error = 15yards, B 公司 population size 80balls,mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少"></a>舉例: A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 population size 120balls, population mean 275yards, standard error = 15yards, B 公司 population size 80balls,mean 258yards, standard error = 20yards，詢問在 95% 的信心水準之中，這兩家公司的平均擊球差異是多少</h4><ul>
 <li>定義 population1 為 A 公司，population2 為 B 公司，我們透過抽取樣本的方式(用點估計)來算出 \(\mu_1 - \mu_2\)，但因為是樣本所以會有誤差的問題。</li>
 <li>因此先算出點估計量 \(\mu_1 - \mu_2 = \bar{x_1} - \bar{x_2} = 275-258 = 17\)</li>
 <li>再來我們帶抽樣分配公式，\(\bar{x_1} - \bar{x_2} \pm z_{a/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = 17 \pm 1.96 \sqrt{\frac{(15)^2}{120} + \frac{(20)^2}{80}} = 17 \pm 5.14\)，也就是平均擊球差異會落在 11.86yards to 22.14yards. </li>
@@ -14177,7 +14177,7 @@
 <li>而公式為 \(z = (\bar{x_1} - \bar{x_2})-D_0 / \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\)，注意已知的檢定量要用 z，未知的才有 t。</li>
 <li>不懂假設統計可看<a href="https://theriseofdavid.github.io/2021/02/27/NTUT_note/statistics-ch9/" target="_blank" rel="noopener">統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)</a></li>
 </ul>
-<h3 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-sample-size-120balls-sample-mean-275yards-standard-error-15yards-B-公司-sample-size-80balls-sample-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。" class="headerlink" title="舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。"></a>舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 sample size 120balls, sample mean 275yards, standard error = 15yards, B 公司 sample size 80balls, sample mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。</h3><ul>
+<h3 id="舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-population-size-120balls-population-mean-275yards-standard-error-15yards-B-公司-population-size-80balls-population-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。"><a href="#舉例-A-高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時-B-也開發了一個新球桿，A-公司-population-size-120balls-population-mean-275yards-standard-error-15yards-B-公司-population-size-80balls-population-mean-258yards-standard-error-20yards，詢問在-1-的顯著性測試下是不是-A-公司大於-B-公司。" class="headerlink" title="舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 population size 120balls, population mean 275yards, standard error = 15yards, B 公司 population size 80balls, population mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。"></a>舉例:  A 高爾夫球設備製造商開發出了新球桿可以將高爾夫球打得更遠，而同時 B 也開發了一個新球桿，A 公司 population size 120balls, population mean 275yards, standard error = 15yards, B 公司 population size 80balls, population mean 258yards, standard error = 20yards，詢問在 1% 的顯著性測試下是不是 A 公司大於 B 公司。</h3><ul>
 <li>定義 population1 為 A 公司，population2 為 B 公司</li>
 <li>因此定義對立假設與虛無假設<ul>
 <li>\(H_0: \mu_1 - \mu_2 \leq 0\)</li>
@@ -14555,7 +14555,7 @@
 <li>通常會將比較大的樣本變異數設定為 population1</li>
 </ul>
 </li>
-<li>t 檢定公式為 \(F = \frac{s_1^2}{s_2^2}\)<br>此公式會有兩個自由度，因為有兩個母體。第一個母體為分子\(s_1\)、第二個母體為分母\(s_2\)。</li>
+<li>F 檢定公式為 \(F = \frac{s_1^2}{s_2^2}\)<br>此公式會有兩個自由度，因為有兩個母體。第一個母體為分子\(s_1\)、第二個母體為分母\(s_2\)。</li>
 <li>拒絕法則 Rejection Rule<ul>
 <li>左尾<ul>
 <li>p-value approach<br>Reject \(H_0\) if \(p-value \leq a\)</li>
@@ -14601,7 +14601,7 @@
 </li>
 <li>t 檢定公式為 \(F = \frac{s_1^2}{s_2^2}\)，其中 A 公司的數值為 1.768，B 公司的數值為 0.7，因此 \(F = 1.768 / 0.7 = 2.53\)</li>
 <li>p-value Approach<ul>
-<li>透過  Probability Distribution App 計算 \(F=2.53 \) 時機率為 0.9，但因為是雙尾，因此我們要將機率乘二變為 0.18，\(a = 0.05 &lt; p-value = 0.18\)，因此我們不拒絕 \(H_0\)</li>
+<li>透過 Probability Distribution App 計算 \(F=2.53 \) 時機率為 0.09，但因為是雙尾，因此我們要將機率乘二變為 0.18，\(a = 0.05 &lt; p-value = 0.18\)，因此我們不拒絕 \(H_0\)</li>
 <li>因此我們沒有辦法證明兩家公司恆溫器的變異數是不同的。</li>
 </ul>
 </li>
@@ -15920,7 +15920,7 @@
 </blockquote>
 <h2 id="關於應變數的轉換-Transformations-Involving-the-Dependent-Variable"><a href="#關於應變數的轉換-Transformations-Involving-the-Dependent-Variable" class="headerlink" title="關於應變數的轉換 Transformations Involving the Dependent Variable"></a>關於應變數的轉換 Transformations Involving the Dependent Variable</h2><ul>
 <li>在有時候我們會遇到有些自變數沒有變異數的狀況(EX: 交互作用)，遇到這些問題我們要怎麼解決呢？<ul>
-<li>方法 A: 將回歸方程式的 \(\mathcal{E} \) 改為 \(e = 2.71828 \) 也就是 \(log_10\)</li>
+<li>方法 A: 將回歸方程式的 \(\mathcal{E} \) 改為 \(e = 2.71828 \) 也就是 \(ln_{10}\)</li>
 <li>方法 B: 將 y 變成 \(1/y\) 後，我們的回歸方程式改成去預測 \(1/y\)</li>
 </ul>
 </li>
@@ -15929,7 +15929,7 @@
 <li>假設我們模型中有 \(\beta_0, \beta_1, …, \beta_p\)，且她們的 z 有些有 \(x^n\)，大於或等於 a second-order model</li>
 <li>這時候我們可以進行一些數學的轉換來讓他們變成線性模型<ul>
 <li>EX: 原本的非線性方程式 \(E(y) = \beta_0 \beta_1^x\)</li>
-<li>我們可以透過 log 進行轉換， \(log E(y) = log \beta_0 + x log \beta_1\)，把前面的公式每項變數改為 \(y’ = \beta_0’ + beta_1’ x\)，這樣就成為了一個線性模型！</li>
+<li>我們可以透過 log 進行轉換， \(ln \ E(y) = ln \beta_0 + x ln \beta_1\)，把前面的公式每項變數改為 \(y’ = \beta_0’ + beta_1’ x\)，這樣就成為了一個線性模型！</li>
 </ul>
 </li>
 </ul>
@@ -18166,7 +18166,7 @@
 <li>計算 Type2 Error  <ul>
 <li>我們先假設一個值，此值要是符合 \(H_1\)，這裡假設為 14，因此 \(\mu = 14\)</li>
 <li>計算樣本標準差 \(\sigma_\bar{x} = \frac{3.2}{\sqrt{40}} = 0.5060 \)</li>
-<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / sqrt{n}} = \frac{12.8323 - 14}{3.2 / \sqrt{40}} = -2.31 \) </li>
+<li>計算 z 值為 \(z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} = \frac{12.8323 - 14}{3.2 / \sqrt{40}} = -2.31 \) </li>
 <li>再來我們找出 \(z = -2.31 \) 的機率為 0.0104，就是 \(\beta \)</li>
 <li>圖片解釋<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=1qhP93dQujI_jGQcsgiCWLs32KJ7-VZZS&export=download" alt=""></p>
@@ -19140,7 +19140,8 @@
 <li>經過一段痛苦的 label 後</li>
 </ul>
 <h3 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h3><ul>
-<li>完成後資料夾內應該要有一個 <code>class.txt</code>、一堆圖片和圖片名子相同，但檔名是 txt 的資料<blockquote>
+<li>完成後資料夾內應該要有一個 <code>class.txt</code>、一堆圖片和圖片名子相同，但檔名是 txt 的資料</li>
+<li>其中標記的 txt 必須與圖片在同個位置<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=12JeZB8S9StCpvTZ1G_0PmzhsiTKG2vzA&export=download" alt=""></p>
 </blockquote>
 </li>
@@ -19223,7 +19224,7 @@
 <p><img src="https://drive.google.com/u/2/uc?id=1nQsU6wAQ4GFLdfJ76OgatAAQqz-Tq1VV&export=download" alt=""></p>
 </blockquote>
 </li>
-<li>steps 則是 max_batches 的 80% or 90%<blockquote>
+<li>steps 則是 max_batches 的 80% and 90%<blockquote>
 <p><img src="https://drive.google.com/u/2/uc?id=183naBtkh2ubLy3G_gQqD2r4A7fRsk4GH&export=download" alt=""></p>
 </blockquote>
 </li>
@@ -20293,7 +20294,7 @@
       </tags>
   </entry>
   <entry>
-    <title>北科資工二多媒體技術與應用 第七周個人作業 - 請提出一種情境設想，適合使用LSTM (不可與課程講義中所提到的範例相同)，並寫下原因(使用 LSTM 比起 RNN 及其他神經網路結構的優勢)。</title>
+    <title>北科資工二多媒體技術與應用 第八周個人作業 - 請提出一種情境設想，適合使用LSTM (不可與課程講義中所提到的範例相同)，並寫下原因(使用 LSTM 比起 RNN 及其他神經網路結構的優勢)。</title>
     <url>/2021/06/14/Media_with_Image_recognition/NTUTcs_MediaHW08T01/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
 <p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
@@ -20341,7 +20342,7 @@
       </tags>
   </entry>
   <entry>
-    <title>北科資工二多媒體技術與應用 第八周個人作業 - 請提出一種情境設想，適合在架構中加入Encoder-Decoder(不可以 課程講義中的內容重複)，並說明理由(甚麼情況使得需要加入 Encoder-Decoder，可以搭配甚麼模型架構等等)。</title>
+    <title>北科資工二多媒體技術與應用 第九周個人作業 - 請提出一種情境設想，適合在架構中加入Encoder-Decoder(不可以 課程講義中的內容重複)，並說明理由(甚麼情況使得需要加入 Encoder-Decoder，可以搭配甚麼模型架構等等)。</title>
     <url>/2021/06/14/Media_with_Image_recognition/NTUTcs_MediaHW09T01/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
 <p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
@@ -20440,6 +20441,458 @@
         <tag>DFS</tag>
         <tag>UVa</tag>
         <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11147 - kuPellaKeS BST(遞迴)</title>
+    <url>/2021/06/30/UVa/UVa11147/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>BST 是數的資料結構，kuPellaKeS BST 則是繼承 BST 後，還有以下特點</p>
+<ul>
+<li>kuPellaKeS BST 的左子樹、右子樹相差必須是最小的</li>
+<li>kuPellaKeS BST 如果有超過一種符合第一點的方法，則選擇左子樹權重最大</li>
+<li>左右子樹也都必須符合 kuPellaKeS BST</li>
+</ul>
+<p>並且我們 kuPellaKeS BST 也有特別的輸出方式</p>
+<ul>
+<li>沒有左右子樹時，則輸出 <code>root</code></li>
+<li>只有左 or 右子樹時，則輸出 <code>root(sub_node)</code></li>
+<li>有左右子樹時，則輸出 <code>root(left_sub_node, right_sub_node)</code></li>
+</ul>
+<p>給你一數列，請輸出 kuPellaKeS BST<br><a href="https://onlinejudge.org/external/111/11147.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>建造 BST </li>
+<li>difference 在這邊是相減，並不是<strong>不一樣</strong>的意思</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>difference 真的是太過分了，我一直被他誤導QQ。</p>
+<ul>
+<li>我們可以明顯知道，建立一個 BST 不難，只需要一個遞迴就好，那我們現在的重點就是要讓 BST 變成 kuPellaKeS BST。</li>
+<li>接下來我們就是根據此方式去實作，但是我們要怎麼找，才能符合題目的左右子樹切割條件呢？<ul>
+<li>原本的 BST 是 <code>(L+R)/2</code>，有一個很明顯的公式。</li>
+<li>n 最大只有 2000，那我們可以用暴力的方式解解看。</li>
+<li>畢竟 n 不大，2000 最多就 2 的 11 次，因此最壞情況下迴圈長度為 22000。</li>
+<li>用迴圈不斷去比較，找出符合題目要求的切割左右子樹方法。</li>
+</ul>
+</li>
+<li>一個小技巧，\(O(1)\)算出左右子樹大小<ul>
+<li>可以使用區間查詢。</li>
+<li>先將數列進行排序</li>
+<li>也就是說，如果我們有一個陣列為 <code>sum[i] = sum[i-1] + num[i]</code>，新的 index 值會繼承救的數值並且加上當前數列數字</li>
+<li>BST 的特性，左子樹的所有數值一定比 root 小，因此我們要查詢的區間就是 <code>sum[root-1] - sum[L-1]</code>，記住 root 並不是左子樹的範圍內、L 則在左子樹的範圍內</li>
+<li>反之，右子樹就是我們要查詢的區間就是 <code>sum[R] - sum[root])</code></li>
+</ul>
+</li>
+<li>判斷輸出格式<ul>
+<li>考慮左右子樹都有數值，就需要輸出逗號。</li>
+<li>因此我們可以用 <code>root != L &amp;&amp; root != R</code>，也就是說 root 並不在左邊界 or 右邊界上，就表示 root 下一定還有左右子樹</li>
+</ul>
+</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好久沒有寫演算法，腦袋變差很多QQ。 希望可以趕快恢復</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11147" target="_blank" rel="noopener">Uva11147 - KuPellaKeS BST by txya900619</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> sum[MAXN], num[MAXN];</span><br><span class="line"><span class="keyword">int</span> t, n, kase=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> L, <span class="keyword">int</span> R)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(L &gt; R) <span class="keyword">return</span>; <span class="comment">//沒有其他數值，因此不用輸出</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> root = L, min_diff = INT32_MAX, max_left = INT32_MIN; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = L; i &lt;= R; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i != R &amp;&amp; num[i] == num[i+<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">int</span> left_tree = (i == <span class="number">0</span> ? <span class="number">0</span> : sum[i<span class="number">-1</span>]) - (L == <span class="number">0</span> ? <span class="number">0</span> : sum[L<span class="number">-1</span>]); <span class="comment">//左子樹總和</span></span><br><span class="line">        <span class="keyword">int</span> right_tree = sum[R] - sum[i]; <span class="comment">//右子樹總和</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> diff = <span class="built_in">abs</span>(right_tree - left_tree); <span class="comment">//記住，需要 abs，不然樹會整個往左偏。</span></span><br><span class="line">        <span class="keyword">int</span> left = left_tree;</span><br><span class="line">        <span class="keyword">if</span>(diff &lt; min_diff)&#123;</span><br><span class="line">            root = i;</span><br><span class="line">            min_diff = diff;</span><br><span class="line">            max_left = left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(diff == min_diff &amp;&amp; left &gt; max_left)&#123;</span><br><span class="line">            root = i;</span><br><span class="line">            min_diff = diff;</span><br><span class="line">            max_left = left;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; num[root]; <span class="comment">//輸出當前 root</span></span><br><span class="line">    <span class="keyword">if</span>(L != R )&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span>;</span><br><span class="line">        dfs(L, root<span class="number">-1</span>); <span class="comment">//右子樹</span></span><br><span class="line">        <span class="keyword">if</span>(root != L &amp;&amp; root != R) <span class="built_in">cout</span> &lt;&lt; <span class="string">","</span>;</span><br><span class="line">        dfs(root+<span class="number">1</span>, R); <span class="comment">//左子樹</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">")"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">        sort(num, num+n);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        sum[<span class="number">0</span>] = num[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) sum[i] = sum[i<span class="number">-1</span>] + num[i]; <span class="comment">//計算區間總和</span></span><br><span class="line">        dfs(<span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>遞迴</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12893 - Count It(設計解題)</title>
+    <url>/2021/06/30/UVa/UVa12893/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>請根據題目連結中的程式碼進行優化，讓 \(1 \leq n \leq 10^{18}\) 時也有辦法 AC<br><a href="https://onlinejudge.org/external/128/12893.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>找出此公式的關係式</li>
+<li>二進位</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我們可以發現一些重點</p>
+<ul>
+<li><code>num[i] = num[i/2] + (i%2)</code>，我們可以發現會延續 <code>num[i/2]</code> +1 or 0。</li>
+<li>算算看 1 的情況，2 的情況、3 的情況。</li>
+<li><code>num[1] = 1, num[2] = 2, num[4] = 3</code>，似乎有點二進位的味道？</li>
+<li>因此也就是將 <code>i</code> 轉換成 2 進位，並且看 2 進位的 <code>i</code> 有幾個 1　？</li>
+<li>對，就是他了！</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>腦筋急轉彎…，太狠了。<br>我怎麼在看解答錢都沒有想出來RRRR，我好笨。拜託，再讓我聰明點八</p>
+<p><a href="https://hackmd.io/@txya900619/Uva12893" target="_blank" rel="noopener">Uva12893 - Count It by txya900619</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(n)&#123; <span class="comment">//當 n 為二進位時，有多少個 1</span></span><br><span class="line">            cnt += n &amp; <span class="number">1</span>;</span><br><span class="line">            n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; cnt &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa13142 - Destroy the Moon to Save the Earth(水題、英文測驗 )</title>
+    <url>/2021/06/17/UVa/UVa13142/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>在 T 年後會有一顆隕石撞擊地球！如果讓他撞擊地球會造成數以百計的死亡，這是科學家們想到一個方法，讓月亮來幫地球扛這個隕石。<br>　<br>其中 S 是月亮轉地球的速率，D 是如果隕石跟月球互相撞擊還差多少公里，D 可以是正數或負數。<br>我們知道如果消除月亮 1 ton 可以讓月亮的速度加快 1mm/s，因此科學家可以用武器撞擊月球來讓月球加速；反之，如果我們讓月亮增重 1 ton 則可以讓月亮的速度變慢 1mm/s。</p>
+<p>現在請告訴科學家們，要讓月亮消除或增加多少 ton 才可以讓月亮撞擊隕石。 請輸出無條件捨去的 ton<br><a href="https://onlinejudge.org/external/131/13142.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>英文的閱讀能力</li>
+<li>判斷題目的可用資訊</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>如果你的英文夠好，那你應該會知道其實 S 對我們是沒有用的，因為其實題目的 D 是隕石跟月球互相撞擊還差多少公里，也就是說 D 的標準就是透過 S 的速率去推估，因此我們其實只需要做增加或是減少 S。</p>
+<p>怎麼做呢？就是用題目的消除或增加 1 ton。<br>因此我們的公式就是 \(距離 / 時間\)，記得單位要換算，距離的單位是 mm、時間的單位是 s。</p>
+<p>再來我們的輸出特別注意</p>
+<ul>
+<li>floor 是無條件退位，因此 \(abs(floor(-8.4)) = 9 \)，並不符合題目要求，因此我們要改成 \(floor(abs(-8.4)) = 8 \)。</li>
+<li>判斷是要 remove or add<br>題目有說，ton = 0 時必須輸出 add，但是我們判斷是否等於 0 時，假設 ton = 0.3，判斷公式是 <code>if(ton &gt; 0) cout &lt;&lt; &quot;Remove &quot; &lt;&lt; floor(ton) &lt;&lt; &quot; tons\n&quot;;</code>，則會輸出 <code>remove</code>，這是因為我們的 <code>if(ton &gt; 0)</code> 這時是 0.3，才會判斷是 true，因此我們要改成  <code>if(floor(ton) &gt; 0)</code> 判斷時就先退位，這樣才會符合題目的正確輸出要求。</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>我英文真的好爛，需要再複習拉QAQ。<br>看了題目那麼久，結果一個詳解發現這題目那麼簡單。</p>
+<p>我一開始還以為我要知道地球的周長然後去計算月亮速率，2500 公里是隕石跟月亮的距離，還有再算一堆東西，想到就頭疼的…。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva13142" target="_blank" rel="noopener">Uva13142 - Destroy the Moon to Save the Earth</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">double</span> t, s, d, ton;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123; </span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; t &gt;&gt; s &gt;&gt; d;</span><br><span class="line">        <span class="comment">//距離 / 時間，記得單位要換算，距離的單位是 mm、時間的單位是 s</span></span><br><span class="line">        ton = d * <span class="number">1000</span> * <span class="number">100</span> * <span class="number">10</span> / (t * <span class="number">24</span> * <span class="number">60</span>* <span class="number">60</span>); </span><br><span class="line">        <span class="comment">//小心判斷，注意 0.3 的情況；注意負數時的 floor 會 -1，舉例：floor(-0.3) = -1。</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">floor</span>(ton) &gt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Remove "</span> &lt;&lt; <span class="built_in">floor</span>(ton) &lt;&lt; <span class="string">" tons\n"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"Add "</span> &lt;&lt; <span class="built_in">floor</span>(<span class="built_in">abs</span>(ton)) &lt;&lt; <span class="string">" tons\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>統計學(二) 筆記 - 期末專案 國內股票型基金分析</title>
+    <url>/2021/07/02/statistics/statistics-final-project/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>我們根據<a href="https://fund.bot.com.tw/w/wq/wq02.djhtm?a=ET001004&b=BANKFUNDID&customershowall=0" target="_blank" rel="noopener">台灣銀行可申購的基金</a>，針對國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金做探討。</p>
+<p>國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，以下簡稱為<strong>三類基金</strong><br>我們主要想探討的是，在這三種類型的所有基金中，透過統計的方式找出哪些基金值得被購買，適合消費者購買。</p>
+<p>過程中我們使用 <strong>R 語言</strong> 進行分析。<br><a href="https://drive.google.com/file/d/1TZ9b66NvqLzXglfXqvaQRIfvtH89nkx1/view?usp=sharing" target="_blank" rel="noopener">我們這組的期末 ppt 報告</a></p>
+<p>此文章記錄用途只在於台北科技大學資訊與財金管理系大二下期末專案<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="章節"><a href="#章節" class="headerlink" title="章節"></a>章節</h2><ul>
+<li>蒐集資料，透過 yahoo 基金網頁下載歷史資料。</li>
+<li>根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。<ul>
+<li>其中國內股票開放型一般股票型基金最好的基金定義為 normal_fund</li>
+<li>其中國內股票開放型中小型基金最好的基金定義為 small_fund</li>
+<li>其中國內股票開放型科技型基金最好的基金定義為 tech_fund</li>
+</ul>
+</li>
+<li>再來我們針對 normal_fund、small_fund、tech_fund 比較看看這些基金是否有差異。</li>
+<li>再來為這 normal_fund、small_fund、tech_fund 基金做迴歸分析，X 變數是 normal_fund、small_fund、tech_fund 的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。</li>
+<li>再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中</li>
+<li>資料來源</li>
+<li>心得</li>
+</ul>
+<p>如果想跳到這些章節，請點選右邊的章節列描點過去。</p>
+<p><font color="#dd0000">以下的統計分析的 alpha 都是 0.05。</font></p>
+<h2 id="資料取得"><a href="#資料取得" class="headerlink" title="資料取得"></a>資料取得</h2><ul>
+<li>我們資料使用 <a href="https://tw.stock.yahoo.com/基金" target="_blank" rel="noopener">yahoo 基金</a> 從 2017~2020 的資料作統計分析。</li>
+<li>之後透過 R 語言處理資料。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment">#merge.data.R </span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(tibble)</span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line">data_merge &lt;- <span class="keyword">function</span>(folder_name)&#123;</span><br><span class="line">  <span class="comment">#"一般股票型"</span></span><br><span class="line">  path &lt;- file.path(getwd(), <span class="string">"基金CSV"</span>, folder_name)</span><br><span class="line">  files &lt;- dir(path)</span><br><span class="line">  data &lt;- tibble(YM = character(), name = character(), <span class="keyword">return</span> = numeric(),</span><br><span class="line">                 sharpe = numeric(), sd = numeric())</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (fname <span class="keyword">in</span> files)&#123;</span><br><span class="line">    </span><br><span class="line">    path &lt;- file.path(getwd(), <span class="string">"基金CSV"</span>, folder_name, fname)</span><br><span class="line">    fund &lt;- read.csv(path)</span><br><span class="line">    fname &lt;- gsub(<span class="string">".csv"</span>, <span class="string">""</span>, fname)</span><br><span class="line">    fund$date &lt;- fund$日期 %&gt;% as.Date() %&gt;% as.character() <span class="comment">#將日期與 yahoo 股價一致</span></span><br><span class="line">    fund$漲跌幅 &lt;- gsub(<span class="string">"%"</span>, <span class="string">""</span>, fund$漲跌幅) %&gt;% as.numeric()  <span class="comment">#子串轉數字</span></span><br><span class="line">    fund &lt;- fund[-grep(<span class="string">"2021"</span>, fund$date) ,] <span class="comment">#消除 2021 的資料</span></span><br><span class="line">    fund &lt;- fund[-grep(<span class="string">"2016"</span>, fund$date) ,] <span class="comment">#消除 2016 的資料</span></span><br><span class="line">    <span class="keyword">if</span>(nrow(fund) &lt;= <span class="number">0</span>) <span class="keyword">next</span></span><br><span class="line">    </span><br><span class="line">    fund$YM &lt;- substr(fund$date, <span class="number">1</span>, <span class="number">4</span>)<span class="comment">#year with month 取出年份與月份</span></span><br><span class="line">    YMs &lt;- unique(fund$YM) </span><br><span class="line"></span><br><span class="line">    <span class="comment">#將基金的每日資料合併成每年的資料</span></span><br><span class="line">    <span class="keyword">for</span>(ym <span class="keyword">in</span> YMs)&#123;</span><br><span class="line">      sub_fund &lt;- fund[fund$YM == ym, ]</span><br><span class="line">      <span class="keyword">return</span> &lt;- (tail(sub_fund$淨值,<span class="number">1</span>) - head(sub_fund$淨值,<span class="number">1</span>)) / head(sub_fund$淨值,<span class="number">1</span>) <span class="comment">#計算報酬率</span></span><br><span class="line">      data &lt;- data %&gt;% add_row(YM = ym, name = fname,</span><br><span class="line">                         <span class="keyword">return</span> = <span class="keyword">return</span>,</span><br><span class="line">                         sharpe = (mean(sub_fund$漲跌幅) - <span class="number">0.0000232</span>) / sd(sub_fund$漲跌幅) * (sqrt(<span class="number">252</span>)), <span class="comment"># sharpe ratio</span></span><br><span class="line">                         sd = sd(sub_fund$漲跌幅)) <span class="comment"># 標準差</span></span><br><span class="line">    <span class="comment">#sharpe ratio 的無風險利率使用台灣銀行一天的利息做標準 0.0000232 </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="蒐集資料，透過-yahoo-基金網頁下載歷史資料。"><a href="#蒐集資料，透過-yahoo-基金網頁下載歷史資料。" class="headerlink" title="蒐集資料，透過 yahoo 基金網頁下載歷史資料。"></a>蒐集資料，透過 yahoo 基金網頁下載歷史資料。</h2><p>選擇 yahoo 某一檔基金，這裡用<a href="https://tw.stock.yahoo.com/fund/summary/F0HKG05X22:FO" target="_blank" rel="noopener">安聯台灣科技基金為例</a>，點擊 <strong>歷史淨值</strong> &gt; 往下看，會看到一個<strong>下載歷史報價</strong>，選擇自己想要的期間去下載。 </p>
+<h2 id="根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。"><a href="#根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。" class="headerlink" title="根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。"></a>根據國內股票開放型中小型基金、國內股票開放型科技型基金、國內股票開放型一般股票型基金，分別選出最好的基金。</h2><ul>
+<li>將資料轉化成以每年為單位的基金資料</li>
+<li>再來我們做 ANOVA 分析，看看這些基金的 報酬率、sharpe ratio 是否都一樣</li>
+<li>如果 ANOVA 分析這些基金的 報酬率、sharpe ratio 不一樣，則做 LSD 找出最前段班的組別。<br>我們會先做報酬率，並取出 LSD 最好的一組，再去做 sharpe ratio 分析</li>
+<li>下結論</li>
+<li>從最好的基金們中找出最好的基金。</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment">#fund.R</span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(stats)</span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./merge_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./loading_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"></span><br><span class="line">fund_type &lt;- c(<span class="string">"一般股票型"</span>, <span class="string">"中小型"</span>, <span class="string">"科技型"</span>)</span><br><span class="line"><span class="comment">#data_return &lt;- function(folder_name)</span></span><br><span class="line">data &lt;- data_merge(<span class="string">"一般股票型"</span>)</span><br><span class="line"><span class="comment">#write.csv(data, "一般股票型.csv")</span></span><br><span class="line">write.csv(data, <span class="string">"./ppt材料/一般股票型統計.csv"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#報酬率</span></span><br><span class="line">fit &lt;- aov(formula = <span class="keyword">return</span> ~ name, data = data) <span class="comment"># anova 分析</span></span><br><span class="line">anova_table &lt;- anova(fit)</span><br><span class="line">lsd &lt;- LSD.test(fit, <span class="string">"name"</span>, p.adj =<span class="string">"none"</span>, alpha = <span class="number">0.05</span>) <span class="comment">#判斷 LSD 分析</span></span><br><span class="line">lsd$groups$name &lt;- lsd$groups %&gt;% row.names()</span><br><span class="line">row.names(lsd$groups) &lt;- <span class="literal">NULL</span> <span class="comment">#將 rownames 轉為 index</span></span><br><span class="line">View(lsd$groups)</span><br><span class="line">good_funds &lt;- lsd$groups$name[grep(<span class="string">"a"</span>, lsd$groups$groups)]</span><br><span class="line">data &lt;- data[data$name %<span class="keyword">in</span>% good_funds, ]</span><br><span class="line"></span><br><span class="line"><span class="comment">#sharpe</span></span><br><span class="line">fit &lt;- aov(formula = sharpe ~ name, data = data) <span class="comment">#anova 分析</span></span><br><span class="line">anova_table &lt;- anova(fit)</span><br><span class="line">lsd &lt;- LSD.test(fit, <span class="string">"name"</span>, p.adj =<span class="string">"none"</span>, alpha = <span class="number">0.05</span>) <span class="comment">#判斷 LSD 分析</span></span><br><span class="line">lsd$groups$name &lt;- lsd$groups %&gt;% row.names()</span><br><span class="line">row.names(lsd$groups) &lt;- <span class="literal">NULL</span> <span class="comment">#將 rownames 轉為 index</span></span><br><span class="line">View(lsd$groups)</span><br><span class="line">good_funds &lt;- lsd$groups$name[grep(<span class="string">"a"</span>, lsd$groups$groups)]</span><br><span class="line">data &lt;- data[data$name %<span class="keyword">in</span>% good_funds, ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="結果與結論"><a href="#結果與結論" class="headerlink" title="結果與結論"></a>結果與結論</h3><ul>
+<li><p>一般股票型</p>
+<ul>
+<li>return <ul>
+<li>ANOVA，一般股票型基金的報酬差沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=19bum8ZSvbmeCnKKovx8KHVCl685-gkS8&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Bb0LplP1vkSfzl_VXAPymdzuRcyys7BM&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>sharpe ratio<ul>
+<li>ANOVA，一般股票型基金的 sharpe ratio 沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1KzVqrgiSoqKu6rMZZrxq67LsboFhIqxR&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=16vDV4ghesv1pQIrGsDeqs_Aawo6zJ_o1&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>中小型</p>
+<ul>
+<li>return <ul>
+<li>ANOVA，中小型基金的報酬差沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1zi443MEVinhnJRNUcK4i-kYb7XxbOgHm&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1CfZRmGEdlS-ArM9MBx7TrvLXG3UEiggM&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>sharpe ratio<ul>
+<li>ANOVA，中小型基金的 sharpe ratio 沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1AZ4aOovpoPf8obCQ76YJwMt6i2N-roNy&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=12w11gSiXrXBvlsMNtaNhlslUyKi1xzBQ&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>科技型</p>
+<ul>
+<li>return <ul>
+<li>ANOVA，科技型的報酬差沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ibAPTLZitwZAzHGVLInwJQcNakNMpQoU&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1_93_Zmy-2ZJ0fm9qf2U4cK27rqoSOd76&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>sharpe ratio<ul>
+<li>ANOVA，科技型基金的 sharpe ratio 沒有明顯差異<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BQRdg1uS8U8u50E-eKn0rZQSuxNIpiDM&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>LSD <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-7iFT9d-qWRxGTW5rI2clUS8iq2cDQ0x&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>結論</p>
+<ul>
+<li><p>蠻意外的，沒想到在 2017~2020 中每個類型中的所有基金的 return、sharpe ratio 全部都一樣。ummm…所以這樣應該也就表示其實所有的基金管理人都差不多優秀，沒有明顯被坑的情況。</p>
+</li>
+<li><p>因此我們就選出三類基金中的 return、sharpe ratio LSD 綜合排名第一名，來當作我們這三類基金的 normal_fund、small_fund、tech_fund</p>
+<ul>
+<li>其中國內股票開放型一般股票型基金最好的基金<strong>安聯台灣智慧基金</strong>定義為 normal_fund  </li>
+<li>其中國內股票開放型中小型基金最好的基金<strong>復華中小精選基金</strong>定義為 small_fund </li>
+<li>其中國內股票開放型科技型基金最好的基金<strong>安聯台灣科技基金</strong>定義為 tech_fund</li>
+</ul>
+</li>
+<li><p>normal_fund、small_fund、tech_fund 的報酬率、sharpe ratio 折線圖</p>
+<ul>
+<li>return     <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1RXtkEPP0G2y1wOptf1zZ6EbErmmh-_lZ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>sharpe ratio 折線圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1rH4dc0yVpd6tHZPS7rsjr4lX3PFbuSkC&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="再來我們針對-normal-fund、small-fund、tech-fund-比較看看這些基金是否有差異。"><a href="#再來我們針對-normal-fund、small-fund、tech-fund-比較看看這些基金是否有差異。" class="headerlink" title="再來我們針對 normal_fund、small_fund、tech_fund 比較看看這些基金是否有差異。"></a>再來我們針對 normal_fund、small_fund、tech_fund 比較看看這些基金是否有差異。</h2><ul>
+<li><strong>結論：normal_fund、small_fund、tech_fund　這三個基金的變異數都相等。</strong></li>
+<li>下面有六張圖，請根據圖片中的 <code>data: xxx_fund and aaa_fund</code>，來得知是哪兩個基金比較。<ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1olFq5iIq6yzQTOTX6EKIrx3UxpvrQ4s_&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gJCnHIF2VMI7H4qfes0OYqIaviDZye13&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Zsdh_q-SSLJxI2lHkT6cKU_J0Ochd53N&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1OutFoK56DPngaUaHkprq_py1FHFkt2hW&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qywg5tbMcQHtC-JSell3IXVRMSUJeHML&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1zRMe_YRTLlFnjUgg528e1XwV_vsw02Kg&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment">#var.R</span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(stats)</span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./merge_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#在使用此函式前，必須先使用 *_fund.R 先判斷哪些基金最好</span></span><br><span class="line"></span><br><span class="line">fund_type &lt;- c(<span class="string">"一般股票型"</span>, <span class="string">"中小型"</span>, <span class="string">"科技型"</span>)</span><br><span class="line"><span class="comment">#data_return &lt;- function(folder_name)</span></span><br><span class="line">normal_fund &lt;- data_merge(<span class="string">"一般股票型"</span>)</span><br><span class="line">small_fund &lt;- data_merge(<span class="string">"中小型"</span>)</span><br><span class="line">tech_fund &lt;- data_merge(<span class="string">"科技型"</span>)</span><br><span class="line"></span><br><span class="line">write.csv(normal_fund[normal_fund$name == <span class="string">"安聯台灣智慧基金"</span>,], <span class="string">"./ppt材料/安聯台灣智慧基金統計.csv"</span>)</span><br><span class="line">write.csv(small_fund[small_fund$name == <span class="string">"復華中小精選基金"</span>,], <span class="string">"./ppt材料/復華中小精選基金統計.csv"</span>)</span><br><span class="line">write.csv(tech_fund[tech_fund$name == <span class="string">"安聯台灣科技基金"</span>,], <span class="string">"./ppt材料/安聯台灣科技基金統計.csv"</span>)</span><br><span class="line">normal_fund &lt;- normal_fund$<span class="keyword">return</span>[normal_fund$name == <span class="string">"安聯台灣智慧基金"</span>] </span><br><span class="line">small_fund &lt;- small_fund$<span class="keyword">return</span>[small_fund$name == <span class="string">"復華中小精選基金"</span>]</span><br><span class="line">tech_fund &lt;- tech_fund$<span class="keyword">return</span>[tech_fund$name == <span class="string">"安聯台灣科技基金"</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var(normal_fund)</span><br><span class="line">var(small_fund)</span><br><span class="line">var(tech_fund)</span><br><span class="line"><span class="comment">#Reject</span></span><br><span class="line">var.test(normal_fund, </span><br><span class="line">         small_fund,</span><br><span class="line">         alternative = <span class="string">"two.sided"</span>) <span class="comment">#less 表示 A 股票比 B 股票標準差更大</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="再來為這-normal-fund、small-fund、tech-fund-基金做迴歸分析，X-變數是-normal-fund、small-fund、tech-fund-的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。"><a href="#再來為這-normal-fund、small-fund、tech-fund-基金做迴歸分析，X-變數是-normal-fund、small-fund、tech-fund-的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。" class="headerlink" title="再來為這 normal_fund、small_fund、tech_fund 基金做迴歸分析，X 變數是 normal_fund、small_fund、tech_fund 的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。"></a>再來為這 normal_fund、small_fund、tech_fund 基金做迴歸分析，X 變數是 normal_fund、small_fund、tech_fund 的前十大股票，使用迴歸分析來看基金的前十大標的是否對這基金影響力很強。</h2><ul>
+<li>以下的 x 變數是前十大股票當天漲跌幅</li>
+<li>y 都是基金當天漲跌幅</li>
+</ul>
+<h3 id="normal-fund-基金回歸"><a href="#normal-fund-基金回歸" class="headerlink" title="normal_fund 基金回歸"></a>normal_fund 基金回歸</h3><ul>
+<li>共線性測試，並沒有明顯共線性問題<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1T6D-XTxzcTyQx_ko3iXSz5uu0CravQLJ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>回歸模型，\(adj_R^2 = 0.7381\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1CBDAM-7tZHJiCZR-emaTZFuOqfcKtQBe&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 係數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1-UYBTwNfRid5lbARBr7AVaP5pXEQsxM8&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 的 t test，每一個都與 y 有關聯<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=10iVIHLXSQf3AIAGHk7I_UsUXkwF-aao9&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>殘差分析、常態機率等圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1lo5kNGjQ0qRl-KWc_pCZjxpWcuD6-_jL&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>結論<br>如果我們買前十大基金並搭配 x 係數的資金分配，那我們就可以達到基金大約 73% 的功效，也就是說我們如果單純只買這幾支股票，那麼我們理論上會跟這基金有百分之 73% 漲幅相同，也許投資人可以嘗試看看自己買股票，就可以減少基金投資人手續費。</li>
+</ul>
+<h3 id="small-fund-基金回歸"><a href="#small-fund-基金回歸" class="headerlink" title="small_fund 基金回歸"></a>small_fund 基金回歸</h3><ul>
+<li>共線性測試，並沒有明顯共線性問題<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1J7LQMRGdeWtUk-ivL_207ncUguBZESOJ&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>回歸模型，\(adj_R^2 = 0.6952\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1h3gAhuhFuY85N8b2kqFOVpJZREPnltFf&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 係數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ppMc_Fg0Rc6uoxpLSQ2H9ckv3q0KevvC&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 的 t test，每一個都與 y 有關聯<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gn55G2j8QYiXKenRFJj8-fsvX3Gl93i0&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>殘差分析、常態機率等圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1mlEFl481HJnPUIwt5RR7EFls9hR16Rdm&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>結論<br>如果我們買前十大基金並搭配 x 係數的資金分配，那我們就可以達到基金大約 70% 的功效，也就是說我們如果單純只買這幾支股票，那麼我們理論上會跟這基金有百分之 70% 漲幅相同，也許投資人可以嘗試看看自己買股票，就可以減少基金投資人手續費。</li>
+</ul>
+<h3 id="tech-fund-基金回歸"><a href="#tech-fund-基金回歸" class="headerlink" title="tech_fund 基金回歸"></a>tech_fund 基金回歸</h3><ul>
+<li>共線性測試，2327 與 2492 有明顯貢獻性關係，2492 在這檔基金的權重較高，因此我們刪除 2327<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=13Vtty6mouxE2VRlUS-PNUyNjtdAIOj4y&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>回歸模型，\(adj_R^2 = 0.8399\)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1rRyDF0i1ewMsOz_b4u2roTSm0CUIGEUT&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 係數<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1R9pCSJse9yFvB7FW7d82LWXgcNntP_DG&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>所有 x 的 t test，每一個都與 y 有關聯<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1KcTR7KkPHOg7nLbRblMnqBR9nZBtlx5M&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>殘差分析、常態機率等圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1qipc8LEY37jUMZxq0vHYX0j5tnZ4sI1a&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>結論<br>如果我們買前十大基金並搭配 x 係數的資金分配，那我們就可以達到基金大約 84% 的功效，也就是說我們如果單純只買這幾支股票，那麼我們理論上會跟這基金有百分之 84% 漲幅相同，也許投資人可以嘗試看看自己買股票，就可以減少基金投資人手續費。</li>
+</ul>
+<h3 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h3><figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment">#### file name</span></span><br><span class="line"><span class="comment"># lm.R </span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"><span class="keyword">library</span>(magrittr)</span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">library</span>(agricolae)</span><br><span class="line"><span class="keyword">library</span>(tibble)</span><br><span class="line"><span class="keyword">library</span>(ggfortify)</span><br><span class="line"><span class="keyword">source</span>(<span class="string">"./merge_data.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br><span class="line"></span><br><span class="line">setwd(<span class="string">"D:\\NTUT\\大二下\\統計\\報告"</span>)</span><br><span class="line"></span><br><span class="line">fund_type &lt;- c(<span class="string">"一般股票型"</span>, <span class="string">"中小型"</span>, <span class="string">"科技型"</span>)</span><br><span class="line"><span class="comment">#data_return &lt;- function(folder_name)</span></span><br><span class="line"></span><br><span class="line">path &lt;- file.path(getwd(), <span class="string">"基金CSV"</span>, <span class="string">"科技型"</span>, <span class="string">"安聯台灣科技基金.csv"</span>)</span><br><span class="line"></span><br><span class="line">fund &lt;- read.csv(path)</span><br><span class="line">fund$date &lt;- fund$日期 %&gt;% as.Date() %&gt;% as.character()</span><br><span class="line"></span><br><span class="line">fund$<span class="keyword">return</span> &lt;- gsub(<span class="string">"%"</span>, <span class="string">""</span>, fund$漲跌幅) %&gt;% as.numeric() </span><br><span class="line">fund$<span class="keyword">return</span> &lt;- fund$<span class="keyword">return</span> * <span class="number">0.01</span></span><br><span class="line">date &lt;- fund$date</span><br><span class="line"></span><br><span class="line"><span class="comment">#基金的前十大股票</span></span><br><span class="line">codes &lt;- c(<span class="string">"2330.TW"</span>, <span class="string">"3529.TWO"</span>, <span class="string">"2492.TW"</span>, <span class="string">"2327.TW"</span>, <span class="string">"2337.TW"</span>, <span class="string">"8016.TW"</span>, <span class="string">"6510.TWO"</span>,</span><br><span class="line">           <span class="string">"6732.TWO"</span>, <span class="string">"4966.TWO"</span>, <span class="string">"3035.TW"</span>)</span><br><span class="line"><span class="keyword">for</span> (code <span class="keyword">in</span> codes)&#123; <span class="comment">#找出所有股票的共同日期</span></span><br><span class="line">  stock &lt;- getSymbols(code, auto.assign = <span class="literal">FALSE</span> , from = <span class="string">"2016-01-01"</span> ) %&gt;% na.omit() %&gt;% data.frame()</span><br><span class="line">  names(stock) &lt;- c(<span class="string">"open"</span>, <span class="string">"high"</span>, <span class="string">"low"</span>, <span class="string">"close"</span>, <span class="string">"vol"</span>, <span class="string">"adjPrice"</span>)</span><br><span class="line">  stock$date &lt;- rownames(stock) %&gt;% as.Date() %&gt;% as.character()</span><br><span class="line">  rownames(stock) &lt;- <span class="literal">NULL</span></span><br><span class="line">  date &lt;- intersect(date, stock$date)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data &lt;- tibble(date = date, <span class="keyword">return</span> = fund$<span class="keyword">return</span>[fund$date %<span class="keyword">in</span>% date])</span><br><span class="line"><span class="keyword">for</span>(code <span class="keyword">in</span> codes)&#123; <span class="comment">#找出所有股票的共同日期的報酬率</span></span><br><span class="line">  stock &lt;- getSymbols(code, auto.assign = <span class="literal">FALSE</span> , from = <span class="string">"2016-01-01"</span> ) %&gt;% na.omit() %&gt;% data.frame()</span><br><span class="line">  names(stock) &lt;- c(<span class="string">"open"</span>, <span class="string">"high"</span>, <span class="string">"low"</span>, <span class="string">"close"</span>, <span class="string">"vol"</span>, <span class="string">"adjPrice"</span>)</span><br><span class="line">  stock$date &lt;- rownames(stock) %&gt;% as.Date() %&gt;% as.character()</span><br><span class="line">  stock$last_close &lt;- c(<span class="literal">Inf</span>, head(stock$close, length(stock$close)-<span class="number">1</span>))</span><br><span class="line">  stock$<span class="keyword">return</span> &lt;- (stock$close - stock$last_close) / stock$last_close</span><br><span class="line">  rownames(stock) &lt;- <span class="literal">NULL</span></span><br><span class="line">  data[ , code] &lt;- stock$<span class="keyword">return</span>[stock$date %<span class="keyword">in</span>% date]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#共線性測試，</span></span><br><span class="line">cor.test &lt;- cor(data[<span class="number">3</span>:ncol(data)])</span><br><span class="line">cor.test</span><br><span class="line"></span><br><span class="line"><span class="comment">#將共線性過高的刪除</span></span><br><span class="line">data[<span class="string">"2327.TW"</span>] &lt;- <span class="literal">NULL</span></span><br><span class="line">write.csv(data, <span class="string">"科技股回歸資料.csv"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#迴歸分析</span></span><br><span class="line">model &lt;- lm(formula = <span class="keyword">return</span> ~ ., data = data[, <span class="number">2</span>:ncol(data)]) </span><br><span class="line">View(model)</span><br><span class="line">sum_model &lt;- summary(model)</span><br><span class="line">View(sum_model)</span><br><span class="line"></span><br><span class="line"><span class="comment">#殘差圖、標準常態圖</span></span><br><span class="line">autoplot(model)</span><br></pre></td></tr></table></figure>
+
+<h2 id="再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中"><a href="#再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中" class="headerlink" title="再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中"></a>再來做最適資產配置，推薦投資者應該將投資如何比例至這些基金中</h2><ul>
+<li>我們有請教<a href="http://web.fin.mcu.edu.tw/zh-hant/content/%E5%85%BC%E4%BB%BB%E5%B8%AB%E8%B3%87" target="_blank" rel="noopener">王甡老師</a> 如果要做三檔基金時要怎麼樣計算，老師給了我們一份 word 資料，提供我們學習。<br>我將檔案連結放在這邊，由於是<a href="https://drive.google.com/file/d/1eOMUrfjgTLIIECHG8-JLlR2vZJbW-tGz/view?usp=sharing" target="_blank" rel="noopener">老師的檔案我沒有權力共享，因此只有設定我的帳號才可以查看、瀏覽，提供我學習XD</a>。</li>
+<li>再來我們借助 excel 的矩陣運算與最佳求解，找出三種資產的最適資產配置比例<ul>
+<li>利用前面假設檢定挑選出的各基金類別中最好的基金進行最適資產配置</li>
+<li>計算年化報酬率、共變異數矩陣</li>
+<li>最適風險性資產投資組合的權重是投資組合變異數最小的權重</li>
+<li>最小變異數的投資組合為標準差4.79%，預期報酬率31.2%</li>
+</ul>
+</li>
+<li>結論資產配置<ul>
+<li>權重為安聯台灣智慧基金111.00%</li>
+<li>復華中小精選基金-18.71%</li>
+<li>安聯台灣科技基金7.71%</li>
+</ul>
+</li>
+<li>表示若要選擇風險最小的投資組合必須將投資在復華中小精選基金的資金，投資到另外兩檔基金，需要借貸資金才能達到風險最小的投資組合</li>
+<li>圖表 <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1FhK2u15yqpvjHXHxT9t29Ly8pCI5N3ye&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="非常有趣的資產配置方法"><a href="#非常有趣的資產配置方法" class="headerlink" title="非常有趣的資產配置方法"></a>非常有趣的資產配置方法</h3><ul>
+<li>由於我們知道資產配置不可以有負值，如果有，表示這三種並不適合一起拿來做資產配置，或負比例基金移除。</li>
+<li>但我們這邊做一個啟發。</li>
+<li>公式推導<ul>
+<li>A:安聯台灣智慧基金 B:復華中小精選基金C:安聯台灣科技基金 </li>
+<li>A+B+C = 100，其中因為 B 是負，導致投資人沒辦法正確資產配置，因此我們將 B 改為 0。</li>
+<li>\(A+B+C=100\) ，\(A+C=100+B\) ，其中 \(B = -18.71\)</li>
+<li>\(A+C = 100 + B = 118.71\) ,\(A+C=118.71\)</li>
+<li>\(111+7.71 = 118.71\)，\(A+C=100\) ，\(同除 1.1871\)</li>
+<li>\(C=6.4948%\) ，\(A=93.505%\)</li>
+</ul>
+</li>
+<li>因此我們推薦投資人買安聯台灣智慧基金 93.505%  ，安聯台灣科技基金 = 6.4948%</li>
+<li>這個完全沒有任何論文根據，純粹個人推導，如果並不是這樣我不負責喔XD。不過可以跟我說我錯在哪裡。</li>
+</ul>
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><p><a href="https://rdrr.io/r/base/row.names.html" target="_blank" rel="noopener">row.names: Get and Set Row Names for Data Frames by rdrr.io</a><br><a href="https://bookdown.org/jefflinmd38/r4biost/basicfunctiuon.html" target="_blank" rel="noopener">Chapter 6 基本函式 by bookdown</a><br><a href="https://stat.ethz.ch/pipermail/r-help/2008-January/152105.html" target="_blank" rel="noopener">[R] subsetting a data frame using string matching by stat.ethz</a><br><a href="https://stackoverflow.com/questions/15326792/select-column-2-to-last-column-in-r" target="_blank" rel="noopener">Select column 2 to last column in R by stackoverflow</a><br><a href="https://stackoverflow.com/questions/11991692/using-rs-lm-on-a-dataframe-with-a-list-of-predictors" target="_blank" rel="noopener">Using R’s lm on a dataframe with a list of predictors by stackoverflow</a><br><a href="https://stackoverflow.com/questions/6286313/remove-an-entire-column-from-a-data-frame-in-r" target="_blank" rel="noopener">Remove an entire column from a data.frame in R by stackoverflow</a><br><a href="https://bookdown.org/wangminjie/R4DS/lm.html#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">33.2 线性回归模型 by bookdown</a><br><a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm" target="_blank" rel="noopener">lm: Fitting Linear Models by rdocu</a><br><a href="https://www.statmethods.net/stats/correlations.html" target="_blank" rel="noopener">Correlations by Quick-R</a><br><a href="http://www.sthda.com/english/wiki/f-test-compare-two-variances-in-r" target="_blank" rel="noopener"> F-Test: Compare Two Variances in R by STHDA</a><br><a href="https://stat.ethz.ch/pipermail/r-help/2010-January/225345.html" target="_blank" rel="noopener">[R] Extract R-squared from summary of lm by stat.ethz</a><br><a href="https://zhuanlan.zhihu.com/p/49149862" target="_blank" rel="noopener">R语言(3)-四张图检验线性回归模型 by 知乎</a><br><a href="https://slidesplayer.com/slide/17269077/" target="_blank" rel="noopener">R教學 變異數分析R指令與範例 by 羅琪老師.</a><br><a href="https://stackoverflow.com/questions/12208090/selecting-columns-in-r-data-frame-based-on-those-not-in-a-vector" target="_blank" rel="noopener">Selecting columns in R data frame based on those <em>not</em> in a vector by stackoverflow</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好累阿，不過先謝謝我們的組員們，畢竟我們一起努力生出這份專案 <strong>吳淑萍、彭元俊、王奕淇</strong>，也要謝謝丁秀儀老師，其實我一直很想用統計做一個投資的專案，終於讓我做出來了www。<br>也要謝謝王甡老師，有他在後面督促我們，引導方向，我們才可以順利產出，並且有符合實務。</p>
+<p>其實一路上再用 R 寫統計專案真的是很累QQ，不過這已經比其他的程式語言都還好用，只是自己摸不熟拉，剛好透過這次的專案摸熟。<br>其實 R 真的很有用，建議大家有機會的話可以學學他。</p>
+<p>謝謝吳淑萍幫我們做 PPT，還有跟我開那麼多會，一直跟我溝通，辛苦了XD。<br>謝謝彭元俊幫我們做資產配置，使用 excel 做資產配置最適規劃。<br>謝謝王奕淇幫我們蒐集資料。</p>
+<p>總之我覺得我們這組做的很棒，也很不賴！有各位才順利。</p>
+<p>不過老實講，我自己在弄統計的時候，其實寫程式寫久都會有一種負能量產生，因為寫程式寫太久一直再找 bug 常常腦中就會有RRRRR，怎麼只有我一個人再找 bug，不行，工作質量分配不均！我要上訴，之類的奇怪想法在我腦海裏面wwww，可是其實我就會想一下，我除了寫程式以外其他都沒有比較擅長的，我也只有這個會做，有了這個反擊後，我就又會乖乖的寫程式。<br>直到下一次 bug 找不到為止www。</p>
+<p>不過也要很感謝 R 開放套件的人，如果沒有他們，我就會更難寫程式了！</p>
+<blockquote>
+<p>附上一張詢問王甡老師的照片<br><img src="https://drive.google.com/u/2/uc?id=1AKOiMXtk--MC6O-GNxDZjA9UG8rQuIoo&export=download" alt=""></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>統計 statistics</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>統計學筆記</tag>
+        <tag>北科大二下統計學筆記</tag>
       </tags>
   </entry>
 </search>

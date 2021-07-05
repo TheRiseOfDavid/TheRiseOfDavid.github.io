@@ -151,7 +151,7 @@ ga('send', 'pageview');
 </blockquote>
 <h2 id="關於應變數的轉換-Transformations-Involving-the-Dependent-Variable"><a href="#關於應變數的轉換-Transformations-Involving-the-Dependent-Variable" class="headerlink" title="關於應變數的轉換 Transformations Involving the Dependent Variable"></a>關於應變數的轉換 Transformations Involving the Dependent Variable</h2><ul>
 <li>在有時候我們會遇到有些自變數沒有變異數的狀況(EX: 交互作用)，遇到這些問題我們要怎麼解決呢？<ul>
-<li>方法 A: 將回歸方程式的 \(\mathcal{E} \) 改為 \(e = 2.71828 \) 也就是 \(log_10\)</li>
+<li>方法 A: 將回歸方程式的 \(\mathcal{E} \) 改為 \(e = 2.71828 \) 也就是 \(ln_{10}\)</li>
 <li>方法 B: 將 y 變成 \(1/y\) 後，我們的回歸方程式改成去預測 \(1/y\)</li>
 </ul>
 </li>
@@ -160,7 +160,7 @@ ga('send', 'pageview');
 <li>假設我們模型中有 \(\beta_0, \beta_1, …, \beta_p\)，且她們的 z 有些有 \(x^n\)，大於或等於 a second-order model</li>
 <li>這時候我們可以進行一些數學的轉換來讓他們變成線性模型<ul>
 <li>EX: 原本的非線性方程式 \(E(y) = \beta_0 \beta_1^x\)</li>
-<li>我們可以透過 log 進行轉換， \(log E(y) = log \beta_0 + x log \beta_1\)，把前面的公式每項變數改為 \(y’ = \beta_0’ + beta_1’ x\)，這樣就成為了一個線性模型！</li>
+<li>我們可以透過 log 進行轉換， \(ln \ E(y) = ln \beta_0 + x ln \beta_1\)，把前面的公式每項變數改為 \(y’ = \beta_0’ + beta_1’ x\)，這樣就成為了一個線性模型！</li>
 </ul>
 </li>
 </ul>
