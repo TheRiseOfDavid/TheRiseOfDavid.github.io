@@ -20530,7 +20530,7 @@
 <li>對，就是他了！</li>
 </ul>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>腦筋急轉彎…，太狠了。<br>我怎麼在看解答錢都沒有想出來RRRR，我好笨。拜託，再讓我聰明點八</p>
-<p><a href="https://hackmd.io/@txya900619/Uva12893" target="_blank" rel="noopener">Uva12893 - Count It by txya900619</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva12893" target="_blank" rel="noopener">Uva12893 - Count It by txya900619</a></p>
 <h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(n)&#123; <span class="comment">//當 n 為二進位時，有多少個 1</span></span><br><span class="line">            cnt += n &amp; <span class="number">1</span>;</span><br><span class="line">            n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; cnt &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -20893,6 +20893,558 @@
         <tag>北科上課筆記</tag>
         <tag>統計學筆記</tag>
         <tag>北科大二下統計學筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 期末報告 - 物件辨識，使用 colab 與 yolov4 實作</title>
+    <url>/2021/07/08/Media_with_Image_recognition/NTUTcs_MediaHwfinalexamG01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+<p>訓練的資料從 KITTI 資料集產生出來，後面會留下的成果。</p>
+<p>如果需要點選某些特定章節，請善用右上的章節列</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="專案說明"><a href="#專案說明" class="headerlink" title="專案說明"></a>專案說明</h2><blockquote>
+<p>如紅色線條上方說明文字<br><img src="https://drive.google.com/u/2/uc?id=1f6Rxxk0vANowWgqtTBz_u-hQdEM6nf2G&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1O0gSfy0En5HQKDJj_VsLHGgY5_zONQlP&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1dUtJqVaVRml61RwgiqAwFIyrLu714Z69&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1OPx-JlmgCz02vmUz3MnqKm_nguzxrmtw&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=15b4jvm388-9JHdMAO9ljVetrpAvO93pv&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1zL8qx0jhzH6UXjlNzBwyydJMWXlSDwNP&export=download" alt=""></p>
+</blockquote>
+<h2 id="下載資料"><a href="#下載資料" class="headerlink" title="下載資料"></a>下載資料</h2><p>根據專案要求先前往<a href="http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark&fbclid=IwAR1u06li3-5cW0-g5duUsCD4Eo3JxkhseahQRAFNMXOMAqQRrd1Dy0v52wo" target="_blank" rel="noopener">此網站獲得資料集</a>，你會收到一封驗證信，點擊驗證信網址後就會自動下載，由於我們使用 colab 來進行訓練，因此就不需要下載到本地。</p>
+<blockquote>
+<p>保留此網址<br><img src="https://drive.google.com/u/2/uc?id=159CWiyb1iZ5lPZzlCU5uN6mhEKgkXOQs&export=download" alt=""></p>
+</blockquote>
+<h2 id="開啟-colab，並且將-KITTI-資料下載到雲端硬碟"><a href="#開啟-colab，並且將-KITTI-資料下載到雲端硬碟" class="headerlink" title="開啟 colab，並且將 KITTI 資料下載到雲端硬碟"></a>開啟 colab，並且將 KITTI 資料下載到雲端硬碟</h2><p>前情概要，如果<a href="https://theriseofdavid.github.io/2021/05/19/Media_with_Image_recognition/NTUTcs_MediaHW07G01/#%E4%BD%BF%E7%94%A8-google-colab-%E4%BE%86%E9%80%B2%E8%A1%8C%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98" target="_blank" rel="noopener">不熟悉 colab 可以看這篇網站的解說</a>，這邊我們不會對 colab 多做介紹，已完成專案需求為主。</p>
+<p>以下的 colab 可能都有路徑問題，因為 colab 在久沒有使用時，會自動斷開，因此路徑會有混亂的問題，對每位讀者非常抱歉。</p>
+<h3 id="必要條件與須知"><a href="#必要條件與須知" class="headerlink" title="必要條件與須知"></a>必要條件與須知</h3><ul>
+<li>先將 gpu 功能開啟</li>
+<li>colab 在處理大量資料時會有時間差，也就是你在 colab 已經刪除這個資料，但在 google drive 還沒看到資料被刪除，這時必須耐心等待。<del>我也是這樣撐過來的</del></li>
+</ul>
+<h3 id="google-drive-與-colab-串接"><a href="#google-drive-與-colab-串接" class="headerlink" title="google drive 與 colab 串接"></a>google drive 與 colab 串接</h3><p>輸入以下指令</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> google.colab <span class="keyword">import</span> drive</span><br><span class="line">drive.mount(<span class="string">'/content/drive'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="再來我們設定一個捷逕，方便我們之後在操作時可以直接透過此捷徑迅速到我們的物件辨識專區"><a href="#再來我們設定一個捷逕，方便我們之後在操作時可以直接透過此捷徑迅速到我們的物件辨識專區" class="headerlink" title="再來我們設定一個捷逕，方便我們之後在操作時可以直接透過此捷徑迅速到我們的物件辨識專區"></a>再來我們設定一個捷逕，方便我們之後在操作時可以直接透過此捷徑迅速到我們的物件辨識專區</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">!ln -f -s /content/drive/MyDrive/NTUT/<span class="string">'大二下- 資工多媒體技術與應用'</span>/<span class="string">'期末報告-物件辨識'</span> /drive  <span class="comment">#這是我資料夾的路徑</span></span><br><span class="line">!ls /drive</span><br></pre></td></tr></table></figure>
+
+<h3 id="再來我們將-KITTI-下載到雲端硬碟"><a href="#再來我們將-KITTI-下載到雲端硬碟" class="headerlink" title="再來我們將 KITTI 下載到雲端硬碟"></a>再來我們將 KITTI 下載到雲端硬碟</h3><ul>
+<li>在專案說明中有提到我們必須下載三個檔案，其中有兩個檔案有驗證信、一個可以直接下載，我們將這三個網址都複製起來，並透過 colab 直接進行下載。</li>
+<li>下面我只列出一個網址，但實際上我們並須下載三個網址。</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">%cd /drive/ <span class="comment">#將資料存放到物件辨識專區</span></span><br><span class="line">!pwd </span><br><span class="line">!wget https://s3.eu-central<span class="number">-1.</span>amazonaws.com/avg-kitti/data_object_image_2.zip <span class="comment">#大概有 7800 多張照片</span></span><br><span class="line">!wget https://s3.eu-central<span class="number">-1.</span>amazonaws.com/avg-kitti/data_object_label_2.zip</span><br><span class="line">!wget https://s3.eu-central<span class="number">-1.</span>amazonaws.com/avg-kitti/devkit_object.zip</span><br></pre></td></tr></table></figure>
+
+<p>google colab 的網速真的神，我的爛到一個不行…。下載/上傳 16/3 mpbs 好慘QQ。</p>
+<h3 id="再來我們將這三個檔案進行解壓縮"><a href="#再來我們將這三個檔案進行解壓縮" class="headerlink" title="再來我們將這三個檔案進行解壓縮"></a>再來我們將這三個檔案進行解壓縮</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#可能會有路徑問題，請大家注意，如果已在 drive 內，就不需要</span></span><br><span class="line">!unzip /drive/data_object_image_2.zip -d /drive/training</span><br><span class="line">!unzip /drive/data_object_label_2.zip -d /drive/training</span><br><span class="line">!unzip /drive/devkit_object.zip  -d /drive/training</span><br></pre></td></tr></table></figure>
+
+<h3 id="檢查下是否都有成功被解壓縮到正確位置"><a href="#檢查下是否都有成功被解壓縮到正確位置" class="headerlink" title="檢查下是否都有成功被解壓縮到正確位置"></a>檢查下是否都有成功被解壓縮到正確位置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">%cat .&#x2F;label&#x2F;000000.txt</span><br><span class="line">#如果有成功輸出 3 0.622194 0.609351 0.080335 0.44573，表示成功</span><br></pre></td></tr></table></figure>
+
+<h2 id="colab-下載-darknet"><a href="#colab-下載-darknet" class="headerlink" title="colab 下載 darknet"></a>colab 下載 darknet</h2><p><a href="https://theriseofdavid.github.io/2021/05/19/Media_with_Image_recognition/NTUTcs_MediaHW07G01/#%E4%BD%BF%E7%94%A8-google-colab-%E4%BE%86%E9%80%B2%E8%A1%8C%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98" target="_blank" rel="noopener">請按照這邊的步驟，即可成功</a>，但有幾點需要特別注意。</p>
+<ul>
+<li>必須先將我們的雲端硬碟更改權限為可以讀出、寫入<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#必須先做，第一步非常重要! </span></span><br><span class="line">!chmod +x ./ <span class="comment">#讓我的雲端硬碟可被寫入</span></span><br></pre></td></tr></table></figure></li>
+<li>下載 darknet<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#抓預訓練模型</span></span><br><span class="line">%cd ./darknet/</span><br><span class="line">!wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv<span class="number">.137</span></span><br></pre></td></tr></table></figure></li>
+<li>Makefile 修改 4 點，之後進行 make</li>
+<li>修改 <code>/content/darknet/cfg/yolov4-custom.cfg</code><br>其中讀者可以從 readme.txt 得知有 9 個 class。</li>
+</ul>
+<h2 id="將-KITTI-資料集-label-轉換為-yolo-格式"><a href="#將-KITTI-資料集-label-轉換為-yolo-格式" class="headerlink" title="將 KITTI 資料集 label 轉換為 yolo 格式"></a>將 KITTI 資料集 label 轉換為 yolo 格式</h2><p><a href="#專案說明">專案說明</a>有提到，KITTI 資料集的 label 並不是 yolo 格式，因此要進行轉換。<br>轉換程式碼如下，謝謝林紀瑋的編寫。</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os </span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">path = <span class="string">"/drive/training"</span></span><br><span class="line">images_file = list()</span><br><span class="line">os.chdir(os.path.join(path, <span class="string">"label"</span>)) <span class="comment"># KITTI 標籤位置</span></span><br><span class="line">print(os.getcwd())</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> os.listdir(os.getcwd()):</span><br><span class="line">    ID = <span class="string">""</span></span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    y = <span class="number">0</span></span><br><span class="line">    width = <span class="number">0</span></span><br><span class="line">    height = <span class="number">0</span></span><br><span class="line">    f = open(fname)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        s = line.split(<span class="string">' '</span>)</span><br><span class="line">        ID = (s[<span class="number">0</span>])</span><br><span class="line">        x = ((float(s[<span class="number">4</span>])+float(s[<span class="number">6</span>]))/<span class="number">2</span>) <span class="comment">#x</span></span><br><span class="line">        y = ((float(s[<span class="number">5</span>])+float(s[<span class="number">7</span>]))/<span class="number">2</span>) <span class="comment">#y</span></span><br><span class="line">        width = (float(s[<span class="number">6</span>]) -float(s[<span class="number">4</span>])) <span class="comment">#width</span></span><br><span class="line">        height = (float(s[<span class="number">7</span>]) -float(s[<span class="number">5</span>])) <span class="comment">#height</span></span><br><span class="line">            </span><br><span class="line">    print(ID)</span><br><span class="line">    print(x)</span><br><span class="line">    print(y)</span><br><span class="line">    print(width)</span><br><span class="line">    print(height)</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment">##path = 'output.txt'</span></span><br><span class="line">    <span class="comment">##f = open(path, 'w')</span></span><br><span class="line">    <span class="comment">##lines = ['Hello World\n', '123', '456\n', '789\n']</span></span><br><span class="line">    <span class="comment">##f.writelines(lines)</span></span><br><span class="line">    <span class="comment">##f.close()</span></span><br><span class="line"></span><br><span class="line">    f = open(fname,<span class="string">'w'</span>)</span><br><span class="line">    f.write(ID+<span class="string">'\t'</span>)</span><br><span class="line">    f.write(str(x)+<span class="string">'\t'</span>)</span><br><span class="line">    f.write(str(y)+<span class="string">'\t'</span>)</span><br><span class="line">    f.write(str(width)+<span class="string">'\t'</span>)</span><br><span class="line">    f.write(str(height)+<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="將-yolo-格式的資料放到圖片的資料夾中"><a href="#將-yolo-格式的資料放到圖片的資料夾中" class="headerlink" title="將 yolo 格式的資料放到圖片的資料夾中"></a>將 yolo 格式的資料放到圖片的資料夾中</h3><p>這裡我們直接使用 linux 語法來操作</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#將 label 資料放到圖片位置，透過正規表達式來處理</span></span><br><span class="line">!cp /drive/training/label/*.txt /drive/training/image</span><br><span class="line"></span><br><span class="line"><span class="comment">#檢查是否都有成功的將資料集標籤放到圖片資料夾下</span></span><br><span class="line">%cd /drive/training/image/</span><br><span class="line">!ls</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="訓練前處理"><a href="#訓練前處理" class="headerlink" title="訓練前處理"></a>訓練前處理</h2><h3 id="根據專案說明，我們訓練的資料至少有-5000-張、其他為驗證集，因此我們寫一個-py-程式來將檔名-gt-5500-的圖片放到另一資料夾與訓練集分開"><a href="#根據專案說明，我們訓練的資料至少有-5000-張、其他為驗證集，因此我們寫一個-py-程式來將檔名-gt-5500-的圖片放到另一資料夾與訓練集分開" class="headerlink" title="根據專案說明，我們訓練的資料至少有 5000 張、其他為驗證集，因此我們寫一個 py 程式來將檔名 &gt; 5500 的圖片放到另一資料夾與訓練集分開"></a>根據專案說明，我們訓練的資料至少有 5000 張、其他為驗證集，因此我們寫一個 py 程式來將檔名 &gt; 5500 的圖片放到另一資料夾與訓練集分開</h3><p>驗證集資料路徑我們使用 <code>/drive/testing</code></p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#移動 5000 以上的資料至 testing </span></span><br><span class="line"><span class="comment">#%pwd</span></span><br><span class="line"><span class="keyword">import</span> os </span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line">path = <span class="string">"/drive/testing/"</span></span><br><span class="line">files = list()</span><br><span class="line">os.chdir(os.path.join(path, <span class="string">"label"</span>))</span><br><span class="line">print(os.getcwd())</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> os.listdir(os.getcwd()):</span><br><span class="line">  num = fname.split(<span class="string">"."</span>)[<span class="number">0</span>] <span class="comment">#判斷檔名是不是為資料集中的圖片，資料集中的圖片都已數字編號完成 </span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">not</span> num.isdigit()):  </span><br><span class="line">    <span class="keyword">continue</span></span><br><span class="line">  move_path = <span class="string">"/drive/testing/image/"</span> </span><br><span class="line">  <span class="keyword">if</span> int(num) &gt; <span class="number">5500</span>: <span class="comment">#移動路徑</span></span><br><span class="line">    shutil.move(os.path.join(os.getcwd(), fname), os.path.join(move_path, fname))</span><br><span class="line">    print(os.path.join(move_path), fname)</span><br></pre></td></tr></table></figure>
+
+<p>正確輸出時會產生這樣的資料</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1AtD6hVk0Ep4tzPgZ0NS9SPzyMJ9hgoD2&export=download" alt=""></p>
+</blockquote>
+<h2 id="將訓練集資料、驗證集資料收錄到-train-txt-valid-txt"><a href="#將訓練集資料、驗證集資料收錄到-train-txt-valid-txt" class="headerlink" title="將訓練集資料、驗證集資料收錄到 train.txt, valid.txt"></a>將訓練集資料、驗證集資料收錄到 <code>train.txt, valid.txt</code></h2><p>前情概要，如果<a href="https://theriseofdavid.github.io/2021/05/19/Media_with_Image_recognition/NTUTcs_MediaHW07G01/#%E4%BD%BF%E7%94%A8-google-colab-%E4%BE%86%E9%80%B2%E8%A1%8C%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98" target="_blank" rel="noopener">不熟悉 colab 可以看這篇網站的解說</a>，這邊我們不會對 colab 多做介紹，已完成專案需求為主。</p>
+<p>直接寫 py 來根據資料夾內容圖片收錄至 <code>train.txt, valid.txt</code>，因此下面這份程式要被執行兩次分別是  <code>train.txt, valid.txt</code></p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os </span><br><span class="line"><span class="comment">#path = "/drive/training" #訓練集路徑</span></span><br><span class="line">path = <span class="string">"/drive/testing"</span> <span class="comment">#驗證集路徑</span></span><br><span class="line">images_file = list()</span><br><span class="line">os.chdir(os.path.join(path, <span class="string">"image"</span>)) </span><br><span class="line">print(os.getcwd())</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> fname <span class="keyword">in</span> os.listdir(os.getcwd()):</span><br><span class="line">  <span class="keyword">if</span> fname.endswith(<span class="string">".png"</span>):</span><br><span class="line">    images_file.append(<span class="string">"/image/"</span> + fname)</span><br><span class="line">    print(fname)</span><br><span class="line"></span><br><span class="line">os.chdir(<span class="string">".."</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"train.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> output: <span class="comment">#驗證集則使用 valid.txt</span></span><br><span class="line">  <span class="keyword">for</span> image <span class="keyword">in</span> images_file:</span><br><span class="line">    output.write(path + image)</span><br><span class="line">    output.write(<span class="string">'\n'</span>)</span><br><span class="line">  output.close()</span><br></pre></td></tr></table></figure>
+
+<p>檢查 <code>train.txt, valid.txt</code> 是否有成功被收錄</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">%cat /drive/training/train.txt</span><br><span class="line">%cat /drive/testing/valid.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="再來在本地產生兩個檔案，並放入-training-資料夾內"><a href="#再來在本地產生兩個檔案，並放入-training-資料夾內" class="headerlink" title="再來在本地產生兩個檔案，並放入 training 資料夾內"></a>再來在本地產生兩個檔案，並放入 training 資料夾內</h3><h4 id="obj-data"><a href="#obj-data" class="headerlink" title="obj.data"></a><code>obj.data</code></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">classes &#x3D; 9</span><br><span class="line">train &#x3D; &#x2F;drive&#x2F;training&#x2F;train.txt</span><br><span class="line">valid &#x3D; &#x2F;drive&#x2F;testing&#x2F;train.txt</span><br><span class="line">names &#x3D; &#x2F;drive&#x2F;training&#x2F;obj.names</span><br><span class="line">backup &#x3D; &#x2F;drive&#x2F;training</span><br></pre></td></tr></table></figure>
+
+<h4 id="obj-names"><a href="#obj-names" class="headerlink" title="obj.names"></a><code>obj.names</code></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Car</span><br><span class="line">Van</span><br><span class="line">Truck</span><br><span class="line">Pedestrian</span><br><span class="line">Person_sitting</span><br><span class="line">Cyclist</span><br><span class="line">Tram</span><br><span class="line">Misc</span><br><span class="line">DontCare</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="訓練模型"><a href="#訓練模型" class="headerlink" title="訓練模型"></a>訓練模型</h2><p>我們就來訓練模型</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#初次訓練模型</span></span><br><span class="line">%cd ./darknet</span><br><span class="line">!./darknet detector train /drive/training/obj.data \</span><br><span class="line">/drive/darknet/cfg/yolov4-custom.cfg \</span><br><span class="line">/drive/darknet/yolov4.conv<span class="number">.137</span> -dont_show</span><br></pre></td></tr></table></figure>
+
+<h3 id="ERROR：-Can-39-t-open-label-file-This-can-be-normal-only-if-you-use-MSCOCO-drive-training-image-2-001318-txt"><a href="#ERROR：-Can-39-t-open-label-file-This-can-be-normal-only-if-you-use-MSCOCO-drive-training-image-2-001318-txt" class="headerlink" title="ERROR： Can&#39;t open label file. (This can be normal only if you use MSCOCO): /drive/training/image_2/001318.txt"></a>ERROR： <code>Can&#39;t open label file. (This can be normal only if you use MSCOCO): /drive/training/image_2/001318.txt</code></h3><p>表示你的路徑位置並不正確，需要在檢查</p>
+<h3 id="當-colab-因為使用過久而中斷後，再次進行訓練"><a href="#當-colab-因為使用過久而中斷後，再次進行訓練" class="headerlink" title="當 colab 因為使用過久而中斷後，再次進行訓練"></a>當 colab 因為使用過久而中斷後，再次進行訓練</h3><h4 id="記住，如果訓練過久中斷，你必須重新連接-google-drive-並設置捷徑，並且讓雲端硬碟可讓-colab-寫入"><a href="#記住，如果訓練過久中斷，你必須重新連接-google-drive-並設置捷徑，並且讓雲端硬碟可讓-colab-寫入" class="headerlink" title="記住，如果訓練過久中斷，你必須重新連接 google drive 並設置捷徑，並且讓雲端硬碟可讓 colab 寫入"></a>記住，如果訓練過久中斷，你必須重新連接 google drive 並設置捷徑，並且讓雲端硬碟可讓 colab 寫入</h4><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">%cd /drive/</span><br><span class="line"><span class="comment">#%cd </span></span><br><span class="line">%ls</span><br><span class="line">%pwd</span><br><span class="line">!chmod <span class="number">755</span> -R ./ <span class="comment">#讓我的雲端硬碟可被寫入</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="再次進行訓練模型時則使用此語法"><a href="#再次進行訓練模型時則使用此語法" class="headerlink" title="再次進行訓練模型時則使用此語法"></a>再次進行訓練模型時則使用此語法</h4><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#不斷訓練模型</span></span><br><span class="line">%cd ./darknet</span><br><span class="line">!./darknet detector train /drive/training/obj.data \</span><br><span class="line">/drive/darknet/cfg/yolov4-custom.cfg \</span><br><span class="line">/drive/training/yolov4-custom_last.weights -dont_show</span><br></pre></td></tr></table></figure>
+
+<p>訓練完成後，您會看到有一個檔名叫做 <code>yolov4-custom_final.weights</code> 這個就是完整的訓練模型了。之後都靠她來辨識拉！</p>
+<h4 id="到底還要訓練多久？"><a href="#到底還要訓練多久？" class="headerlink" title="到底還要訓練多久？"></a>到底還要訓練多久？</h4><blockquote>
+<p>有看到用紅筆畫底線的數字嗎? 那個是 max_batches 的數字，只要訓練到 max_batches 就會停止了。如果希望可以訓練的快點就將 <code>yolov4-custom.cfg</code> max_batches 修改。<br><img src="https://drive.google.com/u/2/uc?id=1HkszGppT9GFiEo87QLQUozarM9LUkDSG&export=download" alt=""></p>
+</blockquote>
+<h2 id="使用訓練好的模型來辨識圖片"><a href="#使用訓練好的模型來辨識圖片" class="headerlink" title="使用訓練好的模型來辨識圖片"></a>使用訓練好的模型來辨識圖片</h2><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">%cd ../</span><br><span class="line">!./darknet/darknet detector test  /drive/training/obj.data \</span><br><span class="line">/drive/darknet/cfg/yolov4-custom.cfg \</span><br><span class="line">/drive/training/yolov4-custom_final.weights \</span><br><span class="line">-dont_show /drive/testing/image/<span class="number">005510.</span>png \ </span><br><span class="line">-out_filename /drive/testing/image/<span class="number">005510.</span>png \</span><br><span class="line"><span class="comment">#隨意一張照片，沒有要求</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ERROR-如果辨識出來的圖片沒有標籤文字怎麼辦？-如下圖所示"><a href="#ERROR-如果辨識出來的圖片沒有標籤文字怎麼辦？-如下圖所示" class="headerlink" title="ERROR: 如果辨識出來的圖片沒有標籤文字怎麼辦？ 如下圖所示"></a>ERROR: 如果辨識出來的圖片沒有標籤文字怎麼辦？ 如下圖所示</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1tDSugt34QgLLJLkB2EeImr_zXwAo0RYV&export=download" alt=""></p>
+</blockquote>
+<p>很不幸的，你必須自己去修改程式碼。<br>路徑為 darknet &gt; src &gt; image.c:276，必須將他修改到符合你的雲端硬碟檔案路徑位置。<br>也就是說你的 darknet &gt; data &gt; labels 資料夾這邊不更動，理論上是沒有吃到你雲端硬碟的路徑，因此將 darknet 前面改成你的雲端硬碟路徑即可。</p>
+<blockquote>
+<p>示意如下：<br><img src="https://drive.google.com/u/2/uc?id=1CmS8G4giEJNCaGsRgG28uhJ8My-gHni4&export=download" alt=""></p>
+</blockquote>
+<p>當你修改完成後，請記住需要再 <code>!make darknet</code></p>
+<h3 id="QUESTION-我可以讓輸出的圖片到我指定的資料夾嗎"><a href="#QUESTION-我可以讓輸出的圖片到我指定的資料夾嗎" class="headerlink" title="QUESTION: 我可以讓輸出的圖片到我指定的資料夾嗎?"></a>QUESTION: 我可以讓輸出的圖片到我指定的資料夾嗎?</h3><p>當然沒問題，但是很麻煩QQ。 這是我跟林紀瑋學長一起嘗試用出來的。<br>我用圖片來表示那些地方要修改，變數命名很髒就不要笑了XD。</p>
+<p>路徑為 darknet &gt; src &gt; detector.c:1693 開始</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1nJI2vV_gqhGRBkv5japv4KYr6sUecYwT&export=download" alt=""></p>
+</blockquote>
+<h3 id="QUESTION-我想要大量產生透過-yolo-辨識後的圖片，該怎麼辦呢？"><a href="#QUESTION-我想要大量產生透過-yolo-辨識後的圖片，該怎麼辦呢？" class="headerlink" title="QUESTION: 我想要大量產生透過 yolo 辨識後的圖片，該怎麼辦呢？"></a>QUESTION: 我想要大量產生透過 yolo 辨識後的圖片，該怎麼辦呢？</h3><p>我們可以將想要透過 yolo 辨識的圖片放到同一個資料夾中，然後使用 linux 語法來寫迴圈。<br>我之前有使用過 py 來操作，但發現 colab 並沒有辦法使用 os package，因此使用 linux 語法解決。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!for i in &#123;6111..7218&#125;; do .&#x2F;darknet&#x2F;darknet detector test  &#x2F;drive&#x2F;training&#x2F;obj.data \</span><br><span class="line">&#x2F;drive&#x2F;darknet&#x2F;cfg&#x2F;yolov4-custom.cfg \</span><br><span class="line">&#x2F;drive&#x2F;training&#x2F;yolov4-custom_final.weights \</span><br><span class="line">-dont_show &#x2F;drive&#x2F;testing&#x2F;image&#x2F;00$i.png \</span><br><span class="line">-out_filename &#x2F;drive&#x2F;testing&#x2F;image&#x2F;00$i.png \ ;done</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用-yolo-訓練完的模型來對驗證集做驗證，看看效果如何"><a href="#利用-yolo-訓練完的模型來對驗證集做驗證，看看效果如何" class="headerlink" title="利用 yolo 訓練完的模型來對驗證集做驗證，看看效果如何"></a>利用 yolo 訓練完的模型來對驗證集做驗證，看看效果如何</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">%cd .&#x2F;darknet&#x2F;</span><br><span class="line">!.&#x2F;darknet detector map &#x2F;drive&#x2F;training&#x2F;obj.data \</span><br><span class="line"> &#x2F;drive&#x2F;darknet&#x2F;cfg&#x2F;yolov4-custom.cfg \</span><br><span class="line">&#x2F;drive&#x2F;training&#x2F;yolov4-custom_last.weights \</span><br><span class="line">-dont_show &#x2F;drive&#x2F;testing&#x2F;image_2&#x2F;007007.png \</span><br><span class="line">-out_filename &#x2F;drive&#x2F;testing&#x2F;image_2&#x2F;007007.png &gt;&gt; pic_map.log</span><br><span class="line">#將結果存到 pic_map.log</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>結果如下<br>其中 TP 為正確數、FP 為錯誤數<br>average IOU 位置準確率為 68.07%，並不算很完美，但算是尚可的表現。<br>準確率達到 0.88，相當優秀。<br><img src="https://drive.google.com/u/2/uc?id=10XdEVZkhcYmkMKJUXF2EgnxAigkMDr-w&export=download" alt=""></p>
+</blockquote>
+<h2 id="使用訓練好的模型來辨識圖片有哪些物件，並且將驗證集的圖片都進行辨識。"><a href="#使用訓練好的模型來辨識圖片有哪些物件，並且將驗證集的圖片都進行辨識。" class="headerlink" title="使用訓練好的模型來辨識圖片有哪些物件，並且將驗證集的圖片都進行辨識。"></a>使用訓練好的模型來辨識圖片有哪些物件，並且將驗證集的圖片都進行辨識。</h2><p><a href="https://drive.google.com/drive/folders/1da--8WGo8-VYbOdrMIpRp_JUSR2abYi1?usp=sharing" target="_blank" rel="noopener">此資料夾將所有的驗證集圖片都進行辨識</a>，希望可以幫助到大家</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/pjreddie/darknet/issues/1726" target="_blank" rel="noopener">Can’t open label file. (This can be normal only if you use MSCOCO) #1726 by github</a><br><a href="https://stackoverflow.com/questions/51109931/moving-files-in-google-colab" target="_blank" rel="noopener">Moving files in Google Colab by stackoverflow</a><br><a href="https://stackoverflow.com/questions/63321024/bin-bash-darknet-permission-denied" target="_blank" rel="noopener">/bin/bash: ./darknet: Permission denied by stackoverflow</a><br><a href="https://chtseng.wordpress.com/2018/09/01/%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84yolo%E8%BE%A8%E8%AD%98%E6%A8%A1%E5%9E%8B-%E4%BB%A5%E6%9F%91%E6%A9%98%E8%BE%A8%E8%AD%98%E7%82%BA%E4%BE%8B/" target="_blank" rel="noopener">建立自己的YOLO辨識模型 – 以柑橘辨識為例 by CH.Tseng</a><br><a href="https://www.ibm.com/docs/zh-tw/aix/7.1?topic=directories-copying-cp-command" target="_blank" rel="noopener">複製目錄（cp 指令） by IBM</a><br><a href="https://github.com/googlecolab/colabtools/issues/287" target="_blank" rel="noopener">files in colab is not in sync with google drive  by github</a><br><a href="https://makerpro.cc/2020/02/use-google-colab-to-train-yolo/" target="_blank" rel="noopener">【機器學習】利用Google Colab訓練YOLO by MAKERPRO</a><br><a href="https://blog.csdn.net/mieleizhi0522/article/details/79989754" target="_blank" rel="noopener">YOLOv3批量测试图片并保存在自定义文件夹下 by CSDN</a><br><a href="https://stackoverflow.com/questions/63328654/yolo-darknet-how-to-change-the-output-file-directory-of-a-detection-predicti" target="_blank" rel="noopener">YOLO (Darknet): How to change the output file directory of a detection (predictions.jpg)? by stackoverflow</a><br><a href="https://www.huaweicloud.com/articles/511a98ee75d2a414365e182e780f1f1d.html" target="_blank" rel="noopener">darknet评测自己的数据集 recall map计算 by 華為雲</a><br><a href="https://github.com/pjreddie/darknet/issues/903" target="_blank" rel="noopener">How to run YOLO on multiple images and save predictions to a txt file by stackoverflow</a><br><a href="https://github.com/pjreddie/darknet/issues/955" target="_blank" rel="noopener">Cannot load image “data/labels/*.png” by stackoverflow</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>真的是好累壓，上多媒體課程學習到了好多東西。老實講，很喜歡這堂課。這堂課讓我學習到了好多事務。而且也讓我願意一個字一個字慢慢打，來整理我所學習到的事物。</p>
+<p>從原本討厭 yolo、colab 到慢慢可以接受，老實講心境真的變蠻多的XDDDD，果然上手了就有差，還沒突破撞牆期之前的話都不能算數阿XDD。</p>
+<p>總之，希望自己未來也能夠像現在一樣努力，整理著自己學習的回憶。</p>
+<p>願未來一切安好，我努力成功。</p>
+<p>也謝謝組員林紀瑋、郭梓琳一路的陪伴，讓我這個外系生不需要自己一個人扛起全部，不然每次修外系課都很怕遇到雷隊友呢！</p>
+<h2 id="專案報告-ppt"><a href="#專案報告-ppt" class="headerlink" title="專案報告 ppt"></a>專案報告 ppt</h2><p>我將專案報告 ppt 分享給大家，希望大家也能從我的 blog 中學到！<br><a href="https://drive.google.com/file/d/1xkjLWlkDp7rYDvqxvqtebJ14R2pa3tbt/view?usp=sharing" target="_blank" rel="noopener">多媒體技術與應用-期末報告</a></p>
+<h2 id="我的-colab"><a href="#我的-colab" class="headerlink" title="我的 colab"></a>我的 colab</h2><p><a href="https://colab.research.google.com/drive/1Tah0qdum10irIaovUjHpQS0Sjea-x8dX?usp=sharing" target="_blank" rel="noopener">我在這邊共享我的 colab 副本，開放檢視權，讓讀者可以看到一些我可能文字敘述不好的地方</a></p>
+<h2 id="yolov5-in-colab"><a href="#yolov5-in-colab" class="headerlink" title="yolov5 in colab"></a>yolov5 in colab</h2><p>其中在我學習的過程中，班上的好朋友力瑋提醒我說現在 yolov5 比 yolov4 更簡單，讀者們也可以去試試看。<br><a href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb" target="_blank" rel="noopener">YOLOv5 Tutorial - Colaboratory</a></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科資工二多媒體技術與應用 期末心得 - 本學期中學到的內容、希望課程補充的教學內容</title>
+    <url>/2021/07/08/Media_with_Image_recognition/NTUTcs_MediaHwfinalexamT01/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h2 id="本學期中學到的內容"><a href="#本學期中學到的內容" class="headerlink" title="本學期中學到的內容"></a>本學期中學到的內容</h2><p>印象最深的是期中專案的剪刀石頭布，因為主要不是在 colab 上面實作，只透過自己的電腦並且 Hog、SIFT是一種演算法，因此可以清楚描繪出這些演算法是如何實現的，讓我在做的印象特別深刻。<br>我寫的 blog</p>
+<p>YOLOv4、LSTM 等需要使用 colab 與深度學習，我認為我比較傾向是會在 colab 上面學會這些應用，但並沒有深刻了解 YOLOv4、LSTM 這些深度學習，深度學習比起演算法更難理解加上我其實沒有去實際體驗一次深度學習的計算，因此會有種自己像是在根據操作手冊在執行步驟的感覺，有點可惜。</p>
+<h2 id="希望課程補充的教學內容"><a href="#希望課程補充的教學內容" class="headerlink" title="希望課程補充的教學內容"></a>希望課程補充的教學內容</h2><p>主要希望課程可以補充深度學習的實踐，可以給我們幾次的專案實作了解深度學習的原理，在告訴我們如何使用 YOLOv4，並移除部分軌跡預測，我認為軌跡預測是很好的學習主題，但是我希望可以將時間主要用於深度學習、圖像辨識，圖像預測對我而言有點過早XDDD。</p>
+<p>如果沒有疫情，我是希望老師可以給我們主題類似於期中專案，讓我們根據手邊，從材料開始一一逐步去建立、實作！但是這樣會花費太多時間，因此說步定不是一個好想法。<br>畢竟 labelImg 如果要我們自己標籤，會標到哭吧QQ。</p>
+<p>以上，謝謝老師與助教。</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>北科大多媒體技術與應用筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10954 - Add All(水題)</title>
+    <url>/2021/07/14/UVa/UVa10954/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>給你一個數列，請善用 <code>a+b=c, cost += c</code> ，其中 a 與 b 是數列裡面的數字，並將 c 再放入數列<br>請求出最小的 cost </p>
+<p><a href="https://onlinejudge.org/external/109/10954.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>priority_queue 的應用<br><a href="https://theriseofdavid.github.io/2021/05/31/Explain_Algorithm/heap_sort/" target="_blank" rel="noopener">priority_queue 是 heap sort 的應用，理論就是不斷拿出 heap tree 的 root，需要看 heap sort 請看大衞的筆記</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>我們可以知道不斷拿數列中兩個最小的數字相加會使得 cost 最小<br>如果你覺得不可信，可以看看題目舉例</li>
+<li>因此我們使用 priority_queue 每次取出兩個最小的相加即可。</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>水題，給我自信XD。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, num;</span><br><span class="line"><span class="comment">//注意，這是最小遞增 priority_queue 的寫法</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt; &gt; q; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &amp;&amp; n)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!q.empty()) q.pop(); <span class="comment">//clear, priority_queue 沒有 clear 的 method  </span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;  <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; num;</span><br><span class="line">            q.push(num);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>, a, b;</span><br><span class="line">        <span class="keyword">while</span>(q.size() != <span class="number">1</span>)&#123; <span class="comment">//只要數列中還有兩個以上的數字可以累加</span></span><br><span class="line">            a = q.top(); q.pop();</span><br><span class="line">            b = q.top(); q.pop();</span><br><span class="line">            q.push(a+b);</span><br><span class="line">            ans += a+b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11264 - Coin Collector(設計解題、貪心)</title>
+    <url>/2021/07/08/UVa/UVa11264/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有位愛好蒐集銅板的人想要透過銀行換錢的方式蒐集各式各樣的錢幣。但礙於銀行永遠都只會先給面額較大的錢幣，因此想請問你他最多可以蒐集多少錢幣。</p>
+<p>假如有 1,5,10 這三種錢幣，如果我現在有 31 元，那我就會收到 2 個 10 元硬幣、1 個 1 元硬幣。</p>
+<p>假如他身上有任意的錢，請告訴她，透過銀行匯款的方式他能夠收集到幾種貨幣。</p>
+<p><a href="https://onlinejudge.org/external/112/11264.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解到能夠不斷給相同貨幣</li>
+<li>了解絕對沒有辦法蒐集到全部的貨幣</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>我們來觀察題目，以 1,3,6,8 為例<ul>
+<li>我有 5 元時可以拿到 3,1,1 =&gt; 比 5 小的硬幣都有順利拿到</li>
+<li>我有 10 元時可以拿到 8,1,1 =&gt; 並沒有辦法順利地拿到 1,6,10 </li>
+<li>我有 12 元時可以拿到 8,3,1 =&gt; 無法拿到 6 硬幣</li>
+</ul>
+</li>
+<li>觀察 A<ul>
+<li>如果我想要拿到 6,8 這兩種硬幣，則 14 元可以做到</li>
+<li>如果我想拿到 1,6,7 這三種硬幣，則不可能做到。<ul>
+<li>\(1+6+7=14\)，\(14 = 7+7 )</li>
+<li>如果 \(1+6 &lt;= 7)，那麼 1,6 硬幣沒有辦法同時出現，因為會被 7 取代</li>
+<li>如果 \(A+B &lt;= C)，那麼 A,B 硬幣沒有辦法同時出現，因為會被 C 取代</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>觀察 B，另一種可能性，以 1,3,6,8 為例<ul>
+<li>我有 18 元時可以拿到 8,8,1,1 =&gt; 3,6 沒辦法拿到</li>
+<li>我有 10 元時可以拿到 8,1,1 =&gt; 3,6 沒辦法拿到</li>
+<li>這是因為 \(3+6 &gt;= 8\)，因此沒有機會讓 3,6 同時被拿到。</li>
+<li>我們不可能讓 3,6 同時都存在，但我們可以讓 1,3 or 1,6 存在，這裡我們則是去除最大的硬幣。</li>
+</ul>
+</li>
+<li>結論<ul>
+<li>小面額銅板的錢幣總和比當前硬幣小，則當前硬幣也可以變成一種組合(觀察A)</li>
+<li>小面額銅板的錢幣總和比當前硬幣大，換掉最大的小面額銅板，並加入現在的當前硬幣(觀察B)</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11264" target="_blank" rel="noopener">Uva11264 - Coin Collector by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>一個好題，複習我的英文能力，不然我的英文能力真的亂糟糟QQ。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 2000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n;</span><br><span class="line"><span class="keyword">int</span> num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">        <span class="comment">//sort(num, num+n); //題目本身就有排序</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; </span><br><span class="line">            <span class="keyword">if</span>(num[i] &gt; sum)&#123; <span class="comment">//觀察 A</span></span><br><span class="line">                ans++;</span><br><span class="line">                sum += num[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> sum = sum - num[i<span class="number">-1</span>] + num[i]; <span class="comment">//觀察 B</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11583 - Alien DNA(設計解題、位元運算)</title>
+    <url>/2021/07/11/UVa/UVa11583/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>我們發現外星人的 DNA 片段了！但我們必須要將這些 DNA 的片段組裝成一組 DNA。(注意：一組 DNA 是我定義的名詞)<br>而組裝的方式則是只要 DNA 片段中有一個小寫字母與另一個 DNA 片段小寫字母組在一起即可。<br>P.S. 如果想要讓一組 DNA 有三個或以上的片段組成時，則新進來的 DNA 必須都跟其他 DNA 片斷有一個以上的小寫字母連接。</p>
+<p>其中一組 DNA 是連續的，因此不可以拿第一個片段 DNA 與第三個片段 DNA 組成一個新的 DNA。<br>而題目要求則是，我們最少需要<strong>切幾次</strong>可以讓裡面的片段 DNA 們都是一組 DNA。 </p>
+<p><a href="https://onlinejudge.org/external/115/11583.pdf" target="_blank" rel="noopener">UVa 11583 Alien DNA</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>英文閱讀<ul>
+<li>對很重要 <code>least one common base.</code> 我看不出來他是指說組裝的方式則是只要 DNA 片段中有一個小寫字母與另一個 DNA 片段小寫字母組在一起即可。</li>
+<li>然後我也看不出來<strong>一組 DNA 是連續的</strong>，這個題目要求…</li>
+</ul>
+</li>
+<li>程式編寫<br>有效率、簡潔的程式碼</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這個問題如果有理解英文後就很好解。</p>
+<ul>
+<li>我們用 int 的 2 進位位數來表示每個字母是否在這組 DNA 中<ul>
+<li>這組 DNA 預設情況 <code>000...0</code></li>
+<li>這組 DNA 有了 Z 之後  <code>100...0</code></li>
+</ul>
+</li>
+<li>上面這種方式透過數字表達的 DNA 我稱為數字 DNA</li>
+<li>之後我們讓片段 DNA 先產生出數字 DNA </li>
+<li>判斷片段數字 DNA 是否跟現在這組數字 DNA 有共同的地方，如果有就讓 <code>(片段數字 DNA &amp; 這組數字 DNA</code><ul>
+<li>如果沒有就讓當前這組 DNA 升級成一組 DNA</li>
+</ul>
+</li>
+<li>輸出共有幾組 DNA</li>
+</ul>
+<p>因為題目有說明片段 DNA 只能夠跟左右片段連接，因此如果是不同種的組裝方式，組合數量也不會不一樣。<br>一組內的片段 DNA 都必須有一個數字相同，所以往往切斷點就是無法組合的片段 DNA</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://yuihuang.com/zj-d272/" target="_blank" rel="noopener">【題解】ZeroJudge d272: 11583 – Alien DNA by YUI HUANG 演算法學習筆記</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題的英文不知道是不是我邏輯差，我怎麼一直看不懂RRRRR。</p>
+<p>知道了邏輯後，稍微學習了優秀大神的程式碼編寫方法，太棒了太棒了。又被教到了一課<br>用二進位來編寫真的很不賴。</p>
+<p>不愧是竹女阿太秀了</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n ;</span><br><span class="line"><span class="keyword">int</span> segment, dna;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        segment = (<span class="number">1</span> &lt;&lt; <span class="number">27</span>) - <span class="number">1</span>; <span class="comment">//產生出一組 A~Z 都是 1 的數字 DNA，才一定能跟第一組做組合 </span></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">            dna = <span class="number">0</span>; <span class="comment">//片段數字 DNA</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.size(); j++)&#123;</span><br><span class="line">                dna |= (<span class="number">1</span> &lt;&lt; (s[j] - <span class="string">'a'</span>));</span><br><span class="line">                <span class="comment">//數字 DNA 表達方式 0 表示沒有 1 表示有</span></span><br><span class="line">                <span class="comment">//a 是 個位數、b 是十位數... 以此類推</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//如果可以成為一組，那就一組八!</span></span><br><span class="line">            <span class="comment">//注意必須用 and，因為要每個片段 DNA 都有一個小寫字母相同</span></span><br><span class="line">            <span class="keyword">if</span>(dna &amp; segment ) segment &amp;= dna; </span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                segment = dna; <span class="comment">//與前面的一組 DNA 不同，這個片段 DNA 升級成一組 DNA </span></span><br><span class="line">                ans++; <span class="comment">//找到切斷點了! </span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11890 - Calculus Simplified(貪心)</title>
+    <url>/2021/07/11/UVa/UVa11890/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>給你一個只有加減的多元方程式與一些數字，EX: \(-(-(x-x))\)，\(x = 2,3\)，請將這些 x 帶入方程式內，並找出一種方程式帶入 x 後可以輸出最大的數字。<br>每一個 x 只能夠使用一次</p>
+<p><a href="https://onlinejudge.org/external/118/11890.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>英文閱讀(對，這個對我來說太麻煩了….)</li>
+<li>將方程式做拆解</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>我們需要解決的問題是將方程式做拆解，然後讓所有帶有負號的 \(x\) 放入最小的數字，讓正 \(x\) 都帶入最大的數字。</li>
+<li>當運算遇到負號時，x 會改變其正負。</li>
+<li>因此我們需要做到<ul>
+<li>紀錄每一個 x 的正負</li>
+<li>並透過 <code>pair&lt;int,int&gt;</code> 保存正 x 有幾個、負 x 有幾個</li>
+<li>正 x 帶入最大的數字、負 x 帶入最小的數字</li>
+</ul>
+</li>
+<li>現在我們來講講如何實現八<ul>
+<li>由於我們要解決括號的問題，因此我們可以用一個 stack 來儲存到現在為止我們經過幾個正、負</li>
+<li>並且用一個 <code>post</code> 標記，來表示這組括號內都是正 or 負</li>
+<li>當碰到右括號時，看看 <code>stack.top()</code> <ul>
+<li>如果是負號，就需要把 <code>post</code> 相反，因為我們已經離開現在這組帶有負項的括號，所以要變號</li>
+<li>正數則不用改變。</li>
+<li><code>stack.pop()</code> </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11890" target="_blank" rel="noopener">Uva11890 -Calculus Simplified by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有點被考倒了QQ。原本是很貪心的只想要紀錄現在經過了幾個 +,-，然後直接做成一個 <code>pair</code>，完全忘記括號的問題了…orz。</p>
+<p>然後想到這個問題後，花了 5min 還想不出來要怎麼解決括號。<br>題外話：我原本還想用前序、後序去解，不過後來發現有更好的寫法，只要用 stack 記錄經過的括號，離開這組括號時在 pop 這組括號的符號即可。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, num[MAXN];</span><br><span class="line"><span class="built_in">string</span> formula; <span class="comment">//題目方程式</span></span><br><span class="line"></span><br><span class="line">pair&lt;int,int&gt; process()&#123;</span><br><span class="line">    pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; x; <span class="comment">//first 表示正的 x 有幾個、second 負 x 有幾個</span></span><br><span class="line">    <span class="keyword">bool</span> post = <span class="literal">true</span>; <span class="comment">//展開方程式後，當前這組括號是正還是負 post true plus, false subtract</span></span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">bool</span>&gt; status; <span class="comment">//儲存經過的每組括號正負</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; formula.length(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(formula[i] == <span class="string">'x'</span>)&#123; </span><br><span class="line">            <span class="keyword">bool</span> op = post; <span class="comment">//這一個 x 是正或是負 operator true plus, false subtract</span></span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; formula[i<span class="number">-1</span>] == <span class="string">'-'</span>) op = !op; <span class="comment">//如果這項 x 是負，那就需要變號</span></span><br><span class="line">            <span class="keyword">if</span>(op) x.first++; </span><br><span class="line">            <span class="keyword">else</span> x.second++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(formula[i] == <span class="string">'('</span>)&#123; <span class="comment">//經過這組括號</span></span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; formula[i<span class="number">-1</span>] == <span class="string">'-'</span>)&#123; <span class="comment">//這組括號是負號</span></span><br><span class="line">                post = !post;</span><br><span class="line">                status.push(<span class="literal">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> status.push(<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(formula[i] == <span class="string">')'</span>)&#123; <span class="comment">//離開這組括號</span></span><br><span class="line">            <span class="keyword">if</span>(status.top() == <span class="literal">false</span>) post = !post; <span class="comment">//如果這組括號是負號，那我們再把它變回來</span></span><br><span class="line">            status.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; formula &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">        sort(num, num+n);</span><br><span class="line">        pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; x = process();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x.second; i++) ans -= num[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x.first; i++) ans += num[n-i<span class="number">-1</span>];</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12321 - Gas Stations(設計解題、貪心)</title>
+    <url>/2021/07/08/UVa/UVa12321/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>在一條主要幹道上，有許多加油站，其中每一個加油站都會影響主要幹道上的某個區段，用 \([x+r, x-r])\) 表示，x 是道路位置、r 是影像長度，其中幹道上的每一個點都有被加油站區斷給覆蓋到，現在加油站公司想要把一些加油站刪除，前提是幹道上的每一個點都還是必須有一個加油站覆蓋到。<br>請問總共可以刪掉幾個加油站？<br>如果不行，輸出 -1</p>
+<p><a href="https://onlinejudge.org/external/123/12321.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>英文閱讀</li>
+<li>整個程式碼的架構</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>其實這個問題並不難，但要花點心思處理。</p>
+<ul>
+<li>我們主要是要讓整個幹道的每個點被覆蓋到<ul>
+<li>因此我們需要先讓所有的加油站影響區段都記錄下來，我們用 pair 紀錄</li>
+<li>排序 pair </li>
+</ul>
+</li>
+<li>預設沒有任何幹道被覆蓋到，預設為 0</li>
+<li>用 for 找到一個加油站區段的左邊界 &lt; 0<ul>
+<li>因為我們不確定，現在這個加油站是不是最好的選擇，因此我們先準備一個暫存變數 temp</li>
+<li>temp = 右邊界</li>
+<li>接續 for 循環，如果有一個加油站區段也符合左邊界 &lt; 0，就檢查 temp 是否大於此加油站區段右邊界。</li>
+<li>如果有大於，那就讓 temp 改變成此加油站右邊界。</li>
+<li>找到一個必要的加油站。</li>
+</ul>
+</li>
+<li>讓 temp 變成加油站覆蓋幹道的左邊界，並且不斷執行 for 循環。(注意: 這裡的 for 與上一點 for 相同，且 i 是接續上一個點)</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva12321" target="_blank" rel="noopener">Uva12321 -Gas Stations by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實這題沒有很難，就是他有一些小步驟要處理。<br>但是我沒有過這個灣，不太會反向思考嗎QQQQ 好難過，被電了一手，嗚嗚。</p>
+<p>下次要學會反向思考，不要你不做的意思其實是要你做！　但我的腦袋總是編譯不成功這個意思嘛QQ</p>
+<p>謝謝力瑋的 code 拉。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> G, L, x, r;</span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt; gas;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; L &gt;&gt; G, L &gt; <span class="number">0</span> &amp;&amp; G &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        gas.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G; i++)&#123; <span class="comment">//輸入加油站區段位置</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; r;</span><br><span class="line">            gas.push_back(&#123;x-r, x+r&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(gas.begin(), gas.end()); <span class="comment">//排序</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//coverage 當前覆蓋位置</span></span><br><span class="line">        <span class="comment">//temp_coverage 為分析中的 temp 含意</span></span><br><span class="line">        <span class="comment">//eliminated 可以消除的加油站</span></span><br><span class="line">        <span class="keyword">int</span> coverage = <span class="number">0</span>, temp_coverage = <span class="number">0</span>, eliminated = G, i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(L &gt; coverage)&#123; <span class="comment">//如果當前覆蓋位置還沒有把幹道每個點都覆蓋</span></span><br><span class="line">            temp_coverage = coverage; <span class="comment">//先將 temp 設定為當前覆蓋位置的右邊界</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//for exit condition: 加油站的右邊界必須小於等於當前覆蓋區端</span></span><br><span class="line">            <span class="keyword">for</span>(; i &lt; G &amp;&amp; gas[i].first &lt;= coverage; i++)&#123; </span><br><span class="line">                <span class="comment">//有辦法比 temp 還長，那就讓 temp 延長到 gas[i].second</span></span><br><span class="line">                <span class="keyword">if</span>(gas[i].second &gt; temp_coverage) temp_coverage = gas[i].second;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(coverage == temp_coverage) <span class="keyword">break</span>; <span class="comment">//如果沒變，表示無法繼續延長區段就跳出</span></span><br><span class="line">            coverage = temp_coverage; <span class="comment">// 延伸當前區段到 temp_coverage</span></span><br><span class="line">            eliminated--; <span class="comment">//必要的加油站多一個 = 能消除的加油站 -1</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(coverage &lt; L) <span class="built_in">cout</span> &lt;&lt; <span class="string">"-1\n"</span>; <span class="comment">//如果沒辦法完整覆蓋幹道輸出 -1</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; eliminated &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//輸出答案</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12834 - Extreme Terror(水題)</title>
+    <url>/2021/07/07/UVa/UVa12834/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Shamsu 有幾個商業地點，這些地點分別都會帶來收益，但這些商業地點都有房租。<br>房東們全都是同一人，房東讓你選 k 個地點(不一定要選到 k，可以小於 k)不需要收租、也不能帶來利益。</p>
+<p>我們想請你幫幫忙，幫助 Shamsu 獲得最大的利益。<br>其中利益計算方法為：\(收益 - 房租\)。</p>
+<p><a href="https://onlinejudge.org/external/128/12834.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>水題，英文太長，不好閱讀八XD</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>這題其實不難，就是先計算每一個商業地點的利益</li>
+<li>之後 sort</li>
+<li>選擇 k <ul>
+<li>將利益最小的(負數)，都刪掉，直到放棄的地點數量 = k </li>
+<li>利益如果為正，全部保留。<br>因為利益只要為正，即是在小都會讓 Shamsu 獲得更多利益</li>
+</ul>
+</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題沒有很難，就是普通的水題。考我英文測驗XD</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva12834" target="_blank" rel="noopener">Uva12834 - Extreme Terror by txya900619</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, k, kase = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> profit[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入成本</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; profit[i];</span><br><span class="line">            profit[i] *= <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> y;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入獲利，並計算利益</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; y;</span><br><span class="line">            profit[i] += y;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(profit, profit+n); <span class="comment">//排序，由小排到大</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; </span><br><span class="line">            <span class="keyword">if</span>(k &amp;&amp; profit[i] &lt; <span class="number">0</span>)&#123; <span class="comment">//獲利為負，並且還有額度可以放棄</span></span><br><span class="line">                k--;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ans += profit[i]; <span class="comment">//計算在總獲利中</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//輸出答案</span></span><br><span class="line">        <span class="keyword">if</span>(ans &gt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": No Profit"</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>水題</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa13054 - Hippo Circus(設計解題、貪心)</title>
+    <url>/2021/07/08/UVa/UVa13054/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一組馬戲團要表演，其中要表演河馬走鋼索，他們可以選擇一隻河馬走鋼索，會使用 \(T_a\) 秒、兩隻河馬<strong>疊在一起</strong>一起走鋼索，會使用 \(T_b\) 秒，但由於馬戲團的每一個部門都必須表演，且不能讓時間太長，因此請幫助河馬使用最少的秒數完成表演。</p>
+<p>其中每隻河馬都有不同的高度，如果選擇兩隻河馬<strong>疊在一起</strong>一起走鋼索那他們相加起來的高度不可以大於出場門的高度，否則會撞到門。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>直接了當地解決問題</li>
+<li>使用貪心解決問題<ul>
+<li>\(T_a * 2 &lt; T_b \)</li>
+<li>如何讓兩隻河馬疊起來卻不超過門的高度呢？</li>
+</ul>
+</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>如果\(T_a * 2 &lt; T_b \)，那我就讓每隻河馬都自己走自己的就好。</li>
+<li>如何讓兩隻河馬疊起來卻不超過門的高度呢？<ul>
+<li>先進行排序</li>
+<li>讓最大河馬高度與最小河馬高度相加，如果有大於門的高度，就讓最大的河馬自己走</li>
+<li>如果<strong>沒有</strong>大於門的高度，就讓最大的河馬與最小河馬高度一起走</li>
+<li>我們用左、右邊界來實現這部分。</li>
+</ul>
+</li>
+<li>如此一來我們就可以順利讓所有的河馬都可以達到完美匹配，讓疊在一起的河馬高度不會大於門。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva13054" target="_blank" rel="noopener">Uva13054 - Hippo Circus by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>一開始我想的太複雜，後來發現我應該這樣思考就好。 也是看完力瑋的文章後才有更好的啟發，可以把它寫得更乾淨。<br>謝謝力瑋啦。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> c, n, h, ta, tb, kase=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; c;</span><br><span class="line">    <span class="keyword">while</span>(c--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; h &gt;&gt; ta &gt;&gt; tb;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">        sort(num, num+n); <span class="comment">//蒐集每個河馬高度，然後排序</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> L=<span class="number">0</span>, R=n<span class="number">-1</span>, ans=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(R &gt; L)&#123; <span class="comment">//左右指針去查詢</span></span><br><span class="line">            <span class="comment">//如果 ta*2 比 tb 大才值得兩個河馬疊起來</span></span><br><span class="line">            <span class="comment">//河馬 R + 河馬 L 高度要比 h 小</span></span><br><span class="line">            <span class="keyword">if</span>(ta * <span class="number">2</span> &gt; tb &amp;&amp; num[R] + num[L] &lt; h)&#123; </span><br><span class="line">                R--; <span class="comment">//左右邊界各縮減一，表示都被使用過</span></span><br><span class="line">                L++;</span><br><span class="line">                ans += tb;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                R--; <span class="comment">//讓最大的自己走。</span></span><br><span class="line">                ans += ta;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//防止中間那隻河馬沒有人跟他配，所以要確認。</span></span><br><span class="line">        <span class="comment">//也不可以寫 while(R &gt;= L) 這樣中間那隻河馬跟他自己疊起來 &lt; h 時不合理。</span></span><br><span class="line">        <span class="keyword">if</span>(R == L) ans += ta; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa13177 - Orchestral scores(Binary Search 二分搜尋)</title>
+    <url>/2021/07/11/UVa/UVa13177/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>一個古典樂團要進行演奏，通常古典樂團是許多樂器、許多人一起搭配而成，例如：演奏小提琴有 8 個人、中提琴有 4 個、大提琴有 2 個，由於每次演奏的曲譜都不一樣，要帶著走很不方便。<br>如果每個樂手都有一份譜，古典樂一份樂譜至少要 100 張紙以上，這很不環保、浪費成本，因此我們希望可以讓<strong>同個樂器的人可以共同看一份樂譜</strong>，但是如果讓一群人只看一張樂譜會讓聽眾視覺觀感不好，因此指揮會讓<strong>同個樂器的人拿到很多份樂譜</strong>，來降低讓觀眾視覺觀感不好。</p>
+<p>因此我們希望給你 p 張譜，n 種樂器、其中每種樂器都有很多人，請告訴我們在以讓最少人一起看樂譜的前提下，最多會有幾個人一起合看一張樂譜。<br>題目不會有 <code>樂譜 &lt; 樂器種類</code> 的情況 </p>
+<p>舉例：演奏小提琴有 8 個人、兩張樂譜，那麼小提琴 4 個人一起看一張樂譜。<br><a href="https://onlinejudge.org/external/131/13177.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>這邊可以用兩種做法，其中 Binary Search 最好實現<ul>
+<li>priority_queue<br><a href="https://theriseofdavid.github.io/2021/05/31/Explain_Algorithm/heap_sort/" target="_blank" rel="noopener">priority_queue 是 heap sort 的應用，理論就是不斷拿出 heap tree 的 root，需要看 heap sort 請看大衞的筆記</a></li>
+<li><a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">Binary Search</a><br>注意，這裡的二分搜尋的區間是 <code>[L,R]</code>，而學習連結是 <code>[L,R)</code></li>
+</ul>
+</li>
+<li>Udebug 的第二個測資有誤…。(在我寫這篇文章時他是第二個)</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>通常大家第一個會先想到 priority_queue，但我們要考慮一種情況。<ul>
+<li>舉例：p = 5, n = 3, 9,1,1<ul>
+<li>如果用最簡單的做法，大到小 priority_queue 然後不斷除二，會遇到小數點的問題。<ul>
+<li><code>9/2= 4.5</code>，這時候就變成我們要 + 1，<code>push(5)</code></li>
+<li>但正確答案其實是 3。</li>
+</ul>
+</li>
+<li>也就是說，如果用 priority_queue 實作，我們必須用一個 struct 實作，參數有。<ul>
+<li>樂手數量</li>
+<li>幾個樂譜</li>
+<li>幾個人看一張樂譜</li>
+</ul>
+</li>
+<li>但這樣比較麻煩，因為你必須寫 struct compare。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二分搜尋，這個大家比較不會想到，原因是因為不直觀。<ul>
+<li>想想，其實我們是要找出一種狀況是最多會有幾個人一起合看一張樂譜。</li>
+<li>題目詢問我們的是<strong>x 個人一起合看一張樂譜</strong></li>
+<li>我們把題目想深一點，可以想成<strong>這個樂團最多 x 個人看一張樂譜，樂譜總數量有沒有超過 p</strong></li>
+<li>這時候就可以轉化成二分搜尋，降低複雜度。我們只要找到最低的 x 就可以了！此時就不會被 p 影響，複雜度就可以降至 \(O(n \log n\)</li>
+<li>作法<ul>
+<li>左邊界設為 1 個人看一張、右邊界設為樂器中最多人的一團看一張。</li>
+<li>如果再 x 個人的情況下需要 y 張樂譜<ul>
+<li>y 比 p 小，可以讓更多人看因此把 R 邊界降低，讓 (L+R)/2 變小，讓更少人看一張</li>
+<li>y 比 p 大，把 L 邊界提高，讓更少人看一張</li>
+</ul>
+</li>
+<li>不斷二分搜尋，找出一種最佳答案。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva13177" target="_blank" rel="noopener">Uva13177 - Orchestral scores by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>其實我原本是要用 priority_queue 的寫法的，只是在我想好做法後，先翻了翻解答XD。<br>不然假如自己程式碼寫錯還要重改很嘔嘛，又不是比賽，深思熟慮完成後對答案來改進也不差。</p>
+<p>畢竟紙上談兵都錯了的話，那做下去也不會對。</p>
+<p>看了後發現這題還可以用另一種方式去詮釋，覺得很棒。就寫這種做法了。</p>
+<p><a href="https://isaaclo97.github.io/problems/UVA/13177.html" target="_blank" rel="noopener">後來有在網路上看到有人用 priority_queue 這種作法，點此連結</a></p>
+<p>總之，這次讓我看到了一種做法是並不是以題目給的答案為主要思考方向，而是在往上推一層，找出一個可以決定題目答案的變數，並推敲此變數已獲得答案。<br>這想法很不賴阿，100分。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> p, n;</span><br><span class="line"><span class="keyword">int</span> num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; p &gt;&gt; n)&#123;</span><br><span class="line">        <span class="comment">//注意：這裡我們的 m 就是分析中的 x，是要看最多 x 人拿一張樂譜的情況下，每個樂器部門需要幾張</span></span><br><span class="line">        <span class="comment">//左邊界設定一個人一張</span></span><br><span class="line">        <span class="keyword">int</span> L=<span class="number">1</span>, R=<span class="number">0</span>; <span class="comment">// L </span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line">            <span class="comment">//L = min(num[i], L);</span></span><br><span class="line">            R = max(num[i], R); <span class="comment">//右邊界設定以最大團的樂器部門人數數量，以此做標準拿一張</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(L &lt;= R)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (L+R) / <span class="number">2</span>, required = <span class="number">0</span>; <span class="comment">//required 總共需要幾張樂譜</span></span><br><span class="line">            <span class="comment">//計算每張樂譜需要的數量</span></span><br><span class="line">            <span class="comment">//因為每個樂團至少要一張，因此先將 mid，以避免計算出來的數字為 0</span></span><br><span class="line">            <span class="comment">//EX: 2 / 10 = 0，但理論上要是 1</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) required += (num[i] + mid - <span class="number">1</span>) / mid;</span><br><span class="line">            <span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"L R required "</span> &lt;&lt; L &lt;&lt; <span class="string">' '</span> &lt;&lt; R &lt;&lt; <span class="string">' '</span> &lt;&lt; required &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">            <span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// DEBUG</span></span></span><br><span class="line">            <span class="keyword">if</span>(required &lt;= p)&#123; <span class="comment">//如果 required 小於等於 p，表示還可以讓更少人拿一張</span></span><br><span class="line">                ans = mid; <span class="comment">//以最多 mid 人為一個單位，剛好符合答案</span></span><br><span class="line">                R = mid<span class="number">-1</span>; <span class="comment">//由於我們的邊界是 [L,R]，因此 R-1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> L = mid+<span class="number">1</span>; <span class="comment">//由於我們的邊界是 [L,R]，因此 L+1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>設計解題</tag>
+        <tag>程式解題</tag>
+        <tag>Binary Search 二分搜尋</tag>
       </tags>
   </entry>
 </search>
