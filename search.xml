@@ -21109,9 +21109,9 @@
 <li>觀察 A<ul>
 <li>如果我想要拿到 6,8 這兩種硬幣，則 14 元可以做到</li>
 <li>如果我想拿到 1,6,7 這三種硬幣，則不可能做到。<ul>
-<li>\(1+6+7=14\)，\(14 = 7+7 )</li>
-<li>如果 \(1+6 &lt;= 7)，那麼 1,6 硬幣沒有辦法同時出現，因為會被 7 取代</li>
-<li>如果 \(A+B &lt;= C)，那麼 A,B 硬幣沒有辦法同時出現，因為會被 C 取代</li>
+<li>\(1+6+7=14\)，\(14 = 7+7 \)</li>
+<li>如果 \(1+6 &lt;= 7\)，那麼 1,6 硬幣沒有辦法同時出現，因為會被 7 取代</li>
+<li>如果 \(A+B &lt;= C\)，那麼 A,B 硬幣沒有辦法同時出現，因為會被 C 取代</li>
 </ul>
 </li>
 </ul>
@@ -21445,6 +21445,244 @@
         <tag>設計解題</tag>
         <tag>程式解題</tag>
         <tag>Binary Search 二分搜尋</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - 動態規劃 Dynamic programming</title>
+    <url>/2021/07/21/Explain_Algorithm/dynamic_programming/</url>
+    <content><![CDATA[<h2 id="動態規劃-Dynamic-programming-介紹"><a href="#動態規劃-Dynamic-programming-介紹" class="headerlink" title="動態規劃 Dynamic programming 介紹"></a>動態規劃 Dynamic programming 介紹</h2><blockquote>
+<p>動態規劃用在需要狀態轉移的題目上，例如說 \(y = 2x+1\)，那麼在計算出 y 之前就必須要有 x，否則 y 沒有辦法產生一個自然數。</p>
+<p>動態規劃最好的理解方式就是，我們將某些變數的所有可能都列舉出來，並根據我們之前的紀錄，並透過遞迴關係式找出答案。<br>舉例：\(y = 2x+1\)，我們可以將產生出來的 y，再帶入 x，想請問 y 等於 15 有幾種組合可以產生。</p>
+<ul>
+<li>遞迴關係式就是 \(y = 2x+1\)</li>
+<li>我們可以設定一個陣列 <code>dp[x(0~15)] = x 組合的數量</code></li>
+<li>現在我們可以做一個迴圈如下</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(int i &#x3D; 0; i &lt;&#x3D; 15; i++)&#123;</span><br><span class="line">    dp[2*i+1] &#x3D; dp[i] + 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>你跟我說這很像遞迴？對！他就是遞迴的有效率版，浪費記憶體版XD。</li>
+</ul>
+<p>下面我們來聊聊一些常用的 dp 問題</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="01-背包問題-Knapsack-Problem"><a href="#01-背包問題-Knapsack-Problem" class="headerlink" title="01 背包問題 Knapsack Problem"></a>01 背包問題 Knapsack Problem</h2><p>你是一個水果批發商，你的卡車容量最多只能載 G 箱，你有很多種水果，他們在市場的賣出價為 S、買入價為 F、並且我們的預算只有 C，我們的目標是期望所有水果賣出價最高、C 最低。</p>
+<p>並且水果每種只能買一箱，因為我們批發的水果都是高級水果，人人搶著要。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>通常遇到這種問題，就是使用這種解法</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">memset</span>(dp, INF, <span class="keyword">sizeof</span>(dp));</span><br><span class="line"><span class="built_in">memset</span>(dp[<span class="number">0</span>], <span class="number">0</span>, <span class="keyword">sizeof</span>(dp[<span class="number">0</span>])); <span class="comment">//車子是 0 貨箱時，一定沒辦法買水果，因此最低價都是 0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= 每種水果; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= 卡車容量; j++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= 預算; k++)&#123;</span><br><span class="line">            <span class="comment">//主要是我們假設卡車容量有 1~G，</span></span><br><span class="line">            <span class="comment">//總預算有 1~n </span></span><br><span class="line">            <span class="comment">//我們透過紀錄，在卡車容量是 G-1 的情況，卡車現在預算 - 這種水果預算時，</span></span><br><span class="line">            <span class="comment">//有沒有比現在的 dp[卡車容量][預算] 來得小，有就替換</span></span><br><span class="line">            dp[j][k] = min(dp[j][k], dp[j<span class="number">-1</span>][cost - 水果買入價] + 水果賣出價 )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//想要找到最高的預算就是</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; dp[卡車容量][預算];</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11566 - Let’s Yum Cha!(背包問題、動態規劃)</title>
+    <url>/2021/07/20/UVa/UVa11566/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>一群好朋友要去吃港式飲茶，朋友們說好要一起出錢，同時不希望一樣的菜色出現兩次、或是一個人叫兩次以上的點心，看起來很膩，吃不到別的東西。<br>於是朋友們對每一樣菜列出了自己的喜愛程度，然後交由你來負責點菜，你需要滿足他們的<strong>平均最大喜愛程度</strong><br>其中有 N 位朋友、每位朋友的預算為 x，有 K 個點心，入場費用是 T，並加收 10%  服務費(點心價+入場費)，就靠你幫忙算出拉</p>
+<p><a href="https://onlinejudge.org/external/115/11566.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>能看得下那麼長的英文</li>
+<li>使用 0,1 背包問題</li>
+<li>花點巧思解決每盤不能點兩遍以上、一個人叫兩次以上的點心</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>我們理所當然地了解到這是一個背包問題，選擇喜愛程度的點心並降低預算</li>
+<li>\(n+1\)，題目只有說到朋友有 n 個，但自己也會去吃所以是 \(n+1\)</li>
+<li>注意 budget 計算<ul>
+<li>不可以使用 \(n<em>x * 0.1\) 作為服務費<br>原因是因為服務費是根據我們的 x 再加一成，因此公式應該為 \(x + 0.1x\)，與 \(n</em>x * 0.1\) 邏輯不符合。</li>
+<li>公式 \(x + 0.1x = 1.1x, x / 1.1 = 總預算\)<br>我們的點心總費用必須再加上一層服務費，因此 \(1.1x\) 就是我們的總預算。</li>
+</ul>
+</li>
+<li>那我們要處理的背包問題如下<ul>
+<li>我們必須將每位朋友的這種點心的喜愛程度加總，並算出價錢。<br>使用迴圈解決</li>
+<li>每個菜色最多只能有兩盤<br>我們可以讓每個種類的點心都複製一份，也就是說我們可以把每種點心放兩次到展示櫃中，這樣我們就解決 0,1 背包問題只能夠選擇拿或不拿。</li>
+<li>每個人最多只能點兩份<br>我們可以假設背包最多只能放 \(2n\)，就可以解決 0,1 背包中的個數問題。</li>
+<li>如何找到<strong>平均最大喜愛程度</strong><br>我們透過 <code>max(dp[0 ~ 2*N ][總預算])</code> 即可找出答案。 </li>
+</ul>
+</li>
+<li>注意 Udebug 中第二個測資是錯誤的，請不要使用</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11566" target="_blank" rel="noopener">Uva11566 - Let’s Yum Cha! by txya900619</a><br><a href="https://www.pinghenotes.com/UVa-11566-Let-s-Yum-Cha/" target="_blank" rel="noopener">Uva11566 - Let’s Yum Cha! by pinghenotes</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>首先我要先讚嘆各位能夠看完那麼長的英文，太佩服你們了，我自己看到一半就看不太下去了…。幾乎快要是看一點英文、做點別的事，這樣才好不容易把他看完…。</p>
+<p>看來我的英文閱讀耐力是真的爛阿QQ。</p>
+<p>在來就是太久沒有寫背包問題，很多演算法太久沒有用真的會忘記阿QQ，但其實都會有印象，只要看一下公式馬上就能夠想出來原理是甚麼，只是還需要看一下，感覺自己好沒用RRRR，沒辦法靠自己喚醒這個公式，需要答案幫忙QQQ。</p>
+<p>總之希望我可以透過這個公式幫上自己未來的忙拉</p>
+<p>還有就是希望好心人可以幫我解決為甚麼使用我的方式計算 budget，會是 WA QQ。真的很需要拜託了！</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define DEBUG</span></span><br><span class="line"><span class="comment">//#define int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, x, t, k;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">12</span>*<span class="number">2</span>][<span class="number">12</span>*<span class="number">100</span>];</span><br><span class="line"><span class="comment">//點心的展示櫃</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; item; <span class="comment">//price value </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; x &gt;&gt; t &gt;&gt; k &amp;&amp; n)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        item.clear();</span><br><span class="line"></span><br><span class="line">        n++; <span class="comment">//include me 自己也會去吃</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//UVa AC 作法，解決小數點精度問題。</span></span><br><span class="line">        <span class="comment">//其中需要 (float) 1.1 是因為在 double 時小數點較多，容易導致精度不準確，</span></span><br><span class="line">        <span class="comment">//1.1 我們只需要最多一個小數點即可，避免精度不精因此使用 float</span></span><br><span class="line">        <span class="comment">//budget = 總預算 / (服務費 + 總花費) - 茶費</span></span><br><span class="line">        <span class="keyword">int</span> budget = (n * x) / (<span class="keyword">float</span>) <span class="number">1.1</span> - (n * t);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++)&#123; <span class="comment">//計算每一個點心價格與所有朋友的喜愛程度總和</span></span><br><span class="line">            <span class="keyword">int</span> value=<span class="number">0</span>, sum=<span class="number">0</span>, price;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; price;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; value;</span><br><span class="line">                sum += value;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//展示櫃直接放兩個，解決 0,1 背包問題</span></span><br><span class="line">            item.push_back(make_pair(price, sum));</span><br><span class="line">            item.push_back(make_pair(price, sum)); <span class="comment">// 2(n+1)</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; item.size(); i++)&#123; <span class="comment">//展示櫃裡的東西選擇拿或不拿</span></span><br><span class="line">            <span class="keyword">int</span> price = item[i].first;</span><br><span class="line">            <span class="keyword">int</span> value = item[i].second;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = n*<span class="number">2</span>; j &gt; <span class="number">0</span>; j--)&#123; <span class="comment">//最多只能點 n*2點心</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = budget; k &gt;= price; k--)&#123; <span class="comment">//dp 0,1 背包問題</span></span><br><span class="line">                    <span class="comment">//判斷增加這個點心，會不會帶來更大的朋友喜愛程度</span></span><br><span class="line">                    dp[j][k] = max(dp[j][k], dp[j<span class="number">-1</span>][k-price] + value);</span><br><span class="line">                    <span class="comment">//不增加會不會比較好 </span></span><br><span class="line">                    dp[j][k] = max(dp[j][k], dp[j<span class="number">-1</span>][k]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//找出最好的答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n*<span class="number">2</span>; i++) ans = max(ans, dp[i][budget]);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; setprecision(<span class="number">2</span>) &lt;&lt; fixed &lt;&lt; (<span class="keyword">double</span>) ans / n &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>背包問題 Knapsack Problem</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11832 - Account Book(動態規劃 Dynamic programming)</title>
+    <url>/2021/07/19/UVa/UVa11832/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>打擊腐敗基金會要對 Nlogonia 非法組織做審查，但基金會收到帳本後卻發現帳本並沒有表示交易紀錄是收入還是支出，只剩下數字、結餘多少。<br>於是我們希望可以透過程式還原每項明細，他是收入還是支出。</p>
+<p>如果此結餘跟所有明細都對不上就輸出 <code>*</code><br>如果這筆明細確認是收入就輸出 <code>+</code><br>如果這筆明細確認是費用就輸出 <code>-</code><br>如果這筆明細無法確認就輸出 <code>?</code></p>
+<p><a href="https://onlinejudge.org/external/118/11832.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/07/21/Explain_Algorithm/dynamic_programming/" target="_blank" rel="noopener">動態規劃 - 大衛的筆記</a></li>
+<li>紀錄每一種明細組合的資訊</li>
+<li>當明細組合與其他明細組合相同時，要如何合併</li>
+<li>使用動態規劃？還是有辦法貪心嗎？</li>
+<li>有負數的動態規劃要怎麼樣建立陣列？</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>好題一題，讓我學了很多東西XD</p>
+<ul>
+<li>我們可以確定一件事，我們必須追蹤每一個明細在不同組合時的狀態。</li>
+<li>使用貪心？使用動態規劃？<ul>
+<li>貪心<ul>
+<li>\(40!= 8.1591528e+47\)，一看就知道不可能</li>
+<li>遇到結餘有多種組合時不容易處理。</li>
+</ul>
+</li>
+<li>動態規劃<ul>
+<li>透過陣列與二進位表達，來結合多種組合</li>
+<li>無法確認的狀態就是這筆明細設定為支出時，也可以透過與其他明細組合，變成結餘的數字<br>怎麼解決這個問題，我們可以用兩個 DP 陣列(紀錄正、紀錄負)來解決</li>
+<li>看起來動態規劃是比較好的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>動態規劃要處理的問題<ul>
+<li>題目的明細有可能是支出，那假如結餘是負數，我的動態規劃 index 不可以是負數<br>題目有說明細最大值是 1000，最多 40 筆，因此我們可以設定 dp 長度為 \(40 * 1000 * 2 = 80000\)，為了保險起見，建議可以開 100000，並以 index 50000 作為結餘 0 的標準，方便邏輯思考</li>
+<li>因為我們已經開了一個很大的 dp 陣列，如果我們開一個 <code>dp[明細數量][結餘]</code>，會爆炸，那要怎麼辦<br>我們可以了解到，其實我們的 dp 都是根據到<code>dp[上一個明細數量][結餘]</code> 延續的，因為我們<strong>每一個名係數都會使用到，只是決定正或負</strong></li>
+<li>那我要怎麼在 dp 內存放每筆交易的收入或支出呢？<br>透過 2 進位表示，<code>110(2)</code>，表示第二筆第三筆是正的。以此類推</li>
+<li>第三點只有提到交易為收入的表達，那支出呢？<br>沒辦法，開兩個 dp，分別存放收入交易、支出交易</li>
+<li>其他的概念就與 dp 相同，直接看程式碼表達就好。</li>
+</ul>
+</li>
+<li>提醒，在使用 2 進位表達時，必須開 long long，因為 \(n=40\)，會過大。</li>
+<li>一開始必須先將第一筆交易紀錄先額外寫入 dp，不可以讓 <code>dp[上一個明細數量][0] = 1</code>，因為 f 可以是 0。</li>
+<li>動態規劃邏輯關係表達如下<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> L = 累積交易明細都是支出的結餘</span><br><span class="line"><span class="keyword">int</span> R = 累積交易明細都是收入的結餘</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(交易明細)&#123;</span><br><span class="line">    <span class="keyword">for</span>(L~R)&#123; <span class="comment">//加速搜尋，以避免需要 0~100000 大量 for</span></span><br><span class="line">        <span class="keyword">if</span>(收入交易[上一個交易][結餘] || 支出交易[上一個交易][結餘])&#123;</span><br><span class="line">            收入交易[這一個交易][結餘 + 正交易明細] |=  收入交易[上一個交易][結餘] + 正交易明細</span><br><span class="line">            支出交易[這一個交易][結餘 + 正交易明細] |=  收入交易[上一個交易][結餘] </span><br><span class="line">            收入交易[這一個交易][結餘 + 負交易明細] |=  收入交易[上一個交易][結餘] </span><br><span class="line">            支出交易[這一個交易][結餘 + 負交易明細] |=  收入交易[上一個交易][結餘] + 負交易明細</span><br><span class="line"></span><br><span class="line">            <span class="comment">//也就是說當你想看某個結餘時，你必須同時看支出交易、收入交易。</span></span><br><span class="line">            <span class="comment">//支出交易負責 支出明細</span></span><br><span class="line">            <span class="comment">//收入交易負責 收入明細</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//注意必須要是 |=，因為如果剛好另種組合也等於結餘時，必須兩種狀態都保存，所以是 or</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11832" target="_blank" rel="noopener">Uva11832 - Account Book by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題很不賴欸，開導了我很多東西，很多是我自己沒有學過的一些小伎倆，透過這題來讓自己收穫許多。</p>
+<p>並且也了解到有時候並不需要把所有的交易紀錄資訊都放在同個陣列裡，那樣會很難處理。分開來會好很多，只是我不知道當我遇到這種題目時，我有沒有辦法把這些想法都套用在題目上。</p>
+<p>希望我都可以套用在題目上，有機會套用在未來上。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, f, t;</span><br><span class="line"><span class="keyword">int</span> add[<span class="number">2</span>][<span class="number">100000</span>]; <span class="comment">//收入交易</span></span><br><span class="line"><span class="keyword">int</span> subtract[<span class="number">2</span>][<span class="number">100000</span>]; <span class="comment">//支出交易</span></span><br><span class="line"><span class="keyword">int</span> num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; f &amp;&amp; n)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(add, <span class="number">0</span>, <span class="keyword">sizeof</span>(add));</span><br><span class="line">        <span class="built_in">memset</span>(subtract, <span class="number">0</span>, <span class="keyword">sizeof</span>(subtract));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//roll 只會以 0,1 兩種型態存活，當 roll = 0，那 1 就是當前交易，0 為上一筆，反之亦同</span></span><br><span class="line">        <span class="keyword">int</span> L=<span class="number">50000</span>-num[<span class="number">0</span>], R=<span class="number">50000</span>+num[<span class="number">0</span>], roll = <span class="number">0</span>; </span><br><span class="line">        add[<span class="number">0</span>][R] = <span class="number">1</span>; <span class="comment">//分析第五點</span></span><br><span class="line">        subtract[<span class="number">0</span>][L] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123; <span class="comment">//分析第六點</span></span><br><span class="line">            <span class="built_in">memset</span>(add[!roll], <span class="number">0</span>, <span class="keyword">sizeof</span>(add[!roll]));</span><br><span class="line">            <span class="built_in">memset</span>(subtract[!roll], <span class="number">0</span>, <span class="keyword">sizeof</span>(subtract[!roll]));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = L; j &lt;= R; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(add[roll][j] || subtract[roll][j])&#123;</span><br><span class="line">                    <span class="keyword">int</span> add_value = j + num[i];</span><br><span class="line">                    add[!roll][add_value] |= add[roll][j] | (<span class="number">1L</span>L &lt;&lt; i);</span><br><span class="line">                    subtract[!roll][add_value] |= subtract[roll][j];</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">int</span> subtract_value = j - num[i];</span><br><span class="line">                    add[!roll][subtract_value] |= add[roll][j];</span><br><span class="line">                    subtract[!roll][subtract_value] |= subtract[roll][j] | (<span class="number">1L</span>L &lt;&lt; i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            L -= num[i]; <span class="comment">//區間修改，因為最低結餘與最高結餘的上下限改變了</span></span><br><span class="line">            R += num[i];</span><br><span class="line">            roll = !roll; <span class="comment">//roll 修改，上上一筆明細已經被延續，現在是需要當前明細</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//cout &lt;&lt; "roll " &lt;&lt; roll &lt;&lt; '\n';</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = L<span class="number">-50000</span>; i &lt;= R<span class="number">-50000</span>; i++) <span class="built_in">printf</span>(<span class="string">"%3d "</span>, i);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = L; i &lt;= R; i++) <span class="built_in">printf</span>(<span class="string">"%3d "</span>, add[roll][i]);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//debug</span></span></span><br><span class="line"></span><br><span class="line">        f += <span class="number">50000</span>; <span class="comment">//因為我們一開始就加了 50000</span></span><br><span class="line">        <span class="comment">//此結餘跟所有交易中的結餘都沒有任何明細紀錄</span></span><br><span class="line">        <span class="keyword">if</span>(add[roll][f] == <span class="number">0</span> &amp;&amp; subtract[roll][f] == <span class="number">0</span>)&#123; </span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"*"</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> item = <span class="number">1L</span>L &lt;&lt; i; <span class="comment">//2進位筆達</span></span><br><span class="line">            <span class="keyword">if</span>(add[roll][f] &amp; item)&#123; <span class="comment">//收入紀錄</span></span><br><span class="line">                <span class="keyword">if</span>(subtract[roll][f] &amp; item) <span class="built_in">cout</span> &lt;&lt; <span class="string">"?"</span>; <span class="comment">//收入跟支出都有此紀錄</span></span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"+"</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(subtract[roll][f] &amp; item) <span class="built_in">cout</span> &lt;&lt; <span class="string">"-"</span>; <span class="comment">//支出紀錄</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12640 - Largest Sum Game(貪心)</title>
+    <url>/2021/07/19/UVa/UVa12640/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一群人他們在玩 Largest Sum Game，主要就是在一個數列內要找出一個區間的總和最大，並輸出總和最大的數字。</p>
+<p><a href="https://onlinejudge.org/external/126/12640.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/07/21/Explain_Algorithm/dynamic_programming/" target="_blank" rel="noopener">動態規劃 - 大衛的筆記</a></li>
+<li><a href="https://stackoverflow.com/questions/3292107/whats-the-difference-between-istringstream-ostringstream-and-stringstream-w" target="_blank" rel="noopener">stringstream 的使用，請點擊此連結查看教學</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>基本上沒什麼好分析的XD</li>
+<li>主要是我們從數列第一個開始，不斷累加，定義變數為 <code>sum</code><ul>
+<li><code>sum + 數列第 i 值</code>，不斷讓區間變更大</li>
+<li><code>if(sum &lt; 0) sum = 0</code>，由於前面的區塊總和已經是負，因此捨棄前面的區間<br>舉例：當 y,x 都是正數時，\(-y+x\) 不會比 \(x\) 大</li>
+<li><code>if(sum &gt; 0) comtinue</code>，由於前面的區塊總和已經是正，因此保留前面的區間會讓數字總和更大<br>舉例：當 y,x 都是正數時，\(y+x\) 會比 \(x\) 大</li>
+</ul>
+</li>
+<li>再來就是對每個數列時做 <code>ans = max(ans, sum)</code>，找到最大的 ans 就是答案</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva12640" target="_blank" rel="noopener">Uva12640 - Largest Sum Game by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>水題XD，應該大家都會拉。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, temp;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; num;<span class="comment">//debug 用數列</span></span><br><span class="line"><span class="built_in">string</span> q;</span><br><span class="line"><span class="comment">// istringstream insert ostringstream output</span></span><br><span class="line"><span class="comment">//https://stackoverflow.com/questions/3292107/whats-the-difference-between-istringstream-ostringstream-and-stringstream-w</span></span><br><span class="line"><span class="built_in">stringstream</span> ss;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(getline(<span class="built_in">cin</span>, q))&#123;</span><br><span class="line">        ss.clear(); ss.str(<span class="string">""</span>);</span><br><span class="line">        ss &lt;&lt; q; <span class="comment">//將數列字串放入 stringstream</span></span><br><span class="line">        num.clear();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>, max_sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">            ss &gt;&gt; temp;</span><br><span class="line">            <span class="comment">//stringstream.fail() 如果剛剛沒有傳任何資料到變數就是 yes</span></span><br><span class="line">            <span class="keyword">if</span>(ss.fail()) <span class="keyword">break</span>; </span><br><span class="line">            num.push_back(temp); <span class="comment">//debug 用</span></span><br><span class="line"></span><br><span class="line">            sum += temp; <span class="comment">//不斷加入數列 i 值</span></span><br><span class="line">            <span class="keyword">if</span>(sum &lt; <span class="number">0</span>) sum = <span class="number">0</span>; <span class="comment">//捨棄前面區間</span></span><br><span class="line">            max_sum = max(sum, max_sum); <span class="comment">//看看現在區間，與 ans 誰比較大</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; max_sum &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; num.size() &lt;&lt; '\n';</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.size(); i++) <span class="built_in">cout</span> &lt;&lt; num[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// DEBUG</span></span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa13095 - Tobby and Query(貪心、動態規劃)</title>
+    <url>/2021/07/19/UVa/UVa13095/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Tobby and Query 對一些事情很感興趣，Tobby 對一些問題很有興趣<br>題目會給你一組數列，其中數列的數字只會是 0~9，之後會給你一個區間 <code>[l,r]</code>，想問妳這裡面有幾個不重複的數字</p>
+<p><a href="https://onlinejudge.org/external/130/13095.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>使用動態規劃</li>
+<li>題目的數字只有 10 個，是不是可以用些笨拙的方法快速解決這題？</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>應該會有些人像我一樣，第一個想法是使用 set or segment tree 嗎?<ul>
+<li>使用 set 不好，我們只能夠確認區間裡面有那些數字，在大量查詢時沒辦法</li>
+<li>使用 Segment tree 呢？在判斷左子樹、右子樹 <code>[l,r]</code> 有哪些數字時會比較難處理些</li>
+</ul>
+</li>
+<li>動態規劃<ul>
+<li>我們可以發現題目的數列是不需要修改的，也就是我們只要做到區間查詢就好，不需要做到區間修改。    </li>
+<li>此時動態規劃就很適合我們解決此問題，先算出 <code>[0,0~r]</code> 中有哪些數字、有幾個，之後透過<strong>區間相減</strong>的方式來進行區間查詢</li>
+<li>注意：區間查詢不能用在需要<strong>區間修改</strong>的問題</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/morris821028/UVa/blob/master/volume130/13095%20-%20Tobby%20and%20Query.cpp" target="_blank" rel="noopener">Uva11264 - Coin Collector by morris821028</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>嗚嗚，我處理這種問題還是需要再聰明點，雖然一開始就想到區間查詢 =&gt; Segment tree，確定後再試著找一些網路上的詳解，驗證我的答案是不是對的XD。</p>
+<p>看來我想得不夠乾淨，理應可以把題目變得更簡單。<br>能夠盡量把題目變得更簡單，就應該要變得簡單，我還要在訓練這方面的思考。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, q, l, r, idx; <span class="comment">//var index error =&gt; https://blog.csdn.net/cyril_ki/article/details/109668100</span></span><br><span class="line"><span class="keyword">int</span> a[MAXN][<span class="number">12</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; idx;</span><br><span class="line">            a[i][idx]++;</span><br><span class="line">            <span class="comment">//狀態轉移，區間 [0,i-1] =&gt; [0,i]</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) a[i][j] += a[i<span class="number">-1</span>][j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; l &gt;&gt; r;</span><br><span class="line">            <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">                <span class="comment">//如果區間 [0,r] - [0,l) = [l,r] 裡面如果有 0~9 就 ans +1</span></span><br><span class="line">                <span class="keyword">if</span>(a[r][j] - a[l<span class="number">-1</span>][j] &gt; <span class="number">0</span>) ans++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
       </tags>
   </entry>
 </search>
