@@ -6239,7 +6239,7 @@
       </tags>
   </entry>
   <entry>
-    <title>演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn))</title>
+    <title>演算法知識 - Longest Increasing Subsequence 最長遞增子序列(時間複雜度 O(nlogn) 與 時間複雜度 O(n^2))</title>
     <url>/2020/11/13/Explain_Algorithm/LIS/</url>
     <content><![CDATA[<h2 id="Longest-Increasing-Subsequence-介紹"><a href="#Longest-Increasing-Subsequence-介紹" class="headerlink" title="Longest Increasing Subsequence 介紹"></a>Longest Increasing Subsequence 介紹</h2><blockquote>
 <p>以下簡稱 LIS，在一個陣列中找出最長遞增的序列，序列是甚麼？舉例：</p>
@@ -6259,6 +6259,11 @@
 
 <h2 id="Longest-Increasing-Subsequence-原理"><a href="#Longest-Increasing-Subsequence-原理" class="headerlink" title="Longest Increasing Subsequence 原理"></a>Longest Increasing Subsequence 原理</h2><p>二分搜尋 + 陣列 = LIS，這是最好的解釋了XD。</p>
 <p>產生兩個陣列 t , d ， t 用來記錄當前最長序列，d 則用來記錄當前 LIS 有包括此數值的前一個數值位置。</p>
+<p>針對不同的題型，必須使用不同的 LIS</p>
+<ul>
+<li>時間複雜度 \(O(n log n\)，當每個數值權重<strong>相等</strong>時使用</li>
+<li>時間複雜度 \(O(n log n\)，當每個數值權重<strong>不一定相等或相等</strong>都可以使用，但效率不好</li>
+</ul>
 <h3 id="QUESTION-你在解釋甚麼，太爛了吧XD。"><a href="#QUESTION-你在解釋甚麼，太爛了吧XD。" class="headerlink" title="QUESTION: 你在解釋甚麼，太爛了吧XD。"></a>QUESTION: 你在解釋甚麼，太爛了吧XD。</h3><p><del>我也覺得</del>，所以我們用舉例的。</p>
 <p>假設我們要在 10 30 20 40 50 找出 LIS，那透過我們的原理要怎麼做呢？</p>
 <h4 id="Step1-初始化-t-d-並-i-1-放入-10"><a href="#Step1-初始化-t-d-並-i-1-放入-10" class="headerlink" title="Step1: 初始化 t , d 並 i = 1 , 放入 10"></a>Step1: 初始化 t , d 並 i = 1 , 放入 10</h4><p>由於 t 是紀錄最長陣列，且我們一定能夠保證 LIS 最長長度一定有 1，則是因為隨機在數列中拿出一個元素都可以是 LIS 長度為 1 而得證。</p>
@@ -6316,23 +6321,32 @@
 </tbody></table>
 <p>OK，沒錯，LIS 正確無誤。</p>
 <h3 id="OK-現在問題被我們解決成是-Binary-Search-了，那我們就來做吧！"><a href="#OK-現在問題被我們解決成是-Binary-Search-了，那我們就來做吧！" class="headerlink" title="OK, 現在問題被我們解決成是 Binary Search 了，那我們就來做吧！"></a>OK, 現在問題被我們解決成是 Binary Search 了，那我們就來做吧！</h3><p>關於 <a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">Binary Search 的部分就先去看大衞的筆記</a>即可。</p>
-<h2 id="LIS-實作與說明"><a href="#LIS-實作與說明" class="headerlink" title="LIS 實作與說明"></a>LIS 實作與說明</h2><h3 id="版本一-學習版"><a href="#版本一-學習版" class="headerlink" title="版本一 學習版"></a>版本一 學習版</h3><p>在程式碼進行說明，相信會比較好理解些。</p>
+<h2 id="LIS-實作與說明，時間複雜度-O-n-log-n"><a href="#LIS-實作與說明，時間複雜度-O-n-log-n" class="headerlink" title="LIS 實作與說明，時間複雜度 \(O(n log n)\)"></a>LIS 實作與說明，時間複雜度 \(O(n log n)\)</h2><h3 id="版本一-學習版"><a href="#版本一-學習版" class="headerlink" title="版本一 學習版"></a>版本一 學習版</h3><p>在程式碼進行說明，相信會比較好理解些。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> b[N] , t[N] , d[N] , n ; </span><br><span class="line"><span class="comment">// b 是原本的數列</span></span><br><span class="line"><span class="comment">// t 則是當前 LIS 的數列</span></span><br><span class="line"><span class="comment">// d 則是在 LIS 中此數值的前一個數值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123; <span class="comment">//二分搜尋法</span></span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span> , cur ; <span class="comment">//LIS 最小長度為 1，因此 len = 1</span></span><br><span class="line">    <span class="comment">//cur 則是二分搜尋中找到的位置</span></span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ; <span class="comment">//初始化 LIS 需要用到的兩個陣列</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123; <span class="comment">//</span></span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[t[len]] )&#123; <span class="comment">//如果此數值比 LIS 中最長的數值還大時就直接增長</span></span><br><span class="line">            d[i] = t[len] ; <span class="comment">//d[i] 就則是在 LIS 中此數值的前一個數值</span></span><br><span class="line">            t[++len] = i ; <span class="comment">//增長 t 的長度</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span>&#123; <span class="comment">// 表示目前的數值可以替換此 LIS 中某個數值</span></span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);  <span class="comment">// 二分搜尋找出此位置</span></span><br><span class="line">            t[cur] = i ; <span class="comment">//將原本 LIS 的 cur 值替換成 i </span></span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>] ; <span class="comment">// 由於我們將 i 放入 t[cur]，所以我們的 d 就是找 t[cur-1]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ; <span class="comment">//回傳最長 LIS</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="版本二-實踐版"><a href="#版本二-實踐版" class="headerlink" title="版本二 實踐版"></a>版本二 實踐版</h3><p>此版比較好實踐，但並沒有辦法了解深刻意思，建議大家先學習舊版的再看新版的。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 5020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="keyword">int</span> T, n, len = <span class="number">0</span>, cur;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; b; <span class="comment">//用來產生 LIS 長度</span></span><br><span class="line">    b.push_back(a[<span class="number">0</span>]); <span class="comment">//先放入一個數值，以避免 b.back() 找不到值</span></span><br><span class="line">    <span class="keyword">int</span> temp; <span class="comment">//紀錄二分搜尋後找到的位置</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &gt; b.back())&#123; <span class="comment">//如果現在這個數字大於此數列中最大的數字</span></span><br><span class="line">            b.push_back(a[i]); <span class="comment">//LIS push back</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            temp = upper_bound(b.begin(), b.end(), a[i]) - b.begin(); </span><br><span class="line">            <span class="comment">//二分搜尋，找到他適合的位置，前面數字比她小或相等，後面數字大</span></span><br><span class="line">            b.insert(b.begin()+temp , a[i]); <span class="comment">//插入數值在此位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> b.size(); <span class="comment">//輸出最長 LIS 長度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="LCS-應用"><a href="#LCS-應用" class="headerlink" title="LCS 應用"></a>LCS 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
+
+<h3 id="LCS-無註解程式碼"><a href="#LCS-無註解程式碼" class="headerlink" title="LCS 無註解程式碼"></a>LCS 無註解程式碼</h3><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> b[N] , t[N] , d[N] , n ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span> , cur ;</span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[t[len]] )&#123;</span><br><span class="line">            d[i] = t[len] ;</span><br><span class="line">            t[++len] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>] ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LIS-實作與說明，時間複雜度-O-n-2"><a href="#LIS-實作與說明，時間複雜度-O-n-2" class="headerlink" title="LIS 實作與說明，時間複雜度 \(O(n^2)\)"></a>LIS 實作與說明，時間複雜度 \(O(n^2)\)</h2><ul>
+<li>基本上概念類似於選擇排序</li>
+<li>我們是判斷以 i 為中心時，符合 \(num[i] &gt; num[j]\)，並找出前面最大的 LIS，找到後 \(num[i] = num[j] + \text{index i 的權重}\)</li>
+</ul>
+<h3 id="程式碼說明"><a href="#程式碼說明" class="headerlink" title="程式碼說明"></a>程式碼說明</h3><p>透過程式碼來進行說明，會很好理解。<br>我們將每一個數列數值 \(num[i]\) 的權重都使用 i 來表示</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, kase = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> lis[MAXN], num[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        lis[i] = i; <span class="comment">//每一個 LIS 都一定有自己，因此先設定 lis[i] = i;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123; <span class="comment">//以 i 為中心，往前找哪個 lis[j] 最大</span></span><br><span class="line">            <span class="comment">//如果 num[j] &lt; num[i] 符合 LIS 特性，那就看當前的 lis[i] 與 lis[j] + 權重，</span></span><br><span class="line">            <span class="comment">//誰比較大</span></span><br><span class="line">            <span class="keyword">if</span>(num[i] &gt; num[j]) lis[i] = max(lis[i], lis[j] + i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LIS-應用"><a href="#LIS-應用" class="headerlink" title="LIS 應用"></a>LIS 應用</h2><p>我在學習此演算法的過程中如果有題目讓我應用到此演算法我則收錄在此，連結則是我的詳解如果想要去看題目的就搜尋一下吧！</p>
 <ul>
 <li><a href="https://theriseofdavid.github.io/2020/11/14/UVa/UVa111/" target="_blank" rel="noopener">UVa 111 - History Grading (LIS)</a></li>
 </ul>
 <h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.youtube.com/watch?v=S9oUiVYEq7E&t=0s" target="_blank" rel="noopener">Longest Increasing Subsequence in nlogn time - Tushar Roy - Coding Made Simple </a><br><a href="https://forgoal.gitbooks.io/-/content/longest_increasing_subsequence.html" target="_blank" rel="noopener">Longest Increasing Subsequence (LIS)</a></p>
 <h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>複習一些之前所學習的演算法並加入我的 blog 中感覺其實還真不賴呢！感覺以後如果有些忘記就可以直接拿過來用了XD，而且又是變相地複習我的演算法知識，只是在打演算法解釋有點麻煩QQ，語言障礙不太行阿，希望之後可以把自己的文字表達能力練強，才不會讓別人都聽不懂我在說甚麼…。</p>
 <p>總感覺自學就像盲人摸象一般，有時候別人跟你說專業的你反而聽不懂呢。因為你學習並不是一個完整的系統導致有些部分會 miss，但教授都會假設你是完整的學過，所以要盡量補起來這些坑呢！</p>
-<h2 id="LCS-無註解程式碼"><a href="#LCS-無註解程式碼" class="headerlink" title="LCS 無註解程式碼"></a>LCS 無註解程式碼</h2><p>這裡則放置沒有註解的程式碼，如果讀者想要複製就從這裡進行複製吧！</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N </span></span><br><span class="line"><span class="keyword">int</span> b[N] , t[N] , d[N] , n ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bs</span><span class="params">(<span class="keyword">int</span> l , <span class="keyword">int</span> r , <span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m ;</span><br><span class="line">    <span class="keyword">while</span>(r&gt;l)&#123;</span><br><span class="line">        m = (r+l) / <span class="number">2</span> ;</span><br><span class="line">        <span class="keyword">if</span>(b[v] &gt; b[t[m]] ) l = m+<span class="number">1</span> ;</span><br><span class="line">        <span class="keyword">else</span> r = m ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lis</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">1</span> , cur ;</span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span> , t[<span class="number">1</span>] = <span class="number">1</span> ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[t[len]] )&#123;</span><br><span class="line">            d[i] = t[len] ;</span><br><span class="line">            t[++len] = i ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cur = bs(<span class="number">1</span>,len,i);</span><br><span class="line">            t[cur] = i ;</span><br><span class="line">            d[i] = t[cur<span class="number">-1</span>] ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 ]]></content>
       <categories>
         <category>演算法知識</category>
@@ -21673,6 +21687,398 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, q, l, r, idx; <span class="comment">//var index error =&gt; https://blog.csdn.net/cyril_ki/article/details/109668100</span></span><br><span class="line"><span class="keyword">int</span> a[MAXN][<span class="number">12</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; idx;</span><br><span class="line">            a[i][idx]++;</span><br><span class="line">            <span class="comment">//狀態轉移，區間 [0,i-1] =&gt; [0,i]</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) a[i][j] += a[i<span class="number">-1</span>][j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; l &gt;&gt; r;</span><br><span class="line">            <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)&#123;</span><br><span class="line">                <span class="comment">//如果區間 [0,r] - [0,l) = [l,r] 裡面如果有 0~9 就 ans +1</span></span><br><span class="line">                <span class="keyword">if</span>(a[r][j] - a[l<span class="number">-1</span>][j] &gt; <span class="number">0</span>) ans++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10534 - Wavio Sequence(LIS, 動態規劃)</title>
+    <url>/2021/07/24/UVa/UVa10534/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>我們定義 Wavio Sequence</p>
+<ul>
+<li>長度必須是 \(2 * n + 1\)</li>
+<li>前 \(n+1\) 個數字必須遞增</li>
+<li>後 \(n+1\) 個數字必須遞減<br>接下來會給你一個數列，請你在這些數字中找出 <strong>最長 Wavio Sequence</strong></li>
+</ul>
+<p><a href="https://onlinejudge.org/external/105/10534.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2020/11/13/Explain_Algorithm/LIS/" target="_blank" rel="noopener">LIS 的應用</a></li>
+<li>將每一個 index 的 LIS 長度都記錄下來</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>Wavio Sequence 可以看成前半段是 LIS、後半段是 LDS(最長遞減子序列)</li>
+<li>那我們可以從左至右、從右至左各做一次 LIS，並且用兩個陣列紀錄每個數列位置的最長 LIS、LDS 長度<br>注意：從右至左做一次 LIS，就是從左至右做一次 LDS</li>
+<li>找出在同個數列 index 下中 \(min(LIS,LDS) * 2 + 1\)，即可。</li>
+<li>有些小細節，我在程式裡說明</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva10534" target="_blank" rel="noopener">Uva10534 - Wavio Sequence by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>LIS 很多小細節處理其實我也沒有學得很精，希望自己可以好好學習好。注意這些問題，加強自己的思考能力。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, temp;</span><br><span class="line"><span class="comment">//num 題目數列, lis_index 最長的 LIS 長度，lds 也是</span></span><br><span class="line"><span class="keyword">int</span> num[MAXN], lis_index[MAXN], lds_index[MAXN]; </span><br><span class="line"><span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; lis, lds;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        lis.clear(); lds.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; num[i];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//LIS</span></span><br><span class="line">        lis.push_back(num[<span class="number">0</span>]);</span><br><span class="line">        lis_index[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[i] &gt; lis.back())&#123;</span><br><span class="line">                <span class="comment">//要稍微注意，因為我們 LIS 下方的 else 在輸入 lis_index[i] 是會根據 deque.size()，</span></span><br><span class="line">                <span class="comment">//但 deque.size() 從 0 開始計數，所以我們這邊的 lis_index[i] 也從 0 開始計數，</span></span><br><span class="line">                <span class="comment">//因此當 lis_index[i] = 0，都內含自己。</span></span><br><span class="line">                lis_index[i] = lis.size(); <span class="comment">//be careful, lower_bound =&gt; deque.size(). NOT LIS length</span></span><br><span class="line">                lis.push_back(num[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//大衛的筆記是用 upper_bound，是因為那篇實作 LIS 是大於等於都可以，但這裡僅限大於</span></span><br><span class="line">                temp = lower_bound(lis.begin(), lis.end(), num[i]) - lis.begin();</span><br><span class="line">                lis [temp] = num[i];</span><br><span class="line">                lis_index[i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//LDS，解釋與上方相同</span></span><br><span class="line">        lds.push_back(num[n<span class="number">-1</span>]);</span><br><span class="line">        lds_index[n<span class="number">-1</span>] = <span class="number">0</span>; <span class="comment">//要先歸為零，不然會跟其他測資混亂。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[i] &gt; lds.back())&#123;</span><br><span class="line">                lds_index[i] = lds.size();</span><br><span class="line">                lds.push_back(num[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                temp = lower_bound(lds.begin(), lds.end(), num[i]) - lds.begin();</span><br><span class="line">                lds[temp] = num[i];</span><br><span class="line">                lds_index[i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; "i lis lds " &lt;&lt; i &lt;&lt; " " &lt;&lt; lis_index[i] &lt;&lt; " " &lt;&lt; lds_index[i] &lt;&lt; "\n";</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">//由於 Wavio Sequence 必須左右長度都是 n+1, 因此我們就以 i 為單位，</span></span><br><span class="line">            <span class="comment">//使用最小的 LIS or LSD 長度，</span></span><br><span class="line">            <span class="comment">//但由於我們計數都是從 0 開始，別忘了 + 1(自己)</span></span><br><span class="line">            <span class="comment">//+1 原因，我們是以 num[i] 為中心算最長長度，因此重複用到一次。</span></span><br><span class="line">            <span class="comment">//但因為我們計數都是從 0 開始，所以從 (2*n)-1 改為 (2*n)+1</span></span><br><span class="line">            ans = max(ans, min(lis_index[i], lds_index[i]) * <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>最長遞增子序列 Longest Increasing Subsequence</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10534 - Murcia’s Skyline(LIS, 動態規劃)</title>
+    <url>/2021/07/24/UVa/UVa11790/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>摩天大樓一座有一座的蓋起，這時候許多摩天大樓在一起時會有一條天際線。<br>摩天大樓有不同的寬度、高度，我們想要找出 LIS 並且寬度要是最長的、LDS 並且寬度要是最長的</p>
+<p><a href="https://onlinejudge.org/external/117/11790.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2020/11/13/Explain_Algorithm/LIS/#LIS-實作與說明，時間複雜度-O-n-2" target="_blank" rel="noopener">了解甚麼時候使用時間複雜度 \(O(n^2)\) 的 LIS</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>由於這題的 LIS 數值權重並非都相同，因此只能使用 \(O(n^2)\) 版</li>
+<li>做一次 LIS 與 LDS，並找出最大值即可。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11790" target="_blank" rel="noopener">Uva11790 - Murcia’s Skyline by txya900619</a><br><a href="http://web.ntnu.edu.tw/~algo/Subsequence.html" target="_blank" rel="noopener">http://web.ntnu.edu.tw/~algo/Subsequence.html</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講，我其實已經太久沒有寫過 LIS 時間複雜度 \(O(n^2)\) 的版本了，都快忘記了…。<br>有時候演算法沒有到非常熟，忘了真的很難憑自己的記憶在馬上推出來，但是可以透過查看自己的筆記就可以馬上想出來。</p>
+<p>還真希望我隨時都可以想到這些筆記XD。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1000020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, kase = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> height[MAXN], width[MAXN];</span><br><span class="line"><span class="keyword">int</span> lis[MAXN], lds[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="comment">//做動態規劃前，一定要先將陣列歸 0，才不會讓陣列裡面混入前面的資料</span></span><br><span class="line">        <span class="built_in">memset</span>(lis, <span class="number">0</span>, <span class="keyword">sizeof</span>(lis)); </span><br><span class="line">        <span class="built_in">memset</span>(lds, <span class="number">0</span>, <span class="keyword">sizeof</span>(lds));</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; height[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">cin</span> &gt;&gt; width[i];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//LIS 應用</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            lis[i] = width[i];</span><br><span class="line">            lds[i] = width[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(height[i] &gt; height[j]) lis[i] = max(lis[i], lis[j] + width[i]);</span><br><span class="line">                <span class="keyword">if</span>(height[i] &lt; height[j]) lds[i] = max(lds[i], lds[j] + width[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//找出最大 lis, lds</span></span><br><span class="line">        <span class="keyword">int</span> ans_lis = <span class="number">0</span>, ans_lds = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            ans_lis = max(ans_lis, lis[i]);</span><br><span class="line">            ans_lds = max(ans_lds, lds[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//題目要求，當 LIS 大時有其輸出格式、LDS 也是</span></span><br><span class="line">        <span class="keyword">if</span>(ans_lis &gt;= ans_lds)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">". Increasing ("</span> &lt;&lt; ans_lis &lt;&lt; <span class="string">"). Decreasing ("</span> &lt;&lt; ans_lds &lt;&lt; <span class="string">").\n"</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">". Decreasing ("</span> &lt;&lt; ans_lds &lt;&lt; <span class="string">"). Increasing ("</span> &lt;&lt; ans_lis &lt;&lt; <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>最長遞增子序列 Longest Increasing Subsequence</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10448 - Unique World(動態規劃)</title>
+    <url>/2021/07/26/UVa/UVa10448/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>獨特世界裡面的人開車非常特別，他們從任意一個點出發到另外一個點的成本都是唯一無二的且只有一種走法，因此獨特世界只要看到成本就可以知道這是從 A 到 B 的車票，但獨特世界裡面突然發現了一個大問題，他們發現只要你願意繞路就可以讓任意一個點出發到另外一個點的成本竟然可以有多種解法，且成本不一致！<br>因此總統下令</p>
+<ul>
+<li>每一條路徑可以重複走，只有終點與前一個點的路徑只能走一遍</li>
+<li>不可以走非必要路徑</li>
+<li>必須讓開車成本符合總統要求的成本</li>
+</ul>
+<p>如果可以就輸出 yes、最小使用道路數量，no 表示不行<br>好了，現在需要一個程式設計師來解決問題了！<br><strong>注意，每一個 test case 中間要有斷行</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>看得懂題目，這題題目也太難看懂了…</li>
+<li>了解 DFS、動態規劃</li>
+<li>了解題目細節<br>題目非常多小機關，透過分析說明。</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>噁心，太噁心了…，把兩題結合成一題，又有一堆細節要處理..</li>
+<li>定義名詞<ul>
+<li>require_cost 政府要求的 cost</li>
+</ul>
+</li>
+<li>首先我們從題目中知道，每個節點都有一個獨特路徑。因此必須先走一次 <strong>DFS</strong>，找到最好的解法。並且判斷一些問題<ul>
+<li>我們必須要確定 A 到 B 有連通</li>
+<li>require_cost 要減掉所有經過路線的 cost</li>
+<li>紀錄所有路徑的成本</li>
+</ul>
+</li>
+<li>DFS 後，我們接下來會發現一些問題<ul>
+<li><code>require_cost &lt; 0</code>，解不出來</li>
+<li><code>require_cost == 0</code>，完美，直接輸出 dfs 路徑的數量</li>
+<li>如果有 <code>require_cost &gt; 0</code> 那怎麼辦?<ul>
+<li>可以轉化成動態規劃，我們來判斷我們要重複走幾次必要路徑，才能讓  <code>require_cost == 0</code></li>
+<li>概念如下：有 <code>require_cost</code>，我們最少用幾個 cost 讓 <code>require_cost == 0</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>動態規劃，一樣有一些問題要注意<ul>
+<li>必須先將 <code>require_cost / 2</code>，因為多走一步就必須在退回一步</li>
+<li>因此我們可以得知，當 dfs 後的 require_cost 為奇數時，一定是 no，因為每一個路徑走過去又走回來一定是 \(路徑 * 2\)，不可能會有奇數</li>
+<li>題目有說，終點與前一個點的路徑只能走一遍，因此我們要把終點與前一個點的 cost erase。</li>
+<li>紀錄當問題求最小時，必須讓 dp 初始化時都是 INF。</li>
+<li><code>DFS 的路徑數量 == 成本數量</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>天啊，這題太狠了….，這題目好多細節，DP 與 DFS 的融合，太可怕了…我學到好多東西。</p>
+<p>老實講，這個其實還不賴，就是我在解決這題時思考的稍微有點久，也花了些時間先看懂別人如何寫的我再來自己試寫一遍。</p>
+<p>然後那個 UVa 那個格式有時候真的很機車QQQ，不要這樣啦。<br>希望我到時候都能在寫其他題目時注意到這些細節</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 60</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN_cost 100020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, m, q;</span><br><span class="line"><span class="keyword">int</span> id1, id2, cost;</span><br><span class="line"><span class="keyword">int</span> from, to, require_cost;</span><br><span class="line"><span class="keyword">int</span> visit[MAXN];</span><br><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN_cost];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> node, cost;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; road[MAXN]; </span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; travel_cost;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "root to " &lt;&lt; root &lt;&lt; ' ' &lt;&lt; to &lt;&lt; '\n';</span></span><br><span class="line">    <span class="keyword">if</span>(root == to) <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//已被經過</span></span><br><span class="line"></span><br><span class="line">    visit[root] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; road[root].size(); i++)&#123; <span class="comment">//不斷嘗試尋找可能路徑</span></span><br><span class="line">        <span class="keyword">if</span>(dfs(road[root][i].node))&#123;</span><br><span class="line">            require_cost -= road[root][i].cost;</span><br><span class="line">            <span class="comment">//注意邏輯，這裡是越後面的 path 會放在 vector 前面</span></span><br><span class="line">            travel_cost.push_back(road[root][i].cost); </span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">coin_change</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(from == to) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//UVa debug 有這個測資，但 UVa online judge 沒用</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "fron to require_cost " &lt;&lt; from &lt;&lt; ' ' &lt;&lt; to &lt;&lt; ' ' &lt;&lt; require_cost &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">int</span> connected = dfs(from); <span class="comment">//判斷是否有唯一路徑</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "connected status " &lt;&lt; connected &lt;&lt; "\n";</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "required cost " &lt;&lt; require_cost &lt;&lt; "\n";</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//if(connected == 0) return -1; 題目有說，一定有唯一路徑，因此不用判斷</span></span><br><span class="line">    <span class="keyword">if</span>(require_cost == <span class="number">0</span>) <span class="keyword">return</span> travel_cost.size(); <span class="comment">//分析第 4-2 點</span></span><br><span class="line">    <span class="keyword">if</span>(require_cost &lt; <span class="number">0</span> || require_cost % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//分析第 4-1、5-2 點</span></span><br><span class="line">    travel_cost.erase(travel_cost.begin()); <span class="comment">//分析 5-2 點</span></span><br><span class="line">    <span class="keyword">if</span>(travel_cost.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//如果沒有其他可重複路徑，但還有成本，那也解不出來</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "start dp " &lt;&lt; '\n';</span></span><br><span class="line">    <span class="comment">//for(int i = 0; i &lt; travel_cost.size(); i++) cout &lt;&lt; travel_cost[i] &lt;&lt; ' ';</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">    require_cost /= <span class="number">2</span>; <span class="comment">//折半，走一步、退回一步</span></span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//dp 一開始初始化 dp[i][j], i = 使用的路徑、j = require_cost</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; travel_cost.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= require_cost; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j - travel_cost[i] &gt;= <span class="number">0</span>) dp[i][j] = min(dp[i][j], dp[i][j - travel_cost[i]]+<span class="number">1</span>);</span><br><span class="line">            <span class="comment">//if(j - travel_cost[i] &gt;= 0) cout &lt;&lt; j &lt;&lt; " " &lt;&lt; dp[i][j] &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//狀態轉移</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span>) dp[i][j] = min(dp[i<span class="number">-1</span>][j], dp[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "travel_cost.size()-1 " &lt;&lt; travel_cost.size()-1 &lt;&lt; '\n';</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; dp[travel_cost.size()-1][require_cost] &lt;&lt; ' ' &lt;&lt; INF &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果 requre_cost 有答案，就直接輸出，沒有就是 -1</span></span><br><span class="line">    <span class="keyword">if</span>(dp[travel_cost.size()<span class="number">-1</span>][require_cost] == INF) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="comment">//由於 dp 這邊是算來回走，</span></span><br><span class="line">    <span class="comment">//因此 DFS 路徑數量(路徑數量 == 成本數量) + dp * 2 + 終點與前一個點的路徑只能走一遍</span></span><br><span class="line">    <span class="keyword">return</span> travel_cost.size() + dp[travel_cost.size()<span class="number">-1</span>][require_cost] * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) road[i].clear(); <span class="comment">//路徑清空</span></span><br><span class="line">        <span class="comment">//放入路徑，為了效率， road[i][j]，i 為 node、j 為 node 的第幾個路徑</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; </span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; id1 &gt;&gt; id2 &gt;&gt; cost;</span><br><span class="line">            road[id1].push_back(&#123;id2, cost&#125;);</span><br><span class="line">            road[id2].push_back(&#123;id1, cost&#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123;</span><br><span class="line">            travel_cost.clear(); <span class="comment">//紀錄成本的 vector 刪除</span></span><br><span class="line">            <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit)); <span class="comment">//初始 visit</span></span><br><span class="line">            <span class="built_in">memset</span>(dp, INF, <span class="keyword">sizeof</span>(dp)); <span class="comment">//初始 dp</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; from &gt;&gt; to &gt;&gt; require_cost;</span><br><span class="line">            <span class="keyword">int</span> ans = coin_change();</span><br><span class="line">            <span class="keyword">if</span>(ans == <span class="number">-1</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"No"</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes "</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(t != <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//題目要求換行</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11259 - Coin Changing Agains(動態規劃、排容原理)</title>
+    <url>/2021/07/26/UVa/UVa11259/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>這個地方有四個硬幣，你必須用 4 個硬幣組合成 v 元，有 q 個查詢，且每個硬幣數量都會隨之 q 不同，想請問在每次的 q 查詢中所設定的硬幣數量內，最多有幾種組合方法</p>
+<p><a href="https://onlinejudge.org/external/112/11259.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解<a href="https://highscope.ch.ntu.edu.tw/wordpress/?p=12453" target="_blank" rel="noopener">排容原理</a></li>
+<li>了解動態規劃</li>
+<li>將他們結合應用起來</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>可以發現，普通的動態規劃沒有辦法解決這題，因為他的硬幣數量可能會來到 \(10^6\)</li>
+<li>此時可以想想有沒有一些方法可以解決呢？<ul>
+<li>貪心<br>似乎有點複雜</li>
+<li>排容原理，如果我們先假設這是個無限背包問題，我們要處理一個問題<ul>
+<li>使用的硬幣數量超過題目上限<ul>
+<li>這時候我們可以透過一種方始解決，<code>dp[v 元] - dp[v 元 - coin[i] * (d[i]+1)]</code>，我們可以知道一件事，在 <code>coin[i] * d[i] 元</code> 中都可解出來</li>
+<li>因此我們可以知道 <code>dp[v 元 - coin[i] * (d[i]+1)]</code>，就是不合法的</li>
+<li>此時，可能會有個疑惑，那 <code>dp[v 元 - coin[i] * (d[i]+2)]</code> 我們就不用減嗎？</li>
+<li>真的不用，因為 <code>dp[v 元 - coin[i] * (d[i]+1)]</code> 包含 <code>dp[v 元 - coin[i] * (d[i]+2)]</code></li>
+<li>但注意，這邊一定要用 <code>dp[v 元 - coin[i] * (d[i]+1)]</code> 來做，不可用 <code>dp[coin[i] * (d[i]+1)]</code>，因為我們狀態是不斷往後加，如果我們只減掉一開始 dp 的非法的硬幣數量，那後面的非法的硬幣數量與其他組合我們都沒有處理掉</li>
+</ul>
+</li>
+<li>注意，會有重複扣的問題<ul>
+<li>可能會有一種組合是，<code>coin[i]、coin[j]</code> 都是非法數量，但因為上一點的邏輯而重複扣了兩遍，因此我們必須要給他加回來</li>
+<li>可能會有一種組合是，<code>coin[i]、coin[j]、coin[k]</code> 都是非法數量，但因為上一點的邏輯(<code>coin[i]、coin[j]</code>)而加回來，因此我們必須要給他扣掉。</li>
+<li>因此我們必須是扣掉 <code>-c[1]-c[2]+c[1]*c[2]....-c[1]*c[2]*c[3]*c[4]</code> 的非法數量</li>
+<li>最後我們要判斷 v 在減掉這種非法數量時，v 是否還有大於零，因為 v 必須要大於 0 才表示這種非法組合有成立。</li>
+<li>再來讓無限背包的<code>dp[v] - 非法數量</code>就是答案</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/weixin_30416871/article/details/98992438" target="_blank" rel="noopener">UVA 11259 Coin Changing Again by weixin_30416871</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>一開始我認為這題應該可以用貪心 + dp 的方法解出來XD，後來發現確實有點太難了QQ，太久沒有寫到排容原理的題目，都忘記要這樣想了….</p>
+<p>既然複習到了就讓自己未來在用到時可以順利想起來吧!</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t;</span><br><span class="line"><span class="keyword">int</span> c[<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> d[<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> q, v;</span><br><span class="line"><span class="keyword">int</span> dp[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) <span class="built_in">cin</span> &gt;&gt; c[i];</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; q;</span><br><span class="line"></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)&#123; <span class="comment">//無限背包問題</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = c[i]; j &lt; MAXN; j++)&#123; </span><br><span class="line">                dp[j] += dp[j - c[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) <span class="built_in">cin</span> &gt;&gt; d[i];</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; v;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//一共有 16 種組合每一種組合都可能有非法組合，每個硬筆拿或不拿，使用二進位表示</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">16</span><span class="number">-1</span>; i++)&#123; </span><br><span class="line">                <span class="comment">//flag 重複項現在的正負狀態，每有兩個重複項就補回多扣的非法數量</span></span><br><span class="line">                <span class="comment">//x 非法組合的最後的金額(元)是多少</span></span><br><span class="line">                <span class="keyword">int</span> x = v, flag = <span class="number">1</span>; </span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++)&#123;<span class="comment">//這一種組合方式，有沒有使用 coin[j]</span></span><br><span class="line">                    <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j))&#123; <span class="comment">//如果有</span></span><br><span class="line">                        flag = -flag; <span class="comment">//判斷現在是做補回多扣的非法數量，還是減去非法數量</span></span><br><span class="line">                        x -= c[j] * (d[j]+<span class="number">1</span>); <span class="comment">//x 減掉非法金額(元)</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//如果 x &gt; 0，標示這種非法數量存在，進行刪減或補回</span></span><br><span class="line">                <span class="keyword">if</span>(x &gt;= <span class="number">0</span>) ans += flag * dp[x]; </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+        <tag>排容原理 Inclusion–exclusion principle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11420 - Chest of Drawers(動態規劃)</title>
+    <url>/2021/08/02/UVa/UVa11420/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>抽屜櫃是很方便的家具之一，可以放入很多的物品，而且每一個抽屜都可以選擇上鎖或不上鎖，上鎖的抽屜就會相當安全，但要小心，如果 <code>i</code> 抽屜上鎖，<code>i+1</code>抽屜不上鎖，那麼小偷可以透過 <code>i+1</code> 抽屜抽掉後，把 <code>i</code> 的抽屜物品拿走。</p>
+<p>我們想請問如果我們給你一個抽屜櫃並且有 n 個抽屜，並要保證 s 個物品安全，想請問一共有幾種做法？<br>UVa 題目中的 U 表示不上鎖，L 表示上鎖，在 <code>n=6, s=4</code> 的情況下，有六種做法。</p>
+<p><a href="https://onlinejudge.org/external/114/11420.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>察覺這是一個 3 維 DP</li>
+<li>理解題目的抽屜，有點不好懂XD</li>
+<li>透過 DP 來解決各種發生狀態<ul>
+<li>如果上一層沒鎖，這層有鎖，那要怎麼用 DP 解決。</li>
+<li>有可能鎖著的櫃子，比櫃子數量來的更多嗎?</li>
+</ul>
+</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>首先我們可以確定一定有兩個變數<ul>
+<li>幾個抽屜、有幾個上鎖</li>
+<li>但好像沒有辦法解決，透過 <code>i+1</code> 抽屜抽掉後，把 <code>i</code> 的抽屜物品拿走。這種可能性？</li>
+<li>那我們可以試試一種方法來解決這種問題。</li>
+<li>增加一個抽屜，都是放到櫃子中的最上層，我們每次都只判斷最上層的櫃子有沒有鎖；如此一來，就解決中間櫃子有沒有鎖的問題，因為中間的櫃子一定都是透過其他的櫃子累加上來的。</li>
+</ul>
+</li>
+<li>因此我們就再增加一個變數，最上層的櫃子有沒有鎖？</li>
+<li><code>dp[i][j][k]</code><ul>
+<li>i 是抽屜</li>
+<li>j 是物品可置放在安全抽屜的個數，簡稱<strong>可靠抽屜</strong><br>注意：可靠抽屜並不是鎖，但有可靠抽屜才會有鎖</li>
+<li>k 是最上層有沒有上鎖，1 表示有、0 表示沒有。</li>
+</ul>
+</li>
+<li>那就準備進行 DP 規劃拉，我們來看看 DP 的狀態轉移<ul>
+<li>先找出最初的設定值 <ul>
+<li><code>dp[1][0][0] = 1</code>，在 1 個櫃子、0 個可靠抽屜的情況下有一種做法，合理！<br>0 個櫃子、0 個可靠抽屜，則不合理。這樣並不符合題目要求。</li>
+<li><code>dp[1][1][1] = 1</code>，1 個櫃子、1 個可靠抽屜的情況下只有一種作法，合理！<ul>
+<li>0 個櫃子、1 個可靠抽屜，則不合哩，你沒有櫃子，可靠抽屜有甚麼用阿XD。</li>
+<li><code>dp[1][0][1] = 1</code>，1 個櫃子、0 個可靠抽屜的情況下最上層的櫃子是所住的，不合理！<br>這裡就是一個很明顯的範例點，由於 <code>n=1</code> 因此最上層就是其本身，但是沒有鎖怎麼會有可靠抽屜呢，因此這是很明顯的錯誤</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>得出結論，<strong>抽屜的數量必須要大於鎖的數量</strong></li>
+<li>狀態轉移公式<ul>
+<li><code>dp[i][0][0] = dp[i-1][0][0] + dp[i-1][1][1]</code><ul>
+<li>需要特別注意，可能有些人會搞不懂為甚麼這裡也要加 <code>dp[i-1][1][1]</code><br>因為在 <code>dp[i][0][0]</code> 情況下，最上層的櫃子是沒有鎖的，此時 <code>dp[i-1][1][1]</code> 則是有鎖，但現在最上層加了一層沒鎖的抽屜，那第二層有鎖也是白鎖。</li>
+<li>因此我們的可靠抽屜必須 -1</li>
+</ul>
+</li>
+<li><code>dp[i][j][0] = dp[i-1][j+1][1] + dp[i-1][j][0]</code><ul>
+<li>由於 <code>dp[i][j][0]</code> 最上層沒有鎖，因此 <code>dp[i-1][j+1][1]</code> 中安全抽屜會少一(最上層的抽屜有鎖住，勢必<strong>可靠抽屜會多一個</strong>)，會被人從最上層抽屜拿取上鎖的抽屜。</li>
+<li><code>dp[i-1][j][0]</code> 則很合理</li>
+</ul>
+</li>
+<li><code>dp[i][j][1] = dp[i-1][j-1][0] + dp[i-1][j-1][1]</code><ul>
+<li><code>dp[i-1][j-1][0]</code> 很合理，現在最上層有鎖，因此安全抽屜會加一</li>
+<li><code>dp[i-1][j-1][1]</code>，同上</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.pinghenotes.com/UVa-11420-Chest-of-Drawers/" target="_blank" rel="noopener">UVa 11420 - Chest of Drawers by pinghenotes</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>我記得我好像高中，就有寫過這題了XD，而且我印象我想了一個禮拜才寫出這題R….，那時候的我好笨QQ，不過那時候我記得網路上還沒有太多詳解，因此我沒有辦法順利解決這些題目。</p>
+<p>現在有了，也讓我學會了！太開心了，趕緊記錄起來</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 70</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> n, s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    dp[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//註解 4-1-1</span></span><br><span class="line">    dp[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>; <span class="comment">//註解 4-1-2 </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; MAXN<span class="number">-2</span>; i++)&#123;</span><br><span class="line">        dp[i][<span class="number">0</span>][<span class="number">0</span>] = dp[i<span class="number">-1</span>][<span class="number">0</span>][<span class="number">0</span>] + dp[i<span class="number">-1</span>][<span class="number">1</span>][<span class="number">1</span>]; <span class="comment">//註解 4-3-1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i; j++)&#123;</span><br><span class="line">            dp[i][j][<span class="number">0</span>] = dp[i<span class="number">-1</span>][j+<span class="number">1</span>][<span class="number">1</span>] + dp[i<span class="number">-1</span>][j][<span class="number">0</span>]; <span class="comment">//註解 4-3-2</span></span><br><span class="line">            dp[i][j][<span class="number">1</span>] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>][<span class="number">0</span>] + dp[i<span class="number">-1</span>][j<span class="number">-1</span>][<span class="number">1</span>]; <span class="comment">//註解 4-3-3</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; s &amp;&amp; n &gt;= <span class="number">0</span> &amp;&amp; s &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; dp[n][s][<span class="number">0</span>] + dp[n][s][<span class="number">1</span>] &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>背包問題 Knapsack Problem</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12862 - Intrepid climber(DFS)</title>
+    <url>/2021/08/02/UVa/UVa12862/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>你爬上了山峰！你想把這個興奮的心情告訴其他還在爬山朋友，但那些朋友都還在山上爬，你要跑下去跟他們說。<br>現在你想要跟全部的朋友講，下山不需要花很多體力、但是上山需要花體力，但是題目保證一定會有一條完整的路徑(不會經過重複的路)可以讓你可以走到每個朋友的身邊。</p>
+<p>現在請你算出你走到每個朋友身邊需要耗費多少體力。<br><a href="https://onlinejudge.org/external/128/12862.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解 DFS</li>
+<li>認識<a href="https://zh.wikipedia.org/wiki/%E4%B8%80%E7%AC%94%E7%94%BB%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">尤拉路徑</a></li>
+<li>發現題目的細節</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>我們可以觀察題目，發現一個很有趣的事情</li>
+<li>因為題目保證我們只會有一條路徑！因此我們不需要找出路徑</li>
+<li><strong>只要找到最後一個朋友，就不需要在移動</strong></li>
+<li>所以我們只要找出所有的路徑，找到有一條<strong>從山峰到路徑累積 weights 最大</strong>，並把它當作最後一條路徑，然後扣掉他(因為找到最後一個朋友，不需要再移動)。</li>
+<li>為甚麼是<strong>從山峰到路徑累積 weights 最大</strong>則是因為<ul>
+<li>山峰是最高點</li>
+<li>我們可以把她想像成有兩種路徑以山峰為起點，一種是從左邊下山遇到朋友、另一種則是從右邊下山遇到朋友。<br>註：山峰並不代表一開始的題目位置，題目只有說有唯一路徑，並沒有說都會經過題目初始位置</li>
+<li>因此我們可以把題目轉化成，從左邊下山後上山 or 從右邊下山後上山，哪邊花的能量比較少，就選那邊下山後上山，再去找另一邊的朋友，然後就下山，不需要再耗費能量。</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva12862" target="_blank" rel="noopener">Uva12862 - Intrepid climber By txya900619</a><br><a href="https://morris821028.github.io/2014/11/18/uva-12862/" target="_blank" rel="noopener">UVa 12862 - Intrepid climber By Morris</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題完全考細節，不考程式碼難度，太秀了。希望我以後也可以發現這些邏輯</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> f, n;</span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; nodes[MAXN]; <span class="comment">//題目的邊 first 2nd node, second weights</span></span><br><span class="line"><span class="keyword">int</span> pal[MAXN]; <span class="comment">//朋友[i] = 1，表示是不是有 i 這個朋友</span></span><br><span class="line"><span class="keyword">int</span> a, b, c, l;</span><br><span class="line"><span class="keyword">int</span> max_weights, ans;<span class="comment">//max_weights 最長的一個邊， ans 答案</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> weights)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> visited_friend = <span class="number">0</span>; <span class="comment">//遇過了幾個朋友</span></span><br><span class="line">    <span class="keyword">if</span>(pal[root] == <span class="number">1</span>)&#123; <span class="comment">//發現朋友</span></span><br><span class="line">        max_weights = max(weights, max_weights); </span><br><span class="line">        visited_friend++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes[root].size(); i++)&#123; <span class="comment">//不斷找朋友</span></span><br><span class="line">        <span class="keyword">int</span> node = nodes[root][i].first, weight = nodes[root][i].second;</span><br><span class="line">        <span class="keyword">int</span> visit_friend = dfs(node, weights+weight);<span class="comment">//往這邊走有幾個朋友</span></span><br><span class="line">        visited_friend += visit_friend; <span class="comment">//紀錄遇到幾個朋友了</span></span><br><span class="line">        <span class="keyword">if</span>(visit_friend) ans += weight; <span class="comment">//如果有找到朋友，表示這路徑要加近來</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "root visit_friend " &lt;&lt; root &lt;&lt; " " &lt;&lt; visited_friend &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">return</span> visited_friend;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; f &gt;&gt; n)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= f; i++) nodes[i].clear(); <span class="comment">//清除資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; f<span class="number">-1</span>; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">            nodes[a].push_back(make_pair(b, c));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(pal, <span class="number">0</span>, <span class="keyword">sizeof</span>(pal)); <span class="comment">//清除朋友資訊</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入朋友位置</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; l;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; "l " &lt;&lt; l &lt;&lt; "\n";</span></span><br><span class="line">            pal[l] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        max_weights = <span class="number">0</span>, ans = <span class="number">0</span>; </span><br><span class="line">        dfs(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//cout &lt;&lt; "ans " &lt;&lt; ans &lt;&lt; "\n";</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans - max_weights &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//減掉最大的</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12955 - Factorial(動態規劃、背包問題)</title>
+    <url>/2021/08/02/UVa/UVa12955/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>給你一個數字 n，想請問你最少可以用幾個 \(x!\) 來組合成 n。<br>其中 x 不一定都要相同數字，舉例： \(10 = 3! + 2! + 2!\)，因此我們使用 3 個 !，輸出 3。</p>
+<p><a href="https://onlinejudge.org/external/129/12955.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>了解動態規劃</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li><a href="http://web.ntnu.edu.tw/~algo/KnapsackProblem.html#6" target="_blank" rel="noopener">Coin Change Problem</a>問題，但從找最大改成找最小</li>
+<li>第一個迴圈設定為 9<br>因為 \(9! = 362880\)，大於題目的最大 N </li>
+<li>第二個迴圈設為 N，從 \(0~N\) 不斷進行無限背包</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>難得輕鬆解，開心</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> num[MAXN], n;</span><br><span class="line"><span class="keyword">int</span> f = <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(num, <span class="number">0x3f3f3f</span>, <span class="keyword">sizeof</span>(num)); <span class="comment">//初始為無限大</span></span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">1</span>; <span class="comment">//用於計算 factorial</span></span><br><span class="line">    num[<span class="number">0</span>] = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">9</span>; i++)&#123;</span><br><span class="line">        sum *= i; <span class="comment">//第 i factorial</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = sum; j &lt; MAXN; j++)&#123; <span class="comment">//無限背包問題</span></span><br><span class="line">            num[j] = min(num[j], num[j - sum]+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//for(int i = 0; i &lt; 30; i++) cout &lt;&lt; num[i] &lt;&lt; "\n";</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; num[n] &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>背包問題 Knapsack Problem</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa13141 - Growing Trees(動態規劃)</title>
+    <url>/2021/08/02/UVa/UVa13141/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>目前正在做林地復育，大家給你一個任務是數每一個樹的其中一個 level 樹幹有幾個，而林地裡面的樹大多邏輯是這樣，觀察下面此圖找到邏輯<br><img src="https://drive.google.com/u/2/uc?id=1_RnBkRNpcUnUfg4QMgdsLjnoeHytn8wZ&export=download" alt=""></p>
+<p>邏輯大概如下</p>
+<ul>
+<li>level 1 的樹，只會是一枝樹幹</li>
+<li>level i 的樹，如果這一枝樹幹不是透過上一層分裂而來，那 level i+1 要分裂成兩個樹幹</li>
+<li>level i 的樹，是透過上一層分裂而來，那 level i+1 不分裂</li>
+</ul>
+<p>我們會問你 level i，請告訴我們那一層有幾個樹幹</p>
+<p><a href="https://onlinejudge.org/external/131/13141.pdf" target="_blank" rel="noopener">題目大意</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>觀察 DP 邏輯</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>稍微細心的解題者可以發現，這棵樹其實就是一個費式樹列，因此直接產生一個費式樹列即可。</li>
+</ul>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 90</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> f[MAXN];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    f[<span class="number">1</span>] = <span class="number">1</span>, f[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt; MAXN; i++)&#123;</span><br><span class="line">        f[i] = f[i<span class="number">-1</span>] + f[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &amp;&amp; n)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; f[n] &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 ]]></content>

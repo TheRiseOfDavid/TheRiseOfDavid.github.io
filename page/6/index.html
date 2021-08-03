@@ -77,6 +77,639 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-Explain_Algorithm/josephus" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/21/Explain_Algorithm/josephus/"
+    >演算法知識 - Josephus problem 約瑟夫問題 遞迴公式說明與應用</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/21/Explain_Algorithm/josephus/" class="article-date">
+  <time datetime="2021-05-21T10:54:07.000Z" itemprop="datePublished">2021-05-21</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Josephus-problem-約瑟夫問題介紹"><a href="#Josephus-problem-約瑟夫問題介紹" class="headerlink" title="Josephus problem 約瑟夫問題介紹"></a>Josephus problem 約瑟夫問題介紹</h2><blockquote>
+<p>約瑟夫問題是一個非常黑暗的問題XD，主要是殘兵們不想被對方軍團俘虜，而想出一種自殺方式，其內容大概如下</p>
+<ul>
+<li>全部人圍成一個圓圈，編號 \(1,2,3,…,n\)</li>
+<li>定義一個數字 \(k\)，只要數到第 k 個數字，那麼那個人就自殺。</li>
+<li>接下來，從死掉的那個人開始在數 k 個數字，再來第 \(2k\) 的人自殺。</li>
+<li>不斷數著 k、不斷地自殺，不斷循環，直到最後只剩下一個人為止。</li>
+</ul>
+<p>而我們的主角 Josephus 則不想要自殺，於是他必須找到一個位置，並且是最後剩下的那個人。</p>
+<p>表達大致上的意思，並沒有全部完整表達。</p>
+<p>下方我的證明可能並沒有很好閱讀，因此不懂的讀者可以參考<a href="https://blog.csdn.net/u011500062/article/details/72855826" target="_blank" rel="noopener">约瑟夫环——公式法（递推公式） by 陈浅墨</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/21/Explain_Algorithm/josephus/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Josephus-problem-%E7%B4%84%E7%91%9F%E5%A4%AB%E5%95%8F%E9%A1%8C/" rel="tag">Josephus problem 約瑟夫問題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa10774" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/21/UVa/UVa10774/"
+    >UVa10774 - Repeated Josephus(數論 Math theorm、Josephus problem 約瑟夫問題)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/21/UVa/UVa10774/" class="article-date">
+  <time datetime="2021-05-21T05:51:59.000Z" itemprop="datePublished">2021-05-21</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>我不想浪費你的時間在讀題目，這裡有 n 個人要約瑟夫問題，其中 k = 2，倖存者的位置為 x，如果 \(x != n\)，那我們將讓 \(n = x\)，n 等於 x，重新進行一次約瑟夫問題，而新的倖存者位置如果等於 n，那我們就輸出，這是第幾次執行約瑟夫問題(不包含第一次)，第 n 個人的位置是多少？</p>
+<p>舉例：n = 5 時的約瑟夫問題為 3，\(5 != 3\)，將 \(n =3\) 執行約瑟夫問題，這次 \(n = 3, x = 3\)，重複執行了 1 次約瑟夫問題，最後一次的約瑟夫問題的 x 是 3。<br>因此輸出 “1 3”</p>
+<p><a href="https://onlinejudge.org/external/107/10774.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/21/UVa/UVa10774/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Josephus-problem-%E7%B4%84%E7%91%9F%E5%A4%AB%E5%95%8F%E9%A1%8C/" rel="tag">Josephus problem 約瑟夫問題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa11351" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/21/UVa/UVa11351/"
+    >UVa11531 - Last Man Standing(數論 Math theorm、Josephus problem 約瑟夫問題)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/21/UVa/UVa11351/" class="article-date">
+  <time datetime="2021-05-21T05:51:59.000Z" itemprop="datePublished">2021-05-21</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p><a href="https://theriseofdavid.github.io/2021/05/21/Explain_Algorithm/josephus/" target="_blank" rel="noopener">約瑟夫問題</a>，給你 n,k，總共有 n 個人，數到第 k 個人，那人則必須離開。</p>
+<p>試問，最後一個人會是離開的人是誰？</p>
+<p><a href="https://onlinejudge.org/external/113/11351.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/21/UVa/UVa11351/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Josephus-problem-%E7%B4%84%E7%91%9F%E5%A4%AB%E5%95%8F%E9%A1%8C/" rel="tag">Josephus problem 約瑟夫問題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Media_with_Image_recognition/NTUTcs_MediaHW07G01" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/19/Media_with_Image_recognition/NTUTcs_MediaHW07G01/"
+    >北科資工二多媒體技術與應用 第七次團隊作業 - 使用 google colab 與 yolo 訓練後進行圖像辨識</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/19/Media_with_Image_recognition/NTUTcs_MediaHW07G01/" class="article-date">
+  <time datetime="2021-05-19T15:59:50.000Z" itemprop="datePublished">2021-05-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E5%A4%9A%E5%AA%92%E9%AB%94%E8%88%87%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98-Image-Recognition/">多媒體與圖像辨識 Image Recognition</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+<p>訓練的資料是助教同意讓我們在這堂課做使用，並非同意我將訓練資料拿來散步，因此不將訓練資料生出來。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/19/Media_with_Image_recognition/NTUTcs_MediaHW07G01/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%9A%E5%AA%92%E9%AB%94%E6%8A%80%E8%A1%93%E8%88%87%E6%87%89%E7%94%A8%E7%AD%86%E8%A8%98/" rel="tag">北科大多媒體技術與應用筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-R/R-dir_using" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/18/R/R-dir_using/"
+    >R 檔案路徑用法教學 (檢查路徑、新增路徑)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/18/R/R-dir_using/" class="article-date">
+  <time datetime="2021-05-18T08:59:03.000Z" itemprop="datePublished">2021-05-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/R%E8%AA%9E%E8%A8%80/">R語言</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>在寫 R 語言時有時要輸出檔案時則會遇到一些要新增資料夾或是檢查此路徑是否存在之類的，那應該要怎麼辦才好呢？</p>
+<p>內容大概講述 R 對於一些路徑的使用方法</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/18/R/R-dir_using/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-R/R-search-tail-or-head" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/18/R/R-search-tail-or-head/"
+    >R 尋找前 n 筆的 dataframe 或是後 n 筆的 dataframe</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/18/R/R-search-tail-or-head/" class="article-date">
+  <time datetime="2021-05-18T08:59:03.000Z" itemprop="datePublished">2021-05-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/R%E8%AA%9E%E8%A8%80/">R語言</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>有時候我們會想要找出 dataframe 從上找 n 筆或是由下往上找 n 筆資料，R 有沒有甚麼好語法提供呢？</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/18/R/R-search-tail-or-head/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-dataframe/" rel="tag">R dataframe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Python/Python_install_pip" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/18/Python/Python_install_pip/"
+    >Python 安裝 pip.py (for windows)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/18/Python/Python_install_pip/" class="article-date">
+  <time datetime="2021-05-18T03:02:52.000Z" itemprop="datePublished">2021-05-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>我們都知道 python 安裝套件時，是使用 <code>pip install package</code> 的指令，那假如一開始沒有 pip 那應該要怎麼辦呢？</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/18/Python/Python_install_pip/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-R/R-dataframe-two-condition-search" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/18/R/R-dataframe-two-condition-search/"
+    >R dataframe 使用兩個條件去找出特定的資料</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/18/R/R-dataframe-two-condition-search/" class="article-date">
+  <time datetime="2021-05-17T21:51:11.000Z" itemprop="datePublished">2021-05-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/R%E8%AA%9E%E8%A8%80/">R語言</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
+<p>如果 dataframe 使用兩個條件去找出特定的資料想不到怎麼做？ 那就來看我這篇 blog 就對了！</p>
+<p>標題已經有大概講述怎麼解決了XD</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/18/R/R-dataframe-two-condition-search/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-dataframe/" rel="tag">R dataframe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E6%B8%AC/" rel="tag">回測</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-R/R-dataframe_append_column" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -232,633 +865,13 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-statistics/statistics-ch15" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/15/statistics/statistics-ch15/"
-    >統計學(二) 筆記 - 第十五章 複迴歸(Multiple Regression)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/15/statistics/statistics-ch15/" class="article-date">
-  <time datetime="2021-05-15T09:59:50.000Z" itemprop="datePublished">2021-05-15</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/15/statistics/statistics-ch15/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-linux/jobs-kill" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/12/linux/jobs-kill/"
-    >linux 刪除後台工作</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/12/linux/jobs-kill/" class="article-date">
-  <time datetime="2021-05-12T12:48:32.000Z" itemprop="datePublished">2021-05-12</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
-<p>我們都知道，只要將運行的程式搬到後臺去執行，只需要在 <code>command &amp;</code> 即可，那我們要怎麼樣去刪除後台正在運行的程式呢？</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/12/linux/jobs-kill/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-R/R-error-invaild-json" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/11/R/R-error-invaild-json/"
-    >R plumber 套件在解析 json 時的問題(plumber invalid json)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/11/R/R-error-invaild-json/" class="article-date">
-  <time datetime="2021-05-10T21:51:11.000Z" itemprop="datePublished">2021-05-11</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/R%E8%AA%9E%E8%A8%80/">R語言</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
-<p>R plumber 製作 api 後，如果要 post json 會出現 invalid json 的時候該怎麼辦呢？</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/11/R/R-error-invaild-json/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-R/R-dataframe_edit_and_for_faster" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/11/R/R-dataframe_edit_and_for_faster/"
-    >R 效率提升經驗紀錄，盡量使用向量、不對龐大 dataframe 進行修改</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/11/R/R-dataframe_edit_and_for_faster/" class="article-date">
-  <time datetime="2021-05-10T21:51:11.000Z" itemprop="datePublished">2021-05-11</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/R%E8%AA%9E%E8%A8%80/">R語言</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
-<p>如果發現自己寫的 R 跑得太慢時，應該要怎麼樣解決會比較好呢？</p>
-<p>標題已經有大概講述怎麼解決了XD</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/11/R/R-dataframe_edit_and_for_faster/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R-dataframe/" rel="tag">R dataframe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E6%B8%AC/" rel="tag">回測</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-R/R-sodium-non-zero-exit" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/11/R/R-sodium-non-zero-exit/"
-    >R installation of package ‘sodium’ had non-zero exit status 解決方法</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/11/R/R-sodium-non-zero-exit/" class="article-date">
-  <time datetime="2021-05-10T21:51:11.000Z" itemprop="datePublished">2021-05-11</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/R%E8%AA%9E%E8%A8%80/">R語言</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><blockquote>
-<p>在 centOS6 作業系統中在安裝 R plumber，卻發生此問題那該怎麼辦呢？</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/11/R/R-sodium-non-zero-exit/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RESTAPI/" rel="tag">RESTAPI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R%E8%AA%9E%E8%A8%80/" rel="tag">R語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-contest_experence/WMPCCA2021" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/10/contest_experence/WMPCCA2021/"
-    >台灣財富管理規劃顧問認證協會 - 2021 全國大專院校第十一屆財富管理競賽</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/10/contest_experence/WMPCCA2021/" class="article-date">
-  <time datetime="2021-05-10T15:33:09.000Z" itemprop="datePublished">2021-05-10</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/">競賽心得</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>僅此紀錄 2021/05 月所製作的財富管理競賽<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去</p>
-<p>每一次的努力都證明著自己的光輝</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/10/contest_experence/WMPCCA2021/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/" rel="tag">競賽心得</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%87%91%E8%9E%8D%E7%AB%B6%E8%B3%BD/" rel="tag">金融競賽</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa10346" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/09/UVa/UVa10346/"
-    >UVa10346 - Peter’s Smokes(水題)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/09/UVa/UVa10346/" class="article-date">
-  <time datetime="2021-05-09T05:51:59.000Z" itemprop="datePublished">2021-05-09</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>Peter 有 n 個大麻，每抽 k 個大麻後剩下的殘渣可以再捲成一個新大麻，Peter 總共可以抽幾個大麻</p>
-<p><a href="https://onlinejudge.org/external/103/10346.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/09/UVa/UVa10346/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B0%B4%E9%A1%8C/" rel="tag">水題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa10908" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/08/UVa/UVa10908/"
-    >UVa10908 - Largest Square(DFS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/08/UVa/UVa10908/" class="article-date">
-  <time datetime="2021-05-08T05:51:59.000Z" itemprop="datePublished">2021-05-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>有一個長方形地圖，會給你一個正方形中心點，此中心點為對角線交叉點，請以此中心點找出最大的正方形，並輸出邊長。</p>
-<p><a href="https://onlinejudge.org/external/109/10908.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/08/UVa/UVa10908/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/7/">下一頁</a>
+    <a class="extend prev" rel="prev" href="/page/5/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/7/">下一頁</a>
   </nav>
   
 </section>

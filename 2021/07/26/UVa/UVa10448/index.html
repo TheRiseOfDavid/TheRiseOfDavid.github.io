@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa10448 - Unique World(動態規劃) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa10448" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa10448 - Unique World(動態規劃)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/26/UVa/UVa10448/" class="article-date">
+  <time datetime="2021-07-26T05:51:59.000Z" itemprop="datePublished">2021-07-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>獨特世界裡面的人開車非常特別，他們從任意一個點出發到另外一個點的成本都是唯一無二的且只有一種走法，因此獨特世界只要看到成本就可以知道這是從 A 到 B 的車票，但獨特世界裡面突然發現了一個大問題，他們發現只要你願意繞路就可以讓任意一個點出發到另外一個點的成本竟然可以有多種解法，且成本不一致！<br>因此總統下令</p>
+<ul>
+<li>每一條路徑可以重複走，只有終點與前一個點的路徑只能走一遍</li>
+<li>不可以走非必要路徑</li>
+<li>必須讓開車成本符合總統要求的成本</li>
+</ul>
+<p>如果可以就輸出 yes、最小使用道路數量，no 表示不行<br>好了，現在需要一個程式設計師來解決問題了！<br><strong>注意，每一個 test case 中間要有斷行</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>看得懂題目，這題題目也太難看懂了…</li>
+<li>了解 DFS、動態規劃</li>
+<li>了解題目細節<br>題目非常多小機關，透過分析說明。</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>噁心，太噁心了…，把兩題結合成一題，又有一堆細節要處理..</li>
+<li>定義名詞<ul>
+<li>require_cost 政府要求的 cost</li>
+</ul>
+</li>
+<li>首先我們從題目中知道，每個節點都有一個獨特路徑。因此必須先走一次 <strong>DFS</strong>，找到最好的解法。並且判斷一些問題<ul>
+<li>我們必須要確定 A 到 B 有連通</li>
+<li>require_cost 要減掉所有經過路線的 cost</li>
+<li>紀錄所有路徑的成本</li>
+</ul>
+</li>
+<li>DFS 後，我們接下來會發現一些問題<ul>
+<li><code>require_cost &lt; 0</code>，解不出來</li>
+<li><code>require_cost == 0</code>，完美，直接輸出 dfs 路徑的數量</li>
+<li>如果有 <code>require_cost &gt; 0</code> 那怎麼辦?<ul>
+<li>可以轉化成動態規劃，我們來判斷我們要重複走幾次必要路徑，才能讓  <code>require_cost == 0</code></li>
+<li>概念如下：有 <code>require_cost</code>，我們最少用幾個 cost 讓 <code>require_cost == 0</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>動態規劃，一樣有一些問題要注意<ul>
+<li>必須先將 <code>require_cost / 2</code>，因為多走一步就必須在退回一步</li>
+<li>因此我們可以得知，當 dfs 後的 require_cost 為奇數時，一定是 no，因為每一個路徑走過去又走回來一定是 \(路徑 * 2\)，不可能會有奇數</li>
+<li>題目有說，終點與前一個點的路徑只能走一遍，因此我們要把終點與前一個點的 cost erase。</li>
+<li>紀錄當問題求最小時，必須讓 dp 初始化時都是 INF。</li>
+<li><code>DFS 的路徑數量 == 成本數量</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>天啊，這題太狠了….，這題目好多細節，DP 與 DFS 的融合，太可怕了…我學到好多東西。</p>
+<p>老實講，這個其實還不賴，就是我在解決這題時思考的稍微有點久，也花了些時間先看懂別人如何寫的我再來自己試寫一遍。</p>
+<p>然後那個 UVa 那個格式有時候真的很機車QQQ，不要這樣啦。<br>希望我到時候都能在寫其他題目時注意到這些細節</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 60</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN_cost 100020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, m, q;</span><br><span class="line"><span class="keyword">int</span> id1, id2, cost;</span><br><span class="line"><span class="keyword">int</span> from, to, require_cost;</span><br><span class="line"><span class="keyword">int</span> visit[MAXN];</span><br><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN_cost];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> node, cost;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; road[MAXN]; </span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; travel_cost;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "root to " &lt;&lt; root &lt;&lt; ' ' &lt;&lt; to &lt;&lt; '\n';</span></span><br><span class="line">    <span class="keyword">if</span>(root == to) <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//已被經過</span></span><br><span class="line"></span><br><span class="line">    visit[root] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; road[root].size(); i++)&#123; <span class="comment">//不斷嘗試尋找可能路徑</span></span><br><span class="line">        <span class="keyword">if</span>(dfs(road[root][i].node))&#123;</span><br><span class="line">            require_cost -= road[root][i].cost;</span><br><span class="line">            <span class="comment">//注意邏輯，這裡是越後面的 path 會放在 vector 前面</span></span><br><span class="line">            travel_cost.push_back(road[root][i].cost); </span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">coin_change</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(from == to) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//UVa debug 有這個測資，但 UVa online judge 沒用</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "fron to require_cost " &lt;&lt; from &lt;&lt; ' ' &lt;&lt; to &lt;&lt; ' ' &lt;&lt; require_cost &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">int</span> connected = dfs(from); <span class="comment">//判斷是否有唯一路徑</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "connected status " &lt;&lt; connected &lt;&lt; "\n";</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "required cost " &lt;&lt; require_cost &lt;&lt; "\n";</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//if(connected == 0) return -1; 題目有說，一定有唯一路徑，因此不用判斷</span></span><br><span class="line">    <span class="keyword">if</span>(require_cost == <span class="number">0</span>) <span class="keyword">return</span> travel_cost.size(); <span class="comment">//分析第 4-2 點</span></span><br><span class="line">    <span class="keyword">if</span>(require_cost &lt; <span class="number">0</span> || require_cost % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//分析第 4-1、5-2 點</span></span><br><span class="line">    travel_cost.erase(travel_cost.begin()); <span class="comment">//分析 5-2 點</span></span><br><span class="line">    <span class="keyword">if</span>(travel_cost.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//如果沒有其他可重複路徑，但還有成本，那也解不出來</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "start dp " &lt;&lt; '\n';</span></span><br><span class="line">    <span class="comment">//for(int i = 0; i &lt; travel_cost.size(); i++) cout &lt;&lt; travel_cost[i] &lt;&lt; ' ';</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">    require_cost /= <span class="number">2</span>; <span class="comment">//折半，走一步、退回一步</span></span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>; <span class="comment">//dp 一開始初始化 dp[i][j], i = 使用的路徑、j = require_cost</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; travel_cost.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= require_cost; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j - travel_cost[i] &gt;= <span class="number">0</span>) dp[i][j] = min(dp[i][j], dp[i][j - travel_cost[i]]+<span class="number">1</span>);</span><br><span class="line">            <span class="comment">//if(j - travel_cost[i] &gt;= 0) cout &lt;&lt; j &lt;&lt; " " &lt;&lt; dp[i][j] &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//狀態轉移</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span>) dp[i][j] = min(dp[i<span class="number">-1</span>][j], dp[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "travel_cost.size()-1 " &lt;&lt; travel_cost.size()-1 &lt;&lt; '\n';</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; dp[travel_cost.size()-1][require_cost] &lt;&lt; ' ' &lt;&lt; INF &lt;&lt; '\n';</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果 requre_cost 有答案，就直接輸出，沒有就是 -1</span></span><br><span class="line">    <span class="keyword">if</span>(dp[travel_cost.size()<span class="number">-1</span>][require_cost] == INF) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="comment">//由於 dp 這邊是算來回走，</span></span><br><span class="line">    <span class="comment">//因此 DFS 路徑數量(路徑數量 == 成本數量) + dp * 2 + 終點與前一個點的路徑只能走一遍</span></span><br><span class="line">    <span class="keyword">return</span> travel_cost.size() + dp[travel_cost.size()<span class="number">-1</span>][require_cost] * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) road[i].clear(); <span class="comment">//路徑清空</span></span><br><span class="line">        <span class="comment">//放入路徑，為了效率， road[i][j]，i 為 node、j 為 node 的第幾個路徑</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; </span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; id1 &gt;&gt; id2 &gt;&gt; cost;</span><br><span class="line">            road[id1].push_back(&#123;id2, cost&#125;);</span><br><span class="line">            road[id2].push_back(&#123;id1, cost&#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123;</span><br><span class="line">            travel_cost.clear(); <span class="comment">//紀錄成本的 vector 刪除</span></span><br><span class="line">            <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit)); <span class="comment">//初始 visit</span></span><br><span class="line">            <span class="built_in">memset</span>(dp, INF, <span class="keyword">sizeof</span>(dp)); <span class="comment">//初始 dp</span></span><br><span class="line"></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; from &gt;&gt; to &gt;&gt; require_cost;</span><br><span class="line">            <span class="keyword">int</span> ans = coin_change();</span><br><span class="line">            <span class="keyword">if</span>(ans == <span class="number">-1</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"No"</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes "</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(t != <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//題目要求換行</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-Dynamic-programming/" rel="tag">動態規劃 Dynamic programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/08/02/UVa/UVa13141/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa13141 - Growing Trees(動態規劃)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/07/26/UVa/UVa11259/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa11259 - Coin Changing Agains(動態規劃、排容原理)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
