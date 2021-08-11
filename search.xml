@@ -22124,4 +22124,244 @@
         <tag>人生旅途</tag>
       </tags>
   </entry>
+  <entry>
+    <title>演算法知識 - Graph theorm Find Bridge</title>
+    <url>/2021/08/11/Explain_Algorithm/Find_Bridge_Problem/</url>
+    <content><![CDATA[<h2 id="Find-Bridge-介紹"><a href="#Find-Bridge-介紹" class="headerlink" title="Find Bridge 介紹"></a>Find Bridge 介紹</h2><blockquote>
+<p>Find Bridge 顧名思義就是要找到橋，那這裡的橋是甚麼意思呢？<br>想想現實生活中的橋，是不是只要橋斷開了兩邊的聯繫就斷了？</p>
+<p>那麼圖論中亦是如此，只要<strong>有一個邊斷掉了</strong>，那麼就一張圖就被分成兩個圖了！(注意，兩張圖中可能其中有一張圖只有一個點)<br><a href="http://web.ntnu.edu.tw/~algo/Component.html#1" target="_blank" rel="noopener">師大演算法</a>中有用圖片進行說明，其中我用紅筆圈出來的就是橋。<br>注意，圖中的 (1,2)、(7,8)、(7,9) 都是橋<br><img src="https://drive.google.com/u/2/uc?id=1_tHUD8aRq2pGCI_nSM9fb22YusZBOi2L&export=download" alt=""></p>
+<p><strong>而此演算法解出的問題就是讓所有這些橋的點都被找到</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li>她講得很好，大力推薦 <a href="https://cp-algorithms.com/graph/bridge-searching.html" target="_blank" rel="noopener">Finding bridges in a graph in O(N+M) by CP-alhorithm</a></li>
+<li><a href="http://web.ntnu.edu.tw/~algo/Component.html#1" target="_blank" rel="noopener">師大演算法</a><h2 id="邏輯證明"><a href="#邏輯證明" class="headerlink" title="邏輯證明"></a>邏輯證明</h2></li>
+<li>四個陣列，一個 vector <code>edge</code> 紀錄題目的邊<ul>
+<li><code>depth</code> 記錄當前深度</li>
+<li><code>low</code> 紀錄當前節點，能返回的最淺深度是多少</li>
+<li><code>visit</code> 紀錄是否有走訪過</li>
+<li><code>ancestor</code> 為 disjoint set，將所有橋的節點放在一起</li>
+</ul>
+</li>
+<li>程式邏輯與證明<ul>
+<li>首先我們先假設 <code>low[root] = depth[root]</code>，完全一樣 </li>
+<li>當 <code>root</code> 可以返回到已經走訪過的邊(定義 <code>v</code>)時，此時 <code>depth[root] &lt; depth[v]</code><br>因為可以碰到之前走訪過的點，因此這個邊不會是一個 bridge，root 就也不會是 bridge node</li>
+<li>當 <code>low[root] &gt; low[v]</code> 表示 <code>v</code> 這個節點他可以返回到更前面的節點。因此就表示 root 也不是 bridge node。</li>
+<li>當 <code>low[v] &gt; depth[root]</code>，表示 root 的下一個節點 v，沒辦法透過任何方式回到 root 身邊來，因此我們就可以證實 root 跟 v 都是 bridge node，有一個 bridge node。<ul>
+<li>此時，將 root 與 v 放入同一個 bridge node set，就可以知道他們都是 bridge node。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="程式碼說明"><a href="#程式碼說明" class="headerlink" title="程式碼說明"></a>程式碼說明</h2><p>這裡我們透過程式碼說明，並且解釋。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN];</span><br><span class="line"><span class="keyword">int</span> visit[MAXN], depth[MAXN], low[MAXN];</span><br><span class="line"><span class="keyword">int</span> ancestor[MAXN];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> find_root(<span class="keyword">int</span> x)&#123; </span><br><span class="line">    <span class="keyword">if</span>(ancestor[x] != x) <span class="keyword">return</span> ancestor[x] = find_root(ancestor[x]);</span><br><span class="line">    <span class="keyword">return</span> ancestor[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_bridge</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> past)</span></span>&#123; <span class="comment">//找到橋點</span></span><br><span class="line">    visit[root] = <span class="number">1</span>; <span class="comment">//表示走訪過</span></span><br><span class="line">    depth[root] = low[root] = cnt++; <span class="comment">//邏輯證明 2.1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node: edge[root])&#123; <span class="comment">//不斷遍地</span></span><br><span class="line">        <span class="comment">//因為是無向邊，因此雙向同個 edge 不是 bridge </span></span><br><span class="line">        <span class="keyword">if</span>(node == past) <span class="keyword">continue</span>; </span><br><span class="line">        <span class="keyword">if</span>(visit[node]) low[root] = min(low[root], depth[node]); <span class="comment">//邏輯證明 2.2</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//先進行 DFS，往下找其他的 node 有沒有辦法回到曾經走放過的節點</span></span><br><span class="line">            find_bridge(node, root); </span><br><span class="line">            low[root] = min(low[root], low[node]); <span class="comment">//邏輯證明 2.3</span></span><br><span class="line">            <span class="keyword">if</span>(low[node] &gt; depth[root])&#123;  <span class="comment">//邏輯證明 2.4</span></span><br><span class="line">                <span class="keyword">int</span> fa_node = find_root(node); <span class="comment">//進行 disjoint merge</span></span><br><span class="line">                <span class="keyword">int</span> fa_root = find_root(root);</span><br><span class="line">                <span class="comment">//cout &lt;&lt; "fa " &lt;&lt; fa_node &lt;&lt; " " &lt;&lt; fa_root &lt;&lt; "\n";</span></span><br><span class="line">                ancestor[fa_node] = fa_root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好久沒有學演算法了，真的覺得學演算法是最開心的一件事，總是能透過一些優秀的方式來解決生活上的許多難題，這種動腦的我真的很喜歡。</p>
+<p>但是我又感覺我不夠聰明好討厭QQ。</p>
+<p>謝謝 cp 用好懂的方式教會我。</p>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>Find Bridge</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10116 - Robot Motion(DFS)</title>
+    <url>/2021/08/10/UVa/UVa10116/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>我們的機器人會根據路面上的指示進行移動，請告訴我們當她從座標 \(0,c\) 進去後幾步會出來地圖外。<br>如果產生迴圈的狀態，請告訴我們這個迴圈有幾步</p>
+<p><a href="https://onlinejudge.org/external/101/10116.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>DFS</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>簡單的 DFS</li>
+<li>判斷迴圈<ul>
+<li>當碰到之前經歷過的節點，就知道是迴圈並且輸出步數</li>
+</ul>
+</li>
+<li>可以離開地圖<ul>
+<li>只要當我們走到地圖外後，就知道離開地圖</li>
+</ul>
+</li>
+<li>途中記錄每一個遍地的節點都必須要記錄<strong>步數</strong></li>
+</ul>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> maze[<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> visit[<span class="number">20</span>][<span class="number">20</span>];</span><br><span class="line"><span class="keyword">int</span> r, c, go;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> step)</span></span>&#123;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">if</span>(x &lt; <span class="number">0</span> || x &gt;= r || y &lt; <span class="number">0</span> || y &gt;= c)&#123; <span class="comment">//判斷是否離開地圖</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; step &lt;&lt; <span class="string">" step(s) to exit\n"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(visit[x][y] != <span class="number">-1</span>)&#123; <span class="comment">//又重新回到 loop</span></span><br><span class="line">        <span class="comment">//visit[x][y] 由於回到迴圈，因此碰到迴圈的那個點之前的步數都是正常</span></span><br><span class="line">        <span class="comment">//step - visit[x][y] 總步數 - 不是迴圈的步數 = 迴圈步數</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; visit[x][y] &lt;&lt; <span class="string">" step(s) before a loop of "</span> &lt;&lt; step - visit[x][y] &lt;&lt; <span class="string">" step(s)\n"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    visit[x][y] = step; <span class="comment">//這是第幾步</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//判斷下一個位置要怎麼走</span></span><br><span class="line">    <span class="keyword">if</span>(maze[x][y] == <span class="string">'N'</span>) dfs(x<span class="number">-1</span>, y, step+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(maze[x][y] == <span class="string">'S'</span>) dfs(x+<span class="number">1</span>, y, step+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(maze[x][y] == <span class="string">'W'</span>) dfs(x, y<span class="number">-1</span>, step+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(maze[x][y] == <span class="string">'E'</span>) dfs(x, y+<span class="number">1</span>, step+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; r &gt;&gt; c &gt;&gt; go &amp;&amp; (r + c + go) != <span class="number">0</span>)&#123; <span class="comment">//注意，我的 index 從 0 開始</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r; i++) <span class="built_in">cin</span> &gt;&gt; maze[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= r; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= c; j++) visit[i][j] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(<span class="number">0</span>,go<span class="number">-1</span>,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10505 - Montesco vs Capuleto(DFS、塗色問題)</title>
+    <url>/2021/08/10/UVa/UVa10505/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>羅密歐與茱麗葉要結婚啦，但他們的雙方家庭是世仇，但他們還是希望可以找雙方家庭的親朋好友來，因此它們避免婚禮之間有衝突，他們邀請的人如下</p>
+<ul>
+<li>如果 a 跟 b 是敵人，b 跟 c 也是敵人，d 跟 a,b,c 都不是敵人，那麼 a 跟 c 就是朋友、a 與 d <strong>並不是朋友</strong>。</li>
+<li>如果 a 跟 b 是敵人，雙方都討厭對方</li>
+<li>我們只邀請數字小於 N 的人，大於 N 的都不邀請</li>
+<li>如果我們邀請 a，那麼 a 以外的所有朋友都要參加，避免被誤會。</li>
+</ul>
+<p>現在請告訴羅密歐與茱麗葉，最多有幾個人可以來參加婚禮</p>
+<p><a href="https://onlinejudge.org/external/105/10505.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>塗色問題(在題目的第一點可以得知)</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>寫一個 DFS，並分成 A、B 陣營，只要是 B 的敵人就是 A 陣營，反之亦同。</li>
+<li>必須邀請每一個朋友，因此只要有一個好朋友不能來就不行，也表示當塗色問題遇到衝突時，就果斷放棄那棵樹，因為不管怎麼選都會有一個朋友沒辦法參加，或出現一個敵人。<ul>
+<li>舉例，A 跟 B 是敵人、B 跟 C 是敵人、A 跟 C 是敵人</li>
+</ul>
+</li>
+<li><strong>因此這個朋友關係表不可以有任何衝突，有就不能記錄</strong></li>
+<li>最多邀請人數 = 每一個朋友關係表中的最大陣營(<code>max(a,b)</code>)<br>每一個是因為題目不一定<strong>只給一個</strong></li>
+<li><strong>紀錄，不可以發現衝突就 return 回來，這樣那一個完整的朋友關係圖沒有完整走過，因此我們不斷在尋找下一張朋友關系圖時，程式會拆成兩張，造成 bug</strong></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva10505" target="_blank" rel="noopener">Uva10505 - Montesco vs Capuleto by txya900619</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>一開始我還沒辦法發現這是塗色問題QQ，加上好久沒有看到 <strong>if, and only if,</strong>，都是看到 iff，直接把題目意思給搞錯了…。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 300</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN];</span><br><span class="line"><span class="keyword">int</span> visit[MAXN];</span><br><span class="line"><span class="keyword">int</span> t, n, cnt, enemy;</span><br><span class="line"><span class="keyword">int</span> color[<span class="number">2</span>], flag; <span class="comment">//color = A、B 兩大陣營，flag 為判斷這個朋友關係表是否有衝突</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> status)</span></span>&#123; <span class="comment">//status 表示現在的 node 必須是哪個陣營</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "root " &lt;&lt; root &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">if</span>(visit[root] == <span class="number">-1</span>) visit[root] = status; <span class="comment">//加入陣營</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//如果此節點已經有加入陣營且陣營與 status 相同，表示不衝突</span></span><br><span class="line">        <span class="comment">//注意這裡是用 and (1 &amp; 1 = 0) (0 &amp; 0=1)，不要像我一樣突然把 and 當成 nor..</span></span><br><span class="line">        flag &amp;= (visit[root] == status); </span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">//他之前已經遍地過因此 return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "root status " &lt;&lt; root &lt;&lt; " " &lt;&lt; visit[root] &lt;&lt; "\n";</span></span><br><span class="line">    color[status]++; <span class="comment">//status 陣營增加一個</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[root].size(); i++)&#123; <span class="comment">//幫 subnode 加入敵對陣營</span></span><br><span class="line">        dfs(edge[root][i], <span class="number">1</span>-status);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            visit[i] = <span class="number">-1</span>;</span><br><span class="line">            edge[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; cnt;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cnt; j++)&#123;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; enemy;</span><br><span class="line">                <span class="keyword">if</span>(enemy &gt; n) <span class="keyword">continue</span>; <span class="comment">//題目第三點說明</span></span><br><span class="line">                edge[i].push_back(enemy); <span class="comment">//雙向，題目第二點說明</span></span><br><span class="line">                edge[enemy].push_back(i);</span><br><span class="line">                <span class="comment">//cout &lt;&lt; "i enemy " &lt;&lt; i &lt;&lt; " " &lt;&lt; enemy &lt;&lt; "\n";</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="built_in">memset</span>(color, <span class="number">0</span>, <span class="keyword">sizeof</span>(color));</span><br><span class="line">            <span class="keyword">if</span>(visit[i] == <span class="number">-1</span>)&#123;</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">                dfs(i, <span class="number">0</span>); </span><br><span class="line">                <span class="comment">//表示這個朋友關係表沒有衝突，找最大的陣營的來參加婚禮</span></span><br><span class="line">                <span class="keyword">if</span>(flag == <span class="number">1</span>) ans += max(color[<span class="number">0</span>], color[<span class="number">1</span>]); </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//cout &lt;&lt; "max " &lt;&lt; max(color[0], color[1]) &lt;&lt; "\n";</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12363 - Hedge Mazes(DFS、Find Bridge Problem、Disjoint Set)</title>
+    <url>/2021/08/10/UVa/UVa12363/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>女王是迷宮粉絲，因此他把女王的住處切割成每一個房間，並透過走廊連接，每一個房間都透過走廊連接，女王想問你說從 A 到 B 是不是<strong>恰好只有一條路徑可以抵達</strong>。</p>
+<p><a href="https://cp-algorithms.com/graph/bridge-searching.html" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://cp-algorithms.com/graph/bridge-searching.html" target="_blank" rel="noopener">Find Bridge Problem</a></li>
+<li><a href="https://theriseofdavid.github.io/2021/02/02/Explain_Algorithm/disjoint-set/" target="_blank" rel="noopener">並查集</a></li>
+<li>必須先熟悉上面兩點才有辦法寫此題目</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>首先，我們知道，如果要恰好只有一條路徑，那麼就必須每一個走廊都要是 bridge 才有辦法完成。</li>
+<li>因此，我們用 Find Bridge Problem + disjoint set 將所有的橋都放在同個 set。</li>
+<li>這篇則有詳細的說明 <a href="https://theriseofdavid.github.io/2021/08/11/Explain_Algorithm/Find_Bridge_Problem/" target="_blank" rel="noopener">Find Bridge Problem by 大衞的筆記</a></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva12363" target="_blank" rel="noopener">Uva12363 - Hedge Mazes by txya900619</a><br><a href="https://cp-algorithms.com/graph/bridge-searching.html" target="_blank" rel="noopener">Finding bridges in a graph in O(N+M) by CP-alhorithm</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。<br>其中 <a href="https://theriseofdavid.github.io/2021/08/11/Explain_Algorithm/Find_Bridge_Problem/" target="_blank" rel="noopener">Find Bridge Problem by 大衞的筆記</a> 這邊的程式碼請看這個 link 有詳細的說明。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 100020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN];</span><br><span class="line"><span class="keyword">int</span> visit[MAXN], ancestor[MAXN];</span><br><span class="line"><span class="keyword">int</span> depth[MAXN], low[MAXN];</span><br><span class="line"><span class="keyword">int</span> r, c, q, cnt;</span><br><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ancestor[x] != x) <span class="keyword">return</span> ancestor[x] = find_root(ancestor[x]);</span><br><span class="line">    <span class="keyword">return</span> ancestor[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_bridge</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> past)</span></span>&#123;</span><br><span class="line">    visit[root] = <span class="number">1</span>;</span><br><span class="line">    depth[root] = low[root] = cnt++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node: edge[root])&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == past) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(visit[node]) low[root] = min(low[root], depth[node]);</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            find_bridge(node, root);</span><br><span class="line">            low[root] = min(low[root], low[node]);</span><br><span class="line">            <span class="keyword">if</span>(low[node] &gt; depth[root])&#123;</span><br><span class="line">                <span class="keyword">int</span> fa_node = find_root(node);</span><br><span class="line">                <span class="keyword">int</span> fa_root = find_root(root);</span><br><span class="line">                <span class="comment">//cout &lt;&lt; "fa " &lt;&lt; fa_node &lt;&lt; " " &lt;&lt; fa_root &lt;&lt; "\n";</span></span><br><span class="line">                ancestor[fa_node] = fa_root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; r &gt;&gt; c &gt;&gt; q &amp;&amp; (r+c+q) != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)&#123;</span><br><span class="line">            edge[i].clear();</span><br><span class="line">            ancestor[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">        <span class="built_in">memset</span>(depth, <span class="number">0</span>, <span class="keyword">sizeof</span>(depth));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            edge[a].push_back(b);</span><br><span class="line">            edge[b].push_back(a);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cnt = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!visit[i]) find_bridge(i, <span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"ancestor "</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; ancestor[i] &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"low "</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; low[i] &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            <span class="keyword">int</span> fa_a = find_root(a);</span><br><span class="line">            <span class="keyword">int</span> fa_b = find_root(b);</span><br><span class="line">            <span class="keyword">if</span>(fa_a == fa_b) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Y\n"</span>; <span class="comment">//如果在同個 bridge node 就是 Yes</span></span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"N\n"</span>; <span class="comment">//沒有表示有兩種以上路徑 or 沒有路徑</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"-\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>Disjoint Set 並查集</tag>
+        <tag>程式解題</tag>
+        <tag>Find Bridge Problem</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>程式交易股票經驗，賠了 3 萬的大衛QQ</title>
+    <url>/2021/08/10/trade_life/program_stock_experence20210811/</url>
+    <content><![CDATA[<h2 id="前情概要"><a href="#前情概要" class="headerlink" title="前情概要"></a>前情概要</h2><blockquote>
+<p>主要是大衛從 7/16 開始用程式做交易，結果賠了 3 萬元，在這邊做一個心得回饋與紀錄。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="一開始的我"><a href="#一開始的我" class="headerlink" title="一開始的我"></a>一開始的我</h2><p>由於一開始我的策略透過回測都很棒，勝率 80%、profit factor 大於 3，就會很想要下去實際操作看看。(題外話：感謝吳沐恩老師與研究生們，讓我學到很多知識)</p>
+<p>那說實在的，我去年工作也就只有 15 萬多，跟媽媽要了 10 萬，就拿 25 萬下去玩股票拉XD。</p>
+<p>一開始的時候策略大賺就陸續想了一些新的策略，看起來也都很漂亮就慢慢來使用了。<br>其實很想要跟沐恩老師開會報告，但感覺沒有面對面我不太會表達QQ，想說等到開學見面再跟他講講我的策略想法。</p>
+<h2 id="程式交易"><a href="#程式交易" class="headerlink" title="程式交易"></a>程式交易</h2><p>雖然說是程式交易拉，但其實也不算，更正確一點說是<strong>股票推薦機器人</strong>，因為我都是用日K來做判斷，畢竟我沒有那麼多時間看盤，我怕做當沖，我去忙一個程式錯誤就要把我的錢大切八塊了QQ。</p>
+<p>因此我就寫了一個股票機器人，用日K判斷，此時就可以善用台股的盤後交易去交易，抑或是掛這今天收盤價去明天市場買入。</p>
+<h2 id="等等，我回測公式錯了，我竟然沒發現！"><a href="#等等，我回測公式錯了，我竟然沒發現！" class="headerlink" title="等等，我回測公式錯了，我竟然沒發現！"></a>等等，我回測公式錯了，我竟然沒發現！</h2><p>這時候我有一個策略，我定義它叫做<strong>斜率突破策略</strong>，他是我回測最漂亮、最亮眼的一隻策略，陸陸續續給了我好多隻股票，我就都買下去了，結果都大賠！常常就是隔天跌停…，我這個是放空大策略八…。<br>此時，我研究出了一個問題！發現我買的股票都是隔日沖大戶買的！</p>
+<p>起初，我一開始以為只是我的股票策略輸給了隔日沖大戶，因此還是繼續買，注意那幾個隔日沖卷商就好，結果還是有 70% 賠掉，這跟我原本想得很不一樣，明明應該至少都會大賺，怎麼會這樣？</p>
+<p>因此，我馬上回來檢查我的程式碼，發現我有一個的公式寫錯，導致我都是用前一天的價格買，這下可好了，我用前一天的價格判斷我今天會不會漲，阿可是我現實中是買今天的成交價阿…。</p>
+<p>我應該用今天預知明天，卻用了昨天來預知今天，接下來我將此程式修正，發現這隻策略就完全沒有賺，還大賠…，聽起來好適合放空喔XD。<br>但是我好像不能股票放空？沒有問過卷商不清楚。</p>
+<h2 id="現在才發現的我，已經賠了-1-萬-5-了…"><a href="#現在才發現的我，已經賠了-1-萬-5-了…" class="headerlink" title="現在才發現的我，已經賠了 1 萬 5 了…"></a>現在才發現的我，已經賠了 1 萬 5 了…</h2><p>沒辦法，乖乖認賠止損拉，雖然心很痛，但也沒辦法嘛。畢竟是自己的問題，怎麼能抱怨別人？自己摸摸鼻子，下次努力。</p>
+<p>然後今天，我那隻表現比較普通的策略讓我現在未實現損益 4.97%，我都是 5% 停損，雖然現在很想停損…，但還是遵守紀律，看看明天的收盤有沒有跌破 5% 八…。</p>
+<h2 id="其實回測下來，發現等待不可怕，但是在購買的時候，發現等待才是魔鬼"><a href="#其實回測下來，發現等待不可怕，但是在購買的時候，發現等待才是魔鬼" class="headerlink" title="其實回測下來，發現等待不可怕，但是在購買的時候，發現等待才是魔鬼"></a>其實回測下來，發現等待不可怕，但是在購買的時候，發現等待才是魔鬼</h2><p>你會因為在等待，看到股票漲，那天心情就好；看到股票跌，心情就差，很容易被股票的未實現損益給影響心情，賠的時候就很想趕快賣掉，賺的時候就會想放著慢慢賺，ummm…聽起來真的是很微妙…。</p>
+<p>要讓自己學會等待，雖然我自己最不擅長等待，每次一等待就會急躁，心情不好…，還要多練練。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>介於上面這些因素，我對程式買賣股票有了一些結論</p>
+<ul>
+<li>先下模擬單一個月，讓自己習慣這個策略的漲跌習性<ul>
+<li>如果發現這個月都是賠，那就先不要下場。也許是還在吹西北風，還沒吹東風。</li>
+<li>如果這個月都是賺，漂亮，該下場了bro。</li>
+</ul>
+</li>
+<li>如果短期(5 天)想不到好策略，要不要試試看中期？(一個月)<ul>
+<li>我都以 5 日為目標，但發現只用 5 個 K 棒有點難做，我玩期貨也沒有只用 5 跟K，也許我還泰菜了</li>
+</ul>
+</li>
+</ul>
+<p>總之，希望我能記起這 3 萬得教訓，讓自己好好變的優秀，可以讓自己在股票市場中賺的到錢！<br>我還蠻希望可以把交易員當作我的工作，我可以看盤看 3 個小時不覺得累！看盤跟寫演算法都是我的最大樂趣之一！</p>
+<p>只是看盤不利可能會睡公園，所以我要加緊腳步學習！</p>
+]]></content>
+      <categories>
+        <category>交易人生</category>
+      </categories>
+      <tags>
+        <tag>程式交易</tag>
+        <tag>股票</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12783 - Weak Links(DFS、Find Bridge Problem)</title>
+    <url>/2021/08/12/UVa/UVa12783/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>警察想要拆除犯罪份子的聯繫，會給你一個犯罪分子的聯繫圖，只要我們能夠將這個聯繫圖一分為二，此時他們的消息傳播就會被我們給阻斷。</p>
+<p>你的任務就是要找出只要切斷那些犯罪份子的聯繫，就可以讓消息傳播阻斷，輸出總共有幾種切法，並且輸出每一種切法。<br>並且從最小的犯罪份子(數字代號)開始依序輸出<br><a href="https://onlinejudge.org/external/127/12783.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://cp-algorithms.com/graph/bridge-searching.html" target="_blank" rel="noopener">Find Bridge Problem</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>首先，我們知道，將圖一分為二的方法就是找到 bridge</li>
+<li>因此我們就將所有的 bridge 存在 vector</li>
+<li>之後 vector sort 就可以輸出。</li>
+<li>這篇則有詳細的說明 <a href="https://theriseofdavid.github.io/2021/08/11/Explain_Algorithm/Find_Bridge_Problem/" target="_blank" rel="noopener">Find Bridge Problem by 大衞的筆記</a></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><a href="https://cp-algorithms.com/graph/bridge-searching.html" target="_blank" rel="noopener">Find Bridge Problem</a></li>
+<li><a href="https://hackmd.io/@txya900619/Uva12783" target="_blank" rel="noopener">Uva12783 - Weak Links by txya900619</a></li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>有時候不要耍小聰明，想說少寫一兩行，少做一個 step，將一些步驟優化掉，一定要先確認這個絕對沒錯，才可以優化！</p>
+<p>不然就會像我一樣，為了除一個錯，花了一個小時…，雖然我是覺得當你認為你優化非常棒的時候，就不會覺得有錯XD，好矛盾喔www。</p>
+<p>總之就是，要想清楚再寫，盡量想到各種可能性，沒想到地就當經驗，吸收起來。</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。<br>其中 <a href="https://theriseofdavid.github.io/2021/08/11/Explain_Algorithm/Find_Bridge_Problem/" target="_blank" rel="noopener">Find Bridge Problem by 大衞的筆記</a> 這邊的程式碼請看這個 link 有詳細的說明。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="comment">//#define DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1200</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt; bridge; <span class="comment">//儲存 bridge</span></span><br><span class="line"><span class="keyword">int</span> visit[MAXN], depth[MAXN], low[MAXN];</span><br><span class="line"><span class="keyword">int</span> n, m, a, b;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_bridge</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> past, <span class="keyword">int</span> cnt)</span></span>&#123;</span><br><span class="line">    visit[root] = <span class="number">1</span>; <span class="comment">//表示走訪過</span></span><br><span class="line">    depth[root] = low[root] = cnt; <span class="comment">//邏輯證明 2.1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> node: edge[root])&#123; <span class="comment">//不斷遍地</span></span><br><span class="line">        <span class="comment">//因為是無向邊，因此雙向同個 edge 不是 bridge</span></span><br><span class="line">        <span class="keyword">if</span>(node == past) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(visit[node]) low[root] = min(low[root], depth[node]); <span class="comment">//邏輯證明 2.2</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//先進行 DFS，往下找其他的 node 有沒有辦法回到曾經走放過的節點</span></span><br><span class="line">            find_bridge(node, root, cnt+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            low[root] = min(low[root], low[node]); <span class="comment">//邏輯證明 2.3</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(low[node] &gt; depth[root])&#123;  <span class="comment">//邏輯證明 2.4</span></span><br><span class="line">                <span class="comment">//我的 bug，請引以為戒。</span></span><br><span class="line">                <span class="comment">//我原本想說按照題目要求，小的放前面。那我就先使用 if 如果 root &gt; node 就交換，</span></span><br><span class="line">                <span class="comment">//但這樣會造成接下來的 for 中 root 全部都是錯的！</span></span><br><span class="line">                <span class="comment">//請大家不要跟我一樣犯錯...</span></span><br><span class="line">                <span class="comment">//if(node &lt; root) swap(node, root); </span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//小的節點放前面，大的放後面</span></span><br><span class="line">                bridge.push_back(&#123;min(node, root), max(node, root)&#125;); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &amp;&amp; (n+m) != <span class="number">0</span>)&#123;</span><br><span class="line">        bridge.clear();</span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">        <span class="built_in">memset</span>(depth, <span class="number">0</span>, <span class="keyword">sizeof</span>(depth));</span><br><span class="line">        <span class="built_in">memset</span>(low, <span class="number">0</span>, <span class="keyword">sizeof</span>(low));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) edge[i].clear();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            edge[a].push_back(b);</span><br><span class="line">            edge[b].push_back(a);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!visit[i]) find_bridge(i,<span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sort(bridge.begin(), bridge.end());</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; bridge.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> b: bridge)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; b.first &lt;&lt; <span class="string">" "</span> &lt;&lt; b.second;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"i depth low "</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span> &lt;&lt; depth[i] &lt;&lt; <span class="string">" "</span> &lt;&lt; low[i] &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n: edge[<span class="number">8</span>]) <span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
 </search>
