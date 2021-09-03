@@ -2866,7 +2866,6 @@
       <tags>
         <tag>大學Life</tag>
         <tag>ICPC</tag>
-        <tag>第五屆全國科技大專校院程式競賽</tag>
         <tag>程式比賽</tag>
         <tag>競賽心得</tag>
         <tag>人生旅途</tag>
@@ -22168,7 +22167,7 @@
       <tags>
         <tag>程式解題</tag>
         <tag>演算法知識</tag>
-        <tag>Find Bridge</tag>
+        <tag>Graph Component</tag>
       </tags>
   </entry>
   <entry>
@@ -22280,7 +22279,7 @@
         <tag>UVa</tag>
         <tag>Disjoint Set 並查集</tag>
         <tag>程式解題</tag>
-        <tag>Find Bridge Problem</tag>
+        <tag>Graph Component</tag>
       </tags>
   </entry>
   <entry>
@@ -22391,6 +22390,325 @@
       </categories>
       <tags>
         <tag>LATEX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - Component Tarjan&#39;s Algorithm</title>
+    <url>/2021/08/31/Explain_Algorithm/Tarjan&#39;s_Algorithm/</url>
+    <content><![CDATA[<h2 id="Tarjan’s-Algorithm-介紹"><a href="#Tarjan’s-Algorithm-介紹" class="headerlink" title="Tarjan’s Algorithm 介紹"></a>Tarjan’s Algorithm 介紹</h2><blockquote>
+<p>Tarjan’s Algorithm 分成無向圖與有向圖兩種</p>
+<ul>
+<li>無向圖<br>作者還沒有複習到此題目，就還沒寫XD。</li>
+<li>有向圖找出所有的 Sridge-connected Component(強連通分量)<ul>
+<li>Bridge-connected Component 所有兩點之間雙向皆有路可以抵達，圖片由<a href="http://web.ntnu.edu.tw/~algo/Component.html#8" target="_blank" rel="noopener">師大演算法</a>提供，不願意讓我放上再請告知我<br><img src="https://drive.google.com/u/2/uc?id=1exHXMEPgbRfMIm8pBpkvw6f7j1DIAD2_&export=download" alt="">   </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Tarjan’s-Algorithm-無向圖實作與原理"><a href="#Tarjan’s-Algorithm-無向圖實作與原理" class="headerlink" title="Tarjan’s Algorithm 無向圖實作與原理"></a>Tarjan’s Algorithm 無向圖實作與原理</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ul>
+<li>使用 DFS 實作</li>
+<li>使用堆疊紀錄每一個經過的點</li>
+<li>找出每一個點最高能回到哪一個點</li>
+<li>如果這個點最高能回朔的點還是自己，則表示這個點往下的所有點都會回朔到他，形成一個 SCC，因此將堆疊裡的點刪除，直到 stack.top() 最高能回朔的點還是自己。</li>
+</ul>
+<h3 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h3><p>不廢話，直接上來</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN]; <span class="comment">//圖</span></span><br><span class="line"><span class="keyword">int</span> stk[MAXN], in_stk[MAXN]; <span class="comment">//stk 是堆疊、in_stk 確認此點是否已在堆疊上</span></span><br><span class="line"><span class="keyword">int</span> visit[MAXN]; <span class="comment">//是否有走訪過</span></span><br><span class="line"><span class="keyword">int</span> lead[MAXN], low[MAXN]; <span class="comment">//lead 表示此點為哪一個 SCC、low 表示此點最高能回到哪一個點</span></span><br><span class="line"><span class="keyword">int</span> stk_index; <span class="comment">//堆疊的 size</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scc</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    visit[root] = low[root] = cnt++; <span class="comment">//因為是第一次接觸，先認定 root 只能回到 root</span></span><br><span class="line">    stk[++stk_index] = root; <span class="comment">// root 加入 stack， stk_index+1</span></span><br><span class="line">    in_stk[root] = <span class="number">1</span>; <span class="comment">//此點加入 stack</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[root])&#123; <span class="comment">//DFS</span></span><br><span class="line">        scc(it);</span><br><span class="line">        <span class="comment">//如果 scc 完成以後，因為 root -&gt; it 是一條邊，如果 it 可以返回到的點比 root 小，</span></span><br><span class="line">        <span class="comment">//那就改變 low[root]</span></span><br><span class="line">        <span class="keyword">if</span>(in_stk[it]) low[root] = min(low[it], low[root]); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果 low[root] 同時也是 root，表示這個點是 SCC 起點，把這個點以下的 stack，都設定為同組的 SCC</span></span><br><span class="line">    <span class="keyword">if</span>(visit[root] == low[root])&#123; </span><br><span class="line">        <span class="keyword">int</span> it;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            it = stk[stk_index--]; <span class="comment">//找出 stack.top()</span></span><br><span class="line">            in_stk[it] = <span class="number">0</span>; <span class="comment">//stack.pop()</span></span><br><span class="line">            lead[it] = root; <span class="comment">//it 的 SCC 是 root 組</span></span><br><span class="line">        &#125;<span class="keyword">while</span>(it != root); <span class="comment">//只要 it != root，表示還沒有找玩</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(visit[i]) <span class="keyword">continue</span>;</span><br><span class="line">        stk_index = <span class="number">-1</span>; cnt = <span class="number">1</span>;</span><br><span class="line">        scc(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://web.ntnu.edu.tw/~algo/Component.html#8" target="_blank" rel="noopener">Component: Tarjan’s Algorithm by 師大演算法</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>復習了之前學習過的演算法，不要再把她忘記了拉QQ。</p>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>Graph Component</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11770 - Lighting Away(DFS、Tarjan&#39;s Algorithm)</title>
+    <url>/2021/08/31/UVa/UVa11770/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Ronju 是一個保全，他每天晚上都必須讓公園裡的所有燈開啟，為此他必須每個電燈都走過去並開啟，他覺得太麻煩了，因此他買了許多不良但價格便宜的光感追蹤器，這種光感追蹤器很酷，只要他感應到 A 的電燈有開，則 B 也會開啟。</p>
+<p>現在會給你已知的資訊，只要 A 被點亮，同時 B 也會開啟的光感追蹤器數組，請告訴 Ronju 自己必須去手動開幾個電燈才可以把公園裡的全部電燈打開</p>
+<p><a href="https://onlinejudge.org/external/117/11770.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/08/31/Explain_Algorithm/Tarjan' target="_blank" rel="noopener"s_Algorithm/">Tarjan’s Algorithm by 大衞的筆記</a></li>
+<li>找到每個 SCC 後，確認是否可以讓兩個 SCC 被連通。</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>首先，先做一次 Tarjan’s Algorithm</li>
+<li>假如有兩個 SCC 是可以透過一個 bridge 連通，那是不是只要點一個燈，就可以讓兩個 SCC 連起來了，那我要怎麼排除這種情況<ul>
+<li>對所有的節點連接的每個連接都檢查一次 <ul>
+<li>it 為 A 開啟則 B 會開啟中的 B</li>
+<li>root 為 A 開啟則 B 會開啟中的 A</li>
+</ul>
+</li>
+<li>首先我們知道，如果 <code>lead[it] != it</code> 表示，這一個 SCC 的老大並不是 it</li>
+<li>如果 <code>lead[it] != lead[root]</code>，表示他們是兩個不同的 SCC，但卻可以互相連接，因此我們就可以讓 <code>lead[it]</code> 這組 SCC 不用被開啟，因為它可以被 <code>lead[root]</code> 開啟</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://web.ntnu.edu.tw/~algo/Component.html#8" target="_blank" rel="noopener">Component: Tarjan’s Algorithm by 師大演算法</a><br><a href="https://github.com/morris821028/UVa/blob/master/volume117/11770%20-%20Lighting%20Away.cpp" target="_blank" rel="noopener">11770 - Lighting Away by morris821028</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。<br>其中 <a href="https://theriseofdavid.github.io/2021/08/31/Explain_Algorithm/Tarjan' target="_blank" rel="noopener"s_Algorithm/">Tarjan’s Algorithm by 大衞的筆記</a> 這邊的程式碼請看這個 link 有詳細的說明。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, m, a, b, kase=<span class="number">1</span>, cnt;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN];</span><br><span class="line"><span class="keyword">int</span> stk[MAXN], in_stk[MAXN];</span><br><span class="line"><span class="keyword">int</span> visit[MAXN];</span><br><span class="line"><span class="keyword">int</span> lead[MAXN], low[MAXN];</span><br><span class="line"><span class="keyword">int</span> follow[MAXN]; <span class="comment">//follow 如果數值大於等於 1 表示，這個電燈可以被另外一個電燈給開啟。</span></span><br><span class="line"><span class="keyword">int</span> stk_index;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scc</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    visit[root] = low[root] = cnt++;</span><br><span class="line">    stk[++stk_index] = root;</span><br><span class="line">    in_stk[root] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[root])&#123;</span><br><span class="line">        scc(it);</span><br><span class="line">        <span class="keyword">if</span>(in_stk[it]) low[root] = min(low[it], low[root]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(visit[root] == low[root])&#123;</span><br><span class="line">        <span class="keyword">int</span> it;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            it = stk[stk_index--];</span><br><span class="line">            in_stk[it] = <span class="number">0</span>;</span><br><span class="line">            lead[it] = root;</span><br><span class="line">        &#125;<span class="keyword">while</span>(it != root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">isfollow</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[root])&#123;</span><br><span class="line">        <span class="keyword">if</span>(lead[it] != it) follow[it]++;</span><br><span class="line">        <span class="keyword">if</span>(lead[root] != lead[it]) follow[lead[it]]++; <span class="comment">//如果可以從 A強通道走道 B 強通道，就刪掉 B 強通道的開燈點</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//清除資料</span></span><br><span class="line">            edge[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123; <span class="comment">//加入邊</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            edge[a].push_back(b);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//進行 tarjan</span></span><br><span class="line">            <span class="keyword">if</span>(visit[i]) <span class="keyword">continue</span>;</span><br><span class="line">            stk_index = <span class="number">-1</span>; cnt = <span class="number">1</span>;</span><br><span class="line">            scc(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; "banana\n";</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(follow, <span class="number">0</span>, <span class="keyword">sizeof</span>(follow));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) isfollow(i);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="comment">//如果沒有辦法被其他電燈給開啟就 ans++</span></span><br><span class="line">            <span class="keyword">if</span>(!follow[i] &amp;&amp; lead[i] == i) ans++; </span><br><span class="line">            <span class="comment">//其中 lead[i] == i 則是此電燈沒辦法被其他電燈開啟，表示他會是強通道</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//for(int i = 1; i &lt;= n; i++) cout &lt;&lt; i &lt;&lt; " " &lt;&lt; group[i] &lt;&lt; "\n";</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; kase++ &lt;&lt; <span class="string">": "</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>Disjoint Set 並查集</tag>
+        <tag>程式解題</tag>
+        <tag>Graph Component</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R 股票回測推薦機器人首頁與目錄 - 使用 R 語言寫出你的第一個股票回測</title>
+    <url>/2021/08/25/trade_life/R_backtest_example/</url>
+    <content><![CDATA[<h2 id="文章概要"><a href="#文章概要" class="headerlink" title="文章概要"></a>文章概要</h2><blockquote>
+<p>主要透過 R 語言來寫股票回測，我們主要是想要解決這些問題</p>
+<ul>
+<li>將自己的策略透過程式回測，決定此策略是否有用</li>
+<li>選出適合自己的回測分析指標</li>
+<li>將所有的上市股票都嘗試一遍此策略，看看有多少股票適合此策略</li>
+</ul>
+<p>這裡我們會用一個簡單的例子來為各位示範一遍。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="章節，我們根據每一份程式碼來做一個章節"><a href="#章節，我們根據每一份程式碼來做一個章節" class="headerlink" title="章節，我們根據每一份程式碼來做一個章節"></a>章節，我們根據每一份程式碼來做一個章節</h2><ul>
+<li><a href=""><code>Ystock_data_convert.R</code> 股票資料蒐集</a></li>
+<li><code>strategy.R</code> 回測主程式</li>
+<li><code>XX_strategy.R</code> 策略回測程式碼</li>
+<li><code>trade_record_convert_to_profit_info.R</code> 將交易紀錄轉換為損益</li>
+<li><code>backtest_statistics.R</code> 回測效益分析</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>每一個人都希望可以透過操盤來賺錢，但並不是每一個人都可以順利透過操盤賺錢，但可以透過回測的方式將一些不好的策略提前逐出、將優秀的策略去無存菁。</p>
+<p>股票在短時間中也是一個零和遊戲，因此風險也必須是投資者所可以承受的範圍內，不應該因為在股票交易的過程股價，而讓自己的心情開心或難過。</p>
+<p>只有出場才是真的，沒有出場前都還說不一定。</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+        <category>交易人生</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>R dataframe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第六屆全國科大程式競賽心得 - 金獎(3th)心得</title>
+    <url>/2021/08/19/contest_experence/ncut2021/</url>
+    <content><![CDATA[<h2 id="文章概要"><a href="#文章概要" class="headerlink" title="文章概要"></a>文章概要</h2><blockquote>
+<p>紀錄 2021/08/19 第六屆全國科大程式競賽心得。<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>獲得了第三屆全國科大程式競賽金獎 (3th)</p>
+<p>組員有 陳力瑋、官齊芫分別簡稱為立委、阿官</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="前提概要、賽前練習"><a href="#前提概要、賽前練習" class="headerlink" title="前提概要、賽前練習"></a>前提概要、賽前練習</h2><p>這是我第二次參加這個比賽，雖然也不是第一次，但這次的隊友跟上次都完全不同，班底全都換了，老實說心裡還是會有點緊張，怕怕的。</p>
+<p>不過這次比上次來說，更有系統化、持續性的練習，這次開始加入風平學長推薦的 competitive programming 4 書中練習題，並且每個禮拜都會找一天來練習 codeforces、每周寫 4 題 UVa 並附上簡單詳解。</p>
+<p>從去年 12 月開始練習，大家其實也都有一點默契在、也都具備有一定的知識，其實我並不擔心會考差，只是我也不太希望考得比上次差，會難過QQ。</p>
+<h2 id="賽前準備"><a href="#賽前準備" class="headerlink" title="賽前準備"></a>賽前準備</h2><p>我們比賽前時，讓大家都蒐集好各自學習的演算法，並開一個 github 團隊空間，讓大家把程式碼放進去，接下來再透過 latex 將所有的演算法透過 LATEX 編譯成一本 notebook。</p>
+<p>不得不說，使用 latex 製作 notebook，其中的 mathjax and chinese 真的是夠搞死我的…，花了一堆時間去解決這些問題。</p>
+<p>最後，這裡是我們這次的 notebook，就給大家看看拉。</p>
+<p><a href="https://drive.google.com/file/d/1lzciqnBq3FsxkXoEokk4OKNFS3rFK2J1/view?usp=sharing" target="_blank" rel="noopener">NTUT_King notebook</a></p>
+<p>也要謝謝史丹佛大學願意提供 latex 範本給我們使用，謝謝風平學長在網路上找到此資源，並與我分享。</p>
+<h2 id="比賽前一天"><a href="#比賽前一天" class="headerlink" title="比賽前一天"></a>比賽前一天</h2><h3 id="從台北下去雲林"><a href="#從台北下去雲林" class="headerlink" title="從台北下去雲林"></a>從台北下去雲林</h3><p>從台北下去雲林時，我們就取票來搭高鐵，結果我前面的那個阿伯把他的椅子靠背拉超低，讓我根本不能用筆電，超級妨礙我的工作，請大家以後看到後面有人的時候請不要將靠背拉到最低，對後面的人來說非常不友善。</p>
+<p>不得不說，我還是覺得雲林高鐵站真的好漂亮，就像旅館大廳一樣高級，可是卻有點空虛，因為高鐵站裡面只有高鐵，但是地都很大，有時候難免會有點冷清感。</p>
+<blockquote>
+<p>雲林高鐵站<br><img src="https://drive.google.com/u/2/uc?id=1qowJJS1XBt5BGfRsCx8rJdHDRdTXIBmR&export=download" alt=""></p>
+</blockquote>
+<h3 id="民宿價格變貴了！"><a href="#民宿價格變貴了！" class="headerlink" title="民宿價格變貴了！"></a>民宿價格變貴了！</h3><p>按照慣例，我們習慣在比賽前一天會去住宿，因為去年有去過了，所以就想說找去年的，因此我就先在網路上搜尋此民宿並且去詢問價格，結果價格比去年多 200 元…。</p>
+<p>沒辦法嘛，窮學生，因此就回去找之前那間民宿的 Line，跟他們說我們要比賽，看看他會不會覺得我們是老顧客就給我們算便宜一點，按照去年價 1280 元XD。</p>
+<p>結果沒有QQ，好難過。<br>而且還有點尷尬，因為我都是用一樣的帳號去問，可能讓老闆娘覺得我很白目XD，故意想問便宜的價錢，不過沒辦法嘛，我是學生又不是大老闆QAQ。</p>
+<p>不過民宿雖然變貴，但是跟去年的裝潢差不多，不會很差。</p>
+<blockquote>
+<p>民宿與我的搭配<br><img src="https://drive.google.com/u/2/uc?id=1tXxwhQqZQeIykNJAYheGOil3VDFntfeE&export=download" alt=""></p>
+</blockquote>
+<h3 id="下來雲林後的探險"><a href="#下來雲林後的探險" class="headerlink" title="下來雲林後的探險"></a>下來雲林後的探險</h3><p>當我們下來到雲林高鐵站後，我們就搭計程車到虎尾，平均計程車價格在 170~190 左右，如果有些人也下來比賽，注意不要被計程車司機坑了XD。</p>
+<p>再來當我們到了民宿後，民宿的鐵門早上是不會關的..，我們以為必須關，還我們一直想把他關起來，結果他有卡住阿！我還以為是我太笨了，關不起來…。</p>
+<h4 id="吃飯"><a href="#吃飯" class="headerlink" title="吃飯"></a>吃飯</h4><p>到了民宿後，我們就先去吃飯。</p>
+<p>我們住的民宿離虎尾科大比較近，但虎尾科大沒有好吃的QQ，要走大概 20 分鐘才會到虎尾市區QQ，我們就一路走，一路吃東西。</p>
+<p>虎尾中正路上面有一堆好吃的，重點是虎尾都賣得很便宜！讓我這個台北俗覺得哇，太棒了！<br>而且南部的飲料店很酷，有一家叫做<strong>茶之魔手</strong>，他們的青茶只要 25 元，卻好喝到讓我驚豔，而且重點是我以為 25 元是大杯(700CC)，不過好像南部的大杯是 1000CC，哇喔，能花 25 元喝到 1000cc，在台北真的是有點想都別想..。</p>
+<p>他們的杯子是使用保麗龍杯，讚！在台北每次拿著塑膠杯，當裡面還有冰塊的時候手都會覺得冰冰冷冷，很不舒服，虎尾就不會！</p>
+<p>我上次在虎尾認識的學長宇翔學長則是告訴我說，虎尾有家很好吃的爆漿雞排，真的好吃，但是在外面不好吃QQ。疫情的關係邊走邊吃看起來都很罪惡，好難過…。<br>趕快解封拉，我想邊走邊吃。</p>
+<p>然後在虎尾真的不要買有掛名台北的東西，真的不好吃，我吃了士林粥，真的不合我口味…。<br>爆漿雞排、茶之魔手，是我那天吃過最好的東西了八XD。</p>
+<p>由於阿官沒有電腦，因此只有我跟立委有帶電腦來，且我們還有一年的考古題還沒寫，就想說順便在旅館裡面寫寫<br>吃飽後，我們來寫一下考古題，我拿出我帶來的 poker 提議說我們來玩大老二，誰先贏下兩場就不用寫 UVa。<br>結果我都輸，我沒辦法爽，哭阿。</p>
+<blockquote>
+<p>在民宿裡面的我們<br><img src="https://drive.google.com/u/2/uc?id=18MmBeWiTZM1u0avtfeQexqgqkyFccJ3O&export=download" alt=""></p>
+</blockquote>
+<p>再來我跟立委稍微買了些酒，吃飽後，我們在民宿裡面玩遊戲，玩99(poker)，每個人都限定一個數字，當那個人丟出那個數字後，其他人就必須喝酒XD。</p>
+<p>其實蠻好玩的，只是我一直輸:(<br>才 20 分鐘我就把我的長罐啤酒喝完了…。</p>
+<h4 id="洗澡"><a href="#洗澡" class="headerlink" title="洗澡"></a>洗澡</h4><p>洗澡的時候熱水一直沒有很熱，真的是快被冷死了…，下次在進去浴室之前必須都先確認浴室蓮蓬頭流出的水是熱水，不是冷水！<br>不然你在浴室裡面一直叫隊友幫你調高熱水器溫度真的很尷尬，而且你也不知道要在裡面冷多久…。</p>
+<h4 id="睡覺"><a href="#睡覺" class="headerlink" title="睡覺"></a>睡覺</h4><p>下次一定要提醒我，<strong>睡雙人床一定要拿兩個棉被</strong>，千萬不能一個，要是棉被被捲走了就真的不用睡了…。<br>我的棉被過程中常常被捲走QQ，或是被熱醒！可能會有些人想說，太熱就把冷氣調冷阿，我也這麼覺得，可是我已經開 26 度，卻還是被熱醒，但是其他人都不會，我只能說這間民宿的棉被真的太暖了，一定是想要我蓋著暖被子、開最冷的冷氣，讓我舒服睡覺XD。</p>
+<p>結果後面有點睡不太著，只睡了 2,3 個小時，其他時間都是被熱醒或是棉被被捲走了XD。</p>
+<p>總之下次一定要拿兩件棉被，不然跟男生睡覺時真的不太喜歡在睡覺時肢體碰撞，感覺有點微妙w。</p>
+<h2 id="比賽當天"><a href="#比賽當天" class="headerlink" title="比賽當天"></a>比賽當天</h2><h3 id="比賽的早上"><a href="#比賽的早上" class="headerlink" title="比賽的早上"></a>比賽的早上</h3><p>比賽當天早上，我們就順利的抵達虎尾科大報到，由於這次疫情關係，分成兩間教室，採用 2,1 方式做法，也就是 2 個人做一間教室，另一個人一間這樣。</p>
+<p>跟上次一樣的開場，因為去年有比過，大部分都差不多，比較不同的是這次有了隔板，以電腦為中心左右各塞一個隔板，真的是蠻不友善的設計…，不過疫情嘛，也沒辦法，只好將就點忍耐瞜。</p>
+<p>再來中午時我跟立委和阿官去印 notebook，順邊跟立委買個提神飲料，好笑的是，我買了兩杯 redbull 可以玩小七的兩杯飲料抽抽樂，我原本想要自己點，結果店員直接幫我點了，哭阿…，這..這是我的樂趣阿QAQ，不過店員幫我點到 68 折，蠻好的XD，馬上就不哭了www。</p>
+<h3 id="比賽了！"><a href="#比賽了！" class="headerlink" title="比賽了！"></a>比賽了！</h3><p>接下來進到考場比賽，這次比賽的難度比以往大幅提升超多…，出了大量數學、一點點幾何，圖論、字串題的難度較輕，剩下的就是基本操作題。</p>
+<p>其中我以為 E 是最難的題目，因為 E 的頁數最多，按照以往 ICPC 的慣例就是頁數最多、秒數最多的題目最難，結果在 NCUT 下完全不是！剛好反了，秒數越少的越難…，頁數多的反而講得很仔細，偏操作題，越難的題目頁數就越少…，哭阿，今年不按牌理出牌，我被唬到了…。</p>
+<p>其中這次我寫 D，D 其實不難，就是很煩…，我直接寫到崩潰…，要一直轉換，害我把我的程式寫得又臭又髒，並且在快要寫完的時候讓力瑋來接手，因為我的腦袋已經到極限了QQ，不要出這種一直要人硬幹的題目拉，出點正常點，需要一點小巧思的題目，讓我甘拜下風啦。</p>
+<p>接下來這次立委一共寫了 2.5 題、阿官寫了一題，我則寫了 0.5 題，看起來我最沒用QQ，這次沒有我擅長的題目QAQ。</p>
+<p>其中在最後半小時的時候特別刺激，因為我們在一個小時前就先寫了四題，接下來的一個小時都沒有新的進展，我們的名次則一直都在第三名，但是其中 4~10 名都是寫了三題，且作答時數都比我們少，因為我們常常把題目送出去 WA，被扣了一些分數，但他們幾乎沒有，因此真的很怕他們隨時有一組突然寫對一題，那我們就不是第三名，是第四名了…。</p>
+<p>因此其實真的很緊張，很怕別人寫出來，但是我現在也沒辦法讓我們這組再多寫一題，好無能為力QQ，真的只能交由天來決定了…。</p>
+<p>比賽最後 5 分鐘，聽到某一組突然歡呼的聲音，不知道他們是不是寫到四題，超越我們，害我突然很緊張…。</p>
+<p>幸好最後頒獎，我們還是第三名，我在想歡呼的那組應該不是 4~10 名八，好理家在，不然我這次回去就會有點苦悶了XD。<br>不過我也要好好改進，當我遇到這種大部分題目我都不會的時候，我應該要做甚麼，我能做甚麼，真的要好好檢討一下QQ。</p>
+<p>接下來順利頒完獎後，我們也拿到了獎金 6000 元，再來我們一起平分，就順順利利的準備打道回府啦。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gX-KmwP9ry1evpFhnJ9xkyf6OQiOs9bR&export=download" alt=""></p>
+</blockquote>
+<p>不過很酷的是，這次沒有參加獎狀那些東西，就是只有拍一張照片，簡單頒獎，讓我覺得有點小小難過QQ。</p>
+<blockquote>
+<p>虎尾聯軍(參加這次比賽虎尾科大的所有人)的合照<br><img src="https://drive.google.com/u/2/uc?id=1lkR131E_qx1dJMK0TICrAQaWWCC6qBB9&export=download" alt=""></p>
+</blockquote>
+<h2 id="準備回家"><a href="#準備回家" class="headerlink" title="準備回家"></a>準備回家</h2><p>接下來我們就離開虎尾，立委昨天提議說要吃拉麵，因此我們就去吃了一碗拉麵，話說我還真不懂拉麵，因為我之前看日本的影片，似乎日本人吃拉麵都會把湯給喝完，因此我也想說把湯給喝完，但是那個湯好鹹好油阿QQ，後來果斷放棄不喝湯，出了店家後我問立委說，這家店算好吃嗎？立委跟我說還不錯，我就感到驚訝，我就說可是他的湯好鹹好油，他跟我說那樣是正常的，表示這家店很用心，我就感到很驚訝！<br>原來是我見識少阿，看來文化這種東西可能還是不太能夠太相信影片(?，還是有知道的人幫我解答下QQ。</p>
+<blockquote>
+<p>拉麵照片<br><img src="https://drive.google.com/u/2/uc?id=1hTmch_bMMo02jTVcZ-spdnvRwprHscex&export=download" alt=""></p>
+</blockquote>
+<p>接下來我們就搭計程車回到雲林高鐵站，不得不說，雲林高鐵站是真的好繁華阿…，要是旁邊不要那麼的荒涼就好了XD。<br>計程車司機還蠻有趣的，一直跟我幹話，因為我不太能夠進去前座…，我覺得不是我胖啊，就書包太大了，不好進去，他車子太小了齁XD。然後一直被隊友還有司機開玩笑，哭阿哭阿。</p>
+<p>到了雲林高鐵站後，其實也才 6 點，但是我是訂 9 點的高鐵…，不小心訂得太晚了..，害我們整組隊員一起在高鐵站白等了 3 小時，我很抱歉&gt;&lt;，下次我會改進的！</p>
+<p>總之還是謝謝阿官、立委陪我一起比賽，要是沒有他們，我這次真的不會拿到第三名。</p>
+<h2 id="檢討"><a href="#檢討" class="headerlink" title="檢討"></a>檢討</h2><p>最後還是要稍微檢討一下，我覺得這次其實沒有太大問題，就是我的一些過去心態必須要改正，不可以一直按照過去經驗行事，畢竟比賽都是當下的，你還是不可以說，因為之前的比賽題目都怎樣怎樣，所以接下來會怎樣怎樣，這樣會出意外的。</p>
+<p><strong>要將所有題目都看完，不可以因為題目太多、秒數太久而不看，對待每一道題目都是一視同仁，不可以偏心</strong>，這就是我打這個比賽最需要檢討的地方了。</p>
+<p><strong>還有就是要多拍一些照片，多紀念，太久沒有出門了，一直忘記在路上多拍照，留下許多回憶</strong>。</p>
+]]></content>
+      <categories>
+        <category>競賽心得</category>
+      </categories>
+      <tags>
+        <tag>大學Life</tag>
+        <tag>ICPC</tag>
+        <tag>程式比賽</tag>
+        <tag>競賽心得</tag>
+        <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>演算法知識 - Component Kosaraju&#39;s Algorithm</title>
+    <url>/2021/08/31/Explain_Algorithm/Kosaraju_algorithm/</url>
+    <content><![CDATA[<h2 id="Kosaraju’s-Algorithm-介紹"><a href="#Kosaraju’s-Algorithm-介紹" class="headerlink" title="Kosaraju’s Algorithm 介紹"></a>Kosaraju’s Algorithm 介紹</h2><blockquote>
+<p>Kosaraju’s Algorithm 可以找出有向圖的 SCC</p>
+<ul>
+<li>Sridge-connected Component(強連通分量)<ul>
+<li>Bridge-connected Component 所有兩點之間雙向皆有路可以抵達，圖片由<a href="http://web.ntnu.edu.tw/~algo/Component.html#8" target="_blank" rel="noopener">師大演算法</a>提供，不願意讓我放上再請告知我</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Kosaraju’s-Algorithm-原理"><a href="#Kosaraju’s-Algorithm-原理" class="headerlink" title="Kosaraju’s Algorithm 原理"></a>Kosaraju’s Algorithm 原理</h2><h3 id="證明"><a href="#證明" class="headerlink" title="證明"></a>證明</h3><ul>
+<li>如果是 A、B、C 三個點都為 SCC，那我從 A 反方向走或正方向走都能走到 A</li>
+<li>其中圖中有一條邊為 A -&gt; D<ul>
+<li>如果有一個邊是 D -&gt; A，那我們就可以表示 A、B、C、D 都是 SCC</li>
+</ul>
+</li>
+<li>因此我們準備一張反向圖，一樣從 A 出發<ul>
+<li>題目給的圖如果是 A -&gt; B，則反向圖為 B -&gt; A</li>
+</ul>
+</li>
+<li>走訪 A、B、C<ul>
+<li>同理，如果我能夠滿足此上述條件就表示 A、B、C 為 SCC</li>
+</ul>
+</li>
+<li>無法走訪 A、D</li>
+<li>不可以的話，他們就不是同一組 SCC</li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ul>
+<li>使用 DFS 實作</li>
+<li>先進行一次 DFS，並由離開 DFS 的節點順序，依序放入 vector，定義為 <code>path</code></li>
+<li>再來根據 <code>path</code>，從最後被加入的節點不斷往前疊代進行 DFS。<ul>
+<li>這一次 dfs 中，此節點能夠碰到的所有節點都是同一組 scc。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kosaraju’s-Algorithm-實作"><a href="#Kosaraju’s-Algorithm-實作" class="headerlink" title="Kosaraju’s Algorithm 實作"></a>Kosaraju’s Algorithm 實作</h2><p>不廢話，直接上來</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN]; <span class="comment">//題目圖</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rev_edge[MAXN]; <span class="comment">//反向圖</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path; <span class="comment">//紀錄離開 DFS 的節點順序</span></span><br><span class="line"><span class="keyword">int</span> visit[MAXN]; </span><br><span class="line"><span class="keyword">int</span> group[MAXN]; <span class="comment">//判斷此節點在哪一個組</span></span><br><span class="line"><span class="keyword">int</span> cnt, a, b, q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span>;</span><br><span class="line">    visit[root] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[root])&#123;</span><br><span class="line">        dfs1(it);</span><br><span class="line">    &#125;</span><br><span class="line">    path.push_back(root); <span class="comment">//紀錄 DFS 離開的節點</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> ancestor)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span> ;</span><br><span class="line"></span><br><span class="line">    visit[root] = <span class="number">1</span>;</span><br><span class="line">    group[root] = ancestor; <span class="comment">//root 跟 ancestor 在同一個 SCC</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: rev_edge[root])&#123;</span><br><span class="line">       dfs2(it, ancestor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kosoraju</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; q; i++)&#123; <span class="comment">//q 為邊的長度 </span></span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        edge[a].push_back(b); <span class="comment">//題目圖</span></span><br><span class="line">        rev_edge[b].push_back(a); <span class="comment">//反向圖</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">    path.clear();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++)&#123; <span class="comment">//第一次 DFS</span></span><br><span class="line">        <span class="keyword">if</span>(!visit[i]) dfs1(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">    <span class="built_in">memset</span>(group, <span class="number">0</span>, <span class="keyword">sizeof</span>(group));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = path.size()<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123; <span class="comment">//尋找以 path[i] 為主的 SCC 有哪些節點</span></span><br><span class="line">        <span class="keyword">if</span>(!visit[path[i]])&#123;</span><br><span class="line">            dfs2(path[i], path[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://web.ntnu.edu.tw/~algo/Component.html#9" target="_blank" rel="noopener">Component: Kosaraju’s Algorithm by 師大演算法</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>專家們、科學家們研究出來的成果希望我都可以把他們吸收進去，並且運用在我未來的道路上。</p>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+        <tag>Graph Component</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11709 - Trust groups(DFS、Kosaraju&#39;s Algorithm)</title>
+    <url>/2021/08/31/UVa/UVa11709/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>由於公司內部的員工產生了不信任的問題導致公司生產力降低，為了解決此問題，因此公司決定讓互相信任的人組成一組，來增加生產力。<br>我們希望可以在公司的員工們，分成最小的組別數。</p>
+<p><a href="https://onlinejudge.org/external/117/11709.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/08/31/Explain_Algorithm/Kosaraju_algorithm/" target="_blank" rel="noopener">Kosaraju’s Algorithm by 大衞的筆記</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>Kosaraju’s Algorithm 的模板題，直接套用即可。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11709" target="_blank" rel="noopener">Uva11709 - Trust groups by txya900619</a><br><a href="http://web.ntnu.edu.tw/~algo/Component.html#9" target="_blank" rel="noopener">Component: Kosaraju’s Algorithm by 師大演算法</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。<br>其中 <a href="https://theriseofdavid.github.io/2021/08/31/Explain_Algorithm/Tarjan' target="_blank" rel="noopener"s_Algorithm/">Tarjan’s Algorithm by 大衞的筆記</a> 這邊的程式碼請看這個 link 有詳細的說明。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> a, b;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; name;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rev_edge[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line"><span class="keyword">int</span> visit[MAXN];</span><br><span class="line"><span class="keyword">int</span> group[MAXN];</span><br><span class="line"><span class="keyword">int</span> t, p, cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span>;</span><br><span class="line">    visit[root] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[root])&#123;</span><br><span class="line">        dfs1(it);</span><br><span class="line">    &#125;</span><br><span class="line">    path.push_back(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> ancestor)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span> ;</span><br><span class="line"></span><br><span class="line">    visit[root] = <span class="number">1</span>;</span><br><span class="line">    group[root] = ancestor;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it: rev_edge[root])&#123;</span><br><span class="line">       dfs2(it, ancestor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; p &gt;&gt; t &amp;&amp; (t+p)!=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">cin</span>.ignore();</span><br><span class="line">        name.clear();</span><br><span class="line">        cnt = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; p; i++)&#123; <span class="comment">//清除資料，將名子進行 hash</span></span><br><span class="line">            edge[cnt].clear();</span><br><span class="line">            rev_edge[cnt].clear();</span><br><span class="line"></span><br><span class="line">            getline(<span class="built_in">cin</span>, a);</span><br><span class="line">            name[a] = cnt++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; t; i++)&#123;</span><br><span class="line">            getline(<span class="built_in">cin</span>, a);</span><br><span class="line">            getline(<span class="built_in">cin</span>, b);</span><br><span class="line">            edge[name[a]].push_back(name[b]); <span class="comment">//題目圖</span></span><br><span class="line">            rev_edge[name[b]].push_back(name[a]); <span class="comment">//反向圖</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">        path.clear();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; cnt; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!visit[i]) dfs1(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>; <span class="comment">//總共有幾組 SCC</span></span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">        <span class="built_in">memset</span>(group, <span class="number">0</span>, <span class="keyword">sizeof</span>(group));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = path.size()<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123; </span><br><span class="line">            <span class="keyword">if</span>(!visit[path[i]])&#123;</span><br><span class="line">                dfs2(path[i], path[i]);</span><br><span class="line">                ans++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//for(int i = 1; i &lt; cnt; i++)&#123;</span></span><br><span class="line">        <span class="comment">//    cout &lt;&lt; i &lt;&lt; " " &lt;&lt; group[i] &lt;&lt; "\n";</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//輸出答案</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Graph Component</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11831 - Sticker Collector Robot(DFS)</title>
+    <url>/2021/08/31/UVa/UVa11831/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>給你一個地圖，地圖中有貼紙與柱子，機器人碰到柱子則無法前進，碰到貼紙則會蒐集貼紙<br>給你機器人的位置，並告訴你機器人的行動方式，請告訴機器人可以蒐集幾個貼紙。</p>
+<p>機器人會向左轉、向右轉、往前走三個動作，並告訴妳一開始機器人面對的方位是哪邊。</p>
+<p><a href="https://onlinejudge.org/external/118/11831.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>模擬操作</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>由於機器人只有東西南北四個方位，而每個方位都有一個左邊、一個右邊，因此我們可以直接將各種情況列舉出來，下面舉例<ul>
+<li>北方的左邊是西邊</li>
+<li>北方的右邊是東邊</li>
+</ul>
+</li>
+<li>用一個 <code>visit</code> 來表示地圖中的這個 cell 有沒有被走過，如果有且這個 cell 有貼紙則答案 +1。</li>
+<li>將邊界更輕鬆處理，在第 0 層與 \(n+1\) 層的 cell 全部都設定為牆壁的</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/mobius_strip/article/details/49493383" target="_blank" rel="noopener">UVa 11831 - Sticker Collector Robot by 小白菜又菜</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 120</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, s;</span><br><span class="line"><span class="keyword">int</span> x, y, ans;</span><br><span class="line"><span class="keyword">int</span> visit[MAXN][MAXN]; <span class="comment">//判斷是不是第一次經過此 cell，避免撞牆後重複蒐集地圖</span></span><br><span class="line"><span class="built_in">string</span> graph[MAXN]; <span class="comment">//地圖</span></span><br><span class="line"><span class="built_in">string</span> line, direct, pillars; <span class="comment">//direct 機器人的方位, pillars 表示 row 都是柱子(邊界)</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; L; <span class="comment">//L[方位A] = 方位B，方位 A 的左邊是方位 B</span></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; R; <span class="comment">//與上面概念向通</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">walk</span><span class="params">(<span class="keyword">char</span> cmd)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(cmd == <span class="string">'F'</span>)&#123; <span class="comment">//如果是往前走</span></span><br><span class="line">        <span class="comment">//如果往此方向走，並且不撞到支柱，就讓機器人往那邊走</span></span><br><span class="line">        <span class="keyword">if</span>(direct == <span class="string">"N"</span> &amp;&amp; graph[x<span class="number">-1</span>][y] != <span class="string">'#'</span>) x = x<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(direct == <span class="string">"S"</span> &amp;&amp; graph[x+<span class="number">1</span>][y] != <span class="string">'#'</span>) x = x+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(direct == <span class="string">"O"</span> &amp;&amp; graph[x][y<span class="number">-1</span>] != <span class="string">'#'</span>) y = y<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(direct == <span class="string">"L"</span> &amp;&amp; graph[x][y+<span class="number">1</span>] != <span class="string">'#'</span>) y = y+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(!visit[x][y] &amp;&amp; graph[x][y] == <span class="string">'*'</span>) ans++; <span class="comment">//如果第一次走到且此 cell 有貼紙則答案+1</span></span><br><span class="line">        visit[x][y] = <span class="number">1</span>; <span class="comment">//表示並不是第一次經過</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="string">'D'</span>) direct = R[direct]; <span class="comment">//轉向</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="string">'E'</span>) direct = L[direct];</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "cmd x y graph " &lt;&lt; cmd &lt;&lt; " " &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; " " &lt;&lt; direct &lt;&lt; "\n";</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    L[<span class="string">"N"</span>] = <span class="string">"O"</span>; L[<span class="string">"O"</span>] = <span class="string">"S"</span>; L[<span class="string">"S"</span>] = <span class="string">"L"</span>, L[<span class="string">"L"</span>] = <span class="string">"N"</span>; <span class="comment">//將各種方位轉向都列舉出來</span></span><br><span class="line">    R[<span class="string">"N"</span>] = <span class="string">"L"</span>; R[<span class="string">"L"</span>] = <span class="string">"S"</span>; R[<span class="string">"S"</span>] = <span class="string">"O"</span>, R[<span class="string">"O"</span>] = <span class="string">"N"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; s &amp;&amp; (n+m+s) != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">        pillars = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m+<span class="number">1</span>; i++) pillars += <span class="string">"#"</span>; <span class="comment">//建造邊界牆</span></span><br><span class="line"></span><br><span class="line">        graph[<span class="number">0</span>] = pillars; <span class="comment">//分析第三點</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; line;</span><br><span class="line">            graph[i] = <span class="string">"#"</span> + line + <span class="string">"#"</span>; <span class="comment">//最左邊、最右邊都加入支柱，避免邊界額外判斷</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(graph[i][j] == <span class="string">'N'</span> || graph[i][j] == <span class="string">'S'</span> || graph[i][j] == <span class="string">'L'</span> || graph[i][j] == <span class="string">'O'</span>)&#123; <span class="comment">//找到機器人現在方位，並且定位</span></span><br><span class="line">                    x = i;</span><br><span class="line">                    y = j;</span><br><span class="line">                    direct = graph[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        graph[n+<span class="number">1</span>] = pillars; <span class="comment">//分析第三點</span></span><br><span class="line"></span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; line;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; line.length(); i++)&#123; <span class="comment">//執行機器人全部指令</span></span><br><span class="line">            walk(line[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//輸出答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
       </tags>
   </entry>
 </search>
