@@ -22711,4 +22711,181 @@
         <tag>程式解題</tag>
       </tags>
   </entry>
+  <entry>
+    <title>演算法知識 - Kruskal Algorithm</title>
+    <url>/2021/09/06/Explain_Algorithm/kruskal/</url>
+    <content><![CDATA[<h2 id="Kruskal-Algorithm-介紹"><a href="#Kruskal-Algorithm-介紹" class="headerlink" title="Kruskal Algorithm 介紹"></a>Kruskal Algorithm 介紹</h2><blockquote>
+<p>主要是在一張圖中組合成一顆樹，其中每一條邊都有一個成本，且要求這顆樹的總和成本必須要是最小。<br>時間複雜度為 \(O(E \log E)\)</p>
+<p>主要用來找出一張圖中的最小生成樹、最大生成樹</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Kruskal-Algorithm-證明與實作"><a href="#Kruskal-Algorithm-證明與實作" class="headerlink" title="Kruskal Algorithm 證明與實作"></a>Kruskal Algorithm 證明與實作</h2><h3 id="證明"><a href="#證明" class="headerlink" title="證明"></a>證明</h3><ul>
+<li>不難理解，我們可以知道從最小的邊開始組合成的一棵樹一定是總成本最小的</li>
+<li>但是有可能再拿最小的邊時，發現這個邊與其他邊有衝突<ul>
+<li>舉例：(1,3) 成本 2，(1,3) 成本 3，(1,4) 成本 10</li>
+<li>如果從最小的拿，那我們必須避免使用 (1,3) 成本 3 </li>
+</ul>
+</li>
+<li>因此我們使用並查集，只要拿最小的邊，並且判斷這兩個邊的節點是否在同個 set 裡，如果有那就要捨棄掉，因為已經有更小的邊連接他們了。<ul>
+<li>可能會有疑問，那有沒有可能這個生成樹是多顆生成樹，其實並沒有被連接</li>
+<li>只要保證他是一張圖，那麼圖中的每一個點我們會遍地經歷過，就勢必會經過連接點，此時若沒有更小的邊，那我們就會加入他，並透過 disjoint set 來合併這兩個生成樹</li>
+<li>因此，我們必須確認他是<strong>一張圖</strong>，而不是兩張圖，因為如果是兩張分裂的圖那麼 set 很高機率會變拆成兩組。</li>
+<li>此時就變成有兩顆生成樹</li>
+</ul>
+</li>
+<li>不斷連接，只到將所有的邊都使用過。</li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ul>
+<li>使用 disjoint set 判斷每一個節點現在屬於哪一個生成樹</li>
+<li>再來將每一個 edge 放入 vector，並 sort</li>
+<li>使用 for loop，確認邊的節點是否有在同個 set<ul>
+<li>如果都在同個 set，則不需要這個 edge</li>
+<li>如果不同，則加入此 edge，並記錄</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kruskal-Algorithm-實作"><a href="#Kruskal-Algorithm-實作" class="headerlink" title="Kruskal Algorithm 實作"></a>Kruskal Algorithm 實作</h2><p>不廢話，直接上來</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 200020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> a, b, c;</span><br><span class="line"><span class="keyword">int</span> p[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, c; <span class="comment">//u,v 分別為邊的節點， c 是成本</span></span><br><span class="line">    </span><br><span class="line">    edge(): u(<span class="number">0</span>), v(<span class="number">0</span>), c(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">    edge(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> c): u(u), v(v), c(c) &#123;&#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> edge&amp; other) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c &lt; other.c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; node;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; MST; <span class="comment">//最小生成樹</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "find_root " &lt;&lt; x &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">if</span>(p[x] != x) <span class="keyword">return</span> p[x] = find_root(p[x]);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span></span>&#123;</span><br><span class="line">    node.clear();</span><br><span class="line">    MST.clear();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) p[i] = i; <span class="comment">//init disjoint set</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c; <span class="comment">//輸入邊、成本</span></span><br><span class="line">        node.push_back(&#123;a,b,c&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    sort(node.begin(), node.end()); <span class="comment">//排序，這邊排序方式為遞增</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(edge it: node)&#123;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; it.u &lt;&lt; " " &lt;&lt; it.v &lt;&lt; " " &lt;&lt; it.c &lt;&lt; "\n";</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; p[3] &lt;&lt; " " &lt;&lt; p[4] &lt;&lt; "\n";</span></span><br><span class="line">        <span class="keyword">int</span> pu = find_root(it.u); <span class="comment">//判斷邊的節點們是否都在同個 set </span></span><br><span class="line">        <span class="keyword">int</span> pv = find_root(it.v);</span><br><span class="line">        <span class="keyword">if</span>(pu != pv)&#123; <span class="comment">//分析 3-1</span></span><br><span class="line">                p[pv] = pu;</span><br><span class="line">                MST.push_back(it); <span class="comment">//記錄此 edge</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(edge it: MST)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; it.u &lt;&lt; <span class="string">" "</span> &lt;&lt; it.v &lt;&lt; <span class="string">" "</span> &lt;&lt; it.c &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//輸出所有邊</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://web.ntnu.edu.tw/~algo/SpanningTree.html" target="_blank" rel="noopener">Minimum Spanning Tree: Kruskal’s Algorithm by 師大演算法</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>專家們、科學家們研究出來的成果希望我都可以把他們吸收進去，並且運用在我未來的道路上。</p>
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>Kruskal</tag>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11631 - Dark Roads(Kruskal)</title>
+    <url>/2021/09/06/UVa/UVa11631/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Byteland 這座城市想要節省電費，因此想要在晚上把路燈給關掉，每一公尺就需要花一塊錢，但是要是整座城市都沒有路燈就太可怕了！於是 Byteland 折衷，她希望可以有一個明亮的路徑通往到每一個道路上，因此他想問說，如果只有一條明亮的路徑並且可以通往到每個道路上，那我將其他燈都關掉可以省下多少成本</p>
+<p><a href="https://onlinejudge.org/external/116/11631.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/09/06/Explain_Algorithm/kruskal/" target="_blank" rel="noopener">Kruskal by 大衞的筆記</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>只要看懂題目大意後就會知道，其實是一個最小生成樹，只要讓每一條路可以抵達其他路即可。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.pinghenotes.com/UVa-11631-Dark-Roads/" target="_blank" rel="noopener">UVa 11631 - Dark Roads</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<p>關於 kruskal 詳解請參考 <a href="https://theriseofdavid.github.io/2021/09/06/Explain_Algorithm/kruskal/" target="_blank" rel="noopener">Kruskal by 大衞的筆記</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 200020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> a, b, c;</span><br><span class="line"><span class="keyword">int</span> p[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, c; </span><br><span class="line">    edge()&#123;</span><br><span class="line">        u = <span class="number">0</span>, v = <span class="number">0</span>, c = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    edge(<span class="keyword">int</span> _u, <span class="keyword">int</span> _v, <span class="keyword">int</span> _c)&#123;</span><br><span class="line">        u = _u, v = _v, c = _c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> edge&amp; other) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c &lt; other.c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; node;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; remain; <span class="comment">//放入沒有被用入 edge，記錄省下成本</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "find_root " &lt;&lt; x &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">if</span>(p[x] != x) <span class="keyword">return</span> p[x] = find_root(p[x]);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &amp;&amp; (n+m) != <span class="number">0</span>)&#123;</span><br><span class="line">        node.clear();</span><br><span class="line">        remain.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) p[i] = i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">            node.push_back(&#123;a,b,c&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(node.begin(), node.end());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(edge it: node)&#123;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; it.u &lt;&lt; " " &lt;&lt; it.v &lt;&lt; " " &lt;&lt; it.c &lt;&lt; "\n";</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; p[3] &lt;&lt; " " &lt;&lt; p[4] &lt;&lt; "\n";</span></span><br><span class="line">            <span class="keyword">int</span> pu = find_root(it.u);</span><br><span class="line">            <span class="keyword">int</span> pv = find_root(it.v);</span><br><span class="line">            <span class="keyword">if</span>(pu != pv) p[pv] = pu;</span><br><span class="line">            <span class="keyword">else</span> remain.push_back(it); <span class="comment">//紀錄沒被用到的邊</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(edge it: remain) ans += it.c; <span class="comment">//計算總和</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Kruskal&#39;s algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12442 - Forwarding Emails(DFS)</title>
+    <url>/2021/09/06/UVa/UVa12442/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一封信需要給大家知道，而每一個人都會將信轉寄給另外一個人(不會轉寄給第二個人)，你必須找出寄給誰才可以讓最多的人知道。</p>
+<p>請輸出，從誰開始轉寄可以讓最多人知道。<br><a href="https://onlinejudge.org/external/124/12442.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>DFS 概念轉換</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>由於題目有說明每一個人只會轉寄給另外一個人，那我們的目標就是知道每一個人他不斷往下轉寄後，最多可以轉寄給幾個人</li>
+<li>因此直接使用 DFS 實作</li>
+<li>因為不可能每一個人都 DFS，會 TLE，因此優化<ul>
+<li>舉例： A 給 B，B 給 C，C 給 D</li>
+<li>那我們如果從 B 開始寄信，那麼 C、D 我們是不是也知道他最多可以轉寄給幾個人(DFS特性)</li>
+<li>因此只要 DFS 跑過的，我們就不需要再跑一次。</li>
+<li>但是假如接下來我們跑 A，那我們是不是就直接找出 B 最多轉寄 3 個？<ul>
+<li>不行，要注意迴圈問題</li>
+<li>舉例：A 給 B，B 給 C，C 給 A，D 給 A</li>
+<li>如果從 C 開始跑，那順序會是 C -&gt; A -&gt; B。</li>
+<li>此時再來從 D 繼續跑，那 D 碰到 A，直接收到 A 最多轉寄兩個，輸出答案</li>
+<li>但其實不對，從 D 開始跑，可以轉寄給四個</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>為了避免 DFS 拓樸排序的問題，因此我們只能<strong>保證知道 DFS 的節點，最多可以轉寄幾個</strong>，但沒辦法確認沒有被 DFS 的節點碰到有被 DFS 過的節點，此時，有被 DFS 過的節點最多轉寄的信已經被我們求出。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/nur-shuvo/UVA-solutions/blob/master/uva%20%2012442%20Forwarding%20%20Emails%20%20.cpp" target="_blank" rel="noopener">uva 12442 Forwarding Emails by nur-shuvo</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 50020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, kase = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> a, b, cnt;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN];</span><br><span class="line"><span class="keyword">int</span> visit[MAXN], flag[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visit[root]) <span class="keyword">return</span>; <span class="comment">//有被經過，因此不再重複</span></span><br><span class="line">    visit[root] = <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it : edge[root])&#123;</span><br><span class="line">        dfs(it);</span><br><span class="line">        cnt++; <span class="comment">//紀錄總長度</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//由於只能轉寄給一個人，因此從起點到 root 只有一種路徑，經過後就不會再重複經過。</span></span><br><span class="line">    <span class="comment">//但有可能這個路徑本身是 circle，但不會出現兩個以上 circle，因此不會發生衝突。</span></span><br><span class="line">    <span class="comment">//如果有兩個以上 circle 表示，會有一個人可以轉寄給兩個人</span></span><br><span class="line">    visit[root] = <span class="number">0</span>; </span><br><span class="line">    flag[root] = <span class="number">1</span>; <span class="comment">//分析 2-1,2-2,2-3,4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) edge[i].clear(); <span class="comment">//清除資料</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            edge[a].push_back(b); <span class="comment">//加入邊</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(visit, <span class="number">0</span>, <span class="keyword">sizeof</span>(visit));</span><br><span class="line">        <span class="built_in">memset</span>(flag, <span class="number">0</span>, <span class="keyword">sizeof</span>(flag));</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>, ans_cnt = <span class="number">0</span>; <span class="comment">//ans 是從誰寄信最好，ans_cnt 則是最多可以轉寄給幾個人</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(flag[i]) <span class="keyword">continue</span>;</span><br><span class="line">            cnt = <span class="number">0</span>;</span><br><span class="line">            dfs(i);</span><br><span class="line">            <span class="keyword">if</span>(ans_cnt &lt; cnt)&#123; <span class="comment">//如果現在的答案比較大，就替換他</span></span><br><span class="line">                ans = i;</span><br><span class="line">                ans_cnt = cnt;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": "</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12442 - Tour Belt(Kruskal)</title>
+    <url>/2021/09/08/UVa/UVa1265/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Korea 群島可以組成很多種旅遊行程，那如果是兩個島連在一起所產生的好處稱為 SE(協同效應)，再來我們定義協同效應</p>
+<ul>
+<li>有一張連通圖裡面有 n 個頂點、m 個邊</li>
+<li>SE 必須使用兩頂點組成(也就是邊)，且不可以有重複地點用到</li>
+<li>再來我們要在一張圖中組成協同效應，其中協同效應必須要選大的，並且要在圖中找出最多的 SE。</li>
+<li>如果可以有多組以上的協同效應，那麼我們必須確認我們選的邊必須要大於內部的協同效應</li>
+</ul>
+<p>簡單來說就是使用 kruskal 找出最大的 SE，並檢查有沒有辦法再跟其他 SE 組成一個更大的 SE。<br>並將所有 SE 的 size 總合起來輸出。</p>
+<p>我題目講的沒有很清楚，這題要去看題目才好理解，不太好解釋。有點出得很難懂..<br><a href="https://onlinejudge.org/external/12/1265.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>超級讚的英文</li>
+<li><a href="https://theriseofdavid.github.io/2021/09/06/Explain_Algorithm/kruskal/" target="_blank" rel="noopener">Kruskal by 大衞的筆記</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>由於有一種可能性是 SE 與 SE 再組成更大的 SE</li>
+<li>題目有說明 SE 與 SE 中間不可以有比這兩個 SE 之間更大的 SE，否則應該拿更大的 SE 去跟別的 SE 產生新的 SE。</li>
+<li>我們要證明第二點，那就先使用 Kruskal 不斷地從最大點 SE 做生成<ul>
+<li>只要生成樹的內部 SE 沒有比生成樹外部的 SE 小，我們就可以知道這邊會再多一組 SE</li>
+<li>因為 SE 會先從最大的開始產生，因此兩個大 SE 如果裡面包著小 SE，那麼那兩個大 SE 還是可以再組成一組 SE</li>
+<li>因此只要確認<ul>
+<li><code>兩個大 SE 包著小 SE 最大值</code> 大於 <code>兩個大 SE 以外的 SE 最小值</code> 就可以計入答案</li>
+<li>因為如果<code>兩個大 SE 以外的 SE</code> 還有更小值的話，那麼應該要讓兩個大 SE 去包她才對。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>剩下的直接看 code 理解。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://mypaper.pchome.com.tw/zerojudge/post/1325001404" target="_blank" rel="noopener">uva 1265 - Tour Belt by morris</a><br><a href="https://blog.csdn.net/keshuai19940722/article/details/48379693" target="_blank" rel="noopener">uva 1265 - Tour Belt（生成树） by CDSN</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這一次真的寫不太好，但是不太知道要怎麼解釋，非常抱歉，請大家見諒</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<p>關於 kruskal 詳解請參考 <a href="https://theriseofdavid.github.io/2021/09/06/Explain_Algorithm/kruskal/" target="_blank" rel="noopener">Kruskal by 大衞的筆記</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 5020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, m;</span><br><span class="line"><span class="keyword">int</span> a, b, c;</span><br><span class="line"><span class="keyword">int</span> p[MAXN], length[MAXN]; <span class="comment">//length 表示以 i 為中心的生成樹，裡面的 sum SE 有多少</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt; edges[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, c; <span class="comment">//u,v 分別為邊的節點， c 是成本</span></span><br><span class="line">    edge(): u(<span class="number">0</span>), v(<span class="number">0</span>), c(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">    edge(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> c): u(u), v(v), c(c) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> edge&amp; other) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c &gt; other.c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;edge&gt; node;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_root</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="comment">//cout &lt;&lt; "find_root " &lt;&lt; x &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">if</span>(p[x] != x) <span class="keyword">return</span> p[x] = find_root(p[x]);</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="comment">//inedge 內部的 SE 大小，outedge 外部的 edge 大小，預設是最小</span></span><br><span class="line">    <span class="keyword">int</span> inedge = INF, outedge = <span class="number">0</span>; <span class="comment">//inedge = inside edge, outedge = outside edge</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//針對每一個邊仔細檢查</span></span><br><span class="line">        <span class="keyword">if</span>(x != find_root(i)) <span class="keyword">continue</span>; <span class="comment">//如果兩個生成樹並不一樣，表示內部沒有 SE</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: edges[i])&#123; </span><br><span class="line">            <span class="comment">//如果生成樹都一樣，那將內部最大 SE 取出</span></span><br><span class="line">            <span class="keyword">if</span>(find_root(it.first) == x) inedge = min(inedge, it.second);</span><br><span class="line">            <span class="keyword">else</span> outedge = max(outedge, it.second); <span class="comment">//如果不一樣，那就表示這個邊並不是內部SE、而是外部 SE</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; "x inedge outedge " &lt;&lt; x &lt;&lt; " " &lt;&lt; inedge &lt;&lt; " " &lt;&lt; outedge &lt;&lt; "\n";</span></span><br><span class="line">    <span class="keyword">return</span> inedge &gt; outedge; <span class="comment">//如果內部 SE 比外部大，表示這一個生成樹可以在組成一組 SE</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        node.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            p[i] = i; <span class="comment">//init disjoint set</span></span><br><span class="line">            edges[i].clear();</span><br><span class="line">            length[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c; <span class="comment">//輸入邊、成本</span></span><br><span class="line">            node.push_back(&#123;a,b,c&#125;);</span><br><span class="line">            edges[a].push_back(&#123;b,c&#125;);</span><br><span class="line">            edges[b].push_back(&#123;a,c&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(node.begin(), node.end()); <span class="comment">//排序，這邊排序方式為遞增</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(edge it: node)&#123;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; it.u &lt;&lt; " " &lt;&lt; it.v &lt;&lt; " " &lt;&lt; it.c &lt;&lt; "\n";</span></span><br><span class="line">            <span class="keyword">int</span> pu = find_root(it.u); <span class="comment">//判斷邊的節點們是否都在同個 set</span></span><br><span class="line">            <span class="keyword">int</span> pv = find_root(it.v);</span><br><span class="line">            <span class="keyword">if</span>(find_root(pu) != find_root(pv))&#123;</span><br><span class="line">                p[pv] = pu;</span><br><span class="line">                length[pu] += length[pv]; <span class="comment">//計入成本，表示以 pv 為頭的 SE，轉給 pu</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//cout &lt;&lt; "len pu " &lt;&lt; length[pu] &lt;&lt; "\n";</span></span><br><span class="line">                <span class="keyword">if</span>(check(pu)) ans += length[pu]; <span class="comment">//分析 3.3</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Kruskal&#39;s algorithm</tag>
+      </tags>
+  </entry>
 </search>
