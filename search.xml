@@ -23082,4 +23082,163 @@
         <tag>廣度優先搜尋 Breadth-First Search</tag>
       </tags>
   </entry>
+  <entry>
+    <title>演算法知識 - Dijkstra&#39;s Algorithm (無權重、有權重向圖)</title>
+    <url>/2021/09/24/Explain_Algorithm/dijkstra/</url>
+    <content><![CDATA[<h2 id="Dijkstra’a-Algorithm-介紹"><a href="#Dijkstra’a-Algorithm-介紹" class="headerlink" title="Dijkstra’a Algorithm 介紹"></a>Dijkstra’a Algorithm 介紹</h2><blockquote>
+<p>能夠針對<strong>有權重的</strong>有向圖做出單點全源最短路徑演算法。</p>
+<p>時間複雜度為 \(O((E+V)log V)\)，E 為邊、V 為頂點</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Dijkstra’s-Algorithm-證明與實作"><a href="#Dijkstra’s-Algorithm-證明與實作" class="headerlink" title="Dijkstra’s Algorithm 證明與實作"></a>Dijkstra’s Algorithm 證明與實作</h2><h3 id="證明"><a href="#證明" class="headerlink" title="證明"></a>證明</h3><ul>
+<li>我們知道無權重的有向圖可以做出單點全源最短路徑演算法。keyword: spfa</li>
+<li>但是如果有權重的時候有可能 <code>queue</code> 上面的節點並不是最快速的節點，因為放入 <code>queue</code> 的順序是依照<strong>時間放入</strong>。</li>
+<li>因此我們改使用 <code>priority_queue</code> 將 queue 的排序從依照<strong>時間放入</strong>更改為<strong>queue 中成本最小的值</strong>。</li>
+<li>理所當然，成本最小的值加上任一相同路徑也還會是最小<ul>
+<li>EX: \(3+5 =8, 10+5 = 15\)</li>
+</ul>
+</li>
+<li>其他與無權重的有向圖相同。</li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ul>
+<li>使用  <code>priority_queue</code>，內部資料結構為 <code>(root, cost)</code></li>
+<li>放入節點 <code>(root,0)</code>，root 為出發點節、0 表示成本</li>
+<li>進行 BFS，並用一陣列從出發點到 x 點最短距離。<ul>
+<li>其中 E 表示有一條邊從 root 到 x</li>
+<li>如果 \((root, cost) + E(root,x).成本 &gt;  當前 x 點最短距離  \)<ul>
+<li>\( 當前 x 點最短距離 = (root, cost) + E(root,x).成本 \)</li>
+<li><code>priority_queue.push(x, 當前 x 點最短距離)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kruskal-Algorithm-實作"><a href="#Kruskal-Algorithm-實作" class="headerlink" title="Kruskal Algorithm 實作"></a>Kruskal Algorithm 實作</h2><p>不廢話，直接上來</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 2100000000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span> <span class="comment">// 我們使用 Edge struct 實做 (root, cost)</span></span><br><span class="line">    <span class="keyword">int</span> v, c;</span><br><span class="line">    Edge(): v(<span class="number">0</span>), c(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">    Edge(<span class="keyword">int</span> _v, <span class="keyword">int</span> _c): v(_v), c(_c) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge&amp; other) <span class="keyword">const</span>&#123; </span><br><span class="line">        <span class="keyword">return</span> c &lt; other.c; <span class="comment">//遞減排序，決定 priority_queue 的方式</span></span><br><span class="line">        <span class="comment">//return c &gt; other.c; //遞增排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c, v;</span><br><span class="line"><span class="keyword">int</span> a, b, cost;</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; edge[MAXN]; <span class="comment">//放入題目的邊</span></span><br><span class="line"><span class="keyword">int</span> dist[MAXN]; <span class="comment">//從 root 出發到 x 邊的最短距離</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;Edge&gt; q;</span><br><span class="line">    q.push_back(&#123;root,<span class="number">0</span>&#125;); <span class="comment">//初始放入開始點</span></span><br><span class="line">    dist[root] = <span class="number">0</span>; <span class="comment">//自己到自己成本為零</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        Edge node = q.front(); q.pop_front(); </span><br><span class="line">        <span class="comment">//cout &lt;&lt; node.v &lt;&lt; " " &lt;&lt; node.c &lt;&lt; "\n";</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[node.v])&#123;</span><br><span class="line">            cost = dist[node.v] + it.c; <span class="comment">//分析 3</span></span><br><span class="line">            <span class="keyword">if</span>(cost &lt; odd_dist[it.v])&#123; </span><br><span class="line">                q.push_back(&#123;it.v, cost&#125;);</span><br><span class="line">                odd_dist[it.v] = cost;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; c &gt;&gt; v)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= c; i++)&#123; <span class="comment">//清除邊、重置距離</span></span><br><span class="line">            edge[i].clear();</span><br><span class="line">            dist[i] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v; i++)&#123; <span class="comment">//加入邊</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; cost;</span><br><span class="line">            edge[a].push_back(&#123;b,cost&#125;); <span class="comment">//單向時使用</span></span><br><span class="line">            edge[b].push_back(&#123;a,cost&#125;); <span class="comment">//雙向時使用</span></span><br><span class="line">        &#125;</span><br><span class="line">        dijkstra(root); <span class="comment">//root 為任移值，為開始的點</span></span><br><span class="line">        <span class="keyword">if</span>(dist[x] == INF) <span class="built_in">cout</span> &lt;&lt; <span class="string">"-1\n"</span>; <span class="comment">// root -&gt; x 最短距離為多少，無法抵達輸出 -1</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; dist[x] &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//可以抵達則輸出。</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>演算法知識</category>
+      </categories>
+      <tags>
+        <tag>Dijkstra&#39;s</tag>
+        <tag>程式解題</tag>
+        <tag>演算法知識</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12950 - Even Obsession(Dijkstra&#39;s)</title>
+    <url>/2021/09/20/UVa/UVa12950/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Patricia 是個傑出的軟體工程師，但她有一些怪癖，喜歡偶數的事物，例如:喜歡買偶數張電影票、一天吃兩餐 or 四餐…等。<br>在 Patricia 所住的城市需要收過路費，Patricia 想從 1 到 x 點，她希望他可以被收偶數次的過路費，並且花費最少，你則必須輸出花費最小的數值為多少。</p>
+<p><a href="https://onlinejudge.org/external/129/12950.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/09/24/Explain_Algorithm/dijkstra/" target="_blank" rel="noopener">dijkstra’s by 大衛的筆記</a></li>
+<li>dijkstra’s 的變化題</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>只有一點點小小的變化， dijkstra’s 是想要找出最短路徑，而這題目新增條件是要經過偶數個邊</li>
+<li>那我們就分開操作，產生兩個 dist，一個裝在偶數邊時的最短距離、一個則裝奇數邊的最短距離。<ul>
+<li>定義<ul>
+<li>odd_dist 奇數邊的最短距離</li>
+<li>even_dist 偶數邊時的最短距離</li>
+<li>root <code>priority queue</code> 當前的節點</li>
+<li>cost <code>priority queue</code> 當前的成本</li>
+<li>x root 可以抵達的任意節點</li>
+<li>edge.c 當前的任意邊成本</li>
+<li><code>{root, cost}</code> 為 <code>priority queue</code> 型別，root 是節點、cost 是成本</li>
+</ul>
+</li>
+<li>只要  <code>edge.c[x] + odd_dist[root] &gt; even_dist[x]</code>，  <code>priority queue.push({x, edge.c[x] + odd_dist[root]})</code></li>
+<li>只要  <code>edge.c[x] + even_dist[root] &gt; odd_dist[x]</code>，  <code>priority queue.push({x, edge.c[x] + even_dist[root]})</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.bbsmax.com/A/A2dmx4e45e/" target="_blank" rel="noopener">UVa 12950 by bbsmax</a><br><a href="https://www.cnblogs.com/fightfordream/p/5552225.html" target="_blank" rel="noopener">UVa 12950 by Shadowdsp</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>有一些程式碼註解在 <a href="https://theriseofdavid.github.io/2021/09/24/Explain_Algorithm/dijkstra/" target="_blank" rel="noopener">dijkstra’s by 大衛的筆記</a> 請供參考。</p>
+<p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 2100000000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, c; </span><br><span class="line">    Edge(): v(<span class="number">0</span>), c(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">    Edge(<span class="keyword">int</span> _v, <span class="keyword">int</span> _c): v(_v), c(_c) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge&amp; other) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c &lt; other.c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c, v;</span><br><span class="line"><span class="keyword">int</span> a, b, cost;</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; edge[MAXN];</span><br><span class="line"><span class="keyword">int</span> odd_dist[MAXN], even_dist[MAXN]; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="built_in">deque</span>&lt;Edge&gt; q;</span><br><span class="line">    q.push_back(&#123;root,<span class="number">0</span>&#125;);</span><br><span class="line">    even_dist[root] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//odd_dist[root] = 0;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        Edge node = q.front(); q.pop_front();</span><br><span class="line">        <span class="comment">//cout &lt;&lt; node.v &lt;&lt; " " &lt;&lt; node.c &lt;&lt; "\n";</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[node.v])&#123; </span><br><span class="line">            cost = odd_dist[node.v] + it.c;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; "even dist " &lt;&lt; cost &lt;&lt; " " &lt;&lt; even_dist[it.v] &lt;&lt; "\n";</span></span><br><span class="line">            <span class="keyword">if</span>(cost &lt; even_dist[it.v])&#123; <span class="comment">//分析 2</span></span><br><span class="line">                q.push_back(&#123;it.v, cost&#125;);</span><br><span class="line">                even_dist[it.v] = cost;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            cost = even_dist[node.v] + it.c;</span><br><span class="line">            <span class="keyword">if</span>(cost &lt; odd_dist[it.v])&#123;</span><br><span class="line">                q.push_back(&#123;it.v, cost&#125;);</span><br><span class="line">                odd_dist[it.v] = cost;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; c &gt;&gt; v)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= c; i++)&#123;</span><br><span class="line">            edge[i].clear();</span><br><span class="line">            even_dist[i] = INF;</span><br><span class="line">            odd_dist[i] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; cost;</span><br><span class="line">            edge[a].push_back(&#123;b,cost&#125;); <span class="comment">//題目為雙向邊</span></span><br><span class="line">            edge[b].push_back(&#123;a,cost&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        dijkstra(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(even_dist[c] == INF) <span class="built_in">cout</span> &lt;&lt; <span class="string">"-1\n"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; even_dist[c] &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>Dijkstra&#39;s</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa12047 - Highest Paid Toll(Dijkstra&#39;s)</title>
+    <url>/2021/09/24/UVa/UVa12047/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>在一個城市中，每一條道路都必須要收過路費。<br>其中會給你一個數值 p，你從出發點到終點不可以花超過 p 費用，並且在符合前面條件下，會產生 toll<br>toll: 在你走的路徑中，花費最多一次的過路費。<br>請你找出最大的 toll 是多少。</p>
+<p><a href="https://onlinejudge.org/external/120/12047.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/09/24/Explain_Algorithm/dijkstra/" target="_blank" rel="noopener">dijkstra’s by 大衛的筆記</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>由於 toll 在你走的路徑中，花費最多一次的過路費。</li>
+<li>題目是單向圖</li>
+<li>因此我們可以做兩張圖，第一張圖與題目相同、第二章圖與題目相反，且兩張圖都做 dijkstra<ul>
+<li>第一張圖的出發點，為題目的出發點，定義為 st_dist</li>
+<li>第二張圖的出發點，以題目的終點為出發點 ed_dist</li>
+<li>再來我們的 toll 任意枚舉每一條邊，u -&gt; v</li>
+</ul>
+</li>
+<li>公式： \(st_dist[u] + ed_dist[v] + edge[v].cost \)<ul>
+<li>從出發點到 u 點的最短距離 + 從終點到 v 點的最短距離 + (u -&gt; v) 的成本，是不是有比 p 小。</li>
+<li>如果有，就看有沒有比當前答案大，有就替換。</li>
+</ul>
+</li>
+<li>由於題目的每一個過路費最大可能到 \(10^4\)，因此 INF 必須要開到 \(10^5 * 10^5 = 10^10\)</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://mypaper.pchome.com.tw/zerojudge/post/1325001267" target="_blank" rel="noopener">UVa 12047 by Morris’s</a><br><a href="https://github.com/yulonglong/UVa-Solutions/blob/master/12047.cpp" target="_blank" rel="noopener">UVa 12047 by yulonglong</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>有一些程式碼註解在 <a href="https://theriseofdavid.github.io/2021/09/24/Explain_Algorithm/dijkstra/" target="_blank" rel="noopener">dijkstra’s by 大衛的筆記</a> 請供參考。</p>
+<p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 2100000000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n, m;</span><br><span class="line"><span class="keyword">int</span> st, ed, p;</span><br><span class="line"><span class="keyword">int</span> a, b, c;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, c; <span class="comment">//vector, cost;</span></span><br><span class="line">    Edge(): v(<span class="number">0</span>), c(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">    Edge(<span class="keyword">int</span> _v, <span class="keyword">int</span> _c): v(_v), c(_c) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge&amp; other) <span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c &gt; other.c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//st_edge 題目圖, ed_edge 反向圖</span></span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; st_edge[MAXN], ed_edge[MAXN]; </span><br><span class="line"><span class="comment">//以 st_dist 題目圖最小距離, ed_edge 反向圖最小距離</span></span><br><span class="line"><span class="keyword">int</span> visit[MAXN], st_dist[MAXN], ed_dist[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> root, <span class="built_in">vector</span>&lt;Edge&gt; edge[MAXN], <span class="keyword">int</span> dist[MAXN] )</span></span>&#123;</span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line">    q.push(root); <span class="comment">//這裡理應要使用 dijkstra by 大衛的筆記，</span></span><br><span class="line">    <span class="comment">//但是我認為題目 n 太小，queue 應該也做得到，試試看，結果過了 AC XD。</span></span><br><span class="line">    dist[root] = <span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cost, x;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123; </span><br><span class="line">        x = q.top(); q.pop(); </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it: edge[x])&#123; </span><br><span class="line">            cost = dist[x] + it.c;</span><br><span class="line">            <span class="keyword">if</span>(cost &lt; dist[it.v])&#123;</span><br><span class="line">                q.push(it.v);</span><br><span class="line">                dist[it.v] = cost;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCLA</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; st &gt;&gt; ed &gt;&gt; p;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//clear</span></span><br><span class="line">            st_edge[i].clear();</span><br><span class="line">            st_dist[i] = INF;</span><br><span class="line">            ed_edge[i].clear();</span><br><span class="line">            ed_dist[i] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">            st_edge[a].push_back(&#123;b,c&#125;); <span class="comment">//題目圖</span></span><br><span class="line">            ed_edge[b].push_back(&#123;a,c&#125;); <span class="comment">//反向圖</span></span><br><span class="line">        &#125;</span><br><span class="line">        dijkstra(st, st_edge, st_dist); <span class="comment">//題目圖 dijkstra</span></span><br><span class="line">        dijkstra(ed, ed_edge, ed_dist); <span class="comment">//題目圖 dijkstra</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//cout &lt;&lt; "dist 2 " &lt;&lt; st_dist[2] &lt;&lt; "\n";</span></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">-1</span>, cost = <span class="number">0</span>; <span class="comment">//ans 題目答案</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123; <span class="comment">//枚舉每一個邊</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> it: st_edge[i])&#123;</span><br><span class="line">                cost = st_dist[i] + ed_dist[it.v] + it.c; <span class="comment">//分析 4</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; "cost i j " &lt;&lt; i &lt;&lt; " " &lt;&lt; it.v &lt;&lt; " " &lt;&lt; cost &lt;&lt; "\n";</span></span><br><span class="line">                <span class="comment">//cout &lt;&lt; "cost formula " &lt;&lt; st_dist[i] &lt;&lt; " " &lt;&lt; ed_dist[it.v] &lt;&lt; " " &lt;&lt; it.c &lt;&lt; "\n";</span></span><br><span class="line">                <span class="keyword">if</span>(cost &lt;= p)&#123; </span><br><span class="line">                    ans = max(ans, it.c);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>Dijkstra&#39;s</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>QUESTION! Win10 無法更新安裝，並顯示 virutalbox 需要解除安裝，但電腦沒有此文件</title>
+    <url>/2021/09/28/windows/win10_update_with_virtualbox/</url>
+    <content><![CDATA[<h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>QUESTION! Win10 無法更新安裝，並顯示 virutalbox 需要解除安裝，但電腦沒有此文件</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><ul>
+<li>確認自己的電腦裡面真的沒有 virutal box </li>
+<li>將所有手機模擬器全部檢查，只要他們有用到 virutal box，就將手機模擬器全部解除安裝。<ul>
+<li>尤其是夜神，很難清乾淨</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://answers.microsoft.com/zh-hant/windows/forum/all/%E6%88%91%E7%9A%84%E9%9B%BB%E8%85%A6windows/ba61cd48-145f-4907-992e-999bd7799ec4?page=3&auth=1" target="_blank" rel="noopener">我的電腦Windows 10無法更新安裝 然後出現說virtualbox立即解除安裝此應用程式 因為他與Windows 10不相容 然後旁邊還有出現手動解除安裝 但是無法按 by est7711</a></p>
+]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>ngrok</tag>
+        <tag>server</tag>
+      </tags>
+  </entry>
 </search>
