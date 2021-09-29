@@ -22755,8 +22755,8 @@
         <category>演算法知識</category>
       </categories>
       <tags>
-        <tag>Kruskal</tag>
         <tag>程式解題</tag>
+        <tag>Kruskal&#39;s algorithm</tag>
         <tag>演算法知識</tag>
       </tags>
   </entry>
@@ -22837,7 +22837,7 @@
       </tags>
   </entry>
   <entry>
-    <title>UVa12442 - Tour Belt(Kruskal)</title>
+    <title>UVa1265 - Tour Belt(Kruskal)</title>
     <url>/2021/09/08/UVa/UVa1265/</url>
     <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
 <p>Korea 群島可以組成很多種旅遊行程，那如果是兩個島連在一起所產生的好處稱為 SE(協同效應)，再來我們定義協同效應</p>
