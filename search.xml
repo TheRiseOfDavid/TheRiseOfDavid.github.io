@@ -23713,4 +23713,232 @@
         <tag>Maximum Bipartite Matching 二分匹配</tag>
       </tags>
   </entry>
+  <entry>
+    <title>財務報表分析 - 第四章 財務報表分析的技術、常有的財務比率</title>
+    <url>/2021/10/24/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_04/</url>
+    <content><![CDATA[<h2 id="將資產負債表及綜合損益表轉換成共同比財務報表"><a href="#將資產負債表及綜合損益表轉換成共同比財務報表" class="headerlink" title="將資產負債表及綜合損益表轉換成共同比財務報表"></a>將資產負債表及綜合損益表轉換成共同比財務報表</h2><ul>
+<li>資產負債表: 以資產總額為 100%，各項金額除以資產總額就是各項比率</li>
+<li>綜合損益表: 以營業收入(銷貨淨額)為 100%，各項金額除以銷貨淨額就是各項比率<ul>
+<li>台積電 2019 年簡明損益比較分析<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1vLBfp_o-PsFZ_1l75f9hwYKQMFsGtHKQ&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="舉例：台積電的獲利之趨勢分析"><a href="#舉例：台積電的獲利之趨勢分析" class="headerlink" title="舉例：台積電的獲利之趨勢分析"></a>舉例：台積電的獲利之趨勢分析</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ylAB7cmCslN86tz3b7VUd_oToXJr5vZf&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1GkDWYJGpYhzP2C6eAHoD6LYQs6LFOI9s&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>以 2013 為 base，去對 2014~2019 做比例</li>
+<li>營業收入淨額、營業毛利、營業利益、本期淨利都是往上，表示這公司獲利良好，是一間好公司。 </li>
+<li>但近期向上幅度變小，可能有點沒力，需要密切注意下一年的狀態。</li>
+</ul>
+<h2 id="常用的財務比率"><a href="#常用的財務比率" class="headerlink" title="常用的財務比率"></a>常用的財務比率</h2><h3 id="變現力比率"><a href="#變現力比率" class="headerlink" title="變現力比率"></a>變現力比率</h3><ul>
+<li>流動比率 \(\frac{流動資產}{流動負債}\)</li>
+<li>速動比率 \(\frac{流動資產}{流動負債} = \frac{流動資產 - 存貨 - 預付費用}{流動負債}\)</li>
+</ul>
+<h3 id="負債管理比率"><a href="#負債管理比率" class="headerlink" title="負債管理比率"></a>負債管理比率</h3><ul>
+<li>負債比例 \(\frac{負債總額}{資產總額}\)</li>
+<li>負債對股東權益比率 \(\frac{負債總額}{股東權益總額}\)</li>
+<li>權益乘數 \(\frac{資產總額}{股東權益總額}\)</li>
+<li>利息保障倍數 \(\frac{稅前息前淨利}{利息費用}\)</li>
+<li>現金涵蓋比率 \(\frac{稅前息前淨利+折舊費用}{利息費用}\)</li>
+</ul>
+<h3 id="資產管理比例"><a href="#資產管理比例" class="headerlink" title="資產管理比例"></a>資產管理比例</h3><ul>
+<li>存貨周轉率 \(\frac{營業成本}{平均存貨}\)</li>
+<li>存貨週轉天數 \(\frac{365天}{存貨周轉率}\)</li>
+<li>應收帳款周轉率 \(\frac{賒帳收入淨額}{平均應收帳款}\)</li>
+<li>平均收現期間 \(\frac{365天}{應收帳款週轉率} \)</li>
+<li>不動產、廠房及設備周轉率 \(\frac{營業收入淨額}{平均淨不動產、廠房及設備}\)</li>
+<li>總資產周轉率 \(\frac{稅後淨利}{營業收入淨額}\)</li>
+</ul>
+<h3 id="獲利能力比率"><a href="#獲利能力比率" class="headerlink" title="獲利能力比率"></a>獲利能力比率</h3><ul>
+<li>純益率 \(\frac{稅後淨利}{營業收入淨額}\)</li>
+<li>股東權益報酬率 \(\frac{稅後淨利}{平均股東權益}\)</li>
+<li>總資產報酬率 \(\frac{稅後淨利 + 利息費用 * (1- 邊際稅率)}{平均總資產}\)</li>
+</ul>
+<h3 id="市場價值比率"><a href="#市場價值比率" class="headerlink" title="市場價值比率"></a>市場價值比率</h3><ul>
+<li>本益比 \(\frac{普通股每股市價}{每股盈餘}\)</li>
+<li>股利收益率 \(\frac{每股股利}{普通股每股市價}\)</li>
+<li>市價淨值比 \(\frac{每股股價}{每股淨值}\)</li>
+</ul>
+<h2 id="作業"><a href="#作業" class="headerlink" title="作業"></a>作業</h2><p><a href="https://hackmd.io/EUkI8p67Sjycz61-kM1eyw" target="_blank" rel="noopener">財報分析 - Ch04 財務報表分析的技術</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>財務報表分析(五版) by 謝劍平</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>財務報表分析</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>財務報表分析筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>財務報表分析 - 第七章 認識現金流量表與權益變動表</title>
+    <url>/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_03/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上財務報表分析重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="了解現金與企業活動的關聯"><a href="#了解現金與企業活動的關聯" class="headerlink" title="了解現金與企業活動的關聯"></a>了解現金與企業活動的關聯</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1oK3jWmasnDK6IxPyh97CZLaJkOt0agmV&export=download" alt=""></p>
+</blockquote>
+<h2 id="現金流量計算與類型"><a href="#現金流量計算與類型" class="headerlink" title="現金流量計算與類型"></a>現金流量計算與類型</h2><p>由於都是基礎的會計知識，有對會計有初中級了解、並熟知分錄即可知道，比較偏向定義；因此我在這邊附上二連結，方便大家學習</p>
+<p><a href="http://blog.ncue.edu.tw/sys/lib/read_attach.php?id=10774" target="_blank" rel="noopener">由會計基本方程式破解現金流量法的快速解法 by 彰商 吳秀蓮</a><br><a href="https://rich01.com/what-operating-cash-flow/" target="_blank" rel="noopener">營業現金流量是什麼、如何計算？如何用它來分析公司營運 by Mr.Marker 先生</a><br><a href="https://drive.google.com/file/d/1ErOl_pK9KbwtolduMoNALfSzUEaytH-1/view?usp=sharing" target="_blank" rel="noopener">老師上課筆記 pdf 照片，不是個人筆記就非公開</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>財務報表分析(五版) by 謝劍平</p>
+<h2 id="作業"><a href="#作業" class="headerlink" title="作業"></a>作業</h2><p><a href="https://hackmd.io/XWWE34ufRj6hhGQXUipjig" target="_blank" rel="noopener">財報分析 - Ch03</a></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>財務報表分析</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>財務報表分析筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>財務報表分析 - 第五章 流動性分析</title>
+    <url>/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_05/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上財務報表分析重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="流動性分析的重要性及目的"><a href="#流動性分析的重要性及目的" class="headerlink" title="流動性分析的重要性及目的"></a>流動性分析的重要性及目的</h2><h3 id="應受帳款分析注意事項"><a href="#應受帳款分析注意事項" class="headerlink" title="應受帳款分析注意事項"></a>應受帳款分析注意事項</h3><ul>
+<li>是否美化帳面<br>EX: 在財報發布前，給客戶大量優惠，讓客戶大量購買已達到帳面美化功能</li>
+<li>是否借新還舊<br>避免先將舊應付票據用<strong>新的應付票據去償還</strong></li>
+<li>公司信用政策<br>檢查公司對於應受帳款接受度，如果應收帳款越高則呆帳可能性就越高，但公司如果都不接受應收帳款則可能導致公司客戶流失。</li>
+<li>帳齡分析<br>透過帳齡分析表，得知公司的應收帳款狀況</li>
+<li>客戶集中度<br>如果客戶越集中，則客戶議價能力強，如果客戶流失則會導致公司財務狀況出現震盪</li>
+</ul>
+<h3 id="2018-台灣各產業平均收現期間"><a href="#2018-台灣各產業平均收現期間" class="headerlink" title="2018 台灣各產業平均收現期間"></a>2018 台灣各產業平均收現期間</h3><ul>
+<li>觀光事業大多在出遊前就會收集好款項，才會帶你出去玩</li>
+<li>汽車工業，則因為汽車昂貴，大都需要貸款，才導致應收帳款這麼久</li>
+</ul>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1tZT9lg7PWL_brZzamYyw1jCndlnfkFAn&export=download" alt=""></p>
+</blockquote>
+<h2 id="存貨價值"><a href="#存貨價值" class="headerlink" title="存貨價值"></a>存貨價值</h2><ul>
+<li>存貨數量為正確的盤點數量，而非帳面數量</li>
+<li>存貨價值則兩者取其低<ul>
+<li>成本：先進先出、平均加權、個別認定法</li>
+<li>淨變現價值</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1L22ytsERe6HmyHRXsYuxAGrB5KLmgiE2&export=download" alt=""></p>
+</blockquote>
+<h3 id="存貨錯誤對綜合損益表的影響"><a href="#存貨錯誤對綜合損益表的影響" class="headerlink" title="存貨錯誤對綜合損益表的影響"></a>存貨錯誤對綜合損益表的影響</h3><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17Gln9ay3XromVtvDBRG18ZyrOp98Pj9-&export=download" alt=""></p>
+</blockquote>
+<h3 id="台灣各產業平均存貨週轉天數"><a href="#台灣各產業平均存貨週轉天數" class="headerlink" title="台灣各產業平均存貨週轉天數"></a>台灣各產業平均存貨週轉天數</h3><ul>
+<li>以營造業最久，建造房子需要花費大量時間</li>
+<li>觀光業最少，旅遊行程通常都在近期才推出</li>
+</ul>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ht244glbxws7Y6byb49dCGEPMFqDvL7K&export=download" alt=""></p>
+</blockquote>
+<h2 id="作業與練習"><a href="#作業與練習" class="headerlink" title="作業與練習"></a>作業與練習</h2><p><a href="https://hackmd.io/zil2Dr-TSCmycz375LGMwA" target="_blank" rel="noopener">財報分析 - Ch05 流動性分析之基本要素</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>財務報表分析(五版) by 謝劍平</p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>財務報表分析</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>財務報表分析筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>財務報表分析 - 第六章 現金流量分析</title>
+    <url>/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_06/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上財務報表分析重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="現金流量表"><a href="#現金流量表" class="headerlink" title="現金流量表"></a>現金流量表</h2><p>由於現金流量比起收入更難造假，因此有時會用現金流量才審視這間公司合不合格</p>
+<h3 id="現金流量分析用處"><a href="#現金流量分析用處" class="headerlink" title="現金流量分析用處"></a>現金流量分析用處</h3><ul>
+<li>對獲取現金能力做出評價</li>
+<li>對償債能力做出評價</li>
+<li>對收益品質做出評價</li>
+<li>對投資活動、籌資活動做出評價</li>
+</ul>
+<h2 id="現金流量計算"><a href="#現金流量計算" class="headerlink" title="現金流量計算"></a>現金流量計算</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ItnSt2ZMcHSlYDVzoO1n-hSK3Avk3g7R&export=download" alt=""><br><img src="https://drive.google.com/u/2/uc?id=1287R5rBZ5r3trgVsiut12_8ggJvmZJJv&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>\(自由現金流量 = 營業用現金流量 - 資本支出 \)</li>
+</ul>
+<h2 id="現金流量公式"><a href="#現金流量公式" class="headerlink" title="現金流量公式"></a>現金流量公式</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=186QfSHvXh9BAETvt-5TAC9QyZx7lHrnB&export=download" alt=""></p>
+</blockquote>
+<h3 id="現金流量比率"><a href="#現金流量比率" class="headerlink" title="現金流量比率"></a>現金流量比率</h3><p>\( 現金流量比例 = 營業活動之淨現金收入 / 流動負債合計 * 100% \)<br>與流動比例有關，現金流入越多表示對當期債務償還保障越強，企業的流動性越好；表示營業活動現金流入是否可以應付流動負債</p>
+<p>例題:</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1zhzMmUOhXDdw8FgrZvJbu7E0OwwTJP-e&export=download" alt=""></p>
+</blockquote>
+<h3 id="現金流量允當比率"><a href="#現金流量允當比率" class="headerlink" title="現金流量允當比率"></a>現金流量允當比率</h3><p>\(現金流量允當比率＝ 最近5年度營業活動淨現金流量／（最近5年度的資本支出＋最近5年度的存貨增加額＋最近5年度的現金股利）×100% \)</p>
+<p>公式意義為最近五年，公司經常性營業活動所賺進的現金，是否能應付最近五年資本支出、存貨、與發放給股東的現金股利。<br>如果 現金流量允當比率 &gt; 100%，表示公司近五年來財務狀況良好，不需要做借錢或新增股資</p>
+<p>例題:</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1mYTSWQqHT8STljN7b7Zy7cYUsJ1YaptW&export=download" alt=""></p>
+</blockquote>
+<h3 id="現金再投資比例"><a href="#現金再投資比例" class="headerlink" title="現金再投資比例"></a>現金再投資比例</h3><p>\(現金再投資比率＝ （營業活動淨現金流量－現金股利）／（固定資產毛額＋長期投資＋其他資產＋營運資金）×100%\)<br>其中 \(營運資金 = 流動資產 - 流動負債) \)<br>其公式表示為公司經常性營業活動的現金流入扣除給股東的現金股利後，將剩餘的錢再轉投資到此公司，讓其公司更強大</p>
+<p>當現金再投資比例 &gt; 10%，則表示公司留下來的現金則夠再進行投資。</p>
+<p>例題: </p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1rVeqDIlsi9qP-domodU3t4f_cLAlU_vl&export=download" alt=""><br>\((615138744-259303805)/(1352377405+38581386+822613914-590735701+2559781484) = 0.08507\)</p>
+</blockquote>
+<h3 id="利息保障倍數"><a href="#利息保障倍數" class="headerlink" title="利息保障倍數"></a>利息保障倍數</h3><p>\(利息保障倍數 = 稅前息前利潤 / 利息費用\)<br>表示一間公司支付利息的能力，利息保障倍數越高，表示此企業的償還能力越好。<br>一般來說會希望利息保障倍數大於五倍。</p>
+<p>利息保障倍數低：公司負債高、利息壓力沉重、獲利少，容易有還不出錢倒閉的風險。<br>利息保障倍數高：公司有能力支付利息，財務風險較低。</p>
+<h4 id="比較利息保障倍數需要注意的事情"><a href="#比較利息保障倍數需要注意的事情" class="headerlink" title="比較利息保障倍數需要注意的事情"></a>比較利息保障倍數需要注意的事情</h4><ul>
+<li>利息保障倍數必須要跟同業比較，例如銀行業、保險業是以借錢再營利，而零售業則不太需要借錢，因此要跟同產業比較才準確</li>
+<li>有些產業不適合使用比較利息保障倍數，例如零售業</li>
+<li>利息保障倍數比較適合用來評估每年資本資出大的公司，因為這些公司會借錢來投資自己產業，來維持競爭力，如電子廠、製造廠</li>
+</ul>
+<p>例題: </p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1w5Fgjs5ix6Zm0bMdffsNTfKKYryzm16j&export=download" alt=""></p>
+</blockquote>
+<p>(615138774 + 52044071) / 3597145 = 185.475660559</p>
+<h2 id="練習與作業"><a href="#練習與作業" class="headerlink" title="練習與作業"></a>練習與作業</h2><p><a href="https://hackmd.io/8S4pSWkLQY2xcaCKdSGr1A" target="_blank" rel="noopener">財報分析 - Ch06 現金流量分析 作業</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>財務報表分析(五版) by 謝劍平<br><a href="https://smart.businessweekly.com.tw/Reading/WebArticle.aspx?id=68260&p=3" target="_blank" rel="noopener">3項現金流指標　評估企業存活能力 by 財經好讀</a><br><a href="https://rich01.com/what-times-interest-earned/" target="_blank" rel="noopener">利息保障倍數是什麼？公式如何計算？如何用它來判斷公司好壞？ by Mr.Market 市場先生</a></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>財務報表分析</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>財務報表分析筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>財務報表分析 - 第七章 現金流量分析</title>
+    <url>/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_07/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>財務報表分析</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>財務報表分析筆記</tag>
+      </tags>
+  </entry>
 </search>

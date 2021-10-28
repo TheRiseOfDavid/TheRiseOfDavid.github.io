@@ -77,6 +77,412 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-Explain_Algorithm/interpolation_search" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/06/01/Explain_Algorithm/interpolation_search/"
+    >演算法知識 - 插值搜尋 inerpolation search</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/06/01/Explain_Algorithm/interpolation_search/" class="article-date">
+  <time datetime="2021-06-01T08:54:07.000Z" itemprop="datePublished">2021-06-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="插值搜尋-inerpolation-search-介紹與實作原理"><a href="#插值搜尋-inerpolation-search-介紹與實作原理" class="headerlink" title="插值搜尋 inerpolation search 介紹與實作原理"></a>插值搜尋 inerpolation search 介紹與實作原理</h2><blockquote>
+<p>插值搜尋主要用在於資料量大，且資料離散程度大致相同的數列。</p>
+<p>其概念與<a href="https://theriseofdavid.github.io/2020/11/15/Explain_Algorithm/binary_search/" target="_blank" rel="noopener">二分搜尋 by 大衞的筆記</a> 概念大致相同，只有對於 mid 並不同。</p>
+<p>二分搜尋再分成左右子樹時，是切半分配。<br>插值搜尋則是透過斜率公式去進行優化。</p>
+<p>其主要插值法的選擇原理如下<br>value 是我們要查詢的值，那 \(x_1, x_2\) 則是我們現在進行搜尋的區間，因為我們要搜尋的數列是<strong>已經排序好</strong>的數列，那我們假設區間的資料都是相同離散分布，因此理論上我們可以透過斜率來猜測我們的 value 應該位於 m 處(數列 index)。<br>也就是我們透過 \(m = \frac{(value - y_1)(x_2 - x_1)}{(y_2 - y_1)} + x_1\)。</p>
+<p><img src="https://drive.google.com/u/2/uc?id=1c-CeW3Cg8KwD7aruMKQ3lqAxUQY6EDQH&export=download" alt=""></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/06/01/Explain_Algorithm/interpolation_search/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Media_with_Image_recognition/NTUTcs_MediaHW08G01" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/31/Media_with_Image_recognition/NTUTcs_MediaHW08G01/"
+    >北科資工二多媒體技術與應用 第八次團隊作業 - 使用 google colab 與 LSTM 進行期貨價格預測</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/31/Media_with_Image_recognition/NTUTcs_MediaHW08G01/" class="article-date">
+  <time datetime="2021-05-31T15:59:50.000Z" itemprop="datePublished">2021-05-31</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E5%A4%9A%E5%AA%92%E9%AB%94%E8%88%87%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98-Image-Recognition/">多媒體與圖像辨識 Image Recognition</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+<p>訓練的資料是從 <a href="https://api.finmindtrade.com/docs" target="_blank" rel="noopener">FinMind Api</a> 取得，謝謝他們的無私奉獻，讓我們可以輕鬆讀取資料。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/31/Media_with_Image_recognition/NTUTcs_MediaHW08G01/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%9A%E5%AA%92%E9%AB%94%E6%8A%80%E8%A1%93%E8%88%87%E6%87%89%E7%94%A8%E7%AD%86%E8%A8%98/" rel="tag">北科大多媒體技術與應用筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Explain_Algorithm/heap_sort" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/31/Explain_Algorithm/heap_sort/"
+    >演算法知識 - heap sort 堆積排序</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/31/Explain_Algorithm/heap_sort/" class="article-date">
+  <time datetime="2021-05-31T08:54:07.000Z" itemprop="datePublished">2021-05-31</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="heap-sort-堆積排序-介紹與實作原理"><a href="#heap-sort-堆積排序-介紹與實作原理" class="headerlink" title="heap sort 堆積排序 介紹與實作原理"></a>heap sort 堆積排序 介紹與實作原理</h2><blockquote>
+<p>堆積排序是透過最大堆積樹來進行排序，其實作與原理如下<br>主要核心是要讓 root 大於左右子樹，由於我們每次都能夠找出 root，且必定大於左右子樹，因此我們只需要將 root 提出來，再讓左右子樹中的最大值替補 root，依序遞迴擊可。</p>
+<ul>
+<li>我們用一維陣列來表達我們的二元樹</li>
+<li>其中 index 0 一定是二元樹中最大的數字</li>
+<li>透過遞迴，參數： i<ul>
+<li>以當前 i 節點為 root，L、R 分別是左右子樹</li>
+<li>如果左子樹數值比 i 數值還要大，那就讓 i 與左子樹交換</li>
+<li>如果右子樹數值比 i 數值還要大，那就讓 i 與右子樹交換</li>
+<li>如果先前有進行交換的動作，那我們就讓與 i 交換的子樹再重新進行遞迴</li>
+</ul>
+</li>
+</ul>
+<p>我們主要是維護二元堆積樹的 root 最大，如果 root 與其他數值有做交換，那我們必須讓 root 往下至其適合的位置，適合的位置：左右子樹都沒有比他還大，root 本身比左右子樹更大</p>
+<p>時間複查度為 \(O(n log n)\)，在某些演算法中會用到堆積排序，因此算是篇重要的排序演算法之一。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/31/Explain_Algorithm/heap_sort/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-case_report/NTUTifm_Manager_t08" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/28/case_report/NTUTifm_Manager_t08/"
+    >北科資財二管理資訊系統 個案八 趣吧-網路共享旅遊平台</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/28/case_report/NTUTifm_Manager_t08/" class="article-date">
+  <time datetime="2021-05-28T15:59:50.000Z" itemprop="datePublished">2021-05-28</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%80%8B%E6%A1%88%E5%A0%B1%E5%91%8A-Case-Report/">個案報告 Case Report</a> / <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>（請閱讀W12_趣吧-網路共享旅遊平台）</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/28/case_report/NTUTifm_Manager_t08/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E7%AE%A1%E7%90%86%E8%B3%87%E8%A8%8A%E7%B3%BB%E7%B5%B1%E7%AD%86%E8%A8%98/" rel="tag">北科大管理資訊系統筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-case_report/NTUTifm_Manager_t07" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/28/case_report/NTUTifm_Manager_t07/"
+    >北科資財二管理資訊系統 個案七 宸訊科技-開放政府資料打造精準農場決策</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/28/case_report/NTUTifm_Manager_t07/" class="article-date">
+  <time datetime="2021-05-28T15:59:50.000Z" itemprop="datePublished">2021-05-28</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%80%8B%E6%A1%88%E5%A0%B1%E5%91%8A-Case-Report/">個案報告 Case Report</a> / <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下管理作業系統作業紀錄<br><font color="#dd0000">並非所有人都適用，此為老師所給予的題目。</font><br><strong>這是個人心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>（請閱讀W11_宸訊科技-開放政府資料打造精準農場決策）</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/28/case_report/NTUTifm_Manager_t07/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E7%AE%A1%E7%90%86%E8%B3%87%E8%A8%8A%E7%B3%BB%E7%B5%B1%E7%AD%86%E8%A8%98/" rel="tag">北科大管理資訊系統筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-NTUT_note/NTUTgec_music" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -232,6 +638,96 @@ ga('send', 'pageview');
 
 </article>
     
+    <article id="post-UVa/UVa12190" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/24/UVa/UVa12190/"
+    >UVa12190 - Electric Bill(Binary Search 二分搜尋 )</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/24/UVa/UVa12190/" class="article-date">
+  <time datetime="2021-05-24T05:51:59.000Z" itemprop="datePublished">2021-05-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>在 2100 年，電變得非常昂貴，電力公司的累進費率如下</p>
+<ul>
+<li>1~10CHw 2元</li>
+<li>101~10000 3元</li>
+<li>10001~1000000 5元</li>
+<li>1000000 7元</li>
+</ul>
+<p>電力公司為了賺更多錢想出一種方法，電力公司會給你 A、B 兩個數字，其中</p>
+<ul>
+<li>A 是你的用電量與鄰居用電量的總和，如果合在一起的電費帳單</li>
+<li>B 是你的電費與鄰居電費的差額</li>
+</ul>
+<p>如果想知道自己的電費，則必須付給電力公司計算費，但你想要省下這筆錢，所以來寫程式計算八！<br>我們可以保證的是，我們一定比鄰居的用電量還少！<br>注意：在這題中，每組題目都答案只會有一組解。不必擔心多組解問題</p>
+<p><a href="https://onlinejudge.org/external/121/12190.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/05/24/UVa/UVa12190/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search-%E4%BA%8C%E5%88%86%E6%90%9C%E5%B0%8B/" rel="tag">Binary Search 二分搜尋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-UVa/UVa11052" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -346,96 +842,6 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa12190" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/24/UVa/UVa12190/"
-    >UVa12190 - Electric Bill(Binary Search 二分搜尋 )</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/24/UVa/UVa12190/" class="article-date">
-  <time datetime="2021-05-24T05:51:59.000Z" itemprop="datePublished">2021-05-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>在 2100 年，電變得非常昂貴，電力公司的累進費率如下</p>
-<ul>
-<li>1~10CHw 2元</li>
-<li>101~10000 3元</li>
-<li>10001~1000000 5元</li>
-<li>1000000 7元</li>
-</ul>
-<p>電力公司為了賺更多錢想出一種方法，電力公司會給你 A、B 兩個數字，其中</p>
-<ul>
-<li>A 是你的用電量與鄰居用電量的總和，如果合在一起的電費帳單</li>
-<li>B 是你的電費與鄰居電費的差額</li>
-</ul>
-<p>如果想知道自己的電費，則必須付給電力公司計算費，但你想要省下這筆錢，所以來寫程式計算八！<br>我們可以保證的是，我們一定比鄰居的用電量還少！<br>注意：在這題中，每組題目都答案只會有一組解。不必擔心多組解問題</p>
-<p><a href="https://onlinejudge.org/external/121/12190.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/24/UVa/UVa12190/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Binary-Search-%E4%BA%8C%E5%88%86%E6%90%9C%E5%B0%8B/" rel="tag">Binary Search 二分搜尋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
     <article id="post-Explain_Algorithm/Insertion_sort" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -506,434 +912,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Explain_Algorithm/merge_sort" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/24/Explain_Algorithm/merge_sort/"
-    >演算法知識 - 合併排序 merge sort</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/24/Explain_Algorithm/merge_sort/" class="article-date">
-  <time datetime="2021-05-24T04:54:07.000Z" itemprop="datePublished">2021-05-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="合併排序-merge-sort-介紹與實作原理"><a href="#合併排序-merge-sort-介紹與實作原理" class="headerlink" title="合併排序 merge sort 介紹與實作原理"></a>合併排序 merge sort 介紹與實作原理</h2><blockquote>
-<p>合併排序主要是透過 divide 的方式將每一個數列不斷分割成兩數堆(將數列進行分割)，平均時間複雜度為 \(O(n log n\)，是目前時間穩定、效率優質的演算法之一。<br>也是目前大家會選擇的排序演算法之一。</p>
-<p>實作原理如下：</p>
-<ul>
-<li>以下舉例是由小到大</li>
-<li>準備一個暫存的數列 temp</li>
-<li>先不斷進行遞迴，將數列分割成兩個子數列</li>
-<li>處理程序：<ul>
-<li>如果不能夠再分割，直接回傳數字</li>
-<li>將先前遞迴好的兩子數列，定義 A、B，分別給於這兩個子數列一個指針，定義 start_l、start_r</li>
-<li>將 start_l、start_r 指針指定的數字進行比較，如果 start_l 比較小就放入 temp，並將 start_;+1，反之 start_r 比較小就反入 temp，並將 start_r+1，</li>
-<li>上面此點主要是將兩個已經排序好的子數列，再依照順序放入 temp 中，因為我們可以知道 A、B 一開始一定是最小的數值，後面都是更大的數值，所以我們可以透過此操作來進行優化</li>
-<li>如果已經有一邊的子數列用完，而另一邊沒有用完，則將剩下的另一邊依照順序放入 temp</li>
-<li>之後將 temp 的數列放回原本的數列</li>
-</ul>
-</li>
-</ul>
-<p>最後就可以輸出答案！ </p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/24/Explain_Algorithm/merge_sort/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%88%E4%BD%B5%E6%8E%92%E5%BA%8F-merge-sort/" rel="tag">合併排序 merge sort</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Explain_Algorithm/quick_sort" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/24/Explain_Algorithm/quick_sort/"
-    >演算法知識 - 快速排序 quick sort</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/24/Explain_Algorithm/quick_sort/" class="article-date">
-  <time datetime="2021-05-24T04:54:07.000Z" itemprop="datePublished">2021-05-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="quick-sort-快速排序-介紹與實作原理"><a href="#quick-sort-快速排序-介紹與實作原理" class="headerlink" title="quick sort 快速排序 介紹與實作原理"></a>quick sort 快速排序 介紹與實作原理</h2><blockquote>
-<p>快速排序顧名思義就是快的排序嘛XD。平均時間複雜度為 \(O(n log n\)，算是平常大家會用的演算法之一</p>
-<p>實作原理如下：</p>
-<ul>
-<li>定義 L 與 R，分別是當前數列的最左邊 index 與最右邊的 index</li>
-<li>standard 為每次 quick_sort 的第一值，每個人可以定義如何選擇此數字。<ul>
-<li>定義：x 為數值，數堆為 standard 左 or 右 邊的數值</li>
-<li>我們主要是想讓陣列從原本的 <code>standard x x x x x x</code>，透過程式碼運算後改成 <code>x x x standard x x x</code>，再讓 standard 的左右邊再進行一次 quick_sort。</li>
-<li>而我們交換的方式就是使用兩個指針 L and R，從 L 開始不斷往右找直到找出第一個值比 standard 還大；從 R 開始不斷往左找直到找出第一個值比 standard 還大</li>
-<li>找到後進行交換，之後重複上一點，直到 L、R 指針相遇</li>
-<li>其中 standard 的左邊一定比 standard 還小，standard 的右邊一定比 standard 還大</li>
-<li>因此要找出最適合此排序的 standard 會讓排序變得更輕鬆，否則如果選出過大的 standard 會使的分好的兩堆數量過於偏頗，如： ```x x x x x standard x ``，</li>
-</ul>
-</li>
-<li>之後將 standard 隔開的兩數堆在進行 quick_sort，直到 standard 的左右沒辦法在分堆(遇到邊界)</li>
-</ul>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/24/Explain_Algorithm/quick_sort/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-quick-sort/" rel="tag">快速排序 quick sort</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Explain_Algorithm/josephus" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/21/Explain_Algorithm/josephus/"
-    >演算法知識 - Josephus problem 約瑟夫問題 遞迴公式說明與應用</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/21/Explain_Algorithm/josephus/" class="article-date">
-  <time datetime="2021-05-21T10:54:07.000Z" itemprop="datePublished">2021-05-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="Josephus-problem-約瑟夫問題介紹"><a href="#Josephus-problem-約瑟夫問題介紹" class="headerlink" title="Josephus problem 約瑟夫問題介紹"></a>Josephus problem 約瑟夫問題介紹</h2><blockquote>
-<p>約瑟夫問題是一個非常黑暗的問題XD，主要是殘兵們不想被對方軍團俘虜，而想出一種自殺方式，其內容大概如下</p>
-<ul>
-<li>全部人圍成一個圓圈，編號 \(1,2,3,…,n\)</li>
-<li>定義一個數字 \(k\)，只要數到第 k 個數字，那麼那個人就自殺。</li>
-<li>接下來，從死掉的那個人開始在數 k 個數字，再來第 \(2k\) 的人自殺。</li>
-<li>不斷數著 k、不斷地自殺，不斷循環，直到最後只剩下一個人為止。</li>
-</ul>
-<p>而我們的主角 Josephus 則不想要自殺，於是他必須找到一個位置，並且是最後剩下的那個人。</p>
-<p>表達大致上的意思，並沒有全部完整表達。</p>
-<p>下方我的證明可能並沒有很好閱讀，因此不懂的讀者可以參考<a href="https://blog.csdn.net/u011500062/article/details/72855826" target="_blank" rel="noopener">约瑟夫环——公式法（递推公式） by 陈浅墨</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/21/Explain_Algorithm/josephus/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Josephus-problem-%E7%B4%84%E7%91%9F%E5%A4%AB%E5%95%8F%E9%A1%8C/" rel="tag">Josephus problem 約瑟夫問題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa10774" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/21/UVa/UVa10774/"
-    >UVa10774 - Repeated Josephus(數論 Math theorm、Josephus problem 約瑟夫問題)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/21/UVa/UVa10774/" class="article-date">
-  <time datetime="2021-05-21T05:51:59.000Z" itemprop="datePublished">2021-05-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>我不想浪費你的時間在讀題目，這裡有 n 個人要約瑟夫問題，其中 k = 2，倖存者的位置為 x，如果 \(x != n\)，那我們將讓 \(n = x\)，n 等於 x，重新進行一次約瑟夫問題，而新的倖存者位置如果等於 n，那我們就輸出，這是第幾次執行約瑟夫問題(不包含第一次)，第 n 個人的位置是多少？</p>
-<p>舉例：n = 5 時的約瑟夫問題為 3，\(5 != 3\)，將 \(n =3\) 執行約瑟夫問題，這次 \(n = 3, x = 3\)，重複執行了 1 次約瑟夫問題，最後一次的約瑟夫問題的 x 是 3。<br>因此輸出 “1 3”</p>
-<p><a href="https://onlinejudge.org/external/107/10774.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/21/UVa/UVa10774/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Josephus-problem-%E7%B4%84%E7%91%9F%E5%A4%AB%E5%95%8F%E9%A1%8C/" rel="tag">Josephus problem 約瑟夫問題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa11351" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/21/UVa/UVa11351/"
-    >UVa11531 - Last Man Standing(數論 Math theorm、Josephus problem 約瑟夫問題)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/21/UVa/UVa11351/" class="article-date">
-  <time datetime="2021-05-21T05:51:59.000Z" itemprop="datePublished">2021-05-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p><a href="https://theriseofdavid.github.io/2021/05/21/Explain_Algorithm/josephus/" target="_blank" rel="noopener">約瑟夫問題</a>，給你 n,k，總共有 n 個人，數到第 k 個人，那人則必須離開。</p>
-<p>試問，最後一個人會是離開的人是誰？</p>
-<p><a href="https://onlinejudge.org/external/113/11351.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/21/UVa/UVa11351/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Josephus-problem-%E7%B4%84%E7%91%9F%E5%A4%AB%E5%95%8F%E9%A1%8C/" rel="tag">Josephus problem 約瑟夫問題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E8%AB%96-Math-theorm/" rel="tag">數論 Math theorm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
