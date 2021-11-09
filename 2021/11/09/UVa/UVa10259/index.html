@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    UVa10259 - Hippity Hopscotch(SPFA、dijkstra、Directed Acyclic Graph) |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-UVa/UVa10259" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  UVa10259 - Hippity Hopscotch(SPFA、dijkstra、Directed Acyclic Graph)
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/09/UVa/UVa10259/" class="article-date">
+  <time datetime="2021-11-09T15:51:59.000Z" itemprop="datePublished">2021-11-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">813</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">4分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>小時候大家都有玩過跳格子八XD，現在我們對跳格子再增加一些規則，格子中都有錢，每個人從 (1,1) 出發，可以水平或垂直跳至多 K 格，但跳到下一個格子時，下一個格子的錢必須比現在的格子還要多<br>請問最多可以拿多少錢</p>
+<p><a href="https://onlinejudge.org/external/102/10259.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/11/09/Explain_Algorithm/Directed_Acyclic_Graph/" target="_blank" rel="noopener">演算法知識 - Directed Acyclic Graphby 大衛的筆記</a></li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>由於我們可以理解出這題是 DAG，無向圖，不會有 circle(每次跳得格子都必須比現在的格子大)，因此用 SPFA 來解。</li>
+<li>只要根據上下左右並且對可抵達的格子進行查詢，看是否能夠擴展即可。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="http://mobcs.blogspot.com/2015/06/uva-10259-hippity-hopscotch.html" target="_blank" rel="noopener">[UVa] 10259 - Hippity Hopscotch by Hi, I am Code</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 110</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> g[MAXN][MAXN]; <span class="comment">//題目</span></span><br><span class="line"><span class="keyword">int</span> ans[MAXN][MAXN]; <span class="comment">//當前格子可收集到的最大數量</span></span><br><span class="line"><span class="keyword">int</span> t, n, k, collect = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(ans, <span class="number">0</span>, <span class="keyword">sizeof</span>(ans));</span><br><span class="line">    <span class="built_in">deque</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line">    q.push_back(&#123;<span class="number">1</span>,<span class="number">1</span>&#125;);</span><br><span class="line">    ans[<span class="number">1</span>][<span class="number">1</span>] = g[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">    collect = g[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; node = q.front(); q.pop_front();</span><br><span class="line">        <span class="keyword">int</span> x = node.first, y = node.second;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; " " &lt;&lt; collect &lt;&lt; "\n";</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; (x+9 &lt;= n &amp;&amp; g[x+9][y] &gt; g[x][y] &amp;&amp; ans[x][y] + g[x+9][y] &gt; ans[x+9][y]) &lt;&lt; " " &lt;&lt; g[x+9][y] &lt;&lt; "\n";</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++)&#123; <span class="comment">//對可抵達距離(1~K) 展開擴展</span></span><br><span class="line">            <span class="comment">//cout &lt;&lt; "i= " &lt;&lt; i &lt;&lt; " " &lt;&lt; g[x+k][y]&lt;&lt; "\n";</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//擴展時必須比原先的 ans 還要大，這樣才有擴展的理由</span></span><br><span class="line">            <span class="keyword">if</span>(x+i &lt;= n &amp;&amp; g[x+i][y] &gt; g[x][y] &amp;&amp; ans[x][y] + g[x+i][y] &gt; ans[x+i][y])&#123; <span class="comment">//左</span></span><br><span class="line">                 ans[x+i][y] = ans[x][y] + g[x+i][y];</span><br><span class="line">                 collect = max(ans[x+i][y], collect);</span><br><span class="line">                 q.push_back(&#123;x+i,y&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(x-i &gt; <span class="number">0</span> &amp;&amp; g[x-i][y] &gt; g[x][y] &amp;&amp; ans[x][y] + g[x-i][y] &gt; ans[x-i][y])&#123; <span class="comment">//右</span></span><br><span class="line">                 ans[x-i][y] = ans[x][y] + g[x-i][y];</span><br><span class="line">                 collect = max(ans[x-i][y], collect);</span><br><span class="line">                 q.push_back(&#123;x-i,y&#125;);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(y + i &lt;= n &amp;&amp; g[x][y+i] &gt; g[x][y] &amp;&amp; ans[x][y] + g[x][y+i] &gt; ans[x][y+i])&#123; <span class="comment">//下</span></span><br><span class="line">                 ans[x][y+i] = ans[x][y] + g[x][y+i];</span><br><span class="line">                 collect = max(ans[x][y+i], collect);</span><br><span class="line">                 q.push_back(&#123;x,y+i&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(y - i &gt; <span class="number">0</span> &amp;&amp; g[x][y-i] &gt; g[x][y] &amp;&amp; ans[x][y] + g[x][y-i] &gt; ans[x][y-i])&#123; <span class="comment">//上</span></span><br><span class="line">                 ans[x][y-i] = ans[x][y] + g[x][y-i];</span><br><span class="line">                 collect = max(ans[x][y-i], collect);</span><br><span class="line">                 q.push_back(&#123;x,y-i&#125;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> collect;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">        <span class="built_in">memset</span>(g, <span class="number">-1</span>, <span class="keyword">sizeof</span>(g)); <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; g[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; bfs() &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">        <span class="keyword">if</span>(t) <span class="built_in">cout</span> &lt;&lt; <span class="string">"\n"</span>; <span class="comment">//最後只需要一個斷行 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        for(int i = 1; i &lt;= n; i++)&#123;</span></span><br><span class="line"><span class="comment">//            for(int j = 1; j &lt;= n; j++)&#123;</span></span><br><span class="line"><span class="comment">//                cout &lt;&lt; ans[i][j] &lt;&lt; " ";</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; "\n";</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dijkstra-s/" rel="tag">Dijkstra's</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Directed-Acyclic-Graph/" rel="tag">Directed Acyclic Graph</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/11/09/UVa/UVa10350/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            UVa10350 - Liftless EME(DP、Directed Acyclic Graph)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/11/09/Explain_Algorithm/Directed_Acyclic_Graph/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">演算法知識 - Directed Acyclic Graph</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
