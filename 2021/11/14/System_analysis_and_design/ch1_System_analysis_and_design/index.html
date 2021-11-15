@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    系統分析與設計- 第一章 簡介 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-System_analysis_and_design/ch1_System_analysis_and_design" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  系統分析與設計- 第一章 簡介
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/14/System_analysis_and_design/ch1_System_analysis_and_design/" class="article-date">
+  <time datetime="2021-11-14T11:59:50.000Z" itemprop="datePublished">2021-11-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88/">系統分析與設計</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">7分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="資訊科技"><a href="#資訊科技" class="headerlink" title="資訊科技"></a>資訊科技</h2><ul>
+<li>系統分析與設計(system analysis and design)是發展高品質資訊系統的逐步過程</li>
+<li>資訊系統(information system)結合資訊科技、人員及資料來支援企業的需求</li>
+<li>系統設計師職責<ul>
+<li>協助規劃、開發、維護資訊系統</li>
+<li>管理 IT 專案、召開會議、進行簡報，以及撰寫備忘錄、報告及文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="資訊系統"><a href="#資訊系統" class="headerlink" title="資訊系統"></a>資訊系統</h2><ul>
+<li>系統(system)是由一組產生特定結果的相關要件組成<ul>
+<li>關鍵任務系統是指對公司營運有非常重大影響的系統</li>
+<li>系統必須輸入資料(data)</li>
+<li>資訊(information) 則是對使用者有價值的輸出資料</li>
+</ul>
+</li>
+<li>一個完整的系統透過硬體、軟體、資料、流程、人員</li>
+<li>硬體，包含資訊系統內的實體事務</li>
+<li>軟體  <ul>
+<li>系統軟體，用來管理軟體</li>
+<li>應用軟體，支援日常商業功能<ul>
+<li>水平系統，適合不同種類的公司使用</li>
+<li>垂直系統，針對特定需求的公司使用</li>
+<li>老舊系統，之前的舊系統，要考慮其相容性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>資料，資訊系統裡面的原料</li>
+<li>流程，使用者、經理、IT人員為達成特定結果所經歷的任務與需要執行的業務功能</li>
+<li>人員，與資訊系統相關的利害關係人</li>
+</ul>
+<h2 id="網路商業策略"><a href="#網路商業策略" class="headerlink" title="網路商業策略"></a>網路商業策略</h2><ul>
+<li>三個主要趨勢<ul>
+<li>全球化快速增加</li>
+<li>提供無縫隙資料存取並進行技術整合</li>
+<li>雲端運算服務成長</li>
+</ul>
+</li>
+<li>網際網路模式<ul>
+<li>電子商務</li>
+<li>使用者介面可實現資料庫管理軟體與 Web server 進行互動</li>
+<li>B2C</li>
+<li>B2B<ul>
+<li>供應商關係管理，指某項商品提供所需原料、服務、功能的所有公司</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="企業營運塑模"><a href="#企業營運塑模" class="headerlink" title="企業營運塑模"></a>企業營運塑模</h2><ul>
+<li>業務概況<br>描述公司的使命、功能、流程、組織、產品、服務、顧客、供應商、競爭者、限制，以及未來方向</li>
+<li>商業流程，能被記錄成文件的特定交易、事件、任務或結果<ul>
+<li>商業流程塑模(business process modeling, BPM)是以圖形化方式顯示一個或多個商業流程</li>
+<li>商業流程塑模記法(business process modeling notation, BPMN)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1wej-lyd165kFVhmLZGGVC9LYwk1kRWQc&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="企業資訊系統"><a href="#企業資訊系統" class="headerlink" title="企業資訊系統"></a>企業資訊系統</h2><ul>
+<li>員工不論職位高低，都必須使用可提升生產力的辦公室系統<ul>
+<li>第一線的操作員也必須接觸決策支援系統</li>
+<li>現今的系統應該從其功能及特性來區分</li>
+</ul>
+</li>
+<li>企業運算(enterprise computing)，支持整體企業運作與資料管理需求的資料庫系統<ul>
+<li>企業資源規劃(enterprise resource planning, ERP)系統，提供高效率全方位管理</li>
+<li>交易處理系統(transaction processing (TP) systems)，處理日常業務運作產生的資料，如：顧客訂單處理、應收帳款等</li>
+<li>商務支援系統(business support systems, BSS)，提供和工作有關的資訊，以支援公司內各階層的使用者，如<ul>
+<li>管理資訊系統(management information systems, MIS)</li>
+<li>無線射頻辨識 (radio frequency identification, RFID)</li>
+</ul>
+</li>
+<li>知識管理系統(Knowledge management system)，使用知識庫以及推理法則<ul>
+<li>知識庫 (knowledge base)是由一個大型資料庫所組成，輸入關鍵字或一般英文的疑問句來尋找所需的資訊</li>
+<li>推理法則 (inference rule)則是識別資料型態與關係的邏輯法則</li>
+</ul>
+</li>
+<li>數位助理</li>
+<li>系統整合，將交易處理、商務支援、知識管理以及使用者生產力等功能結合在同一個系統</li>
+<li>使用者生產力系統，可提供生產力的科技</li>
+</ul>
+</li>
+</ul>
+<h2 id="組織資訊模型"><a href="#組織資訊模型" class="headerlink" title="組織資訊模型"></a>組織資訊模型</h2><ul>
+<li>高階經理，擬定長期計畫</li>
+<li>中階經理，提供只是、必要資源、績效回饋給督導和小組長</li>
+<li>知識工作者(knowledge worker)對組織的基本功能提供支援</li>
+<li>組織階層、商務職能示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1DcQfW6c6UbUXsK3kTyr9MaZEiMWKhuho&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>督導與小組長，負責監管操作人員，並且執行日常功能</li>
+<li>操作人員<ul>
+<li>包含從交易處理系統取得與輸入資料的使用者</li>
+<li>許多公司的操作人員也必須接觸到資訊以及做出過去應該是督導負責的決策</li>
+</ul>
+</li>
+</ul>
+<h2 id="系統開發"><a href="#系統開發" class="headerlink" title="系統開發"></a>系統開發</h2><ul>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1llgpsCBVbY2j2WBBh0Q6vm2-0Bj49RfD&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>結構化分析<ul>
+<li>使用系統開發生命週期，對資訊系統進行規劃、分析、設計、建置以及支援等</li>
+<li>結構化分析使用一連串的流程模型，以圖形來描述一套系統</li>
+<li>系統規畫階段<ul>
+<li>對IT部門的請求開始，稱為系統請求(systems request)</li>
+<li>初步調查(preliminary investigation)，其中重點為可行性評估(feasibility study)</li>
+</ul>
+</li>
+<li>系統分析階段(systems analysis phase) <ul>
+<li>建立新系統的邏輯模型(logical model) </li>
+<li>建立商業、資料、流程及物件等模型</li>
+<li>產生系統需求文件(system requirements document)</li>
+</ul>
+</li>
+<li>系統設計階段(systems design phase)<ul>
+<li>目的是創造一個滿足所有需求的具體模型(physical model) A</li>
+<li>設計使用介面，識別出必要的輸出、輸入與流程</li>
+<li>可交付成果是系統設計規格(system design specification) A</li>
+<li>使用者與管理者不能對系統設計產生誤解</li>
+</ul>
+</li>
+<li>系統建置階段(systems implementation phase)<ul>
+<li>建置新的系統</li>
+<li>撰寫程式、測試、撰寫文件(documented)及系統導入(installed)</li>
+<li>系統必須功能完整、運作正常、文件完整</li>
+</ul>
+</li>
+<li>系統支援與安全階段(systems support and security phase)<ul>
+<li>系統必須具備安全、可靠、可維護及可延展等特性</li>
+<li>系統在運作幾年後，大都需要重大更新或汰舊換新</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>物件導向分析，將資料與處理資料的流程合而為一，類似於 OOP</li>
+<li>快捷法<ul>
+<li>雛形(prototype)是資訊系統完成之前的早期工作版本<br>缺點：如果業務或IT沒有徹底了解問題時，有些決策下定後，可能還需要修改，導致大量重來。</li>
+<li>建立一連串雛形，並根據使用者需求進行調整</li>
+<li>開發人員也不斷地修正、擴充並合併先前的雛型，進而產生最終產品</li>
+<li>強調不斷反覆開發，每一次開發都會更新上次的缺點</li>
+<li>螺旋式模型 (spiral model)，表示一連串根據使用者回饋而進行的反覆、修正動作</li>
+</ul>
+</li>
+<li>系統分析師必須對方法有了解，才可夠選出適合的方案</li>
+</ul>
+<h2 id="資訊科技部門"><a href="#資訊科技部門" class="headerlink" title="資訊科技部門"></a>資訊科技部門</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1sftP6ngsJIY5eQPTyAN_a_KCh-aNyjYR&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>應用程式開發，由使用者、管理者及IT 團隊成員所組成的小組負責開發</li>
+<li>系統支援與安全，負責為系統軟硬體提供防護與維護服務</li>
+<li>使用者支援，負責為使用者提供技術方面的資訊與訓練，並協助增加生產力</li>
+<li>資料庫管理，涵蓋資料設計、管理、安全、備份及存取等</li>
+<li>網路管理，包括網路方面的軟硬體維修、支援及安全</li>
+<li>Web 支援，設計與架構網頁、監看流量、管理軟硬體，以及連結 Web 式應用程<br>式與公司既有的資訊系統</li>
+<li>品質保證，負責審查與測試系統，以確定規格與品質符合標準</li>
+</ul>
+<h2 id="系統分析師"><a href="#系統分析師" class="headerlink" title="系統分析師"></a>系統分析師</h2><ul>
+<li>對公司的資訊系統進行調查、分析、設計、開發、安裝、評估及維護等</li>
+<li>經常與使用者和管理者在公司裡外進行互動</li>
+<li>角色<ul>
+<li>擔任管理者和程式設計師的翻譯者</li>
+<li>IT災難時的最佳防衛者</li>
+<li>最有價值的技能：傾聽的能力</li>
+<li>向使用者尋求回饋與意見，以避免專案方向走偏</li>
+</ul>
+</li>
+<li>所需知識、技能、背景<ul>
+<li>技術知識</li>
+<li>溝通技巧</li>
+<li>商業技能</li>
+<li>批判性思考技能</li>
+<li>有學士學位，並有 IT 經驗</li>
+<li>有進行認證</li>
+</ul>
+</li>
+</ul>
+<h2 id="資訊科技趨勢"><a href="#資訊科技趨勢" class="headerlink" title="資訊科技趨勢"></a>資訊科技趨勢</h2><ul>
+<li>發展最快的產業之一</li>
+<li>重要趨勢<ul>
+<li>快捷法</li>
+<li>雲端運算</li>
+<li>資料科學</li>
+<li>行動裝置</li>
+<li>服務導向</li>
+<li>社群媒體網路</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>系統分析與設計 by Scott Tilley</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88%E7%AD%86%E8%A8%98/" rel="tag">系統分析與設計筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch2_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            系統分析與設計- 第二章 分析企業個案
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/11/12/NTUT_note/NTUTCSIE_database_midterm/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">北科大資工資料庫管理期中考複習</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

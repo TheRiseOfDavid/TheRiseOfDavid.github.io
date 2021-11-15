@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    系統分析與設計- 第二章 分析企業個案 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-System_analysis_and_design/ch2_System_analysis_and_design" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  系統分析與設計- 第二章 分析企業個案
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/14/System_analysis_and_design/ch2_System_analysis_and_design/" class="article-date">
+  <time datetime="2021-11-14T11:59:50.000Z" itemprop="datePublished">2021-11-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88/">系統分析與設計</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">4分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="策略規劃"><a href="#策略規劃" class="headerlink" title="策略規劃"></a>策略規劃</h2><ul>
+<li>策略規劃(strategic planning) 是一套制訂長期性的組織目標、策略及資源的流程。</li>
+<li>通廠已反映公司願景、目的及價值，關鍵成功因素，優先權高的短期目標為主</li>
+<li>SWOT 分析，對公司的科技、人力及財務等資源進行檢查</li>
+<li>IT 部門的角色<ul>
+<li>專案能支持商業策略與作業需求</li>
+<li>專案每一個事件都明確完整  </li>
+<li>專案目標能夠切乎實際及可達成，且與特定宣言、假設、限制、因素及其他需求緊密相連</li>
+</ul>
+</li>
+<li>策略規劃工具<ul>
+<li>Word、Excel</li>
+<li>心智圖</li>
+<li>平衡計分法 </li>
+<li>差距分析 </li>
+</ul>
+</li>
+</ul>
+<h2 id="企業個案"><a href="#企業個案" class="headerlink" title="企業個案"></a>企業個案</h2><ul>
+<li>企業個案 (business case)是指一個提案的提出理由或正當性。<ul>
+<li>描述清楚、容易理解。</li>
+<li>清楚描述專案、一個執行的正當性，並對專案財務影響進行估計</li>
+</ul>
+</li>
+<li>能回答這些問題<ul>
+<li>為甚麼要做</li>
+<li>在做甚麼</li>
+<li>帶來的好處與風險</li>
+</ul>
+</li>
+</ul>
+<h2 id="系統請求"><a href="#系統請求" class="headerlink" title="系統請求"></a>系統請求</h2><ul>
+<li>大部分資訊專案都從系統請求開始<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Y0GOxYoHVYyQi4sZk1Sj4LNyZGyv3AMX&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>影響資訊專案的因素<ul>
+<li>內部<br>策略計畫、使用者需求、公司財務…</li>
+<li>外部<br>科技、顧客、競爭者、政府</li>
+</ul>
+</li>
+</ul>
+<h2 id="系統評估請求"><a href="#系統評估請求" class="headerlink" title="系統評估請求"></a>系統評估請求</h2><ul>
+<li>會有一個系統審查委員會進行系統評估請求<ul>
+<li>委員會可以讓決策不受到個人偏見</li>
+<li>可能委員會會有派系</li>
+<li>委員會運作才會開始處理這些請求</li>
+</ul>
+</li>
+<li>請求必須有一致性、容易理解且清楚的指示、申請程序流暢</li>
+<li>可行性<ul>
+<li>花多少時間、經歷才可以完成</li>
+</ul>
+</li>
+<li>進行初步事實調查<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=14343QQdMzXFBGvWPuKJQ3I_kMqeqdHfw&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="評估請求的可行性"><a href="#評估請求的可行性" class="headerlink" title="評估請求的可行性"></a>評估請求的可行性</h2><ul>
+<li>這邊的人們為消費者與顧客、經理</li>
+<li>操作可行性<ul>
+<li>人們是否支持該專案</li>
+<li>新系統可以對人力要求降低嗎</li>
+<li>新系統是否要重新訓練使用者</li>
+<li>使用者是否在新系統規劃時要加入他們的意見</li>
+</ul>
+</li>
+<li>操作可行性<ul>
+<li>會對人們產生什麼樣的負擔</li>
+<li>公司商譽、形象會有甚麼風險</li>
+<li>法律問題、道德問題</li>
+<li>是否會與公司其他事情發生衝突</li>
+</ul>
+</li>
+<li>技術可行性<ul>
+<li>開發、採購、安裝、操作用到的技術資源<ul>
+<li>硬體是否足夠</li>
+<li>新舊系統整合</li>
+</ul>
+</li>
+<li>公司需要新增什麼樣的資源嗎</li>
+<li>需要增加技術專家嗎</li>
+<li>是否要用到雛形(prototype)</li>
+</ul>
+</li>
+<li>經濟可行性<ul>
+<li>專案效益是否會大於成本，包括人力、財力、物力</li>
+<li>有形成本(tangible costs) 通常可以用金錢衡量</li>
+<li>無形成本(intangible costs)肯定會影響公司績效</li>
+<li>有形利益 (tangible benefits)可以是來自花費的減少，或收益的增加</li>
+<li>無形利益 (intangible benefits)難以透過金錢衡量，卻對公司十分重要</li>
+</ul>
+</li>
+<li>時程可行性<ul>
+<li>是否可在允許時間內完成</li>
+<li>如果加速開發會有甚麼風險</li>
+<li>專案時程表</li>
+</ul>
+</li>
+<li>設定優先順序<ul>
+<li>什麼樣的事情要先做，其他可以慢做</li>
+<li>影響優先順序的因素<ul>
+<li>新系統是否可以增加利益</li>
+<li>是否可以降低成本</li>
+<li>能讓人們更喜歡</li>
+</ul>
+</li>
+<li>可讓管理者選擇是否進行的專案為自由裁量專案(discretionary projects) </li>
+<li>不可讓管理者選擇是否進行的專案為非自由裁量專案(nondiscretionary projects)<ul>
+<li>有些非自由裁量專案是可預期的，例如薪資調整、稅率調整</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="初步調查"><a href="#初步調查" class="headerlink" title="初步調查"></a>初步調查</h2><ul>
+<li>初步調查規劃<ul>
+<li>主要的管理者、使用者及IT人員見面，並描述這個專案、說明你的職責、回答問題及徵詢意見</li>
+<li>「問題」，在訪談時過度使用會讓人覺得厭惡</li>
+<li>詢問使用者需要甚麼新的功能，而非遇到困難</li>
+<li>交出報告示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1SIQ7VYWSPee21b-lQG5NVXj9Di7WGU2L&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>初步調查五步驟<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17BH54-N_Fw5OP_nDgbrCbr6_rUY6EbZw&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>初步調查<ul>
+<li>step1: 了解問題或機會<ul>
+<li>描述問題或機會</li>
+<li>如果改進會有甚麼好處</li>
+<li>牽涉到那些部門</li>
+<li>有些潛在問題沒辦法被發現</li>
+<li>使用魚骨圖或石川圖表達</li>
+</ul>
+</li>
+<li>step2: 定義專案範圍與限制<ul>
+<li>專案範疇 (project scope)是指定義出具體的專案邊界或範圍</li>
+<li>建立清單並分成必須做、應該做、可以做、不要做</li>
+<li>避免形成專案蔓延(project creep)的情況，專案範疇應該盡可能定義清楚</li>
+<li>識別出限制 (constraint)<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=15gxXUXyaRNQL7I3smiRSPBvwttmN6JJP&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>step3: 進行實情調查<ul>
+<li>蒐集專案可用性、成本、利益以及時程的資料</li>
+<li>分析組織圖</li>
+<li>訪談題目券任</li>
+<li>紀錄並回顧文件、使用者問卷調查</li>
+<li>分析資料，帕列圖(Pareto chart)、散布圖(scatter diagram)</li>
+</ul>
+</li>
+<li>step4: 分析專案可用性、成本、利益和時程資料<ul>
+<li>取得那些資訊、如何蒐集、分析</li>
+<li>如何訪談，訪談對象為誰</li>
+</ul>
+</li>
+<li>step5: 評估可行性<ul>
+<li>操作可行性、經濟可行性、技術可行性、時程可行性</li>
+</ul>
+</li>
+<li>總結<ul>
+<li>提供一份準備報告給管理者</li>
+<li>需要有系統請求摘要、調查發現、解決方案、可行性評估、期望利益</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88%E7%AD%86%E8%A8%98/" rel="tag">系統分析與設計筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch6_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            系統分析與設計- 第九章 資料設計
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch1_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">系統分析與設計- 第一章 簡介</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

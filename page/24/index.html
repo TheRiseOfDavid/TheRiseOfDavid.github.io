@@ -77,6 +77,565 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-UVa/UVa824" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/24/UVa/UVa824/"
+    >UVa824 - Coast Tracker(實作)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/24/UVa/UVa824/" class="article-date">
+  <time datetime="2020-12-24T06:45:35.000Z" itemprop="datePublished">2020-12-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>我們寫 GPS 的一小部分功能，給予一張圖，地圖上只有陸地與海，我們只能走陸地且要沿著海岸線走，我們透過逆時鐘方向進行搜尋，找出下一個節點是我們可以走的方向，輸出下一個節點可以走的方向位置</p>
+<p>方向位置圖如下:<br><img src="https://i.imgur.com/i6ufysm.png" alt=""></p>
+<p>需要注意的是，我們是根據上一個節點的方向開始逆時鐘，而不是每次都是從上一張圖的 1 開始。<br>　座標則是像我們畫方程式的座標相同，也就是北(x,y+1)，左上(-1,1)…以此類推，<strong>與平常不同</strong>。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/12/24/UVa/UVa824/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Competitive-Programming3/" rel="tag">Competitive Programming3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa318" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/24/UVa/UVa318/"
+    >UVa318 - Domino Effect(Dijkstra)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/24/UVa/UVa318/" class="article-date">
+  <time datetime="2020-12-24T05:27:35.000Z" itemprop="datePublished">2020-12-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>Domino Effect 指一件事的發生會產生一連串的連鎖反應，但這不是我們的重點XD。</p>
+<p>我們的重點就如題目，給你一張骨牌的圖，並告訴你<strong>關鍵點</strong>以及從此關鍵點到下一個關鍵點的<strong>秒數</strong>。然後我們想要推動其中一個關鍵點，來讓圖上所有的骨牌倒塌，想請問是在第幾秒的時候全部倒塌，在那一個<strong>關鍵點</strong>開始倒榻。</p>
+<p>關鍵點: 可以影響到兩個骨牌以上的骨牌。<br>秒數的一個小提示，假如最後倒塌是從兩個關鍵點一起倒榻時則計算秒數方式如下 \(0.5(起點到關鍵點一 +  起點到關鍵點二 + 關鍵點一至關鍵點二)\)</p>
+<p>這題的測試資料有個問題，最後一筆是只有一個 0，因此在判斷時，只要判斷 N 是否為 0 即可，如果全部都判斷反而會有錯誤(cin 的情況，因為我是用 cin )。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/12/24/UVa/UVa318/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Competitive-Programming3/" rel="tag">Competitive Programming3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dijkstra-s/" rel="tag">Dijkstra's</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa280" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/24/UVa/UVa280/"
+    >UVa280 - Vertex(DFS)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/24/UVa/UVa280/" class="article-date">
+  <time datetime="2020-12-24T05:27:35.000Z" itemprop="datePublished">2020-12-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>給你一張單向圖，寫一個程式，我們想詢問從 x 點進行搜尋會有哪些點是不會被搜尋到。</p>
+<p>題目測資有點小麻煩，需要處理。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/12/24/UVa/UVa280/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Competitive-Programming3/" rel="tag">Competitive Programming3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/Uva168" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/24/UVa/Uva168/"
+    >UVa168 - Theseus and the Minotaur (DFS)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/24/UVa/Uva168/" class="article-date">
+  <time datetime="2020-12-24T02:45:35.000Z" itemprop="datePublished">2020-12-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>英雄要捕捉牛頭怪，牛頭怪怕光也怕英雄，給你一張圖(有節點與邊)，英雄可以在 K 步後的節點蠟燭，這樣牛頭人就不會在往那通道走，總有一天英雄會抓到牛頭人，我們想請問牛頭人最後走到哪裡就無路可走。</p>
+<p>牛頭人走路有順序性，一定會先走<strong>字典序</strong>最小的值，但不會回頭走。<br>英雄一開始一定在牛頭人旁邊的節點，也就是英雄與牛頭人的距離只有 1 (只有一個邊)。</p>
+<p>題目輸入極其難受，請仔細思考<br>P.S. 注意 K 沒有限制，想要多大都可以，但基本上可以不需要在意這個問題。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/12/24/UVa/Uva168/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Competitive-Programming3/" rel="tag">Competitive Programming3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa118" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/24/UVa/UVa118/"
+    >UVa118 - Mutant Flatworld Explorers (實作題)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/24/UVa/UVa118/" class="article-date">
+  <time datetime="2020-12-24T02:44:35.000Z" itemprop="datePublished">2020-12-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>我們命令機器人依照我們的指令在陸地上移動，如果機器人根據我們的指令跳入海裡時，那接下來的機器人會知道那邊是海，而不會執行我們的指令。</p>
+<p>舉例：假如向前走會掉入海裡，那則不會執行命令</p>
+<p>指令有向左轉與向右轉、往前走，一開始會給你地圖的右上角，之後就是每一個機器人與其需要執行的指令。</p>
+<p>題目要求 由於是根據向量座標，於是往北走的座標則為 x,y+1 , 南(x,y-1) , 西(x-1,y) , 東(x+1,y)</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/12/24/UVa/UVa118/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Competitive-Programming3/" rel="tag">Competitive Programming3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%A6%E4%BD%9C%E9%A1%8C/" rel="tag">實作題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-life_experence/Life_Plan_20201218" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/18/life_experence/Life_Plan_20201218/"
+    >人生規劃書 - 20201218</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/18/life_experence/Life_Plan_20201218/" class="article-date">
+  <time datetime="2020-12-18T15:35:16.000Z" itemprop="datePublished">2020-12-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/">人生旅途</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><blockquote>
+<p>由於最近的自己一直沒辦法安下心來，不斷的充滿迷茫感，於是特地寫下我對於我人生的要求，之後再不斷進行修正或更改八。</p>
+<p>如果用公司來比喻的話，那麼這家公司的目標、產業發展都不明確(自己的規劃)，而股東們都有自己的想法，公司提出來的版本都還沒有辦法讓每位股東願意信服、投資，因此讓每位股東對這家公司感到擔憂、不信任。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/12/18/life_experence/Life_Plan_20201218/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8Life/" rel="tag">大學Life</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa1326" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/15/UVa/UVa1326/"
+    >UVa1326 - Jurassic Remains (雙向搜尋-Meet in the middle、位元運算)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/12/15/UVa/UVa1326/" class="article-date">
+  <time datetime="2020-12-14T18:28:36.000Z" itemprop="datePublished">2020-12-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>考古學家們挖到恐龍化石，但恐龍化石太大沒有辦法被載送回來，於是考古學家就將化石切成零件，並做上標記，載回博物館；但遇到了一個麻煩，同時有另外一批化石也被送回博物館，同時也是將化石切稱 零件，運氣不好的是他們的零件標記與我們使用的符號相同，我們的目標就是找出我們的恐龍化石，並且透過我們的零件組回化石。</p>
+<p>有五點需要特別注意：</p>
+<ul>
+<li>零件組合必須是兩個相同的標籤組成</li>
+<li>每一個化石標籤，都必須都有相同的化石標籤且<strong>不一定是</strong>另外一個零件，也可以是自己的</li>
+<li>我們找回的化石必須要是零件配對數量最大的，也就是零件配對數量必須要最高</li>
+<li>一個零件中的所有標籤，每一個都必須被使用到</li>
+<li>零件最多不會超過 25</li>
+</ul>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/12/15/UVa/UVa1326/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BD%8D%E5%85%83%E9%81%8B%E7%AE%97/" rel="tag">位元運算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%99%E5%90%91%E6%90%9C%E5%B0%8B/" rel="tag">雙向搜尋</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Explain_Algorithm/Two-way-search" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -319,573 +878,13 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-NTUT_note/investment_stock_value_analysis_economic" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/05/NTUT_note/investment_stock_value_analysis_economic/"
-    >投資學 筆記 - 股票價值基本分析 (國內外政經事件與國內總經因素)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/12/05/NTUT_note/investment_stock_value_analysis_economic/" class="article-date">
-  <time datetime="2020-12-05T11:04:50.000Z" itemprop="datePublished">2020-12-05</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
-<ul>
-<li>討論股票每股真實價值</li>
-<li>分析影響股票市價因素</li>
-</ul>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/12/05/NTUT_note/investment_stock_value_analysis_economic/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上投資學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E6%9C%9F%E4%B8%AD%E8%80%83%E7%AD%86%E8%A8%98/" rel="tag">北科大大二上投資學期中考筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-statistics/statistics-1081-mid" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/04/statistics/statistics-1081-mid/"
-    >統計學(一) 筆記 - 大二上第二次段考 (L4-L6)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/12/04/statistics/statistics-1081-mid/" class="article-date">
-  <time datetime="2020-12-04T15:20:50.000Z" itemprop="datePublished">2020-12-04</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/12/04/statistics/statistics-1081-mid/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-NTUT_note/investment_stock_asset_profolio_and_capital_asset_pricing_model" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/03/NTUT_note/investment_stock_asset_profolio_and_capital_asset_pricing_model/"
-    >投資學 筆記 - 股票資產組合管理資產組合與資本資產定價模型篇</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/12/03/NTUT_note/investment_stock_asset_profolio_and_capital_asset_pricing_model/" class="article-date">
-  <time datetime="2020-12-03T09:11:50.000Z" itemprop="datePublished">2020-12-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
-<ul>
-<li>資產多元化配置以降低風險</li>
-<li>判斷市場均衡時定出資本資產定價模型，並判定個別資產是否有被高估或低估</li>
-</ul>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/12/03/NTUT_note/investment_stock_asset_profolio_and_capital_asset_pricing_model/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上投資學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E6%9C%9F%E4%B8%AD%E8%80%83%E7%AD%86%E8%A8%98/" rel="tag">北科大大二上投資學期中考筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-NTUT_note/investment-stock-Asset-Portfolio-Management-Basic" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/02/NTUT_note/investment-stock-Asset-Portfolio-Management-Basic/"
-    >投資學 筆記 - 股票資產組合管理基礎篇(報酬與風險)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/12/02/NTUT_note/investment-stock-Asset-Portfolio-Management-Basic/" class="article-date">
-  <time datetime="2020-12-02T14:30:50.000Z" itemprop="datePublished">2020-12-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
-<ul>
-<li>量化金融資產用預期報酬與風險</li>
-<li>了解預期報酬與風險</li>
-<li>透過過去歷史資料計算每種資產預期報酬率</li>
-</ul>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/12/02/NTUT_note/investment-stock-Asset-Portfolio-Management-Basic/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上投資學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E6%9C%9F%E4%B8%AD%E8%80%83%E7%AD%86%E8%A8%98/" rel="tag">北科大大二上投資學期中考筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-statistics/statistics-ch7" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/01/statistics/statistics-ch7/"
-    >統計學(一) 筆記 - 第七章 抽樣與抽樣分配(Sampling and Sampling Distributions)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/12/01/statistics/statistics-ch7/" class="article-date">
-  <time datetime="2020-12-01T15:59:50.000Z" itemprop="datePublished">2020-12-01</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/12/01/statistics/statistics-ch7/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-NTUT_note/investment_stock_trading_system" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/01/NTUT_note/investment_stock_trading_system/"
-    >投資學 筆記 - 股票交易制度</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/12/01/NTUT_note/investment_stock_trading_system/" class="article-date">
-  <time datetime="2020-12-01T14:30:50.000Z" itemprop="datePublished">2020-12-01</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上投資學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br>本章主要內容</p>
-<ul>
-<li>上市櫃股票交易流程</li>
-<li>上市櫃股票交易成本</li>
-<li>上市櫃股價漲跌幅與檔次</li>
-<li>上市櫃股票信用交易</li>
-<li>上市櫃股票鉅額交易與零股交易</li>
-<li>興櫃股票交易制度</li>
-</ul>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/12/01/NTUT_note/investment_stock_trading_system/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二上投資學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%A7%E4%BA%8C%E4%B8%8A%E6%8A%95%E8%B3%87%E5%AD%B8%E6%9C%9F%E4%B8%AD%E8%80%83%E7%AD%86%E8%A8%98/" rel="tag">北科大大二上投資學期中考筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-NTUT_note/database_1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/01/NTUT_note/database_1/"
-    >資料庫管理 筆記 - 大二上期中考</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/12/01/NTUT_note/database_1/" class="article-date">
-  <time datetime="2020-12-01T12:34:50.000Z" itemprop="datePublished">2020-12-01</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2020/12/01/NTUT_note/database_1/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B3%87%E6%96%99%E5%BA%AB%E7%AE%A1%E7%90%86/" rel="tag">資料庫管理</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/23/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/25/">下一頁</a>
+    <a class="extend prev" rel="prev" href="/page/23/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/25/">下一頁</a>
   </nav>
   
 </section>

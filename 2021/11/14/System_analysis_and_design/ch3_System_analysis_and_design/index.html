@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    系統分析與設計- 第三章 系統專案管理 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-System_analysis_and_design/ch3_System_analysis_and_design" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  系統分析與設計- 第三章 系統專案管理
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/14/System_analysis_and_design/ch3_System_analysis_and_design/" class="article-date">
+  <time datetime="2021-11-14T11:59:50.000Z" itemprop="datePublished">2021-11-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88/">系統分析與設計</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">4分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="專案管理描述"><a href="#專案管理描述" class="headerlink" title="專案管理描述"></a>專案管理描述</h2><ul>
+<li>專案管理(project management)是指開發一套資訊系統時所進行的規劃、排程、監督與控制，以及回報等流程。</li>
+<li>專案樣貌，一項成功專案要準時完成、低於預算，提供有品質的系統來滿足消費者需求</li>
+<li>專案三角(project triangle)，會隨著那邊比重大而改變<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17ieGLBFfkiq2TD7IenPU19MtNLkp9pPb&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>專案經理的任務<ul>
+<li>專案規劃(project planning)，確認專案任務並估計完成時間成本</li>
+<li>專案排程(project scheduling)，建立明確時間表顯示任務、任務依存性，以及會造成專案延宕的關鍵任務</li>
+<li>專案監督 (project monitoring)，引導、監督、協調專案團隊工作負荷</li>
+<li>專案回報(project reporting)，對主管、使用者及專案團隊本身進行例行性進度報告</li>
+</ul>
+</li>
+</ul>
+<h2 id="建立工作分解結構"><a href="#建立工作分解結構" class="headerlink" title="建立工作分解結構"></a>建立工作分解結構</h2><ul>
+<li>工作分解結構(work breakdown structure, WBS)是將一個專案拆解成一系列較小的任務<ul>
+<li>甘特圖(Gantt chart)</li>
+<li>PERT/CPM 圖</li>
+<li>專案評核術 (Program Evaluation Review Technique, PERT) 與 關鍵路徑法 (Critical Path Method, CPM) 已不在被使用</li>
+</ul>
+</li>
+<li>確認工作分解結構中的任務<ul>
+<li>任務(task)或活動(activity)是指具有開始與結束時間的任何一項工作、相對小並好管理</li>
+<li>每項專案都必須要有檢查點</li>
+</ul>
+</li>
+<li>確認工作分解結構中的任務<ul>
+<li>列出任務</li>
+<li>估計任務時間，使用最佳情況估計(best-case estimate, B)、可能情況估計(probable-caseestimate, P)、最差情況估計(worst-case estimate, W)</li>
+<li>做出估計後，經理分配權重</li>
+</ul>
+</li>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=18tMukbP7_u5b_dDK1XHYoqnMeuAEBVvr&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>影響所需時間的因素<ul>
+<li>專案大小<br>事情多不多、任務時間</li>
+<li>人力資源<br>大家忙不忙、會不會有辭職問題</li>
+<li>如何預估時間<ul>
+<li>相似專案的經驗</li>
+<li>直接要求限制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可以透過任務群組的方式，將許多任務進行溝通簡化</li>
+</ul>
+<h2 id="任務模式"><a href="#任務模式" class="headerlink" title="任務模式"></a>任務模式</h2><ul>
+<li>工作分解結構中的所有任務都必須按照任務模式(taskpattern)的邏輯順序來排列</li>
+<li>以任務盒建立模型<ul>
+<li>任務名稱簡潔且具描述性</li>
+<li>任務編號必須唯一</li>
+<li>其他按照字面意思</li>
+</ul>
+</li>
+<li>任務盒示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1MW_6NAZsXJx4fayb5I47yC6mT5iJUySR&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>任務模式類型<ul>
+<li>依存任務 (dependent task)，任務必須一個一個完成</li>
+<li>多重後續任務，類似 tree，可以透過一個任務展開兩個任務</li>
+<li>多重前置任務，必須要先將前面某些任務完成，才可以進行此任務</li>
+</ul>
+</li>
+<li>複雜的任務模式<br>當加入選多任務後，必須清楚了解邏輯順序，否則沒有效率、不準確</li>
+<li>任務模式類型示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1vjfW1qi6jGqTe8OoRluGXR3r0kaGS5eZ&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="關鍵路徑"><a href="#關鍵路徑" class="headerlink" title="關鍵路徑"></a>關鍵路徑</h2><ul>
+<li>關鍵路徑(critical path)是指一連串的任務，假如這些任務延誤了，將會影響整個專案的最終完成日期<br>必須先決定每項任務的開始與結束日期，才能決定專案的關鍵路徑</li>
+</ul>
+<h2 id="專案監督與控制"><a href="#專案監督與控制" class="headerlink" title="專案監督與控制"></a>專案監督與控制</h2><ul>
+<li>監督與控制技術<ul>
+<li>結構化逐步審查(structured walk-through)是一種將專案團隊成員的工作交由團隊中其他成員進行審查的方式</li>
+<li>結構化審查在 SDLC(系統發展生命週期) 中會不斷出現</li>
+<li>設計審查(designreviews) </li>
+<li>程式碼審查(code reviews) </li>
+<li>測試審查(testing reviews) </li>
+</ul>
+</li>
+<li>保持進度<ul>
+<li>專案很難沒辦法都不延誤、沒遇到問題</li>
+<li>透過監督與控制工作，來將破壞降至最低</li>
+</ul>
+</li>
+<li>任務與關鍵路徑<br>專案經理會花大部分時間去追縱關鍵路徑上的任務</li>
+<li>專案狀態會議<ul>
+<li>定期開會討論專案狀態</li>
+<li>分享問題，討論新技術</li>
+</ul>
+</li>
+<li>專案狀態報告<br>向長官、使用者回報</li>
+<li>處理問題</li>
+</ul>
+<h2 id="風險管理"><a href="#風險管理" class="headerlink" title="風險管理"></a>風險管理</h2><ul>
+<li>風險管理(risk management)則是一套確認、分析、預估，以及監控風險的流程，使其對專案的影響減到最低</li>
+<li>風險管理步驟<ul>
+<li>發展一份風險管理計畫(risk management plan)</li>
+<li>風險確認(risk identification)，可能產生的風險的問題列出</li>
+<li>質性風險分析(qualitative risk analysis)，評估風險發生的可能性並評估</li>
+<li>建立風險應對計畫(risk response plan)，對於風險，那我們前置作業要怎麼防範</li>
+<li>監控風險</li>
+</ul>
+</li>
+</ul>
+<h2 id="專案管理的成功"><a href="#專案管理的成功" class="headerlink" title="專案管理的成功"></a>專案管理的成功</h2><ul>
+<li>專案經理必須具有高度的警覺性、良好的技術及應變能力，此外也必須具有良好的溝通和交際能力</li>
+<li>專案問題有這幾種<ul>
+<li>業務問題<ul>
+<li>每一個系統都是為了解決問題</li>
+<li>專案蔓延(project creep)，專案不斷擴大、變化，到無法控制的地步</li>
+</ul>
+</li>
+<li>預算問題，EX:成本超支</li>
+<li>時程問題，EX:員工離職</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p>系統分析與設計 by Scott Tilley</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88%E7%AD%86%E8%A8%98/" rel="tag">系統分析與設計筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch4_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            系統分析與設計- 第四章 需求工程
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch5_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">系統分析與設計- 第五章 結構化分析中資料與流程塑模</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

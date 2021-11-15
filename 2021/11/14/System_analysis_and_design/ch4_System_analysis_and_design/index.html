@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    系統分析與設計- 第四章 需求工程 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-System_analysis_and_design/ch4_System_analysis_and_design" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  系統分析與設計- 第四章 需求工程
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/14/System_analysis_and_design/ch4_System_analysis_and_design/" class="article-date">
+  <time datetime="2021-11-14T11:59:50.000Z" itemprop="datePublished">2021-11-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88/">系統分析與設計</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">5分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="系統需求"><a href="#系統需求" class="headerlink" title="系統需求"></a>系統需求</h2><ul>
+<li>系統需求(system requirement)是指在一套資訊系統中必須包含的特性或功能，以滿足業務需求以及使用者的實際需要。</li>
+<li>需求工程<ul>
+<li>蒐集需求：了解(understanding)問題</li>
+<li>表示需求：描述(describing)問題</li>
+<li>確認與驗證需求：同意(agreeing)問題</li>
+</ul>
+</li>
+<li>需求類型<ul>
+<li>根據不同特性分類，區分為功能性、非功能性</li>
+</ul>
+</li>
+<li>需求的挑戰，不夠精確、同意、拖延</li>
+</ul>
+<h2 id="其他考量"><a href="#其他考量" class="headerlink" title="其他考量"></a>其他考量</h2><ul>
+<li>可延展性(scalability)：系統處理未來業務與交易量增加的能力</li>
+<li>安全性</li>
+<li>總體擁有成本(total cost of ownership, TCO)：直接成本與間接成本</li>
+</ul>
+<h2 id="團隊技巧"><a href="#團隊技巧" class="headerlink" title="團隊技巧"></a>團隊技巧</h2><h3 id="JAD"><a href="#JAD" class="headerlink" title="JAD"></a>JAD</h3><ul>
+<li>聯合應用開發(joint application development, JAD)，頗受歡迎，他將使用者視為實際參與、開發者，需要有一個良好人際關係組長，還有負責記錄討論與決議的組員</li>
+<li>JAD 優勢<ul>
+<li>缺點<ul>
+<li>與傳統方法相比，JAD 成本高</li>
+<li>規模大，則會比較繁瑣</li>
+</ul>
+</li>
+<li>優點<ul>
+<li>能夠有效餐與</li>
+<li>使用者有參與感，更喜歡</li>
+<li>JAD 更容易產生正確系統，提高新系統的投入程度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>JAD 示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1b4oqYewSkutaiJy7rA8Is-kYIOM3AJhh&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>開會流程<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1d4iaVVF0d-tQzZpdf7_oXrgYJB3-1cOx&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="RAD"><a href="#RAD" class="headerlink" title="RAD"></a>RAD</h3><ul>
+<li>快速應用開發(rapid application development, RAD)<ul>
+<li>類似於 JAD</li>
+<li>開發新的資訊系統</li>
+<li>開發方法<ul>
+<li>包括與傳統 SDLC(系統生命開發週期)</li>
+<li>減少成本、開發時間</li>
+<li>提升成功機率</li>
+<li>依賴雛型化與使用者涉入</li>
+</ul>
+</li>
+<li>RAD 示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1vm7E-KOoKmjuLh8TeI8fkUFsd_hQ8-sy&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>RAD 目標<br>讓使用者參與系統開發的各個階段，以縮短開發時間與支出</li>
+<li>RAD 優劣<ul>
+<li>更快、成本更低</li>
+<li>注重系統本身，可能會忽略公司要求</li>
+<li>倉促行事，則會產生問題</li>
+</ul>
+</li>
+</ul>
+<h2 id="團隊技巧-1"><a href="#團隊技巧-1" class="headerlink" title="團隊技巧"></a>團隊技巧</h2><h3 id="快捷法-agile-method-，屬於團隊技巧，而非開發"><a href="#快捷法-agile-method-，屬於團隊技巧，而非開發" class="headerlink" title="快捷法(agile method)，屬於團隊技巧，而非開發"></a>快捷法(agile method)，屬於團隊技巧，而非開發</h3><ul>
+<li>累加方式建構雛形，並根據使用者需求調整</li>
+<li>不斷修改、刪除、合併雛形，而完成商品</li>
+<li>會隨著先前的雛型而進步</li>
+<li>另一種方法為 Scrum<ul>
+<li>心智上的合作</li>
+<li>每個團員都要扮演角色，達到有趣與加速生產、明確角色</li>
+<li>強調時間、互動、以及可產生交付軟體的團隊式活動</li>
+</ul>
+</li>
+<li>優點<ul>
+<li>彈性、效率快</li>
+<li>反覆確認，降低最終錯誤風險</li>
+</ul>
+</li>
+<li>缺點<ul>
+<li>團隊人員需要良好溝通技巧</li>
+<li>缺乏結構化與文件紀錄則容易導致風險</li>
+<li>專案範疇也可能因為使用者需求的變化而變動    </li>
+</ul>
+</li>
+</ul>
+<h2 id="蒐集需求"><a href="#蒐集需求" class="headerlink" title="蒐集需求"></a>蒐集需求</h2><ul>
+<li>使用需求獲取(requirement elicitation)或實情調查(fact-finding)<ul>
+<li>需求獲取，獲得顆戶德需求</li>
+<li>實情調查，根據現實層面進行分析</li>
+</ul>
+</li>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Gro2vlFawBQs9MA-zZIINKwoDGsD2p7v&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>step1 決定訪談對象<ul>
+<li>選擇正確的人且問題扎實，考慮來自正式和非正式結構(informal structure)中的人員</li>
+<li>確認群組或個人訪談</li>
+</ul>
+</li>
+<li>step2 建立訪談目標<ul>
+<li>決定討論的問題範圍</li>
+<li>了解事項</li>
+</ul>
+</li>
+<li>step3 設計訪談問題<ul>
+<li>對訪談的問題進行標準化可以讓訪談有所依循，也避免節外生枝</li>
+<li>避免導引式問題(leading questions)，有意或無意暗示訪談者說出某個答案<ul>
+<li>開放式問題(open-ended questions)可以讓受訪者不拘形式的回答，沒有固定的標準答案</li>
+<li>封閉式問題(closed-ended questions)會限制受訪者的回答，在需要特定資訊或查證事實時使用</li>
+<li>範圍式問題(range-of-response questions)也是一種封閉式問題，它可讓受訪者從一組既定答案中或某個數值範圍選擇解答</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>step4 準備訪談<ul>
+<li>不能閒聊，非常重要</li>
+<li>一個小時內完成</li>
+<li>將主題提前送給受訪者</li>
+</ul>
+</li>
+<li>step5 執行訪談<ul>
+<li>會議擬訂計畫</li>
+<li>進行訪談時先自我介紹、描述專案內容</li>
+<li>專注傾聽(engaged listening)</li>
+<li>給對方思考</li>
+<li>彙整資料，並告訴對方我們為甚麼需要</li>
+</ul>
+</li>
+<li>step6 記錄訪談<br>可以發感謝卡，並做筆記</li>
+<li>step7 評量訪談<br>檢討自己與對方</li>
+</ul>
+<h2 id="其他蒐集需求的方法"><a href="#其他蒐集需求的方法" class="headerlink" title="其他蒐集需求的方法"></a>其他蒐集需求的方法</h2><ul>
+<li>文件查閱(document review)，了解現有系統如何運作</li>
+<li>觀察(observation)<ul>
+<li>就是觀察你</li>
+<li>霍桑效應(Hawthorne Effect，別人看你，你會讓自己做的最好</li>
+</ul>
+</li>
+<li>問卷(questionnaire)和調查(survey)</li>
+<li>訪談針對個人做表達，但花時間</li>
+<li>問卷可以讓許多人表達意見，但不一定準確</li>
+<li>腦力激盪 (brainstorming)是指針對特定問題、機會與議題的小組討論<ul>
+<li>結構化腦力激盪 (structured brainstorming)，參加者輪流發言</li>
+<li>非結構化腦力激盪 (unstructured brainstorming)，<del>立法院</del>，隨便你發言</li>
+</ul>
+</li>
+<li>抽樣<ul>
+<li>系統抽樣(systematic sample)：每10人抽取1人</li>
+<li>階層抽樣(stratified sample) ：在所有四個郵遞區號中，每個抽取5人</li>
+<li>隨機抽樣(random sample) ：任意抽取20人    </li>
+<li>管你怎麼抽，只要樣本能代表母體就可以</li>
+</ul>
+</li>
+<li>研究<ul>
+<li>讀書、開會</li>
+<li>實地參訪</li>
+</ul>
+</li>
+<li>快捷法專案中的需求蒐集<ul>
+<li>注重使用者案例、情境、故事</li>
+<li>蒐集需求是為了改進</li>
+</ul>
+</li>
+</ul>
+<h2 id="需求的表示"><a href="#需求的表示" class="headerlink" title="需求的表示"></a>需求的表示</h2><ul>
+<li>分析師紀錄文件時需要注意<ul>
+<li>獲得資訊就紀錄</li>
+<li>簡單方式紀錄、好懂</li>
+<li>文件容易被檢索</li>
+</ul>
+</li>
+<li>自然語言</li>
+<li>圖表</li>
+<li>功能分解圖(functional decomposition diagram, FDD) <blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1TyW_RjopA_69qfIQ7EEU_1E-_7jSxLF-&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>商業流程模型(BPM)<ul>
+<li>描述一個或多個商業流程</li>
+<li>商業流程塑模記法(business process modeling notation, BPMN)包含可用來表示事件、程序及流程的各種不同圖形和符號</li>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1vXBT_woRibdFH106Hzn27RIGrx2-EreK&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>資料流向圖(data flow diagram, DFD)<ul>
+<li>顯示系統如何儲存、運作、轉變資料</li>
+</ul>
+</li>
+<li>模型<ul>
+<li>統一塑模語言(unified modeling language, UML) </li>
+<li>使用案例圖(use case diagram)<br>視覺化表示使用者與資訊系統的互動</li>
+<li>循序圖(sequence diagram)<br>表述各物件之間互動及其時間</li>
+<li>示意圖 A<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JV-RkUfLAbccX0MRfR793aodZY8gD5T1&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>示意圖 B<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1c23M26u3gQxCFoMnWfZMWG_tZwNFIvDm&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="確認與驗證需求"><a href="#確認與驗證需求" class="headerlink" title="確認與驗證需求"></a>確認與驗證需求</h2><ul>
+<li>需求的確認與驗證(validation and verification, V&amp;V)<ul>
+<li>為了讓需求能夠定義出顧客真正需要的系統<ul>
+<li>確認：陳述的需求是否正確？</li>
+<li>驗證：需求是否正確地陳述？    </li>
+</ul>
+</li>
+<li>並檢查是否有完整性、一致性、可理解性</li>
+</ul>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88%E7%AD%86%E8%A8%98/" rel="tag">系統分析與設計筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch3_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">系統分析與設計- 第三章 系統專案管理</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
