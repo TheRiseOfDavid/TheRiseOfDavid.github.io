@@ -7044,7 +7044,7 @@
     <title>資料庫管理 筆記 - 大二上期中考</title>
     <url>/2020/12/01/NTUT_note/database_1/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二上統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二上資料庫管理學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
 </blockquote>
 <a id="more"></a>
 
@@ -24362,250 +24362,6 @@
       </tags>
   </entry>
   <entry>
-    <title>系統分析與設計- 第九章 資料設計</title>
-    <url>/2021/11/14/System_analysis_and_design/ch6_System_analysis_and_design/</url>
-    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
-<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="資料設計概念"><a href="#資料設計概念" class="headerlink" title="資料設計概念"></a>資料設計概念</h2><ul>
-<li>資料結構<ul>
-<li>資料結構是資訊系統內的組織、儲存及管理資料的架構</li>
-<li>檔案和資料表它們有各種形式彼此連結</li>
-</ul>
-</li>
-<li>檔案式系統(file-oriented system)，利用檔案來處理資料</li>
-<li>關聯式模型(relational model)，利用資料庫來處理資料</li>
-<li>資料庫管理系統(database management system, DBMS)<ul>
-<li>可讓使用者新增、更新、管理、存取並分析資料內容的一組工具、功能及介面的組合。</li>
-<li>優點<ul>
-<li>可延展性(scalability)，系統可以輕易擴充、縮小</li>
-<li>經濟規模(economy of scale)，長期平均總成本會因為產量增加而減少</li>
-<li>有效支援企業級應用系統——資料庫管理師 (database, administrator,DBA)</li>
-<li>更強的標準</li>
-<li>更佳的安全性</li>
-<li>資料獨立性</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="DBMS-組成元件"><a href="#DBMS-組成元件" class="headerlink" title="DBMS 組成元件"></a>DBMS 組成元件</h2><blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1gk75CY0q4SKefV4C3HiGVPsnZHe8CsqA&export=download" alt=""></p>
-</blockquote>
-<ul>
-<li>使用者、資料庫管理師與其系統介面<ul>
-<li>使用者，根據事先定義查詢或指令來執行動作</li>
-<li>資料庫管理師，負責 DBMS 管理與支援</li>
-<li>相關資訊系統，DBMS 可支援許多提供輸入給 DBMS 或是從 DBMS 取得特定資料</li>
-</ul>
-</li>
-<li>資料綱目<ul>
-<li>綱目(schema) A<ul>
-<li>包括所有欄位、資料表及關聯性的描述</li>
-<li>子綱目(subschema)：資料庫中符合特定系統或使用者需求，或是允許存取的部分</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>實體資料儲存處<ul>
-<li>包含綱目與子綱目</li>
-<li>可集中式也可以分散到數個地點</li>
-</ul>
-</li>
-</ul>
-<h2 id="Web-式設計"><a href="#Web-式設計" class="headerlink" title="Web 式設計"></a>Web 式設計</h2><ul>
-<li>讓資料庫連上 web，史資料可以被更新或閱讀</li>
-<li>中介軟體(middleware)是一種整合不同應用系統並讓它們彼此能夠交換資料的軟體</li>
-<li>Web 式資料必須顧及安全性，並且讓授權使用者能輕易存取</li>
-<li>Web 特性<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=127jTFH07odZVHVHpwxB1H6TOzPKw4wwf&export=download" alt=""></p>
-</blockquote>
-</li>
-<li>Web 與 database 架構<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1xe3SAo5oEzYC_TbFkVxx2M-gN9_4poaf&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-<h2 id="資料設計術語"><a href="#資料設計術語" class="headerlink" title="資料設計術語"></a>資料設計術語</h2><ul>
-<li>定義<ul>
-<li>實體(entity)，蒐集和維護資料的對象</li>
-<li>資料表(table)或檔案(file)，包含了一組相關的紀錄，這些紀錄都存放了與特定實體有關的資料</li>
-<li>欄位(field)，也稱為屬性(attribute)，亦即實體的一個特性，如果一個屬性有兩個實體則是共同欄位</li>
-<li>紀錄(record)，也稱為值組(tuple)，一組相關欄位的組合，用以描述實體的一筆實例</li>
-</ul>
-</li>
-<li>鍵欄位(key fields)<ul>
-<li>主鍵(primary key)，一個欄位或一組欄位，可以唯一且簡潔地識別出實體某個特定成員</li>
-<li>候選鍵(candidate key)，其他可以做為主鍵的欄位</li>
-<li>外鍵(foreign key)，某一張資料表的其中一個欄位，但同時也是另一張資料表的主鍵，用以建立兩張資料表的關係</li>
-<li>次級鍵(secondary key)，其他的欄位</li>
-</ul>
-</li>
-<li>參照完整性(referential integrity)，避免資料不一致、品質不穩定的問題<br>每一個外來鍵必須對應到其他資料表的主鍵，否則不應該輸入</li>
-</ul>
-<h3 id="實體關係圖"><a href="#實體關係圖" class="headerlink" title="實體關係圖"></a>實體關係圖</h3><ul>
-<li>實體關係圖(entityrelationship diagram, ERD)是一個顯示系統實體間邏輯關係的模型<ul>
-<li>關係，兩個實體的媒介，分成一對一、一對多、多對多</li>
-<li>示意圖<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1x9KyOELQk4zqXrNHhSIte_WR5iKKW5jF&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>基數(cardinality)<ul>
-<li>描述兩實體間的關記數量，顯示與另外一個實體的關聯性<ul>
-<li>基數標記法(cardinality notation)利用特殊的符號來表示關係</li>
-<li>基數標記法示意圖<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=123kKiWWol56mv7oG300z-MSLIOksiu_M&export=download" alt=""></p>
-</blockquote>
-</li>
-<li>鴨足標記法(crow’s foot notation)使用圓圈、直線條以及類似鴨子腳的符號來標示各種可能的關係</li>
-<li>鴨足標記法示意圖<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=14HQMPNyc-zINbGuD72JCkhXZvlB-z-Zx&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="資料正規化"><a href="#資料正規化" class="headerlink" title="資料正規化"></a>資料正規化</h2><ul>
-<li>正規化(normalization)是為資料庫中每個資料表指定明確欄位或屬性的資料表設計建立流程</li>
-<li>資料表設計(table design)，為特定檔案或資料表指定其欄位與主鍵的動作</li>
-<li>正規化程序包含四階段<ul>
-<li>未正規化的設計</li>
-<li>第一正規形式</li>
-<li>第二正規形式</li>
-<li>第三正規形式</li>
-</ul>
-</li>
-<li>標準標記格式(standard notation format)<ul>
-<li>表示資料表結構、欄位、primary key</li>
-<li>name(++primary_key++, attribute1, attribute2)</li>
-</ul>
-</li>
-<li>未正規化的設計<ul>
-<li>沒有辨認重複的群組或欄位，不可以有重複群組的問題。</li>
-<li>示意圖<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=17fLiE96Bhw3SsIf2jaW5IcUXYtl6TDVU&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>第一正規形式(first normal form, 1NF)<ul>
-<li>資料表不包含群組</li>
-<li>把重複群組的 primary key 變成資料表的 primary key<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1J6ILCDjVj7cJC1VCLrsC54iqZ0GQysoC&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>第二正規形式(second normal form, 2NF)<ul>
-<li>功能相依(functionally dependent)的概念，如果 attribute1 會根據 attribute2 而改變，那麼 attribute1 功能相依 attribute1</li>
-<li>當資料表符合 1nf，且有功能相依的 table 時就是 2nf。<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1pIc1mUUa2QjE3Rf8oIdoawnVmaSAlPzo&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>第三正規形式(third normal form, 3NF)<ul>
-<li>其他非 primary key 的 attribute，都功能相依於 primary key 時，就符合 3nf</li>
-<li>可避免 2nf 的重複、資料完整性問題<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1I4xI8aegbeBvpOogZJOfS44Hsb_BmiS7&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="代碼-code"><a href="#代碼-code" class="headerlink" title="代碼 code"></a>代碼 code</h2><ul>
-<li>代碼(code) 是一組用來代表資料項目的英文字母或數字，它可以用來簡化輸出、輸入和資料格式</li>
-<li>代碼(code) 的特性<ul>
-<li>通常比本身資料來的更簡短</li>
-<li>節省儲存空間與成本</li>
-<li>減少資料傳輸時間並減少資料輸入時間</li>
-<li>用來揭露和隱藏資訊</li>
-<li>減少資料輸入的錯誤</li>
-<li>比較好記且容易輸入</li>
-</ul>
-</li>
-<li>代碼的類型<ul>
-<li>順序代碼(sequence codes) 是指以特定次序指定的數字和字母</li>
-<li>分段順序代碼(block sequence codes) 是用一些區塊的數字代表不同的分類</li>
-<li>字母代碼 (alphabetic codes) 是以英文字母來區分不同的項目<ul>
-<li>類別代碼(category codes)，用來分類一群相關項目</li>
-<li>縮寫代碼(abbreviation codes)，將名稱進行縮寫</li>
-</ul>
-</li>
-<li>舉例 TPE 為桃園國際機場代號</li>
-<li>我認為應該要叫代號，但不知道為甚麼課本教做代碼，不太是台灣用詞</li>
-</ul>
-</li>
-<li>加密代碼(cipher codes)用一個關鍵字將一個數字進行編碼的方法</li>
-<li>行動代碼(action codes)表示要對其所關聯的項目採取什麼行動</li>
-<li>設計代碼<ul>
-<li>保持精簡、簡單結構</li>
-<li>允許擴充並維持一致性</li>
-<li>保持代碼穩定</li>
-<li>使代碼唯一、避免混淆</li>
-<li>使用可排序代碼</li>
-</ul>
-</li>
-</ul>
-<h2 id="資料儲存及存取"><a href="#資料儲存及存取" class="headerlink" title="資料儲存及存取"></a>資料儲存及存取</h2><ul>
-<li>工具與技術<ul>
-<li>資料倉儲(data warehouse)，它可以涵蓋公司內各處所存放而似乎並不相關的資料</li>
-<li>資料市集(data mart)，專門設計用來服務特定部門需求<blockquote>
-<p><img src="https://drive.google.com/u/2/uc?id=1X08FxU5OiQ3V3G6_qqIfPB64ekKSoqcn&export=download" alt=""></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>資料探勘建議目標<ul>
-<li>增加每次連線的平均造訪網頁數</li>
-<li>增加推薦顧客的數量</li>
-<li>減少成交點擊數(clicks to close)，減少平均完成一次購買行為，使用者會開幾個網頁搜尋，降低消費者去比較或是猶豫的慾望。</li>
-<li>增加每次造訪的結帳次數</li>
-<li>增加每次結帳的平均利潤</li>
-</ul>
-</li>
-<li>邏輯與實體儲存<ul>
-<li>邏輯儲存(logical storage)係指透過使用者觀點所見到的資料，而不管該資訊實際組織或儲存的方法及地點</li>
-<li>實體儲存(physical storage)純粹與硬體相關</li>
-<li>資料編碼<ul>
-<li>EBCDIC 應用在大型主機或高容量伺服器</li>
-<li>ASCII 大部分個人電腦編碼方式</li>
-<li>Unicode 使用二位元組</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="資料控制"><a href="#資料控制" class="headerlink" title="資料控制"></a>資料控制</h2><ul>
-<li>設計良好的 DBMS，必須提供內建的控制與安全性功能</li>
-<li>資料保護方式<ul>
-<li>限制檔案和資料庫存取</li>
-<li>使用者 ID 與密碼</li>
-<li>權限(permission)與加密(encryption)</li>
-</ul>
-</li>
-<li>所有系統檔案與資料庫都要定期備份</li>
-<li>復原程序(recovery procedures)可以將檔案和資料庫復原到上次備份時的狀態</li>
-</ul>
-]]></content>
-      <categories>
-        <category>北科上課筆記</category>
-        <category>系統分析與設計</category>
-      </categories>
-      <tags>
-        <tag>學習筆記</tag>
-        <tag>北科上課筆記</tag>
-        <tag>系統分析與設計筆記</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>系統分析與設計- 第五章 結構化分析中資料與流程塑模</title>
     <url>/2021/11/14/System_analysis_and_design/ch5_System_analysis_and_design/</url>
     <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
@@ -25085,6 +24841,7 @@
 <li>工作分解結構(work breakdown structure, WBS)是將一個專案拆解成一系列較小的任務<ul>
 <li>甘特圖(Gantt chart)</li>
 <li>PERT/CPM 圖</li>
+<li>同時使用甘特圖、PERT 圖並不衝突</li>
 <li>專案評核術 (Program Evaluation Review Technique, PERT) 與 關鍵路徑法 (Critical Path Method, CPM) 已不在被使用</li>
 </ul>
 </li>
@@ -25095,7 +24852,7 @@
 </li>
 <li>確認工作分解結構中的任務<ul>
 <li>列出任務</li>
-<li>估計任務時間，使用最佳情況估計(best-case estimate, B)、可能情況估計(probable-caseestimate, P)、最差情況估計(worst-case estimate, W)</li>
+<li>估計任務時間，使用最佳情況估計(best-case estimate, B)、可能情況估計(probable-caseestimate, P)、最差情況估計(worst-case estimate, W)，通常會用此公式預估 \(\frac{B+4P+W}{6}\)</li>
 <li>做出估計後，經理分配權重</li>
 </ul>
 </li>
@@ -25442,6 +25199,473 @@
         <tag>學習筆記</tag>
         <tag>北科上課筆記</tag>
         <tag>系統分析與設計筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>資料庫管理 筆記 - 大二上期中考手寫筆試重點複習</title>
+    <url>/2020/12/01/NTUT_note/NTUTcsie_OOPmidterm/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二上物件導向程式設計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="makefile-用處如何，語法"><a href="#makefile-用處如何，語法" class="headerlink" title="makefile 用處如何，語法"></a>makefile 用處如何，語法</h2><p>輸入 <code>make</code> 指令，會尋找 ls 是否有 makefile 的文件，並編譯 makefile 文件進而自動化建構程式。</p>
+<p>makefile 適合開發大型程式，根據 target、rule 來判斷那些程式需要重新編譯、哪些不需要，在編譯大型程式時，如果我們只改動一小部分卻要將所有程式整個編譯就會花費大量時間</p>
+<ul>
+<li><code>#</code> 是 makefile 中的註解</li>
+<li><code>\</code> 是 makefile 中的換行</li>
+<li><code>.PHONY</code> 原先 make 會先確認當前是否有此命令資料夾，如果有就會認為已經執行過而不執行，而在 <code>.PHONY</code> 裡面則會強制他必須執行，不須確認是否有此資料夾</li>
+</ul>
+<p>一個 makefile 的範例</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.PHONY: directories clean stat </span><br><span class="line"></span><br><span class="line">all: directories bin&#x2F;ut_all</span><br><span class="line"></span><br><span class="line">bin&#x2F;ut_all: test&#x2F;ut_main.cpp test&#x2F;ut_cat.h src&#x2F;cat.h</span><br><span class="line">	g++ -std&#x3D;c++11 test&#x2F;ut_main.cpp -o bin&#x2F;ut_all -lgtest -lpthread</span><br><span class="line"></span><br><span class="line">directories: </span><br><span class="line">	mkdir -p bin</span><br><span class="line"></span><br><span class="line">clean: </span><br><span class="line">	rm -rf bin</span><br><span class="line"></span><br><span class="line">stat: </span><br><span class="line">	wc src&#x2F;* test&#x2F;*</span><br></pre></td></tr></table></figure>
+
+<h2 id="Default-Constructor-甚麼時機用，甚麼時候不用"><a href="#Default-Constructor-甚麼時機用，甚麼時候不用" class="headerlink" title="Default Constructor 甚麼時機用，甚麼時候不用"></a>Default Constructor 甚麼時機用，甚麼時候不用</h2><ul>
+<li>Default Constructor 在使用時，會讓內部參數都是預設參數，如果使用者沒有進行預設那則使用系統預設</li>
+<li>如果使用者有建構 constructor 時，則系統就不會存在 default constructor </li>
+<li>可以使用 <code>object() = delete</code> 來把 deafault constructor 刪除</li>
+</ul>
+<h2 id="By-Reference-By-Value-Pointer-個別意思，如何區別，請舉例"><a href="#By-Reference-By-Value-Pointer-個別意思，如何區別，請舉例" class="headerlink" title="By Reference, By Value, Pointer 個別意思，如何區別，請舉例"></a>By Reference, By Value, Pointer 個別意思，如何區別，請舉例</h2><ul>
+<li>point 與 ByReference 相同<ul>
+<li>pointer 可以隨時 assign，但 Reference 只能在初始化時 assign </li>
+<li>pointer 可以設定 NULL，但 Reference 不可以</li>
+<li>pointer 可使用 iterator</li>
+<li>pointer 持有 memory，但 Reference 只是共享</li>
+<li>pointer 需要用到 * 才可以讀取內部資料，但 Reference 不用</li>
+</ul>
+</li>
+<li>By Value 是複製一份資料進來，因此與先前的資料就完全不同</li>
+</ul>
+<h2 id="Copy-assignment、copy-constructor-個別意思，如何區別"><a href="#Copy-assignment、copy-constructor-個別意思，如何區別" class="headerlink" title="Copy assignment、copy constructor 個別意思，如何區別"></a>Copy assignment、copy constructor 個別意思，如何區別</h2><ul>
+<li>Copy assignment 已被初始化後的物件複製其他 object</li>
+<li>copy constructor <strong>未被初始化的物件</strong>複製其他 object</li>
+<li><code>object(a,b)</code> copy constructor </li>
+<li><code>object a = b;</code> copy assignment </li>
+</ul>
+<h2 id="Function-overloading-個別意思"><a href="#Function-overloading-個別意思" class="headerlink" title="Function overloading 個別意思"></a>Function overloading 個別意思</h2><ul>
+<li>相同的 function name 但卻有不同的 parma </li>
+<li>函數可以相同，<strong>但參數不可以相同</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" Here is int "</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">double</span> f)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" Here is float "</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> <span class="keyword">const</span> *c)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" Here is char* "</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	print(<span class="number">10</span>);</span><br><span class="line">	print(<span class="number">10.10</span>);</span><br><span class="line">	print(<span class="string">"ten"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.geeksforgeeks.org/passing-by-pointer-vs-passing-by-reference-in-c/" target="_blank" rel="noopener">Passing by pointer Vs Passing by Reference in C++ by GeekforGeeks</a><br><a href="https://medium.com/@racktar7743/c-c-%E6%8C%87%E6%A8%99%E6%95%99%E5%AD%B8-%E5%9B%9B-pass-by-value-vs-pass-by-reference-ed5882802789" target="_blank" rel="noopener">[C/C++] 指標教學[四]: Pass by value vs Pass by reference by MuLong PuYang</a><br><a href="https://stackoverflow.com/questions/11706040/whats-the-difference-between-assignment-operator-and-copy-constructor" target="_blank" rel="noopener">What’s the difference between assignment operator and copy constructor by stackoverflow</a><br><a href="https://www.geeksforgeeks.org/function-overloading-c/" target="_blank" rel="noopener">Function Overloading in C++ by GeekforGeeks</a></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>資料庫管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>R dataframe append column 透過變數</title>
+    <url>/2021/05/03/R/R-dataframe-append-column-with-string/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>有時候想要透過變數來讓 dataframe append column，那該怎麼辦呢？</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution:"></a>Solution:</h2><p>使用這種方法解決</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df &lt;- data.frame(x = c(<span class="number">1</span>:<span class="number">100</span>)) <span class="comment">#create dataframe</span></span><br><span class="line">new_column &lt;- <span class="string">"new_column"</span> </span><br><span class="line"></span><br><span class="line">df[[new_column]] &lt;- <span class="number">0</span> <span class="comment">#增加新的 column</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://stackoverflow.com/questions/31458244/how-to-create-and-add-new-columns-to-a-dataframe-in-r-within-a-loop" target="_blank" rel="noopener">How to create and add new columns to a dataframe in R within a loop? by stackoverflow</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>老實講 R 真的蠻香的XDD，雖然之前一直嫌棄她不好用。但最近有點被調教成功了XD，多元的套件包就有多元的支持，讚啦！</p>
+<p>可是有些效率問題好難過QQ</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>系統分析與設計- 第九章 資料設計</title>
+    <url>/2021/11/14/System_analysis_and_design/ch9_System_analysis_and_design/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="資料設計概念"><a href="#資料設計概念" class="headerlink" title="資料設計概念"></a>資料設計概念</h2><ul>
+<li>資料結構<ul>
+<li>資料結構是資訊系統內的組織、儲存及管理資料的架構</li>
+<li>檔案和資料表它們有各種形式彼此連結</li>
+</ul>
+</li>
+<li>檔案式系統(file-oriented system)，利用檔案來處理資料</li>
+<li>關聯式模型(relational model)，利用資料庫來處理資料</li>
+<li>資料庫管理系統(database management system, DBMS)<ul>
+<li>可讓使用者新增、更新、管理、存取並分析資料內容的一組工具、功能及介面的組合。</li>
+<li>優點<ul>
+<li>可延展性(scalability)，系統可以輕易擴充、縮小</li>
+<li>經濟規模(economy of scale)，長期平均總成本會因為產量增加而減少</li>
+<li>有效支援企業級應用系統——資料庫管理師 (database, administrator,DBA)</li>
+<li>更強的標準</li>
+<li>更佳的安全性</li>
+<li>資料獨立性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="DBMS-組成元件"><a href="#DBMS-組成元件" class="headerlink" title="DBMS 組成元件"></a>DBMS 組成元件</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gk75CY0q4SKefV4C3HiGVPsnZHe8CsqA&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>使用者、資料庫管理師與其系統介面<ul>
+<li>使用者，根據事先定義查詢或指令來執行動作</li>
+<li>資料庫管理師，負責 DBMS 管理與支援</li>
+<li>相關資訊系統，DBMS 可支援許多提供輸入給 DBMS 或是從 DBMS 取得特定資料</li>
+</ul>
+</li>
+<li>資料綱目<ul>
+<li>綱目(schema) A<ul>
+<li>包括所有欄位、資料表及關聯性的描述</li>
+<li>子綱目(subschema)：資料庫中符合特定系統或使用者需求，或是允許存取的部分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>實體資料儲存處<ul>
+<li>包含綱目與子綱目</li>
+<li>可集中式也可以分散到數個地點</li>
+</ul>
+</li>
+</ul>
+<h2 id="Web-式設計"><a href="#Web-式設計" class="headerlink" title="Web 式設計"></a>Web 式設計</h2><ul>
+<li>讓資料庫連上 web，史資料可以被更新或閱讀</li>
+<li>中介軟體(middleware)是一種整合不同應用系統並讓它們彼此能夠交換資料的軟體</li>
+<li>Web 式資料必須顧及安全性，並且讓授權使用者能輕易存取</li>
+<li>Web 特性<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=127jTFH07odZVHVHpwxB1H6TOzPKw4wwf&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>Web 與 database 架構<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xe3SAo5oEzYC_TbFkVxx2M-gN9_4poaf&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="資料設計術語"><a href="#資料設計術語" class="headerlink" title="資料設計術語"></a>資料設計術語</h2><ul>
+<li>定義<ul>
+<li>實體(entity)，蒐集和維護資料的對象</li>
+<li>資料表(table)或檔案(file)，包含了一組相關的紀錄，這些紀錄都存放了與特定實體有關的資料</li>
+<li>欄位(field)，也稱為屬性(attribute)，亦即實體的一個特性，如果一個屬性有兩個實體則是共同欄位</li>
+<li>紀錄(record)，也稱為值組(tuple)，一組相關欄位的組合，用以描述實體的一筆實例</li>
+</ul>
+</li>
+<li>鍵欄位(key fields)<ul>
+<li>主鍵(primary key)，一個欄位或一組欄位，可以唯一且簡潔地識別出實體某個特定成員</li>
+<li>候選鍵(candidate key)，其他可以做為主鍵的欄位</li>
+<li>外鍵(foreign key)，某一張資料表的其中一個欄位，但同時也是另一張資料表的主鍵，用以建立兩張資料表的關係</li>
+<li>次級鍵(secondary key)，其他的欄位</li>
+</ul>
+</li>
+<li>參照完整性(referential integrity)，避免資料不一致、品質不穩定的問題<br>每一個外來鍵必須對應到其他資料表的主鍵，否則不應該輸入</li>
+</ul>
+<h3 id="實體關係圖"><a href="#實體關係圖" class="headerlink" title="實體關係圖"></a>實體關係圖</h3><ul>
+<li>實體關係圖(entityrelationship diagram, ERD)是一個顯示系統實體間邏輯關係的模型<ul>
+<li>關係，兩個實體的媒介，分成一對一、一對多、多對多</li>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1x9KyOELQk4zqXrNHhSIte_WR5iKKW5jF&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>基數(cardinality)<ul>
+<li>描述兩實體間的關記數量，顯示與另外一個實體的關聯性<ul>
+<li>基數標記法(cardinality notation)利用特殊的符號來表示關係</li>
+<li>基數標記法示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=123kKiWWol56mv7oG300z-MSLIOksiu_M&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>鴨足標記法(crow’s foot notation)使用圓圈、直線條以及類似鴨子腳的符號來標示各種可能的關係</li>
+<li>鴨足標記法示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=14HQMPNyc-zINbGuD72JCkhXZvlB-z-Zx&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料正規化"><a href="#資料正規化" class="headerlink" title="資料正規化"></a>資料正規化</h2><ul>
+<li>正規化(normalization)是為資料庫中每個資料表指定明確欄位或屬性的資料表設計建立流程</li>
+<li>資料表設計(table design)，為特定檔案或資料表指定其欄位與主鍵的動作</li>
+<li>正規化程序包含四階段<ul>
+<li>未正規化的設計</li>
+<li>第一正規形式</li>
+<li>第二正規形式</li>
+<li>第三正規形式</li>
+</ul>
+</li>
+<li>標準標記格式(standard notation format)<ul>
+<li>表示資料表結構、欄位、primary key</li>
+<li>name(++primary_key++, attribute1, attribute2)</li>
+</ul>
+</li>
+<li>未正規化的設計<ul>
+<li>沒有辨認重複的群組或欄位，不可以有重複群組的問題。</li>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17fLiE96Bhw3SsIf2jaW5IcUXYtl6TDVU&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>第一正規形式(first normal form, 1NF)<ul>
+<li>資料表不包含群組</li>
+<li>把重複群組的 primary key 變成資料表的 primary key<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1J6ILCDjVj7cJC1VCLrsC54iqZ0GQysoC&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>第二正規形式(second normal form, 2NF)<ul>
+<li>功能相依(functionally dependent)的概念，如果 attribute1 會根據 attribute2 而改變，那麼 attribute1 功能相依 attribute1</li>
+<li>所有 attribute 必須依賴 primary key</li>
+<li>當資料表符合 1nf，且有功能相依的 table 時就是 2nf。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1pIc1mUUa2QjE3Rf8oIdoawnVmaSAlPzo&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>第三正規形式(third normal form, 3NF)<ul>
+<li>其他非 primary key 的 attribute，都功能相依於 primary key 時，就符合 3nf</li>
+<li>可避免 2nf 的重複、資料完整性問題<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1I4xI8aegbeBvpOogZJOfS44Hsb_BmiS7&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="代碼-code"><a href="#代碼-code" class="headerlink" title="代碼 code"></a>代碼 code</h2><ul>
+<li>代碼(code) 是一組用來代表資料項目的英文字母或數字，它可以用來簡化輸出、輸入和資料格式</li>
+<li>代碼(code) 的特性<ul>
+<li>通常比本身資料來的更簡短</li>
+<li>節省儲存空間與成本</li>
+<li>減少資料傳輸時間並減少資料輸入時間</li>
+<li>用來揭露和隱藏資訊</li>
+<li>減少資料輸入的錯誤</li>
+<li>比較好記且容易輸入</li>
+</ul>
+</li>
+<li>代碼的類型<ul>
+<li>順序代碼(sequence codes) 是指以特定次序指定的數字和字母</li>
+<li>分段順序代碼(block sequence codes) 是用一些區塊的數字代表不同的分類</li>
+<li>字母代碼 (alphabetic codes) 是以英文字母來區分不同的項目<ul>
+<li>類別代碼(category codes)，用來分類一群相關項目</li>
+<li>縮寫代碼(abbreviation codes)，將名稱進行縮寫</li>
+</ul>
+</li>
+<li>舉例 TPE 為桃園國際機場代號</li>
+<li>我認為應該要叫代號，但不知道為甚麼課本教做代碼，不太是台灣用詞</li>
+</ul>
+</li>
+<li>加密代碼(cipher codes)用一個關鍵字將一個數字進行編碼的方法</li>
+<li>行動代碼(action codes)表示要對其所關聯的項目採取什麼行動</li>
+<li>設計代碼<ul>
+<li>保持精簡、簡單結構</li>
+<li>允許擴充並維持一致性</li>
+<li>保持代碼穩定</li>
+<li>使代碼唯一、避免混淆</li>
+<li>使用可排序代碼</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料儲存及存取"><a href="#資料儲存及存取" class="headerlink" title="資料儲存及存取"></a>資料儲存及存取</h2><ul>
+<li>工具與技術<ul>
+<li>資料倉儲(data warehouse)，它可以涵蓋公司內各處所存放而似乎並不相關的資料</li>
+<li>資料市集(data mart)，專門設計用來服務特定部門需求<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1X08FxU5OiQ3V3G6_qqIfPB64ekKSoqcn&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>資料探勘建議目標<ul>
+<li>增加每次連線的平均造訪網頁數</li>
+<li>增加推薦顧客的數量</li>
+<li>減少成交點擊數(clicks to close)，減少平均完成一次購買行為，使用者會開幾個網頁搜尋，降低消費者去比較或是猶豫的慾望。</li>
+<li>增加每次造訪的結帳次數</li>
+<li>增加每次結帳的平均利潤</li>
+</ul>
+</li>
+<li>邏輯與實體儲存<ul>
+<li>邏輯儲存(logical storage)係指透過使用者觀點所見到的資料，而不管該資訊實際組織或儲存的方法及地點</li>
+<li>實體儲存(physical storage)純粹與硬體相關</li>
+<li>資料編碼<ul>
+<li>EBCDIC 應用在大型主機或高容量伺服器</li>
+<li>ASCII 大部分個人電腦編碼方式</li>
+<li>Unicode 使用二位元組</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料控制"><a href="#資料控制" class="headerlink" title="資料控制"></a>資料控制</h2><ul>
+<li>設計良好的 DBMS，必須提供內建的控制與安全性功能</li>
+<li>資料保護方式<ul>
+<li>限制檔案和資料庫存取</li>
+<li>使用者 ID 與密碼</li>
+<li>權限(permission)與加密(encryption)</li>
+</ul>
+</li>
+<li>所有系統檔案與資料庫都要定期備份</li>
+<li>復原程序(recovery procedures)可以將檔案和資料庫復原到上次備份時的狀態</li>
+</ul>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>系統分析與設計</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>系統分析與設計筆記</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科電子大三上機器學習 使用回歸預測房價</title>
+    <url>/2021/11/25/deep_learning/NTUTece_deeplearning_regression/</url>
+    <content><![CDATA[<h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學電子大三上機器學習作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資財大三學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<a id="more"></a>
+
+
+<h1 id="台北科大深度學習-房價預測回歸模型"><a href="#台北科大深度學習-房價預測回歸模型" class="headerlink" title="台北科大深度學習 - 房價預測回歸模型"></a>台北科大深度學習 - 房價預測回歸模型</h1><h2 id="題目說明"><a href="#題目說明" class="headerlink" title="題目說明"></a>題目說明</h2><p>使用 keras 中的 sequence 進行房價預測，在 kaggle Private Leaderboard 獲得 136 名</p>
+<h2 id="查看房價預測中的所有欄位說明"><a href="#查看房價預測中的所有欄位說明" class="headerlink" title="查看房價預測中的所有欄位說明"></a>查看房價預測中的所有欄位說明</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JghS7Z2aAsqWvT7FoHX3akB3FTKqwqdN&export=download" alt=""></p>
+</blockquote>
+<h2 id="輸出欄位要求必須為"><a href="#輸出欄位要求必須為" class="headerlink" title="輸出欄位要求必須為"></a>輸出欄位要求必須為</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1Fedy4zhBv-IXjvgUiNN3nfjis0eUkvc8&export=download" alt=""></p>
+</blockquote>
+<h2 id="輸入資料"><a href="#輸入資料" class="headerlink" title="輸入資料"></a>輸入資料</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#輸入資料</span></span><br><span class="line"><span class="comment">#train csv </span></span><br><span class="line">train = pd.read_csv(<span class="string">"./regression_data/train-v3.csv"</span>)</span><br><span class="line">  </span><br><span class="line">X_train = train.drop([<span class="string">"price"</span>, <span class="string">"id"</span>], axis=<span class="number">1</span>)</span><br><span class="line">Y_train = train[<span class="string">"price"</span>].values</span><br><span class="line"><span class="comment">#print(X_train)</span></span><br><span class="line"></span><br><span class="line">valid = pd.read_csv(<span class="string">"./regression_data/valid-v3.csv"</span>)</span><br><span class="line"><span class="comment">#print(train)</span></span><br><span class="line">X_valid = valid.drop([<span class="string">"price"</span>, <span class="string">"id"</span>], axis=<span class="number">1</span>)</span><br><span class="line">Y_valid = valid[<span class="string">"price"</span>].values</span><br><span class="line"><span class="comment">#print(X_valid)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="資料預處理"><a href="#資料預處理" class="headerlink" title="資料預處理"></a>資料預處理</h2><p>這邊我使用了幾種不同方式的資料預處理，但發現其實都沒有比不處理來的好</p>
+<h3 id="將內部相關係數大於-0-7-的選擇一個移除"><a href="#將內部相關係數大於-0-7-的選擇一個移除" class="headerlink" title="將內部相關係數大於 0.7 的選擇一個移除"></a>將內部相關係數大於 0.7 的選擇一個移除</h3><p>先來檢測內部參數相關性，如果太相關那我們就選一個拔除，避免回歸時某些類型被重複強調。</p>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1KBIASypCusFb0t8hLeI4FGES71QnhxRC&export=download" alt=""></p>
+</blockquote>
+<p>其中我將以下相關性過高的欄位進行移除</p>
+<ul>
+<li>bathrooms 與 sqft_living 有相關性，刪除 bathrooms </li>
+<li>grade 與 sqft_living 有相關性，刪除 grade</li>
+<li>sqft_above 與 sqft_living 有相關性，刪除 sqft_above</li>
+<li>sqft_living15 與 sqft_living 有相關性，刪除 sqft_living15</li>
+<li>sqft_lot15 與 sqft_lot 有相關性，刪除 sqft_lot15</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns </span><br><span class="line"></span><br><span class="line">train_cor = train.corr(method = <span class="string">"pearson"</span>).round(<span class="number">2</span>)</span><br><span class="line">print(train_cor)</span><br><span class="line">plt.subplots(figsize=(<span class="number">13</span>, <span class="number">16</span>))</span><br><span class="line">sns.heatmap(train_cor, annot = <span class="literal">True</span>,  cmap = <span class="string">"Blues"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#bathrooms 與 sqft_living 有相關性，刪除 bathrooms </span></span><br><span class="line"><span class="comment">#grade 與 sqft_living 有相關性，刪除 grade</span></span><br><span class="line"><span class="comment">#sqft_above 與 sqft_living 有相關性，刪除 sqft_above</span></span><br><span class="line"><span class="comment">#sqft_living15 與 sqft_living 有相關性，刪除 sqft_living15</span></span><br><span class="line"><span class="comment">#sqft_lot15 與 sqft_lot 有相關性，刪除 sqft_lot15</span></span><br><span class="line">train_cor = train.drop([<span class="string">"bathrooms"</span>, <span class="string">"grade"</span>, <span class="string">"sqft_above"</span>, <span class="string">"sqft_living15"</span>, <span class="string">"sqft_lot15"</span>], axis=<span class="number">1</span>)</span><br><span class="line">train_cor = train_cor.corr(method = <span class="string">"pearson"</span>).round(<span class="number">2</span>)</span><br><span class="line">plt.subplots(figsize=(<span class="number">12</span>, <span class="number">9</span>))</span><br><span class="line">sns.heatmap(train_cor, annot = <span class="literal">True</span>,  cmap = <span class="string">"Blues"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X_train = X_train.drop([<span class="string">"bathrooms"</span>, <span class="string">"grade"</span>, <span class="string">"sqft_above"</span>, <span class="string">"sqft_living15"</span>, <span class="string">"sqft_lot15"</span>], axis=<span class="number">1</span>) <span class="comment">#共線性檢視完畢</span></span><br><span class="line">X_valid = X_valid.drop([<span class="string">"bathrooms"</span>, <span class="string">"grade"</span>, <span class="string">"sqft_above"</span>, <span class="string">"sqft_living15"</span>, <span class="string">"sqft_lot15"</span>], axis=<span class="number">1</span>) <span class="comment">#共線性檢視完畢</span></span><br></pre></td></tr></table></figure>
+
+<p>但沒有比不做處理就直接回歸來的好</p>
+<h3 id="將-year、month、day-進行移除"><a href="#將-year、month、day-進行移除" class="headerlink" title="將 year、month、day 進行移除"></a>將 year、month、day 進行移除</h3><p>由於我認為時間序列在回歸中會搗亂預測、讓預測模糊因此我 drop 這三個 column 然後進行回歸。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X_train = X_train.drop([<span class="string">"sale_yr"</span>, <span class="string">"sale_month"</span>, <span class="string">"sale_day"</span>], axis=<span class="number">1</span>) <span class="comment">#共線性檢視完畢</span></span><br><span class="line">X_valid = X_valid.drop([<span class="string">"sale_yr"</span>, <span class="string">"sale_month"</span>, <span class="string">"sale_day"</span>], axis=<span class="number">1</span>) <span class="comment">#共線性檢視完畢</span></span><br></pre></td></tr></table></figure>
+
+<p>但沒有比不做處理就直接回歸來的好</p>
+<h2 id="開始回歸"><a href="#開始回歸" class="headerlink" title="開始回歸"></a>開始回歸</h2><p>使用 sequential 然後我們加入隱藏層並 unit 從 256 不斷除 2，在不斷加入在 model 上</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Dense(<span class="number">250</span>, input_dim =X_train.shape[<span class="number">1</span>], kernel_initializer= <span class="string">"random_normal"</span>, activation=<span class="string">"relu"</span> ))</span><br><span class="line">model.add(Dense(<span class="number">125</span>, kernel_initializer= <span class="string">"random_normal"</span>, activation=<span class="string">"relu"</span> ))</span><br><span class="line">model.add(Dense(<span class="number">60</span>, kernel_initializer= <span class="string">"random_normal"</span>, activation=<span class="string">"relu"</span> ))</span><br><span class="line">model.add(Dense(<span class="number">30</span>, kernel_initializer= <span class="string">"random_normal"</span>, activation=<span class="string">"relu"</span> ))</span><br><span class="line">model.add(Dense(<span class="number">15</span>, kernel_initializer= <span class="string">"random_normal"</span>, activation=<span class="string">"relu"</span> ))</span><br><span class="line">model.add(Dense(<span class="number">1</span>, kernel_initializer= <span class="string">"random_normal"</span>, activation=<span class="string">"relu"</span> ))</span><br><span class="line"></span><br><span class="line">model.compile(loss=<span class="string">"mean_squared_error"</span>, optimizer=<span class="string">"adam"</span>) <span class="comment">#設定 model 的損失函數、優化器</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="訓練開始"><a href="#訓練開始" class="headerlink" title="訓練開始"></a>訓練開始</h3><p>設定好 model epoch 並且將訓練集、測試集資料放入，就等一段時間開始訓練拉</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint</span><br><span class="line">call = ModelCheckpoint(<span class="string">"regression.model"</span>, </span><br><span class="line">                              monitor = <span class="string">"val_loss"</span>,</span><br><span class="line">                              )</span><br><span class="line"></span><br><span class="line">fit = model.fit(X_train, Y_train,</span><br><span class="line">                validation_data = (X_valid, Y_valid),</span><br><span class="line">                callbacks = [call],</span><br><span class="line">                epochs = <span class="number">320</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看差異，1-100-筆預設與實務差異"><a href="#查看差異，1-100-筆預設與實務差異" class="headerlink" title="查看差異，1~100 筆預設與實務差異"></a>查看差異，1~100 筆預設與實務差異</h2><p>我們訓練完資料後可以看看預測跟實際上的資料差多少</p>
+<p>其中我們可以看到我的預測都較保守，實際答案都比我的預測超出許多，有些甚至到了超級多。</p>
+<ul>
+<li>藍色線表示 predict</li>
+<li>橘色線表示 valid </li>
+</ul>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=11Fm6H1lQy7-mVLZF24rOTMzLgFdtbcEG&export=download" alt=""></p>
+</blockquote>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><ul>
+<li>不正確的資料預處理並不會導致 kaggle MSE 分數降低</li>
+<li>像今天上課同學報告的一樣，zipcode 比較沒有甚麼意義，也許可以變成頻率分析</li>
+<li>可以自己加入一些加減乘除的變數，例如室內面積 / 浴室面積比，會有一些參考價值存在</li>
+<li>每次 model 完成後，可以畫出 model accuracy、model loss 圖，方便自己更了解問題所在</li>
+</ul>
+<p><a href="https://colab.research.google.com/drive/1hxwF9CY-1IVXIMpLVcCGHBF_LxE3XxS2?usp=sharing" target="_blank" rel="noopener">我的 colab 供大家參考</a></p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://machinelearningmastery.com/display-deep-learning-model-training-history-in-keras/" target="_blank" rel="noopener">Display Deep Learning Model Training History in Keras 教學劃出 model accuracy、model loss by  Jason Brownlee </a><br><a href="https://keras.io/api/callbacks/model_checkpoint/" target="_blank" rel="noopener">ModelCheckpoint by Keras</a><br><a href="https://blog.csdn.net/imxlw00/article/details/109905940" target="_blank" rel="noopener">Keras深度学习笔记 非线性回归 by csdn imxlw00</a><br><a href="https://keras.io/zh/models/sequential/" target="_blank" rel="noopener">Sequential 模型 API by Keras</a><br><a href="https://keras.io/zh/losses/" target="_blank" rel="noopener">损失函数的使用 by Keras</a><br><a href="https://www.journaldev.com/45330/relu-function-in-python" target="_blank" rel="noopener">ReLu Function in Python by Keras</a><br><a href="https://www.jiqizhixin.com/graph/technologies/f41c192d-9c93-4306-8c47-ce4bf10030dd" target="_blank" rel="noopener">Adam优化器 by 機器之心</a><br><a href="https://zhuanlan.zhihu.com/p/35494575" target="_blank" rel="noopener">python3.x-seaborn.heatmap随笔 by wiliken</a><br><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html" target="_blank" rel="noopener">pandas.DataFrame.drop by pandas</a><br><a href="https://blog.csdn.net/weixin_38278334/article/details/82971752" target="_blank" rel="noopener">fit_transform,fit,transform区别和作用详解！！！！！！ by 九点澡堂子</a><br><a href="https://www.delftstack.com/zh-tw/api/numpy/python-numpy-numpy.shape-function/" target="_blank" rel="noopener">Python NumPy numpy.shape() 函式 by DelftStack</a></p>
+]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>機器學習</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>機器學習</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>機器學習 SOP</title>
+    <url>/2021/04/25/deep_learning/deep_learning_SOP/</url>
+    <content><![CDATA[<h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><p>紀錄大衛在做機器學習時，應該要怎麼做會達到最好。</p>
+<h2 id="SOP-開始"><a href="#SOP-開始" class="headerlink" title="SOP 開始"></a>SOP 開始</h2><ul>
+<li>將遺失的資料移除</li>
+<li>對於沒有意義的數字可以進行移除</li>
+<li>可以考慮把一些 string, numeric 變成頻率分析</li>
+<li>可以自己加入一些加減乘除的變數，例如室內面積 / 浴室面積比，會有一些參考價值存在</li>
+<li>每次 model 完成後畫圖<ul>
+<li>畫出 model accuracy</li>
+<li>model loss 圖，方便自己更了解問題所在</li>
+<li>畫出前 100 筆資料的預測與答案</li>
+<li>使用 tensorboard 來看自己的 model 訓練問題</li>
+</ul>
+</li>
+</ul>
+<h2 id="額外輕鬆項"><a href="#額外輕鬆項" class="headerlink" title="額外輕鬆項"></a>額外輕鬆項</h2><ul>
+<li>bayesian optimization 來自動選擇參數，但要花許久時間，因為是不斷嘗試每個參數</li>
+<li>ReLu 當 activation function</li>
+</ul>
+]]></content>
+      <categories>
+        <category>機器學習</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>機器學習</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大衛手寫考試改進策略，每次考試前必看</title>
+    <url>/2021/11/26/life_experence/exam/</url>
+    <content><![CDATA[<h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><blockquote>
+<p>記錄大衛在手寫考試時，常常會遇到老師考A，我就只會覺得老師考 A，結果老師考試都喜歡來 A+B，然後我就都不會、考很差。</p>
+<p>這篇主要是改善自己的缺點，然後盡量考好。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="改進"><a href="#改進" class="headerlink" title="改進"></a>改進</h2><ul>
+<li>在期中考前再次手寫全部的習題<br>習題很重要，第一次寫過之後，大考前在重寫一次，加深自己印象</li>
+<li>如果沒有買課本，記得在大考前幾周要跟朋友借課本<br>上課 PPT 不一定都有重點，透過具有系統化的課本複習來作筆記會讓自己更加深刻。</li>
+<li>熟記所有公式，找女朋友來幫忙你背</li>
+<li>大考前兩個禮拜就必須開始做好複習<br>我不適合短期衝刺，比較適合慢慢準備</li>
+</ul>
+]]></content>
+      <categories>
+        <category>人生旅途</category>
+      </categories>
+      <tags>
+        <tag>大學Life</tag>
+        <tag>人生旅途</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北科電子三機器學習 使用回歸預測房價</title>
+    <url>/2021/04/25/maching_learning/NTUTece_deeplearning_regression/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>北科上課筆記</category>
+        <category>多媒體與圖像辨識 Image Recognition</category>
+      </categories>
+      <tags>
+        <tag>學習筆記</tag>
+        <tag>北科上課筆記</tag>
+        <tag>機器學習</tag>
       </tags>
   </entry>
 </search>

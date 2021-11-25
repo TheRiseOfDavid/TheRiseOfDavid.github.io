@@ -77,6 +77,171 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-google/google_app_script_connect_google_doc" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/06/07/google/google_app_script_connect_google_doc/"
+    >使用 google app script 擴增 google docs 功能</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/06/07/google/google_app_script_connect_google_doc/" class="article-date">
+  <time datetime="2021-06-07T15:59:50.000Z" itemprop="datePublished">2021-06-07</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Google-App-Script/">Google App Script</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記僅記錄大衛如何使用 google docs 中的建立程式碼，來寫成一份外掛程式。<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生，或是版本更新就不適用</strong></p>
+<p>由於我並不是 google app script 大神，可能有些地方沒有寫得很棒，還請多包涵。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/06/07/google/google_app_script_connect_google_doc/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-App-Script/" rel="tag">Google App Script</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Codeforces/Codeforces 1521C" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/06/03/Codeforces/Codeforces%201521C/"
+    >Codeforces 1513D - GCD and MST(設計解題)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/06/03/Codeforces/Codeforces%201521C/" class="article-date">
+  <time datetime="2021-06-02T17:07:27.000Z" itemprop="datePublished">2021-06-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Codeforces/">Codeforces</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Nastia 有一個數列，但我們並不知道數列裡面的數值，我們現在必須知道這些數值是甚麼，其中我們得知數列裡面的數值，是 1 ~ 數列長度。</p>
+<p>我們可以像 Nastia 進行詢問，但 Nastia 不接受普通的詢問方式，她接受的詢問方式如下</p>
+<ul>
+<li>\(t=1 : max(min(x,p_i), min(x+1, p_j)) \)</li>
+<li>\(t=2 : mim(max(x,p_i), max(x+1, p_j)) \) </li>
+<li>其中 \(t\) 為我們選擇哪種查詢公式，\(p_i,p_j\) 則是數列的 index 當下數值，\(x\) 則是我們任意給的值，但 \(x\) 必須是數列中的數字。</li>
+<li>\(t=1\) or \(t=2, 1 \leq i,j \leq n, i != j, 1 \leq x \leq n-1\)，一定要符合這些條件。  </li>
+</ul>
+<p>我們可以對 Nastia 最多查詢 \( \frac{3*n}{2} + 30 \)，必須在這些次數前確認出所有的數列。</p>
+<p>如果已經確定數列，那輸出格式為 <code>! a b c</code>，其中 a,b,c 為數列的數字， index 從 1 開始。</p>
+<p><a href="https://codeforces.com/contest/1521/problem/C" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/06/03/Codeforces/Codeforces%201521C/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">交互式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Explain_Algorithm/fib_search" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -717,197 +882,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E9%80%9A%E8%AD%98/" rel="tag">北科大通識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9F%B3%E6%A8%82%E6%AC%A3%E8%B3%9E/" rel="tag">音樂欣賞</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-statistics/statistics-ch16" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/24/statistics/statistics-ch16/"
-    >統計學(二) 筆記 - 第十六章 迴歸分析 - 模型建立(Regression Analysis - Model Building)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/24/statistics/statistics-ch16/" class="article-date">
-  <time datetime="2021-05-24T09:59:50.000Z" itemprop="datePublished">2021-05-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/05/24/statistics/statistics-ch16/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa11052" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/24/UVa/UVa11052/"
-    >UVa11052 - Economic phone calls(動態規劃 Dynamic programming )</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/05/24/UVa/UVa11052/" class="article-date">
-  <time datetime="2021-05-24T05:51:59.000Z" itemprop="datePublished">2021-05-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>我有一台很老的手機，他的 RAM 並不大，最近我們遇上了 RAM 用滿的問題，我們現在必須刪除一些電話紀錄，但有一些規則要遵守</p>
-<ul>
-<li>最後一次電話紀錄一定是今年的紀錄</li>
-<li>格式為 <code>mm:dd:HH:MM phone +\-</code>，前面為時間，電話名稱，是否為重要紀錄</li>
-<li>我們只能夠刪除非重要紀錄</li>
-<li>手機並不會記錄年份，因此我們判斷年份是使用相對時間，也就是如果前一筆的時間 &lt; 下一筆的時間，我們可以定義這兩筆資料在同年份；如果前一筆的時間 &gt;= 下一筆的時間 我們則定義這兩筆資料的年份不一樣，前一筆的資料年份比較遠、後一筆資料年份比較近。</li>
-<li>我們可以透過上一點來判斷年份，也就是每年至少都要用一筆資料。</li>
-</ul>
-<p>請告訴我們最少需要保存幾個資料，就可以將重要資料全部保存並且可以判斷每通紀錄的年份。</p>
-<p><a href="https://onlinejudge.org/external/110/11052.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
-<li>動態規劃的時機 (當資料並不能延續狀態，而是會需要前面資料輔助時就用動態規劃)</li>
-<li>了解時間可以用字串比較</li>
-</ul>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這題是我認為算是非常麻煩的問題，我學習他花了將近 4 小時。</p>
-<p>由於我們要保存最少的資料，但完整性、一樣能辨識年份，我們主要會遇到一些困難點</p>
-<ul>
-<li>找出最後一年的重要紀錄，如果沒有就直接隨便找一筆紀錄</li>
-<li>假如兩筆重要紀錄分別是 2001, 2003 年，那我們要留下 2002 的<strong>一筆</strong>不重要紀錄</li>
-<li>舉例如下，那我們是不是這三筆資料都必須留下，否則年份辨識不正確<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">01:10:11 1234 + </span><br><span class="line">01:02:23 2345 -</span><br><span class="line">01:12:11 3456 +</span><br></pre></td></tr></table></figure></li>
-<li>所有的重要紀錄都必須被留下</li>
-</ul>
-<p>根據這些困難點，會發現如果我們使用 greedy 會很難寫，因為例如第三點的情況，我們的 greedy 就必須根據過去資料去判斷，如果第一筆資料與第二筆資料中間又塞入很多的非重要紀錄那就更麻煩了。</p>
-<p>因此這邊我們就使用可以提取過去資料與當前資料判斷的動態規劃。</p>
-<p>主要的動態規劃則是</p>
-<ul>
-<li><code>dp[i]</code> 保留至第 i 個紀錄中最少要保存幾個紀錄</li>
-<li><code>在重要紀錄中的那些不重要紀錄我只紀錄一筆</code>，<code>dp[i] = min(dp[i], dp[j]+1、i &lt; j &lt; n，j 表示同年份的資料</code>，如果直接提取 <code>dp[j]+1</code>，+1 則是紀錄 i</li>
-<li>如果碰到重要紀錄，則直接跳出 <code>for j</code> 迴圈，因為重要紀錄不可省略</li>
-</ul>
-<p>主要架構如上述所說，如果有些不清楚則建議查看下方<a href="#題目程式碼">題目程式碼</a></p>
-<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://hackmd.io/@txya900619/Uva11052" target="_blank" rel="noopener">Uva11052 - Economic phone calls by txya900619</a></p>
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題好難QQQ，而且好複雜！ 我原本是想要用 greedy 去做，做到一半才發現第三點用 greedy 去做並不好做。</p>
-<p>但是也沒有想到 dp 要怎麼做比較好，就看力瑋的程式碼，不斷思考怎麼運作，後來詢問力瑋程式碼意思才逐漸開竅。</p>
-<p>能想出這份程式碼的人真的太聰明了，我的缺點是遇到太多大問題時不擅長拆解，但我擅長將小問題解決，可能跟我的個性有關吧，喜歡注重細節，但常常忽略大局。</p>
-<p>總之，中庸之道我也需要攝取攝取。<br>但我想要成為一位優秀的人，住在漂亮的房子、給小孩好的教育，幸福的人生。</p>
-<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。 </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1020</span>;</span><br><span class="line"><span class="keyword">int</span> n, dp[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">record</span>&#123;</span> <span class="comment">//用於記錄每筆資訊</span></span><br><span class="line">    <span class="built_in">string</span> time, phone, mark;</span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//constructor </span></span><br><span class="line">    record(<span class="built_in">string</span> _time, <span class="built_in">string</span> _phone, <span class="built_in">string</span> _mark, <span class="keyword">int</span> _year)&#123;</span><br><span class="line">        time = _time;</span><br><span class="line">        phone = _phone;</span><br><span class="line">        mark = _mark;</span><br><span class="line">        year = _year;</span><br><span class="line">    &#125;;</span><br><span class="line">    record(): time(<span class="string">""</span>), phone(<span class="string">""</span>), mark(<span class="string">""</span>), year(<span class="number">0</span>)&#123;&#125; <span class="comment">//一開 year 始預設為 0</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">deque</span>&lt;record&gt; info; <span class="comment">//用於紀錄題目每筆紀錄</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug</span><span class="params">()</span></span>&#123; <span class="comment">//debug 無意義</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; info[i].time &lt;&lt; <span class="string">' '</span> &lt;&lt; info[i].phone &lt;&lt; <span class="string">' '</span> &lt;&lt; info[i].mark &lt;&lt; <span class="string">' '</span> &lt;&lt; info[i].year &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &amp;&amp; n)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">        <span class="built_in">string</span> time, phone, mark;</span><br><span class="line">        info.clear(); <span class="comment">//清空，避免影響到其他測資</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//輸入資料</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; time &gt;&gt; phone &gt;&gt; mark;</span><br><span class="line">            info.push_back( record(time, phone, mark, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> year = <span class="number">0</span>; <span class="comment">//先對題目的資料做辨識年份</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(info[i].time &lt;= info[i<span class="number">-1</span>].time) info[i].year = ++year; <span class="comment">//年份不同， year 因此加一</span></span><br><span class="line">            <span class="keyword">else</span> info[i].year = year;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//debug();</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//first_mark 為年份最久的重要記錄，因為在遠的紀錄我們不須留下</span></span><br><span class="line">        <span class="comment">// flag 判斷是否已經讀取到年份最新的重要紀錄</span></span><br><span class="line">        <span class="comment">//last_mark 年份最新的重要紀錄</span></span><br><span class="line">        <span class="keyword">int</span> first_mark = n, flag = <span class="number">1</span>, last_mark;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(info[i].mark == <span class="string">"+"</span>) first_mark = i; <span class="comment">//最後一次讀取就是年份最久的重要紀錄</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//我們必須把最新的年份直到出現今年的重要紀錄時都讓 dp[i] = 1，</span></span><br><span class="line">            <span class="comment">//因為這些紀錄，我們只需要紀錄一筆即可</span></span><br><span class="line">            dp[i] = flag &amp;&amp; info[i].year == year ? <span class="number">1</span> : n-i; </span><br><span class="line">            <span class="keyword">if</span>(flag &amp;&amp; (info[i].mark == <span class="string">"+"</span> || info[i].year != year))&#123; <span class="comment">//更新最近紀錄</span></span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">                last_mark = i;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//dp 動態規劃，由最近年份至最遠年份</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = last_mark; i &gt;= first_mark; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; n; j++)&#123; <span class="comment">//不斷的往最近年份推</span></span><br><span class="line">                <span class="comment">//由於我們動態規劃的核心是想要做成 重要紀錄、一筆非重要紀錄、重要紀錄</span></span><br><span class="line">                <span class="comment">//重要紀錄、非重要紀錄，視為一個區塊</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//但中間的一筆非重要紀錄，不一定只有一筆，所以我們就透過下方 if 來 dp</span></span><br><span class="line">                <span class="comment">//我們選擇*哪一個*非重要紀錄可以讓我們的 dp[i] 最小，下方的 dp[j] 則是上一個區塊，我們從上一個區塊中哪一個 dp[j] 可以使 dp[i] 最小</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//如果年份相同 or (前一年的資料，但離第 i 份資料不差超過一年)</span></span><br><span class="line">                <span class="keyword">if</span>(info[i].year == info[j].year || \</span><br><span class="line">                   (info[i].year + <span class="number">1</span> == info[j].year &amp;&amp; info[i].time &gt;= info[j].time))</span><br><span class="line">                    <span class="comment">//判斷 dp[i] 的資料是否比較少 or 省略 j~i 的紀錄，直接 dp[j]+1 誰少</span></span><br><span class="line">                    dp[i] = min(dp[i], dp[j]+<span class="number">1</span>); </span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>; <span class="comment">//當前區塊結束，跳出迴圈，原因是並非同區塊的資料</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(info[j].mark == <span class="string">"+"</span>) <span class="keyword">break</span>; <span class="comment">//當前區塊結束，跳出迴圈，原因是遇到重要紀錄</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//for(int i = 0; i &lt; n; i++) cout &lt;&lt; dp[i] &lt;&lt; ' ';</span></span><br><span class="line">        <span class="comment">//cout &lt;&lt; '\n';</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; dp[first_mark] &lt;&lt; <span class="string">'\n'</span>; <span class="comment">//輸出保留至第一個紀錄中最少要保存幾個紀錄</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-Dynamic-programming/" rel="tag">動態規劃 Dynamic programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>

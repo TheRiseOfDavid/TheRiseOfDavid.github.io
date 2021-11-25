@@ -77,7 +77,7 @@ ga('send', 'pageview');
     
     
     
-    <article id="post-UVa/UVa10987" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa10259" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -85,8 +85,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/10/31/UVa/UVa10987/"
-    >UVa10987 - AntiFloyd(Floyd)</a
+  <a class="article-title" href="/2021/11/09/UVa/UVa10259/"
+    >UVa10259 - Hippity Hopscotch(SPFA、dijkstra、Directed Acyclic Graph)</a
   >
 </h2>
   
@@ -96,8 +96,8 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/10/31/UVa/UVa10987/" class="article-date">
-  <time datetime="2021-10-31T15:51:59.000Z" itemprop="datePublished">2021-10-31</time>
+      <a href="/2021/11/09/UVa/UVa10259/" class="article-date">
+  <time datetime="2021-11-09T15:51:59.000Z" itemprop="datePublished">2021-11-09</time>
 </a>
       
   <div class="article-category">
@@ -121,11 +121,11 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>一個系統管理師要管理一家公司的網路，他測試每一個 cable to 每一台電腦，現在他想要移除一些 cable，但不可以讓原本的速度變快或變慢，還是必須是速度一樣快的狀態。<br>請問他應該保留那一些電纜，如果沒有辦法移除，那就輸出 ‘Need better measurements.’</p>
-<p><a href="https://onlinejudge.org/external/109/10987.pdf" target="_blank" rel="noopener">題目連結</a></p>
+<p>小時候大家都有玩過跳格子八XD，現在我們對跳格子再增加一些規則，格子中都有錢，每個人從 (1,1) 出發，可以水平或垂直跳至多 K 格，但跳到下一個格子時，下一個格子的錢必須比現在的格子還要多<br>請問最多可以拿多少錢</p>
+<p><a href="https://onlinejudge.org/external/102/10259.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/10/31/UVa/UVa10987/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/11/09/UVa/UVa10259/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -138,7 +138,84 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Floyd-Warshall-algorithm/" rel="tag">Floyd-Warshall algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dijkstra-s/" rel="tag">Dijkstra's</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Directed-Acyclic-Graph/" rel="tag">Directed Acyclic Graph</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Explain_Algorithm/Directed_Acyclic_Graph" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/11/09/Explain_Algorithm/Directed_Acyclic_Graph/"
+    >演算法知識 - Directed Acyclic Graph</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/09/Explain_Algorithm/Directed_Acyclic_Graph/" class="article-date">
+  <time datetime="2021-11-09T13:37:07.000Z" itemprop="datePublished">2021-11-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Directed-Acyclic-Graph-介紹"><a href="#Directed-Acyclic-Graph-介紹" class="headerlink" title="Directed Acyclic Graph 介紹"></a>Directed Acyclic Graph 介紹</h2><blockquote>
+<p>是一種沒有 circle、無向圖，因此 DAG 不走回頭路、不斷向前進，永遠都從起點通往到對岸的另外一邊，讓所有點都可以碰觸到終點。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/11/09/Explain_Algorithm/Directed_Acyclic_Graph/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Directed-Acyclic-Graph/" rel="tag">Directed Acyclic Graph</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -217,6 +294,84 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maximum-Bipartite-Matching-%E4%BA%8C%E5%88%86%E5%8C%B9%E9%85%8D/" rel="tag">Maximum Bipartite Matching 二分匹配</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa10987" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/10/31/UVa/UVa10987/"
+    >UVa10987 - AntiFloyd(Floyd)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/10/31/UVa/UVa10987/" class="article-date">
+  <time datetime="2021-10-31T15:51:59.000Z" itemprop="datePublished">2021-10-31</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>一個系統管理師要管理一家公司的網路，他測試每一個 cable to 每一台電腦，現在他想要移除一些 cable，但不可以讓原本的速度變快或變慢，還是必須是速度一樣快的狀態。<br>請問他應該保留那一些電纜，如果沒有辦法移除，那就輸出 ‘Need better measurements.’</p>
+<p><a href="https://onlinejudge.org/external/109/10987.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/10/31/UVa/UVa10987/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Floyd-Warshall-algorithm/" rel="tag">Floyd-Warshall algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -354,7 +509,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-Financial_Statement _Analysis/Financial_Statement _Analysis_07" class="article article-type-post" itemscope
+    <article id="post-Financial_Statement _Analysis/Financial_Statement _Analysis_06" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -362,8 +517,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_07/"
-    >財務報表分析 - 第七章 現金流量分析</a
+  <a class="article-title" href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_06/"
+    >財務報表分析 - 第六章 現金流量分析</a
   >
 </h2>
   
@@ -373,7 +528,7 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_07/" class="article-date">
+      <a href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_06/" class="article-date">
   <time datetime="2021-10-21T11:59:50.000Z" itemprop="datePublished">2021-10-21</time>
 </a>
       
@@ -397,6 +552,12 @@ ga('send', 'pageview');
       
 
       
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上財務報表分析重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_06/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -504,7 +665,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-Financial_Statement _Analysis/Financial_Statement _Analysis_06" class="article article-type-post" itemscope
+    <article id="post-Financial_Statement _Analysis/Financial_Statement _Analysis_07" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -512,8 +673,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_06/"
-    >財務報表分析 - 第六章 現金流量分析</a
+  <a class="article-title" href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_07/"
+    >財務報表分析 - 第七章 現金流量分析</a
   >
 </h2>
   
@@ -523,7 +684,7 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_06/" class="article-date">
+      <a href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_07/" class="article-date">
   <time datetime="2021-10-21T11:59:50.000Z" itemprop="datePublished">2021-10-21</time>
 </a>
       
@@ -547,12 +708,6 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大三上財務報表分析重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
-<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/10/21/Financial_Statement%20_Analysis/Financial_Statement%20_Analysis_06/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -722,164 +877,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maximum-Bipartite-Matching-%E4%BA%8C%E5%88%86%E5%8C%B9%E9%85%8D/" rel="tag">Maximum Bipartite Matching 二分匹配</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Explain_Algorithm/Maximum_Bipartite_Matching" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/16/Explain_Algorithm/Maximum_Bipartite_Matching/"
-    >演算法知識 - Maximum Bipartite Matching (使用 Augmenting Path Algorithm)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/16/Explain_Algorithm/Maximum_Bipartite_Matching/" class="article-date">
-  <time datetime="2021-10-16T13:37:07.000Z" itemprop="datePublished">2021-10-16</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="Maximum-Bipartite-Matching-介紹"><a href="#Maximum-Bipartite-Matching-介紹" class="headerlink" title="Maximum Bipartite Matching 介紹"></a>Maximum Bipartite Matching 介紹</h2><blockquote>
-<p>在介紹最大二分匹配時，必須先介紹二分圖。<br>二分圖是一種圖的特例，二分圖的結構為，X 群體的每一個點都有連結到至少一個以上 Y 群體的點、T 群體的每一個點都有連結到至少一個以上 X 群體的點，且 X、Y 群體各自沒有邊互相連接。<br><img src="https://drive.google.com/u/2/uc?id=1lSatIhYWuXC1s4yqM_3qgz3CpkKzYg_3&export=download" alt=""><br>圖源引用師大演算法</p>
-<p>二分匹配就是，每一個 x 節點只能連到一個 y 個節點、每一個 y 節點只能連到一個 x 個節點，舊式二分匹配，類似於一夫一妻制。<br><img src="https://drive.google.com/u/2/uc?id=1qJJvxwOkz6cTJ40gFXnURnYWEbbyuaMd&export=download" alt=""><br>圖源引用師大演算法</p>
-<p>我們使用 Augmenting Path Algorithm 實作，時間複雜度為 \(O(VE)\)，V 是頂點、e 是邊</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/10/16/Explain_Algorithm/Maximum_Bipartite_Matching/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maximum-Bipartite-Matching-%E4%BA%8C%E5%88%86%E5%8C%B9%E9%85%8D/" rel="tag">Maximum Bipartite Matching 二分匹配</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa10354" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/10/11/UVa/UVa10354/"
-    >UVa10354 - Avoiding Your Boss(Floyd)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/10/11/UVa/UVa10354/" class="article-date">
-  <time datetime="2021-10-11T15:51:59.000Z" itemprop="datePublished">2021-10-11</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>你是一個悠閒但優秀的程式設計師，有一天，你裝病請假，但你想出門到超市買東西，你要避免遇到老闆，老闆會從老闆家會走路徑到辦公室，其中老闆一定會走最短路徑，那你的任務則是避開老闆走的最短路徑中所有節點，再讓你自己走最短路徑抵達超市。</p>
-<p>請輸出自己走最短路徑抵達超市的成本，不行請輸出 “MISSION IMPOSSIBLE.”</p>
-<p><a href="https://onlinejudge.org/external/103/10354.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/10/11/UVa/UVa10354/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Floyd-Warshall-algorithm/" rel="tag">Floyd-Warshall algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>

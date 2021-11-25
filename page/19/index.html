@@ -77,7 +77,7 @@ ga('send', 'pageview');
     
     
     
-    <article id="post-UVa/UVa10305" class="article article-type-post" itemscope
+    <article id="post-Regular Expression/Regular-Expression-win-file-manager" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -85,8 +85,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/02/27/UVa/UVa10305/"
-    >UVa10305 - Ordering Tasks(拓樸排序)</a
+  <a class="article-title" href="/2021/03/01/Regular%20Expression/Regular-Expression-win-file-manager/"
+    >正規表達式表達 windows 檔案命名規則</a
   >
 </h2>
   
@@ -96,12 +96,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/02/27/UVa/UVa10305/" class="article-date">
-  <time datetime="2021-02-27T12:36:44.000Z" itemprop="datePublished">2021-02-27</time>
+      <a href="/2021/03/01/Regular%20Expression/Regular-Expression-win-file-manager/" class="article-date">
+  <time datetime="2021-02-28T21:51:11.000Z" itemprop="datePublished">2021-03-01</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+    <a class="article-category-link" href="/categories/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-Regular-Expression/">正規表示式 Regular Expression</a>
   </div>
 
       
@@ -120,12 +120,12 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>John 有很多任務要做，但有些任務息息相關，希望你可以幫他寫出一份任務清單讓他來做任務</p>
-<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1246" target="_blank" rel="noopener">題目連結</a></p>
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>如果在寫程式的過程中需要輸出檔案到 windows OS 上時，<code>/  \   *  ?   :    &quot;   &lt;   &gt;  |</code> 都不可以用是檔名，此時正規表達式來幫助我們解決這問題是最好的了！</p>
+<p>　如何寫出正規表達式表達 windows 檔案命名規則呢，就是我們的主題。</p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/02/27/UVa/UVa10305/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/03/01/Regular%20Expression/Regular-Expression-win-file-manager/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -138,7 +138,315 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Topological-Ordering-%E6%8B%93%E6%A8%B8%E6%8E%92%E5%BA%8F/" rel="tag">Topological Ordering 拓樸排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-Regular-Expression/" rel="tag">正規表示式 Regular Expression</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Regular Expression/Regular-Expression" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/03/01/Regular%20Expression/Regular-Expression/"
+    >正規表達式 Regular Expression 基本方法</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/01/Regular%20Expression/Regular-Expression/" class="article-date">
+  <time datetime="2021-02-28T21:51:11.000Z" itemprop="datePublished">2021-03-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-Regular-Expression/">正規表示式 Regular Expression</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="正規表達式-Regular-Expression-介紹"><a href="#正規表達式-Regular-Expression-介紹" class="headerlink" title="正規表達式 Regular Expression 介紹"></a>正規表達式 Regular Expression 介紹</h2><blockquote>
+<p>在電腦科學中用來判斷一個字串是否符合我們所規定的特定模式，在文字編輯器中用來檢索、替換那些符合某個規則的文字。。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/03/01/Regular%20Expression/Regular-Expression/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-Regular-Expression/" rel="tag">正規表示式 Regular Expression</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-C++/C++_binarysearch" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/28/C++/C++_binarysearch/"
+    >QUESTION! C++11 upperbound and lowerbound 用法</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/28/C++/C++_binarysearch/" class="article-date">
+  <time datetime="2021-02-28T11:46:07.000Z" itemprop="datePublished">2021-02-28</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Cpp/">Cpp</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
+<p>語法常常讓人忘記，尤其是相似的語法更為容易，這裡告訴讀者這兩個用法差別，讓讀者在忘記時可以用到。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/02/28/C++/C++_binarysearch/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp/" rel="tag">Cpp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-blog/hackmd_view_googledricePIC" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/28/blog/hackmd_view_googledricePIC/"
+    >Markdown 放入 google drive 圖片</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/28/blog/hackmd_view_googledricePIC/" class="article-date">
+  <time datetime="2021-02-27T16:10:56.000Z" itemprop="datePublished">2021-02-28</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="主要內容"><a href="#主要內容" class="headerlink" title="主要內容"></a>主要內容</h2><blockquote>
+<p>主要介紹如何將 google drive 的圖片放到 markdown 上，並且會自動顯示。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/02/28/blog/hackmd_view_googledricePIC/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/" rel="tag">markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-statistics/statistics-ch9" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/27/statistics/statistics-ch9/"
+    >統計學(二) 筆記 - 第九章 假說檢定(hypothesis testing)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/27/statistics/statistics-ch9/" class="article-date">
+  <time datetime="2021-02-27T15:59:50.000Z" itemprop="datePublished">2021-02-27</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B5%B1%E8%A8%88-statistics/">統計 statistics</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大二下統計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是觀看影片心得後的筆記，老師上課可能不太適用會忘記抄到</strong></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/02/27/statistics/statistics-ch9/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E4%BA%8C%E4%B8%8B%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">北科大二下統計學筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%AD%86%E8%A8%98/" rel="tag">統計學筆記</a></li></ul>
 
 
     </footer>
@@ -283,6 +591,84 @@ ga('send', 'pageview');
 </blockquote>
       
       <a class="article-more-link" href="/2021/02/27/UVa/UVa11060/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Topological-Ordering-%E6%8B%93%E6%A8%B8%E6%8E%92%E5%BA%8F/" rel="tag">Topological Ordering 拓樸排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa10305" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/27/UVa/UVa10305/"
+    >UVa10305 - Ordering Tasks(拓樸排序)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/27/UVa/UVa10305/" class="article-date">
+  <time datetime="2021-02-27T12:36:44.000Z" itemprop="datePublished">2021-02-27</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>John 有很多任務要做，但有些任務息息相關，希望你可以幫他寫出一份任務清單讓他來做任務</p>
+<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1246" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/02/27/UVa/UVa10305/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -457,406 +843,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codeforces/" rel="tag">Codeforces</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B8%E5%AD%B8%E6%8E%A8%E7%90%86/" rel="tag">數學推理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-life_experence/north_coast_trip_with_college_friends" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/02/22/life_experence/north_coast_trip_with_college_friends/"
-    >2021/01/29 北科大學生夜衝北海岸</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/02/22/life_experence/north_coast_trip_with_college_friends/" class="article-date">
-  <time datetime="2021-02-22T07:36:44.000Z" itemprop="datePublished">2021-02-22</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/">人生旅途</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><blockquote>
-<p>跟大學程式設計社團的朋友們一起去北海岸看日出、夜衝。<br>有紹宇、力瑋、天佑、洸明</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/02/22/life_experence/north_coast_trip_with_college_friends/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8Life/" rel="tag">大學Life</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa758" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/02/21/UVa/UVa758/"
-    >UVa758 - The Same Game(DFS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/02/21/UVa/UVa758/" class="article-date">
-  <time datetime="2021-02-21T13:36:44.000Z" itemprop="datePublished">2021-02-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>一個小遊戲(類似於 candy crush)，目標是拿到最大分，規則與分數如下：</p>
-<ul>
-<li>有三種顏色的石頭，只要有三顆相同顏色的石頭在一起就可以被消除掉</li>
-<li>如果石頭有被消除掉，當前的格子為空，那上面的石頭會替補上來(column)</li>
-<li>如果有一整排(column)為空，那將右邊的那些石頭全部都往左移一排(column)</li>
-<li>分數計算是消掉的石頭(m) \((m-2) ^ 2\)</li>
-<li>如果全部的石頭都被消去就多獲得 1000 分</li>
-</ul>
-<p>一個好的策略是從左下底端開始尋找，找出有最大堆顏色的石頭將它們消去，不斷重複至不能消除<br>必須要輸出如何消除、總共分數、剩下幾顆。</p>
-<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=699" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/02/21/UVa/UVa758/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa11953" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/02/21/UVa/UVa11953/"
-    >UVa11953 - Battleships(DFS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/02/21/UVa/UVa11953/" class="article-date">
-  <time datetime="2021-02-21T12:36:44.000Z" itemprop="datePublished">2021-02-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>大家有玩過 Battleships game 嗎? 用兩張紙畫，目標是要擊沉對手的所有船艦，每一艘船艦都是 1 * N 大小的，要全部都被擊中就算輸了</p>
-<p>題目是給你一張圖，請你判斷還有哪些戰艦還沒有被擊沉，被擊中並不包含擊沉</p>
-<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=3104" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/02/21/UVa/UVa11953/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa11094" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/02/21/UVa/UVa11094/"
-    >UVa11094 - Continents(DFS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/02/21/UVa/UVa11094/" class="article-date">
-  <time datetime="2021-02-21T12:36:44.000Z" itemprop="datePublished">2021-02-21</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
-<p>有一個國王喜歡佔領領土，給你一張地圖，這張地圖左右邊是有相同連結的！請你找出除了國王所在的地方外，最大的一片土地，國王要去征戰他</p>
-<p>提醒，由於國家的地圖沒有統一標準，因此陸地或是海洋的標示都不相同，但會給你國王所在地。</p>
-<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2035" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/02/21/UVa/UVa11094/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa1103" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/02/20/UVa/UVa1103/"
-    >UVa1103 - Ancient Messages(DFS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/02/20/UVa/UVa1103/" class="article-date">
-  <time datetime="2021-02-20T13:36:44.000Z" itemprop="datePublished">2021-02-20</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>考古學家們給你一些古老文字，請你根據題目給你的資料進行判斷，這圖片有哪些文字，按照字母順序輸出，但你必須想辦法自己在古老文字中辨識古老文字。</p>
-<p>題目給你的值是 16 位元的。<br>古老文字不會重疊、至少會有一個文字。</p>
-<p><a href="https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=3544" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/02/20/UVa/UVa1103/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>

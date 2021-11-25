@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    系統分析與設計- 第九章 資料設計 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-System_analysis_and_design/ch9_System_analysis_and_design" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  系統分析與設計- 第九章 資料設計
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/14/System_analysis_and_design/ch9_System_analysis_and_design/" class="article-date">
+  <time datetime="2021-11-14T11:59:50.000Z" itemprop="datePublished">2021-11-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88/">系統分析與設計</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">6分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="資料設計概念"><a href="#資料設計概念" class="headerlink" title="資料設計概念"></a>資料設計概念</h2><ul>
+<li>資料結構<ul>
+<li>資料結構是資訊系統內的組織、儲存及管理資料的架構</li>
+<li>檔案和資料表它們有各種形式彼此連結</li>
+</ul>
+</li>
+<li>檔案式系統(file-oriented system)，利用檔案來處理資料</li>
+<li>關聯式模型(relational model)，利用資料庫來處理資料</li>
+<li>資料庫管理系統(database management system, DBMS)<ul>
+<li>可讓使用者新增、更新、管理、存取並分析資料內容的一組工具、功能及介面的組合。</li>
+<li>優點<ul>
+<li>可延展性(scalability)，系統可以輕易擴充、縮小</li>
+<li>經濟規模(economy of scale)，長期平均總成本會因為產量增加而減少</li>
+<li>有效支援企業級應用系統——資料庫管理師 (database, administrator,DBA)</li>
+<li>更強的標準</li>
+<li>更佳的安全性</li>
+<li>資料獨立性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="DBMS-組成元件"><a href="#DBMS-組成元件" class="headerlink" title="DBMS 組成元件"></a>DBMS 組成元件</h2><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1gk75CY0q4SKefV4C3HiGVPsnZHe8CsqA&export=download" alt=""></p>
+</blockquote>
+<ul>
+<li>使用者、資料庫管理師與其系統介面<ul>
+<li>使用者，根據事先定義查詢或指令來執行動作</li>
+<li>資料庫管理師，負責 DBMS 管理與支援</li>
+<li>相關資訊系統，DBMS 可支援許多提供輸入給 DBMS 或是從 DBMS 取得特定資料</li>
+</ul>
+</li>
+<li>資料綱目<ul>
+<li>綱目(schema) A<ul>
+<li>包括所有欄位、資料表及關聯性的描述</li>
+<li>子綱目(subschema)：資料庫中符合特定系統或使用者需求，或是允許存取的部分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>實體資料儲存處<ul>
+<li>包含綱目與子綱目</li>
+<li>可集中式也可以分散到數個地點</li>
+</ul>
+</li>
+</ul>
+<h2 id="Web-式設計"><a href="#Web-式設計" class="headerlink" title="Web 式設計"></a>Web 式設計</h2><ul>
+<li>讓資料庫連上 web，史資料可以被更新或閱讀</li>
+<li>中介軟體(middleware)是一種整合不同應用系統並讓它們彼此能夠交換資料的軟體</li>
+<li>Web 式資料必須顧及安全性，並且讓授權使用者能輕易存取</li>
+<li>Web 特性<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=127jTFH07odZVHVHpwxB1H6TOzPKw4wwf&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>Web 與 database 架構<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1xe3SAo5oEzYC_TbFkVxx2M-gN9_4poaf&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="資料設計術語"><a href="#資料設計術語" class="headerlink" title="資料設計術語"></a>資料設計術語</h2><ul>
+<li>定義<ul>
+<li>實體(entity)，蒐集和維護資料的對象</li>
+<li>資料表(table)或檔案(file)，包含了一組相關的紀錄，這些紀錄都存放了與特定實體有關的資料</li>
+<li>欄位(field)，也稱為屬性(attribute)，亦即實體的一個特性，如果一個屬性有兩個實體則是共同欄位</li>
+<li>紀錄(record)，也稱為值組(tuple)，一組相關欄位的組合，用以描述實體的一筆實例</li>
+</ul>
+</li>
+<li>鍵欄位(key fields)<ul>
+<li>主鍵(primary key)，一個欄位或一組欄位，可以唯一且簡潔地識別出實體某個特定成員</li>
+<li>候選鍵(candidate key)，其他可以做為主鍵的欄位</li>
+<li>外鍵(foreign key)，某一張資料表的其中一個欄位，但同時也是另一張資料表的主鍵，用以建立兩張資料表的關係</li>
+<li>次級鍵(secondary key)，其他的欄位</li>
+</ul>
+</li>
+<li>參照完整性(referential integrity)，避免資料不一致、品質不穩定的問題<br>每一個外來鍵必須對應到其他資料表的主鍵，否則不應該輸入</li>
+</ul>
+<h3 id="實體關係圖"><a href="#實體關係圖" class="headerlink" title="實體關係圖"></a>實體關係圖</h3><ul>
+<li>實體關係圖(entityrelationship diagram, ERD)是一個顯示系統實體間邏輯關係的模型<ul>
+<li>關係，兩個實體的媒介，分成一對一、一對多、多對多</li>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1x9KyOELQk4zqXrNHhSIte_WR5iKKW5jF&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>基數(cardinality)<ul>
+<li>描述兩實體間的關記數量，顯示與另外一個實體的關聯性<ul>
+<li>基數標記法(cardinality notation)利用特殊的符號來表示關係</li>
+<li>基數標記法示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=123kKiWWol56mv7oG300z-MSLIOksiu_M&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>鴨足標記法(crow’s foot notation)使用圓圈、直線條以及類似鴨子腳的符號來標示各種可能的關係</li>
+<li>鴨足標記法示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=14HQMPNyc-zINbGuD72JCkhXZvlB-z-Zx&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料正規化"><a href="#資料正規化" class="headerlink" title="資料正規化"></a>資料正規化</h2><ul>
+<li>正規化(normalization)是為資料庫中每個資料表指定明確欄位或屬性的資料表設計建立流程</li>
+<li>資料表設計(table design)，為特定檔案或資料表指定其欄位與主鍵的動作</li>
+<li>正規化程序包含四階段<ul>
+<li>未正規化的設計</li>
+<li>第一正規形式</li>
+<li>第二正規形式</li>
+<li>第三正規形式</li>
+</ul>
+</li>
+<li>標準標記格式(standard notation format)<ul>
+<li>表示資料表結構、欄位、primary key</li>
+<li>name(++primary_key++, attribute1, attribute2)</li>
+</ul>
+</li>
+<li>未正規化的設計<ul>
+<li>沒有辨認重複的群組或欄位，不可以有重複群組的問題。</li>
+<li>示意圖<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17fLiE96Bhw3SsIf2jaW5IcUXYtl6TDVU&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>第一正規形式(first normal form, 1NF)<ul>
+<li>資料表不包含群組</li>
+<li>把重複群組的 primary key 變成資料表的 primary key<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1J6ILCDjVj7cJC1VCLrsC54iqZ0GQysoC&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>第二正規形式(second normal form, 2NF)<ul>
+<li>功能相依(functionally dependent)的概念，如果 attribute1 會根據 attribute2 而改變，那麼 attribute1 功能相依 attribute1</li>
+<li>所有 attribute 必須依賴 primary key</li>
+<li>當資料表符合 1nf，且有功能相依的 table 時就是 2nf。<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1pIc1mUUa2QjE3Rf8oIdoawnVmaSAlPzo&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>第三正規形式(third normal form, 3NF)<ul>
+<li>其他非 primary key 的 attribute，都功能相依於 primary key 時，就符合 3nf</li>
+<li>可避免 2nf 的重複、資料完整性問題<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1I4xI8aegbeBvpOogZJOfS44Hsb_BmiS7&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="代碼-code"><a href="#代碼-code" class="headerlink" title="代碼 code"></a>代碼 code</h2><ul>
+<li>代碼(code) 是一組用來代表資料項目的英文字母或數字，它可以用來簡化輸出、輸入和資料格式</li>
+<li>代碼(code) 的特性<ul>
+<li>通常比本身資料來的更簡短</li>
+<li>節省儲存空間與成本</li>
+<li>減少資料傳輸時間並減少資料輸入時間</li>
+<li>用來揭露和隱藏資訊</li>
+<li>減少資料輸入的錯誤</li>
+<li>比較好記且容易輸入</li>
+</ul>
+</li>
+<li>代碼的類型<ul>
+<li>順序代碼(sequence codes) 是指以特定次序指定的數字和字母</li>
+<li>分段順序代碼(block sequence codes) 是用一些區塊的數字代表不同的分類</li>
+<li>字母代碼 (alphabetic codes) 是以英文字母來區分不同的項目<ul>
+<li>類別代碼(category codes)，用來分類一群相關項目</li>
+<li>縮寫代碼(abbreviation codes)，將名稱進行縮寫</li>
+</ul>
+</li>
+<li>舉例 TPE 為桃園國際機場代號</li>
+<li>我認為應該要叫代號，但不知道為甚麼課本教做代碼，不太是台灣用詞</li>
+</ul>
+</li>
+<li>加密代碼(cipher codes)用一個關鍵字將一個數字進行編碼的方法</li>
+<li>行動代碼(action codes)表示要對其所關聯的項目採取什麼行動</li>
+<li>設計代碼<ul>
+<li>保持精簡、簡單結構</li>
+<li>允許擴充並維持一致性</li>
+<li>保持代碼穩定</li>
+<li>使代碼唯一、避免混淆</li>
+<li>使用可排序代碼</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料儲存及存取"><a href="#資料儲存及存取" class="headerlink" title="資料儲存及存取"></a>資料儲存及存取</h2><ul>
+<li>工具與技術<ul>
+<li>資料倉儲(data warehouse)，它可以涵蓋公司內各處所存放而似乎並不相關的資料</li>
+<li>資料市集(data mart)，專門設計用來服務特定部門需求<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1X08FxU5OiQ3V3G6_qqIfPB64ekKSoqcn&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>資料探勘建議目標<ul>
+<li>增加每次連線的平均造訪網頁數</li>
+<li>增加推薦顧客的數量</li>
+<li>減少成交點擊數(clicks to close)，減少平均完成一次購買行為，使用者會開幾個網頁搜尋，降低消費者去比較或是猶豫的慾望。</li>
+<li>增加每次造訪的結帳次數</li>
+<li>增加每次結帳的平均利潤</li>
+</ul>
+</li>
+<li>邏輯與實體儲存<ul>
+<li>邏輯儲存(logical storage)係指透過使用者觀點所見到的資料，而不管該資訊實際組織或儲存的方法及地點</li>
+<li>實體儲存(physical storage)純粹與硬體相關</li>
+<li>資料編碼<ul>
+<li>EBCDIC 應用在大型主機或高容量伺服器</li>
+<li>ASCII 大部分個人電腦編碼方式</li>
+<li>Unicode 使用二位元組</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料控制"><a href="#資料控制" class="headerlink" title="資料控制"></a>資料控制</h2><ul>
+<li>設計良好的 DBMS，必須提供內建的控制與安全性功能</li>
+<li>資料保護方式<ul>
+<li>限制檔案和資料庫存取</li>
+<li>使用者 ID 與密碼</li>
+<li>權限(permission)與加密(encryption)</li>
+</ul>
+</li>
+<li>所有系統檔案與資料庫都要定期備份</li>
+<li>復原程序(recovery procedures)可以將檔案和資料庫復原到上次備份時的狀態</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88%E7%AD%86%E8%A8%98/" rel="tag">系統分析與設計筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch2_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            系統分析與設計- 第二章 分析企業個案
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/11/14/System_analysis_and_design/ch4_System_analysis_and_design/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">系統分析與設計- 第四章 需求工程</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2021
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
