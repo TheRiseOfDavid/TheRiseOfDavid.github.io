@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    資料庫管理 筆記 - 大二上期中考手寫筆試重點複習 |  大衞的筆記
+    2021 International Collegiate Programming Contest Asia Taipei-Hsinchu Site (ICPC2021) - 72th 心得 |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,7 +43,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-NTUT_note/NTUTcsie_OOPmidterm" class="article article-type-post" itemscope
+  <article id="post-contest_experence/icpc2021" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -51,7 +51,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  資料庫管理 筆記 - 大二上期中考手寫筆試重點複習
+  2021 International Collegiate Programming Contest Asia Taipei-Hsinchu Site (ICPC2021) - 72th 心得
 </h1>
   
 
@@ -60,12 +60,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2020/12/01/NTUT_note/NTUTcsie_OOPmidterm/" class="article-date">
-  <time datetime="2020-12-01T12:34:50.000Z" itemprop="datePublished">2020-12-01</time>
+      <a href="/2021/11/28/contest_experence/icpc2021/" class="article-date">
+  <time datetime="2021-11-28T15:33:09.000Z" itemprop="datePublished">2021-11-28</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+    <a class="article-category-link" href="/categories/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/">競賽心得</a>
   </div>
 
       
@@ -75,7 +75,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">697</span>
+            <span class="post-count">1.6k</span>
         </span>
     </span>
 
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">3分鐘</span>
+            <span class="post-count">5分鐘</span>
         </span>
     </span>
 </div>
@@ -111,50 +111,50 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊工程系大二上物件導向程式設計學重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+      <blockquote>
+<p>僅此紀錄 2021/11/28 2021 ICPC 心得。<br>「紀錄每個時刻，讓未來的自己不遺忘過去的自己」<br>只有自己才能體會自己的過去<br>沒有得獎拉，只是很可惜自己還不夠好吧。</p>
+<p><strong>明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。</strong></p>
+<p><a href="https://theriseofdavid.github.io/2020/11/10/contest_experence/ICPC2020/" target="_blank" rel="noopener">ICPC 的流程可以看這裡</a></p>
 </blockquote>
 <a id="more"></a>
 
-<h2 id="makefile-用處如何，語法"><a href="#makefile-用處如何，語法" class="headerlink" title="makefile 用處如何，語法"></a>makefile 用處如何，語法</h2><p>輸入 <code>make</code> 指令，會尋找 ls 是否有 makefile 的文件，並編譯 makefile 文件進而自動化建構程式。</p>
-<p>makefile 適合開發大型程式，根據 target、rule 來判斷那些程式需要重新編譯、哪些不需要，在編譯大型程式時，如果我們只改動一小部分卻要將所有程式整個編譯就會花費大量時間</p>
-<ul>
-<li><code>#</code> 是 makefile 中的註解</li>
-<li><code>\</code> 是 makefile 中的換行</li>
-<li><code>.PHONY</code> 原先 make 會先確認當前是否有此命令資料夾，如果有就會認為已經執行過而不執行，而在 <code>.PHONY</code> 裡面則會強制他必須執行，不須確認是否有此資料夾</li>
+<h2 id="第一天的報告"><a href="#第一天的報告" class="headerlink" title="第一天的報告"></a>第一天的報告</h2><h3 id="前情"><a href="#前情" class="headerlink" title="前情"></a>前情</h3><p>由於最後這幾周是期中考周，大家都比較忙也沒有在練習其他題目，因此我們的 codebook 跟 NCPC 決賽時相同</p>
+<h3 id="報告"><a href="#報告" class="headerlink" title="報告"></a>報告</h3><p>由於這次因為疫情的關係，這次比賽後沒有晚宴可以吃，只有餐盒可以拿QQ。</p>
+<p>我跟阿官還有力瑋約 13 點 20 分在北商集合，結果我遲到了，其他兩個都比我早到，我好對不起大家。</p>
+<p>確認力瑋有帶字典後我們就去報到了，這次我們的比賽組別是在 A20，我們選手的衣服顏色沒變，倒是工作人員與教練的衣服變得很好看，讓我覺得很羨慕阿！藍色的衣服真的不適合我拉。</p>
+<p>但是書包這次明顯有升級，我覺得好很多。</p>
+<p>報到完成，換成比賽衣服，就拍完照準備上去報到啦。</p>
+<blockquote>
+<p>ICPC 報告照<br><img src="https://drive.google.com/u/2/uc?id=17GeeEED2am611AlU2vX3MzSyPJkGZxe1&export=download" alt=""></p>
+</blockquote>
+<blockquote>
+<p>北商照片<br><img src="https://drive.google.com/u/2/uc?id=1VsTB7hBdYgC-M0iUMnSHDstMxukwCkc5&export=download" alt=""></p>
+</blockquote>
+<h3 id="進場與開幕典禮"><a href="#進場與開幕典禮" class="headerlink" title="進場與開幕典禮"></a>進場與開幕典禮</h3><p>由於因為疫情關係，ICPC 這次沒有其他國外隊參賽，因此比賽的隊伍跟 NCPC 基本上一樣，此時我原本對我們隊伍很有信心，因為上次我們拿到 30th，這次應該不會太差吧，我心裡是這樣想著的。</p>
+<p>主辦單位開始舉行開幕儀式，因為這次沒有外國隊，因此開幕典禮就用中文表達XD，其實還蠻不賴拉，對不懂英文的我來說也是一大好事啦。</p>
+<p>這次的點心是巧克力跟一些小餅乾，不是不好吃拉，但是好懷念 2020 那時候可以吃很多好吃的小蛋糕喔，小蛋糕真的 100 分，這次的小餅乾讓我好傷心QQ。</p>
+<h3 id="電腦測試"><a href="#電腦測試" class="headerlink" title="電腦測試"></a>電腦測試</h3><p>這次電腦測試是用 TOPC2021 的題目來做測試，由於其實題目大部分都相似，因此就是讓我們熟悉電腦環境，讓我們上傳去測試各種錯誤 or AC。</p>
+<p>大概在下午 4 點的時候主辦單位就說可以陸續讓大家回家拉。</p>
+<h2 id="第二天"><a href="#第二天" class="headerlink" title="第二天"></a>第二天</h2><h3 id="報到"><a href="#報到" class="headerlink" title="報到"></a>報到</h3><p>這天我最早到XD，接下來 10 分鐘後力瑋跟阿官就順利到場，開始進行報到。</p>
+<h3 id="比賽過程"><a href="#比賽過程" class="headerlink" title="比賽過程"></a>比賽過程</h3><p>這次比賽題目比較多，我希望可以拿高好名次，因此我跟隊友說有把握在送出去，盡量不要錯一些可惜的地方，起初我順利解出水題，再來力瑋解出一題，而阿官這時還沒有找出其他簡單好寫的題目，再來我看了一題字串，力瑋也在看一題。</p>
+<p>力瑋送出一題 CE，原因是 freopen 沒有關，好可惜<br>力瑋在送一次 TLE，好可惜，也是沒過QQ。</p>
+<p>大衛送出一題 WA，再送一次 WA，再送一次 WA，此時我已經浪費很多時間在更改邏輯、程式碼，大概只剩下 1 小時了。</p>
+<p>我跟力瑋、阿官求救，此時阿官想到一個很簡單、直覺的想法，並上前寫了上去 AC，我當下的腦中真的一片空白，是我想太深、思考不夠全面嗎，把一個最簡單的想法給漏了，要是成功把他解開來說不定就可以爭取更多時間寫題目拉！</p>
+<p>當阿官順利解完時，時間只剩下 30min，其他的題目我們都不太能夠解出來。</p>
+<p>主辦單位不斷發放許多的小餐點給大家補充營養，但是我覺得都還是沒有比小蛋糕來的好吃拉，小糕點才是最棒的，那些餅乾甚麼的在糕點面前都不勘一提阿XD。</p>
+<blockquote>
+<p>競賽畫面<br><img src="https://drive.google.com/u/2/uc?id=17Qdb8FVcaUKJTay0uOIQe-XyuE1DHCpx&export=download" alt=""></p>
+</blockquote>
+<h3 id="頒獎典禮-amp-心得"><a href="#頒獎典禮-amp-心得" class="headerlink" title="頒獎典禮 &amp; 心得"></a>頒獎典禮 &amp; 心得</h3><p>我們其實都知道我們這次比得不好，主要是我在浪費時間，我花了太多時間解一題我一直都沒有往正確方向思考的題，才讓這次我們的隊伍考得這麼差QQ，要是如果我在第一次 WA 就先與隊友討論，那或許情況不應該遭到此地步，而非讓隊友去看其他難的題目，我自己慢慢解實作題。</p>
+<p>自己實作題其實沒有到很擅長，但當下我覺得我做得到就上去解，結果失敗了，好自責。因為這次比賽其實解出 3 題、解出 4 題的人非常多，大概從 25 名 ~ 85 名都是解出三題跟四題，也就意味著這次比賽很考驗你解題錯了幾次，錯越多，那你的名次就越後面。</p>
+<p>最後在公布名次的時候我也發現有很多學校隊伍只花了 120 分鐘就寫出 3 題後就再也不作答了，我才驚然意識到很多人在這次比賽都使用保守策略，不衝題，我只要等著其他努力的人解題目然後 WA 把名次往下摔就好，雖然覺得這種策略很消極，但他們成功了。<br>也許我下次 ICPC 也要考慮使用這種策略，解完有把握的，再來就都不解，休息等比賽結束，說不定才是最好的解法。</p>
+<h3 id="檢討"><a href="#檢討" class="headerlink" title="檢討"></a>檢討</h3><ul>
+<li>我對不起我的隊友，這次我比得不好，我需要好好檢討自己。</li>
+<li>我們最後的練習也不足，演算法也練不多，我想這是我們隊伍必須要好好檢討的，向心力有點不太足夠。</li>
+<li>Codeforces 比起 UVa 來的更重要，這是用經驗換來的</li>
+<li>當隊員看一題看超過 15min or 送出程式碼卻 WA 時，其他隊員必須也來聽聽這個題目，並確認此隊員想法是否有正確，達成共識後再 submit。</li>
 </ul>
-<p>一個 makefile 的範例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: directories clean stat </span><br><span class="line"></span><br><span class="line">all: directories bin&#x2F;ut_all</span><br><span class="line"></span><br><span class="line">bin&#x2F;ut_all: test&#x2F;ut_main.cpp test&#x2F;ut_cat.h src&#x2F;cat.h</span><br><span class="line">	g++ -std&#x3D;c++11 test&#x2F;ut_main.cpp -o bin&#x2F;ut_all -lgtest -lpthread</span><br><span class="line"></span><br><span class="line">directories: </span><br><span class="line">	mkdir -p bin</span><br><span class="line"></span><br><span class="line">clean: </span><br><span class="line">	rm -rf bin</span><br><span class="line"></span><br><span class="line">stat: </span><br><span class="line">	wc src&#x2F;* test&#x2F;*</span><br></pre></td></tr></table></figure>
-
-<h2 id="Default-Constructor-甚麼時機用，甚麼時候不用"><a href="#Default-Constructor-甚麼時機用，甚麼時候不用" class="headerlink" title="Default Constructor 甚麼時機用，甚麼時候不用"></a>Default Constructor 甚麼時機用，甚麼時候不用</h2><ul>
-<li>Default Constructor 在使用時，會讓內部參數都是預設參數，如果使用者沒有進行預設那則使用系統預設</li>
-<li>如果使用者有建構 constructor 時，則系統就不會存在 default constructor </li>
-<li>可以使用 <code>object() = delete</code> 來把 deafault constructor 刪除</li>
-</ul>
-<h2 id="By-Reference-By-Value-Pointer-個別意思，如何區別，請舉例"><a href="#By-Reference-By-Value-Pointer-個別意思，如何區別，請舉例" class="headerlink" title="By Reference, By Value, Pointer 個別意思，如何區別，請舉例"></a>By Reference, By Value, Pointer 個別意思，如何區別，請舉例</h2><ul>
-<li>point 與 ByReference 相同<ul>
-<li>pointer 可以隨時 assign，但 Reference 只能在初始化時 assign </li>
-<li>pointer 可以設定 NULL，但 Reference 不可以</li>
-<li>pointer 可使用 iterator</li>
-<li>pointer 持有 memory，但 Reference 只是共享</li>
-<li>pointer 需要用到 * 才可以讀取內部資料，但 Reference 不用</li>
-</ul>
-</li>
-<li>By Value 是複製一份資料進來，因此與先前的資料就完全不同</li>
-</ul>
-<h2 id="Copy-assignment、copy-constructor-個別意思，如何區別"><a href="#Copy-assignment、copy-constructor-個別意思，如何區別" class="headerlink" title="Copy assignment、copy constructor 個別意思，如何區別"></a>Copy assignment、copy constructor 個別意思，如何區別</h2><ul>
-<li>Copy assignment 已被初始化後的物件複製其他 object</li>
-<li>copy constructor <strong>未被初始化的物件</strong>複製其他 object</li>
-<li><code>object(a,b)</code> copy constructor </li>
-<li><code>object a = b;</code> copy assignment </li>
-</ul>
-<h2 id="Function-overloading-個別意思"><a href="#Function-overloading-個別意思" class="headerlink" title="Function overloading 個別意思"></a>Function overloading 個別意思</h2><ul>
-<li>相同的 function name 但卻有不同的 parma </li>
-<li>函數可以相同，<strong>但參數不可以相同</strong></li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" Here is int "</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">double</span> f)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" Here is float "</span> &lt;&lt; f &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">char</span> <span class="keyword">const</span> *c)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">" Here is char* "</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	print(<span class="number">10</span>);</span><br><span class="line">	print(<span class="number">10.10</span>);</span><br><span class="line">	print(<span class="string">"ten"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://www.geeksforgeeks.org/passing-by-pointer-vs-passing-by-reference-in-c/" target="_blank" rel="noopener">Passing by pointer Vs Passing by Reference in C++ by GeekforGeeks</a><br><a href="https://medium.com/@racktar7743/c-c-%E6%8C%87%E6%A8%99%E6%95%99%E5%AD%B8-%E5%9B%9B-pass-by-value-vs-pass-by-reference-ed5882802789" target="_blank" rel="noopener">[C/C++] 指標教學[四]: Pass by value vs Pass by reference by MuLong PuYang</a><br><a href="https://stackoverflow.com/questions/11706040/whats-the-difference-between-assignment-operator-and-copy-constructor" target="_blank" rel="noopener">What’s the difference between assignment operator and copy constructor by stackoverflow</a><br><a href="https://www.geeksforgeeks.org/function-overloading-c/" target="_blank" rel="noopener">Function Overloading in C++ by GeekforGeeks</a></p>
+<h3 id="賽後結束"><a href="#賽後結束" class="headerlink" title="賽後結束"></a>賽後結束</h3><p>再來賽後結束大家就各自領著餐盒結束，一起好好準備未來，也謝謝各位努力陪我練習演算法一整年，謝謝力瑋跟阿官了，即使大家在忙，也沒有把這邊的責任逃避或放下，都有好好做完。</p>
 
       
       <!-- reward -->
@@ -178,7 +178,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B3%87%E6%96%99%E5%BA%AB%E7%AE%A1%E7%90%86/" rel="tag">資料庫管理</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICPC/" rel="tag">ICPC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%BA%E7%94%9F%E6%97%85%E9%80%94/" rel="tag">人生旅途</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8Life/" rel="tag">大學Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E6%AF%94%E8%B3%BD/" rel="tag">程式比賽</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AB%B6%E8%B3%BD%E5%BF%83%E5%BE%97/" rel="tag">競賽心得</a></li></ul>
 
 
     </footer>
@@ -189,19 +189,19 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2020/12/01/NTUT_note/investment_stock_trading_system/" class="article-nav-link">
+      <a href="/2021/12/01/NTUT_note/NTUTcsie_OOPmidterm/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            投資學 筆記 - 股票交易制度
+            物件導向程式設計 筆記 - 大二上期中考手寫筆試重點複習
           
         </div>
       </a>
     
     
-      <a href="/2020/12/01/NTUT_note/database_1/" class="article-nav-link">
+      <a href="/2021/11/26/life_experence/exam/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">資料庫管理 筆記 - 大二上期中考</div>
+        <div class="article-nav-title">大衛手寫考試改進策略，每次考試前必看</div>
       </a>
     
   </nav>
