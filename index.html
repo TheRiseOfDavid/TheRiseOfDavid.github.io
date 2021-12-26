@@ -77,6 +77,216 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-deep_learning/NTUTece_deeplearning_classification" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/26/deep_learning/NTUTece_deeplearning_classification/"
+    >北科電子大三上機器學習 使用 CNN 對 The Simpons 中 50 個人物進行辨識</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/26/deep_learning/NTUTece_deeplearning_classification/" class="article-date">
+  <time datetime="2021-12-26T15:59:50.000Z" itemprop="datePublished">2021-12-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/">機器學習</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="台北科大深度學習-使用-CNN-對-The-Simpons-中-50-個人物進行辨識"><a href="#台北科大深度學習-使用-CNN-對-The-Simpons-中-50-個人物進行辨識" class="headerlink" title="台北科大深度學習 - 使用 CNN 對 The Simpons 中 50 個人物進行辨識"></a>台北科大深度學習 - 使用 CNN 對 The Simpons 中 50 個人物進行辨識</h1><h2 id="題目說明"><a href="#題目說明" class="headerlink" title="題目說明"></a>題目說明</h2><p>使用 CNN 算法來針對 The Simpons 中的 50 人物進行辨識</p>
+<h2 id="將-kaggle-資料進行解壓縮"><a href="#將-kaggle-資料進行解壓縮" class="headerlink" title="將 kaggle 資料進行解壓縮"></a>將 kaggle 資料進行解壓縮</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!unzip .&#x2F;data&#x2F;machine-learningntut-2021-autumn-classification.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="將-50-個人物名稱透過-dict-紀錄"><a href="#將-50-個人物名稱透過-dict-紀錄" class="headerlink" title="將 50 個人物名稱透過 dict 紀錄"></a>將 50 個人物名稱透過 dict 紀錄</h2><ul>
+<li>先將所有的人物先存在文字檔再透過 py 一個一個進行讀取</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#%cd /content/drive/My Drive/NTUT/大三上-深度學習/Predict_Simposons/ #t108AB0008@ntut.org.tw</span></span><br><span class="line"><span class="comment">#other email</span></span><br><span class="line">%cd /content/drive/.shortcut-targets-by-id/<span class="number">1</span>EmT_yvIKvgl-iNKBU0Wu2XOFjOPsxhyu/大三上-深度學習/Predict_Simposons </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">characters = dict()</span><br><span class="line">characters.clear()</span><br><span class="line">f = open(<span class="string">"characters.txt"</span>, <span class="string">"r"</span>)</span><br><span class="line">cnt = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">  characters[cnt] = line.strip()</span><br><span class="line">  cnt += <span class="number">1</span></span><br><span class="line">print(characters)</span><br></pre></td></tr></table></figure>
+
+<h2 id="決定圖像大小、訓練集、測試集大小"><a href="#決定圖像大小、訓練集、測試集大小" class="headerlink" title="決定圖像大小、訓練集、測試集大小"></a>決定圖像大小、訓練集、測試集大小</h2><ul>
+<li>由於圖像大小會影響深度學習中的模型細節，還有時間，由於使用 colab 進行訓練因此將圖像 size 設定為非常小</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pic_width = <span class="number">42</span></span><br><span class="line">pic_height = <span class="number">42</span></span><br><span class="line"></span><br><span class="line">num_class = len(characters)</span><br><span class="line">print(num_class)</span><br><span class="line">test_size = <span class="number">0.15</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="讀取所有資料"><a href="#讀取所有資料" class="headerlink" title="讀取所有資料"></a>讀取所有資料</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="keyword">from</span> google.colab.patches <span class="keyword">import</span> cv2_imshow</span><br><span class="line"></span><br><span class="line"><span class="comment">#imgpath = "/content/drive/My Drive/NTUT/大三上-深度學習/Predict_Simposons/data/theSimpsons-train/train"</span></span><br><span class="line">imgpath = <span class="string">"/content/drive/.shortcut-targets-by-id/1EmT_yvIKvgl-iNKBU0Wu2XOFjOPsxhyu/大三上-深度學習/Predict_Simposons/theSimpsons-train/train"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_picture</span><span class="params">()</span>:</span></span><br><span class="line">  pics = []</span><br><span class="line">  labels = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> k, v <span class="keyword">in</span> characters.items(): <span class="comment"># k 是編號， v 是名稱</span></span><br><span class="line">    origin_pics = [k <span class="keyword">for</span> k <span class="keyword">in</span> glob.glob(imgpath + <span class="string">"/"</span> + v + <span class="string">"/*"</span>)]</span><br><span class="line">    print(v + <span class="string">" : "</span> + str(len(origin_pics)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, filename <span class="keyword">in</span> enumerate(origin_pics):</span><br><span class="line">      tmp_img = cv2.imread(filename)</span><br><span class="line">      </span><br><span class="line">      <span class="comment"># opencv 讀圖片時用 BGR，而非 RGB 因此做轉換</span></span><br><span class="line">      tmp_ing = cv2.cvtColor(tmp_img, cv2.COLOR_BGR2RGB)</span><br><span class="line">      tmp_img = cv2.resize(tmp_img, (pic_height, pic_width))</span><br><span class="line">      pics.append(tmp_img)</span><br><span class="line">      labels.append(k)</span><br><span class="line">  <span class="keyword">return</span> np.array(pics), np.array(labels)</span><br><span class="line"></span><br><span class="line"><span class="comment">#load_picture()</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="分割成訓練集、測試集，並透過-h5py-存成資料集"><a href="#分割成訓練集、測試集，並透過-h5py-存成資料集" class="headerlink" title="分割成訓練集、測試集，並透過 h5py 存成資料集"></a>分割成訓練集、測試集，並透過 h5py 存成資料集</h2><p>由於老師是給全部的資料，因此我們就需要進行分割。</p>
+<p>那下面這個程式中的參數用意如下</p>
+<ul>
+<li>save 則是將讀進來的全部資料分成訓練集、測試集，並存取</li>
+<li>load 將之前分好的訓練集、測試集讀取</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_dataset</span><span class="params">(save=False, load=False)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> load:</span><br><span class="line">    <span class="comment"># 讀檔</span></span><br><span class="line">    h5f = h5py.File(<span class="string">"train60.h5"</span>, <span class="string">"r"</span>)</span><br><span class="line">    x_train = h5f[<span class="string">"x_train"</span>][:]</span><br><span class="line">    x_test = h5f[<span class="string">"x_test"</span>][:]</span><br><span class="line">    h5f.close()</span><br><span class="line"></span><br><span class="line">    h5f = h5py.File(<span class="string">"valid60.h5"</span>, <span class="string">"r"</span>)</span><br><span class="line">    y_train = h5f[<span class="string">"y_train"</span>][:]</span><br><span class="line">    y_test = h5f[<span class="string">"y_test"</span>][:]</span><br><span class="line">    h5f.close()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="comment">#從最原始圖像進行處理</span></span><br><span class="line">    x, y= load_picture()</span><br><span class="line">    y = keras.utils.np_utils.to_categorical(y, num_class) <span class="comment">#將分類轉換成 numpy  https://blog.csdn.net/moyu123456789/article/details/83444140</span></span><br><span class="line">    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = test_size)</span><br><span class="line">    <span class="keyword">if</span> save: <span class="comment">#將資料集、測試集存到 google drive</span></span><br><span class="line">      h5f = h5py.File(<span class="string">"train60.h5"</span>, <span class="string">"w"</span>)</span><br><span class="line">      h5f.create_dataset(<span class="string">"x_train"</span>, data=x_train)</span><br><span class="line">      h5f.create_dataset(<span class="string">"x_test"</span>, data=x_test)</span><br><span class="line">      h5f.close()</span><br><span class="line"></span><br><span class="line">      h5f = h5py.File(<span class="string">"valid60.h5"</span>, <span class="string">"w"</span>)</span><br><span class="line">      h5f.create_dataset(<span class="string">"y_train"</span>, data=y_train)</span><br><span class="line">      h5f.create_dataset(<span class="string">"y_test"</span>, data=y_test)</span><br><span class="line">      h5f.close()</span><br><span class="line"></span><br><span class="line">  <span class="comment">#資料歸一化處理</span></span><br><span class="line">  x_train = x_train.astype(<span class="string">"float32"</span>) /<span class="number">255</span></span><br><span class="line">  x_test = x_test.astype(<span class="string">"float32"</span>) /<span class="number">255</span></span><br><span class="line">  print(<span class="string">"Train"</span>, x_train.shape, y_train.shape)</span><br><span class="line">  print(<span class="string">"valid"</span>, x_test.shape, y_test.shape)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> x_train, x_test, y_train, y_test                    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x_train, x_test, y_train, y_test = get_dataset(save = <span class="literal">True</span>, load = <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>完成示意圖<br><img src="https://drive.google.com/u/2/uc?id=1cRqR0-Yx91MX0V6EySePA7BQODEaAVVQ&export=download" alt=""></p>
+</blockquote>
+<h2 id="增強訓練習的資料"><a href="#增強訓練習的資料" class="headerlink" title="增強訓練習的資料"></a>增強訓練習的資料</h2><p>如果覺得自己的訓練集資料不夠多時，可以考慮透過 <code>from keras.preprocessing.image import ImageDataGenerator</code> 透過圖像偏移、角度轉換的方式來補充訓練集資料，加強模型</p>
+<p>但我在這邊沒有加入，因為我認為訓練集資料已經足夠</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.preprocessing.image <span class="keyword">import</span> ImageDataGenerator</span><br><span class="line">datagen = ImageDataGenerator(</span><br><span class="line">    shear_range = <span class="number">0.2</span>,</span><br><span class="line">    zoom_range = <span class="number">0.2</span>,</span><br><span class="line">  horizontal_flip = <span class="literal">True</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="模型設定"><a href="#模型設定" class="headerlink" title="模型設定"></a>模型設定</h2><p>Sequential 是在機器學習中最簡單、也最好用的模型，且在大部分的機器學習中她都可以應用（但她不一定是最好的），因此我在這邊就使用 Sequential 來做出簡單的 CNN 模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.layers.convolutional_recurrent <span class="keyword">import</span> ConvLSTM2D</span><br><span class="line"><span class="keyword">import</span> tensorflow.keras.optimizers</span><br><span class="line"><span class="keyword">import</span> keras</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense, Dropout, Activation, Flatten, BatchNormalization, MaxPool2D </span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Conv2D, MaxPooling2D</span><br><span class="line"><span class="keyword">from</span> keras.applications.resnet <span class="keyword">import</span> ResNet50</span><br><span class="line"><span class="keyword">from</span> keras.applications.vgg16 <span class="keyword">import</span> VGG16</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createModel2</span><span class="params">()</span>:</span></span><br><span class="line">  input_shape = (pic_height, pic_width, <span class="number">3</span>)</span><br><span class="line">  model = Sequential()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 由於我們是圖像，加入 Convolution Layer 必須用 "2D"，</span></span><br><span class="line">  <span class="comment"># kernel_size 用 (3,3) 則是因為我圖像已經相對小了，因此要對細節好好處理</span></span><br><span class="line">  <span class="comment"># padding 對超出邊界的視窗直接補 0 即可</span></span><br><span class="line">  model.add(Conv2D(<span class="number">32</span>, kernel_size = (<span class="number">3</span>,<span class="number">3</span>), padding = <span class="string">"Same"</span>,</span><br><span class="line">            activation=<span class="string">"relu"</span>, input_shape = input_shape))</span><br><span class="line">  model.add(Conv2D(<span class="number">32</span>, kernel_size=(<span class="number">3</span>,<span class="number">3</span>), padding = <span class="string">"Same"</span>, activation=<span class="string">"relu"</span>))</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 在一般情況下 pool_size 設定成 2 就有不錯效果</span></span><br><span class="line">  model.add(MaxPool2D(pool_size=(<span class="number">2</span>,<span class="number">2</span>)))</span><br><span class="line">  model.add(BatchNormalization())</span><br><span class="line">  model.add(Conv2D(<span class="number">64</span>, kernel_size=(<span class="number">3</span>,<span class="number">3</span>), padding=<span class="string">"Same"</span>, activation=<span class="string">"relu"</span>))</span><br><span class="line">  model.add(Conv2D(<span class="number">64</span>, kernel_size=(<span class="number">3</span>,<span class="number">3</span>), padding=<span class="string">"Same"</span>, activation=<span class="string">"relu"</span>))</span><br><span class="line">  model.add(MaxPool2D(pool_size=(<span class="number">2</span>,<span class="number">2</span>)))</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 將前面每一層的 layer 的 feature 都做 Normalization，確保不會讓前面的 layer 權重太大，</span></span><br><span class="line">  <span class="comment"># 由於每一層 layer 都會影響到下一層，因此會容易讓前面一層的 layer 影響被放大，就有可能 overfitting </span></span><br><span class="line">  <span class="comment">#可以參考 [ML筆記] Batch Normalization by 陳雲濤的部落格</span></span><br><span class="line">  model.add(BatchNormalization())</span><br><span class="line">  model.add(Conv2D(<span class="number">86</span>, kernel_size = (<span class="number">3</span>,<span class="number">3</span>), padding = <span class="string">"Same"</span>, activation=<span class="string">"relu"</span>))</span><br><span class="line">  model.add(Conv2D(<span class="number">86</span>, kernel_size=(<span class="number">3</span>,<span class="number">3</span>), padding = <span class="string">"Same"</span>, activation=<span class="string">"relu"</span>))</span><br><span class="line">  model.add(MaxPool2D(pool_size=(<span class="number">2</span>,<span class="number">2</span>)))</span><br><span class="line">  model.add(BatchNormalization())</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 將多維的輸入轉化成一維</span></span><br><span class="line">  model.add(Flatten())</span><br><span class="line">  <span class="comment"># 將資料變成 1024 個特徵</span></span><br><span class="line">  model.add(Dense(<span class="number">1024</span>, activation=<span class="string">"relu"</span>))</span><br><span class="line">  model.add(Dense(<span class="number">512</span>, activation=<span class="string">"relu"</span>))</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 由於我們最後辨識 50 個腳色，因此大小就是 50</span></span><br><span class="line">  model.add(Dense(<span class="number">50</span>, activation=<span class="string">"softmax"</span>)) <span class="comment">#因為我們資料是機率，所以用 softmax，可以顯現出 50 個 character 機率</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#define the optimizer</span></span><br><span class="line">  optimizer = <span class="string">"Adam"</span></span><br><span class="line">  model.compile(optimizer=optimizer, loss=<span class="string">"categorical_crossentropy"</span>, metrics=[<span class="string">"accuracy"</span>])</span><br><span class="line">  <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
+
+<h2 id="開始執行-model"><a href="#開始執行-model" class="headerlink" title="開始執行 model"></a>開始執行 model</h2><p>這邊就開始執行 model</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint, LearningRateScheduler, EarlyStopping</span><br><span class="line"></span><br><span class="line">model = createModel2()</span><br><span class="line">model.summary()</span><br><span class="line"></span><br><span class="line">lr = <span class="number">0.001</span></span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">32</span></span><br><span class="line">epoch = <span class="number">50</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lr_schedule</span><span class="params">(epoch)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> lr*(<span class="number">0.1</span>**(int(epoch/<span class="number">10</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 會將最好的 model 儲存，並且如果 epoch 沒有更好時，就會讓此 model 暫停</span></span><br><span class="line">history = model.fit(x_train, y_train,</span><br><span class="line">                    batch_size = batch_size,</span><br><span class="line">                    epochs = epoch,</span><br><span class="line">                    validation_data = (x_test, y_test),</span><br><span class="line">                    shuffle = <span class="literal">True</span>,</span><br><span class="line">                    callbacks=[LearningRateScheduler(lr_schedule), </span><br><span class="line">                               ModelCheckpoint(<span class="string">"model2.h5"</span>, save_best_only=<span class="literal">True</span>, period=<span class="number">10</span>),</span><br><span class="line">                               EarlyStopping(monitor=<span class="string">"val_accuracy"</span>, patience=<span class="number">3</span>, mode= <span class="string">"auto"</span>)])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>執行畫面<br><img src="https://drive.google.com/u/2/uc?id=11UKudkD2brtfha8DFC4PsTGSw4uxZRBl&export=download" alt=""></p>
+</blockquote>
+<h2 id="對準確率、還有錯誤率進行畫圖"><a href="#對準確率、還有錯誤率進行畫圖" class="headerlink" title="對準確率、還有錯誤率進行畫圖"></a>對準確率、還有錯誤率進行畫圖</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_train_history</span><span class="params">(history, train_metrics, val_metrics)</span>:</span></span><br><span class="line">  plt.plot(history.history.get(train_metrics), <span class="string">'-o'</span>)</span><br><span class="line">  plt.plot(history.history.get(val_metrics, <span class="string">'-o'</span>))</span><br><span class="line">  plt.ylabel(train_metrics)</span><br><span class="line">  plt.xlabel(<span class="string">"epoch"</span>)</span><br><span class="line">  plt.legend([<span class="string">"train"</span>, <span class="string">"validation"</span>])</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">4</span>))</span><br><span class="line">plt.subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">plot_train_history(history, <span class="string">"loss"</span>, <span class="string">"val_loss"</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">plot_train_history(history, <span class="string">"accuracy"</span>, <span class="string">"val_accuracy"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="驗證辨識結果"><a href="#驗證辨識結果" class="headerlink" title="驗證辨識結果"></a>驗證辨識結果</h2><p>如果送上去 kaggle 之前可以先看看，模型對每一個角色的辨識率。<br>對結果大概有個譜XD</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line">predict = model.predict(x_test)</span><br><span class="line">predict = np.argmax(predict, axis=<span class="number">1</span>)</span><br><span class="line">ans = np.argmax(y_test, axis = <span class="number">1</span>)</span><br><span class="line">print(<span class="string">"\n"</span>, sklearn.metrics.classification_report(ans, predict, target_names=list(characters.values())), sep=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="對老師給的測試集進行辨識"><a href="#對老師給的測試集進行辨識" class="headerlink" title="對老師給的測試集進行辨識"></a>對老師給的測試集進行辨識</h2><ul>
+<li>將測試資料讀入，並呼教我們的 model 來進行辨識</li>
+<li>要注意的是，我們 model 設定最後一層是呼叫機率，但是老師希望我們輸出最大的機率角色即可，因此就找第一項即可</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> load_model</span><br><span class="line"><span class="keyword">from</span> google.colab.patches <span class="keyword">import</span> cv2_imshow</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_images</span><span class="params">(path)</span>:</span></span><br><span class="line">  images=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10791</span>):</span><br><span class="line">  <span class="comment">#for i in range(3):</span></span><br><span class="line">    print(path+str(i+<span class="number">1</span>)+<span class="string">'.jpg'</span>)</span><br><span class="line">    image = cv2.resize(cv2.imread(path+str(i+<span class="number">1</span>)+<span class="string">'.jpg'</span>), (pic_height, pic_width))</span><br><span class="line">    <span class="comment">#image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span></span><br><span class="line">    <span class="comment">#cv2_imshow(image)</span></span><br><span class="line">    images.append(image)</span><br><span class="line">  images = np.array(images, dtype=np.float32) / <span class="number">255</span></span><br><span class="line">  <span class="keyword">return</span> images</span><br><span class="line"></span><br><span class="line">model = load_model(<span class="string">"model2.h5"</span>)</span><br><span class="line"><span class="comment">#imgpath = "/content/drive/My Drive/NTUT/大三上-深度學習/Predict_Simposons/theSimpsons-test/test/" #t108AB0008@ntut.org.tw</span></span><br><span class="line">imgpath = <span class="string">"/content/drive/.shortcut-targets-by-id/1EmT_yvIKvgl-iNKBU0Wu2XOFjOPsxhyu/大三上-深度學習/Predict_Simposons/theSimpsons-test/test/"</span> <span class="comment">#others</span></span><br><span class="line"></span><br><span class="line">test_images = read_images(imgpath)</span><br><span class="line">print(test_images.shape)</span><br><span class="line">predict = model.predict(test_images)</span><br><span class="line">predict = np.argmax(predict, axis=<span class="number">1</span>) <span class="comment">#找第一個機率最大的</span></span><br><span class="line">print(characters[int(predict[<span class="number">2</span>])])</span><br></pre></td></tr></table></figure>
+
+<h2 id="將辨識結果輸出-csv"><a href="#將辨識結果輸出-csv" class="headerlink" title="將辨識結果輸出 csv"></a>將辨識結果輸出 csv</h2><p>再來就從 google drive 下載 csv 然後上傳 kaggle</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">"predict2.csv"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">  f.write(<span class="string">"id,character\n"</span>)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(predict)):</span><br><span class="line">    text = str(i+<span class="number">1</span>) + <span class="string">","</span> + characters[int(predict[i])] + <span class="string">"\n"</span></span><br><span class="line">    f.write(text)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1207sKmU2LVju89YnRQvxAr9fePu7wVHm&export=download" alt=""></p>
+</blockquote>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><strong>北科電子系機器學習教授廖元甫老師的學生教學，教得非常好</strong><br><a href="https://ithelp.ithome.com.tw/articles/10192028" target="_blank" rel="noopener">Day 08：CNN 模型設計 by I code so I am</a><br><a href="http://violin-tao.blogspot.com/2018/02/ml-batch-normalization.html" target="_blank" rel="noopener">[ML筆記] Batch Normalization by 陳雲濤的部落格</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" rel="tag">機器學習</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa10913" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/26/UVa/UVa10913/"
+    >UVa10913 - Walking on a Grid(DP、DFS)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/12/26/UVa/UVa10913/" class="article-date">
+  <time datetime="2021-12-26T15:51:59.000Z" itemprop="datePublished">2021-12-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h1 id="UVa10913-Walking-on-a-Grid-DP、DFS"><a href="#UVa10913-Walking-on-a-Grid-DP、DFS" class="headerlink" title="UVa10913 - Walking on a Grid(DP、DFS)"></a>UVa10913 - Walking on a Grid(DP、DFS)</h1><h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一個 \(n*n\) 的棋盤，你從 (1,1) 出發抵達到 (n,n)，其中棋盤裡面的格子都有不同的權重(有正負數)，請告訴我從 (1,1) 抵達 (n,n) 最大路徑是多少，有一些規則你必須遵守</p>
+<ul>
+<li>每一個格子只能走一次</li>
+<li>只能夠往下、往左、往右行走</li>
+<li>給你 k 號數字表示，你最多能夠經過 k 個負數格</li>
+</ul>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/12/26/UVa/UVa10913/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-Dynamic-programming/" rel="tag">動態規劃 Dynamic programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-contest_experence/ICPC_review" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -544,84 +754,6 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-System_analysis_and_design/ch4_System_analysis_and_design" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/11/14/System_analysis_and_design/ch4_System_analysis_and_design/"
-    >系統分析與設計- 第四章 需求工程</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/11/14/System_analysis_and_design/ch4_System_analysis_and_design/" class="article-date">
-  <time datetime="2021-11-14T11:59:50.000Z" itemprop="datePublished">2021-11-14</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88/">系統分析與設計</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
-<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/11/14/System_analysis_and_design/ch4_System_analysis_and_design/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88%E7%AD%86%E8%A8%98/" rel="tag">系統分析與設計筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
     <article id="post-System_analysis_and_design/ch3_System_analysis_and_design" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -749,84 +881,6 @@ ga('send', 'pageview');
 </blockquote>
       
       <a class="article-more-link" href="/2021/11/14/System_analysis_and_design/ch1_System_analysis_and_design/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88%E7%AD%86%E8%A8%98/" rel="tag">系統分析與設計筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-System_analysis_and_design/ch5_System_analysis_and_design" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/11/14/System_analysis_and_design/ch5_System_analysis_and_design/"
-    >系統分析與設計- 第五章 結構化分析中資料與流程塑模</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/11/14/System_analysis_and_design/ch5_System_analysis_and_design/" class="article-date">
-  <time datetime="2021-11-14T11:59:50.000Z" itemprop="datePublished">2021-11-14</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E7%B3%BB%E7%B5%B1%E5%88%86%E6%9E%90%E8%88%87%E8%A8%AD%E8%A8%88/">系統分析與設計</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊與財金管理系大三上系統分析與設計重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
-<p>如果有侵犯到版權的問題在聯繫我，再聯絡我，我在移除</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/11/14/System_analysis_and_design/ch5_System_analysis_and_design/">閱讀更多...</a>
       
       
       <!-- reward -->
