@@ -25770,4 +25770,34 @@
         <tag>機器學習</tag>
       </tags>
   </entry>
+  <entry>
+    <title>UVa12875 - Concert Tour(DP、DAG)</title>
+    <url>/2022/01/05/UVa/UVa12875/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一位歌手要舉辦演唱會，在各縣市中的百貨公司進行演唱，來吸引更多的顧客消費，給你 c 天、有許多個百貨公司必須要去，給你在每一天每一個百貨公司演唱預期帶來的利益，以及每一個百貨公司到另一個百貨公司的成本，請告訴我最大化利益為多少<br><a href="https://onlinejudge.org/external/128/12875.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><p><a href="https://theriseofdavid.github.io/2021/11/09/Explain_Algorithm/Directed_Acyclic_Graph/" target="_blank" rel="noopener">演算法知識 - Directed Acyclic Graph by 大衛的筆記</a></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>根據重點觀念，因為可以有多個起點，因此使用 DP</li>
+<li>因此使用三迴圈，從第幾天開始，再從 a 到 b 點，轉移方程式為 <code>dp[第i+1天][抵達 k 百貨公司], dp[第 i 天][抵達 j 百貨公司] + profit[第 k 天][在 i+1 百貨公司] - cost[從 j 百貨公司][到 k 百貨公司]</code></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://morris821028.github.io/2014/12/30/uva-12875/" target="_blank" rel="noopener">UVa 12875 - Concert Tour by morris</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>好久沒寫 DAG，都有點忘記要怎麼寫了QQ。<br>一開始還想把它寫成 DFS</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 200</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, s, c;</span><br><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN], cost[MAXN][MAXN], profit[MAXN][MAXN]; <span class="comment">//dp, cost 百貨公司移動成本, 百貨公司演唱利益</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; s &gt;&gt; c;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= c; j++)&#123;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; profit[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= s; j++)&#123;</span><br><span class="line">                <span class="built_in">cin</span> &gt;&gt; cost[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; c; i++)&#123; <span class="comment">//第幾天</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= s; j++)&#123; <span class="comment">//從 j 百貨公司</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= s; k++)&#123; <span class="comment">//到 k 百貨公司</span></span><br><span class="line">                    dp[i+<span class="number">1</span>][k] = max(dp[i+<span class="number">1</span>][k], dp[i][j] + profit[k][i+<span class="number">1</span>] - cost[j][k]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s; i++)&#123; <span class="comment">//尋找最大利益</span></span><br><span class="line">            ans = max(ans, dp[c][i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>DFS</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>動態規劃 Dynamic programming</tag>
+      </tags>
+  </entry>
 </search>
