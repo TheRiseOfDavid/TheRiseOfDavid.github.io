@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    北科電子大三上機器學習 台語語音辨識 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-deep_learning/NTUTece_deeplearning_ASR" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  北科電子大三上機器學習 台語語音辨識
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/01/18/deep_learning/NTUTece_deeplearning_ASR/" class="article-date">
+  <time datetime="2022-01-18T15:59:50.000Z" itemprop="datePublished">2022-01-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/">機器學習</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">2.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">13分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學電子大三上機器學習作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
+<p>由於我沒有學習過裡面的理論，因此這是資財大三學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
+</blockquote>
+<h2 id="題目說明"><a href="#題目說明" class="headerlink" title="題目說明"></a>題目說明</h2><blockquote>
+<p>train data 為單人女聲聲音（高雄腔）、台灣羅馬拼音(全小寫、無聲調)<br>test data 為單人女聲聲音（高雄腔），台灣羅馬拼音(全小寫、無聲調)<br><a href="https://juejin.cn/post/6844903682979430413" target="_blank" rel="noopener">主要學習來源為脉动，非常謝謝他</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="先將資料解壓縮"><a href="#先將資料解壓縮" class="headerlink" title="先將資料解壓縮"></a>先將資料解壓縮</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!unzip ./data/machine-learningntut-2021-autumn-asr.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="蒐集-train-data-的路徑"><a href="#蒐集-train-data-的路徑" class="headerlink" title="蒐集 train data 的路徑"></a>蒐集 train data 的路徑</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_wav_files</span><span class="params">(wav_path)</span>:</span></span><br><span class="line">  wav_files = []</span><br><span class="line">  <span class="keyword">for</span>(dirpath, dirnames, filenames) <span class="keyword">in</span> os.walk(wav_path): <span class="comment">#for(現在目錄, 目錄子目路, 目錄下的文件)</span></span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">      <span class="keyword">if</span> filename.endswith(<span class="string">".wav"</span>) <span class="keyword">or</span> filename.endswith(<span class="string">'.WAV'</span>):</span><br><span class="line">        <span class="comment">#print(filename)</span></span><br><span class="line">        filename_path = os.path.join(dirpath, filename)</span><br><span class="line">        print(filename_path)</span><br><span class="line">        wav_files.append(filename_path)</span><br><span class="line">  <span class="keyword">return</span> wav_files</span><br><span class="line"></span><br><span class="line">wav_files = get_wav_files(<span class="string">"/content/drive/MyDrive/NTUT/大三上-深度學習/ASR/data/train"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="將每一段-wav-讀入-colab-中"><a href="#將每一段-wav-讀入-colab-中" class="headerlink" title="將每一段 wav 讀入 colab 中"></a>將每一段 wav 讀入 colab 中</h2><ul>
+<li>國弘學長 PPT 有說，必須將老師提供的 csv 檔依據每一個 wav 檔給予相對應的 txt，依據學長說的描述，主要是 csv 格式問題會讓我們在 train 時出現錯誤，讓驗證非常差，跟交全白檔案相同</li>
+</ul>
+<h3 id="將老師提供的-csv-分割成-txt"><a href="#將老師提供的-csv-分割成-txt" class="headerlink" title="將老師提供的 csv 分割成 txt"></a>將老師提供的 csv 分割成 txt</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"./data/train-toneless_update.csv"</span>, newline=<span class="string">''</span>, errors=<span class="string">'ignore'</span>) <span class="keyword">as</span> csvfile:</span><br><span class="line">  rows = csv.reader(csvfile)</span><br><span class="line">  <span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">    a = row[<span class="number">0</span>]</span><br><span class="line">    b = row[<span class="number">1</span>]</span><br><span class="line">    f = open(<span class="string">'./data/train/'</span> + a + <span class="string">'.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">    f.write(b)</span><br><span class="line">    f.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="將切割好的-txt-輸入到-colab"><a href="#將切割好的-txt-輸入到-colab" class="headerlink" title="將切割好的 txt 輸入到 colab"></a>將切割好的 txt 輸入到 colab</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_tran_files</span><span class="params">(wav_path, tran_path)</span>:</span></span><br><span class="line">  tran_texts = []</span><br><span class="line">  <span class="keyword">for</span> wav_file <span class="keyword">in</span> wav_files:</span><br><span class="line">      x = os.path.splitext(wav_file)[<span class="number">0</span>]</span><br><span class="line">      tran_file = os.path.join(tran_path, x + <span class="string">'.txt'</span>)</span><br><span class="line">      <span class="keyword">if</span> os.path.exists(tran_file) <span class="keyword">is</span> <span class="literal">False</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">      fd = open(tran_file, <span class="string">'r'</span>)</span><br><span class="line">      text = fd.readline().lower()</span><br><span class="line">      tran_texts.append(text.split(<span class="string">'\n'</span>)[<span class="number">0</span>])</span><br><span class="line">      fd.close()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tran_texts</span><br><span class="line"></span><br><span class="line">tran_texts = get_tran_files(<span class="string">"/content/drive/MyDrive/NTUT/大三上-深度學習/ASR/data/train"</span>, <span class="string">"/content/drive/MyDrive/NTUT/大三上-深度學習/ASR/data/train"</span>)</span><br><span class="line">print(tran_texts)</span><br></pre></td></tr></table></figure>
+
+<h2 id="將-wav-音檔轉換為數學一維公式，並輸入在-colab"><a href="#將-wav-音檔轉換為數學一維公式，並輸入在-colab" class="headerlink" title="將 wav 音檔轉換為數學一維公式，並輸入在 colab"></a>將 wav 音檔轉換為數學一維公式，並輸入在 colab</h2><ul>
+<li><code>from python_speech_features import mfcc</code> 可以將音樂的特徵透過數學表達出來</li>
+<li>因此我們就透過 mfcc 轉換<ul>
+<li>numcep 默認，返回倒普的數量</li>
+<li>nfft 修改成 551，如果使用預設 512，則會沒有作用<br><a href="https://github.com/librosa/librosa/issues/1214" target="_blank" rel="noopener">nfft 512 error</a></li>
+<li>highfreq 將頻率超過 8000 的移除掉</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line">!pip install python_speech_features</span><br><span class="line"><span class="keyword">from</span> python_speech_features <span class="keyword">import</span> mfcc </span><br><span class="line"></span><br><span class="line">features = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(range(len(wav_files))):</span><br><span class="line">  path = wav_files[i]</span><br><span class="line">  <span class="comment">#print(path)</span></span><br><span class="line">  audio, sr = load_and_trim(path)</span><br><span class="line">  features.append(mfcc(audio, sr, numcep=mfcc_dim, nfft=<span class="number">551</span>, highfreq=<span class="number">8000</span>))</span><br><span class="line"></span><br><span class="line">print(len(features), features[<span class="number">0</span>].shape)</span><br></pre></td></tr></table></figure>
+
+<h2 id="影音視覺化"><a href="#影音視覺化" class="headerlink" title="影音視覺化"></a>影音視覺化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> Audio</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visualize</span><span class="params">(index)</span>:</span></span><br><span class="line">    path = wav_files[index]</span><br><span class="line">    text = tran_texts[index]</span><br><span class="line">    print(<span class="string">'Audio Text:'</span>, text)</span><br><span class="line">    </span><br><span class="line">    audio, sr = load_and_trim(path)</span><br><span class="line">    plt.figure(figsize=(<span class="number">12</span>, <span class="number">3</span>))</span><br><span class="line">    plt.plot(np.arange(len(audio)), audio)</span><br><span class="line">    plt.title(<span class="string">'Raw Audio Signal'</span>)</span><br><span class="line">    plt.xlabel(<span class="string">'Time'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'Audio Amplitude'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">    feature = mfcc(audio, sr, numcep=mfcc_dim, nfft=<span class="number">551</span>)</span><br><span class="line">    print(<span class="string">'Shape of MFCC:'</span>, feature.shape)</span><br><span class="line">    </span><br><span class="line">    fig = plt.figure(figsize=(<span class="number">12</span>, <span class="number">5</span>))</span><br><span class="line">    ax = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">    im = ax.imshow(feature, cmap=plt.cm.jet, aspect=<span class="string">'auto'</span>)</span><br><span class="line">    plt.title(<span class="string">'Normalized MFCC'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'Time'</span>)</span><br><span class="line">    plt.xlabel(<span class="string">'MFCC Coefficient'</span>)</span><br><span class="line">    ax.set_xticks(np.arange(<span class="number">0</span>, <span class="number">13</span>, <span class="number">2</span>), minor=<span class="literal">False</span>);</span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> path</span><br><span class="line"></span><br><span class="line">Audio(visualize(<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="資料規一化"><a href="#資料規一化" class="headerlink" title="資料規一化"></a>資料規一化</h2><ul>
+<li>將資料進行規一化，降低離群值所帶來的影響</li>
+<li>加強資料可靠性</li>
+<li>隨機抽取 100 筆資料去做 mean</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random </span><br><span class="line">samples = random.sample(features, <span class="number">100</span>)</span><br><span class="line">samples = np.vstack(samples)</span><br><span class="line"></span><br><span class="line">mfcc_mean = np.mean(samples, axis=<span class="number">0</span>)</span><br><span class="line">mfcc_std = np.std(samples, axis=<span class="number">0</span>)</span><br><span class="line">print(mfcc_mean)</span><br><span class="line">print(mfcc_std)</span><br><span class="line"></span><br><span class="line">features = [(feature - mfcc_mean) / (mfcc_std + <span class="number">1e-14</span>) <span class="keyword">for</span> feature <span class="keyword">in</span> features]</span><br></pre></td></tr></table></figure>
+
+<h2 id="新增兩個字典-char2Id-ID2char"><a href="#新增兩個字典-char2Id-ID2char" class="headerlink" title="新增兩個字典 char2Id ID2char"></a>新增兩個字典 char2Id ID2char</h2><ul>
+<li>由於 model 沒辦法對字元進行分類、運算，但可以對數字進行運算</li>
+<li>因此我們先將每一個英文字母對應每一個數字</li>
+<li>我們對每一個 char 做統計，使用越多次的 char 將數字放在最前面</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">chars = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> text <span class="keyword">in</span> tran_texts:</span><br><span class="line">  <span class="keyword">for</span> e <span class="keyword">in</span> text:</span><br><span class="line">    chars[e] = chars.get(e, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">chars = sorted(chars.items(), key = <span class="keyword">lambda</span> x: x[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">chars = [char[<span class="number">0</span>] <span class="keyword">for</span> char <span class="keyword">in</span> chars]</span><br><span class="line">print(len(chars), chars[:<span class="number">100</span>])</span><br><span class="line"></span><br><span class="line">char2id = &#123;c:i <span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(chars)&#125;</span><br><span class="line">id2char = &#123;i:c <span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(chars)&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="模型將資料生成"><a href="#模型將資料生成" class="headerlink" title="模型將資料生成"></a>模型將資料生成</h2><ul>
+<li>將 <code>model.fit_generator</code> 讓訓練模型不需要一次讀取 train data，可以慢慢讀取</li>
+<li>其功能主要透過 batch_size 決定每一次讀取的數量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">total = len(wav_files)</span><br><span class="line">print(total)</span><br><span class="line">data_index = np.arange(total)</span><br><span class="line">np.random.shuffle(data_index)</span><br><span class="line">train_size = int(<span class="number">0.9</span> * total) <span class="comment">#訓練集 0.9  </span></span><br><span class="line">test_size = total - train_size</span><br><span class="line">train_index = data_index[:train_size]</span><br><span class="line">test_index = data_index[train_size:]</span><br><span class="line"></span><br><span class="line">X_train = [features[i] <span class="keyword">for</span> i <span class="keyword">in</span> train_index]</span><br><span class="line">Y_train = [tran_texts[i] <span class="keyword">for</span> i <span class="keyword">in</span> train_index]</span><br><span class="line">X_test = [features[i] <span class="keyword">for</span> i <span class="keyword">in</span> test_index]</span><br><span class="line">Y_test = [tran_texts[i] <span class="keyword">for</span> i <span class="keyword">in</span> test_index]</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">16</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_generator</span><span class="params">(x, y, batch_size=batch_size)</span>:</span>  </span><br><span class="line">  offset = <span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    offset += batch_size</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> offset == batch_size <span class="keyword">or</span> offset &gt;= len(x):</span><br><span class="line">      data_index = np.arange(len(x))</span><br><span class="line">      np.random.shuffle(data_index)</span><br><span class="line">      x = [x[i] <span class="keyword">for</span> i <span class="keyword">in</span> data_index]</span><br><span class="line">      y = [y[i] <span class="keyword">for</span> i <span class="keyword">in</span> data_index]</span><br><span class="line">      offset = batch_size</span><br><span class="line">        </span><br><span class="line">    X_data = x[offset - batch_size: offset]</span><br><span class="line">    Y_data = y[offset - batch_size: offset]</span><br><span class="line">    </span><br><span class="line">    X_maxlen = max([X_data[i].shape[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(batch_size)])</span><br><span class="line">    Y_maxlen = max([len(Y_data[i]) <span class="keyword">for</span> i <span class="keyword">in</span> range(batch_size)])</span><br><span class="line">    </span><br><span class="line">    X_batch = np.zeros([batch_size, X_maxlen, mfcc_dim])</span><br><span class="line">    Y_batch = np.ones([batch_size, Y_maxlen]) * len(char2id)</span><br><span class="line">    X_length = np.zeros([batch_size, <span class="number">1</span>], dtype=<span class="string">'int32'</span>)</span><br><span class="line">    Y_length = np.zeros([batch_size, <span class="number">1</span>], dtype=<span class="string">'int32'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(batch_size):</span><br><span class="line">      X_length[i, <span class="number">0</span>] = X_data[i].shape[<span class="number">0</span>]</span><br><span class="line">      X_batch[i, :X_length[i, <span class="number">0</span>], :] = X_data[i]</span><br><span class="line">      </span><br><span class="line">      Y_length[i, <span class="number">0</span>] = len(Y_data[i])</span><br><span class="line">      Y_batch[i, :Y_length[i, <span class="number">0</span>]] = [char2id[c] <span class="keyword">for</span> c <span class="keyword">in</span> Y_data[i]]</span><br><span class="line">    </span><br><span class="line">    inputs = &#123;<span class="string">'X'</span>: X_batch, <span class="string">'Y'</span>: Y_batch, <span class="string">'X_length'</span>: X_length, <span class="string">'Y_length'</span>: Y_length&#125;</span><br><span class="line">    outputs = &#123;<span class="string">'ctc'</span>: np.zeros([batch_size])&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">yield</span> (inputs, outputs)</span><br></pre></td></tr></table></figure>
+
+<h2 id="定義-layer"><a href="#定義-layer" class="headerlink" title="定義 layer"></a>定義 layer</h2><ul>
+<li>Conv1D 由於我們的聲音訊號是一維數列，因此用 1D<ul>
+<li>filters 出來的維度</li>
+<li>kernel_size 卷積長度</li>
+<li>dilation_rate 捲機膨脹率</li>
+</ul>
+</li>
+<li>batchnorm 資料歸一化</li>
+<li>activation 激勵函數</li>
+<li>res_block </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Model</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input, Activation, Conv1D, Lambda, Add, Multiply, BatchNormalization</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.optimizers <span class="keyword">import</span> Adam, SGD</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> backend <span class="keyword">as</span> K</span><br><span class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint, ReduceLROnPlateau</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv1d</span><span class="params">(inputs, filters, kernel_size, dilation_rate)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> Conv1D(filters=filters, kernel_size=kernel_size, strides=<span class="number">1</span>, padding=<span class="string">'causal'</span>, activation=<span class="literal">None</span>,</span><br><span class="line">                dilation_rate=dilation_rate)(inputs)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchnorm</span><span class="params">(inputs)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> BatchNormalization()(inputs)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">activation</span><span class="params">(inputs, activation)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> Activation(activation)(inputs)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">res_block</span><span class="params">(inputs, filters, kernel_size, dilation_rate)</span>:</span></span><br><span class="line">  hf = activation(batchnorm(conv1d(inputs, filters, kernel_size, dilation_rate)), <span class="string">'tanh'</span>)</span><br><span class="line">  hg = activation(batchnorm(conv1d(inputs, filters, kernel_size, dilation_rate)), <span class="string">'sigmoid'</span>)</span><br><span class="line">  h0 = Multiply()([hf, hg]) <span class="comment">#Multiply 將 layer 相乘</span></span><br><span class="line"></span><br><span class="line">  ha = activation(batchnorm(conv1d(h0, filters, <span class="number">1</span>, <span class="number">11</span>)), <span class="string">'tanh'</span>)</span><br><span class="line">  hs = activation(batchnorm(conv1d(h0, filters, <span class="number">1</span>, <span class="number">1</span>,)), <span class="string">'tanh'</span>)</span><br><span class="line">  <span class="keyword">return</span> Add()([ha, inputs]), hs <span class="comment">#add 融合層，將兩個 layer 相加</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="決定-model-layer"><a href="#決定-model-layer" class="headerlink" title="決定 model layer"></a>決定 model layer</h2><ul>
+<li>在這邊 <code>input</code> 決定 model 輸入輸出，<code>Y_pred</code> 決定 model 裡面的 layer </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">epochs = <span class="number">100</span></span><br><span class="line">num_blocks = <span class="number">3</span></span><br><span class="line">filters = <span class="number">128</span></span><br><span class="line"></span><br><span class="line">X = Input(shape=(<span class="literal">None</span>, mfcc_dim,), dtype=<span class="string">'float32'</span>, name=<span class="string">'X'</span>)</span><br><span class="line">Y = Input(shape=(<span class="literal">None</span>,), dtype=<span class="string">'float32'</span>, name=<span class="string">'Y'</span>)</span><br><span class="line">X_length = Input(shape=(<span class="number">1</span>,), dtype=<span class="string">'int32'</span>, name=<span class="string">'X_length'</span>)</span><br><span class="line">Y_length = Input(shape=(<span class="number">1</span>,), dtype=<span class="string">'int32'</span>, name=<span class="string">'Y_length'</span>)</span><br><span class="line"></span><br><span class="line">h0 = activation(batchnorm(conv1d(X, filters, <span class="number">1</span>, <span class="number">1</span>)), <span class="string">'tanh'</span>)</span><br><span class="line">shortcut = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_blocks):</span><br><span class="line">  <span class="keyword">for</span> r <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>]:</span><br><span class="line">    h0, s = res_block(h0, filters, <span class="number">7</span>, r)</span><br><span class="line">    shortcut.append(s)</span><br><span class="line"></span><br><span class="line">h1 = activation(Add()(shortcut), <span class="string">'relu'</span>)</span><br><span class="line">h1 = activation(batchnorm(conv1d(h1, filters, <span class="number">1</span>, <span class="number">1</span>)), <span class="string">'relu'</span>)</span><br><span class="line">Y_pred = activation(batchnorm(conv1d(h1, len(char2id) + <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)), <span class="string">'softmax'</span>)</span><br><span class="line">sub_model = Model(inputs=X, outputs= Y_pred)</span><br></pre></td></tr></table></figure>
+
+<h2 id="訓練-model"><a href="#訓練-model" class="headerlink" title="訓練 model"></a>訓練 model</h2><ul>
+<li>calc_ctc_loss 主要用來判斷 OCR、語音辨識</li>
+<li>由於 OCR、語音辨識中有可能會有過久的等待時間，但其實有這個等待時間是 ok 的</li>
+<li>舉例：<code>大~衛</code>，理論上可以判斷出大衛這兩個字，但因為大拉長音，因此用普通的損施函數無法判斷，因此就使用 ctc </li>
+<li>使用 SGD(梯度下降) 優化器，每次隨機抽一筆資料，反覆得出最佳值，但也因為這樣 loss 容易隨著 epoch 震盪，只能達到局部最加解</li>
+<li><code>model.fit_generator</code> 每一次丟給模型 batch_size 資料，降低內部記憶消耗、增加精準度</li>
+<li><code>ReduceLROnPlateau</code> 當 epoch 過但 loss 沒有好轉時，就可以降低 learning late，降低方式為 <code>lr*factor</code></li>
+<li>建議 epoch 設定成 100，kaggle loss 可以來到 7</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_ctc_loss</span><span class="params">(args)</span>:</span></span><br><span class="line">  y, yp, ypl, yl = args</span><br><span class="line">  <span class="keyword">return</span> K.ctc_batch_cost(y, yp, ypl, yl)</span><br><span class="line"></span><br><span class="line">ctc_loss = Lambda(calc_ctc_loss, output_shape=(<span class="number">1</span>,), name=<span class="string">'ctc'</span>)([Y, Y_pred, X_length, Y_length])</span><br><span class="line">model = Model(inputs=[X, Y, X_length, Y_length], outputs=ctc_loss)</span><br><span class="line">optimizer = SGD(lr=<span class="number">0.02</span>, momentum=<span class="number">0.9</span>, nesterov=<span class="literal">True</span>, clipnorm = <span class="number">5</span>)</span><br><span class="line">model.compile(loss=&#123;<span class="string">'ctc'</span>: <span class="keyword">lambda</span> ctc_true, ctc_pred: ctc_pred&#125;, optimizer = optimizer)</span><br><span class="line"></span><br><span class="line">checkpointer = ModelCheckpoint(filepath=<span class="string">'asr.h5'</span>, verbose=<span class="number">0</span>)</span><br><span class="line">lr_decay = ReduceLROnPlateau(monitor=<span class="string">'loss'</span>,factor=<span class="number">0.2</span>, patience=<span class="number">1</span>, min_lr = <span class="number">0.000</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">history = model.fit_generator(</span><br><span class="line">    generator=batch_generator(X_train, Y_train), </span><br><span class="line">    steps_per_epoch=len(X_train) // batch_size,</span><br><span class="line">    epochs=epochs, </span><br><span class="line">    validation_data=batch_generator(X_test, Y_test), </span><br><span class="line">    validation_steps=len(X_test) // batch_size, </span><br><span class="line">    callbacks=[checkpointer, lr_decay])</span><br></pre></td></tr></table></figure>
+
+<p>訓練過程如下<br><img src="https://drive.google.com/u/2/uc?id=1xeR2ySFXXwa3V8p5nryAfQkWnZuNwN0I&export=download" alt=""></p>
+<h2 id="將訓練好的模型儲存"><a href="#將訓練好的模型儲存" class="headerlink" title="將訓練好的模型儲存"></a>將訓練好的模型儲存</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">sub_model.save(<span class="string">'asr2.h5'</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dictionary2.pkl'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> fw:</span><br><span class="line">    pickle.dump([char2id, id2char, mfcc_mean, mfcc_std], fw)</span><br></pre></td></tr></table></figure>
+
+<h2 id="顯示-epoch-train-loss、valid-loss-差異"><a href="#顯示-epoch-train-loss、valid-loss-差異" class="headerlink" title="顯示 epoch train loss、valid loss 差異"></a>顯示 epoch train loss、valid loss 差異</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">train_loss = history.history[<span class="string">'loss'</span>]</span><br><span class="line">valid_loss = history.history[<span class="string">'val_loss'</span>]</span><br><span class="line">plt.plot(np.linspace(<span class="number">1</span>, epochs, epochs), train_loss, label=<span class="string">'train'</span>)</span><br><span class="line">plt.plot(np.linspace(<span class="number">1</span>, epochs, epochs), valid_loss, label=<span class="string">'valid'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'upper right'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Epoch'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Loss'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>顯示結果如下<br><img src="https://drive.google.com/u/2/uc?id=1ySkswEsAnLDP90iIJIZ-XxArFZDRrXxg&export=download" alt=""></p>
+<h2 id="對-train-資料進行預測"><a href="#對-train-資料進行預測" class="headerlink" title="對 train 資料進行預測"></a>對 train 資料進行預測</h2><ul>
+<li>預測時由於 model 預測時，都是預設最大長度，因此當 model 認定這個音檔的文字全都輸入完畢後，後面就會是 -1，因此我們就判斷當預測出來的資料是 -1 時就 continue，來避免輸出無效字元</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> load_model</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="comment">#載入模型</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'dictionary2.pkl'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> fr:</span><br><span class="line">    [char2id, id2char, mfcc_mean, mfcc_std] = pickle.load(fr)</span><br><span class="line"></span><br><span class="line">sub_model = load_model(<span class="string">'asr2.h5'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_predict</span><span class="params">(x, y)</span>:</span> <span class="comment">#隨便拿一個 train data 預測</span></span><br><span class="line">    index = np.random.randint(len(x))</span><br><span class="line">    feature = x[index]</span><br><span class="line">    text = y[index]</span><br><span class="line">    </span><br><span class="line">    pred = sub_model.predict(np.expand_dims(feature, axis=<span class="number">0</span>))</span><br><span class="line">    pred_ids = K.eval(K.ctc_decode(pred, [feature.shape[<span class="number">0</span>]], greedy=<span class="literal">False</span>, beam_width=<span class="number">10</span>, top_paths=<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">    pred_ids = pred_ids.flatten().tolist()</span><br><span class="line">    print(pred_ids)</span><br><span class="line"></span><br><span class="line">    ans = list()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> pred_ids:</span><br><span class="line">      <span class="keyword">if</span>(i != <span class="number">-1</span>): </span><br><span class="line">        ans.append(id2char[i])</span><br><span class="line">    print(<span class="string">'True transcription:\n-- '</span>, text, <span class="string">'\n'</span>)</span><br><span class="line">    print(<span class="string">'Predicted transcription:\n-- '</span> + <span class="string">''</span>.join([i <span class="keyword">for</span> i <span class="keyword">in</span> ans]), <span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">random_predict(X_train, Y_train)</span><br><span class="line"><span class="comment">#random_predict(X_test, Y_test)</span></span><br></pre></td></tr></table></figure>
+
+<p>預測顯示如下<br><img src="https://drive.google.com/u/2/uc?id=1zhAtvi6qZrWVSpA6nhXJq8iu_QP8l1AC&export=download" alt=""></p>
+<h2 id="將-test-data-rename"><a href="#將-test-data-rename" class="headerlink" title="將 test data rename"></a>將 test data rename</h2><ul>
+<li>由於在 linux 讀取資料時，是按照字串順序讀的，但老師的 kaggle 卻不是這樣，因此我們必須對 test file rename，將檔名補 0，舉例：<code>1.wav</code> 就變成 <code>00001.wav</code>，透過這種方式讓字串順序可以跟數字順序相同</li>
+<li>預測時由於 model 預測時，都是預設最大長度，因此當 model 認定這個音檔的文字全都輸入完畢後，後面就會是 -1，因此我們就判斷當預測出來的資料是 -1 時就 continue，來避免輸出無效字元</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os </span><br><span class="line"></span><br><span class="line">cnt = <span class="number">4</span></span><br><span class="line">os.chdir(<span class="string">"/content/drive/MyDrive/NTUT/大三上-深度學習/ASR/data/test"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir():</span><br><span class="line">  print(filename.split(<span class="string">'.'</span>)[<span class="number">0</span>].zfill(cnt) + <span class="string">'.wav'</span>)</span><br><span class="line">  os.rename(filename, filename.split(<span class="string">'.'</span>)[<span class="number">0</span>].zfill(cnt) + <span class="string">'.wav'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="test-data-predict"><a href="#test-data-predict" class="headerlink" title="test data predict"></a>test data predict</h2><ul>
+<li>再來就做 test data predict 並將資料存到 predict2.csv</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> glob</span><br><span class="line">test_wavs = test_wavs = <span class="string">"/content/drive/MyDrive/NTUT/大三上-深度學習/ASR/data/test/"</span></span><br><span class="line"></span><br><span class="line">features = []</span><br><span class="line"><span class="keyword">for</span> path <span class="keyword">in</span> sorted(os.listdir(test_wavs)):</span><br><span class="line">  <span class="comment">#path = test_wavs[i]</span></span><br><span class="line">  path = <span class="string">"/content/drive/MyDrive/NTUT/大三上-深度學習/ASR/data/test/"</span> + path</span><br><span class="line">  print(path)</span><br><span class="line">  audio, sr = load_and_trim(path)</span><br><span class="line">  features.append(mfcc(audio, sr, numcep=mfcc_dim, nfft=<span class="number">551</span>, highfreq=<span class="number">8000</span>))</span><br><span class="line">features = [(feature - mfcc_mean) / (mfcc_std + <span class="number">1e-14</span>) <span class="keyword">for</span> feature <span class="keyword">in</span> features] <span class="comment">#這邊必須與前面的 mfcc_mean、mfcc_std 相同，否則不會預測準確</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"predict2.csv"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">  f.write(<span class="string">"id,text\n"</span>)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(features)):</span><br><span class="line">    feature = features[i]</span><br><span class="line">    pred = sub_model.predict(np.expand_dims(feature, axis=<span class="number">0</span>))</span><br><span class="line">    pred_ids = K.eval(K.ctc_decode(pred, [feature.shape[<span class="number">0</span>]], greedy=<span class="literal">False</span>, beam_width=<span class="number">10</span>, top_paths=<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">    pred_ids = pred_ids.flatten().tolist()</span><br><span class="line">    <span class="comment">#print(pred_ids)</span></span><br><span class="line"></span><br><span class="line">    list_ans = list()</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> pred_ids:</span><br><span class="line">      <span class="keyword">if</span>(j != <span class="number">-1</span>):</span><br><span class="line">        list_ans.append(id2char[j]) </span><br><span class="line"></span><br><span class="line">    <span class="comment">#print('True transcription:\n-- ', text, '\n')</span></span><br><span class="line">    print(<span class="string">'Predicted transcription:\n-- '</span> + <span class="string">''</span>.join([j <span class="keyword">for</span> j <span class="keyword">in</span> list_ans]), <span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">    f.write(str(i+<span class="number">1</span>) + <span class="string">","</span> + <span class="string">''</span>.join([j <span class="keyword">for</span> j <span class="keyword">in</span> list_ans]) + <span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>預測結果為 7，但我 epoch 設定成 50 時，ctc_loss 會來到 49，因此我在猜如果我將 epoch 設定更高、<code>ReduceLROnPlateau</code> factor 設定更低的情況下，ctc_loss 可以來到更低。</p>
+<p>謝謝 教授、學長，分享 PPT 教學、設計題目，讓我實踐到那麼多知識。<br>也謝謝 colab 環境讓我可以在他們的伺服器上免費使用，讓我進行學習，很感謝。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://blog.csdn.net/weixin_41861700/article/details/105894294" target="_blank" rel="noopener">【python_speech_features】MFCC调参用法以及参数说明 by csdn </a><br><a href="https://blog.csdn.net/weixin_39529443/article/details/110911683" target="_blank" rel="noopener">python batch_size_神经网络中batch_size参数的含义及设置方法 ycheng_sjtu
+</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/" rel="tag">機器學習</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/01/05/UVa/UVa12875/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa12875 - Concert Tour(DP、DAG)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2022
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
