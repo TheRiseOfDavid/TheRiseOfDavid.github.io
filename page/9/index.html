@@ -77,6 +77,113 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-UVa/UVa11583" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/07/11/UVa/UVa11583/"
+    >UVa11583 - Alien DNA(設計解題、位元運算)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/11/UVa/UVa11583/" class="article-date">
+  <time datetime="2021-07-11T05:51:59.000Z" itemprop="datePublished">2021-07-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>我們發現外星人的 DNA 片段了！但我們必須要將這些 DNA 的片段組裝成一組 DNA。(注意：一組 DNA 是我定義的名詞)<br>而組裝的方式則是只要 DNA 片段中有一個小寫字母與另一個 DNA 片段小寫字母組在一起即可。<br>P.S. 如果想要讓一組 DNA 有三個或以上的片段組成時，則新進來的 DNA 必須都跟其他 DNA 片斷有一個以上的小寫字母連接。</p>
+<p>其中一組 DNA 是連續的，因此不可以拿第一個片段 DNA 與第三個片段 DNA 組成一個新的 DNA。<br>而題目要求則是，我們最少需要<strong>切幾次</strong>可以讓裡面的片段 DNA 們都是一組 DNA。 </p>
+<p><a href="https://onlinejudge.org/external/115/11583.pdf" target="_blank" rel="noopener">UVa 11583 Alien DNA</a></p>
+</blockquote>
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>英文閱讀<ul>
+<li>對很重要 <code>least one common base.</code> 我看不出來他是指說組裝的方式則是只要 DNA 片段中有一個小寫字母與另一個 DNA 片段小寫字母組在一起即可。</li>
+<li>然後我也看不出來<strong>一組 DNA 是連續的</strong>，這個題目要求…</li>
+</ul>
+</li>
+<li>程式編寫<br>有效率、簡潔的程式碼</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>這個問題如果有理解英文後就很好解。</p>
+<ul>
+<li>我們用 int 的 2 進位位數來表示每個字母是否在這組 DNA 中<ul>
+<li>這組 DNA 預設情況 <code>000...0</code></li>
+<li>這組 DNA 有了 Z 之後  <code>100...0</code></li>
+</ul>
+</li>
+<li>上面這種方式透過數字表達的 DNA 我稱為數字 DNA</li>
+<li>之後我們讓片段 DNA 先產生出數字 DNA </li>
+<li>判斷片段數字 DNA 是否跟現在這組數字 DNA 有共同的地方，如果有就讓 <code>(片段數字 DNA &amp; 這組數字 DNA</code><ul>
+<li>如果沒有就讓當前這組 DNA 升級成一組 DNA</li>
+</ul>
+</li>
+<li>輸出共有幾組 DNA</li>
+</ul>
+<p>因為題目有說明片段 DNA 只能夠跟左右片段連接，因此如果是不同種的組裝方式，組合數量也不會不一樣。<br>一組內的片段 DNA 都必須有一個數字相同，所以往往切斷點就是無法組合的片段 DNA</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://yuihuang.com/zj-d272/" target="_blank" rel="noopener">【題解】ZeroJudge d272: 11583 – Alien DNA by YUI HUANG 演算法學習筆記</a></p>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這題的英文不知道是不是我邏輯差，我怎麼一直看不懂RRRRR。</p>
+<p>知道了邏輯後，稍微學習了優秀大神的程式碼編寫方法，太棒了太棒了。又被教到了一課<br>用二進位來編寫真的很不賴。</p>
+<p>不愧是竹女阿太秀了</p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10020</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t, n ;</span><br><span class="line"><span class="keyword">int</span> segment, dna;</span><br><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        segment = (<span class="number">1</span> &lt;&lt; <span class="number">27</span>) - <span class="number">1</span>; <span class="comment">//產生出一組 A~Z 都是 1 的數字 DNA，才一定能跟第一組做組合 </span></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">            dna = <span class="number">0</span>; <span class="comment">//片段數字 DNA</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.size(); j++)&#123;</span><br><span class="line">                dna |= (<span class="number">1</span> &lt;&lt; (s[j] - <span class="string">'a'</span>));</span><br><span class="line">                <span class="comment">//數字 DNA 表達方式 0 表示沒有 1 表示有</span></span><br><span class="line">                <span class="comment">//a 是 個位數、b 是十位數... 以此類推</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//如果可以成為一組，那就一組八!</span></span><br><span class="line">            <span class="comment">//注意必須用 and，因為要每個片段 DNA 都有一個小寫字母相同</span></span><br><span class="line">            <span class="keyword">if</span>(dna &amp; segment ) segment &amp;= dna; </span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                segment = dna; <span class="comment">//與前面的一組 DNA 不同，這個片段 DNA 升級成一組 DNA </span></span><br><span class="line">                ans++; <span class="comment">//找到切斷點了! </span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A8%AD%E8%A8%88%E8%A7%A3%E9%A1%8C/" rel="tag">設計解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Media_with_Image_recognition/NTUTcs_MediaHwfinalexamT01" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -235,7 +342,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa11264" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa12321" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -243,8 +350,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/07/08/UVa/UVa11264/"
-    >UVa11264 - Coin Collector(設計解題、貪心)</a
+  <a class="article-title" href="/2021/07/08/UVa/UVa12321/"
+    >UVa12321 - Gas Stations(設計解題、貪心)</a
   >
 </h2>
   
@@ -254,7 +361,7 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/07/08/UVa/UVa11264/" class="article-date">
+      <a href="/2021/07/08/UVa/UVa12321/" class="article-date">
   <time datetime="2021-07-08T05:51:59.000Z" itemprop="datePublished">2021-07-08</time>
 </a>
       
@@ -279,13 +386,11 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>有位愛好蒐集銅板的人想要透過銀行換錢的方式蒐集各式各樣的錢幣。但礙於銀行永遠都只會先給面額較大的錢幣，因此想請問你他最多可以蒐集多少錢幣。</p>
-<p>假如有 1,5,10 這三種錢幣，如果我現在有 31 元，那我就會收到 2 個 10 元硬幣、1 個 1 元硬幣。</p>
-<p>假如他身上有任意的錢，請告訴她，透過銀行匯款的方式他能夠收集到幾種貨幣。</p>
-<p><a href="https://onlinejudge.org/external/112/11264.pdf" target="_blank" rel="noopener">題目連結</a></p>
+<p>在一條主要幹道上，有許多加油站，其中每一個加油站都會影響主要幹道上的某個區段，用 \([x+r, x-r])\) 表示，x 是道路位置、r 是影像長度，其中幹道上的每一個點都有被加油站區斷給覆蓋到，現在加油站公司想要把一些加油站刪除，前提是幹道上的每一個點都還是必須有一個加油站覆蓋到。<br>請問總共可以刪掉幾個加油站？<br>如果不行，輸出 -1</p>
+<p><a href="https://onlinejudge.org/external/123/12321.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/07/08/UVa/UVa11264/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/07/08/UVa/UVa12321/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -393,7 +498,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa12321" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa11264" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -401,8 +506,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/07/08/UVa/UVa12321/"
-    >UVa12321 - Gas Stations(設計解題、貪心)</a
+  <a class="article-title" href="/2021/07/08/UVa/UVa11264/"
+    >UVa11264 - Coin Collector(設計解題、貪心)</a
   >
 </h2>
   
@@ -412,7 +517,7 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/07/08/UVa/UVa12321/" class="article-date">
+      <a href="/2021/07/08/UVa/UVa11264/" class="article-date">
   <time datetime="2021-07-08T05:51:59.000Z" itemprop="datePublished">2021-07-08</time>
 </a>
       
@@ -437,11 +542,13 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>在一條主要幹道上，有許多加油站，其中每一個加油站都會影響主要幹道上的某個區段，用 \([x+r, x-r])\) 表示，x 是道路位置、r 是影像長度，其中幹道上的每一個點都有被加油站區斷給覆蓋到，現在加油站公司想要把一些加油站刪除，前提是幹道上的每一個點都還是必須有一個加油站覆蓋到。<br>請問總共可以刪掉幾個加油站？<br>如果不行，輸出 -1</p>
-<p><a href="https://onlinejudge.org/external/123/12321.pdf" target="_blank" rel="noopener">題目連結</a></p>
+<p>有位愛好蒐集銅板的人想要透過銀行換錢的方式蒐集各式各樣的錢幣。但礙於銀行永遠都只會先給面額較大的錢幣，因此想請問你他最多可以蒐集多少錢幣。</p>
+<p>假如有 1,5,10 這三種錢幣，如果我現在有 31 元，那我就會收到 2 個 10 元硬幣、1 個 1 元硬幣。</p>
+<p>假如他身上有任意的錢，請告訴她，透過銀行匯款的方式他能夠收集到幾種貨幣。</p>
+<p><a href="https://onlinejudge.org/external/112/11264.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/07/08/UVa/UVa12321/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/07/08/UVa/UVa11264/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -630,95 +737,6 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa11147" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/30/UVa/UVa11147/"
-    >UVa11147 - kuPellaKeS BST(遞迴)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/06/30/UVa/UVa11147/" class="article-date">
-  <time datetime="2021-06-30T05:51:59.000Z" itemprop="datePublished">2021-06-30</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>BST 是數的資料結構，kuPellaKeS BST 則是繼承 BST 後，還有以下特點</p>
-<ul>
-<li>kuPellaKeS BST 的左子樹、右子樹相差必須是最小的</li>
-<li>kuPellaKeS BST 如果有超過一種符合第一點的方法，則選擇左子樹權重最大</li>
-<li>左右子樹也都必須符合 kuPellaKeS BST</li>
-</ul>
-<p>並且我們 kuPellaKeS BST 也有特別的輸出方式</p>
-<ul>
-<li>沒有左右子樹時，則輸出 <code>root</code></li>
-<li>只有左 or 右子樹時，則輸出 <code>root(sub_node)</code></li>
-<li>有左右子樹時，則輸出 <code>root(left_sub_node, right_sub_node)</code></li>
-</ul>
-<p>給你一數列，請輸出 kuPellaKeS BST<br><a href="https://onlinejudge.org/external/111/11147.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/06/30/UVa/UVa11147/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%81%9E%E8%BF%B4/" rel="tag">遞迴</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
     <article id="post-UVa/UVa12893" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -796,7 +814,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa13142" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa11147" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -804,8 +822,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/06/17/UVa/UVa13142/"
-    >UVa13142 - Destroy the Moon to Save the Earth(水題、英文測驗 )</a
+  <a class="article-title" href="/2021/06/30/UVa/UVa11147/"
+    >UVa11147 - kuPellaKeS BST(遞迴)</a
   >
 </h2>
   
@@ -815,8 +833,8 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/06/17/UVa/UVa13142/" class="article-date">
-  <time datetime="2021-06-17T05:51:59.000Z" itemprop="datePublished">2021-06-17</time>
+      <a href="/2021/06/30/UVa/UVa11147/" class="article-date">
+  <time datetime="2021-06-30T05:51:59.000Z" itemprop="datePublished">2021-06-30</time>
 </a>
       
   <div class="article-category">
@@ -840,11 +858,22 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>在 T 年後會有一顆隕石撞擊地球！如果讓他撞擊地球會造成數以百計的死亡，這是科學家們想到一個方法，讓月亮來幫地球扛這個隕石。<br>　<br>其中 S 是月亮轉地球的速率，D 是如果隕石跟月球互相撞擊還差多少公里，D 可以是正數或負數。<br>我們知道如果消除月亮 1 ton 可以讓月亮的速度加快 1mm/s，因此科學家可以用武器撞擊月球來讓月球加速；反之，如果我們讓月亮增重 1 ton 則可以讓月亮的速度變慢 1mm/s。</p>
-<p>現在請告訴科學家們，要讓月亮消除或增加多少 ton 才可以讓月亮撞擊隕石。 請輸出無條件捨去的 ton<br><a href="https://onlinejudge.org/external/131/13142.pdf" target="_blank" rel="noopener">題目連結</a></p>
+<p>BST 是數的資料結構，kuPellaKeS BST 則是繼承 BST 後，還有以下特點</p>
+<ul>
+<li>kuPellaKeS BST 的左子樹、右子樹相差必須是最小的</li>
+<li>kuPellaKeS BST 如果有超過一種符合第一點的方法，則選擇左子樹權重最大</li>
+<li>左右子樹也都必須符合 kuPellaKeS BST</li>
+</ul>
+<p>並且我們 kuPellaKeS BST 也有特別的輸出方式</p>
+<ul>
+<li>沒有左右子樹時，則輸出 <code>root</code></li>
+<li>只有左 or 右子樹時，則輸出 <code>root(sub_node)</code></li>
+<li>有左右子樹時，則輸出 <code>root(left_sub_node, right_sub_node)</code></li>
+</ul>
+<p>給你一數列，請輸出 kuPellaKeS BST<br><a href="https://onlinejudge.org/external/111/11147.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/06/17/UVa/UVa13142/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/06/30/UVa/UVa11147/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -857,7 +886,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B0%B4%E9%A1%8C/" rel="tag">水題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%81%9E%E8%BF%B4/" rel="tag">遞迴</a></li></ul>
 
 
     </footer>
