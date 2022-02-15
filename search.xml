@@ -25951,4 +25951,108 @@
         <tag>遞迴</tag>
       </tags>
   </entry>
+  <entry>
+    <title>R Script bat 在 windows 上要如和使用</title>
+    <url>/2022/02/15/R/R-bat/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>紀錄大衛在加密貨幣做排成時在 windows 採到的雷<br>話說好久沒有寫 R 語言文章了，現在來寫下XD。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>先直接透過 bat 來進行講解</p>
+<ul>
+<li>cmd 預設下並不是透過 utf-8 encoding，因此如果 Rscript 有中文字元，就會無法顯示 or 導致程式出錯</li>
+<li><code>Rscript.exe</code> 有些人會在 windows 上加此環境變數，但我沒加，因此我是使用這種寫法</li>
+<li>裡面的網址則是我在編寫完成後，認為有用的 url</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chcp 65001 :: 讓 cmd 使用 utf-8 encoding</span><br><span class="line"></span><br><span class="line">:: CD 語法</span><br><span class="line">:: https:&#x2F;&#x2F;davidhu0903ex3.pixnet.net&#x2F;blog&#x2F;post&#x2F;443069270-%5B%E6%95%99%E5%AD%B8%5D-dos%E6%89%B9%E6%AC%A1%E6%AA%94%E8%A3%BD%E4%BD%9C---bat%E6%AA%94%E8%AA%9E%E6%B3%95</span><br><span class="line">CD &#x2F;d &quot;D:\project\trader\比例上升&quot;</span><br><span class="line"></span><br><span class="line">&quot;C:\Program Files\R\R-4.0.3\bin\x64\Rscript.exe&quot; &quot;D:\project\trader\比例上升\crontabBTCusdtLong.R&quot; :: 讓 Rscript 使用此 R file</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:: 透過 bat 啟動 R 語言 Rscript.exe</span><br><span class="line">:: https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;14432637&#x2F;r-cmd-batch-output-in-terminal</span><br><span class="line">:: https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;38062284&#x2F;when-trying-to-run-r-script-from-cmd-getting-fatal-error-cannot-open-file-cm</span><br><span class="line"></span><br><span class="line">:: 解決 bat 裡面有中文的問題</span><br><span class="line">:: http:&#x2F;&#x2F;paladinprogram.blogspot.com&#x2F;2019&#x2F;04&#x2F;bat.html</span><br><span class="line"></span><br><span class="line">:: windows 自動排成，寫得很詳細 讚</span><br><span class="line">:: https:&#x2F;&#x2F;davidhu0903ex3.pixnet.net&#x2F;blog&#x2F;post&#x2F;453551861-%5B%E9%99%A4%E9%8C%AF%5D-%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8---%E8%87%AA%E5%8B%95%E5%96%9A%E9%86%92%E5%9F%B7%E8%A1%8C-(0x41301)(0x80)</span><br><span class="line"></span><br><span class="line">:: 透過 bat 輸出文字檔案</span><br><span class="line">:: https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;19878136&#x2F;how-can-i-use-a-batch-file-to-write-to-a-text-file&#x2F;19879594</span><br><span class="line">::echo 245.67&gt;&gt; D:\project\NTUTmuen_Investment\backtest\平均價差-股票\text.txt</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<h2 id="有一件事情需要注意"><a href="#有一件事情需要注意" class="headerlink" title="有一件事情需要注意"></a>有一件事情需要注意</h2><ul>
+<li>由於 bat 讀入的 Rscript 此時<strong>並不是透過 utf-8 編碼</strong>，因此當下那份 Rscript 並不能使用中文</li>
+<li>如果要使用中文，可以考慮在寫成一份檔案，概念如下<ul>
+<li><code>chinese.R</code> 有中文字元的 R</li>
+<li><code>bat.R</code> 純粹只讓 bat 讀入，內容如下<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">source</span>(<span class="string">".\\chinese.R"</span>, encoding = <span class="string">"UTF-8"</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>台灣 R 分享的資源較少，剛好我會寫 R，在我碰到的一些經驗中，我放到我的 Blog 希望也可以拯救有遇到相同需求的人們！</p>
+]]></content>
+      <categories>
+        <category>R語言</category>
+      </categories>
+      <tags>
+        <tag>R語言</tag>
+        <tag>學習筆記</tag>
+        <tag>json</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa10805 - Cockroach Escape Networks(Floyd)</title>
+    <url>/2022/02/01/UVa/UVa10805/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>蟑螂們住在 Bill 的房間哩，這個房間有很多蟑螂的洞穴與小徑，但 Bill 開燈後蟑螂們會四處逃串到其他的洞穴裡面，當最後一隻蟑螂抵達到他的目的地時稱之為緊急回應時間，(不理解題目原意可以想成從洞穴 A 經過 洞穴 B 到洞穴 C 的緊急時間，個人看的也不是很確定)，請輸出緊急回應時間是多少。<br>EX: 所有的蟑螂到他想要的目的地都會走最短路徑</p>
+<p><a href="https://onlinejudge.org/external/108/10805.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li><a href="https://theriseofdavid.github.io/2021/10/11/Explain_Algorithm/floyd/" target="_blank" rel="noopener">演算法知識 - Floyd-Warshall algorithm (無權重、有權重向圖) </a></li>
+<li>不一定在中間</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>由於題目沒有說從哪個點出發，因此我們主要想法就是對所有點做 floyd，並找出最小最大距離。但如果只有這樣想還不會 AC。</li>
+<li>因為題目沒有說從哪個點出發，也就表示其實也可以從洞穴與洞穴之間出發也可以。<ul>
+<li>在最遠距離是偶數時不會受到影響，一定都還是從洞穴出發</li>
+<li>但如果最遠距離是奇數時，就不一定都是從洞穴出發，其實也可以從洞穴與洞穴之間出發也可以。</li>
+</ul>
+</li>
+<li>因此要加入虛邊，讓洞穴與洞穴之間再增加一個虛擬洞穴，來考慮最遠距離是奇數的問題。</li>
+</ul>
+<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>這一題的英文可以再寫得更好一些，讓我看懂，不然他的英文真的非常不優秀…、不好理解。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://mypaper.pchome.com.tw/zerojudge/post/1325080053" target="_blank" rel="noopener">Cockroach Escape Networks by Morris</a><br><a href="http://yp155136codingarea.blogspot.com/2016/11/uva-10805-cockroach-escape-networks.html" target="_blank" rel="noopener">(UVA) 10805 - Cockroach Escape Networks</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>會在下面放一些簡單註解，供大家學習時參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">510</span>;</span><br><span class="line"><span class="keyword">int</span> t, kase=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> a, b;</span><br><span class="line"><span class="keyword">int</span> dp[MAXN][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; MAXN; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; MAXN; j++)&#123;</span><br><span class="line">                dp[i][j] = INF;</span><br><span class="line">            &#125;</span><br><span class="line">            dp[i][i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> nodes = n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123; <span class="comment">//分析 3，加入虛邊 node</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; "a b nodes " &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; " " &lt;&lt; nodes &lt;&lt; "\n";</span></span><br><span class="line">            dp[a][nodes] = dp[nodes][a] = <span class="number">1</span>;</span><br><span class="line">            dp[b][nodes] = dp[nodes][b] = <span class="number">1</span>;</span><br><span class="line">            nodes++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; "nodes " &lt;&lt; nodes &lt;&lt; "\n";</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; nodes; k++)&#123; <span class="comment">//floyd</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes; i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nodes; j++)&#123;</span><br><span class="line">                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);</span><br><span class="line">                    <span class="comment">//cout &lt;&lt; "i j dp " &lt;&lt; i &lt;&lt; " " &lt;&lt; j &lt;&lt; " " &lt;&lt; dp[i][j] &lt;&lt; "\n";</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        for(int i = 0; i &lt; nodes; i++)&#123;</span></span><br><span class="line"><span class="comment">//            for(int j = 0; j &lt; nodes; j++)&#123;</span></span><br><span class="line"><span class="comment">//                cout &lt;&lt; dp[i][j] &lt;&lt; " ";</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//            cout &lt;&lt; "\n";</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = INF;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes; i++)&#123; <span class="comment">//尋找最小最遠距離</span></span><br><span class="line">            sort(dp[i] , dp[i] + n);</span><br><span class="line">            <span class="comment">//cout &lt;&lt; "max1 max2 " &lt;&lt; dp[i][n-1] &lt;&lt; " " &lt;&lt; dp[i][n-2] &lt;&lt; "\n";</span></span><br><span class="line">            <span class="comment">//ans = min(ans, dp[i][n-1] +  dp[i][n-2]);</span></span><br><span class="line">            ans = min(ans, dp[i][n<span class="number">-1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//ans /= 2;</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; kase++ &lt;&lt; <span class="string">":\n"</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="string">"\n\n"</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>Floyd-Warshall algorithm</tag>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UVa11138 - Nuts and Bolts(Maximum Bipartite Matching 二分匹配)</title>
+    <url>/2022/02/15/UVa/UVa11138/</url>
+    <content><![CDATA[<h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>題目給你的程式碼超時了，請你理解此程式碼並且重新寫一次，並通過 AC。<br>程式碼主要是，一個螺帽配合一個螺栓，想請問最大有幾個螺帽、螺栓匹配。</p>
+<p><a href="https://onlinejudge.org/external/111/11138.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="重點觀念"><a href="#重點觀念" class="headerlink" title="重點觀念"></a>重點觀念</h2><ul>
+<li>二分匹配</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>要理解題目程式碼的輸入輸出</li>
+<li>將二分匹配 code 放上去即可。</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://github.com/morris821028/UVa/blob/master/volume111/11138%20-%20Nuts%20and%20Bolts.cpp" target="_blank" rel="noopener">11138 - Nuts and Bolts.cpp by morris </a><br><a href="https://louisfghbvc.pixnet.net/blog/post/325564305-uva-11138-nuts-and-bolts" target="_blank" rel="noopener">Uva 11138 Nuts and Bolts by louisfghbvc</a></p>
+<h2 id="題目程式碼"><a href="#題目程式碼" class="headerlink" title="題目程式碼"></a>題目程式碼</h2><p>有一些程式碼註解在 <a href="https://theriseofdavid.github.io/2021/10/16/Explain_Algorithm/Maximum_Bipartite_Matching/" target="_blank" rel="noopener">Maximum Bipartite Matching by 大衛的筆記</a>請供參考。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LOCAL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">520</span>;</span><br><span class="line"><span class="keyword">int</span> nuts, bolts;</span><br><span class="line"><span class="keyword">int</span> t;</span><br><span class="line"><span class="keyword">int</span> g[MAXN][MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAXN*<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> mx[MAXN*<span class="number">2</span>], my[MAXN*<span class="number">2</span>], vy[MAXN*<span class="number">2</span>]; <span class="comment">//matchX, matchY, visitY</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> y: edge[x])&#123; <span class="comment">//對 x 可以碰到的邊進行檢查</span></span><br><span class="line">        <span class="keyword">if</span>(vy[y] == <span class="number">1</span>) <span class="keyword">continue</span>; <span class="comment">//避免遞迴 error</span></span><br><span class="line">        vy[y] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(my[y] == <span class="number">-1</span> || dfs(my[y]))&#123; <span class="comment">//分析 3</span></span><br><span class="line">            mx[x] = y;</span><br><span class="line">            my[y] = x;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//分析 4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bipartite_matching</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(mx, <span class="number">-1</span>, <span class="keyword">sizeof</span>(mx)); <span class="comment">//分析 1,2</span></span><br><span class="line">    <span class="built_in">memset</span>(my, <span class="number">-1</span>, <span class="keyword">sizeof</span>(my));</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= nuts; i++)&#123;  <span class="comment">//對每一個 x 節點進行 DFS(最大匹配)</span></span><br><span class="line">        <span class="built_in">memset</span>(vy, <span class="number">0</span>, <span class="keyword">sizeof</span>(vy));</span><br><span class="line">        <span class="keyword">if</span>(dfs(i)) ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>&#123; <span class="comment">//讀資料</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bolts+nuts; i++) edge[i].clear();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; bolts &gt;&gt; nuts;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bolts; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nuts; j++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; g[i][j];</span><br><span class="line">            <span class="keyword">if</span>(g[i][j] == <span class="number">1</span> ) edge[j].push_back(i+nuts);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line">    freopen(<span class="string">"in1.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"out.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// LOCAL</span></span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">int</span> kase = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        read();</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        ans = bipartite_matching();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; ++kase &lt;&lt; <span class="string">": a maximum of "</span> &lt;&lt; ans &lt;&lt; <span class="string">" nuts and bolts can be fitted together"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>UVa</category>
+      </categories>
+      <tags>
+        <tag>UVa</tag>
+        <tag>程式解題</tag>
+        <tag>Maximum Bipartite Matching 二分匹配</tag>
+      </tags>
+  </entry>
 </search>
