@@ -156,6 +156,85 @@ ga('send', 'pageview');
 
 </article>
     
+    <article id="post-UVa/UVa11991" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/02/UVa/UVa11991/"
+    >UVa11991 - Easy Problem from Rujia Liu?(水題)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/02/UVa/UVa11991/" class="article-date">
+  <time datetime="2021-02-02T07:36:44.000Z" itemprop="datePublished">2021-02-02</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意："><a href="#題目大意：" class="headerlink" title="題目大意："></a>題目大意：</h2><blockquote>
+<p>Rujia Liu(華人大神出了許多演算法競賽的書，被稱之為聖經) 出了一份題目希望讓大家可以一起來為了演算法競賽而努力，題目內容如下：</p>
+<p>給你一組陣列，進行查詢，查詢的模式是在 v 此數字出現第 k 次的位置是在陣列中的哪個 index</p>
+<p><a href="https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3142" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/02/02/UVa/UVa11991/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disjoint-Set-%E4%B8%A6%E6%9F%A5%E9%9B%86/" rel="tag">Disjoint Set 並查集</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Explain_Algorithm/disjoint-set" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -780,82 +859,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/A-%E6%90%9C%E5%B0%8B/" rel="tag">A*搜尋</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Explain_Algorithm/Astar" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/01/07/Explain_Algorithm/Astar/"
-    >演算法知識 - A* 搜尋</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/01/07/Explain_Algorithm/Astar/" class="article-date">
-  <time datetime="2021-01-07T06:37:07.000Z" itemprop="datePublished">2021-01-07</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="A-介紹"><a href="#A-介紹" class="headerlink" title="A* 介紹"></a>A* 介紹</h2><p>A* 搜尋演算法，(A* 讀做 Astar)，在圖形平面上對對多個節點路徑求出最低成本的演算法，是將 BDS 與遍地圖(Graph Travel )的改進演算法。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>主體還是以 BFS 為主，但多增加一個函式，啟發式搜尋(heuristic)找出最高的權重在使其進行 BFS，找出最高的權重為 \(f(x) = g(x) + h(x) \)，其中 \(g(x)\) 則是從起點走到當前節點的距離，\(h(x)\) 則是啟發式搜尋，用於猜測當前節點至終點的距離。</p>
-<h3 id="啟發式搜尋-heuristic"><a href="#啟發式搜尋-heuristic" class="headerlink" title="啟發式搜尋(heuristic)"></a>啟發式搜尋(heuristic)</h3><p>在搜尋演算法中作為效率提升的一個手段，對於當前已知的資訊或結點進行評判，並對資訊進行評分，透過評分方式來使搜尋演算法找到最優的搜尋方向。</p>
-<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><p><a href="https://oi-wiki.org/search/astar/" target="_blank" rel="noopener">A* OIwiki</a><br><a href="https://oi-wiki.org/search/heuristic/" target="_blank" rel="noopener">启发式搜索 OIwiki</a></p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/A/" rel="tag">A*</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
