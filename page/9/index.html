@@ -77,6 +77,96 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-Explain_Algorithm/dynamic_programming" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/07/21/Explain_Algorithm/dynamic_programming/"
+    >演算法知識 - 動態規劃 Dynamic programming</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/21/Explain_Algorithm/dynamic_programming/" class="article-date">
+  <time datetime="2021-07-21T08:54:07.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="動態規劃-Dynamic-programming-介紹"><a href="#動態規劃-Dynamic-programming-介紹" class="headerlink" title="動態規劃 Dynamic programming 介紹"></a>動態規劃 Dynamic programming 介紹</h2><blockquote>
+<p>動態規劃用在需要狀態轉移的題目上，例如說 \(y = 2x+1\)，那麼在計算出 y 之前就必須要有 x，否則 y 沒有辦法產生一個自然數。</p>
+<p>動態規劃最好的理解方式就是，我們將某些變數的所有可能都列舉出來，並根據我們之前的紀錄，並透過遞迴關係式找出答案。<br>舉例：\(y = 2x+1\)，我們可以將產生出來的 y，再帶入 x，想請問 y 等於 15 有幾種組合可以產生。</p>
+<ul>
+<li>遞迴關係式就是 \(y = 2x+1\)</li>
+<li>我們可以設定一個陣列 <code>dp[x(0~15)] = x 組合的數量</code></li>
+<li>現在我們可以做一個迴圈如下</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i &#x3D; 0; i &lt;&#x3D; 15; i++)&#123;</span><br><span class="line">    dp[2*i+1] &#x3D; dp[i] + 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>你跟我說這很像遞迴？對！他就是遞迴的有效率版，浪費記憶體版XD。</li>
+</ul>
+<p>下面我們來聊聊一些常用的 dp 問題</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/07/21/Explain_Algorithm/dynamic_programming/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83-Dynamic-programming/" rel="tag">動態規劃 Dynamic programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-UVa/UVa11566" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -875,91 +965,13 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-Media_with_Image_recognition/NTUTcs_MediaHwfinalexamT01" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/07/08/Media_with_Image_recognition/NTUTcs_MediaHwfinalexamT01/"
-    >北科資工二多媒體技術與應用 期末心得 - 本學期中學到的內容、希望課程補充的教學內容</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/07/08/Media_with_Image_recognition/NTUTcs_MediaHwfinalexamT01/" class="article-date">
-  <time datetime="2021-07-08T15:59:50.000Z" itemprop="datePublished">2021-07-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a> / <a class="article-category-link" href="/categories/%E5%A4%9A%E5%AA%92%E9%AB%94%E8%88%87%E5%9C%96%E5%83%8F%E8%BE%A8%E8%AD%98-Image-Recognition/">多媒體與圖像辨識 Image Recognition</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
-<p>此筆記用途在於台北科技大學資訊工程系大二下多媒體技術與應用作業紀錄<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font><br><strong>這是學習後心得的筆記，可能不太適用會未來的學生</strong></p>
-<p>由於我沒有學習過裡面的理論，因此這是資工大二學生透過網路與自身理解的筆記，學習價值並不高、且可能擁有大量錯誤。</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/07/08/Media_with_Image_recognition/NTUTcs_MediaHwfinalexamT01/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E5%A4%A7%E5%A4%9A%E5%AA%92%E9%AB%94%E6%8A%80%E8%A1%93%E8%88%87%E6%87%89%E7%94%A8%E7%AD%86%E8%A8%98/" rel="tag">北科大多媒體技術與應用筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/8/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="extend next" rel="next" href="/page/10/">下一頁</a>
+    <a class="extend prev" rel="prev" href="/page/8/">上一頁</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/10/">下一頁</a>
   </nav>
   
 </section>
