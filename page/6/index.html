@@ -161,6 +161,84 @@ ga('send', 'pageview');
 
 </article>
     
+    <article id="post-UVa/UVa12950" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/20/UVa/UVa12950/"
+    >UVa12950 - Even Obsession(Dijkstra&#39;s)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/20/UVa/UVa12950/" class="article-date">
+  <time datetime="2021-09-20T05:51:59.000Z" itemprop="datePublished">2021-09-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>Patricia 是個傑出的軟體工程師，但她有一些怪癖，喜歡偶數的事物，例如:喜歡買偶數張電影票、一天吃兩餐 or 四餐…等。<br>在 Patricia 所住的城市需要收過路費，Patricia 想從 1 到 x 點，她希望他可以被收偶數次的過路費，並且花費最少，你則必須輸出花費最小的數值為多少。</p>
+<p><a href="https://onlinejudge.org/external/129/12950.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/09/20/UVa/UVa12950/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dijkstra-s/" rel="tag">Dijkstra's</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-UVa/UVa10426" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -400,7 +478,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa10457" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa1265" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -408,8 +486,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/09/08/UVa/UVa10457/"
-    >UVa10457 - Magic Car(Kruskal)</a
+  <a class="article-title" href="/2021/09/08/UVa/UVa1265/"
+    >UVa1265 - Tour Belt(Kruskal)</a
   >
 </h2>
   
@@ -419,7 +497,7 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/09/08/UVa/UVa10457/" class="article-date">
+      <a href="/2021/09/08/UVa/UVa1265/" class="article-date">
   <time datetime="2021-09-08T05:51:59.000Z" itemprop="datePublished">2021-09-08</time>
 </a>
       
@@ -444,15 +522,18 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>有一台神奇的車子，稱呼為 magic car</p>
+<p>Korea 群島可以組成很多種旅遊行程，那如果是兩個島連在一起所產生的好處稱為 SE(協同效應)，再來我們定義協同效應</p>
 <ul>
-<li>發動跟結束都需要耗費能量</li>
-<li>中間距離所使用的能量是這樣計算的：\(max(每一條街最大的能量) - min(每一條街最大的能量\)<br>現在這台車子要從 A 到 B，會經過許多條路，請你告訴我走最省油的路徑抵達 B 點時，會花多少能量</li>
+<li>有一張連通圖裡面有 n 個頂點、m 個邊</li>
+<li>SE 必須使用兩頂點組成(也就是邊)，且不可以有重複地點用到</li>
+<li>再來我們要在一張圖中組成協同效應，其中協同效應必須要選大的，並且要在圖中找出最多的 SE。</li>
+<li>如果可以有多組以上的協同效應，那麼我們必須確認我們選的邊必須要大於內部的協同效應</li>
 </ul>
-<p><a href="https://onlinejudge.org/external/104/10457.pdf" target="_blank" rel="noopener">題目連結</a></p>
+<p>簡單來說就是使用 kruskal 找出最大的 SE，並檢查有沒有辦法再跟其他 SE 組成一個更大的 SE。<br>並將所有 SE 的 size 總合起來輸出。</p>
+<p>我題目講的沒有很清楚，這題要去看題目才好理解，不太好解釋。有點出得很難懂..<br><a href="https://onlinejudge.org/external/12/1265.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/09/08/UVa/UVa10457/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/09/08/UVa/UVa1265/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -560,7 +641,7 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-UVa/UVa1265" class="article article-type-post" itemscope
+    <article id="post-UVa/UVa10457" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -568,8 +649,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/09/08/UVa/UVa1265/"
-    >UVa1265 - Tour Belt(Kruskal)</a
+  <a class="article-title" href="/2021/09/08/UVa/UVa10457/"
+    >UVa10457 - Magic Car(Kruskal)</a
   >
 </h2>
   
@@ -579,7 +660,7 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/09/08/UVa/UVa1265/" class="article-date">
+      <a href="/2021/09/08/UVa/UVa10457/" class="article-date">
   <time datetime="2021-09-08T05:51:59.000Z" itemprop="datePublished">2021-09-08</time>
 </a>
       
@@ -604,18 +685,15 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>Korea 群島可以組成很多種旅遊行程，那如果是兩個島連在一起所產生的好處稱為 SE(協同效應)，再來我們定義協同效應</p>
+<p>有一台神奇的車子，稱呼為 magic car</p>
 <ul>
-<li>有一張連通圖裡面有 n 個頂點、m 個邊</li>
-<li>SE 必須使用兩頂點組成(也就是邊)，且不可以有重複地點用到</li>
-<li>再來我們要在一張圖中組成協同效應，其中協同效應必須要選大的，並且要在圖中找出最多的 SE。</li>
-<li>如果可以有多組以上的協同效應，那麼我們必須確認我們選的邊必須要大於內部的協同效應</li>
+<li>發動跟結束都需要耗費能量</li>
+<li>中間距離所使用的能量是這樣計算的：\(max(每一條街最大的能量) - min(每一條街最大的能量\)<br>現在這台車子要從 A 到 B，會經過許多條路，請你告訴我走最省油的路徑抵達 B 點時，會花多少能量</li>
 </ul>
-<p>簡單來說就是使用 kruskal 找出最大的 SE，並檢查有沒有辦法再跟其他 SE 組成一個更大的 SE。<br>並將所有 SE 的 size 總合起來輸出。</p>
-<p>我題目講的沒有很清楚，這題要去看題目才好理解，不太好解釋。有點出得很難懂..<br><a href="https://onlinejudge.org/external/12/1265.pdf" target="_blank" rel="noopener">題目連結</a></p>
+<p><a href="https://onlinejudge.org/external/104/10457.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/09/08/UVa/UVa1265/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/09/08/UVa/UVa10457/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -785,84 +863,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kruskal-s-algorithm/" rel="tag">Kruskal's algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa12442" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/06/UVa/UVa12442/"
-    >UVa12442 - Forwarding Emails(DFS)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/06/UVa/UVa12442/" class="article-date">
-  <time datetime="2021-09-06T05:51:59.000Z" itemprop="datePublished">2021-09-06</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>有一封信需要給大家知道，而每一個人都會將信轉寄給另外一個人(不會轉寄給第二個人)，你必須找出寄給誰才可以讓最多的人知道。</p>
-<p>請輸出，從誰開始轉寄可以讓最多人知道。<br><a href="https://onlinejudge.org/external/124/12442.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/09/06/UVa/UVa12442/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    企業資料通訊 筆記 - 大三下期中考重點複習 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-NTUT_note/data_communication_and_netword_midtern" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  企業資料通訊 筆記 - 大三下期中考重點複習
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/21/NTUT_note/data_communication_and_netword_midtern/" class="article-date">
+  <time datetime="2022-04-21T12:34:50.000Z" itemprop="datePublished">2022-04-21</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">6分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊工程系大二下企業資料通訊重點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="CH1-介紹"><a href="#CH1-介紹" class="headerlink" title="CH1 介紹"></a>CH1 介紹</h2><h3 id="Q1-1-為何需要協定？"><a href="#Q1-1-為何需要協定？" class="headerlink" title="Q1-1 為何需要協定？"></a>Q1-1 為何需要協定？</h3><p>協定定義了如何溝通，何時溝通，準確的傳送資料給不同的 device </p>
+<h3 id="Q1-3-說出-4-種基本網路拓撲，並指出其優點。"><a href="#Q1-3-說出-4-種基本網路拓撲，並指出其優點。" class="headerlink" title="Q1-3 說出 4 種基本網路拓撲，並指出其優點。"></a>Q1-3 說出 4 種基本網路拓撲，並指出其優點。</h3><p>a. Mesh 安全<br>b. Bus: 安裝簡單<br>c. Star: 強大網路<br>d. Ring: 易於故障隔離</p>
+<h3 id="Q1-5-當有住戶使用撥接或-DSL-服務連上-Internet，電話公司的角色為何？"><a href="#Q1-5-當有住戶使用撥接或-DSL-服務連上-Internet，電話公司的角色為何？" class="headerlink" title="Q1-5 當有住戶使用撥接或 DSL 服務連上 Internet，電話公司的角色為何？"></a>Q1-5 當有住戶使用撥接或 DSL 服務連上 Internet，電話公司的角色為何？</h3><p>電話公司腳色為 ISP，從住戶到電話公司使用 WAN 連線到 Interent.</p>
+<h3 id="Q1-7-多點連線優於點對點連線的地方為何？"><a href="#Q1-7-多點連線優於點對點連線的地方為何？" class="headerlink" title="Q1-7 多點連線優於點對點連線的地方為何？"></a>Q1-7 多點連線優於點對點連線的地方為何？</h3><p>易於安裝且低成本</p>
+<h3 id="Q1-9-指出資料通訊系統的-5-個元件。"><a href="#Q1-9-指出資料通訊系統的-5-個元件。" class="headerlink" title="Q1-9 指出資料通訊系統的 5 個元件。"></a>Q1-9 指出資料通訊系統的 5 個元件。</h3><p>sender, recevier, transmission medium, message, protocol </p>
+<h3 id="Q1-11-以線路組態的方來歸類-4-個基本拓撲。"><a href="#Q1-11-以線路組態的方來歸類-4-個基本拓撲。" class="headerlink" title="Q1-11 以線路組態的方來歸類 4 個基本拓撲。"></a>Q1-11 以線路組態的方來歸類 4 個基本拓撲。</h3><p>point-to-point: mesh ring star<br>multiple point: bus</p>
+<h3 id="Q1-13-如果每一條-LAN-都必須直接與另一條-LAN-通訊，那麼需多少條點對點-WAN-來連接-n條-LAN？"><a href="#Q1-13-如果每一條-LAN-都必須直接與另一條-LAN-通訊，那麼需多少條點對點-WAN-來連接-n條-LAN？" class="headerlink" title="Q1-13 如果每一條 LAN 都必須直接與另一條 LAN 通訊，那麼需多少條點對點 WAN 來連接 n條 LAN？"></a>Q1-13 如果每一條 LAN 都必須直接與另一條 LAN 通訊，那麼需多少條點對點 WAN 來連接 n條 LAN？</h3><p>\( n * (n-1) / 2)\)</p>
+<h3 id="Q1-15-解釋-Internet-草案和建議標準的差異。"><a href="#Q1-15-解釋-Internet-草案和建議標準的差異。" class="headerlink" title="Q1-15 解釋 Internet 草案和建議標準的差異。"></a>Q1-15 解釋 Internet 草案和建議標準的差異。</h3><p>Interent draft 的文件非正式且只有六個月的生命週期，<br>Interent draft 中受到大量關注並提案，接受後就變成 Internet 標準</p>
+<h3 id="Q1-17-決定通訊系統是-LAN-或-WAN-的因素為何？"><a href="#Q1-17-決定通訊系統是-LAN-或-WAN-的因素為何？" class="headerlink" title="Q1-17 決定通訊系統是 LAN 或 WAN 的因素為何？"></a>Q1-17 決定通訊系統是 LAN 或 WAN 的因素為何？</h3><p>大小、距離、架構、與所有權</p>
+<h3 id="Q1-19-說明-IETF-和-IRTF-的職責差異"><a href="#Q1-19-說明-IETF-和-IRTF-的職責差異" class="headerlink" title="Q1-19 說明 IETF 和 IRTF 的職責差異"></a>Q1-19 說明 IETF 和 IRTF 的職責差異</h3><p>IETF identify operatioal problem and recommend solution<br>IRTF focuse long-terms topic.</p>
+<h2 id="CH2-網路模型"><a href="#CH2-網路模型" class="headerlink" title="CH2 網路模型"></a>CH2 網路模型</h2><h3 id="Q2-1-下列各層使用的位址型式為何？-a-應用層-b-網路層-c-資料鏈結層"><a href="#Q2-1-下列各層使用的位址型式為何？-a-應用層-b-網路層-c-資料鏈結層" class="headerlink" title="Q2-1 下列各層使用的位址型式為何？ a. 應用層 b. 網路層 c. 資料鏈結層"></a>Q2-1 下列各層使用的位址型式為何？ a. 應用層 b. 網路層 c. 資料鏈結層</h3><p>a. 通常是用來找到目的低的電腦名稱 EX: <a href="mailto:something@somewhere.com">something@somewhere.com</a><br>b. 使用 two logical address source and destination 去定義 source and 目標電腦，address 為獨特的<br>c. 使用 two link address source and destination 去 link 起點到終點</p>
+<h3 id="Q2-3-你能解釋為何應用層中沒有提到多工-解多工的服務？"><a href="#Q2-3-你能解釋為何應用層中沒有提到多工-解多工的服務？" class="headerlink" title="Q2-3 你能解釋為何應用層中沒有提到多工 / 解多工的服務？"></a>Q2-3 你能解釋為何應用層中沒有提到多工 / 解多工的服務？</h3><p>由於應用層上面並沒有其他 layer，因此不需要提供服務給其他人，所以就沒有多工需要</p>
+<h3 id="Q2-5-本章討論協定分層必須遵循以使通訊能夠雙向的第一個準則為何？"><a href="#Q2-5-本章討論協定分層必須遵循以使通訊能夠雙向的第一個準則為何？" class="headerlink" title="Q2-5 本章討論協定分層必須遵循以使通訊能夠雙向的第一個準則為何？"></a>Q2-5 本章討論協定分層必須遵循以使通訊能夠雙向的第一個準則為何？</h3><p>每一個 layer 都必須提供兩個兩個 task，each diresct using one task.</p>
+<h3 id="Q2-7-下列資料單元中哪一個是使用者資料元的解封裝？-a-資料元-b-區段-c-訊息"><a href="#Q2-7-下列資料單元中哪一個是使用者資料元的解封裝？-a-資料元-b-區段-c-訊息" class="headerlink" title="Q2-7 下列資料單元中哪一個是使用者資料元的解封裝？ a. 資料元 b. 區段 c. 訊息"></a>Q2-7 下列資料單元中哪一個是使用者資料元的解封裝？ a. 資料元 b. 區段 c. 訊息</h3><p>transpot-layer 解封裝<strong>訊息</strong>給應用層</p>
+<h3 id="Q2-9-有一主機以-TCP-IP-協定組與另一台主機通訊，下列各層所收送的資料單元為何？-a-應用層-b-網路層-c-資料鏈結層"><a href="#Q2-9-有一主機以-TCP-IP-協定組與另一台主機通訊，下列各層所收送的資料單元為何？-a-應用層-b-網路層-c-資料鏈結層" class="headerlink" title="Q2-9 有一主機以 TCP/IP 協定組與另一台主機通訊，下列各層所收送的資料單元為何？ a. 應用層 b. 網路層 c. 資料鏈結層"></a>Q2-9 有一主機以 TCP/IP 協定組與另一台主機通訊，下列各層所收送的資料單元為何？ a. 應用層 b. 網路層 c. 資料鏈結層</h3><p>a. message<br>b. datagram<br>c. frame </p>
+<h3 id="Q2-11-列出一些本章提及的應用層協定。"><a href="#Q2-11-列出一些本章提及的應用層協定。" class="headerlink" title="Q2-11 列出一些本章提及的應用層協定。"></a>Q2-11 列出一些本章提及的應用層協定。</h3><p>HTTP、FTP、SSH、DNS</p>
+<h3 id="Q2-13-路由器連接-3-條鏈結（網路），路由器會牽涉到下列哪些層次？-a-實體層-b-資料鏈結層-c-網路層"><a href="#Q2-13-路由器連接-3-條鏈結（網路），路由器會牽涉到下列哪些層次？-a-實體層-b-資料鏈結層-c-網路層" class="headerlink" title="Q2-13 路由器連接 3 條鏈結（網路），路由器會牽涉到下列哪些層次？ a. 實體層 b. 資料鏈結層 c. 網路層"></a>Q2-13 路由器連接 3 條鏈結（網路），路由器會牽涉到下列哪些層次？ a. 實體層 b. 資料鏈結層 c. 網路層</h3><p>3 個實體層<br>3 個資料連結層<br>1 個網路層</p>
+<h3 id="Q2-15-如果兩端主機間只有一條路徑，兩主機間需要一台路由器嗎？"><a href="#Q2-15-如果兩端主機間只有一條路徑，兩主機間需要一台路由器嗎？" class="headerlink" title="Q2-15 如果兩端主機間只有一條路徑，兩主機間需要一台路由器嗎？"></a>Q2-15 如果兩端主機間只有一條路徑，兩主機間需要一台路由器嗎？</h3><p>不需要，因為只有一個 path，路由器是在找最佳路徑時才要用到</p>
+<h2 id="CH3-實體層介紹"><a href="#CH3-實體層介紹" class="headerlink" title="CH3 實體層介紹"></a>CH3 實體層介紹</h2><h3 id="Q3-1-複合訊號如何分解成各單獨的頻率？"><a href="#Q3-1-複合訊號如何分解成各單獨的頻率？" class="headerlink" title="Q3-1 複合訊號如何分解成各單獨的頻率？"></a>Q3-1 複合訊號如何分解成各單獨的頻率？</h3><p>Fourier series 在一個週期訊號內給一個頻域<br>Fourier analysis  在一個週期訊號內給定一個頻域</p>
+<h3 id="Q3-3-週期與頻率之間的關係為何？"><a href="#Q3-3-週期與頻率之間的關係為何？" class="headerlink" title="Q3-3 週期與頻率之間的關係為何？"></a>Q3-3 週期與頻率之間的關係為何？</h3><p>互為倒數</p>
+<h3 id="Q3-5-為何光纖中的光訊號其波長很短？"><a href="#Q3-5-為何光纖中的光訊號其波長很短？" class="headerlink" title="Q3-5 為何光纖中的光訊號其波長很短？"></a>Q3-5 為何光纖中的光訊號其波長很短？</h3><p>因為光的頻率極快，因此波長才這麼低</p>
+<h3 id="Q3-7-我們從麥克風送出聲音到錄音機，這是基頻傳輸或寬頻傳輸？"><a href="#Q3-7-我們從麥克風送出聲音到錄音機，這是基頻傳輸或寬頻傳輸？" class="headerlink" title="Q3-7 我們從麥克風送出聲音到錄音機，這是基頻傳輸或寬頻傳輸？"></a>Q3-7 我們從麥克風送出聲音到錄音機，這是基頻傳輸或寬頻傳輸？</h3><p>baseband 因為我們沒有做 modulation</p>
+<h3 id="Q3-9-奈奎斯特定理與通訊有何關聯？"><a href="#Q3-9-奈奎斯特定理與通訊有何關聯？" class="headerlink" title="Q3-9 奈奎斯特定理與通訊有何關聯？"></a>Q3-9 奈奎斯特定理與通訊有何關聯？</h3><p>The Nyquist theorem 定義最大的 bit rate 在無 noise channel </p>
+<h3 id="Q3-11-語音訊號的頻域圖是離散或連續？"><a href="#Q3-11-語音訊號的頻域圖是離散或連續？" class="headerlink" title="Q3-11 語音訊號的頻域圖是離散或連續？"></a>Q3-11 語音訊號的頻域圖是離散或連續？</h3><p>連續的，因為聲音是非週期性訊號</p>
+<h3 id="Q3-13-如何分辨基頻傳輸和寬頻傳輸？"><a href="#Q3-13-如何分辨基頻傳輸和寬頻傳輸？" class="headerlink" title="Q3-13 如何分辨基頻傳輸和寬頻傳輸？"></a>Q3-13 如何分辨基頻傳輸和寬頻傳輸？</h3><p>Baseband transmission 沒有做 modulation using low-pass channel.<br>Broadband transmission 則是有 modulation using band-pass channel </p>
+<h3 id="Q3-15-我們調變許多語音訊號，並送到空氣中，這是基頻傳輸或寬頻傳輸？"><a href="#Q3-15-我們調變許多語音訊號，並送到空氣中，這是基頻傳輸或寬頻傳輸？" class="headerlink" title="Q3-15 我們調變許多語音訊號，並送到空氣中，這是基頻傳輸或寬頻傳輸？"></a>Q3-15 我們調變許多語音訊號，並送到空氣中，這是基頻傳輸或寬頻傳輸？</h3><p>寬頻傳輸，因為有被空氣 modulation. </p>
+<h2 id="CH4-數位傳輸"><a href="#CH4-數位傳輸" class="headerlink" title="CH4 數位傳輸"></a>CH4 數位傳輸</h2><h3 id="Q4-1-列出本書討論過的五種線路編碼機制。"><a href="#Q4-1-列出本書討論過的五種線路編碼機制。" class="headerlink" title="Q4-1 列出本書討論過的五種線路編碼機制。"></a>Q4-1 列出本書討論過的五種線路編碼機制。</h3><p>unipolar, polar, bipolar, multilevel, multi-transition</p>
+<h3 id="Q4-3-定義攪亂碼並舉出它的目的"><a href="#Q4-3-定義攪亂碼並舉出它的目的" class="headerlink" title="Q4-3 定義攪亂碼並舉出它的目的"></a>Q4-3 定義攪亂碼並舉出它的目的</h3><p>Scrambling, 替代 zero-level pulses 並 conbination of other levels.</p>
+<h3 id="Q4-5-分辨資料速率和訊號速率"><a href="#Q4-5-分辨資料速率和訊號速率" class="headerlink" title="Q4-5 分辨資料速率和訊號速率"></a>Q4-5 分辨資料速率和訊號速率</h3><p>data rate: 多少個 data element sent in 1s.<br>bits per second bps: 多少個 signal elements in 1s. 單位是 band </p>
+<h3 id="Q4-7-平行傳輸和序列傳輸之間的差異為何？"><a href="#Q4-7-平行傳輸和序列傳輸之間的差異為何？" class="headerlink" title="Q4-7 平行傳輸和序列傳輸之間的差異為何？"></a>Q4-7 平行傳輸和序列傳輸之間的差異為何？</h3><p>In parallel transmission: 可以在 1s 中送好幾個 bits<br>serial transmission: 一秒一個</p>
+<h3 id="Q4-9-列出三種數位對數位轉換的技術。"><a href="#Q4-9-列出三種數位對數位轉換的技術。" class="headerlink" title="Q4-9 列出三種數位對數位轉換的技術。"></a>Q4-9 列出三種數位對數位轉換的技術。</h3><p>line coding, block colding, scrambling</p>
+<h3 id="Q4-11-定義-DC-成分和它對數位傳輸的效應。"><a href="#Q4-11-定義-DC-成分和它對數位傳輸的效應。" class="headerlink" title="Q4-11 定義 DC 成分和它對數位傳輸的效應。"></a>Q4-11 定義 DC 成分和它對數位傳輸的效應。</h3><p>當電壓訊號保持一定狀態時，頻譜就會產生非常低的頻率，有些系統沒辦法通過低頻時就會出現問題</p>
+<h2 id="CH5-類比傳輸"><a href="#CH5-類比傳輸" class="headerlink" title="CH5 類比傳輸"></a>CH5 類比傳輸</h2><h3 id="Q5-1-定義數位對類比轉換"><a href="#Q5-1-定義數位對類比轉換" class="headerlink" title="Q5-1 定義數位對類比轉換"></a>Q5-1 定義數位對類比轉換</h3><p>一種程序，將數位訊號資料改變為類比資料；代表基頻數位訊號調幅成寬頻類比訊號</p>
+<h3 id="Q5-3-下列類比對類比轉換中，類比訊號的哪些特性改變以表示低通類比訊號？-a-AM-b-FM-c-PM"><a href="#Q5-3-下列類比對類比轉換中，類比訊號的哪些特性改變以表示低通類比訊號？-a-AM-b-FM-c-PM" class="headerlink" title="Q5-3 下列類比對類比轉換中，類比訊號的哪些特性改變以表示低通類比訊號？ a. AM b.FM c. PM"></a>Q5-3 下列類比對類比轉換中，類比訊號的哪些特性改變以表示低通類比訊號？ a. AM b.FM c. PM</h3><ul>
+<li>AM change the amplitude(震幅)</li>
+<li>FM change the frequency(頻率)</li>
+<li>PM change the phase(階段)</li>
+</ul>
+<h3 id="Q5-5-定義類比訊號"><a href="#Q5-5-定義類比訊號" class="headerlink" title="Q5-5 定義類比訊號"></a>Q5-5 定義類比訊號</h3><p>類比傳輸使用 band-pass channel<br>baseband(基頻) 中的類比、數位訊號轉換成複雜的類比訊號頻率，並且在適合的頻道中 </p>
+<h3 id="Q5-7-星宿圖上的訊號，其兩個分量為何？哪一個分量代表水平軸，哪一個分量代表垂直軸？"><a href="#Q5-7-星宿圖上的訊號，其兩個分量為何？哪一個分量代表水平軸，哪一個分量代表垂直軸？" class="headerlink" title="Q5-7 星宿圖上的訊號，其兩個分量為何？哪一個分量代表水平軸，哪一個分量代表垂直軸？"></a>Q5-7 星宿圖上的訊號，其兩個分量為何？哪一個分量代表水平軸，哪一個分量代表垂直軸？</h3><p>兩個 components I、Q<br>I 表示水平軸、Q 表示垂直軸</p>
+<h3 id="Q5-9-四種數位對類比轉換-ASK-FSK-PSK-QAM-的技術中，哪一個最容易受雜訊的影響？請說明。"><a href="#Q5-9-四種數位對類比轉換-ASK-FSK-PSK-QAM-的技術中，哪一個最容易受雜訊的影響？請說明。" class="headerlink" title="Q5-9 四種數位對類比轉換 (ASK, FSK, PSK, QAM) 的技術中，哪一個最容易受雜訊的影響？請說明。"></a>Q5-9 四種數位對類比轉換 (ASK, FSK, PSK, QAM) 的技術中，哪一個最容易受雜訊的影響？請說明。</h3><p>ASM 最容易受到 noise 影響</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BC%81%E6%A5%AD%E8%B3%87%E6%96%99%E9%80%9A%E8%A8%8A/" rel="tag">企業資料通訊</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/04/05/UVa/UVa11952/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">UVa11952 - Arithmetic(Math theorm)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2022
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
