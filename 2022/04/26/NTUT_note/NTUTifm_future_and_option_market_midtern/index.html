@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    期貨與選擇權市場 筆記 - 大三下期中考重點複習 |  大衞的筆記
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-159948450-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-NTUT_note/NTUTifm_future_and_option_market_midtern" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  期貨與選擇權市場 筆記 - 大三下期中考重點複習
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/04/26/NTUT_note/NTUTifm_future_and_option_market_midtern/" class="article-date">
+  <time datetime="2022-04-26T12:34:50.000Z" itemprop="datePublished">2022-04-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/">北科上課筆記</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字數統計：</span>
+            <span class="post-count">3.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 閱讀時間≈</span>
+            <span class="post-count">12分鐘</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於台北科技大學資訊與財金管理系大三下期貨與選擇權市場點整理<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="CH1-導論"><a href="#CH1-導論" class="headerlink" title="CH1 導論"></a>CH1 導論</h2><ul>
+<li>遠期合約，<strong>到期那天執行合約內容</strong></li>
+</ul>
+<h3 id="選擇權"><a href="#選擇權" class="headerlink" title="選擇權"></a>選擇權</h3><ul>
+<li>買權 call option，在未來特定價格，買進特定資產的全力</li>
+<li>賣權 put option，在未來特定價格，賣出特定資產的權力</li>
+<li>歐式選擇權，只有到期日可以履約</li>
+<li>美是選擇權，<strong>到期日前</strong>都可以履約</li>
+</ul>
+<h4 id="選擇權交易"><a href="#選擇權交易" class="headerlink" title="選擇權交易"></a>選擇權交易</h4><ul>
+<li>買權買方，擁有以特定價錢購買資產的權力，<strong>可決定是否執行</strong></li>
+<li>買權賣方，必須用買權買方特定價錢幫買權買方購買資產</li>
+<li>賣權買方，擁有以特定價錢販賣資產的權力，<strong>可決定是否執行</strong></li>
+<li>賣權賣方，必須用賣權買方特定價錢賣買權買方販賣資產</li>
+</ul>
+<h3 id="交易者種類"><a href="#交易者種類" class="headerlink" title="交易者種類"></a>交易者種類</h3><ul>
+<li>避險者，轉移價格波動</li>
+<li>投機者，小資金轉取利潤，接受風險<ul>
+<li>選擇權，最大損失為權利金</li>
+</ul>
+</li>
+<li>套利者，尋找價差<ul>
+<li>同時做一買一賣，才可以做到套利</li>
+</ul>
+</li>
+</ul>
+<h4 id="避險者"><a href="#避險者" class="headerlink" title="避險者"></a>避險者</h4><ul>
+<li>買入賣權避險<ul>
+<li>某一投資人擁有1,000股某公司股票，市價每股28美元，同時市場上有2月期，執行價格為27.50美元的賣權</li>
+<li>投資人同時買入10口賣權以作避險，賣權權利金1美元。</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1bSFSVgiaWybUU4UL-K1AU3Rim5KIU43f&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1J84yk6JhZpp-pXw8tKLGEmApdtGAZu77&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="投機者"><a href="#投機者" class="headerlink" title="投機者"></a>投機者</h4><ul>
+<li>買入買權<ul>
+<li>現在是10月，一位投機者認定某家公司的股價會在未來2個月內上漲，目前的股價是20美元，現有一個到期時間為2個月，履約價格是22.50美元的股票買權，買權價格則是1美元，假設該投機者要投資2,000美元</li>
+</ul>
+</li>
+</ul>
+<h2 id="CH2-期貨市場之運作"><a href="#CH2-期貨市場之運作" class="headerlink" title="CH2 期貨市場之運作"></a>CH2 期貨市場之運作</h2><ul>
+<li>價格收斂性，接近交割時間時，期貨價格會逐漸趨近於標的資產的現貨價格</li>
+<li>套利機會<ul>
+<li>交割期間內，期貨價格&gt;現貨價格</li>
+<li>交割期間內，期貨價格&lt;現貨價格</li>
+</ul>
+</li>
+</ul>
+<h3 id="保險金"><a href="#保險金" class="headerlink" title="保險金"></a>保險金</h3><ul>
+<li>保險金制度<ul>
+<li>確保不會違約</li>
+<li>投資人反悔</li>
+<li>投資人錢不夠</li>
+</ul>
+</li>
+<li>逐日清算<ul>
+<li>起始保證金<br>投資者購買期貨時，必須繳納的金額</li>
+<li>逐日清算<br>每天清算價值，為 \(期使保證金 + 未實現損益\)</li>
+<li>維持保證金<ul>
+<li>\(期貨保證金 + 未實現損益 &lt; 維持保證金 \)，這時候投資者必須繳更多錢以符合公式為 \(期貨保證金 + 未實現損益 = 初始保證金 \)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="交易方式"><a href="#交易方式" class="headerlink" title="交易方式"></a>交易方式</h3><ul>
+<li>當沖交易</li>
+<li>價差交易，買進一個合約(long position)，同時賣出另一個不同到期月份的合約(short position )</li>
+<li>未平倉口數<ul>
+<li>流通在外的合約總數</li>
+<li>等同於合約 long position 的總數，也等於合約 short position 總數</li>
+</ul>
+</li>
+</ul>
+<h3 id="委託單"><a href="#委託單" class="headerlink" title="委託單"></a>委託單</h3><ul>
+<li>限價單，只有比限定價格 or 更好的價格才會成交</li>
+<li>停價單，在限定價格 or 更<strong>不好</strong>的價格才會成交</li>
+<li>停限單，限價單與停價單的綜合，必須事先訂定限定價格與停止價格<ul>
+<li>停和限單，限定價格 = 停止價格</li>
+</ul>
+</li>
+<li>觸動轉市價單，當交易價格在特定價格或更好價格時，立馬買入</li>
+<li>機動委託單，給經紀商判斷最好的交易時間，以獲得好的成交價</li>
+</ul>
+<h3 id="會計"><a href="#會計" class="headerlink" title="會計"></a>會計</h3><ul>
+<li>避險會計，只認列損失，最後才認列是否有賺錢</li>
+<li>投機會計，每年都不斷認列，根據上次結算價認列是賺還是賠</li>
+</ul>
+<h3 id="合約利潤"><a href="#合約利潤" class="headerlink" title="合約利潤"></a>合約利潤</h3><ul>
+<li>遠期合約，全部的利潤或損失會在合約到期時一次產生</li>
+<li>期貨合約，利潤或損失會因逐日清算的機制而每日不同</li>
+<li>外匯期貨合約，價格是每一單位的外國貨幣等於多少美元或美分</li>
+<li>外匯遠期合約，英鎊、歐元、澳幣及紐幣的遠期報價與期貨價格的報價方式完全相同，但對其他主要的外幣時，遠期報價是每一美元(USD)等於多少單位的外幣。</li>
+</ul>
+<h2 id="CH3-第3章-使用期貨的避險策略"><a href="#CH3-第3章-使用期貨的避險策略" class="headerlink" title="CH3 第3章 使用期貨的避險策略"></a>CH3 第3章 使用期貨的避險策略</h2><ul>
+<li>完全避險，將風險完全予以消除的避險，實務上非常少見。</li>
+<li>避險並遺忘，一開始建立期貨部位，就不再做任何調整，在避險期間結束時，才將期貨部位結束。</li>
+</ul>
+<h3 id="公司是否要做避險"><a href="#公司是否要做避險" class="headerlink" title="公司是否要做避險"></a>公司是否要做避險</h3><ul>
+<li>公司對利率、匯率、商品價格做避險，才可以專注在主要企業活動上</li>
+<li><strong>實務上公司並不做避險</strong><ul>
+<li>股東，如果股東想要避險，可以自己去做，並不需要公司代勞。  </li>
+<li>競爭者，特定公司採取和所有其他公司都不同的作法時，有可能是不智之舉。</li>
+<li>避險說不定會搞砸，如果公司老闆不了解避險的真實涵義，避險就會增加財務長本身的風險。</li>
+</ul>
+</li>
+</ul>
+<h3 id="基差風險，重要"><a href="#基差風險，重要" class="headerlink" title="基差風險，重要"></a><strong>基差風險</strong>，重要</h3><ul>
+<li>造成基差風險的原因<ul>
+<li>避險者想要規避風險的資產，不同於期貨合約的標的資產    </li>
+<li>避險者無法預知未來買進或賣出的時間點</li>
+<li>避險者可能在合約尚未結算，就要賣出</li>
+</ul>
+</li>
+<li>基差公式 \(基差 = 避險資產的現貨價格 − 所用期貨合約的價格\)</li>
+<li><strong>基差會隨著時間減少</strong></li>
+</ul>
+<h3 id="定義符號"><a href="#定義符號" class="headerlink" title="定義符號"></a>定義符號</h3><ul>
+<li>t1, t2 時間點 1,2，t1 &lt; t2</li>
+<li>Si 現貨時間點 i 價格</li>
+<li>Fi 期貨時間點 i 價格</li>
+</ul>
+<h3 id="空單避險-short-hedge"><a href="#空單避險-short-hedge" class="headerlink" title="空單避險 short hedge"></a>空單避險 short hedge</h3><ul>
+<li>利用期貨合約的短部位來避險的一種策略</li>
+<li>當確知未來將賣出某一資產，並且欲鎖定其出售價格</li>
+<li>避險流程<ul>
+<li>現貨部位，避險者在 t2 出售資產，賣出價格為 s2</li>
+<li>期貨部位，在 t1 賣出期貨(short position)，在 t2 平倉，賣出期貨損益為 F1 - F2</li>
+<li>避險組合，資產出售的實際價格為 = S2 + (F1 - F2) = F1 + b2，其中 基差 = S2 - F2</li>
+<li>基差影響，基差轉強，避險者的部位變好；基差轉弱，避險者的部位變差</li>
+</ul>
+</li>
+</ul>
+<h3 id="多單避險-long-hedge"><a href="#多單避險-long-hedge" class="headerlink" title="多單避險 long hedge"></a>多單避險 long hedge</h3><ul>
+<li>利用期貨合約的長部位來避險</li>
+<li>當確知未來將買入某一資產，並且欲鎖定其購買價格</li>
+<li>避險流程<ul>
+<li>現貨部位，避險者在 t2 買進資產，買進價格為 s2</li>
+<li>期貨部位，在 t1 買入期貨(long position)，在 t2 平倉，買進期貨損益為 F2 - F1</li>
+<li>避險組合，資產有效價格為 = S2 - (F2 - F1) = F1 + b2，其中 基差 = S2 - F2</li>
+<li>基差影響，基差轉強，避險者的部位變差；基差轉弱，避險者的部位變好</li>
+</ul>
+</li>
+</ul>
+<h3 id="交叉避險-CROSS-HEDGING"><a href="#交叉避險-CROSS-HEDGING" class="headerlink" title="交叉避險 CROSS HEDGING"></a>交叉避險 CROSS HEDGING</h3><ul>
+<li>當期貨合約的標的資產都與需要避險的資產有所不同時，就須採用所謂的交叉避險。<ul>
+<li>當期貨的標的資產等於需要避險的資產，避險比率等於 1.0。</li>
+<li>使用交叉避險時，避險者所選擇的避險比率，應是一個會使避險部位總值的變異數達到最小的數值。</li>
+</ul>
+</li>
+<li>若避險者承擔風險暴露的資產(S)與期貨合約的 標的資產 S∗ 不相同</li>
+<li>\(S_{2}^{*}\) 期貨合約在 t2 時的現貨價格</li>
+<li>資產的賣價(或買價): S2 + F1 - F2 = F1 + ( \(S_{2}^{*} - F2\)) + ( \(S_{2}- S_{2}^{*}\)</li>
+<li>b2 = \(S_{2}^{*} - F2 \) + \(S_2 - S_{2}^{*}\)</li>
+<li>\( S_{2}^{*} - F2\) 避險資產和期貨標的資產相同時的基差</li>
+<li>\(S2 - S_{2}^{*}  \) 這兩種資產不同的基差</li>
+</ul>
+<h3 id="計算最小變異數的避險比率"><a href="#計算最小變異數的避險比率" class="headerlink" title="計算最小變異數的避險比率"></a>計算最小變異數的避險比率</h3><ul>
+<li>決定於現貨價格改變量和期貨價格改變量的關係</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1UpA5o0_tCsyyhpA2ST3Qqn8cuQH_mIOv&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="最佳合約數量"><a href="#最佳合約數量" class="headerlink" title="最佳合約數量"></a>最佳合約數量</h3><ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1MUmPvjfKthqGBD7euSqIqvSXtrdBy4i1&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="逐日清算的影響"><a href="#逐日清算的影響" class="headerlink" title="逐日清算的影響"></a>逐日清算的影響</h3><ul>
+<li>最適避險部位的逐日變動很小且可以被忽略不計</li>
+<li>當用期貨來避險時，為了因應期貨的逐日清算，避險者須做一微小的調整。</li>
+</ul>
+<h3 id="股票組合的避險"><a href="#股票組合的避險" class="headerlink" title="股票組合的避險"></a>股票組合的避險</h3><ul>
+<li>避險者認為投資組合中的股票皆是一時之選，對本身組合的股票能夠勝過市場大盤深具信心。</li>
+<li>因為避險者打算長期持有該投資組合，希望在不確定的市場情境下，獲得短期的保護作用。</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1AeaKTLWb2ugchA0wn0IDBaHblH5qqvvU&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="改變投資組合的-BETA-係數"><a href="#改變投資組合的-BETA-係數" class="headerlink" title="改變投資組合的 BETA 係數"></a>改變投資組合的 BETA 係數</h3><ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=17IOApYVWqszEvCea_L2Is2YwA2ioCFEX&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="避險部位的連續轉倉"><a href="#避險部位的連續轉倉" class="headerlink" title="避險部位的連續轉倉"></a>避險部位的連續轉倉</h3><ul>
+<li>如果避險的到期日比可用期貨合約的交割時間晚，可以將期貨合約平倉，在建立新交割且完全相同期貨部位，唯獨只有時間到期日比原先更晚</li>
+</ul>
+<h2 id="第五章-遠期和期貨價格的決定"><a href="#第五章-遠期和期貨價格的決定" class="headerlink" title="第五章 遠期和期貨價格的決定"></a>第五章 遠期和期貨價格的決定</h2><ul>
+<li>投資財，是一種以投資為目的，並有許多投資者所擁有的一種資產（如股票、債券、黃金、白銀）</li>
+<li>消費財，是一種以消費為主要用途的資產（如銅、原油）</li>
+</ul>
+<h3 id="融券賣出-SHORT-SELLING"><a href="#融券賣出-SHORT-SELLING" class="headerlink" title="融券賣出(SHORT SELLING)"></a>融券賣出(SHORT SELLING)</h3><ul>
+<li>放空，投資者出售忘為擁有的資產</li>
+<li>融券放空股票必須在經紀商處設有保證金帳戶</li>
+<li>不能融券賣出呢?<ul>
+<li>遠期價格及現貨價格關係式無任何影響</li>
+<li>如果遠期價格有偏低的現象，投資者會出售現貨資產，改為買進遠期合約的長部位。</li>
+<li>遠期價格將會持續不斷地調整，直到套利機會都不可能存在為止</li>
+</ul>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ujoU5CEpmhBF-mJFYyGVKpOI-OFW308U&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="定義模型中的前提"><a href="#定義模型中的前提" class="headerlink" title="定義模型中的前提"></a>定義模型中的前提</h3><ul>
+<li>市場交易者進行交易時，沒有交易成本</li>
+<li>市場參與者的所有交易淨利都適用相同的稅率</li>
+<li>市場參與者可以相同的無風險利率進行資金借貸</li>
+<li>市場參與者會充分利用所有可能的套利機會</li>
+</ul>
+<h3 id="定義符號-1"><a href="#定義符號-1" class="headerlink" title="定義符號"></a>定義符號</h3><ul>
+<li>T 遠期or 期貨合約到期時間，單位為年</li>
+<li>S0 遠期或期貨合約之標的資產的今日價格</li>
+<li>F0 遠期或期貨合約的今日價格</li>
+<li>r 連續複利的零息無風險利率，適用的到期時間為𝑇年</li>
+</ul>
+<h4 id="套利的交易策略"><a href="#套利的交易策略" class="headerlink" title="套利的交易策略"></a>套利的交易策略</h4><ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1SaLL-L2uxVNY5mAp_lrGODfB4jwUGrHh&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="遠期價格及現貨價格關係公式"><a href="#遠期價格及現貨價格關係公式" class="headerlink" title="遠期價格及現貨價格關係公式"></a>遠期價格及現貨價格關係公式</h3><ul>
+<li>公式: \(F_0 = S_{0} e^{rT}\)</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BPil7Nvxc6XRHS5Kx3UpSGl1eyZZKWm5&export=download" alt=""></p>
+</blockquote>
+</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1ftX5jo6CPy6wq_sy-r9TolaOXDvmRr9j&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>其中表 5.3 中， 39.60 元，則是此債券會發放 40 美元，當前債券價格為 900 元，</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1BLw3co11n6KRr0Mzb2Cuc_FzR4huvRjr&export=download" alt=""></p>
+</blockquote>
+</li>
+<li>當遠期合約會提供現值為 I 的收入時，公式修改為 \(F_0 = (S_{0} - I) e^{rT}\)</li>
+<li>已知報酬率，q 為遠期合約中，標的資產的平均報酬率(為連續複利的年利率) \(F_0 = S_{0} e^{ (r-q) T}\)<ul>
+<li>其中股價指數的期貨價格(會支付殖利率)，也適用此公式</li>
+</ul>
+</li>
+<li>外幣的遠期合約與期貨合約<ul>
+<li>利率平價關係式 \(F_0 = S_0 e^{ (r- r_f)T }\)</li>
+<li>r_f 為外國無風險利率，r 表示美國的無風險利率</li>
+</ul>
+</li>
+<li>商品期貨合約<ul>
+<li>儲存成本: \(F_0 = (S_0 + U) e^{rT}\)，考慮商品出借收入，商品有儲存成本，將儲存成本視為一項負的收入，以 U 代表遠期合約有效期間內所有儲存成本的現值</li>
+<li>儲存成本: \(F_0 = S_0 e^{(r+u)T}\)，如果扣除收入後的儲存成本與商品價格成一比例關係時，可將儲存成本視為一個負的報酬率，以𝑢表示扣除資產報酬率之後的每年儲存成本<br><del>通常用不太到</del></li>
+</ul>
+</li>
+</ul>
+<h3 id="遠期合約的評價公式"><a href="#遠期合約的評價公式" class="headerlink" title="遠期合約的評價公式"></a>遠期合約的評價公式</h3><ul>
+<li>K 遠期合約的交割價格</li>
+<li>f 遠期合約的今日價格</li>
+<li>F_0 先前已成交遠期合約的今日遠期價格</li>
+<li>T 到期時間</li>
+<li>r 年期無風險利率</li>
+<li>遠期合約長部位的今日價值為 \( f = (F_0 - K) e^{-rT}\)</li>
+<li>遠期合約短部位的今日價值為 \( f = (K - F_0) e^{-rT}\)</li>
+<li>統整公式<ul>
+<li>無收入投資財的遠期合約之價值，\(f = S_{0} -  Ke^{-rT}\)</li>
+<li>標的資產是一個有已知收入且現值為 I 的投資財，\(F_0 = S_{0} - I -  Ke^{rT}\)</li>
+<li>標的資產是一個有已知報酬率 q 的投資財 \(f = S_0  e^{-qT} - K e^{-rT}\)</li>
+</ul>
+</li>
+</ul>
+<h3 id="遠期價格會等於期貨價格嗎"><a href="#遠期價格會等於期貨價格嗎" class="headerlink" title="遠期價格會等於期貨價格嗎"></a>遠期價格會等於期貨價格嗎</h3><ul>
+<li>資產價格與利率<ul>
+<li>有高度的正相關時，期貨價格應略為大於遠期價格</li>
+<li>有高度的負相關時，遠期價格應略為大於期貨價格</li>
+<li>如果未來的利率沒有不確定性時，且具有相同交割日期，遠期價格<strong>等同於</strong>期貨價格</li>
+</ul>
+</li>
+</ul>
+<h3 id="便利殖利率"><a href="#便利殖利率" class="headerlink" title="便利殖利率"></a>便利殖利率</h3><ul>
+<li>便利殖利率(y)，持有實體資產所帶來的利益，反映市場對商品未來供給量的預期心理</li>
+<li>儲存成本<ul>
+<li>現值金額(U): \(F_0 e^{yT} = (S_0 + U) e^{rT}\)</li>
+<li>現貨價格的百分比(u): \(F_0 = S_0 e^{(r+u-y)T}\)，<del>通常用不太到</del></li>
+</ul>
+</li>
+</ul>
+<h3 id="持有成本"><a href="#持有成本" class="headerlink" title="持有成本"></a>持有成本</h3><ul>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1JP1q1hRXhfFKJddqbey8AvmY-YUDPOy3&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="期望現貨價格"><a href="#期望現貨價格" class="headerlink" title="期望現貨價格"></a>期望現貨價格</h3><ul>
+<li>期貨價格 &lt; 期望現貨價格<ul>
+<li>如果避險者多持有期貨短部位，且投機者多持有期貨長部位</li>
+<li>投機者因承擔風險而要求風險溢酬</li>
+</ul>
+</li>
+<li>期貨價格 &gt; 期望現貨價格<br>如果避險者多持有期貨長部位，且投機者多持有期貨短部位</li>
+<li>投資者在承擔正的系統風險時，會要求獲得比無風險利率更高的期望報酬率</li>
+<li>當投資的系統風險是負的時候，投資者也會願意接受低於無風險利率的期望報酬率</li>
+</ul>
+<h3 id="正常逆價差、正價差"><a href="#正常逆價差、正價差" class="headerlink" title="正常逆價差、正價差"></a>正常逆價差、正價差</h3><ul>
+<li>當期貨價格低於未來的期望現貨價格，此即所謂的正常逆價差</li>
+<li>當期貨價格高於未來的期望現貨價格，此即所謂的正價差</li>
+<li><blockquote>
+<p><img src="https://drive.google.com/u/2/uc?id=1sXw-OlIV543LL11mmZNQCPjBwrs5m5cr&export=download" alt=""></p>
+</blockquote>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版權聲明： </strong s>
+              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BC%81%E6%A5%AD%E8%B3%87%E6%96%99%E9%80%9A%E8%A8%8A/" rel="tag">企業資料通訊</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%97%E7%A7%91%E4%B8%8A%E8%AA%B2%E7%AD%86%E8%A8%98/" rel="tag">北科上課筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/04/26/life_experence/david_20220426/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">厭世又努力的大衛，但一路很感謝大家的幫助</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '給我的文章加點評論吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2022
+        John Doe
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="大衞的筆記"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主頁</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">歸檔</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分類</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">標籤</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">關於我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜尋">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['現在的我是樂觀的，我不害怕挑戰、不需要面子，我需要的是貨真價值的能力。', '明天要保持笑容，面對每個挑戰，因為不優秀的人是沒有資格哭泣的。', '想要的都擁有，得不到的都釋懷'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/js/ayer.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>

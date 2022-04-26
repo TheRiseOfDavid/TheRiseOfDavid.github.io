@@ -77,7 +77,7 @@ ga('send', 'pageview');
     
     
     
-    <article id="post-UVa/UVa10477" class="article article-type-post" itemscope
+    <article id="post-Explain_Algorithm/dijkstra" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -85,8 +85,8 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2021/09/20/UVa/UVa10477/"
-    >UVa10477 - The Hybrid Knight(BFS)</a
+  <a class="article-title" href="/2021/09/24/Explain_Algorithm/dijkstra/"
+    >演算法知識 - Dijkstra&#39;s Algorithm (無權重、有權重向圖)</a
   >
 </h2>
   
@@ -96,8 +96,88 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2021/09/20/UVa/UVa10477/" class="article-date">
-  <time datetime="2021-09-20T05:51:59.000Z" itemprop="datePublished">2021-09-20</time>
+      <a href="/2021/09/24/Explain_Algorithm/dijkstra/" class="article-date">
+  <time datetime="2021-09-24T13:37:07.000Z" itemprop="datePublished">2021-09-24</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="Dijkstra’a-Algorithm-介紹"><a href="#Dijkstra’a-Algorithm-介紹" class="headerlink" title="Dijkstra’a Algorithm 介紹"></a>Dijkstra’a Algorithm 介紹</h2><blockquote>
+<p>能夠針對<strong>有、無權重的</strong>有向圖做出單點全源最短路徑演算法。</p>
+<ul>
+<li>單點全源：從 A 點到任意邊的最短距離<br>時間複雜度為 \(O((E+V)log V)\)，E 為邊、V 為頂點</li>
+</ul>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/09/24/Explain_Algorithm/dijkstra/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dijkstra-s/" rel="tag">Dijkstra's</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa12047" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/24/UVa/UVa12047/"
+    >UVa12047 - Highest Paid Toll(Dijkstra&#39;s)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/24/UVa/UVa12047/" class="article-date">
+  <time datetime="2021-09-24T05:51:59.000Z" itemprop="datePublished">2021-09-24</time>
 </a>
       
   <div class="article-category">
@@ -121,17 +201,11 @@ ga('send', 'pageview');
 
       
       <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>生物學家讓西洋棋的騎士更跟其他棋子進行雜交，因此現在產生了一種棋子叫做怪異騎士，怪異騎士總共有三種型態，依序是普通騎士、變異騎士、變異士兵。</p>
-<ul>
-<li>普通騎士與一般騎士走法相同</li>
-<li>變異騎士則是比一般騎士的長度再多一格</li>
-<li>變異士兵走法與一般士兵相同，但變異士兵在走最後一步時可以走一格對角線</li>
-</ul>
-<p>現在給你一個棋盤 \(N*N\) 再給你怪異騎士的初始位置，請你讓怪異騎士走到終點。<br>請給出最小步數走法</p>
-<p><a href="https://onlinejudge.org/external/104/10477.pdf" target="_blank" rel="noopener">題目連結</a></p>
+<p>在一個城市中，每一條道路都必須要收過路費。<br>其中會給你一個數值 p，你從出發點到終點不可以花超過 p 費用，並且在符合前面條件下，會產生 toll<br>toll: 在你走的路徑中，花費最多一次的過路費。<br>請你找出最大的 toll 是多少。</p>
+<p><a href="https://onlinejudge.org/external/120/12047.pdf" target="_blank" rel="noopener">題目連結</a></p>
 </blockquote>
       
-      <a class="article-more-link" href="/2021/09/20/UVa/UVa10477/">閱讀更多...</a>
+      <a class="article-more-link" href="/2021/09/24/UVa/UVa12047/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -144,7 +218,7 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BB%A3%E5%BA%A6%E5%84%AA%E5%85%88%E6%90%9C%E5%B0%8B-Breadth-First-Search/" rel="tag">廣度優先搜尋 Breadth-First Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dijkstra-s/" rel="tag">Dijkstra's</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
@@ -294,6 +368,90 @@ ga('send', 'pageview');
 </blockquote>
       
       <a class="article-more-link" href="/2021/09/20/UVa/UVa10426/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BB%A3%E5%BA%A6%E5%84%AA%E5%85%88%E6%90%9C%E5%B0%8B-Breadth-First-Search/" rel="tag">廣度優先搜尋 Breadth-First Search</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-UVa/UVa10477" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/20/UVa/UVa10477/"
+    >UVa10477 - The Hybrid Knight(BFS)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/20/UVa/UVa10477/" class="article-date">
+  <time datetime="2021-09-20T05:51:59.000Z" itemprop="datePublished">2021-09-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>生物學家讓西洋棋的騎士更跟其他棋子進行雜交，因此現在產生了一種棋子叫做怪異騎士，怪異騎士總共有三種型態，依序是普通騎士、變異騎士、變異士兵。</p>
+<ul>
+<li>普通騎士與一般騎士走法相同</li>
+<li>變異騎士則是比一般騎士的長度再多一格</li>
+<li>變異士兵走法與一般士兵相同，但變異士兵在走最後一步時可以走一格對角線</li>
+</ul>
+<p>現在給你一個棋盤 \(N*N\) 再給你怪異騎士的初始位置，請你讓怪異騎士走到終點。<br>請給出最小步數走法</p>
+<p><a href="https://onlinejudge.org/external/104/10477.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/09/20/UVa/UVa10477/">閱讀更多...</a>
       
       
       <!-- reward -->
@@ -478,6 +636,88 @@ ga('send', 'pageview');
 
 </article>
     
+    <article id="post-UVa/UVa10457" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/UVa/UVa10457/"
+    >UVa10457 - Magic Car(Kruskal)</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/09/08/UVa/UVa10457/" class="article-date">
+  <time datetime="2021-09-08T05:51:59.000Z" itemprop="datePublished">2021-09-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/UVa/">UVa</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
+<p>有一台神奇的車子，稱呼為 magic car</p>
+<ul>
+<li>發動跟結束都需要耗費能量</li>
+<li>中間距離所使用的能量是這樣計算的：\(max(每一條街最大的能量) - min(每一條街最大的能量\)<br>現在這台車子要從 A 到 B，會經過許多條路，請你告訴我走最省油的路徑抵達 B 點時，會花多少能量</li>
+</ul>
+<p><a href="https://onlinejudge.org/external/104/10457.pdf" target="_blank" rel="noopener">題目連結</a></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2021/09/08/UVa/UVa10457/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kruskal-s-algorithm/" rel="tag">Kruskal's algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-UVa/UVa1265" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -625,244 +865,6 @@ ga('send', 'pageview');
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dijkstra-s/" rel="tag">Dijkstra's</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa10457" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/08/UVa/UVa10457/"
-    >UVa10457 - Magic Car(Kruskal)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/08/UVa/UVa10457/" class="article-date">
-  <time datetime="2021-09-08T05:51:59.000Z" itemprop="datePublished">2021-09-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>有一台神奇的車子，稱呼為 magic car</p>
-<ul>
-<li>發動跟結束都需要耗費能量</li>
-<li>中間距離所使用的能量是這樣計算的：\(max(每一條街最大的能量) - min(每一條街最大的能量\)<br>現在這台車子要從 A 到 B，會經過許多條路，請你告訴我走最省油的路徑抵達 B 點時，會花多少能量</li>
-</ul>
-<p><a href="https://onlinejudge.org/external/104/10457.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/09/08/UVa/UVa10457/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kruskal-s-algorithm/" rel="tag">Kruskal's algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-UVa/UVa11631" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/06/UVa/UVa11631/"
-    >UVa11631 - Dark Roads(Kruskal)</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/06/UVa/UVa11631/" class="article-date">
-  <time datetime="2021-09-06T15:51:59.000Z" itemprop="datePublished">2021-09-06</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/UVa/">UVa</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="題目大意"><a href="#題目大意" class="headerlink" title="題目大意"></a>題目大意</h2><blockquote>
-<p>Byteland 這座城市想要節省電費，因此想要在晚上把路燈給關掉，每一公尺就需要花一塊錢，但是要是整座城市都沒有路燈就太可怕了！於是 Byteland 折衷，她希望可以有一個明亮的路徑通往到每一個道路上，因此他想問說，如果只有一條明亮的路徑並且可以通往到每個道路上，那我將其他燈都關掉可以省下多少成本</p>
-<p><a href="https://onlinejudge.org/external/116/11631.pdf" target="_blank" rel="noopener">題目連結</a></p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/09/06/UVa/UVa11631/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kruskal-s-algorithm/" rel="tag">Kruskal's algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UVa/" rel="tag">UVa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Explain_Algorithm/kruskal" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/09/06/Explain_Algorithm/kruskal/"
-    >演算法知識 - Kruskal Algorithm</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2021/09/06/Explain_Algorithm/kruskal/" class="article-date">
-  <time datetime="2021-09-06T13:37:07.000Z" itemprop="datePublished">2021-09-06</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/">演算法知識</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="Kruskal-Algorithm-介紹"><a href="#Kruskal-Algorithm-介紹" class="headerlink" title="Kruskal Algorithm 介紹"></a>Kruskal Algorithm 介紹</h2><blockquote>
-<p>主要是在一張圖中組合成一顆樹，其中每一條邊都有一個成本，且要求這顆樹的總和成本必須要是最小。<br>時間複雜度為 \(O(E \log E)\)</p>
-<p>主要用來找出一張圖中的最小生成樹、最大生成樹</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2021/09/06/Explain_Algorithm/kruskal/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kruskal-s-algorithm/" rel="tag">Kruskal's algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%94%E7%AE%97%E6%B3%95%E7%9F%A5%E8%AD%98/" rel="tag">演算法知識</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A7%A3%E9%A1%8C/" rel="tag">程式解題</a></li></ul>
 
 
     </footer>
