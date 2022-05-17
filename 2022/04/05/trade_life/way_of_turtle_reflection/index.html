@@ -481,16 +481,15 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ul>
-<h2 id="海龜交易法則"><a href="#海龜交易法則" class="headerlink" title="海龜交易法則"></a>海龜交易法則</h2><ul>
+<h2 id="海龜交易法則，以做多策略為例"><a href="#海龜交易法則，以做多策略為例" class="headerlink" title="海龜交易法則，以做多策略為例"></a>海龜交易法則，以做多策略為例</h2><ul>
 <li>成功交易所需要的每項決策<ul>
 <li>市場<br>避免交易量太小或沒有甚麼趨勢的市場</li>
 <li>部位大小<br>將等量的資金投資在各種不同的標的上</li>
+<li>ATR 全名為 平均真實區間(Average True Range)，有興趣的讀者可以去看看</li>
 <li>進場<ul>
-<li>\(delta = 20ATR * 進場價\)</li>
-<li>當 \(進場價 - 2*delta &lt; 當前價 \) 就停損 </li>
+<li>\(當前價 &gt; 20MA \)</li>
 </ul>
 </li>
-<li>停損</li>
 <li>出場<br>對於獲利部位的出場沒有清楚的描述就不算完整的系統</li>
 <li>策略<ul>
 <li>如果你全靠自己判斷，則在交易期間，你可能會發現自己在該大膽時恐懼，該謹慎時卻勇往直前</li>
@@ -498,9 +497,17 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>加碼<ul>
-<li>使用 20 ATR，\( delta = 20ATR * 進場價 \)</li>
+<li>使用 20 ATR，\( delta = 0.5ATR \)</li>
 <li>因此第一口價碼為 \( 進場價 * delta \)</li>
-<li>第二口加碼為 \( 場價 * 2 * delta，以此類推 \)</li>
+<li>第二口加碼為 \( 進場價 * 2 * delta，以此類推 \)</li>
+</ul>
+</li>
+<li>停損<ul>
+<li>當 \(買入價 - 2ATR &lt; 當前價 \)</li>
+</ul>
+</li>
+<li>移動停損<ul>
+<li>當 \(倒數第二次進場價 &gt; 當前價 \)</li>
 </ul>
 </li>
 </ul>
