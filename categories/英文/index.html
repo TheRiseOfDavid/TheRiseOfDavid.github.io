@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    甚麼是 RESTAPI ? |  大衞的筆記
+    英文 |  大衞的筆記
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -43,294 +43,85 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-API" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
+  <article class="articles">
     
-    <header class="article-header">
+    
+    <h1 class="page-type-title">英文</h1>
+    
+    
+  
+  
+  
+  
+  
+  
+  <div class="archives-wrap">
+    <div class="archive-year-wrap">
+      <a href="/archives/2022" class="archive-year">2022</a>
+    </div>
+    <div class="archives">
+      
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/05/17/english_note/english_grammar/" class="archive-article-date">
+  <time datetime="2022-05-17T07:25:16.000Z" itemprop="datePublished">05/17</time>
+</a>
        
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  甚麼是 RESTAPI ?
-</h1>
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2022/05/17/english_note/english_grammar/"
+    >英文文法統整</a
+  >
+</h2>
   
 
     </header>
     
-
-    
-    <div class="article-meta">
-      <a href="/2020/07/23/API/" class="article-date">
-  <time datetime="2020-07-23T08:21:22.000Z" itemprop="datePublished">2020-07-23</time>
-</a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/">學習筆記</a>
+    <a class="article-category-link" href="/categories/%E8%8B%B1%E6%96%87/">英文</a>
   </div>
 
-      
-      
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字數統計：</span>
-            <span class="post-count">578</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 閱讀時間≈</span>
-            <span class="post-count">2分鐘</span>
-        </span>
-    </span>
-</div>
-
-      
-    </div>
-    
-
     
     
-    <div class="tocbot"></div>
-
-
-
-
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="內容說明"><a href="#內容說明" class="headerlink" title="內容說明"></a>內容說明</h2><blockquote>
-<p>此文章講述於 RESTAPI 的大概使用方法與使用時機，並沒有詳細解釋，詳細解釋還需讀閱他人優秀文章</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="甚麼是-API"><a href="#甚麼是-API" class="headerlink" title="甚麼是 API?"></a>甚麼是 API?</h2><p>就是別人把資料給你，你再把那些資料處理成資訊後再給別人，然後是透過 url 來進行交換的入口</p>
-<h2 id="API-Method"><a href="#API-Method" class="headerlink" title="API Method"></a>API Method</h2><ul>
-<li>POST：新增</li>
-<li>GET：讀取</li>
-<li>PUT：修改（修改整份文件）</li>
-<li>PATCH：修改（修改其中幾個欄位）</li>
-<li>DELETE：刪除</li>
-</ul>
-<h2 id="API-回傳資料"><a href="#API-回傳資料" class="headerlink" title="API 回傳資料"></a>API 回傳資料</h2><table>
-<thead>
-<tr>
-<th>狀態</th>
-<th>英文</th>
-<th>中文</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>200</td>
-<td>OK</td>
-<td>完成</td>
-<td>通常在 get 時使用</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Created</td>
-<td>資源新增成功</td>
-<td>通常在 post 時使用</td>
-</tr>
-<tr>
-<td>202</td>
-<td>Accepted</td>
-<td>請求接受，但在處理中</td>
-<td>有可能會失敗</td>
-</tr>
-<tr>
-<td>204</td>
-<td>No Content</td>
-<td>請求成功，但沒有返回內容</td>
-<td>通常用在刪除或修改</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad Request</td>
-<td>錯誤請求</td>
-<td>通常有欄位未填寫或填寫錯誤</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized</td>
-<td>使用者沒有進行驗證</td>
-<td></td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden</td>
-<td>使用者已經登入，但沒有權限操作</td>
-<td></td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone</td>
-<td>資源已經過期</td>
-<td></td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error</td>
-<td>伺服器端錯誤</td>
-<td></td>
-</tr>
-<tr>
-<td>502</td>
-<td>Bad Gateway</td>
-<td>伺服器某個服務沒有被正確執行</td>
-<td></td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable</td>
-<td>伺服器臨時維護或即將死亡，暫時無法處理請求</td>
-<td></td>
-</tr>
-<tr>
-<td>504</td>
-<td>Gateway Timeout</td>
-<td>伺服器上服務回應</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="觀念釐清："><a href="#觀念釐清：" class="headerlink" title="觀念釐清："></a>觀念釐清：</h2><h3 id="POST-跟-GET-主要差在哪裡呢？"><a href="#POST-跟-GET-主要差在哪裡呢？" class="headerlink" title="POST 跟 GET 主要差在哪裡呢？"></a>POST 跟 GET 主要差在哪裡呢？</h3><p>根據我的經驗(對不起我經驗連一年都沒有滿 QQ)，我盡可能來進行解釋。</p>
-<h4 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h4><ul>
-<li>比較像是明信片，只能傳送簡單資訊。</li>
-<li>通常會將你傳送的資訊放在 url 之後。</li>
-<li>沒有 body，畢竟明信片也沒有 Body XD。</li>
-<li>如果有壞蛋想要看你寫甚麼，只要抓到你傳送的 url 就好，安全性較低。<h4 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h4></li>
-<li>比較像是信封，可以傳送複雜資訊。</li>
-<li>通常是將你 post 的資訊放入 body 內。</li>
-<li>比起 get 有保障些，你傳送的資訊較沒有那麼容易就能被他人得知。</li>
-</ul>
-<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結:"></a>參考連結:</h2><p><a href="https://medium.com/%E5%B0%8F%E5%B0%8F%E8%AA%AA%E6%9B%B8%E4%BA%BA/%E7%B6%B2%E9%A0%81get-%E8%88%87-post-%E5%B7%AE%E7%95%B0-%E7%A7%91%E6%99%AE%E5%A3%B9%E9%BB%9E%E9%80%9A-94cbaa666fdb" target="_blank" rel="noopener">網頁Get 與 Post 差異 (科普壹點通)</a></p>
-<h2 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h2><p>API 其實蠻好用，只是有點偏複雜。還需要多加磨練，我也要能夠讓自己變得更優秀，也謝謝各位前輩的努力。<br>也謝謝 台灣STEAM基礎教育聯盟給予我機會使我成長，對不起我有時候速度拖太慢。</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-        <div class="declare">
-          <ul class="post-copyright">
-            <li>
-              <i class="ri-copyright-line"></i>
-              <strong>版權聲明： </strong s>
-              本部落格所有文章除有特別聲明外，均採用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
-                target="_blank">Apache License 2.0</a> 許可協議。轉載請註明出處！
-            </li>
-          </ul>
-        </div>
-        
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RESTAPI/" rel="tag">RESTAPI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
-
-
-    </footer>
-
   </div>
-
-  
-  
-  <nav class="article-nav">
-    
-      <a href="/2020/07/24/R/R-server-install-package/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Linux R 在 install packages 遇到的問題集
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2020/07/23/R/R-api/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">透過 plumber 完成 RESTAPI 在 R 上的應用</div>
-      </a>
-    
-  </nav>
-
-
-  
-
-  
-  
-<!-- valine评论 -->
-<div id="vcomments-box">
-    <div id="vcomments">
-    </div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: '',
-        app_key: '',
-        path: window.location.pathname,
-        notify: 'false',
-        verify: 'false',
-        avatar: 'mp',
-        placeholder: '給我的文章加點評論吧~',
-        recordIP: true
-    });
-    const infoEle = document.querySelector('#vcomments .info');
-    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-        infoEle.childNodes.forEach(function (item) {
-            item.parentNode.removeChild(item);
-        });
-    }
-</script>
-<style>
-    #vcomments-box {
-        padding: 5px 30px;
-    }
-
-    @media screen and (max-width: 800px) {
-        #vcomments-box {
-            padding: 5px 0px;
-        }
-    }
-
-    #vcomments-box #vcomments {
-        background-color: #fff;
-    }
-
-    .v .vlist .vcard .vh {
-        padding-right: 20px;
-    }
-
-    .v .vlist .vcard {
-        padding-left: 10px;
-    }
-</style>
-
-  
-
-  
-  
-  
-
 </article>
+      
+  
+  
+      <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/05/17/english_note/toeic/" class="archive-article-date">
+  <time datetime="2022-05-17T07:25:16.000Z" itemprop="datePublished">05/17</time>
+</a>
+       
+<h2 itemprop="name">
+  <a class="archive-article-title" href="/2022/05/17/english_note/toeic/"
+    >TOEIC 考試注意</a
+  >
+</h2>
+  
+
+    </header>
+    
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%8B%B1%E6%96%87/">英文</a>
+  </div>
+
+    
+    
+  </div>
+</article>
+      
+      
+    </div>
+  </div>
+  
+  
+
+  
 </section>
       <footer class="footer">
   <div class="outer">
@@ -465,30 +256,6 @@ ga('send', 'pageview');
 </script>
 
 
-
-
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: 'main',
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-    onClick: (e) => {
-      $('.toc-link').removeClass('is-active-link');
-      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
-      $(e.target.hash).scrollIntoView();
-      return false;
-    }
-  });
-</script>
 
 
 
