@@ -79,6 +79,298 @@ ga('send', 'pageview');
     
     
     
+    <article id="post-linux/emacs-gui-command" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/08/linux/emacs-gui-command/"
+    >emacs(gui) 的基礎指令</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2024/01/08/linux/emacs-gui-command/" class="article-date">
+  <time datetime="2024-01-08T12:48:32.000Z" itemprop="datePublished">2024-01-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>此筆記用途在於我學習中用到的指令<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+<h2 id="基礎指令"><a href="#基礎指令" class="headerlink" title="基礎指令"></a>基礎指令</h2><ul>
+<li><code>DEL</code> 可直接刪除字元</li>
+<li><code>ctrl-u &lt;number&gt; &lt;char&gt;</code> 將此單字複製多次</li>
+<li><code>ctrl-u &lt;number&gt; &lt;command&gt;</code> 重複特定指令<ul>
+<li><code>ctrl-u 2 ctrl-k</code> 刪除兩行</li>
+</ul>
+</li>
+<li><code>ctrl-space</code> 可以將一段範圍選取，可再搭配特定命令進行操作<ul>
+<li><code>ctrl-w</code> 移除特定字元(當刪除字元時會完整刪除，不留下 space)，若刪除 space 則無異議</li>
+</ul>
+</li>
+<li><code>ctrl-k</code> 從定位點，刪除到行尾</li>
+<li><code>ctrl-y</code> 貼上<ul>
+<li>可將上一次進行刪除的字串，做復原</li>
+</ul>
+</li>
+<li><code>ctrl-y alt-y</code> 回復<strong>倒數第二次</strong>被刪除的字串<ul>
+<li>如果需要回復更早，則輸入更多 <code>alt-y</code></li>
+</ul>
+</li>
+<li><code>ctrl-/</code> 回到上一步</li>
+<li><code>esc esc esc</code> 當你不需要這個指令 or 打錯，則使用這個指令</li>
+</ul>
+<h2 id="進階指令"><a href="#進階指令" class="headerlink" title="進階指令"></a>進階指令</h2><ul>
+<li><code>ctrl-x ctrl-f</code> 查看目錄檔案<ul>
+<li><code>ctrl-x ctrl-f &lt;file_name, options&gt;</code> 新建檔案，可以輸入 filename 來決定此檔名。</li>
+</ul>
+</li>
+<li><code>ctrl-g</code> 終止當前動作</li>
+<li><code>ctrl-x ctrl-s &lt;file_name, options&gt;</code> 儲存檔案，可以輸入 filename 來決定此檔名</li>
+<li><code>ctrl-x 1</code> 關閉視窗</li>
+<li><code>ctrl-x ctrl-b</code> 查看開了哪些 buffer</li>
+<li><code>ctrl-x ctrl-s</code> 儲存檔案</li>
+<li><code>ctrl-x b &lt;buffer_name&gt;</code> 切換其他的 buffer，同時開個新視窗</li>
+<li><code>ctrl-x ctrl-x</code> 儲存每個 buffer 後，關閉 emacs</li>
+<li><code>ctrl-z</code> 將 emacs 切到後台<ul>
+<li><code>%emacs</code> emacs 切回來</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他常用指令"><a href="#其他常用指令" class="headerlink" title="其他常用指令"></a>其他常用指令</h2><ul>
+<li><code>meta-x repl s&lt;return&gt;&lt;search_string&gt;&lt;return&gt;&lt;replacement_string&gt;</code> 替換字串；其中 <code>&lt;return&gt;</code>是按 enter，另外兩個按照字面意思</li>
+<li>使檔案自動儲存<ul>
+<li>則檔案前綴名必須是 <code>#&lt;file.filetype&gt;#</code></li>
+<li>則會自動儲存，其中也可以透過 <code>meta-x recover-file</code> 來還原檔案</li>
+</ul>
+</li>
+<li>倒數第二行之狀態<ul>
+<li><code>-:---</code> 已被儲存</li>
+<li><code>-:**-</code> 有資料尚未被儲存</li>
+</ul>
+</li>
+<li><code>meta-x &lt;modename&gt;</code> 可切換其他 emacs 模式。</li>
+<li><code>ctrl-s</code> 搜尋，反白後則可以做其他動作<ul>
+<li><code>ctrl-r</code> 向前搜尋</li>
+<li><code>ctrl-s</code> 向後搜尋</li>
+</ul>
+</li>
+<li><code>ctrl-x 2</code> 開兩個視窗<ul>
+<li><code>ctrl-x o</code> 切換視窗的 cursor</li>
+</ul>
+</li>
+<li><code>meta-x make-frame</code> 再新增一個程式 emacs</li>
+<li><code>meta-x delete-frame</code> 刪除一個程式 emacs</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-linux/wsl1-update-to-2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/08/linux/wsl1-update-to-2/"
+    >WSL1 升級成 WSL2</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2024/01/08/linux/wsl1-update-to-2/" class="article-date">
+  <time datetime="2024-01-08T12:48:32.000Z" itemprop="datePublished">2024-01-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="請依據此連結進行操作"><a href="#請依據此連結進行操作" class="headerlink" title="請依據此連結進行操作"></a>請依據此連結進行操作</h2><p><a href="https://dev.to/adityakanekar/upgrading-from-wsl1-to-wsl2-1fl9" target="_blank" rel="noopener">從 WSL1 升級到 WSL2</a></p>
+<p>其中在 <code>從 WSL1 升級到 WSL2</code> 標題中的 <code>wsl --set-version Ubuntu-20.04 2</code> 將 20.04 轉換成你電腦中的特定版本。</p>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><p><a href="https://samiouob.github.io/2019/06/17/WSL2/" target="_blank" rel="noopener">[WSL] 將 WSL 升級成 WSL2 吧 !</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-vim/command_introduction" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/01/08/vim/command_introduction/"
+    >VIM 指令教學</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2024/01/08/vim/command_introduction/" class="article-date">
+  <time datetime="2024-01-08T12:34:50.000Z" itemprop="datePublished">2024-01-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/VIM/">VIM</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="筆記說明"><a href="#筆記說明" class="headerlink" title="筆記說明"></a>筆記說明</h2><blockquote>
+<p>此筆記用途在於我學習中用到的指令<br><font color="#dd0000">並非所有人都適用，部分對我而言稍加容易的內容並不會寫在此內。</font></p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2024/01/08/vim/command_introduction/">閱讀更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VIM/" rel="tag">VIM</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-ad/UVa11718" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -626,245 +918,13 @@ ga('send', 'pageview');
 
 </article>
     
-    <article id="post-diary/Me20230619to20230808" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/08/08/diary/Me20230619to20230808/"
-    >大衞日記 &amp; 近期重大事件 2023/06/19 to 2023/08/08</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2023/08/08/diary/Me20230619to20230808/" class="article-date">
-  <time datetime="2023-08-08T15:06:37.000Z" itemprop="datePublished">2023-08-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%A4%A7%E8%A1%9E%E6%97%A5%E8%A8%98/">大衞日記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="文章概要"><a href="#文章概要" class="headerlink" title="文章概要"></a>文章概要</h2><blockquote>
-<p>從 2023/01/06 開始，新年新規劃，讓自己認真每 2 月都會寫一次紀錄。</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2023/08/08/diary/Me20230619to20230808/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8-Life/" rel="tag">大學 Life</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-diary/Me20230314to20230619 " class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/06/19/diary/Me20230314to20230619%20/"
-    >大衞日記 &amp; 近期重大事件 2023/03/14 to 2023/06/19</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2023/06/19/diary/Me20230314to20230619%20/" class="article-date">
-  <time datetime="2023-06-19T15:06:37.000Z" itemprop="datePublished">2023-06-19</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%A4%A7%E8%A1%9E%E6%97%A5%E8%A8%98/">大衞日記</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="文章概要"><a href="#文章概要" class="headerlink" title="文章概要"></a>文章概要</h2><blockquote>
-<p>從 2023/01/06 開始，新年新規劃，讓自己認真每 2 月都會寫一次紀錄。</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2023/06/19/diary/Me20230314to20230619%20/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E5%AD%B8-Life/" rel="tag">大學 Life</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-book_report/interpersonal_psychology" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/03/15/book_report/interpersonal_psychology/"
-    >海龜投資法則－重點節錄</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2023/03/15/book_report/interpersonal_psychology/" class="article-date">
-  <time datetime="2023-03-14T21:51:11.000Z" itemprop="datePublished">2023-03-15</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%A4%E6%98%93%E4%BA%BA%E7%94%9F/">交易人生</a> / <a class="article-category-link" href="/categories/%E8%AE%80%E6%9B%B8%E5%BF%83%E5%BE%97/">讀書心得</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="文章概要"><a href="#文章概要" class="headerlink" title="文章概要"></a>文章概要</h2><blockquote>
-<p>將 人際關係心理學的書，一些對我而言有用得知識記錄下來</p>
-<p>供未來的自己參考用，也希望可以幫助到他人，也謝謝朱芸翎提供<br>「模仿是學習的起點」－人際心理學</p>
-</blockquote>
-      
-      <a class="article-more-link" href="/2023/03/15/book_report/interpersonal_psychology/">閱讀更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag">學習筆記</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%80%E6%9B%B8%E5%BF%83%E5%BE%97/" rel="tag">讀書心得</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/2/">下一頁</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><a class="extend next" rel="next" href="/page/2/">下一頁</a>
   </nav>
   
 </section>
@@ -875,7 +935,7 @@ ga('send', 'pageview');
     <ul class="list-inline">
       <li>
         &copy;
-        2020-2023
+        2020-2024
         John Doe
       </li>
       <li>
